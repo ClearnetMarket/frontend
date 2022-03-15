@@ -84,8 +84,9 @@
           <select
             class="shadow form-select appearance-none block w-full px-3 py-1.5 text-base font-normal focus:shadow-outline text-gray-500 bg-white bg-clip-padding bg-no-repeat border rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             aria-label="Default select example"
+            v-model="registerForm.country"
           >
-            <option selected>Select your country</option>
+        
             <option
               class="text-gray-700"
               v-for="(country, index) in countryList"
@@ -100,8 +101,9 @@
           <select
             class="shadow form-select appearance-none block w-full px-3 py-1.5 text-base font-normal focus:shadow-outline text-gray-500 bg-white bg-clip-padding bg-no-repeat border rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             aria-label="Default select example"
+            v-model="registerForm.currency"
           >
-            <option selected>Select your currency</option>
+         
             <option
               class="text-gray-700"
               v-for="(currency, index) in currencyList"

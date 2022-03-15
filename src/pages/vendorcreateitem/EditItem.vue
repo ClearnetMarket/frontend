@@ -1,874 +1,542 @@
-<template >
-    <q-page class="docs-input q-mb-xl widthstyle">
-        <q-breadcrumbs class="q-mt-md q-ml-lg">
-            <template v-slot:separator>
-                <q-icon size="1.5em" name="chevron_right" />
-            </template>
-            <q-breadcrumbs-el label="Home" icon="home" :to="{ name: 'home' }" />
-            <q-breadcrumbs-el label="My Items" icon="local_mall" :to="{ name: 'forsale' }" />
-        </q-breadcrumbs>
+<template>
+  <MainHeaderTop />
+  <MainHeaderMid />
+  <MainHeaderBottom />
 
-        <div class="row q-ma-none">
-            <div class="col-12 text-center q-ma-none">
-                <h5 class="q-mt-sm">Create an Item</h5>
+  <div v-if="user">
+    <MainHeaderVendor />
+  </div>
+  <div class="">
+    <div class="container max-w-7xl mx-auto px-10">
+      <div class="mt-5 mb-5">
+        <nav class="rounded-md w-full">
+          <ol class="list-reset flex">
+            <li>
+              <router-link :to="{ name: 'home' }">
+                <a class="text-blue-600 hover:text-blue-700">Home</a>
+              </router-link>
+            </li>
+            <li>
+              <span class="text-gray-500 mx-2">/</span>
+            </li>
+            <li>
+              <router-link :to="{ name: 'forsale' }">
+                <a class="text-blue-600 hover:text-blue-700">Items for Sale</a>
+              </router-link>
+            </li>
+            <li>
+              <span class="text-gray-500 mx-2">/</span>
+            </li>
+          </ol>
+        </nav>
+      </div>
+      <div class="grid grid-cols-1 rounded-md p-6 max-w-3xl mx-auto">
+        <div class="text-[24px]">Create a new Item</div>
+        <UploadImages :item_id="item_id" />
+        <form
+          class="rounded-md px-8 pt-6 pb-8 mb-4 w-full"
+          enctype="multipart/form-data"
+          @submit.prevent="CreateItem"
+        >
+          <div class="text-[18px] mt-5 mb-5">General Info</div>
+          <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2"
+              >Item Title</label
+            >
+            <input
+              v-model="CreateItemForm.item_title"
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="title"
+              type="text"
+              placeholder="Enter title of your item .."
+            />
+          </div>
+          <div class="flex gap-5">
+            <div class="flex-1 mb-4">
+              <label class="block text-gray-700 text-sm font-bold mb-2"
+                >Category</label
+              >
+              <select
+                class="shadow form-select appearance-none block w-full px-3 py-1.5 text-base font-normal focus:shadow-outline text-gray-500 bg-white bg-clip-padding bg-no-repeat border rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                aria-label="Default select example"
+                id="category"
+                v-model="CreateItemForm.basicInfo.category_id_0"
+              >
+                <option
+                  class="text-gray-700"
+                  v-for="(category, index) in categoryList"
+                  :key="index"
+                  :value="category.value"
+                >
+                  {{ category.name }}
+                </option>
+              </select>
             </div>
-        </div>
+            <div class="flex-1 mb-4">
+              <label class="block text-gray-700 text-sm font-bold mb-2"
+                >Condition</label
+              >
+              <select
+                class="shadow form-select appearance-none block w-full px-3 py-1.5 text-base font-normal focus:shadow-outline text-gray-500 bg-white bg-clip-padding bg-no-repeat border rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                aria-label="Default select example"
+                id="condition"
+                v-model="CreateItemForm.basicInfo.item_condition"
+              >
+                <option
+                  class="text-gray-700"
+                  v-for="(condition, index) in conditionList"
+                  :key="index"
+                  :value="condition.value"
+                >
+                  {{ condition.text }}
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="text-[18px] mt-5 mb-5">Pricing</div>
+          <div class="flex gap-5">
+            <div class="mb-4 flex-1">
+              <label class="block text-gray-700 text-sm font-bold mb-2"
+                >Item Price</label
+              >
+              <label class="block text-gray-700 text-sm mb-2 text-[11px]"
+                >Item Price in your local currency per item</label
+              >
+              <input
+                v-model="CreateItemForm.pricingInfo.price"
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="price"
+                type="number"
+                min="0"
+                placeholder="Price in your currency..."
+                @keypress="onlyNumberWithDot"
+              />
+            </div>
+            <div class="mb-4 flex-1">
+              <label class="block text-gray-700 text-sm font-bold mb-2"
+                >Item Count</label
+              >
+              <label class="block text-gray-700 text-sm mb-2 text-[11px]"
+                >How many you have for sale</label
+              >
+              <input
+                v-model="CreateItemForm.pricingInfo.item_count"
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="count"
+                type="number"
+                min="0"
+                placeholder="How many your are selling ..."
+                @keypress="onlyNumber"
+              />
+            </div>
+          </div>
+          <div class="flex gap-5">
+            <div class="mb-4 flex-1">
+              <label class="block text-gray-700 text-sm font-bold mb-2"
+                >Accept Bitcoin</label
+              >
+              <input
+                type="checkbox"
+                checked="checked"
+                id="digital_currency_1"
+                v-model="CreateItemForm.pricingInfo.digital_currency_1"
+              />
+            </div>
+            <div class="mb-4 flex-1">
+              <label class="block text-gray-700 text-sm font-bold mb-2"
+                >Accept Bitcoin Cash</label
+              >
+              <input
+                type="checkbox"
+                checked="checked"
+                id="digital_currency_2"
+                v-model="CreateItemForm.pricingInfo.digital_currency_2"
+              />
+            </div>
+            <div class="mb-4 flex-1">
+              <label class="block text-gray-700 text-sm font-bold mb-2"
+                >Accept Monero</label
+              >
+              <input
+                type="checkbox"
+                checked="checked"
+                id="digital_currency_3"
+                v-model="CreateItemForm.pricingInfo.digital_currency_3"
+              />
+            </div>
+          </div>
+          <div class="text-[18px] mt-5 mb-5">Description</div>
+          <div class="mb-4 flex-1">
+            <textarea
+              v-model="CreateItemForm.basicInfo.item_description"
+              id="item_description"
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            ></textarea>
+          </div>
 
-        <!-- Images -->
-        <div class="row q-my-md q-pa-lg bordered rcorners1">
-            <div class="col-12 font-weight-bold">
-                <h5 class="q-ma-none">Images</h5>
-                <hr />
-            </div>
+          <div class="text-[18px] mt-5 mb-5">Shipping</div>
 
-            <div class="justify-center col-12 col-sm-6 col-md-3 q-px-lg">
-                <div v-if="marketitem.image_one_server">
-                    <q-btn
-                        color="negative"
-                        text-color="white"
-                        label="Delete Image"
-                        @click="deleteitemimage(marketitem.image_one_server)"
-                    />
-                    <q-img :src=marketitem.image_one_url :ratio="1" />
-                </div>
-                <div v-else>
-                    <q-uploader
-                        class="col-12 bg-grey-5"
-                        style="width:100%; min-height: 250px; padding: 10px;"
-                        :factory="factoryFnMain"
-                        label="Main Image"
-                        field-name="main_image"
-                        hide-upload-btn
-                        auto-upload
-                        max-file-size="5120000"
-                        max-files="1"
-                        use-chips
-                        dense
-                        accept=".jpg, .png, .gif"
-                        @uploaded="onUploaded"
-                        @failed="onFailed"
-                        @rejected="onRejected"
-                    />
-                </div>
+          <div class="mb-4 flex text-center">
+            <div class="flex-1">Option</div>
+            <div class="flex-1">Shipping Price</div>
+            <div class="flex-1">Estimated Days</div>
+          </div>
+
+          <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2"
+              >Free Shipping</label
+            >
+            <div class="flex gap-5">
+              <div class="flex-1">
+                <input
+                  type="checkbox"
+                  checked="checked"
+                  v-model="CreateItemForm.pricingInfo.free_shipping"
+                />
+              </div>
+              <div class="flex-1"></div>
+              <div class="flex-1">
+                <input
+                  type="integer"
+                  placeholder="Estimated Days"
+                  min="0"
+                  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  v-model="CreateItemForm.pricingInfo.free_shipping_days"
+                />
+              </div>
             </div>
-            <div class="justify-center col-12 col-sm-6 col-md-3 q-px-lg">
-                <div v-if="marketitem.image_two_server">
-                    <q-btn
-                        color="negative"
-                        text-color="white"
-                        label="Delete Image"
-                        @click="deleteitemimage(marketitem.image_two_server)"
-                    />
-                      <q-img :src=marketitem.image_two_url :ratio="1" />
-                </div>
-                <div v-else>
-                    <q-uploader
-                        class="col-12 bg-grey-5"
-                        style="width:100%; min-height: 250px; padding: 10px;"
-                        :factory="factoryFnMain"
-                        label="Second Image"
-                        field-name="image_two"
-                        hide-upload-btn
-                        auto-upload
-                        max-file-size="5120000"
-                        max-files="1"
-                        use-chips
-                        dense
-                        accept=".jpg, .png, .gif"
-                        @uploaded="onUploaded"
-                        @failed="onFailed"
-                        @rejected="onRejected"
-                    />
-                </div>
+          </div>
+          <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2"
+              >Option 1</label
+            >
+            <div class="flex gap-5">
+              <div class="flex-1">
+                <input
+                  type="checkbox"
+                  checked="checked"
+                  v-model="CreateItemForm.pricingInfo.shipping_2"
+                />
+              </div>
+              <div class="flex-1">
+                <input
+                  type="integer"
+                  placeholder="Price"
+                  min="0"
+                  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  v-model="CreateItemForm.pricingInfo.shipping_2_price"
+                  @keypress="onlyNumberWithDot"
+                />
+              </div>
+              <div class="flex-1">
+                <input
+                  type="integer"
+                  placeholder="Estimated Days"
+                  min="0"
+                  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  v-model="CreateItemForm.pricingInfo.shipping_2_days"
+                  @keypress="onlyNumber"
+                />
+              </div>
             </div>
-            <div class="justify-center col-12 col-sm-6 col-md-3 q-px-lg">
-                <div v-if="marketitem.image_three_server">
-                    <q-btn
-                        color="negative"
-                        text-color="white"
-                        label="Delete Image"
-                        @click="deleteitemimage(marketitem.image_three_server)"
-                    />
-                       <q-img :src=marketitem.image_three_url :ratio="1" />
-                </div>
-                <div v-else>
-                    <q-uploader
-                        class="col-12 bg-grey-5"
-                        style="width:100%; min-height: 250px; padding: 10px;"
-                        :factory="factoryFnMain"
-                        label="Third Image"
-                        field-name="image_three"
-                        hide-upload-btn
-                        auto-upload
-                        max-file-size="5120000"
-                        max-files="1"
-                        use-chips
-                        dense
-                        accept=".jpg, .png, .gif"
-                        @uploaded="onUploaded"
-                        @failed="onFailed"
-                        @rejected="onRejected"
-                    />
-                </div>
+          </div>
+          <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2"
+              >Option 3</label
+            >
+            <div class="flex gap-5">
+              <div class="flex-1">
+                <input
+                  type="checkbox"
+                  checked="checked"
+                  v-model="CreateItemForm.pricingInfo.shipping_3"
+                />
+              </div>
+              <div class="flex-1">
+                <input
+                  type="integer"
+                  placeholder="Price"
+                  min="0"
+                  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  v-model="CreateItemForm.pricingInfo.shipping_3_price"
+                  @keypress="onlyNumberWithDot"
+                />
+              </div>
+              <div class="flex-1">
+                <input
+                  type="integer"
+                  placeholder="Estimated Days"
+                  min="0"
+                  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  v-model="CreateItemForm.pricingInfo.shipping_2_days"
+                  @keypress="onlyNumber"
+                />
+              </div>
             </div>
-            <div class="justify-center col-12 col-sm-6 col-md-3 q-px-lg">
-                <div v-if="marketitem.image_four_server">
-                    <q-btn
-                        color="negative"
-                        text-color="white"
-                        label="Delete Image"
-                        @click="deleteitemimage(marketitem.image_four_server)"
-                    />
-                       <q-img :src=marketitem.image_four_url :ratio="1" />
-                </div>
-                <div v-else>
-                    <q-uploader
-                        class="col-12 bg-grey-5"
-                        style="width:100%; min-height: 250px; padding: 10px;"
-                        :factory="factoryFnMain"
-                        label="Fourth Image"
-                        field-name="image_four"
-                        auto-upload
-                        hide-upload-btn
-                        max-file-size="5120000"
-                        max-files="1"
-                        accept=".jpg, .png, .gif"
-                        @uploaded="onUploaded"
-                        @failed="onFailed"
-                        @rejected="onRejected"
-                    />
-                </div>
-            </div>
-        </div>
-        <q-form method="post" enctype="multipart/form-data" @submit="onSubmit">
-            <!-- Top Row-->
-            <div class="row q-my-md q-pa-lg bordered rcorners1">
-                <div class="col-12 font-weight-bold">
-                    <h5 class="q-ma-none q-pb-md">Item Info</h5>
-                </div>
-                <!-- Title-->
-                <div class="col-12 col-sm-12 q-pa-sm">
-                    Title
-                    <q-input
-                        outlined
-                        v-model="CreateItemForm.basicInfo.title"
-                        label="Item Title"
-                        
-                        autocomplete="off"
-                        :dense="CreateItemForm.dense"
-                        :rules="[
-                            $rules.required('Title is Required'),
-                            $rules.minLength(10, 'Your title should have at least 10 letters'),
-                            $rules.maxLength(250, 'Your title should not be larger than 0 letters')
-                        ]"
-                        lazy-rules
-                    />
-                </div>
-                <!-- Category -->
-                <div class="col-12 col-sm-6 q-pa-sm">
-                    Category
-                    <q-select
-                        outlined
-                        v-model="CreateItemForm.basicInfo.category_id_0"
-                        :options="categoryList"
-                        option-value="value"
-                        option-label="name"
-                        label="Condition"
-                        :dense="CreateItemForm.dense"
-                        :rules="[
-                            $rules.required('Category is Required'),
-                        ]"
-                        lazy-rules
-                    />
-                </div>
-                <!-- Condition -->
-                <div class="col-12 col-sm-6 q-pa-sm">
-                    Condition
-                    <q-select
-                        outlined
-                        v-model="CreateItemForm.basicInfo.item_condition"
-                        :options="conditionList"
-                        option-value="value"
-                        option-label="text"
-                        label="Condition"
-                        :dense="CreateItemForm.dense"
-                        :rules="[
-                            $rules.required('Condition is Required'),
-                        ]"
-                        lazy-rules
-                    />
-                </div>
-            </div>
-            <!-- Bottom Row -->
-            <div class="row q-my-md q-pa-lg bordered rcorners1">
-                <div class="col-12 font-weight-bold">
-                    <h5 class="q-ma-none q-pb-md">Pricing</h5>
-                </div>
-                <!-- Price-->
-                <div class="col-12 col-sm-6 q-pa-sm">
-                    Price
-                    <q-input
-                        outlined
-                        v-model="CreateItemForm.pricingInfo.price"
-                        label="Item Price"
-                        autocomplete="off"
-                        mask="#.##"
-                        fill-mask="0"
-                        reverse-fill-mask
-                        :dense="CreateItemForm.dense"
-                        :rules="[
-                            $rules.required('Price is Required'),
-                            $rules.numeric('Numbers only'),
-                            $rules.minValue(1), 'Minimum value of 1'
-                        ]"
-                        lazy-rules
-                    />The price of the item in your local currency
-                </div>
-                <!-- Item Count-->
-                <div class="col-12 col-sm-6 q-pa-sm">
-                    Quantity
-                    <q-input
-                        outlined
-                        v-model="CreateItemForm.pricingInfo.item_count"
-                        type="number"
-                        :dense="CreateItemForm.dense"
-                        style="max-width: 200px"
-                        :rules="[
-                            $rules.required('Amount is Required'),
-                            $rules.numeric('Numbers only'),
-                            $rules.minValue(1), 'Minimum value of 1'
-                        ]"
-                        lazy-rules
-                    />How many items you are selling
-                </div>
-                <!-- BTC Acepted -->
-                <div class="col-12 col-sm-6 q-pa-sm">
-                    <q-toggle
-                        v-model="CreateItemForm.pricingInfo.digital_currency_1"
-                        value="one"
-                        label="Accept Bitcoin"
-                    />
-                    <q-toggle
-                        v-model="CreateItemForm.pricingInfo.digital_currency_2"
-                        label="Accept Bitcoin Cash"
-                        value="two"
-                    />
-                    <q-toggle
-                        v-model="CreateItemForm.pricingInfo.digital_currency_3"
-                        value="three"
-                        label="Monero"
-                    />
-                </div>
-            </div>
-            <!-- Description -->
-            <div class="row q-my-md q-pa-lg bordered rcorners1">
-                <div class="col-12 font-weight-bold">
-                    <h5 class="q-ma-none q-pb-md">Item Description</h5>
-                </div>
-                <div class="col-12 font-weight-bold">
-                    <q-editor
-                        toolbar-bg="secondary"
-                        ref="editorRef"
-                        v-model="CreateItemForm.basicInfo.item_description"
-                        :rules="[
-                            $rules.required('Description is required'),
-                            $rules.minLength(25),
-                        ]"
-                        lazy-rules
-                    />
-                </div>
-            </div>
-            <!-- Shipping -->
-            <div class="row q-pa-lg bordered rcorners1">
-                <div class="col-12 font-weight-bold">
-                    <h5 class="q-ma-none q-pb-md">Shipping</h5>
-                </div>
-                <div class="col-12 font-weight-bold">
-                    <div class="row q-mb-lg">
-                        <div class="col-12 col-sm-12 col-md-3">
-                            <q-toggle
-                                v-model="CreateItemForm.shippingInfo.free_shipping"
-                                label="Free Shipping"
-                            />
-                        </div>
-                        <div class="col-12 col-sm-12 col-md-3">
-                            <q-input
-                                outlined
-                                v-model="CreateItemForm.shippingInfo.free_shipping_days"
-                                label="Estimate days"
-                                autocomplete="off"
-                                :dense="CreateItemForm.dense"
-                            />
-                        </div>
-                    </div>
-                    <div class="row q-mb-md">
-                        <div class="col-12 col-sm-12 col-md-3">
-                            <q-toggle
-                                v-model="CreateItemForm.shippingInfo.shipping_2"
-                                label="Option 2"
-                            />
-                        </div>
-                        <div class="col-12 col-sm-12 col-md-3">
-                            <q-input
-                                outlined
-                                v-model="CreateItemForm.shippingInfo.shipping_2_days"
-                                label="Estimate days"
-                                autocomplete="off"
-                                :dense="CreateItemForm.dense"
-                            />
-                        </div>
-                        <div class="col-12 col-sm-12 col-md-3">
-                            <q-input
-                                outlined
-                                v-model="CreateItemForm.shippingInfo.shipping_2_price"
-                                label="Item Price"
-                                autocomplete="off"
-                                mask="#.##"
-                                fill-mask="0"
-                                reverse-fill-mask
-                                :dense="CreateItemForm.dense"
-                                :rules="[
-                                    $rules.numeric('Numbers only'),
-                                    $rules.minValue(1), 'Minimum value of 1'
-                                ]"
-                                lazy-rules
-                            />
-                        </div>
-                    </div>
-                    <div class="row q-mb-md">
-                        <div class="col-12 col-sm-12 col-md-3">
-                            <q-toggle
-                                v-model="CreateItemForm.shippingInfo.shipping_3"
-                                label="Option 3"
-                            />
-                        </div>
-                        <div class="col-12 col-sm-12 col-md-3">
-                            <q-input
-                                outlined
-                                v-model="CreateItemForm.shippingInfo.shipping_3_days"
-                                label="Estimate days "
-                                autocomplete="off"
-                                :dense="CreateItemForm.dense"
-                            />
-                        </div>
-                        <div class="col-12 col-sm-12 col-md-3">
-                            <q-input
-                                outlined
-                                v-model="CreateItemForm.shippingInfo.shipping_3_price"
-                                label="Item Price"
-                                autocomplete="off"
-                                mask="#.##"
-                                fill-mask="0"
-                                reverse-fill-mask
-                                :dense="CreateItemForm.dense"
-                                :rules="[
-                                    $rules.numeric('Numbers only'),
-                                    $rules.minValue(1), 'Minimum value of 1'
-                                ]"
-                                lazy-rules
-                            />
-                        </div>
-                    </div>
-                    <q-toggle
-                        value="online"
-                        label="WorldWide Shipping or Digital Item"
-                        v-model="isSelectDisabled"
-                    />
-                    <!-- What countrys shipping too -->
-                    <div class="row">
-                        Select countries you are shipping too.
-                        <div class="col-12 q-pa-sm">
-                            Main Country is Required.
-                            <q-select
-                                outlined
-                                v-model="CreateItemForm.shippingInfo.shipping_to_country_one"
-                                :options="countryList"
-                                option-value="value"
-                                option-label="name"
-                                label="Country"
-                                :dense="CreateItemForm.dense"
-                                :rules="[
-                                    $rules.required('Title is Required'),
-                                ]"
-                                lazy-rules
-                                :disable="isSelectDisabled"
-                            />
-                        </div>
-                        <div class="col-6 q-pa-sm">
-                            Optional Country two
-                            <q-select
-                                outlined
-                                v-model="CreateItemForm.shippingInfo.shipping_to_country_two"
-                                :options="countryList"
-                                option-value="value"
-                                option-label="name"
-                                label="Country"
-                                :dense="CreateItemForm.dense"
-                                :disable="isSelectDisabled"
-                            />
-                        </div>
-                        <div class="col-6 q-pa-sm">
-                            Optional Country Five
-                            <q-select
-                                outlined
-                                v-model="CreateItemForm.shippingInfo.shipping_to_country_three"
-                                :options="countryList"
-                                option-value="value"
-                                option-label="name"
-                                label="Country"
-                                :dense="CreateItemForm.dense"
-                                :disable="isSelectDisabled"
-                            />
-                        </div>
-                        <div class="col-6 q-pa-sm">
-                            Optional Country Five
-                            <q-select
-                                outlined
-                                v-model="CreateItemForm.shippingInfo.shipping_to_country_four"
-                                :options="countryList"
-                                option-value="value"
-                                option-label="name"
-                                label="Country"
-                                :dense="CreateItemForm.dense"
-                                :disable="isSelectDisabled"
-                            />
-                        </div>
-                        <div class="col-6 q-pa-sm">
-                            Optional Country Five
-                            <q-select
-                                outlined
-                                v-model="CreateItemForm.shippingInfo.shipping_to_country_five"
-                                :options="countryList"
-                                option-value="value"
-                                option-label="name"
-                                label="Country"
-                                :dense="CreateItemForm.dense"
-                                :disable="isSelectDisabled"
-                            />
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row q-my-md q-pa-lg bordered rcorners1">
-                <!-- KEYWORDS -->
-                <div class="col-12 font-weight-bold">
-                    <h5 class="q-ma-none q-pb-md">KeyWords</h5>
-                </div>
-                <div class="row">
-                    <div class="col-6 q-pa-sm">
-                        <q-input
-                            outlined
-                            v-model="CreateItemForm.basicInfo.keywords"
-                            label="Comma seperated keywords"
-                            autocomplete="off"
-                            :dense="CreateItemForm.dense"
-                            :rules="[
-                                $rules.required('Title is Required'),
-                                $rules.minLength(10, 'Your keywords should have at least 10 letters'),
-                                $rules.maxLength(250, 'Your keywords should not be larger than 250 letters')
-                            ]"
-                            lazy-rules
-                        />
-                    </div>
-                    <div class="col-6 q-pa-sm">
-                        Keywords are import to find your item in the Clearnet Market search engine.
-                        Comma seperated keywords are required to find your items.
-                    </div>
-                </div>
-            </div>
-            <!-- Create Button -->
-            <div class="q-pa-md doc-container">
-                <div class="row justify-end">
-                    <q-btn type="submit" class color="primary" label="Create Item" />
-                </div>
-            </div>
-        </q-form>
-    </q-page>
+          </div>
+          <div class="flex justify-center mt-20">
+            <button
+              class="bg-gray-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              type="submit"
+            >
+              Create Item
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <MainFooter />
 </template>
 
 <script lang="ts">
-
-import { defineComponent } from 'vue';
-import axios from 'axios';
-import { ref } from 'vue';
-
-import authHeader from '../../services/auth.header';
-import { mapGetters } from 'vuex';
-
+import { defineComponent } from "vue";
+import axios from "axios";
+import { useRoute } from "vue-router";
+import { ref } from "vue";
+import authHeader from "../../services/auth.header";
+import { mapGetters } from "vuex";
+import { constants } from "perf_hooks";
+import MainHeaderTop from "../../layouts/headers/MainHeaderTop.vue";
+import MainHeaderMid from "../../layouts/headers/MainHeaderMid.vue";
+import MainHeaderBottom from "../../layouts/headers/MainHeaderBottom.vue";
+import MainHeaderVendor from "../../layouts/headers/MainHeaderVendor.vue";
+import MainFooter from "../../layouts/footers/FooterMain.vue";
+import UploadImages from "./ItemCreation/UploadImages.vue";
 
 export default defineComponent({
-    name: 'createitem',
+  name: "createitem",
+  components: {
+    MainHeaderTop,
+    MainHeaderMid,
+    MainHeaderBottom,
+    MainHeaderVendor,
+    MainFooter,
+    UploadImages,
+  },
+  setup() {
+    const isSelectDisabled = ref(false); // Form Toggle
+    return { isSelectDisabled }; // Form Toggle
+  },
+  mounted() {
+    this.userstatus();
+    this.getItemForSale();
+    this.getCategoryList(); // Query Categories
+    this.getConditionList(); // Query Conditionlist
+    this.getCountryList(); // Query Countries
+  },
 
-    setup () {
- 
-        const isSelectDisabled = ref(false); // Form Toggle 
-        return { isSelectDisabled } // Form Toggle 
+  data() {
+    return {
+      item_id: "",
+      marketitem: "",
+      authtoken: "",
+
+      categoryList: [],
+      conditionList: [],
+      countryList: [],
+      CreateItemForm: {
+        dense: ref(true),
+        basicInfo: {
+          title: "",
+          category_id_0: "",
+          item_condition: "",
+          item_description: "",
+          keywords: "",
+        },
+        pricingInfo: {
+          digital_currency_1: false,
+          digital_currency_2: false,
+          digital_currency_3: false,
+          item_count: "",
+          price: "",
+        },
+        shippingInfo: {
+          worldwide_shipping: "",
+          free_shipping: false,
+          free_shipping_days: "",
+          shipping_2: false,
+          shipping_2_days: "",
+          shipping_2_price: "",
+          shipping_3: false,
+          shipping_3_days: "",
+          shipping_3_price: "",
+          shipping_to_country_one: "",
+          shipping_to_country_two: "",
+          shipping_to_country_three: "",
+          shipping_to_country_four: "",
+          shipping_to_country_five: "",
+        },
+      },
+    };
+  },
+  computed: {
+    ...mapGetters(["user"]),
+  },
+  methods: {
+    async userstatus() {
+      //user Auth
+      await axios({
+        method: "get",
+        url: "/auth/whoami",
+        withCredentials: true,
+        headers: authHeader(),
+      }).then((response) => {
+        if (response.status != 200) {
+          this.$router.push({ name: "home" });
+        }
+      });
     },
-    mounted () {
-        this.userstatus();
-        this.getItemForSale();
-        this.getCategoryList(); // Query Categories 
-        this.getConditionList();// Query Conditionlist 
-        this.getCountryList();// Query Countries 
+    async CreateItem() {
+      let path = "/vendorcreateitem/create-item-main/" + this.item_id;
+      let auth_token = localStorage.getItem("auth_token");
+
+      let the_headers = {
+        Authorization: "bearer " + auth_token,
+      };
+
+      axios({
+        method: "POST",
+        url: path,
+        data: formData,
+        withCredentials: true,
+        headers: the_headers,
+      })
+        .then((response) => {
+          if (response.data.status == "success") {
+            this.$router.push("/vendor/itemsforsale");
+          }
+          if (response.data.status == "error") {
+            this.$router.push("/vendor/createitem");
+          }
+        })
+        .catch((error) => {
+          if (error.response) {
+            if (error.response.status === 401) {
+              this.$store.commit("loginFailure");
+            } else if (error.response.status === 403) {
+            }
+          }
+        });
     },
 
-    data () {
-
-        return {
-            item_id: '',
-            marketitem: '',
-            authtoken: '',
-
-            imageone: '',
-            imagetwo: '',
-            imagethree: '',
-            imagefour: '',
-            imagefive: '',
-
-            currencyList: [],
-            categoryList: [],
-            conditionList: [],
-            countryList: [],
-            CreateItemForm: {
-                dense: ref(true),
-                basicInfo: {
-                    title: '',
-                    category_id_0: '',
-                    item_condition: '',
-                    item_description: '',
-                    keywords: '',
-                },
-                pricingInfo: {
-                    digital_currency_1: '',
-                    digital_currency_2: '',
-                    digital_currency_3: '',
-                    item_count: '',
-                    price: '',
-                },
-                shippingInfo: {
-                    worldwide_shipping: '',
-                    free_shipping: '',
-                    free_shipping_days: '',
-                    shipping_2: '',
-                    shipping_2_days: '',
-                    shipping_2_price: '',
-                    shipping_3: '',
-                    shipping_3_days: '',
-                    shipping_3_price: '',
-                    shipping_to_country_one: '',
-                    shipping_to_country_two: '',
-                    shipping_to_country_three: '',
-                    shipping_to_country_four: '',
-                    shipping_to_country_five: '',
-                },
-            },
-
-        };
+    onlyNumber($event) {
+      let keyCode = $event.keyCode ? $event.keyCode : $event.which;
+      if (keyCode < 48 || keyCode > 57) {
+        // 46 is dot
+        $event.preventDefault();
+      }
     },
-    computed: {
-        ...mapGetters(['user']),
-
+    onlyNumberWithDot($event) {
+      let keyCode = $event.keyCode ? $event.keyCode : $event.which;
+      if ((keyCode < 48 || keyCode > 57) && keyCode !== 46) {
+        // 46 is dot
+        $event.preventDefault();
+      }
     },
-    methods: {
-       
-        async userstatus () { //user Auth
-            await axios({
-                method: 'get',
-                url: '/auth/whoami',
-                withCredentials: true,
-                headers: authHeader()
-            })
-                .then((response) => {
-                    if (response.status = 200) {
-                        this.authtoken = Cookies.get('auth_token')
-                    }
-                    else {
-                        this.$router.push("/")
-                    }
-                })
-        },
-        async getItemForSale () {// Get the item thats being modified
-            const path = '/item/' + this.item_id;
-            await axios({
-                method: 'get',
-                url: path,
-                withCredentials: true,
 
-            })
-                .then((response) => {
-                    if (response.status === 200) {
-                        this.marketitem = response.data;
-                    }
-                    else{
-                        console.log("error")
-                    }
-                })
-                .catch((error) => {
+    async getItemForSale() {
+      // Get the item thats being modified
 
-                });
-        },
-       
-        async CreateItem (
+      const item_id_route = useRoute();
 
-            payLoad: {
-                item_id: string;
-                title: string;
-                item_condition: string;
-                item_description: string;
-                category_id_0: string;
-                keywords: string;
-                item_count: string;
-                digital_currency_1: string;
-                digital_currency_2: string;
-                digital_currency_3: string;
-                price: string;
-                free_shipping: string;
-                free_shipping_days: string;
-                shipping_2: string;
-                shipping_2_days: string;
-                shipping_2_price: string;
-                shipping_3: string;
-                shipping_3_days: string;
-                shipping_3_price: string;
-                shipping_to_country_one: string;
-                shipping_to_country_two: string;
-                shipping_to_country_three: string;
-                shipping_to_country_four: string;
-                shipping_to_country_five: string;
-            }) {
-            const path = '/vendorcreateitem/create-item-main/' + this.item_id;
-            axios({
-                method: 'post',
-                url: path,
-                data: payLoad,
-                withCredentials: true,
-                headers: authHeader()
-            })
-                .then((response) => {
-                    if (response.data.status == 'success') {
-                        this.$q.notify({
-                            type: 'positive',
-                            message: 'Item Created Successfully.',
-                            position: 'top'
-                        })
+      const item_id = item_id_route.params.id;
+      this.item_id = item_id;
 
-                        this.$router.push('/vendor/itemsforsale')
-                    }
-                    if (response.data.status == 'error') {
-                        this.$router.push("/vendor/createitem")
-                        this.$q.notify({
-                            type: 'negative',
-                            message: 'Form Error: There was an error in item creation.',
-                            position: 'top'
-                        })
-                    }
-                })
-                .catch((error) => {
-                    if (error.response) {
-                        if (error.response.status === 401) {
-                            this.$q.notify({
-                                type: 'negative',
-                                message: 'Error: Unauthorized',
-                                position: 'top'
-                            })
-                            this.$store.commit('loginFailure')
-
-                        } else if (error.response.status === 403) {
-                            this.$q.notify({
-                                type: 'negative',
-                                message: 'Error: Forbidden',
-                                position: 'top'
-                            })
-                        } else {
-                            this.$q.notify({
-                                type: 'negative',
-                                message: 'Error: Forbidden',
-                                position: 'top'
-                            })
-                        }
-                    }
-                });
-        },
-        async deleteitemimage (imagename) { // deleet image
-            const path = '/vendorcreateitem/delete-image/' + this.item_id + '/' + imagename ;
-            await axios({
-                method: 'delete',
-                url: path,
-                withCredentials: true,
-                headers: authHeader()
-            })
-                .then((response) => {
-                    if (response.status = 200) {
-                        this.getItemForSale()
-                    }
-                    else {
-
-                    }
-                })
-        },
-        async getCountryList () {// Get Countries
-            const path = '/vendorcreateitem/query/country';
-
-            axios({
-                method: 'get', //you can set what request you want to be
-                url: path,
-                withCredentials: true,
-                data: '',
-            })
-                .then((response) => {
-                    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-                    this.countryList = response.data;
-                })
-                .catch((error) => {
-                    console.error(error);
-                });
-        },
-        async getCategoryList () {// Get Categories
-            const path = '/vendorcreateitem/query/category';
-            await axios({
-                method: 'get', //you can set what request you want to be
-                url: path,
-                withCredentials: true,
-                data: '',
-            })
-                .then((response) => {
-                    this.categoryList = response.data;
-                })
-                .catch((error) => {
-                    console.error(error);
-                });
-        },
-        async getConditionList () {// Get Conditions
-            const path = '/vendorcreateitem/query/condition';
-            await axios({
-                method: 'get',
-                url: path,
-                withCredentials: true,
-                data: '',
-            })
-                .then((response) => {
-
-                    this.conditionList = response.data;
-                })
-                .catch((error) => {
-                    console.error(error);
-                });
-        },
-        factoryFnMain (files) {
-            const authtoken = Cookies.get('auth_token')
-            return new Promise((resolve) => {
-                // simulating a delay of 2 seconds
-
-                setTimeout(() => {
-                    resolve({
-                        url: 'http://192.168.1.101:5000/vendorcreateitem/create-item-images/' + this.item_id,
-                        headers: [
-                            { name: 'Authorization', value: 'bearer ' + authtoken },
-
-                        ],
-
-                    })
-                }, 2000)
-            })
-        },
-
-        // eslint-disable-next-line no-console
-        onUploaded (info) {
-            let files = info.files
-            files.forEach(item => {
-                this.$q.notify({
-                    type: 'positive',
-                    message: `${item.name} successfully uploaded`
-                })
-            })
-            this.getItemForSale()
-        },
-        // eslint-disable-next-line no-console
-        onFailed (info) {
-            let err = JSON.parse(info.xhr.response)
-            console.log(err)
-            let files = info.files
-            files.forEach(item => {
-                this.$q.notify({
-                    type: 'negative',
-                    message: `${item.name} - ${err.error} Error ${err.message}`
-                })
-            })
-        },
-        // eslint-disable-next-line no-console
-        onRejected (rejectedEntries) {
-            this.$q.notify({
-                type: 'negative',
-                message: `${rejectedEntries.length} file(s) did not pass validation constraints`
-            })
-        },
-
-
-        async onSubmit () {// Submit Data for payload
-            const payLoad = {
-                item_id: this.item_id,
-                title: this.CreateItemForm.basicInfo.title,
-                item_condition: this.CreateItemForm.basicInfo.item_condition,
-                item_description: this.CreateItemForm.basicInfo.item_description,
-                keywords: this.CreateItemForm.basicInfo.keywords,
-                category_id_0: this.CreateItemForm.basicInfo.category_id_0,
-                digital_currency_1: this.CreateItemForm.pricingInfo.digital_currency_1,
-                digital_currency_2: this.CreateItemForm.pricingInfo.digital_currency_2,
-                digital_currency_3: this.CreateItemForm.pricingInfo.digital_currency_3,
-                item_count: this.CreateItemForm.pricingInfo.item_count,
-                price: this.CreateItemForm.pricingInfo.price,
-                free_shipping: this.CreateItemForm.shippingInfo.free_shipping,
-                free_shipping_days: this.CreateItemForm.shippingInfo.free_shipping_days,
-                shipping_2: this.CreateItemForm.shippingInfo.shipping_2,
-                shipping_2_days: this.CreateItemForm.shippingInfo.shipping_2_days,
-                shipping_2_price: this.CreateItemForm.shippingInfo.shipping_2_price,
-                shipping_3: this.CreateItemForm.shippingInfo.shipping_3,
-                shipping_3_days: this.CreateItemForm.shippingInfo.shipping_3_days,
-                shipping_3_price: this.CreateItemForm.shippingInfo.shipping_3_price,
-                shipping_to_country_one: this.CreateItemForm.shippingInfo.shipping_to_country_one,
-                shipping_to_country_two: this.CreateItemForm.shippingInfo.shipping_to_country_two,
-                shipping_to_country_three: this.CreateItemForm.shippingInfo.shipping_to_country_three,
-                shipping_to_country_four: this.CreateItemForm.shippingInfo.shipping_to_country_four,
-                shipping_to_country_five: this.CreateItemForm.shippingInfo.shipping_to_country_five,
-            };
-            this.CreateItem(payLoad);
-        },
+      const path = "/item/" + this.item_id;
+      await axios({
+        method: "get",
+        url: path,
+        withCredentials: true,
+      })
+        .then((response) => {
+          if (response.status === 200) {
+            this.marketitem = response.data;
+         
+          }
+        })
+        .catch((error) => {});
     },
+
+    async getCountryList() {
+      // Get Countries
+      const path = "/vendorcreateitem/query/country";
+
+      axios({
+        method: "get", //you can set what request you want to be
+        url: path,
+        withCredentials: true,
+        data: "",
+      })
+        .then((response) => {
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+          this.countryList = response.data;
+        })
+        .catch((error) => {});
+    },
+    async getCategoryList() {
+      // Get Categories
+      const path = "/vendorcreateitem/query/category";
+
+      await axios({
+        method: "get", //you can set what request you want to be
+        url: path,
+        withCredentials: true,
+      })
+        .then((response) => {
+          this.categoryList = response.data;
+        })
+        .catch((error) => {});
+    },
+    async getConditionList() {
+      // Get Conditions
+      const path = "/vendorcreateitem/query/condition";
+      await axios({
+        method: "get",
+        url: path,
+        withCredentials: true,
+      })
+        .then((response) => {
+          this.conditionList = response.data;
+        })
+        .catch((error) => {});
+    },
+    async onSubmit() {
+      // Submit Data for payload
+
+      const payLoad = {
+        item_id: this.item_id,
+        title: this.CreateItemForm.basicInfo.title,
+        item_condition: this.CreateItemForm.basicInfo.item_condition,
+        item_description: this.CreateItemForm.basicInfo.item_description,
+        keywords: this.CreateItemForm.basicInfo.keywords,
+        category_id_0: this.CreateItemForm.basicInfo.category_id_0,
+        digital_currency_1: this.CreateItemForm.pricingInfo.digital_currency_1,
+        digital_currency_2: this.CreateItemForm.pricingInfo.digital_currency_2,
+        digital_currency_3: this.CreateItemForm.pricingInfo.digital_currency_3,
+        item_count: this.CreateItemForm.pricingInfo.item_count,
+        price: this.CreateItemForm.pricingInfo.price,
+        free_shipping: this.CreateItemForm.shippingInfo.free_shipping,
+        free_shipping_days: this.CreateItemForm.shippingInfo.free_shipping_days,
+        shipping_2: this.CreateItemForm.shippingInfo.shipping_2,
+        shipping_2_days: this.CreateItemForm.shippingInfo.shipping_2_days,
+        shipping_2_price: this.CreateItemForm.shippingInfo.shipping_2_price,
+        shipping_3: this.CreateItemForm.shippingInfo.shipping_3,
+        shipping_3_days: this.CreateItemForm.shippingInfo.shipping_3_days,
+        shipping_3_price: this.CreateItemForm.shippingInfo.shipping_3_price,
+        shipping_to_country_one:
+          this.CreateItemForm.shippingInfo.shipping_to_country_one,
+        shipping_to_country_two:
+          this.CreateItemForm.shippingInfo.shipping_to_country_two,
+        shipping_to_country_three:
+          this.CreateItemForm.shippingInfo.shipping_to_country_three,
+        shipping_to_country_four:
+          this.CreateItemForm.shippingInfo.shipping_to_country_four,
+        shipping_to_country_five:
+          this.CreateItemForm.shippingInfo.shipping_to_country_five,
+      };
+      this.CreateItem(payLoad);
+    },
+  },
 });
 </script>
-
-
-<style type="ts" scoped>
-.widthstyle {
-    max-width: 900px;
-    margin: 0 auto;
-}
-.bordered {
-    border-style: solid;
-    border-width: 1px;
-    border-color: #f0f2f2;
-}
-.bordered {
-    border-style: solid;
-    border-width: 1px;
-    border-color: #a7a0a0;
-}
-.rcorners1 {
-    border-radius: 5px;
-}
-.greyhover:hover {
-    background-color: #eeeeee;
-}
-.wordcolor {
-    color: #6b6565;
-}
-.rcorners1 {
-    border-radius: 5px;
-}
-.greyhover:hover {
-    background-color: #eeeeee;
-}
-.wordcolor {
-    color: #6b6565;
-}
-</style>

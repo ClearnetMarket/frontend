@@ -3,8 +3,9 @@
 <MainHeaderTop/>
 <MainHeaderMid/>
 <MainHeaderBottom/>
-<MainHeaderVendor/>
+
 <div v-if="user">
+<MainHeaderVendor/>
 
 </div>
 </template>
@@ -46,8 +47,9 @@ export default defineComponent({
     })
         .then((response) => {
           if (response.status = 200) {
-            this.current_user = response.data.user
-            console.log(this.current_user)
+        
+            this.$store.dispatch('user', response.data.user);
+     
           }
         })
         .catch((error) => {

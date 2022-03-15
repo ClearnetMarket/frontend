@@ -1,101 +1,135 @@
 <template>
-  <q-page class="docs-input">
-    <q-breadcrumbs class="text-info q-mt-md q-ml-lg">
-      <template v-slot:separator>
-        <q-icon size="1.5em" name="chevron_right" color="primary" />
-      </template>
-      <q-breadcrumbs-el label="Home" icon="home" to="/" />
-    </q-breadcrumbs>
+  <MainHeaderTop />
+  <MainHeaderMid />
+  <MainHeaderBottom />
 
-    <div class="row q-ma-none">
-      <div class="col-12 text-center q-ma-none">
-        <h5 class="q-mt-sm">My Items for item</h5>
+  <div v-if="user">
+    <MainHeaderVendor />
+  </div>
+  <div class="">
+    <div class="container h-screen border border-top max-w-7xl mx-auto px-10">
+      <div class="mt-5 mb-5">
+        <nav class="rounded-md w-full">
+          <ol class="list-reset flex">
+            <li>
+              <router-link :to="{ name: 'home' }">
+                <a class="text-blue-600 hover:text-blue-700">Home</a>
+              </router-link>
+            </li>
+            <li>
+              <span class="text-gray-500 mx-2">/</span>
+            </li>
+          </ol>
+        </nav>
+      </div>
+
+      <div class="grid grid-cols-1 bg-white rounded-md p-6">
+        <div class="text-[24px]">Items for Sale</div>
+        <div class="flex justify-end">
+          <router-link :to="{ name: 'createquick' }">
+            <button
+              class="py-2 px-4 shadow-md no-underline rounded-full text-white font-sans text-sm hover:text-white bg-green-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2"
+            >
+              Create Item
+            </button>
+          </router-link>
+        </div>
+        <div class="mt-10 grid grid-cols-12">
+          <div v-for="(item, index) in items" class="col-span-12">
+            <div
+              class="grid grid-cols-12 shadow-md border-2 border-gray-200 rounded-md p-5"
+            >
+              <div class="col-span-2">
+                <img
+                  src="http://picsum.photos/100/100"
+                  alt="{{item.item_title}}"
+                />
+              </div>
+              <div class="col-span-8">
+                <div class="grid grid-cols-12 grid-row-5">
+                  <div class="col-span-12 text-center text-[18px] px-1">
+                    {{ item.item_title }}
+                  </div>
+                  <div class="flex col-span-12 text-[14px] p-1">
+                    Online Status:
+                    <div v-if="(item.online = 0)" class="text-green-500">
+                      ONLINE
+                    </div>
+                    <div v-else class="text-red-500">OFFLINE</div>
+                  </div>
+                  <div class="col-span-12 text-[14px] p-1">
+                    Total Sold: {{ item.total_sold }}
+                  </div>
+                  <div class="col-span-12 text-[14px] p-1">
+                    Total Views: {{ item.view_count }}
+                  </div>
+                  <div class="col-span-12 text-[14px] p-1">
+                    Total Views: {{ item.review_count }}
+                  </div>
+                </div>
+              </div>
+              <div class="col-span-2">
+                <div class="mb-2">
+                     
+                  <button
+                   v-on:click="gotoitem(item.uuid)"
+                    class="py-2 px-4 shadow-md no-underline rounded-full text-white font-sans text-sm hover:text-white bg-zinc-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2"
+                  >
+                    Edit
+                  </button>
+             
+                </div>
+                <div class="mb-2">
+                  <button
+                    @click.prevent="cloneitem(item.uuid)"
+                    class="py-2 px-4 shadow-md no-underline rounded-full text-white font-sans text-sm hover:text-white bg-violet-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2"
+                  >
+                    Clone
+                  </button>
+                </div>
+                <div class="mb-2">
+                  <button
+                    @click.prevent="deleteitem(item.uuid)"
+                    class="py-2 px-4 shadow-md no-underline rounded-full text-white font-sans text-sm hover:text-white bg-red-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2"
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-
-    <div class="row q-mb-lg">
-      <div class="col-12">
-        <q-btn color="primary" icon="mode_edit" label="Create New Item" to="/vendor/createitem" />
-      </div>
-    </div>
-
-    <div v-for="(item, index) in items">
-      <div class="row bg-grey-2 rounded-borders q-mb-sm">
-        <div class="col-12 col-sm-3 col-pa-sm">
-          <q-img spinner-color="white" src="http://picsum.photos/100/100" />
-        </div>
-        <div class="col-12 col-sm-9 col-md-7 q-px-lg q-py-md">
-          <div class="col-12 text-h6">{{ item.item_title }}</div>
-
-          <q-rating
-            v-model="item.item_rating"
-            max="5"
-            size="sm"
-            color="yellow-4"
-            icon="star_border"
-            icon-selected="star"
-            icon-half="star_half"
-            readonly
-          />
-          <div class="col-12">Total Sold: {{ item.total_sold }}</div>
-          <div class="col-12">Total Views: {{ item.view_count }}</div>
-          <div class="col-12">Total Views: {{ item.review_count }}</div>
-        </div>
-        <div class="col-12 col-sm-12 col-md-2 col-pa-sm">
-          <div class="col-12">
-            <q-btn
-              class="btn-fixed-width q-my-sm"
-              color="primary"
-              text-color="white"
-              label="Edit item"
-               v-on:click="gotoitem(item.uuid)"
-            />
-          </div>
-          <div class="col-12">
-            <q-btn
-              class="btn-fixed-width q-my-sm"
-              color="accent"
-              text-color="white"
-              label="Clone Item"
-              v-on:click="cloneitem(item.uuid)"
-            />
-          </div>
-          <div class="col-12">
-            <q-btn
-              class="btn-fixed-width q-my-sm"
-              color="red-14"
-              text-color="white"
-              label="Delete Item"
-                v-on:click="deleteitem(item.uuid)"
-            />
-          </div>
-        </div>
-      </div>
-    </div>
-  </q-page>
+  </div>
+    <MainFooter />
 </template>
 
 <script lang="ts">
-
-import { defineComponent } from 'vue';
-import axios from 'axios';
-import { ref } from 'vue';
-
-import authHeader from '../../services/auth.header';
-import { mapGetters } from 'vuex';
-
-
+import { defineComponent } from "vue";
+import axios from "axios";
+import { ref } from "vue";
+import { mapGetters } from "vuex";
+import authHeader from "../../services/auth.header";
+import MainHeaderTop from "../../layouts/headers/MainHeaderTop.vue";
+import MainHeaderMid from "../../layouts/headers/MainHeaderMid.vue";
+import MainHeaderBottom from "../../layouts/headers/MainHeaderBottom.vue";
+import MainHeaderVendor from "../../layouts/headers/MainHeaderVendor.vue";
+import MainFooter from "../../layouts/footers/FooterMain.vue";
 export default defineComponent({
-  name: 'forsale',
-  setup () {
-
+  name: "forsale",
+  components: {
+    MainHeaderTop,
+    MainHeaderMid,
+    MainHeaderBottom,
+    MainHeaderVendor,
+      MainFooter
   },
-  mounted () {
+  setup() {},
+  mounted() {
     this.getvendoritems();
-
-
   },
-  data () {
+  data() {
     return {
       items: [],
 
@@ -103,91 +137,61 @@ export default defineComponent({
     };
   },
   computed: {
-    ...mapGetters(['user']),
+    ...mapGetters(["user"]),
   },
   methods: {
-    gotoitem(itemid){
-      this.$router.push({name:'edititem', params: {id: itemid }});  
-      },
+    gotoitem(itemid) {
+         this.$router.push({name:'edititem', params: {id: itemid }});  
+    },
 
-    async userstatus () {
+    async userstatus() {
       await axios({
-        method: 'get',
-        url: '/auth/whoami',
+        method: "get",
+        url: "/auth/whoami",
         withCredentials: true,
-        headers: authHeader()
-      })
-        .then((response) => {
-          if (response.status = 200) {
-           
-          }
-          else {
-            this.$router.push("/login")
-          }
-        })
+        headers: authHeader(),
+      }).then((response) => {
+        if ((response.status != 200)) {
+                this.$router.push({ name: 'home' });
+        }
+      });
     },
-    async getvendoritems () {
+    async getvendoritems() {
       await axios({
-        method: 'get',
-        url: '/vendorcreate/itemsforsale',
+        method: "get",
+        url: "/vendorcreate/itemsforsale",
         withCredentials: true,
-        headers: authHeader()
-      })
-        .then((response) => {
-          if (response.status = 200) {
-            this.items = response.data
-         
-          }
-        })
+        headers: authHeader(),
+      }).then((response) => {
+        if ((response.status = 200)) {
+          this.items = response.data;
+        }
+      });
     },
-      async cloneitem (itemid) {
+    async cloneitem(itemid) {
       await axios({
-        method: 'get',
-        url: '/vendorcreate/clone-item/' + itemid,
+        method: "get",
+        url: "/vendorcreate/clone-item/" + itemid,
         withCredentials: true,
-        headers: authHeader()
-      })
-        .then((response) => {
-          if (response.status = 200) {
-            this.getvendoritems();
-              this.$q.notify({
-              type: 'positive',
-              message: 'Successfully cloned item.',
-              position: 'top'
-            })
-          }else{
-               this.$q.notify({
-              type: 'negative',
-              message: 'Error cloning item.',
-              position: 'top'
-            })
-          }
-        })
+        headers: authHeader(),
+      }).then((response) => {
+        if ((response.status = 200)) {
+          this.getvendoritems();
+        }
+      });
     },
-      async deleteitem (itemid) {
+    async deleteitem(itemid) {
       await axios({
-        method: 'delete',
-        url: '/vendorcreate/delete-item/' + itemid,
+        method: "delete",
+        url: "/vendorcreate/delete-item/" + itemid,
         withCredentials: true,
-        headers: authHeader()
-      })
-        .then((response) => {
-          if (response.status = 200) {
-             this.getvendoritems();
-              this.$q.notify({
-              type: 'positive',
-              message: 'Successfully deleted item.',
-              position: 'top'
-            })
-          }else{
-               this.$q.notify({
-              type: 'negative',
-              message: 'Error deleting item.',
-              position: 'top'
-            })
-          }
-        })
+        headers: authHeader(),
+      }).then((response) => {
+        if ((response.status = 200)) {
+          this.getvendoritems();
+        }
+      });
     },
-  }
+  },
 });
 </script>
