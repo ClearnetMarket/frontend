@@ -19,6 +19,7 @@ import MainHeaderTop from '../layouts/headers/MainHeaderTop.vue'
 import MainHeaderMid from '../layouts/headers/MainHeaderMid.vue'
 import MainHeaderBottom from '../layouts/headers/MainHeaderBottom.vue'
 import MainHeaderVendor from '../layouts/headers/MainHeaderVendor.vue'
+
 export default defineComponent({
   name: 'Home',
 

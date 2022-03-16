@@ -1,104 +1,120 @@
 <template>
-    <q-page class="docs-input widthstyle">
-        <q-breadcrumbs class="text-info q-mt-md q-ml-lg">
-            <template v-slot:separator>
-                <q-icon size="1.5em" name="chevron_right" color="primary" />
-            </template>
-            <q-breadcrumbs-el label="Home" icon="home" to="/" />
-        </q-breadcrumbs>
+  <MainHeaderTop />
+  <MainHeaderMid />
+  <MainHeaderBottom />
 
-        <q-tabs v-model="tab" class="text-orange-9 q-mb-sm">
-            <q-route-tab to="/wallet/bch" name="transactions" icon="toc" label="Transactions" />
-            <q-route-tab to="/wallet/bch/recieve" name="receieve" icon="unarchive" label="Recieve" />
-            <q-route-tab to="/wallet/bch/send" name="send" icon="send" label="Send" />
-        </q-tabs>
+  <div class="container h-screen max-w-7xl mx-auto px-10">
+    <!-- Container-->
+    <div class="mt-5 mb-5">
+      <nav class="rounded-md w-full">
+        <ol class="list-reset flex">
+          <li>
+            <router-link :to="{ name: 'home' }">
+              <a class="text-blue-600 hover:text-blue-700">Home</a>
+            </router-link>
+          </li>
+          <li>
+            <span class="text-gray-500 mx-2">/</span>
+          </li>
 
-        <div class="row">
-            <div class="col-12 col-sm-3"></div>
-            <div class="col-12 col-sm-6">
-                <q-img src="../../../assets/coin/bch/bch_logo_long.png" />
-            </div>
-                    <div class="col-12 col-sm-3"></div>
+          <li>
+            <router-link :to="{ name: 'wallet' }">
+              <a class="text-blue-600 hover:text-blue-700">Wallet Home</a>
+            </router-link>
+          </li>
+          <li>
+            <span class="text-gray-500 mx-2">/</span>
+          </li>
+        </ol>
+      </nav>
+    </div>
+
+    <div class="flex mx-10 text-[22px]">Send Bitcoin Cash</div>
+    <div class="flex flex-row mx-10 justify-center mt-20">
+      <form method="post" @submit="onSubmit">
+        <div class="mb-4">
+          <label
+            class="block text-gray-700 text-sm font-bold mb-2"
+            for="username"
+            >Address</label
+          >
+          <label class="block text-gray-700 mb-2 text-[11px]" for="username"
+            >Address of the wallet you are sending coin too.</label
+          >
+          <input
+            v-model="wallet.xmr_address"
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="username"
+            type="text"
+            placeholder="Address"
+          />
+        </div>
+        <div class="mb-4">
+          <label
+            class="block text-gray-700 text-sm font-bold mb-2"
+            for="username"
+            >Transaction Description</label
+          >
+          <label class="block text-gray-700 mb-2 text-[11px]" for="username"
+            >This is the name other users will see you as. It would be the name
+            of your store.</label
+          >
+          <input
+            v-model="wallet.xmr_decscription"
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="username"
+            type="text"
+            placeholder="Description"
+          />
         </div>
 
-        
-
-        <q-form method="post" @submit="onSubmit">
-           
-                <div class="col-12 col-sm-12">
-                    Bch Address
-                    <q-input
-                        outlined
-                        v-model="wallet.bch_address"
-                        label="Destination BCH Address"
-                        autocomplete="off"
-                        :dense="dense"
-                        :rules="[
-                            $rules.required('Title is Required'),
-                            $rules.minLength(25, 'Your address is incorrect'),
-                            $rules.maxLength(100, 'Your address is incorrect')
-                        ]"
-                        lazy-rules
-                    />
-                </div>
-           
-                <div class="col-12 col-sm-12">
-                    Description
-                    <q-input
-                        outlined
-                        v-model="wallet.bch_address"
-                        label="Transaction Description"
-                        autocomplete="off"
-                        :dense="dense"
-                        :rules="[
-                            $rules.minLength(2, 'Your description should have at least 2 characters'),
-                            $rules.maxLength(250, 'Your description should not be larger than 250 letters')
-                        ]"
-                        lazy-rules
-                    />
-                </div>
-                <div class="col-12" style="max-width:200px">
-                    Amount
-                    <q-input
-                        outlined
-                        v-model="wallet.bch_amount"
-                        label="Amount in BCH"
-                        autocomplete="off"
-                        mask="#.########"
-                        fill-mask="0"
-                        :dense="dense"
-                        :rules="[
-                            $rules.required('Amount is Required'),
-                            $rules.numeric('Numbers only'),
-                        
-                        ]"
-                        lazy-rules
-                    />
-                </div>
-                <div class="col-12 col-sm-12" style="max-width:200px">
-                    Wallet Pin
-                    <q-input
-                        outlined
-                        v-model="wallet.pin"
-                        label="Wallet Pin"
-                        autocomplete="off"
-                        :dense="dense"
-                        :rules="[
-                            $rules.required('Pin is Required'),
-                            $rules.minLength(4, 'Your pin should be 4 numbers'),
-                            $rules.maxLength(4, 'Your pin should be 4 numbers')
-                        ]"
-                        lazy-rules
-                    />
-                </div>
-      
-            <div class="q-pa-md doc-container">
-                <div class="row justify-end">
-                    <q-btn type="submit" class color="accent" label="Send Coin" />
-                </div>
-            </div>
-        </q-form>
-    </q-page>
+        <div class="mb-4">
+          <label
+            class="block text-gray-700 text-sm font-bold mb-2"
+            for="password"
+            >Amount</label
+          >
+          
+          <div class="flex flex-row">
+            <input
+              v-model="wallet.xmr_amount"
+              class="basis-1/3 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="amount"
+              type="text"
+              autocomplete="off"
+              placeholder="Amount"
+            />
+          </div>
+        </div>
+        <div class="mb-4">
+          <label
+            class="block text-gray-700 text-sm font-bold mb-2"
+            for="password_confirm"
+            >Wallet Pin</label
+          >
+          <div class="flex flex-row">
+            <input
+              v-model="wallet.pin"
+              class="basis-1/3 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="pin"
+              type="password"
+              autocomplete="off"
+              placeholder="Pin"
+            />
+          </div>
+        </div>
+        <div class="flex items-center justify-center mb-6">
+          <button
+            class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            type="submit"
+          >
+            Send Coin
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <MainFooter />
 </template>
 
 <script lang="ts">
@@ -106,15 +122,26 @@
 import { defineComponent } from 'vue';
 import axios from 'axios';
 import { ref } from 'vue';
-import authHeader from '../../../services/auth.header';
 import { mapGetters } from 'vuex';
+import MainHeaderTop from "../../../layouts/headers/MainHeaderTop.vue";
+import MainHeaderMid from "../../../layouts/headers/MainHeaderMid.vue";
+import MainHeaderBottom from "../../../layouts/headers/MainHeaderBottom.vue";
+import MainHeaderVendor from "../../../layouts/headers/MainHeaderVendor.vue";
+import MainFooter from "../../../layouts/footers/FooterMain.vue";
+import authHeader from "../../../services/auth.header.ts";
+
 
 
 export default defineComponent({
     name: 'bchsend',
-    setup () {
-     
-    },
+  components: {
+    MainHeaderTop,
+    MainHeaderMid,
+    MainHeaderBottom,
+    MainHeaderVendor,
+    MainFooter,
+  },
+  
     mounted () {
         this.userstatus()
     },

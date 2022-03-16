@@ -1,184 +1,174 @@
 <template>
-    <router-view />
-    <q-page class="docs-input">
-        <q-breadcrumbs class="text-info q-mt-md q-ml-lg">
-            <template v-slot:separator>
-                <q-icon size="1.5em" name="chevron_right" color="primary" />
-            </template>
+  <MainHeaderTop />
+  <MainHeaderMid />
+  <MainHeaderBottom />
 
-            <q-breadcrumbs-el label="Home" icon="home" to="/" />
-            <q-breadcrumbs-el label="Account" icon="person" to="/account" />
-        </q-breadcrumbs>
-        <div class="q-pa-md">
-            <div class="text-center">
-                <h5>Your Account</h5>
-            </div>
+  <div v-if="user">
+    <MainHeaderVendor />
+  </div>
+  <!-- Top Stuff-->
+  <div class="container h-screen max-w-7xl mx-auto px-10">
+    <!-- Container-->
+    <div class="mt-5 mb-5">
+      <nav class="rounded-md w-full">
+        <ol class="list-reset flex">
+          <li>
+            <router-link :to="{ name: 'home' }">
+              <a class="text-blue-600 hover:text-blue-700">Home</a>
+            </router-link>
+          </li>
+          <li>
+            <span class="text-gray-500 mx-2">/</span>
+          </li>
+        </ol>
+      </nav>
+    </div>
 
-            <div class="row justify-evenly">
-                <div
-                    class="col-xs-12 col-sm-8 col-md-3 bordered rcorners1 greyhover q-mx-sm q-my-sm"
-                    @click="$router.replace('/orders')"
-                    style="cursor: pointer;"
-                >
-                    <div class="row">
-                        <div class="col-4 q-pa-md">
-                            <q-icon name="shopping_basket" size="xl" color="orange-5" />
-                        </div>
-                        <div class="col-8">
-                            <div class="text-subtitle1">Orders</div>
-                            <div class="text-grey-7">View all of your orders in one place</div>
-                        </div>
-                    </div>
-                </div>
-                <div
-                    class="col-xs-12 col-sm-8 col-md-3 bordered rcorners1 greyhover q-mx-sm q-my-sm"
-                    @click="$router.replace('/changepassword')"
-                    style="cursor: pointer;"
-                >
-                    <div class="row">
-                        <div class="col-4 q-pa-md">
-                            <q-icon name="lock" size="xl" color="orange-5" />
-                        </div>
-                        <div class="col-8">
-                            <div class="text-subtitle1">Account Password</div>
-                            <div class="text-grey-7">Change account password</div>
-                        </div>
-                    </div>
-                </div>
-                <div
-                    class="col-xs-12 col-sm-8 col-md-3 bordered rcorners1 greyhover q-mx-sm q-my-sm"
-                    @click="$router.replace('/changepin')"
-                    style="cursor: pointer;"
-                >
-                    <div class="row">
-                        <div class="col-4 q-pa-md">
-                            <q-icon name="vpn_key" size="xl" color="orange-5" />
-                        </div>
-                        <div class="col-8">
-                            <div class="text-subtitle1">Account Pin</div>
-                            <div class="text-grey-7">Change account pin</div>
-                        </div>
-                    </div>
-                </div>
-                <div
-                    class="col-xs-12 col-sm-8 col-md-3 bordered rcorners1 greyhover q-mx-sm q-my-sm"
-                    @click="$router.replace('/profile')"
-                    style="cursor: pointer;"
-                >
-                    <div class="row">
-                        <div class="col-4 q-pa-md">
-                            <q-icon name="star" size="xl" color="orange-5" />
-                        </div>
-                        <div class="col-8">
-                            <div class="text-subtitle1">Ratings</div>
-                            <div class="text-grey-7">View my ratings</div>
-                        </div>
-                    </div>
-                </div>
-                <div
-                    class="col-xs-12 col-sm-8 col-md-3 bordered rcorners1 greyhover q-mx-sm q-my-sm"
-                    @click="$router.replace('/account/profile')"
-                    style="cursor: pointer;"
-                >
-                    <div class="row">
-                        <div class="col-4 q-pa-md">
-                            <q-icon name="person" size="xl" color="orange-5" />
-                        </div>
-                        <div class="col-8">
-                            <div class="text-subtitle1">Profile</div>
-                            <div class="text-grey-7">Change profile Info</div>
-                        </div>
-                    </div>
-                </div>
-                <div
-                    class="col-xs-12 col-sm-8 col-md-3 bordered rcorners1 greyhover q-mx-sm q-my-sm"
-                    @click="$router.replace('/messages/messageshome')"
-                    style="cursor: pointer;"
-                >
-                    <div class="row">
-                        <div class="col-4 q-pa-md">
-                            <q-icon name="mail" size="xl" color="orange-5" />
-                        </div>
-                        <div class="col-8">
-                            <div class="text-subtitle1">Messages</div>
-                            <div class="text-grey-7">My Messages</div>
-                        </div>
-                    </div>
-                </div>
-                <div
-                    class="col-xs-12 col-sm-8 col-md-3 bordered rcorners1 greyhover q-mx-sm q-my-sm"
-                    @click="$router.replace('/checkout/cart')"
-                    style="cursor: pointer;"
-                >
-                    <div class="row">
-                        <div class="col-4 q-pa-md">
-                            <q-icon name="shopping_cart" size="xl" color="orange-5" />
-                        </div>
-                        <div class="col-8">
-                            <div class="text-subtitle1">Cart</div>
-                            <div class="text-grey-7">Go to my Shopping Cart</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <div class="grid grid-cols-1 bg-white rounded-md p-6">
+      <div class="text-[24px]">My Account</div>
+    </div>
+
+    <!-- END Top Stuff-->
+
+    <div class="grid sm:grid-cols-1 md:grid-cols-3 gap-5 my-3">
+      <div
+        class="col-span-1 border border-1 rounded-md p-5 hover:bg-gray-100"
+        @click="$router.replace('/orders')"
+        style="cursor: pointer"
+      >
+        <div class="grid grid-cols-4 grid-rows-2">
+          <div class="col-span-1 row-span-2">Icon</div>
+          <div class="col-span-3 row-span-1 text-[20px]">Orders</div>
+          <div class="col-span-3 row-span-1 text-[14px] text-gray-600">
+            View all of your orders in one place
+          </div>
         </div>
-    </q-page>
+      </div>
+
+      <div
+        class="col-span-1 border border-1 rounded-md p-5 hover:bg-gray-100"
+        @click="$router.replace('/changepassword')"
+        style="cursor: pointer"
+      >
+        <div class="grid grid-cols-4 grid-rows-2">
+          <div class="col-span-1 row-span-2">Icon</div>
+          <div class="col-span-3 row-span-1 text-[20px]">Account Password</div>
+          <div class="col-span-3 row-span-1 text-[14px] text-gray-600">
+            Change Account Password
+          </div>
+        </div>
+      </div>
+      <div
+        class="border border-1 rounded-md p-5 hover:bg-gray-100"
+        @click="$router.replace('/changepin')"
+        style="cursor: pointer"
+      >
+        <div class="grid grid-cols-4 grid-rows-2">
+          <div class="col-span-1 row-span-2">Icon</div>
+          <div class="col-span-3 row-span-1 text-[20px]">Account Pin</div>
+          <div class="col-span-3 row-span-1 text-[14px] text-gray-600">
+            Change Wallet Pin
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="grid sm:grid-cols-1 md:grid-cols-3 gap-5 my-3">
+      <div
+        class="border border-1 rounded-md p-5 hover:bg-gray-100"
+        @click="$router.replace('/profile')"
+        style="cursor: pointer"
+      >
+        <div class="grid grid-cols-4 grid-rows-2">
+          <div class="col-span-1 row-span-2">Icon</div>
+          <div class="col-span-3 row-span-1 text-[20px]">Ratings</div>
+          <div class="col-span-3 row-span-1 text-[14px] text-gray-600">
+            View my ratings
+          </div>
+        </div>
+      </div>
+      <div
+        class="border border-1 rounded-md p-5 hover:bg-gray-100"
+        @click="$router.replace('/profile')"
+        style="cursor: pointer"
+      >
+        <div class="grid grid-cols-4 grid-rows-2">
+          <div class="col-span-1 row-span-2">Icon</div>
+          <div class="col-span-3 row-span-1 text-[20px]">Profile</div>
+          <div class="col-span-3 row-span-1 text-[14px] text-gray-600">
+            Change Profile Info
+          </div>
+        </div>
+      </div>
+      <div
+        class="border border-1 rounded-md p-5 hover:bg-gray-100"
+        @click="$router.replace('/messages/messageshome')"
+        style="cursor: pointer"
+      >
+        <div class="grid grid-cols-4 grid-rows-2">
+          <div class="col-span-1 row-span-2">Icon</div>
+          <div class="col-span-3 row-span-1 text-[20px]">Messages</div>
+          <div class="col-span-3 row-span-1 text-[14px] text-gray-600">
+            View Messages
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END container-->
+  <MainFooter />
 </template>
-
-
 <script lang="ts">
-
-import { defineComponent } from 'vue';
-import axios from 'axios';
-import { ref } from 'vue';
-
-import authHeader from '../../../services/auth.header';
+import { defineComponent } from "vue";
+import axios from "axios";
+import { ref } from "vue";
+import MainHeaderTop from "../../../layouts/headers/MainHeaderTop.vue";
+import MainHeaderMid from "../../../layouts/headers/MainHeaderMid.vue";
+import MainHeaderBottom from "../../../layouts/headers/MainHeaderBottom.vue";
+import MainHeaderVendor from "../../../layouts/headers/MainHeaderVendor.vue";
+import MainFooter from "../../../layouts/footers/FooterMain.vue";
+import authHeader from "../../../services/auth.header";
 
 export default defineComponent({
-    name: 'Login',
-    components: {},
+  name: "Login",
+  components: {
+    MainHeaderTop,
+    MainHeaderMid,
+    MainHeaderBottom,
+    MainHeaderVendor,
+    MainFooter,
+  },
 
-    data () {
-        return {
+  data() {
+    return {};
+  },
 
-        };
+  methods: {
+    async userstatus() {
+      await axios({
+        method: "get",
+        url: "/auth/whoami",
+        withCredentials: true,
+        headers: authHeader(),
+      }).then((response) => {
+        if ((response.status = 200)) {
+          let user = response.data.user;
+          let user_auth_status = response.data.login;
+        }
+      });
     },
-
-    methods: {
-        async userstatus () {
-            await axios({
-                method: 'get',
-                url: '/auth/whoami',
-                withCredentials: true,
-                headers: authHeader()
-            })
-                .then((response) => {
-                    if (response.status = 200) {
-                        let user = response.data.user;
-                        let user_auth_status = response.data.login;
-
-                    }
-                })
-        },
-        async userprofile () {
-            await axios({
-                method: 'get',
-                url: '/profile/profile_home',
-                withCredentials: true,
-                headers: authHeader()
-            })
-                .then((response) => {
-                    if (response.status = 200) {
-                    }
-                })
-        },
-
+    async userprofile() {
+      await axios({
+        method: "get",
+        url: "/profile/profile_home",
+        withCredentials: true,
+        headers: authHeader(),
+      }).then((response) => {
+        if ((response.status = 200)) {
+        }
+      });
     },
+  },
 });
 </script>
 
-
-<style type="ts" scoped>
-
-
-</style>
+<style type="ts" scoped></style>

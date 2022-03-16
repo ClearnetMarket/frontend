@@ -34,7 +34,11 @@ const routes = [
     name: 'edititem',
     component: () => import('../pages/vendorcreateitem/EditItem.vue'),
   },
-
+  {
+    path: '/wallet',
+    name: 'wallet',
+    component: () => import('../pages/wallets/WalletHome.vue'),
+  },
   {
     path: '/wallet/btc',
     name: 'btcwallet',

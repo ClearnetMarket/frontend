@@ -6,8 +6,8 @@
   <div v-if="user">
     <MainHeaderVendor />
   </div>
-  <div class="">
-    <div class="container h-screen border border-top max-w-7xl mx-auto px-10">
+ 
+    <div class="container  border border-top max-w-7xl mx-auto px-10 ">
       <div class="mt-5 mb-5">
         <nav class="rounded-md w-full">
           <ol class="list-reset flex">
@@ -101,7 +101,7 @@
         </div>
       </div>
     </div>
-  </div>
+
     <MainFooter />
 </template>
 

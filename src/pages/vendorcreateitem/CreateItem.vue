@@ -5,6 +5,7 @@
 
   <div v-if="user">
     <MainHeaderVendor />
+  
   </div>
   <div class="">
     <div class="container max-w-7xl mx-auto px-10">
@@ -21,7 +22,7 @@
             </li>
             <li>
               <router-link :to="{ name: 'forsale' }">
-                <a class="text-blue-600 hover:text-blue-700">Items for Sale</a>
+                <a class="text-blue-600 hover:text-blue-700 ">Items for Sale</a>
               </router-link>
             </li>
             <li>
@@ -423,7 +424,7 @@ import axios from "axios";
 import { ref } from "vue";
 import authHeader from "../../services/auth.header";
 import { mapGetters } from "vuex";
-import { constants } from "perf_hooks";
+i
 import MainHeaderTop from "../../layouts/headers/MainHeaderTop.vue";
 import MainHeaderMid from "../../layouts/headers/MainHeaderMid.vue";
 import MainHeaderBottom from "../../layouts/headers/MainHeaderBottom.vue";
@@ -601,7 +602,7 @@ export default defineComponent({
             this.marketitem = response.data;
             this.image_main = response.data.image_one_server;
             this.image_two = response.data.image_two_server;
-            console.log(this.image_two)
+          
             this.image_three = response.data.image_three_server;
             this.image_four = response.data.image_four_server;
           }
@@ -663,6 +664,7 @@ export default defineComponent({
       })
         .then((response) => {
           this.conditionList = response.data;
+        
         })
         .catch((error) => {});
     },

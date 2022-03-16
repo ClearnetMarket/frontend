@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-neutral-800 h-96 text-white pt-12 pb-12">
+  <div class="bg-neutral-800 h-96 text-white pt-12 pb-12  inset-x-0 bottom-0 mt-20">
   <div class="mx-32 ">
     <div class="flex flex-row ">
      
