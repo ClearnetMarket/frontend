@@ -1,107 +1,149 @@
 <template>
-  <q-page class="docs-input">
-    <div class="row justify-center">
-      <div class="col-xs-12 col-sm-6 col-md-4 col-auto q-pt-xl">
-        <p
-          class="text-center"
-        >In order to unlock your account, please enter your account seed below.</p>
-        <q-form class="q-px-sm q-pt-xl" method="POST" @submit="onSubmit">
-          <div class="q-gutter-md q-pa-lg formlayout">
-            <div class="row">
-              <div class="col-xs-12 text-center text-h4">Unlock Account</div>
-            </div>
-            <q-input
-              outlined
-              v-model="wordForm.word0"
-              label="Word 1"
-              autocomplete="off"
-              :dense="wordForm.dense"
-            />
-            <q-input
-              outlined
-              v-model="wordForm.word1"
-              label="Word 2"
-              autocomplete="off"
-              :dense="wordForm.dense"
-            />
-            <q-input
-              outlined
-              v-model="wordForm.word2"
-              label="Word 3"
-              autocomplete="off"
-              :dense="wordForm.dense"
-            />
-            <q-input
-              outlined
-              v-model="wordForm.word3"
-              label="Word 4"
-              autocomplete="off"
-              :dense="wordForm.dense"
-            />
-            <q-input
-              outlined
-              v-model="wordForm.word4"
-              label="Word 5"
-              autocomplete="off"
-              :dense="wordForm.dense"
-            />
-            <q-input
-              outlined
-              v-model="wordForm.word5"
-              label="Word 6"
-              autocomplete="off"
-              :dense="wordForm.dense"
-            />
-            <div class="q-pa-md doc-container">
-              <div class="row justify-end">
-                <q-btn class="full-width" type="submit" color="secondary" label="Register" />
-              </div>
-            </div>
+  <MainHeaderTop />
+  <MainHeaderMid />
+  <MainHeaderBottom />
 
-            <div class="row">
-              <div class="col-xs-12 text-center q-mb-md">
-                Want to Register?
-                <router-link to="/register">Register</router-link>
-              </div>
+  <div v-if="user">
+    <MainHeaderVendor v-show="user.admin_role > 1" />
+  </div>
 
-              <div class="col-xs-12 text-center">
-                Login Here
-                <router-link to="/login">Login</router-link>
-              </div>
-            </div>
-          </div>
-        </q-form>
-      </div>
+  <div class="container max-w-7xl mx-auto px-10">
+    <div class="mt-5 mb-5">
+      <nav class="rounded-md w-full">
+        <ol class="list-reset flex">
+          <li>
+            <router-link :to="{ name: 'home' }">
+              <a class="text-blue-600 hover:text-blue-700">Home</a>
+            </router-link>
+          </li>
+          <li>
+            <span class="text-gray-500 mx-2">/</span>
+          </li>
+        </ol>
+      </nav>
     </div>
-  </q-page>
+  </div>
+  <div class="flex justify-center mx-auto">
+    <div class="max-w-md">
+      <div class="text-center">
+        In order to unlock your account, please enter your account seed below.
+      </div>
+      <form class="" method="POST" @submit="onSubmit">
+        <div class="gap-6">
+          <div class="flex justify-center">
+            <div class="text-center">Unlock Account</div>
+          </div>
+          <input
+            v-model="wordForm.word0"
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-blue-300 focus:outline-none focus:shadow-outline"
+            type="text"
+            autocomplete="off"
+            placeholder="Word 1"
+          />
+          <input
+            v-model="wordForm.word1"
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-blue-300 focus:outline-none focus:shadow-outline"
+            type="text"
+            autocomplete="off"
+            placeholder="Word 2"
+          />
+          <input
+            v-model="wordForm.word2"
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-blue-300 focus:outline-none focus:shadow-outline"
+            type="text"
+            autocomplete="off"
+            placeholder="Word 3"
+          />
+          <input
+            v-model="wordForm.word3"
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-blue-300 focus:outline-none focus:shadow-outline"
+            type="text"
+            autocomplete="off"
+            placeholder="Word 4"
+          />
+          <input
+            v-model="wordForm.word4"
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-blue-300 focus:outline-none focus:shadow-outline"
+            type="text"
+            autocomplete="off"
+            placeholder="Word 5"
+          />
+          <input
+            v-model="wordForm.word5"
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-blue-300 focus:outline-none focus:shadow-outline"
+            type="text"
+            autocomplete="off"
+            placeholder="Word 6"
+          />
+          <div class="flex p-md justify-center">
+            <button
+              class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-blue-300 focus:outline-none focus:shadow-outline"
+              type="submit"
+            >
+              Confirm
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <MainFooter />
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import axios from 'axios';
-import { ref } from 'vue';
+import { defineComponent } from "vue";
+import axios from "axios";
+import { ref } from "vue";
+import authHeader from "../../services/auth.header";
+import MainHeaderTop from "../../layouts/headers/MainHeaderTop.vue";
+import MainHeaderMid from "../../layouts/headers/MainHeaderMid.vue";
+import MainHeaderBottom from "../../layouts/headers/MainHeaderBottom.vue";
+import MainHeaderVendor from "../../layouts/headers/MainHeaderVendor.vue";
+import MainFooter from "../../layouts/footers/FooterMain.vue";
 
 export default defineComponent({
-  name: 'forgotpassword',
-
-  data () {
+  name: "accountseedconfirm",
+  components: {
+    MainHeaderTop,
+    MainHeaderMid,
+    MainHeaderBottom,
+    MainHeaderVendor,
+    MainFooter,
+  },
+  data() {
     return {
       wordForm: {
-        word0: '',
-        word1: '',
-        word2: '',
-        word3: '',
-        word4: '',
-        word5: '',
-
-        dense: ref(true),
+        word0: "",
+        word1: "",
+        word2: "",
+        word3: "",
+        word4: "",
+        word5: "",
       },
     };
   },
+  mounted() {
+    this.userstatusconfirmed();
 
-  methods:
-  {
-    sendWordRequest (payLoad: {
+  },
+  methods: {
+     async userstatusconfirmed() {
+      await axios({
+        method: "get",
+        url: "/auth/amiconfirmed",
+        withCredentials: true,
+        headers: authHeader(),
+      }).then((response) => {
+        if (response.status == 200) {
+          console.log(response.data)
+          if (response.data.confirmed == true) {
+            this.$router.push({ name: "home" });
+          }
+        }
+      });
+    },
+    sendWordRequest(payLoad: {
       word0: string;
       word1: string;
       word2: string;
@@ -110,47 +152,23 @@ export default defineComponent({
       word5: string;
     }) {
       axios({
-        method: 'post',
-        url: '/auth/accountseedconfirm',
+        method: "post",
+        url: "/auth/accountseedconfirm",
         data: payLoad,
+        withCredentials: true,
+        headers: authHeader(),
       })
         .then((response) => {
           if (response.data.status == "success") {
-
-            this.$router.push('/');
+            this.$router.push({ name: "home" });
           }
         })
         .catch((error) => {
           if (error.response) {
-            if (error.response.status === 401) {
-              this.$q.notify({
-                type: 'negative',
-                message: 'Error: Unauthorized',
-                position: 'top',
-              });
-            } else if (error.response.status === 409) {
-              this.$q.notify({
-                type: 'negative',
-                message: 'Error: Seed does not match',
-                position: 'top',
-              });
-            }
-            else if (error.response.status === 403) {
-              this.$q.notify({
-                type: 'negative',
-                message: 'Error: Forbidden',
-                position: 'top',
-              });
-            } else {
-              this.$q.notify({
-                type: 'negative',
-                message: 'Error',
-              });
-            }
           }
         });
     },
-    onSubmit () {
+    onSubmit() {
       const payLoad = {
         word0: this.wordForm.word0,
         word1: this.wordForm.word1,
@@ -165,10 +183,4 @@ export default defineComponent({
 });
 </script>
 
-
-<style type="ts" scoped>
-.center_text {
-  text-align: center;
-  display: inline-block;
-}
-</style>
+<style type="ts" scoped></style>

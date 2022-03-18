@@ -91,9 +91,7 @@ export default defineComponent({
       returns: "",
     };
   },
-  computed: {
-    ...mapGetters(["user"]),
-  },
+
   mounted() {
     this.userstatus();
   },

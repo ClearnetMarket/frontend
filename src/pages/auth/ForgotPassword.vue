@@ -157,7 +157,7 @@ export default defineComponent({
         });
     },
     onSubmit() {
-      console.log('Submitted');
+
       const payLoad = {
         word0: this.wordForm.word0,
         word1: this.wordForm.word1,

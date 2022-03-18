@@ -20,10 +20,21 @@ const routes = [
     component: () => import('../pages/vendor/Sell.vue'),
   },
   {
+    path: '/vendoragreement',
+    name: 'vendoragreement',
+    component: () => import('../pages/legal/VendorAgreement.vue'),
+  },
+  {
     path: '/vendor/itemsforsale',
     name: 'forsale',
     component: () => import('../pages/vendor/itemsForSale.vue'),
   },
+  {
+    path: '/item/:id',
+    name: 'item',
+    component: () => import('../pages/Item/Item.vue'),
+  },
+
   {
     path: '/vendor/createitem',
     name: 'createquick',

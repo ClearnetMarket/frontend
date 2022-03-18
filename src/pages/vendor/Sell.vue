@@ -1,162 +1,170 @@
 <template>
-  <q-page class="docs-input">
-    <q-breadcrumbs class="text-info q-mt-md q-ml-lg">
-      <template v-slot:separator>
-        <q-icon size="1.5em" name="chevron_right" color="primary" />
-      </template>
-      <q-breadcrumbs-el label="Home" icon="home" to="/" />
-      <q-breadcrumbs-el label="Account" icon="person" to="/account" />
-    </q-breadcrumbs>
+  <MainHeaderTop />
+  <MainHeaderMid />
+  <MainHeaderBottom />
 
-    <q-parallax src="../../assets/vendor/img_trade.jpg"></q-parallax>
-    <div class="row q-mt-lg">
-      <div class="col-12 text-center">
+  <div v-if="user">
+    <MainHeaderVendor v-show="user.admin_role > 1" />
+  </div>
+
+  <div class="container max-w-7xl mx-auto px-10">
+    <div class="mt-5 mb-5">
+      <nav class="rounded-md w-full">
+        <ol class="list-reset flex">
+          <li>
+            <router-link :to="{ name: 'home' }">
+              <a class="text-blue-600 hover:text-blue-700">Home</a>
+            </router-link>
+          </li>
+          <li>
+            <span class="text-gray-500 mx-2">/</span>
+          </li>
+        </ol>
+      </nav>
+    </div>
+    <img src="../../assets/vendor/tsr.jpg" />
+    <div class="flex justify-center my-10">
+      <div class="text-center text-[20px]">
         <h4>Vendor Signup</h4>
       </div>
     </div>
-    <div class="row q-mb-lg">
-      <div class="col-12 text-center">
-        Digital Currency is one of the best inventions of modern time. It allows the world to trade goods and services
-        with the ease of a single currency. It enables a free market, and puts the power back into peoples hands. We
-        can create a better market, built on the free hand of reputation, to enable even the basic of services and goods in every country.
-        Start selling today, and build a better world for tomorrow.
-      </div>
+    <div class="flex mb-10 text-center">
+      We
+      can create a better market, built on user reputation and privacy. Start
+      selling today, and bring crypto ecommerce to your part of the world.
     </div>
-    <div class="row q-mb-lg">
-      <div class="col-12 col-sm-4 text-center">
-        <span class="fa fa- btc" aria-hidden="true" style="font-size: 40px;"></span>
-        <br />
-        <h3 class="q-pb-md">No Fees</h3>
-        <p>Selling without any hidden fees. No signup or annual fee.</p>
+    <div class="flex text-center gap-5">
+      <div class="flex-1 bg-gray-100 rounded-md border border-1 p-5">
+        <div class="text-[20px]">No bullshit</div>
+        <div class="flex mb-10 text-center">
+          Selling without any hidden fees. No signup or annual fee. No paypal or credit card fees.
+          3% fee on
+          all items.
+        </div>
       </div>
 
-      <div class="col-12 col-sm-4 text-center">
-        <span class="fa fa- random" aria-hidden="true" style="font-size: 40px;"></span>
-        <br />
-        <h3 class="q-pb-md">Privacy</h3>
-        <p>
-          Sell with privacy. We don't store your personal information. Sell with
-          confidence that your information is never sold, distributed, or used without your knowledge.
-        </p>
+      <div class="flex-1 bg-gray-100 rounded-md border border-1 p-5">
+        <div class="text-[20px]">Privacy</div>
+        <div class="flex mb-10 text-center">
+          Sell with privacy. We don't store your personal information. We only keep emails for account contact.  Sell with
+          confidence that your information is never sold, distributed, or used
+          without your knowledge.
+        </div>
       </div>
 
-      <div class="col-12 col-sm-4 text-center">
-        <span class="fa fa- user" aria-hidden="true" style="font-size: 40px;"></span>
-
-        <h3 class="q-pb-md">Build your rep</h3>
-        <p>
-          With our unique leveling system, you can showcase your achievements and experience. Our profile box
-          helps customers have trust in you.
-        </p>
+      <div class="flex-1 bg-gray-100 rounded-md border border-1 p-5">
+        <div class="text-[20px]">No banks </div>
+        <div class="flex mb-10 text-center">
+          Anyone anywhere can sell.  No credit cards, banks, or third party payment systems.
+        </div>
       </div>
     </div>
 
-    <div class="row q-mb-xl" >
-      <div class="col-12 text-center">
-        <q-form
-          class="q-px-sm q-pt-xl"
-          method="POST"
-          @submit="onSubmit"
-          :validation-schema="schema"
-        
-        >
-          <q-toggle v-model="accept"  name="acceptTerms" label="I accept the license and terms" />
-        
-          <q-btn type="submit" class color="accent" label="Submit" />
-            <ErrorMessage name="acceptTerms" />
-        </q-form>
-      </div>
+    <div class="flex mx-auto justify-center text-center gap-5 mt-10">
+      <form class="" method="POST" @submit="onSubmit">
+        <div class="flex flex-col">
+          <div class="">
+            <div class="flex text-gray-700 text-sm font-bold">
+              I accept the terms of becoming a vendor
+            </div>
+            <router-link :to="{ name: 'home' }">
+              <div class=" text-blue-600 hover:text-blue-500 text-sm font-bold">
+                Vendor Agreement
+              </div>
+            </router-link>
+          </div>
+          <div class="">
+            <input type="checkbox" v-model="accept" name="acceptTerms" />
+          </div>
+        </div>
+        <div class="mt-5">
+          <button
+            class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            type="submit"
+          >
+            Become Vendor
+          </button>
+        </div>
+      </form>
     </div>
-  </q-page>
+  </div>
+  <MainFooter />
 </template>
 
 <script lang="ts">
-
-import { defineComponent } from 'vue';
-import axios from 'axios';
-import { ref } from 'vue';
-
-import authHeader from '../../services/auth.header';
-import { mapGetters } from 'vuex';
-
+import { defineComponent } from "vue";
+import axios from "axios";
+import { ref } from "vue";
+import { mapGetters } from "vuex";
+import { useRoute } from "vue-router";
+import authHeader from "../../services/auth.header";
+import MainHeaderTop from "../../layouts/headers/MainHeaderTop.vue";
+import MainHeaderMid from "../../layouts/headers/MainHeaderMid.vue";
+import MainHeaderBottom from "../../layouts/headers/MainHeaderBottom.vue";
+import MainHeaderVendor from "../../layouts/headers/MainHeaderVendor.vue";
+import MainFooter from "../../layouts/footers/FooterMain.vue";
 
 export default defineComponent({
-  name: 'sell',
-  setup () {
-
-    
-        // Create a form context with the validation schema
-
-
-   
+  name: "sell",
+  components: {
+    MainHeaderTop,
+    MainHeaderMid,
+    MainHeaderBottom,
+    MainHeaderVendor,
+    MainFooter,
   },
 
-  mounted () {
-    this.userstatus()
+  mounted() {
+    this.userstatus();
   },
-  data () {
+  data() {
     return {
-      verification: '',
+      verification: "",
       accept: ref(false),
-      user_admin: '',
+      user_admin: "",
     };
   },
   computed: {
-    ...mapGetters(['user']),
+    ...mapGetters(["user"]),
   },
 
   methods: {
-
-
-    async userstatus () {
+    async userstatus() {
       await axios({
-        method: 'get',
-        url: '/auth/whoami',
+        method: "get",
+        url: "/auth/whoami",
         withCredentials: true,
-        headers: authHeader()
-      })
-        .then((response) => {
-          if (response.status = 200) {
-            this.user_admin = response.data.user.admin_role;
-            var admin_id = parseInt(this.user_admin);
-             if ((admin_id) != 0) {
-              this.$router.push('/vendor/itemsforsale');
-            }
-          }
-          else {
+        headers: authHeader(),
+      }).then((response) => {
+        if ((response.status = 200)) {
+          this.user_admin = response.data.user.admin_role;
 
+          if (this.user_admin == 1) {
+            this.$router.push({ name: "forsale" });
           }
-        })
+        } else {
+        }
+      });
     },
-    async Register (payLoad: {
-      verification: string;
-    }) {
+    async becomevendor(payLoad: { verification: string }) {
       await axios({
-        method: 'post',
-        url: '/',
+        method: "post",
+        url: "/become-vendor",
         // url: '/vendor/become-vendor',
         data: payLoad,
         withCredentials: true,
-        headers: authHeader()
-      })
-        .then((response) => {
-          if (response.status = 200) {
-
-            this.$q.notify({
-              type: 'positive',
-              message: 'Success! You are now a vendor',
-              position: 'top'
-            })
-            this.$router.push('/vendor/itemsforsale');
-          }
-        })
+        headers: authHeader(),
+      }).then((response) => {
+        if ((response.status = 200)) {
+          this.$router.push({ name: "forsale" });
+        }
+      });
     },
-    async onSubmit () {
-      console.log('Submitted');
+    async onSubmit() {
       const payLoad = {
         verification: this.verification,
       };
-      await this.Register(payLoad);
+      await this.becomevendor(payLoad);
     },
   },
 });

@@ -1,6 +1,9 @@
 <template>
     <div class="max-w-7xl mx-auto grid sm:grid-cols-12 md:grid-cols-12 mb-0">
-        <div class="grid sm:col-span-12 md:col-span-3 grid-rows-2 text-center pt-5 m-0">
+        <div class="grid sm:col-span-12 md:col-span-3 grid-rows-2 text-center pt-5 m-0"
+         @click="$router.replace({name:'home'})"
+        style="cursor: pointer"
+        >
             <div class="row-span-1 text-[20px]">Clearnet Market</div>
             <div class="row-span-1 text-[12px]">Commerce for All</div>
         </div>
@@ -55,37 +58,5 @@ export default defineComponent({
 </script>
 
 <style type="sass" scoped>
-.linkcolor_topb a:link {
-    color: rgb(95, 105, 125);
-    text-decoration: none;
-}
-.linkcolor_topb a:visited {
-    color: rgb(95, 105, 125);
-    text-decoration: none;
-}
-.linkcolor_topb a:hover {
-    color: #ff9900;
-    text-decoration: none;
-}
-.linkcolor_topb a:active {
-    color: #ff9900;
-    text-decoration: none;
-}
 
-.linkcolor_shopping a:link {
-    color: rgb(95, 105, 125);
-    text-decoration: none;
-}
-.linkcolor_shopping a:visited {
-    color: rgb(95, 105, 125);
-    text-decoration: none;
-}
-.linkcolor_shopping a:hover {
-    color: #ff9900;
-    text-decoration: none;
-}
-.linkcolor_shopping a:active {
-    color: #ff9900;
-    text-decoration: none;
-}
 </style>
