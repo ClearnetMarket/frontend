@@ -11,15 +11,15 @@
       </div>
       <div class="flex mr-5">
         <div v-if="user" class="flex">
-         <div v-show="user.user_admin == 0">
-          <router-link :to="{ name: 'sell' }">
-            <button
-              class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mx-3"
-            >
-              Sell
-            </button>
-          </router-link>
-        </div>
+          <div v-show="user.user_admin == 0">
+            <router-link :to="{ name: 'sell' }">
+              <button
+                class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mx-3"
+              >
+                Sell
+              </button>
+            </router-link>
+          </div>
 
           <router-link :to="{ name: 'account' }">
             <button
@@ -38,12 +38,9 @@
               Logout
             </button>
           </router-link>
-          
         </div>
 
-       
-
-        <div v-else class="flex">
+        <div v-else class="flex gap-2">
           <router-link :to="{ name: 'login' }">
             <button
               class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline"
@@ -51,10 +48,7 @@
               Login
             </button>
           </router-link>
-          <router-link
-            class="p-1 lg:px-3 md:mx-2 text-black bg-white text-center border border-solid border-blue-600 rounded hover:bg-gray-200 hover:text-black transition-colors duration-300 mt-1 md:mt-0 md:ml-1"
-            :to="{ name: 'register' }"
-          >
+          <router-link :to="{ name: 'register' }">
             <button
               class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline"
             >

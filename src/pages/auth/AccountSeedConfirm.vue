@@ -1,11 +1,5 @@
 <template>
-  <MainHeaderTop />
-  <MainHeaderMid />
-  <MainHeaderBottom />
-
-  <div v-if="user">
-    <MainHeaderVendor v-show="user.admin_role > 1" />
-  </div>
+  <HeaderPlain />
 
   <div class="container max-w-7xl mx-auto px-10">
     <div class="mt-5 mb-5">
@@ -28,7 +22,7 @@
       <div class="text-center">
         In order to unlock your account, please enter your account seed below.
       </div>
-      <form class="" method="POST" @submit="onSubmit">
+      <form class="" method="POST" @submit.prevent="onSubmit">
         <div class="gap-6">
           <div class="flex justify-center">
             <div class="text-center">Unlock Account</div>
@@ -39,6 +33,7 @@
             type="text"
             autocomplete="off"
             placeholder="Word 1"
+            v-model.trim="wordForm.word0"
           />
           <input
             v-model="wordForm.word1"
@@ -46,6 +41,7 @@
             type="text"
             autocomplete="off"
             placeholder="Word 2"
+             v-model.trim="wordForm.word1"
           />
           <input
             v-model="wordForm.word2"
@@ -53,6 +49,7 @@
             type="text"
             autocomplete="off"
             placeholder="Word 3"
+             v-model.trim="wordForm.word2"
           />
           <input
             v-model="wordForm.word3"
@@ -60,6 +57,7 @@
             type="text"
             autocomplete="off"
             placeholder="Word 4"
+             v-model.trim="wordForm.word3"
           />
           <input
             v-model="wordForm.word4"
@@ -67,6 +65,7 @@
             type="text"
             autocomplete="off"
             placeholder="Word 5"
+             v-model.trim="wordForm.word4"
           />
           <input
             v-model="wordForm.word5"
@@ -74,6 +73,7 @@
             type="text"
             autocomplete="off"
             placeholder="Word 6"
+             v-model.trim="wordForm.word5"
           />
           <div class="flex p-md justify-center">
             <button
@@ -87,8 +87,6 @@
       </form>
     </div>
   </div>
-
-  <MainFooter />
 </template>
 
 <script lang="ts">
@@ -96,20 +94,12 @@ import { defineComponent } from "vue";
 import axios from "axios";
 import { ref } from "vue";
 import authHeader from "../../services/auth.header";
-import MainHeaderTop from "../../layouts/headers/MainHeaderTop.vue";
-import MainHeaderMid from "../../layouts/headers/MainHeaderMid.vue";
-import MainHeaderBottom from "../../layouts/headers/MainHeaderBottom.vue";
-import MainHeaderVendor from "../../layouts/headers/MainHeaderVendor.vue";
-import MainFooter from "../../layouts/footers/FooterMain.vue";
+import HeaderPlain from "../../layouts/headers/HeaderPlain.vue";
 
 export default defineComponent({
   name: "accountseedconfirm",
   components: {
-    MainHeaderTop,
-    MainHeaderMid,
-    MainHeaderBottom,
-    MainHeaderVendor,
-    MainFooter,
+    HeaderPlain,
   },
   data() {
     return {
@@ -125,10 +115,9 @@ export default defineComponent({
   },
   mounted() {
     this.userstatusconfirmed();
-
   },
   methods: {
-     async userstatusconfirmed() {
+    async userstatusconfirmed() {
       await axios({
         method: "get",
         url: "/auth/amiconfirmed",
@@ -136,13 +125,14 @@ export default defineComponent({
         headers: authHeader(),
       }).then((response) => {
         if (response.status == 200) {
-          console.log(response.data)
+      
           if (response.data.confirmed == true) {
             this.$router.push({ name: "home" });
           }
         }
       });
     },
+
     sendWordRequest(payLoad: {
       word0: string;
       word1: string;
@@ -151,6 +141,7 @@ export default defineComponent({
       word4: string;
       word5: string;
     }) {
+    
       axios({
         method: "post",
         url: "/auth/accountseedconfirm",
@@ -159,16 +150,19 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
+          
           if (response.data.status == "success") {
             this.$router.push({ name: "home" });
           }
         })
         .catch((error) => {
           if (error.response) {
+        
           }
         });
     },
     onSubmit() {
+  
       const payLoad = {
         word0: this.wordForm.word0,
         word1: this.wordForm.word1,

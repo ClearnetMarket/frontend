@@ -1,15 +1,13 @@
 <template>
   <HeaderPlain />
   <div class="max-w-7xl mx-auto">
-    <div
-      class="mx-auto max-w-lg flex items-center justify-center h-screen mb-10"
-    >
+    <div class="mx-auto max-w-lg flex items-center justify-center mb-10 mt-36">
       <form
         class="bg-gray-100 shadow-md border-2 border-gray-300 rounded-md px-8 pt-6 pb-8 mb-4 w-full"
         method="POST"
         @submit.prevent="onSubmit"
       >
-        <div class="text-center text-[28px] text-zinc-600">Register</div>
+        <div class="mb-4 text-center text-[28px] text-zinc-600">Register</div>
 
         <div class="mb-4">
           <label
@@ -22,7 +20,8 @@
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="username"
             type="text"
-            placeholder="Username"
+            placeholder="Login Username"
+            v-model.trim="registerForm.username"
           />
         </div>
         <div class="mb-4">
@@ -38,12 +37,26 @@
           <input
             v-model="registerForm.display_username"
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="username"
+            id="display_username"
             type="text"
             placeholder="Username"
           />
         </div>
-
+        <div class="mb-4">
+          <label
+            class="block text-gray-700 text-sm font-bold mb-2"
+            for="username"
+            >Email</label
+          >
+          
+          <input
+            v-model="registerForm.email"
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="email"
+            type="text"
+            placeholder="Email"
+          />
+        </div>
         <div class="mb-4">
           <label
             class="block text-gray-700 text-sm font-bold mb-2"
@@ -57,6 +70,7 @@
             type="password"
             autocomplete="off"
             placeholder="Password"
+              v-model.trim="registerForm.password"
           />
         </div>
         <div class="mb-4">
@@ -72,6 +86,7 @@
             type="password"
             autocomplete="off"
             placeholder="Confirm Password"
+              v-model.trim="registerForm.password_confirm"
           />
         </div>
         <div class="flex">
@@ -85,7 +100,7 @@
               >Security for wallet withdrawls</label
             >
             <input
-              v-model="registerForm.password_confirm"
+              v-model="registerForm.pin"
               class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="pin"
               type="password"
@@ -140,7 +155,7 @@
 
         <div class="flex items-center justify-center mb-6">
           <button
-            class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            class="bg-yellow-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             type="submit"
           >
             Register
@@ -148,15 +163,15 @@
         </div>
         <div class="flex flex-col justify-center">
           <router-link
+            :to="{ name: 'forgotpassword' }"
             class="text-center font-bold text-sm text-blue-500 hover:text-blue-800"
-            to="/forgotpassword"
             >Forgot Password?</router-link
           >
         </div>
         <div class="flex flex-col justify-center mt-5">
           <router-link
+            :to="{ name: 'login' }"
             class="text-center font-bold text-sm text-blue-500 hover:text-blue-800"
-            to="/login"
             >Login Here</router-link
           >
         </div>
@@ -173,7 +188,6 @@ import HeaderPlain from "../../layouts/headers/HeaderPlain.vue";
 export default defineComponent({
   name: "Register",
   components: { HeaderPlain },
-  setup() {},
   data() {
     return {
       isAuthenticated: false,
@@ -221,15 +235,7 @@ export default defineComponent({
             this.$router.push({ name: "accountseed" });
           }
         })
-        .catch((error) => {
-          if (error.response) {
-            if (error.response.status === 401) {
-              this.$store.commit("loginFailure");
-            } else if (error.response.status === 403) {
-            } else {
-            }
-          }
-        });
+        .catch((error) => {});
     },
     async getCurrencyList() {
       const path = "/auth/query/currency";
@@ -242,9 +248,7 @@ export default defineComponent({
         .then((response) => {
           this.currencyList = response.data;
         })
-        .catch((error) => {
-          console.error(error);
-        });
+        .catch((error) => {});
     },
     async getCountryList() {
       const path = "/auth/query/country";
@@ -252,14 +256,10 @@ export default defineComponent({
         .get(path, { withCredentials: true })
         .then((response) => {
           this.countryList = response.data;
-          console.log(this.countryList);
         })
-        .catch((error) => {
-          console.error(error);
-        });
+        .catch((error) => {});
     },
     async onSubmit() {
-      console.log("Submitted");
       const payLoad = {
         username: this.registerForm.username,
         pin: this.registerForm.pin,
@@ -275,9 +275,4 @@ export default defineComponent({
 });
 </script>
 
-<style type="ts" scoped>
-.formlayout {
-  max-width: 450px;
-  margin: 0 auto;
-}
-</style>
+<style type="ts" scoped></style>

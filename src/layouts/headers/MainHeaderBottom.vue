@@ -1,11 +1,12 @@
 <template>
   <div class="bg-zinc-700 py-1 text-white">
     <div
-      class="container flex max-w-7xl mx-auto text-bold text-center justify-between"
+      class="container flex justify-between max-w-7xl mx-auto text-bold text-center"
     >
-      <div class="sm:col-span-6 md:col-start-2 md:col-span-2 m-0">
+      <div class="flex ml-5 ">
+      <div class="pb-2">
         <select
-          class="form-select mt-2 appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat rounded transition ease-in-out m-0"
+          class="form-select mt-2 appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-200 bg-clip-padding bg-no-repeat rounded transition ease-in-out "
           aria-label="Default select example"
         >
           <option selected>All Categories</option>
@@ -18,13 +19,14 @@
             {{ item.name }}
           </option>
         </select>
+        </div>
       </div>
 
-      <div class="flex">
-        <div class="mx-3 pt-2 text-[13px] font-bold">
+      <div class="flex mr-5">
+        <div class="mx-3 pt-3 text-[13px] font-bold">
           <router-link :to="{ name: 'wallet' }" class="px-3">
             <button
-              class="bg-orange-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline"
+              class="bg-yellow-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline"
             >
               Wallets
             </button>

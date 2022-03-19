@@ -1,4 +1,5 @@
 <template>
+  <HeaderPlain />
 <div class="col-xs-12 text-center q-mb-md">
     <h3 v-if="user">{{ user.user_name }}</h3>
     <h3 v-if="user"></h3>
@@ -12,13 +13,12 @@ import { mapGetters } from 'vuex';
 import { defineComponent } from 'vue';
 import axios from 'axios';
 import authHeader from '../../services/auth.header';
+import HeaderPlain from "../../layouts/headers/HeaderPlain.vue";
 
 
 export default defineComponent({
   name: 'Home',
-  setup () {
-   
-  },
+  components: { HeaderPlain },
 
   data () {
     return {
@@ -43,32 +43,7 @@ export default defineComponent({
           }
         })
         .catch((error) => {
-          if (error.response) {
-            if (error.response.status === 401) {
-              this.$router.push('/login');
-              this.$q.notify({
-                type: 'negative',
-                message: 'Error: Unauthorized',
-                position: 'top'
-              })
-
-            }
-            else if (error.response.status === 403) {
-              this.$router.push('/login');
-              this.$q.notify({
-                type: 'negative',
-                message: 'Error: Forbidden',
-                position: 'top'
-              })
-
-            } else {
-              this.$router.push('/login');
-              this.$q.notify({
-                type: 'negative',
-                message: 'Error',
-              })
-            }
-          }
+         
         })
     }
   },

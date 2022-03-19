@@ -1,107 +1,104 @@
 <template>
-  <q-page class="docs-input">
-    <q-breadcrumbs class="text-info q-mt-md q-ml-lg">
-      <template v-slot:separator>
-        <q-icon size="1.5em" name="chevron_right" color="primary" />
-      </template>
+  <HeaderPlain />
 
-      <q-breadcrumbs-el label="Home" icon="home" to="/" />
-      <q-breadcrumbs-el label="Account" icon="person" to="/account" />
-    </q-breadcrumbs>
-    <div class="row justify-center">
-      <div class="col-xs-12 col-sm-6 col-md-4 col-auto q-pt-xl">
-        <q-form class="q-px-sm q-pt-xl" method="POST" @submit="onSubmit">
-          <div class="q-gutter-md q-pa-lg formlayout">
-            <div class="row">
-              <div class="col-xs-12 text-center text-h4">Enter New Password</div>
-            </div>
-            <q-input
-              outlined
-              v-model="ChangePasswordForm.password"
-              label="Password"
-              autocomplete="off"
-              :dense="ChangePasswordForm.dense"
-            />
-            <q-input
-              outlined
-              v-model="ChangePasswordForm.password_confirm"
-              label="Confirm Password"
-              autocomplete="off"
-              :dense="ChangePasswordForm.dense"
-            />
+  <div v-if="user">
+    <MainHeaderVendor v-show="user.admin_role > 1" />
+  </div>
 
-            <div class="q-pa-md doc-container">
-              <div class="row justify-end">
-                <q-btn class="full-width" type="submit" color="secondary" label="Change Password" />
-              </div>
-            </div>
-          </div>
-        </q-form>
-      </div>
+  <div class="container max-w-7xl mx-auto px-10">
+    <div class="mt-5 mb-5">
+      <nav class="rounded-md w-full">
+        <ol class="list-reset flex">
+          <li>
+            <router-link :to="{ name: 'home' }">
+              <a class="text-blue-600 hover:text-blue-700">Home</a>
+            </router-link>
+          </li>
+          <li>
+            <span class="text-gray-500 mx-2">/</span>
+          </li>
+        </ol>
+      </nav>
     </div>
-  </q-page>
+    <div class="mx-auto max-w-lg flex items-center justify-center mb-10 mt-20">
+      <form
+        class="bg-gray-100 shadow-md border-2 border-gray-300 rounded-md px-8 pt-6 pb-8 mb-4 w-full"
+        @submit.prevent="onSubmit"
+      >
+         <div class="mb-4 text-center text-[28px] text-zinc-600">Change Password</div>
+        <div class="mb-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2"
+            >Enter New Password</label
+          >
+          <input
+            v-model="ChangePasswordForm.password"
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="password"
+            type="password"
+            placeholder="Password"
+          />
+        </div>
+        <div class="mb-6">
+          <label class="block text-gray-700 text-sm font-bold mb-2"
+            >Confirm New Password</label
+          >
+          <input
+            v-model="ChangePasswordForm.password_confirm"
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+            id="passwordtwo"
+            type="password"
+            autocomplete="off"
+            placeholder="Confirm Password"
+          />
+        </div>
+        <div class="flex items-center justify-center mb-6">
+          <button
+            class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            type="submit"
+          >
+            Sign In
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import axios from 'axios';
-import { ref } from 'vue';
+import { defineComponent } from "vue";
+import axios from "axios";
+import { ref } from "vue";
+import authHeader from "../../services/auth.header";
+import HeaderPlain from "../../layouts/headers/HeaderPlain.vue";
 
 export default defineComponent({
-  name: 'changepassword',
-
-  data () {
+  name: "changepassword",
+  components: {
+    HeaderPlain
+  },
+  data() {
     return {
       ChangePasswordForm: {
-        password: '',
-        password_confirm: '',
-
+        password: "",
+        password_confirm: "",
       },
     };
   },
 
   methods: {
-    sendWordRequest (payLoad: { password: string; password_confirm: string }) {
+    sendWordRequest(payLoad: { password: string; password_confirm: string }) {
       axios({
-        method: 'post',
-        url: '/auth/change-password',
+        method: "post",
+        url: "/auth/change-password",
         data: payLoad,
-      })
-        .then((response) => {
-          if (response.data.status == 'success') {
-            this.$q.notify({
-              type: 'positive',
-              message: 'Password Has been changed',
-              position: 'top',
-            });
-            this.$router.push('/login');
-          }
-        })
-        .catch((error) => {
-          if (error.response) {
-            if (error.response.status === 401) {
-              this.$q.notify({
-                type: 'negative',
-                message: 'Error: Unauthorized',
-                position: 'top',
-              });
-            } else if (error.response.status === 403) {
-              this.$q.notify({
-                type: 'negative',
-                message: 'Error: Forbidden',
-                position: 'top',
-              });
-            } else {
-              this.$q.notify({
-                type: 'negative',
-                message: 'Error',
-              });
-            }
-          }
-        });
+      }).then((response) => {
+        if (response.data.status == "success") {
+          this.$router.push({ name: "login" });
+        }
+      });
     },
-    onSubmit () {
-      console.log('Submitted');
+    onSubmit() {
       const payLoad = {
         password: this.ChangePasswordForm.password,
         password_confirm: this.ChangePasswordForm.password_confirm,
@@ -112,10 +109,4 @@ export default defineComponent({
 });
 </script>
 
-
-<style type="ts" scoped>
-.center_text {
-  text-align: center;
-  display: inline-block;
-}
-</style>
+<style type="ts" scoped></style>

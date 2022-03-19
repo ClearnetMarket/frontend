@@ -99,17 +99,17 @@ const routes = [
 
   // Plain Stuff
   {
-    path: '/login',
+    path: '/auth/login',
     name: 'login',
     component: () => import('../pages/auth/Login.vue'),
   },
   {
-    path: '/register',
+    path: '/auth/register',
     name: 'register',
     component: () => import('../pages/auth/Register.vue'),
   },
   {
-    path: '/forgotpassword',
+    path: '/auth/forgotpassword',
     name: 'forgotpassword',
     component: () => import('../pages/auth/ForgotPassword.vue'),
   },
@@ -125,22 +125,22 @@ const routes = [
     component: () => import('../pages/auth/account/ProfileBasic.vue'),
   },
   {
-    path: '/changepassword',
+    path: '/auth/changepassword',
     name: 'changepassword',
     component: () => import('../pages/auth/ChangePassword.vue'),
   },
   {
-    path: '/changepin',
+    path: '/auth/changepin',
     name: 'changepin',
     component: () => import('../pages/auth/ChangePin.vue'),
   },
   {
-    path: '/account-seed',
+    path: '/auth/account-seed',
     name: 'accountseed',
     component: () => import('../pages/auth/AccountSeed.vue'),
   },
   {
-    path: '/account-seed-confirm',
+    path: '/auth/account-seed-confirm',
     name: 'accountseedconfirm',
     component: () => import('../pages/auth/AccountSeedConfirm.vue'),
   },

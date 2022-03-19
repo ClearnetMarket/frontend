@@ -1,6 +1,6 @@
 <template>
     <div class="max-w-7xl mx-auto grid sm:grid-cols-12 md:grid-cols-12 mb-0">
-        <div class="grid sm:col-span-12 md:col-span-3 grid-rows-2 text-center pt-5 m-0"
+        <div class="grid sm:col-span-12 md:col-span-3 grid-rows-2 text-center pt-5 m-0 text-gray-800 hover:text-gray-600"
          @click="$router.replace({name:'home'})"
         style="cursor: pointer"
         >

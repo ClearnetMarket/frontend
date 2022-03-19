@@ -1,115 +1,118 @@
 <template>
-  <q-page class="docs-input r">
-  <div class="row justify-center">
-    <div class="col-xs-12 col-sm-6 col-md-4  col-auto q-pt-xl ">
-      <p class="text-center ">
+  <HeaderPlain />
+
+  <div v-if="user">
+    <MainHeaderVendor v-show="user.admin_role > 1" />
+  </div>
+
+  <div class="container max-w-7xl mx-auto px-10">
+    <div class="mt-5 mb-5">
+      <nav class="rounded-md w-full">
+        <ol class="list-reset flex">
+          <li>
+            <router-link :to="{ name: 'home' }">
+              <a class="text-blue-600 hover:text-blue-700">Home</a>
+            </router-link>
+          </li>
+          <li>
+            <span class="text-gray-500 mx-2">/</span>
+          </li>
+        </ol>
+      </nav>
+    </div>
+  </div>
+
+    <div class="mx-auto max-w-lg flex items-center justify-center mb-10 mt-12">
+    <form
+      class="bg-gray-100 shadow-md border-2 border-gray-300 rounded-md px-8 pt-6 pb-8 mb-4 w-full"
+      @submit.prevent="onSubmit"
+    >
+      <div class="mb-4 text-center text-[20px] text-zinc-600">
         In order to unlock your account, please enter your account seed below.
-      </p>
-      <q-form
-        class="q-px-sm q-pt-xl"
-        method="POST"
-        @submit="onSubmit"
-      >
-        <div class="q-gutter-md  q-pa-lg formlayout">
-          <div class="row">
-            <div class="col-xs-12 text-center text-h4">
-              Unlock Account
-            </div>
-          </div>
-          <q-input
-            outlined
-            v-model="wordForm.word0"
-            label="Word 1"
-            autocomplete="off"
-            :dense="wordForm.dense"
-          />
-          <q-input
-            outlined
-            v-model="wordForm.word1"
-            label="Word 2"
-            autocomplete="off"
-            :dense="wordForm.dense"
-          />
-          <q-input
-            outlined
-            v-model="wordForm.word2"
-            label="Word 3"
-            autocomplete="off"
-            :dense="wordForm.dense"
-          />
-          <q-input
-            outlined
-            v-model="wordForm.word3"
-            label="Word 4"
-            autocomplete="off"
-            :dense="wordForm.dense"
-          />
-          <q-input
-            outlined
-            v-model="wordForm.word4"
-            label="Word 5"
-            autocomplete="off"
-            :dense="wordForm.dense"
-          />
-          <q-input
-            outlined
-            v-model="wordForm.word5"
-            label="Word 6"
-            autocomplete="off"
-            :dense="wordForm.dense"
-          />
-          <div class="q-pa-md doc-container">
-            <div class="row justify-end">
-              <q-btn
-                class="full-width"
-                type="submit"
-                color="secondary"
-                label="Register"
-              />
-            </div>
-          </div>
+      </div>
 
-          <div class="row">
-            <div class="col-xs-12 text-center q-mb-md">
-              Want to Register? <router-link to="/register">Register</router-link>
-            </div>
+      <input
+        v-model="wordForm.word0"
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-blue-300 focus:outline-none focus:shadow-outline"
+        type="text"
+        autocomplete="off"
+        placeholder="Word 1"
+      />
+      <input
+        v-model="wordForm.word1"
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-blue-300 focus:outline-none focus:shadow-outline"
+        type="text"
+        autocomplete="off"
+        placeholder="Word 2"
+      />
+      <input
+        v-model="wordForm.word2"
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-blue-300 focus:outline-none focus:shadow-outline"
+        type="text"
+        autocomplete="off"
+        placeholder="Word 3"
+      />
+      <input
+        v-model="wordForm.word3"
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-blue-300 focus:outline-none focus:shadow-outline"
+        type="text"
+        autocomplete="off"
+        placeholder="Word 4"
+      />
+      <input
+        v-model="wordForm.word4"
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-blue-300 focus:outline-none focus:shadow-outline"
+        type="text"
+        autocomplete="off"
+        placeholder="Word 5"
+      />
+      <input
+        v-model="wordForm.word5"
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-blue-300 focus:outline-none focus:shadow-outline"
+        type="text"
+        autocomplete="off"
+        placeholder="Word 6"
+      />
+      <div class="flex p-md justify-center">
+        <button
+          class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-blue-300 focus:outline-none focus:shadow-outline"
+          type="submit"
+        >
+          Confirm
+        </button>
+      </div>
+    </form>
+  </div>
 
-            <div class="col-xs-12 text-center ">
-              Login Here <router-link to="/login">Login</router-link>
-            </div>
-          </div>
-        </div>
-      </q-form>
-    </div>
-    </div>
-  </q-page>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import axios from 'axios';
-import { ref } from 'vue';
+import { defineComponent } from "vue";
+import axios from "axios";
+import { ref } from "vue";
+import authHeader from "../../services/auth.header";
+import HeaderPlain from "../../layouts/headers/HeaderPlain.vue";
 
 export default defineComponent({
-  name: 'forgotpassword',
+  name: "forgotpassword",
+  components: {
+    HeaderPlain
+  },
 
   data() {
     return {
       wordForm: {
-        word0: '',
-        word1: '',
-        word2: '',
-        word3: '',
-        word4: '',
-        word5: '',
-
-       
+        word0: "",
+        word1: "",
+        word2: "",
+        word3: "",
+        word4: "",
+        word5: "",
       },
     };
   },
 
-  methods:
-  {
+  methods: {
     sendWordRequest(payLoad: {
       word0: string;
       word1: string;
@@ -119,45 +122,18 @@ export default defineComponent({
       word5: string;
     }) {
       axios({
-        method: 'post',
-        url: '/auth/login',
+        method: "post",
+        url: "/auth/login",
         data: payLoad,
       })
         .then((response) => {
           if (response.data.status == "success") {
-            this.$q.notify({
-              type: 'positive',
-              message: 'Account has been unlocked. You can now change your password',
-              position: 'top',
-            });
-            this.$router.push('/login');
+             this.$router.push({ name: "login" });
           }
         })
-        .catch((error) => {
-          if (error.response)  {
-            if (error.response.status === 401) {
-              this.$q.notify({
-                type: 'negative',
-                message: 'Error: Unauthorized',
-                position: 'top',
-              });
-            } else if (error.response.status === 403) {
-              this.$q.notify({
-                type: 'negative',
-                message: 'Error: Forbidden',
-                position: 'top',
-              });
-            } else {
-              this.$q.notify({
-                type: 'negative',
-                message: 'Error',
-              });
-            }
-          }
-        });
+        .catch((error) => {});
     },
     onSubmit() {
-
       const payLoad = {
         word0: this.wordForm.word0,
         word1: this.wordForm.word1,
@@ -172,10 +148,4 @@ export default defineComponent({
 });
 </script>
 
-
-<style type="ts" scoped>
-.center_text {
-  text-align: center;
-  display: inline-block;
-}
-</style>
+<style type="ts" scoped></style>

@@ -2,7 +2,10 @@
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
-  <Confirmed v-show="confirmed == false" />
+    <div v-if="user">
+     <div v-if="user.confirmed == false">
+  <Confirmed  />
+    </div>    </div>
   <div v-if="user">
     <MainHeaderVendor v-show="user.admin_role > 1"/>
   </div>

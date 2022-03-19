@@ -28,7 +28,7 @@
       </nav>
     </div>
     <div class="flex">
-      <div class="flex-1 mb-5 text-[24px]">Monero Transactions</div>
+      <div class="flex-1 mb-5 text-[24px]">Bitcoin Transactions</div>
     </div>
     <div class="grid grid-cols-1">
       <div class="">

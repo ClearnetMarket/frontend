@@ -16,17 +16,13 @@
         </button>
       </div>
 
-      <div class="hidden md:flex flex-col md:flex-row md:ml-auto mt-3 md:mt-0" id="navbar-collapse">
-        <router-link
-         to="/login"
-          class="p-1 lg:px-3 md:mx-2 text-black bg-white text-center border border-blue-600
-           border-transparent rounded hover:bg-gray-200 hover:text-black transition-colors duration-300"
+      <div class="hidden md:flex flex-col md:flex-row md:ml-auto mt-3 md:mt-0 gap-5" id="navbar-collapse">
+    <router-link :to="{ name: 'login' }"
+            class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline"
         >Login
         </router-link>
-        <router-link
-          class="p-1 lg:px-3 md:mx-2 text-black bg-white text-center border border-solid
-           border-blue-600 rounded hover:bg-gray-200 hover:text-black transition-colors duration-300 mt-1 md:mt-0 md:ml-1"
-          to="/register"
+        <router-link :to="{ name: 'register' }"
+           class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline"
         >Signup</router-link>
       </div>
     </div>
