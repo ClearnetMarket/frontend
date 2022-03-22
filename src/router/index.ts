@@ -96,7 +96,22 @@ const routes = [
     name: 'xmrwalletrecieve',
     component: () => import('../pages/wallets/xmr/XmrRecieve.vue'),
   },
-
+  // checkout
+  {
+    path: '/cart',
+    name: 'cart',
+    component: () => import('../pages/checkout/Cart.vue'),
+  },
+    {
+    path: '/checkout',
+    name: 'checkout',
+    component: () => import('../pages/checkout/Checkout.vue'),
+  },
+    {
+    path: '/confirmpayment',
+    name: 'confirmpayment',
+    component: () => import('../pages/checkout/ConfirmPayment.vue'),
+  },
   // Plain Stuff
   {
     path: '/auth/login',

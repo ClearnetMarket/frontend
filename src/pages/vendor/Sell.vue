@@ -4,10 +4,10 @@
   <MainHeaderBottom />
 
   <div v-if="user">
-    <MainHeaderVendor v-show="user.admin_role > 1" />
+    <MainHeaderVendor v-show="user.user_admin == 1" />
   </div>
 
-  <div class="container max-w-7xl mx-auto px-10">
+  <div class="container max-w-7xl mx-auto px-10 wrapper mb-10">
     <div class="mt-5 mb-5">
       <nav class="rounded-md w-full">
         <ol class="list-reset flex">
@@ -29,46 +29,46 @@
       </div>
     </div>
     <div class="flex mb-10 text-center">
-      We
-      can create a better market, built on user reputation and privacy. Start
+      We can create a better market, built on user reputation and privacy. Start
       selling today, and bring crypto ecommerce to your part of the world.
     </div>
     <div class="flex text-center gap-5">
       <div class="flex-1 bg-gray-100 rounded-md border border-1 p-5">
         <div class="text-[20px]">No bullshit</div>
         <div class="flex mb-10 text-center">
-          Selling without any hidden fees. No signup or annual fee. No paypal or credit card fees.
-          3% fee on
-          all items.
+          Selling without any hidden fees. No signup or annual fee. No paypal or
+          credit card fees. 3% fee on all items.
         </div>
       </div>
 
       <div class="flex-1 bg-gray-100 rounded-md border border-1 p-5">
         <div class="text-[20px]">Privacy</div>
         <div class="flex mb-10 text-center">
-          Sell with privacy. We don't store your personal information. We only keep emails for account contact.  Sell with
-          confidence that your information is never sold, distributed, or used
-          without your knowledge.
+          Sell with privacy. We don't store your personal information. We only
+          keep emails for account contact. Sell with confidence that your
+          information is never sold, distributed, or used without your
+          knowledge.
         </div>
       </div>
 
       <div class="flex-1 bg-gray-100 rounded-md border border-1 p-5">
-        <div class="text-[20px]">No banks </div>
+        <div class="text-[20px]">No banks</div>
         <div class="flex mb-10 text-center">
-          Anyone anywhere can sell.  No credit cards, banks, or third party payment systems.
+          Anyone anywhere can sell. No credit cards, banks, or third party
+          payment systems.
         </div>
       </div>
     </div>
 
     <div class="flex mx-auto justify-center text-center gap-5 mt-10">
-      <form class="" method="POST" @submit="onSubmit">
+      <form method="post" @submit.prevent="onSubmit">
         <div class="flex flex-col">
           <div class="">
             <div class="flex text-gray-700 text-sm font-bold">
               I accept the terms of becoming a vendor
             </div>
             <router-link :to="{ name: 'home' }">
-              <div class=" text-blue-600 hover:text-blue-500 text-sm font-bold">
+              <div class="text-blue-600 hover:text-blue-500 text-sm font-bold">
                 Vendor Agreement
               </div>
             </router-link>
@@ -88,6 +88,7 @@
       </form>
     </div>
   </div>
+
   <MainFooter />
 </template>
 
@@ -137,35 +138,44 @@ export default defineComponent({
         headers: authHeader(),
       }).then((response) => {
         if ((response.status = 200)) {
-          this.user_admin = response.data.user.admin_role;
+          this.user_admin = response.data.user.user_admin;
 
           if (this.user_admin == 1) {
             this.$router.push({ name: "forsale" });
           }
         } else {
+          this.$router.push({ name: "login" });
         }
       });
     },
-    async becomevendor(payLoad: { verification: string }) {
+
+    async becomevendor(payLoad: { accept: string }) {
       await axios({
         method: "post",
-        url: "/become-vendor",
-        // url: '/vendor/become-vendor',
+        url: "/vendor/becomevendor",
         data: payLoad,
-        withCredentials: true,
+        contentType: "text/plain",
+        dataType: "text",
         headers: authHeader(),
       }).then((response) => {
         if ((response.status = 200)) {
+          localStorage.setItem("auth_user", response.data.user);
+          console.log("reponse is")
+          console.log(response.dat)
           this.$router.push({ name: "forsale" });
         }
       });
     },
     async onSubmit() {
       const payLoad = {
-        verification: this.verification,
+        accept: this.accept,
       };
-      await this.becomevendor(payLoad);
+      this.becomevendor(payLoad);
     },
   },
 });
 </script>
+
+<style>
+
+</style>

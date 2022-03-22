@@ -4,7 +4,7 @@
   <MainHeaderBottom />
 
   <div v-if="user">
-    <MainHeaderVendor v-show="user.admin_role > 1"/>
+    <MainHeaderVendor v-show="user.user_admin == 1" />
   </div>
   <div class="container max-w-7xl mx-auto">
     <div class="mx-auto flex mb-5 px-10">
@@ -27,6 +27,9 @@
 
   <ItemTop
     v-bind:condition="condition"
+    v-bind:digitalcurrencyone="digitalcurrencyone"
+    v-bind:digitalcurrencytwo="digitalcurrencytwo"
+    v-bind:digitalcurrencythree="digitalcurrencythree"
     v-bind:title="title"
     v-bind:price="price"
     v-bind:pricebtc="pricebtc"
@@ -36,6 +39,10 @@
     v-bind:origincountry="origincountry"
     v-bind:freeshipping="freeshipping"
     v-bind:freeshippingdays="freeshippingdays"
+    v-bind:shippingtwo="shippingtwo"
+    v-bind:shippingtwodays="shippingtwodays"
+    v-bind:shippingthree="shippingthree"
+    v-bind:shippingthreedays="shippingthreedays"
     v-bind:totalsold="totalsold"
     v-bind:currency="currency"
     v-bind:vendorname="vendorname"
@@ -46,10 +53,23 @@
     v-bind:imagethreeserver="imagethreeserver"
     v-bind:imagefourserver="imagefourserver"
   />
-  <ItemDescription />
-  <ItemSimiliarItems />
-  <ItemShipping />
-  <ItemUserReviews />
+  <ItemDescription v-bind:description="description" />
+
+  <ItemShipping
+    v-bind:origincountry="origincountry"
+    v-bind:destinationcountryone="destinationcountryone"
+    v-bind:destinationcountrytwo="destinationcountrytwo"
+    v-bind:destinationcountrythree="destinationcountrythree"
+    v-bind:destinationcountryfour="destinationcountryfour"
+    v-bind:shippingfree="shippingfree"
+    v-bind:shippingtwo="shippingtwo"
+    v-bind:shippingthree="shippingthree"
+    v-bind:shippingpricetwo="shippingpricetwo"
+    v-bind:shippingdaytwo="shippingdaytwo"
+    v-bind:shippingpricethree="shippingpricethree"
+    v-bind:shippingdaythree="shippingdaythree"
+  />
+  <ItemUserReviews v-bind:vendorreviews="vendorreviews" />
 
   <MainFooter />
 </template>
@@ -81,7 +101,6 @@ export default defineComponent({
     MainHeaderBottom,
     MainHeaderVendor,
     MainFooter,
-
     ItemDescription,
     ItemImages,
     ItemUserReviews,
@@ -99,7 +118,9 @@ export default defineComponent({
       pricebtc: "",
       pricebch: "",
       pricexmr: "",
-
+      digitalcurrencyone: "",
+      digitalcurrencytwo: "",
+      digitalcurrencythree: "",
       itemcount: "",
       freeshipping: "",
       freeshippingdays: "",
@@ -114,6 +135,22 @@ export default defineComponent({
       imagetwoserver: "",
       imagethreeserver: "",
       imagefourserver: "",
+
+      description: "",
+
+      origincountry: "",
+      destinationcountryone: "",
+      destinationcountrytwo: "",
+      destinationcountrythree: "",
+      destinationcountryfour: "",
+      shippingfree: "",
+      shippingtwo: "",
+      shippingthree: "",
+      shippingpricetwo: "",
+      shippingdaytwo: "",
+      shippingpricethree: "",
+      shippingdaythree: "",
+      vendorreviews: "",
     };
   },
 
@@ -124,11 +161,8 @@ export default defineComponent({
   methods: {
     async getitem() {
       const item_id_route = useRoute();
-
       const item_id = item_id_route.params.id;
-
       this.item_id = item_id;
-
       await axios({
         method: "get",
         url: "/item/" + this.item_id,
@@ -140,9 +174,9 @@ export default defineComponent({
 
             this.title = response.data.item_title;
             this.itemcount = response.data.item_count;
-            this.digitalcurrency1 = response.data.digital_currency_1;
-            this.digitalcurrency2 = response.data.digital_currency_2;
-            this.digitalcurrency3 = response.data.digital_currency_3;
+            this.digitalcurrencyone = response.data.digital_currency_1;
+            this.digitalcurrencytwo = response.data.digital_currency_2;
+            this.digitalcurrencythree = response.data.digital_currency_3;
 
             this.imageoneserver = response.data.image_one_server;
             this.imagetwoserver = response.data.image_two_server;
@@ -153,14 +187,38 @@ export default defineComponent({
             this.freeshipping = response.data.shipping_free;
             this.freeshippingdays = response.data.shipping_day_0;
 
-            this.itemcondition();
-            this.itemprice();
-            this.vendorinfo();
+            this.description = response.data.item_description;
+
+            this.origincountry = response.data.origin_country_name;
+            this.destinationcountryone =
+              response.data.destination_country_one_name;
+            this.destinationcountrytwo =
+              response.data.destination_country_two_name;
+            this.destinationcountrythree =
+              response.data.destination_country_three_name;
+            this.destinationcountryfour =
+              response.data.destination_country_four_name;
+
+            this.shippingfree = response.data.shipping_free;
+            this.shippingtwo = response.data.shipping_two;
+            this.shippingthree = response.data.shipping_three;
+
+            this.shippingpricetwo = response.data.shipping_price_2;
+            this.shippingdaytwo = response.data.shipping_day_2;
+
+            this.shippingpricethree = response.data.shipping_price_3;
+            this.shippingdaythree = response.data.shipping_day_3;
+
+            this.getitemcondition();
+
+            this.getitemprice();
+            this.getvendorinfo();
+            this.getvendorreviews();
           }
         })
         .catch((error) => {});
     },
-    async itemcondition() {
+    async getitemcondition() {
       if (this.item.item_condition === 1) {
         this.condition = "New";
       } else if (this.item.item_condition === 2) {
@@ -175,14 +233,12 @@ export default defineComponent({
         this.condition = "Not Specified";
       }
     },
-    async itemprice() {
+    getitemprice() {
       this.price = this.item.price;
-      this.currency = this.item.currency;
+      this.currency = this.item.currency_symbol;
     },
 
-    async vendorinfo() {
-      this.vendoruuid = this.item.vendor_uuid
-      ;
+    async getvendorinfo() {
       await axios({
         method: "get",
         url: "/vendor/vendoriteminfo/" + this.item.vendor_uuid,
@@ -190,15 +246,30 @@ export default defineComponent({
       })
         .then((response) => {
           if ((response.status = 200)) {
-           this.vendorname = response.data.vendorname;
-           this.vendorrating = response.data.vendorrating;
-           this.vendortotalsales = response.data.vendortotalsales;
-    
+            this.vendorname = response.data.vendorname;
+            this.vendorrating = response.data.vendorrating;
+            this.vendortotalsales = response.data.vendortotalsales;
           }
         })
         .catch((error) => {});
+    },
 
+    async getvendorreviews() {
+      await axios({
+        method: "get",
+        url: "/vendor/vendor-feedback/" + this.item.vendor_uuid,
+        withCredentials: true,
+      })
+        .then((response) => {
+          if ((response.status = 200)) {
+            this.vendorreviews = response.data.vendorname;
 
+            if (this.vendorreviews == undefined) {
+              this.vendorreviews = "No Reviews Yet";
+            }
+          }
+        })
+        .catch((error) => {});
     },
   },
 });

@@ -4,7 +4,7 @@
   <MainHeaderBottom />
 
   <div v-if="user">
-    <MainHeaderVendor v-show="user.admin_role > 1"/>
+    <MainHeaderVendor v-show="user.user_admin == 1" />
   </div>
   <div class="">
     <div class="container max-w-7xl mx-auto px-10">
@@ -21,7 +21,7 @@
             </li>
             <li>
               <router-link :to="{ name: 'forsale' }">
-                <a class="text-blue-600 hover:text-blue-700 ">Items for Sale</a>
+                <a class="text-blue-600 hover:text-blue-700">Items for Sale</a>
               </router-link>
             </li>
             <li>
@@ -33,7 +33,13 @@
       <div class="grid grid-cols-1 rounded-md p-6 max-w-3xl mx-auto">
         <div class="text-[24px]">Create a new Item</div>
 
-        <UploadImages :item_id="item_id" :image_main="image_main" :image_two="image_two" :image_three="image_three" :image_four="image_four"/>
+        <UploadImages
+          :item_id="item_id"
+          :image_main="image_main"
+          :image_two="image_two"
+          :image_three="image_three"
+          :image_four="image_four"
+        />
         <form
           class="rounded-md px-8 pt-6 pb-8 mb-4 w-full"
           enctype="multipart/form-data"
@@ -175,28 +181,22 @@
             ></textarea>
           </div>
 
-
-
-
-
-
           <div class="text-[18px] mt-5 mb-5">Destination</div>
           <div class="mb-4">
             <div class="flex gap-5">
               <div class="mb-4 flex-1">
-          <label class="block text-gray-700 text-sm font-bold mb-2"
-                >Worldwide Shipping or Digital Item</label
-              >
-              <input
-                type="checkbox"
-                checked="checked"
-                id="digital_currency_1"
-                 v-model="isSelectDisabled"
-              />
+                <label class="block text-gray-700 text-sm font-bold mb-2"
+                  >Worldwide Shipping or Digital Item</label
+                >
+                <input
+                  type="checkbox"
+                  checked="checked"
+                  id="digital_currency_1"
+                  v-model="isSelectDisabled"
+                />
               </div>
-         </div>
-          <div class="flex gap-5">
-          
+            </div>
+            <div class="flex gap-5">
               <div class="mb-4 flex-1">
                 <label class="block text-gray-700 text-sm font-bold mb-2"
                   >Destination One</label
@@ -207,9 +207,9 @@
                   aria-label="Default select example"
                   id="category"
                   v-model="CreateItemForm.shippingInfo.shipping_to_country_one"
-                   :disabled="isSelectDisabled"
+                  :disabled="isSelectDisabled"
                 >
-                   <option
+                  <option
                     class="text-gray-700"
                     v-for="(country, index) in countryList"
                     :key="index"
@@ -219,7 +219,7 @@
                   </option>
                 </select>
               </div>
-              
+
               <div class="mb-4 flex-1">
                 <label class="block text-gray-700 text-sm font-bold mb-2"
                   >Destination Two</label
@@ -253,7 +253,9 @@
                   class="shadow form-select appearance-none block w-full px-3 py-1.5 text-base font-normal focus:shadow-outline text-gray-500 bg-white bg-clip-padding bg-no-repeat border rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   aria-label="Default select example"
                   id="category"
-                  v-model="CreateItemForm.shippingInfo.shipping_to_country_three"
+                  v-model="
+                    CreateItemForm.shippingInfo.shipping_to_country_three
+                  "
                   :disabled="isSelectDisabled"
                 >
                   <option
@@ -266,7 +268,7 @@
                   </option>
                 </select>
               </div>
-              
+
               <div class="mb-4 flex-1">
                 <label class="block text-gray-700 text-sm font-bold mb-2"
                   >Destination Four</label
@@ -279,7 +281,7 @@
                   v-model="CreateItemForm.basicInfo.shipping_to_country_four"
                   :disabled="isSelectDisabled"
                 >
-                    <option
+                  <option
                     class="text-gray-700"
                     v-for="(country, index) in countryList"
                     :key="index"
@@ -290,17 +292,7 @@
                 </select>
               </div>
             </div>
-          
-              
-           
-         
           </div>
-
-
-
-
-
-
 
           <div class="text-[18px] mt-5 mb-5">Shipping</div>
 
@@ -423,7 +415,6 @@ import axios from "axios";
 import { ref } from "vue";
 import authHeader from "../../services/auth.header";
 import { mapGetters } from "vuex";
-i
 import MainHeaderTop from "../../layouts/headers/MainHeaderTop.vue";
 import MainHeaderMid from "../../layouts/headers/MainHeaderMid.vue";
 import MainHeaderBottom from "../../layouts/headers/MainHeaderBottom.vue";
@@ -455,20 +446,19 @@ export default defineComponent({
 
   data() {
     return {
-      UploadImages:'',
+      UploadImages: "",
       item_id: "",
       marketitem: Object,
       authtoken: "",
-            image_main: "",
-            image_two: "",
-            image_three: "",
-            image_four: "",
+      image_main: "",
+      image_two: "",
+      image_three: "",
+      image_four: "",
       currencyList: [],
       categoryList: [],
       conditionList: [],
       countryList: [],
       CreateItemForm: {
-       
         basicInfo: {
           title: "",
           category_id_0: "",
@@ -497,7 +487,6 @@ export default defineComponent({
           shipping_to_country_two: "",
           shipping_to_country_three: "",
           shipping_to_country_four: "",
-       
         },
       },
     };
@@ -544,7 +533,6 @@ export default defineComponent({
       shipping_to_country_two: string;
       shipping_to_country_three: string;
       shipping_to_country_four: string;
- 
     }) {
       let path = "/vendorcreateitem/create-item-main/" + this.item_id;
       axios({
@@ -601,7 +589,6 @@ export default defineComponent({
             this.marketitem = response.data;
             this.image_main = response.data.image_one_server;
             this.image_two = response.data.image_two_server;
-          
             this.image_three = response.data.image_three_server;
             this.image_four = response.data.image_four_server;
           }
@@ -631,7 +618,7 @@ export default defineComponent({
         method: "get", //you can set what request you want to be
         url: path,
         withCredentials: true,
-        data: "",
+        
       })
         .then((response) => {
           // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
@@ -663,7 +650,6 @@ export default defineComponent({
       })
         .then((response) => {
           this.conditionList = response.data;
-        
         })
         .catch((error) => {});
     },
@@ -698,7 +684,6 @@ export default defineComponent({
           this.CreateItemForm.shippingInfo.shipping_to_country_three,
         shipping_to_country_four:
           this.CreateItemForm.shippingInfo.shipping_to_country_four,
- 
       };
       this.CreateItem(payLoad);
     },

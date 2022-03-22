@@ -4,7 +4,7 @@
   <MainHeaderBottom />
 
   <div v-if="user">
-    <MainHeaderVendor v-show="user.admin_role > 1"/>
+    <MainHeaderVendor v-show="user.user_admin == 1"/>
   </div>
   <!-- Top Stuff-->
   <div class="container h-screen max-w-7xl mx-auto px-10">

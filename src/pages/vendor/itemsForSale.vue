@@ -4,10 +4,10 @@
   <MainHeaderBottom />
 
   <div v-if="user">
-    <MainHeaderVendor v-show="user.admin_role > 1" />
+    <MainHeaderVendor v-show="user.user_admin == 1" />
   </div>
 
-  <div class="container border border-top max-w-7xl mx-auto px-10">
+  <div class="container border border-top max-w-7xl mx-auto px-10 wrapper">
     <div class="mt-5 mb-5">
       <nav class="rounded-md w-full">
         <ol class="list-reset flex">

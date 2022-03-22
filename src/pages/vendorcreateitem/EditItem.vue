@@ -4,7 +4,7 @@
   <MainHeaderBottom />
 
   <div v-if="user">
-    <MainHeaderVendor v-show="user.admin_role > 1"/>
+    <MainHeaderVendor v-show="user.user_admin == 1" />
   </div>
   <div class="">
     <div class="container max-w-7xl mx-auto px-10">
@@ -36,7 +36,7 @@
         <form
           class="rounded-md px-8 pt-6 pb-8 mb-4 w-full"
           enctype="multipart/form-data"
-          @submit.prevent="CreateItem"
+          @submit.prevent="onSubmit"
         >
           <div class="text-[18px] mt-5 mb-5">General Info</div>
           <div class="mb-4">
@@ -44,9 +44,9 @@
               >Item Title</label
             >
             <input
-              v-model="CreateItemForm.item_title"
+              v-model="CreateItemForm.basicInfo.item_title"
               class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="title"
+              id="item_title"
               type="text"
               placeholder="Enter title of your item .."
             />
@@ -242,7 +242,7 @@
           </div>
           <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2"
-              >Option 3</label
+              >Option 2</label
             >
             <div class="flex gap-5">
               <div class="flex-1">
@@ -268,7 +268,7 @@
                   placeholder="Estimated Days"
                   min="0"
                   class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  v-model="CreateItemForm.pricingInfo.shipping_2_days"
+                  v-model="CreateItemForm.pricingInfo.shipping_3_days"
                   @keypress="onlyNumber"
                 />
               </div>
@@ -328,44 +328,42 @@ export default defineComponent({
 
   data() {
     return {
-      item_id: "",
-      marketitem: "",
-      authtoken: "",
-
+      item_id: '',
+      marketitem: '',
+      authtoken: '',
       categoryList: [],
-      conditionList: [],
+      // conditionList: [],
       countryList: [],
       CreateItemForm: {
-        dense: ref(true),
         basicInfo: {
-          title: "",
-          category_id_0: "",
-          item_condition: "",
-          item_description: "",
-          keywords: "",
+          title: '',
+          category_id_0: '',
+          item_condition: '',
+          item_description: '',
+          keywords: '',
         },
         pricingInfo: {
-          digital_currency_1: false,
-          digital_currency_2: false,
-          digital_currency_3: false,
-          item_count: "",
-          price: "",
+          digital_currency_1: '',
+          digital_currency_2: '',
+          digital_currency_3: '',
+          item_count: '',
+          price: '',
         },
         shippingInfo: {
-          worldwide_shipping: "",
-          free_shipping: false,
-          free_shipping_days: "",
-          shipping_2: false,
-          shipping_2_days: "",
-          shipping_2_price: "",
-          shipping_3: false,
-          shipping_3_days: "",
-          shipping_3_price: "",
-          shipping_to_country_one: "",
-          shipping_to_country_two: "",
-          shipping_to_country_three: "",
-          shipping_to_country_four: "",
-          shipping_to_country_five: "",
+          worldwide_shipping: '',
+          free_shipping: '',
+          free_shipping_days: '',
+          shipping_2: '',
+          shipping_2_days: '',
+          shipping_2_price: '',
+          shipping_3: '',
+          shipping_3_days: '',
+          shipping_3_price: '',
+          shipping_to_country_one: '',
+          shipping_to_country_two: '',
+          shipping_to_country_three: '',
+          shipping_to_country_four: '',
+          shipping_to_country_five: '',
         },
       },
     };
@@ -387,27 +385,46 @@ export default defineComponent({
         }
       });
     },
-    async CreateItem() {
+    async SendItemCreation(payLoad: {
+      item_id: string;
+      item_title: string;
+      item_condition: string;
+      item_description: string;
+      category_id_0: string;
+      keywords: string;
+      item_count: string;
+      digital_currency_1: string;
+      digital_currency_2: string;
+      digital_currency_3: string;
+      price: string;
+      free_shipping: string;
+      free_shipping_days: string;
+      shipping_2: string;
+      shipping_2_days: string;
+      shipping_2_price: string;
+      shipping_3: string;
+      shipping_3_days: string;
+      shipping_3_price: string;
+      shipping_to_country_one: string;
+      shipping_to_country_two: string;
+      shipping_to_country_three: string;
+      shipping_to_country_four: string;
+    }) {
       let path = "/vendorcreateitem/create-item-main/" + this.item_id;
-      let auth_token = localStorage.getItem("auth_token");
-
-      let the_headers = {
-        Authorization: "bearer " + auth_token,
-      };
-
-      axios({
-        method: "POST",
+      
+      await axios({
+        method: "post",
         url: path,
-        data: formData,
+        data: payLoad,
         withCredentials: true,
-        headers: the_headers,
+        headers: authHeader(),
       })
         .then((response) => {
           if (response.data.status == "success") {
             this.$router.push("/vendor/itemsforsale");
           }
           if (response.data.status == "error") {
-            this.$router.push("/vendor/createitem");
+            this.$router.push({ name: "edititem", params: { id: itemid } });
           }
         })
         .catch((error) => {
@@ -439,11 +456,10 @@ export default defineComponent({
       // Get the item thats being modified
 
       const item_id_route = useRoute();
-
       const item_id = item_id_route.params.id;
       this.item_id = item_id;
-
       const path = "/item/" + this.item_id;
+
       await axios({
         method: "get",
         url: path,
@@ -452,7 +468,6 @@ export default defineComponent({
         .then((response) => {
           if (response.status === 200) {
             this.marketitem = response.data;
-         
           }
         })
         .catch((error) => {});
@@ -466,7 +481,7 @@ export default defineComponent({
         method: "get", //you can set what request you want to be
         url: path,
         withCredentials: true,
-        data: "",
+
       })
         .then((response) => {
           // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
@@ -501,12 +516,11 @@ export default defineComponent({
         })
         .catch((error) => {});
     },
-    async onSubmit() {
-      // Submit Data for payload
+    onSubmit() {
 
       const payLoad = {
         item_id: this.item_id,
-        title: this.CreateItemForm.basicInfo.title,
+        item_title: this.CreateItemForm.basicInfo.item_title,
         item_condition: this.CreateItemForm.basicInfo.item_condition,
         item_description: this.CreateItemForm.basicInfo.item_description,
         keywords: this.CreateItemForm.basicInfo.keywords,
@@ -524,18 +538,14 @@ export default defineComponent({
         shipping_3: this.CreateItemForm.shippingInfo.shipping_3,
         shipping_3_days: this.CreateItemForm.shippingInfo.shipping_3_days,
         shipping_3_price: this.CreateItemForm.shippingInfo.shipping_3_price,
-        shipping_to_country_one:
-          this.CreateItemForm.shippingInfo.shipping_to_country_one,
-        shipping_to_country_two:
-          this.CreateItemForm.shippingInfo.shipping_to_country_two,
-        shipping_to_country_three:
-          this.CreateItemForm.shippingInfo.shipping_to_country_three,
-        shipping_to_country_four:
-          this.CreateItemForm.shippingInfo.shipping_to_country_four,
-        shipping_to_country_five:
-          this.CreateItemForm.shippingInfo.shipping_to_country_five,
+        shipping_to_country_one:this.CreateItemForm.shippingInfo.shipping_to_country_one,
+        shipping_to_country_two:this.CreateItemForm.shippingInfo.shipping_to_country_two,
+        shipping_to_country_three:this.CreateItemForm.shippingInfo.shipping_to_country_three,
+        shipping_to_country_four:this.CreateItemForm.shippingInfo.shipping_to_country_four,
       };
-      this.CreateItem(payLoad);
+      console.log("payload is ..")
+      console.log(payLoad)
+      this.SendItemCreation(payLoad);
     },
   },
 });

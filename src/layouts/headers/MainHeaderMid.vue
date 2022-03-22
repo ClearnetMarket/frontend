@@ -5,7 +5,7 @@
         style="cursor: pointer"
         >
             <div class="row-span-1 text-[20px]">Clearnet Market</div>
-            <div class="row-span-1 text-[12px]">Commerce for All</div>
+            <div class="row-span-1 text-[12px]">Privacy Sold Here</div>
         </div>
         <div class="sm:col-span-4 md:col-span-6 pt-5">
             <div class="grid grid-cols-12">
@@ -27,14 +27,18 @@
                 </div>
             </div>
         </div>
-        <div class="sm:col-span-4 sm:col-start-8 md:col-span-3 md:col-start-11 pt-5">
-            <div class="grid grid-cols-12 grid-rows-2">
-                <div class="row-span-2 col-span-3 pt-1">
-                    <ShoppingBagIcon class="text-white bg-blue-600 w-7 h-7" />
+        <div class="sm:col-span-4 sm:col-start-8 md:col-span-3 md:col-start-11 pt-5 ">
+         <router-link :to="{ name: 'cart' }">
+            <div class="grid grid-cols-12 grid-rows-2 ">
+                <div class="row-span-2 col-span-3 pt-1 ">
+                    <ShoppingBagIcon class="text-white bg-blue-600 w-7 h-7"  />
                 </div>
+             
                 <div class="row-span-1 col-span-9 font-bold text-[14px] text-gray-700">Shopping Cart</div>
                 <div class="row-span-1 col-span-9 text-[14px] text-gray-700">0 Items</div>
+               
             </div>
+             </router-link>
         </div>
     </div>
 </template>

@@ -107,7 +107,7 @@ export default defineComponent({
         if ((response.status = 200)) {
           let user = response.data.user;
           let user_auth_status = response.data.login;
-          if (user.admin_role > 0 && user_auth_status == true) {
+          if (user.user_admin > 0 && user_auth_status == true) {
             this.getvendorfeedback();
             this.getvendordisputes();
             this.getvendororders();

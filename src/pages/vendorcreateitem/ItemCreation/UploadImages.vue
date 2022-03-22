@@ -136,9 +136,6 @@ import axios from "axios";
 import { ref } from "vue";
 import authHeader from "../../../services/auth.header";
 import { mapGetters } from "vuex";
-import { constants } from "perf_hooks";
-import { useRoute } from 'vue-router';
-
 
 export default defineComponent({
   name: "UploadImages",
@@ -242,7 +239,6 @@ export default defineComponent({
 
     selectImage1() {
       this.$refs.fileInput1.click();
-    
     },
     selectImage2() {
       this.$refs.fileInput2.click();

@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="bg-neutral-800 h-96 pt-12 pb-12 inset-x-0 bottom-0 mt-20 footerclass"
-  >
+  <div class="bg-neutral-800 h-96 pt-12 pb-12 inset-x-0 bottom-0 footerclass">
     <div class="mx-32">
       <div class="flex flex-row">
         <div class="basis-1/4">
@@ -47,7 +45,7 @@
         </div>
         <div class="basis-1/2">
           <div class="text-[38px] mt-5 mb-5 text-yellow-600">
-            Commerce for everyone
+            Privacy sold here
           </div>
         </div>
       </div>
@@ -69,12 +67,11 @@ export default defineComponent({
 </script>
 <style>
 .footerclass {
-  position: absolute;
+  position: relative;
   right: 0;
   bottom: 0;
   left: 0;
   padding: 1rem;
-
   text-align: center;
 }
 </style>

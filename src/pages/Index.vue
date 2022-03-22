@@ -2,19 +2,19 @@
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
-    <div v-if="user">
-     <div v-if="user.confirmed == false">
-  <Confirmed  />
-    </div>    </div>
   <div v-if="user">
-    <MainHeaderVendor v-show="user.admin_role > 1"/>
-  </div>
-    <div class="max-w-7xl mx-auto flex mb-0 ">
-      <TodayFeatured/>
+    <div v-if="user.confirmed == false">
+      <Confirmed />
     </div>
+  </div>
+  <div v-if="user">
+    <MainHeaderVendor v-show="user.user_admin === 1" />
+  </div>
+  <div class="max-w-7xl mx-auto flex mb-0 wrapper">
+    <TodayFeatured />
+  </div>
 
   <MainFooter />
-
 </template>
 
 <script lang="ts">
@@ -40,14 +40,13 @@ export default defineComponent({
     MainHeaderVendor,
     TodayFeatured,
     MainFooter,
-    Confirmed
+    Confirmed,
   },
 
   data() {
     return {
       token: null,
-      confirmed: '',
-    
+      confirmed: "",
     };
   },
   computed: {
@@ -59,7 +58,6 @@ export default defineComponent({
   },
 
   methods: {
-    
     async userstatus() {
       await axios({
         method: "get",
@@ -74,7 +72,7 @@ export default defineComponent({
         })
         .catch((error) => {});
     },
-        async userstatusconfirmed() {
+    async userstatusconfirmed() {
       await axios({
         method: "get",
         url: "/auth/amiconfirmed",
@@ -82,20 +80,18 @@ export default defineComponent({
         headers: authHeader(),
       }).then((response) => {
         if (response.status == 200) {
-         if (response.data.confirmed == true){
-           this.confirmed = true
-         }
-         else if(response.data.confirmed == false){
-           this.confirmed = false
-         }
-      
-          
+          if (response.data.confirmed == true) {
+            this.confirmed = true;
+          } else if (response.data.confirmed == false) {
+            this.confirmed = false;
+          }
         }
       });
     },
-
   },
 });
 </script>
 
-<style type="ts" scoped></style>
+<style type="ts" scoped>
+
+</style>
