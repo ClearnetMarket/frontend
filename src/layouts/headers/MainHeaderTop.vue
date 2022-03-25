@@ -29,7 +29,7 @@
             </button>
           </router-link>
 
-          <router-link to="/register" class="px-3">
+          <router-link :to="{ name: 'register' }" class="px-3">
             <button
               class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline"
               type="button"

@@ -5,128 +5,225 @@
   <div v-if="user">
     <MainHeaderVendor v-show="user.user_admin == 1" />
   </div>
-    <div class="max-w-7xl mx-auto flex mb-0 wrapper bg-gray-300">
-  <div class="container mx-auto ">
-    <div class="flex shadow-md">
-      <div class="w-3/4 bg-white px-10 py-10">
-        <div class="flex justify-between border-b pb-8">
-          <h1 class="font-semibold text-2xl">Shopping Cart</h1>
-          <h2 class="font-semibold text-2xl">3 Items</h2>
-        </div>
-        <div class="flex mt-10 mb-5">
-          <h3 class="font-semibold text-gray-600 text-xs uppercase w-2/5">Product Details</h3>
-          <h3 class="font-semibold text-center text-gray-600 text-xs uppercase w-1/5">Quantity</h3>
-          <h3 class="font-semibold text-center text-gray-600 text-xs uppercase w-1/5">Price</h3>
-          <h3 class="font-semibold text-center text-gray-600 text-xs uppercase w-1/5">Total</h3>
-        </div>
-        <div class="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5">
-          <div class="flex w-2/5"> <!-- product -->
-            <div class="w-20">
-              <img class="h-24" src="https://drive.google.com/uc?id=18KkAVkGFvaGNqPy2DIvTqmUH_nk39o3z" alt="">
-            </div>
-            <div class="flex flex-col justify-between ml-4 flex-grow">
-              <span class="font-bold text-sm">Iphone 6S</span>
-              <span class="text-red-500 text-xs">Apple</span>
-              <a href="#" class="font-semibold hover:text-red-500 text-gray-500 text-xs">Remove</a>
-            </div>
-          </div>
-          <div class="flex justify-center w-1/5">
-            <svg class="fill-current text-gray-600 w-3" viewBox="0 0 448 512"><path d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"/>
-            </svg>
-
-            <input class="mx-2 border text-center w-8" type="text" value="1">
-
-            <svg class="fill-current text-gray-600 w-3" viewBox="0 0 448 512">
-              <path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"/>
-            </svg>
-          </div>
-          <span class="text-center w-1/5 font-semibold text-sm">$400.00</span>
-          <span class="text-center w-1/5 font-semibold text-sm">$400.00</span>
+  <div class="max-w-7xl mx-auto flex mb-0 wrapper">
+    <div class="grid grid-cols-12 w-full gap-4">
+      <div class="col-span-9 px-10 py-10">
+        <div class="grid grid-cols-4 border-b pb-8">
+          <h1 class="col-span-1 font-semibold text-2xl">Shopping Cart</h1>
+          <h2 class="col-span-1 col-start-4 font-semibold text-2xl">
+            {{ order_summary_count }} Items
+          </h2>
         </div>
 
-        <div class="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5">
-          <div class="flex w-2/5"> <!-- product -->
-            <div class="w-20">
-              <img class="h-24" src="https://drive.google.com/uc?id=10ht6a9IR3K2i1j0rHofp9-Oubl1Chraw" alt="">
-            </div>
-            <div class="flex flex-col justify-between ml-4 flex-grow">
-              <span class="font-bold text-sm">Xiaomi Mi 20000mAh</span>
-              <span class="text-red-500 text-xs">Xiaomi</span>
-              <a href="#" class="font-semibold hover:text-red-500 text-gray-500 text-xs">Remove</a>
+        <div v-if="shopping_cart_items_list">
+          <div v-for="(item, index) in shopping_cart_items_list">
+            <div class="hover:bg-gray-100">
+              <div class="grid grid-cols-12 px-1 py-1">
+                <!-- product -->
+
+                <div class="col-span-3">
+                  <img
+                    class="h-24"
+                    src="https://drive.google.com/uc?id=18KkAVkGFvaGNqPy2DIvTqmUH_nk39o3z"
+                    alt=""
+                  />
+                </div>
+                <div class="col-span-7">
+                  <div class="grid grid-cols-12">
+                    <div class="col-span-12 font-bold text-[18px]">
+                      {{ item.title_of_item }}
+                    </div>
+                    <div class="col-span-12 font-bold text-[18px] py-1">
+                      <span class="text-gray-600 text-xs">
+                        Sold by: {{ item.vendor_user_name }}
+                      </span>
+                    </div>
+                    <div class="col-span-12 font-bold text-[18px] py-1">
+                      <select
+                        @change="itemamount($event, item)"
+                        v-model="selected[currentitemamount(item, index)]"
+                        :key="item.id"
+                      >
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                      </select>
+                    </div>
+
+                     <div class="col-span-12 font-bold text-[18px] py-1">
+                      <select
+                        @change="selectedshipping($event, item)"
+                        v-model="selected_shipping"
+                        :key="item.id"
+                      >
+                         <option value="1" v-if="item.shipping_free == true">{{item.shipping_info_0}}</option>
+                         <option value="2" v-if="item.shipping_two == true">{{item.shipping_info_2}}</option>
+                         <option value="3" v-if="item.shipping_three == true">{{item.shipping_info_3}}</option>
+                      
+                      </select>
+                    </div>
+                    <div class="col-span-12 font-bold text-[18px] py-1">
+                      <div class="flex">
+                        <div class="">
+                          <a
+                            @click="deleteitem(item)"
+                            href="#"
+                            class="font-semibold hover:text-red-500 text-gray-500 text-xs"
+                            >Remove</a
+                          >
+                        </div>
+                        <div class="px-5">
+                          <a
+                            @click.prevent="saveforlateritem(item)"
+                            href="#"
+                            class="font-semibold hover:text-red-500 text-gray-500 text-xs"
+                            >Save For Later</a
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-span-2 text-right">
+                  <span class="font-semibold">${{ item.price_of_item }}</span>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="flex justify-center w-1/5">
-            <svg class="fill-current text-gray-600 w-3" viewBox="0 0 448 512"><path d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"/>
-            </svg>
-
-            <input class="mx-2 border text-center w-8" type="text" value="1">
-
-            <svg class="fill-current text-gray-600 w-3" viewBox="0 0 448 512">
-              <path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"/>
-            </svg>
+        </div>
+        <div v-else>
+          <div class="hover:bg-gray-100">
+            <div class="grid grid-cols-1 px-1 py-1">
+              <div class="text-[20px] text-center">
+                No Items in your shopping cart!
+              </div>
+            </div>
           </div>
-          <span class="text-center w-1/5 font-semibold text-sm">$40.00</span>
-          <span class="text-center w-1/5 font-semibold text-sm">$40.00</span>
+        </div>
+        <div class="grid grid-cols-4 pb-8 mt-10 border-t">
+          <div class="col-span-12 font-semibold text-lg">Saved for Later</div>
         </div>
 
-        <div class="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5">
-          <div class="flex w-2/5"> <!-- product -->
-            <div class="w-20">
-              <img class="h-24" src="https://drive.google.com/uc?id=1vXhvO9HoljNolvAXLwtw_qX3WNZ0m75v" alt="">
-            </div>
-            <div class="flex flex-col justify-between ml-4 flex-grow">
-              <span class="font-bold text-sm">Airpods</span>
-              <span class="text-red-500 text-xs">Apple</span>
-              <a href="#" class="font-semibold hover:text-red-500 text-gray-500 text-xs">Remove</a>
-            </div>
-          </div>
-          <div class="flex justify-center w-1/5">
-            <svg class="fill-current text-gray-600 w-3" viewBox="0 0 448 512"><path d="M416 208H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"/>
-            </svg>
-            <input class="mx-2 border text-center w-8" type="text" value="1">
+        <div v-if="shopping_cart_items_saved_list">
+          <div v-for="(item, index) in shopping_cart_items_saved_list">
+            <div class="hover:bg-gray-100">
+              <div class="grid grid-cols-12 px-1 py-1">
+                <!-- product -->
 
-            <svg class="fill-current text-gray-600 w-3" viewBox="0 0 448 512">
-              <path d="M416 208H272V64c0-17.67-14.33-32-32-32h-32c-17.67 0-32 14.33-32 32v144H32c-17.67 0-32 14.33-32 32v32c0 17.67 14.33 32 32 32h144v144c0 17.67 14.33 32 32 32h32c17.67 0 32-14.33 32-32V304h144c17.67 0 32-14.33 32-32v-32c0-17.67-14.33-32-32-32z"/>
-            </svg>
+                <div class="col-span-3">
+                  <img
+                    class="h-24"
+                    src="https://drive.google.com/uc?id=18KkAVkGFvaGNqPy2DIvTqmUH_nk39o3z"
+                    alt=""
+                  />
+                </div>
+                <div class="col-span-7">
+                  <div class="grid grid-cols-12">
+                    <div class="col-span-12 font-bold text-[18px]">
+                      {{ item.title_of_item }}
+                    </div>
+                    <div class="col-span-12 font-bold text-[18px] py-1">
+                      <span class="text-gray-600 text-xs">
+                        Sold by: {{ item.vendor_user_name }}
+                      </span>
+                    </div>
+                   
+                    <div class="col-span-12 font-bold text-[18px] py-1">
+                      <div class="flex">
+                        <div class="">
+                          <a
+                            @click.prevent="deleteitem(item)"
+                            href="#"
+                            class="font-semibold hover:text-red-500 text-gray-500 text-xs"
+                            >Remove</a
+                          >
+                        </div>
+                        <div class="px-5">
+                          <a
+                            @click.prevent="movetocartitem(item)"
+                            href="#"
+                            class="font-semibold hover:text-red-500 text-gray-500 text-xs"
+                            >Move to Cart</a
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-span-2 text-right">
+                  <span class="font-semibold">${{ item.price_of_item }}</span>
+                </div>
+              </div>
+            </div>
           </div>
-          <span class="text-center w-1/5 font-semibold text-sm">$150.00</span>
-          <span class="text-center w-1/5 font-semibold text-sm">$150.00</span>
         </div>
-
-    
+        <div v-else>
+          <div class="hover:bg-gray-100">
+            <div class="grid grid-cols-1 px-1 py-1">
+              <div class="text-[20px] text-center">No saved items!</div>
+            </div>
+          </div>
+        </div>
       </div>
-
-      <div id="summary" class="w-1/4 px-8 py-10">
-        <h1 class="font-semibold text-2xl border-b pb-8">Order Summary</h1>
-        <div class="flex justify-between mt-10 mb-5">
-          <span class="font-semibold text-sm uppercase">Items 3</span>
-          <span class="font-semibold text-sm">590$</span>
-        </div>
-        <div>
-          <label class="font-medium inline-block mb-3 text-sm uppercase">Shipping</label>
-          <select class="block p-2 text-gray-600 w-full text-sm">
-            <option>Standard shipping - $10.00</option>
-          </select>
-        </div>
-
-        <div class="border-t mt-8">
-          <div class="flex font-semibold justify-between py-6 text-sm uppercase">
-            <span>Total cost</span>
-            <span>$600</span>
-          </div>
-          <button class="bg-yellow-500 font-semibold hover:bg-yellow-600 py-3 text-sm text-white uppercase w-full">Checkout</button>
-        </div>
-      </div>
-
     </div>
 
-</div>
+    <div class="col-span-3 px-8 py-10">
+      <div class="grid grid-cols-1">
+        <div class="col-span-1">
+          <h1 class="font-semibold text-2xl border-b pb-8">Order Summary</h1>
+        </div>
+        <div class="mb-5">
+          <div class="col-span-1">
+            <span class="font-semibold text-sm uppercase"
+              >Items {{ order_summary_count }}</span
+            >
+          </div>
+        </div>
+        <div>
+          <div class="col-span-12">
+            <label class="font-medium inline-block mb-3 text-sm uppercase"
+              >Item Cost: {{ order_summary_cost }}</label
+            >
+          </div>
+          <div class="col-span-12">
+            <div v-if="order_summary_shipping_cost == 0">
+              <Div class="text-orange-500">Free Shipping</Div>
+            </div>
+            <div v-else>
+              <label class="font-medium inline-block mb-3 text-sm uppercase"
+                >Shipping: {{ order_summary_shipping_cost }}</label
+              >
+            </div>
+          </div>
+        </div>
+        <div class="col-span-1">
+          <div class="border-t mt-8">
+            <div class="font-semibold py-6 text-sm uppercase">
+              <span
+                >Total cost {{ order_summary_shipping_and_price_cost }}</span
+              >
+            </div>
+               <router-link :to="{ name: 'checkout' }">
+            <button
 
-
-
-
+              class="bg-yellow-500 font-semibold hover:bg-yellow-600 py-3 text-sm text-white uppercase w-full"
+            >
+              Checkout
+            </button>
+            </router-link>
+          </div>
+        </div>
       </div>
-    <MainFooter />
+    </div>
+  </div>
+  <MainFooter />
 </template>
 
 <script lang="ts">
@@ -147,21 +244,158 @@ export default defineComponent({
     MainHeaderMid,
     MainHeaderBottom,
     MainHeaderVendor,
-    MainFooter
+    MainFooter,
   },
 
   data() {
     return {
-      
+      selected: Object,
+      selected_shipping: "1",
+      shopping_cart_items_list: "",
+      shopping_cart_items_saved_list: "",
+      order_summary_count: "",
+      order_summary_cost: "",
+      order_summary_shipping_cost: "",
+      order_summary_shipping_and_price_cost: "",
     };
   },
 
   mounted() {
-  
+    this.get_shopping_cart_items();
+    this.get_shopping_cart_items_saved_for_later();
+    this.get_shopping_cart_order_summary();
   },
 
   methods: {
-    
+    // Get How many items in shopping cart
+    async get_shopping_cart_items() {
+      await axios({
+        method: "get",
+        url: "/checkout/data/incart",
+        headers: authHeader(),
+      })
+        .then((response) => {
+          this.cart_status = response.status;
+          if (this.cart_status == 200) {
+            this.shopping_cart_items_list = response.data;
+            console.log(response.data)
+          } else {
+            this.shopping_cart_items_list = null;
+          }
+        })
+        .catch((error) => {
+          this.shopping_cart_items_list = null;
+        });
+    },
+    async get_shopping_cart_items_saved_for_later() {
+      await axios({
+        method: "get",
+        url: "/checkout/data/saved",
+        headers: authHeader(),
+      })
+        .then((response) => {
+          this.cart_status = response.status;
+          if (this.cart_status == 200) {
+            this.shopping_cart_items_saved_list = response.data;
+          }
+        })
+        .catch((error) => {
+          this.shopping_cart_items_saved_list = null;
+        });
+    },
+    async get_shopping_cart_order_summary() {
+      await axios({
+        method: "get",
+        url: "/checkout/data/total",
+        headers: authHeader(),
+      })
+        .then((response) => {
+          this.cart_status = response.status;
+          if (this.cart_status == 200) {
+            this.order_summary_count = response.data.total_items;
+            this.order_summary_shipping_cost = response.data.total_shipping;
+            this.order_summary_cost = response.data.total_price_before_shipping;
+            this.order_summary_shipping_and_price_cost =
+              response.data.total_price;
+          }
+        })
+        .catch((error) => {
+          this.shopping_cart_items_saved_list = null;
+        });
+    },
+    async currentitemamount(item, index) {
+      await axios({
+        method: "get",
+        url: "/checkout/currentquantity/" + item.id,
+        headers: authHeader(),
+      }).then((response) => {
+        this.selected[index] = response.data.amount;
+     
+      });
+    },
+    async selectedshipping(event, item) {
+      this.option = event.target.value;
+      let payLoad = {
+        new_shipping_option: this.option,
+      };
+      await axios({
+        method: "put",
+        url: "/checkout/changeshippingoption/" + item.id,
+        headers: authHeader(),
+        data: payLoad,
+      }).then((response) => {
+        
+        this.get_shopping_cart_order_summary();
+      });
+    },
+    async itemamount(event, item) {
+      this.quantity = event.target.value;
+      let payLoad = {
+        new_amount: this.quantity,
+      };
+      await axios({
+        method: "put",
+        url: "/checkout/updateamount/" + item.id,
+        headers: authHeader(),
+        data: payLoad,
+      }).then((response) => {
+        this.shopping_cart_count = response.data.status;
+        this.get_shopping_cart_order_summary();
+      });
+    },
+    async deleteitem(item) {
+      await axios({
+        method: "delete",
+        url: "/checkout/delete/" + item.id,
+        headers: authHeader(),
+      }).then((response) => {
+        this.get_shopping_cart_items();
+        this.get_shopping_cart_items_saved_for_later();
+        this.get_shopping_cart_order_summary();
+      });
+    },
+    async saveforlateritem(item) {
+      await axios({
+        method: "put",
+        url: "/checkout/saveforlater/" + item.id,
+        headers: authHeader(),
+      }).then((response) => {
+        this.get_shopping_cart_items();
+        this.get_shopping_cart_items_saved_for_later();
+        this.get_shopping_cart_order_summary();
+      });
+    },
+    async movetocartitem(item) {
+      await axios({
+        method: "put",
+        url: "/checkout/movecartitem/" + item.id,
+        headers: authHeader(),
+      }).then((response) => {
+        this.get_shopping_cart_items();
+        this.get_shopping_cart_items_saved_for_later();
+          this.get_shopping_cart_order_summary();
+      });
+    },
   },
 });
 </script>

@@ -5,7 +5,6 @@
       <div class="col-span-1 px-5">
         <div class="text-[20px] mb-1 font-bold">{{ title }}</div>
         <div class="flex pt-4 mb-2">
-  
           <div v-if="digitalcurrencyone == true">
             <span
               class="bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-orange-500 mr-2 mb-2"
@@ -39,6 +38,7 @@
             <button
               class="bg-yellow-600 hover:bg-zinc-400 rounded-lg text-white font-bold py-2 px-10 focus:outline-none focus:shadow-outline content-center justify-center"
               type="submit"
+               @click="addtocart()"
             >
               Add to Cart
             </button>
@@ -100,7 +100,8 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import axios from "axios";
-
+import { useRouter, useRoute } from 'vue-router'
+import authHeader from "../../../services/auth.header";
 export default defineComponent({
   name: "ItemTop",
   props: [
@@ -137,15 +138,45 @@ export default defineComponent({
     "shippingtwodays",
     "shippingthree",
     "shippingthreedays",
+  
   ],
 
   data() {
-    return {};
+    return {
+      shopping_cart_count:'',
+     
+    };
   },
   computed() {},
 
-  mounted() {},
+  mounted() {      
+      const item_id_route = useRoute();
+      this.item_id = item_id_route.params.id;
+       },
 
-  methods: {},
+  methods: {
+    addtocart() {
+      const path = "/checkout/add/" + this.item_id;
+      axios({
+        method: "post",
+        url: path,
+        headers: authHeader(),
+      }).then((response) => {
+      this.get_shopping_cart_count();
+      });
+    },
+
+        // Get How many items in shopping cart
+    get_shopping_cart_count() {
+      axios({
+        method: "get",
+        url: "/info/user-cart-count",
+        headers: authHeader(),
+      }).then((response) => {
+        this.shopping_cart_count = response.data.status
+    
+      });
+    },
+  },
 });
 </script>

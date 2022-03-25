@@ -63,7 +63,7 @@
         Orders
       </button>
     </div>
-    <router-link to="/vendor/itemsforsale">
+    <router-link :to="{ name: 'forsale' }">
       <button
         class="py-2 px-4 shadow-md no-underline rounded-full text-white font-sans text-sm hover:text-white bg-zinc-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2"
       >
