@@ -82,13 +82,9 @@ export default defineComponent({
         headers: authHeader(),
       }).then((response) => {
         this.shopping_cart_count = response.data.status
-    
       });
     },
-    
   },
-
-
 });
 </script>
 

@@ -5,8 +5,24 @@
   <div v-if="user">
     <MainHeaderVendor v-show="user.user_admin == 1" />
   </div>
-  <div class="max-w-7xl mx-auto flex mb-0 wrapper">
-    <div class="grid grid-cols-12 w-full gap-4">
+  <div class="max-w-7xl mx-auto mb-20 wrapper">
+    <div class="grid grid-cols-1 w-full gap-4">
+      <div class="mb-10 mt-5">
+        <nav class="rounded-md">
+          <ol class="list-reset flex">
+            <li>
+              <router-link :to="{ name: 'home' }">
+                <a class="text-blue-600 hover:text-blue-700">Home</a>
+              </router-link>
+            </li>
+            <li>
+              <span class="text-gray-500 mx-2">/</span>
+            </li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+    <div class="grid grid-cols-12 gap-4">
       <div class="col-span-9 px-10 py-10">
         <div class="grid grid-cols-4 border-b pb-8">
           <h1 class="col-span-1 font-semibold text-2xl">Shopping Cart</h1>
@@ -16,7 +32,7 @@
         </div>
 
         <div v-if="shopping_cart_items_list">
-          <div v-for="(item, index) in shopping_cart_items_list">
+          <div v-for="(item, index) in shopping_cart_items_list" :key="index">
             <div class="hover:bg-gray-100">
               <div class="grid grid-cols-12 px-1 py-1">
                 <!-- product -->
@@ -41,8 +57,7 @@
                     <div class="col-span-12 font-bold text-[18px] py-1">
                       <select
                         @change="itemamount($event, item)"
-                        v-model="selected[currentitemamount(item, index)]"
-                        :key="item.id"
+                        v-model="item.quantity_of_item"
                       >
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -57,16 +72,21 @@
                       </select>
                     </div>
 
-                     <div class="col-span-12 font-bold text-[18px] py-1">
+                    <div class="col-span-12 font-bold text-[18px] py-1">
                       <select
                         @change="selectedshipping($event, item)"
-                        v-model="selected_shipping"
                         :key="item.id"
+                        v-model="item.selected_shipping"
                       >
-                         <option value="1" v-if="item.shipping_free == true">{{item.shipping_info_0}}</option>
-                         <option value="2" v-if="item.shipping_two == true">{{item.shipping_info_2}}</option>
-                         <option value="3" v-if="item.shipping_three == true">{{item.shipping_info_3}}</option>
-                      
+                        <option value="1" v-if="item.shipping_free == true">
+                          {{ item.shipping_info_0 }}
+                        </option>
+                        <option value="2" v-if="item.shipping_two == true">
+                          {{ item.shipping_info_2 }}
+                        </option>
+                        <option value="3" v-if="item.shipping_three == true">
+                          {{ item.shipping_info_3 }}
+                        </option>
                       </select>
                     </div>
                     <div class="col-span-12 font-bold text-[18px] py-1">
@@ -113,6 +133,7 @@
 
         <div v-if="shopping_cart_items_saved_list">
           <div v-for="(item, index) in shopping_cart_items_saved_list">
+            >
             <div class="hover:bg-gray-100">
               <div class="grid grid-cols-12 px-1 py-1">
                 <!-- product -->
@@ -134,7 +155,7 @@
                         Sold by: {{ item.vendor_user_name }}
                       </span>
                     </div>
-                   
+
                     <div class="col-span-12 font-bold text-[18px] py-1">
                       <div class="flex">
                         <div class="">
@@ -172,52 +193,51 @@
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="col-span-3 px-8 py-10">
-      <div class="grid grid-cols-1">
-        <div class="col-span-1">
-          <h1 class="font-semibold text-2xl border-b pb-8">Order Summary</h1>
-        </div>
-        <div class="mb-5">
+      <div class="col-span-3 px-8 py-10 border border-gray-300">
+        <div class="grid grid-cols-1">
           <div class="col-span-1">
-            <span class="font-semibold text-sm uppercase"
-              >Items {{ order_summary_count }}</span
-            >
+            <h1 class="font-semibold text-2xl border-b pb-8">Order Summary</h1>
           </div>
-        </div>
-        <div>
-          <div class="col-span-12">
-            <label class="font-medium inline-block mb-3 text-sm uppercase"
-              >Item Cost: {{ order_summary_cost }}</label
-            >
-          </div>
-          <div class="col-span-12">
-            <div v-if="order_summary_shipping_cost == 0">
-              <Div class="text-orange-500">Free Shipping</Div>
+          <div class="mb-5">
+            <div class="col-span-1">
+              <span class="font-semibold text-sm uppercase"
+                >Items {{ order_summary_count }}</span
+              >
             </div>
-            <div v-else>
+          </div>
+          <div>
+            <div class="col-span-12">
               <label class="font-medium inline-block mb-3 text-sm uppercase"
-                >Shipping: {{ order_summary_shipping_cost }}</label
+                >Item Cost: {{ order_summary_cost }}</label
               >
+            </div>
+            <div class="col-span-12">
+              <div v-if="order_summary_shipping_cost == 0">
+                <Div class="text-orange-500">Free Shipping</Div>
+              </div>
+              <div v-else>
+                <label class="font-medium inline-block mb-3 text-sm uppercase"
+                  >Shipping: {{ order_summary_shipping_cost }}</label
+                >
+              </div>
             </div>
           </div>
-        </div>
-        <div class="col-span-1">
-          <div class="border-t mt-8">
-            <div class="font-semibold py-6 text-sm uppercase">
-              <span
-                >Total cost {{ order_summary_shipping_and_price_cost }}</span
-              >
+          <div class="col-span-1">
+            <div class="border-t mt-8">
+              <div class="font-semibold py-6 text-sm uppercase">
+                <span
+                  >Total cost {{ order_summary_shipping_and_price_cost }}</span
+                >
+              </div>
+              <router-link :to="{ name: 'checkout' }">
+                <button
+                  class="bg-yellow-500 font-semibold hover:bg-yellow-600 py-3 text-sm text-white uppercase w-full"
+                >
+                  Checkout
+                </button>
+              </router-link>
             </div>
-               <router-link :to="{ name: 'checkout' }">
-            <button
-
-              class="bg-yellow-500 font-semibold hover:bg-yellow-600 py-3 text-sm text-white uppercase w-full"
-            >
-              Checkout
-            </button>
-            </router-link>
           </div>
         </div>
       </div>
@@ -238,7 +258,6 @@ import MainFooter from "../../layouts/footers/FooterMain.vue";
 
 export default defineComponent({
   name: "Cart",
-
   components: {
     MainHeaderTop,
     MainHeaderMid,
@@ -249,23 +268,20 @@ export default defineComponent({
 
   data() {
     return {
-      selected: Object,
       selected_shipping: "1",
-      shopping_cart_items_list: "",
-      shopping_cart_items_saved_list: "",
+      shopping_cart_items_list: [],
+      shopping_cart_items_saved_list: [],
       order_summary_count: "",
       order_summary_cost: "",
       order_summary_shipping_cost: "",
       order_summary_shipping_and_price_cost: "",
     };
   },
-
   mounted() {
     this.get_shopping_cart_items();
     this.get_shopping_cart_items_saved_for_later();
     this.get_shopping_cart_order_summary();
   },
-
   methods: {
     // Get How many items in shopping cart
     async get_shopping_cart_items() {
@@ -278,7 +294,6 @@ export default defineComponent({
           this.cart_status = response.status;
           if (this.cart_status == 200) {
             this.shopping_cart_items_list = response.data;
-            console.log(response.data)
           } else {
             this.shopping_cart_items_list = null;
           }
@@ -296,7 +311,11 @@ export default defineComponent({
         .then((response) => {
           this.cart_status = response.status;
           if (this.cart_status == 200) {
-            this.shopping_cart_items_saved_list = response.data;
+            if (response.data.status !== "none") {
+              this.shopping_cart_items_saved_list = response.data;
+            } else {
+              this.shopping_cart_items_saved_list = null;
+            }
           }
         })
         .catch((error) => {
@@ -329,8 +348,8 @@ export default defineComponent({
         url: "/checkout/currentquantity/" + item.id,
         headers: authHeader(),
       }).then((response) => {
-        this.selected[index] = response.data.amount;
-     
+        console.log(response.data.amount);
+        return 2;
       });
     },
     async selectedshipping(event, item) {
@@ -344,12 +363,12 @@ export default defineComponent({
         headers: authHeader(),
         data: payLoad,
       }).then((response) => {
-        
         this.get_shopping_cart_order_summary();
       });
     },
     async itemamount(event, item) {
       this.quantity = event.target.value;
+      console.log(this.quantity);
       let payLoad = {
         new_amount: this.quantity,
       };
@@ -360,6 +379,7 @@ export default defineComponent({
         data: payLoad,
       }).then((response) => {
         this.shopping_cart_count = response.data.status;
+        console.log(this.shopping_cart_count);
         this.get_shopping_cart_order_summary();
       });
     },
@@ -393,7 +413,7 @@ export default defineComponent({
       }).then((response) => {
         this.get_shopping_cart_items();
         this.get_shopping_cart_items_saved_for_later();
-          this.get_shopping_cart_order_summary();
+        this.get_shopping_cart_order_summary();
       });
     },
   },
