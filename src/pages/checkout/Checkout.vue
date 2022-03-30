@@ -40,13 +40,17 @@
           <div class="col-span-3 font-bold text-">Shipping Options</div>
           <div class="col-span-6">
             <div class="grid grid-cols-1">
-              <div class="">Edwin Eames</div>
-              <div class="">6 STONE RIDGE DR</div>
-              <div class="">LEICESTER, MA 01524-2127</div>
-              <div class=""></div>
+            <div class="">{{ address_name }}</div>
+              <div class="">{{ address }}</div>
+              <div class="">{{apt}}</div>
+              <div class="">{{city}}</div>
+              <div class="">{{stateorprovence}}</div>
+              <div class="">{{zip}}</div>
             </div>
           </div>
-          <div class="col-span-2 text-center text-[12px]">Change</div>
+          <div class="col-span-2 text-center text-[12px]">
+            <router-link :to="{ name: 'defaultaddress' }"> Change </router-link>
+          </div>
         </div>
 
         <div class="grid grid-cols-12 pb-4 pt-4">
@@ -75,7 +79,6 @@
           <div class="col-span-1 font-bold"></div>
           <div class="col-span-11 text-">
             <div v-for="(item, index) in shopping_cart_items_list">
-         
               <div class="grid grid-cols-12 gap-4 border border-gray-300 p-4">
                 <div class="col-span-2">
                   <img
@@ -90,11 +93,13 @@
                       {{ item.title_of_item }}
                     </div>
                     <div class="col-span-1">{{ item.price_of_item }}$</div>
-                     <div class="col-span-1">{{ item.quantity_of_item }} items</div>
+                    <div class="col-span-1">
+                      {{ item.quantity_of_item }} items
+                    </div>
                   </div>
                 </div>
                 <div class="col-span-6">
-                  <div v-if="(item.digital_currency_1 == true)">
+                  <div v-if="item.digital_currency_1 == true">
                     <input
                       v-on:change="checkoutpaymenttype($event, item)"
                       v-model="selected_currency"
@@ -130,8 +135,7 @@
                       id="{{item.id}}"
                       name="{{item.id}}"
                       value="3"
-                     :checked="item.selected_digital_currency == 3"
-
+                      :checked="item.selected_digital_currency == 3"
                     />
                     <label class="px-5" for="javascript">Monero</label>
                   </div>
@@ -148,32 +152,45 @@
             <h1 class="font-semibold text-2xl border-b pb-8">Order Summary</h1>
           </div>
           <div class="mb-5">
-            <div class="col-span-1">
-              <span class="font-semibold text-sm uppercase">Bitcoin </span>
-              <div class="text-[14px]">Items: {{ btcsumofitem }}</div>
-              <div class="text-[14px]">Price: {{ btcprice }}</div>
-              <div class="text-[14px]">Shipping Price: {{ btcshippingprice }}</div>
-              <div class="text-[14px]">Total Price: {{ btctotalprice }}</div>
+            <div v-if="btctotalprice > 0">
+              <div class="col-span-1">
+                <span class="font-semibold text-sm uppercase">Bitcoin </span>
+                <div class="text-[14px]">Items: {{ btcsumofitem }}</div>
+                <div class="text-[14px]">Price: {{ btcprice }}</div>
+                <div class="text-[14px]">
+                  Shipping Price: {{ btcshippingprice }}
+                </div>
+                <div class="text-[14px]">Total Price: {{ btctotalprice }}</div>
+              </div>
             </div>
-            <div class="col-span-1">
-              <span class="font-semibold text-sm uppercase">Bitcoin Cash</span>
-              <div class="text-[14px]">Items: {{ bchsumofitem }}</div>
-              <div class="text-[14px]">Price: {{ bchprice }}</div>
-              <div class="text-[14px]">Shipping Price: {{ bchshippingprice }}</div>
-              <div class="text-[14px]">Total Price: {{ bchtotalprice }}</div>
+            <div v-if="bchtotalprice > 0">
+              <div class="col-span-1">
+                <span class="font-semibold text-sm uppercase"
+                  >Bitcoin Cash</span
+                >
+                <div class="text-[14px]">Items: {{ bchsumofitem }}</div>
+                <div class="text-[14px]">Price: {{ bchprice }}</div>
+                <div class="text-[14px]">
+                  Shipping Price: {{ bchshippingprice }}
+                </div>
+                <div class="text-[14px]">Total Price: {{ bchtotalprice }}</div>
+              </div>
             </div>
-            <div class="col-span-1">
-              <span class="font-semibold text-sm uppercase">Monero</span>
-              <div class="text-[14px]">Items: {{ xmrsumofitem }}</div>
-              <div class="text-[14px]">Price: {{ xmrprice }}</div>
-              <div class="text-[14px]">Shipping Price: {{ xmrshippingprice }}</div>
-              <div class="text-[14px]">Total Price: {{ xmrtotalprice }}</div>
+            <div v-if="xmrtotalprice > 0">
+              <div class="col-span-1">
+                <span class="font-semibold text-sm uppercase">Monero</span>
+                <div class="text-[14px]">Items: {{ xmrsumofitem }}</div>
+                <div class="text-[14px]">Price: {{ xmrprice }}</div>
+                <div class="text-[14px]">
+                  Shipping Price: {{ xmrshippingprice }}
+                </div>
+                <div class="text-[14px]">Total Price: {{ xmrtotalprice }}</div>
+              </div>
             </div>
             <div class="mt-5 mb-5">
               <router-link :to="{ name: 'home' }">
                 <button
-                  class="bg-yellow-500 rounded-md font-semibold hover:bg-yellow-600 py-3
-                   text-sm text-white uppercase w-full"
+                  class="bg-yellow-500 rounded-md font-semibold hover:bg-yellow-600 py-3 text-sm text-white uppercase w-full"
                 >
                   Place Order
                 </button>
@@ -227,6 +244,15 @@ export default defineComponent({
       xmrshippingprice: "",
       xmrtotalprice: "",
       selected_currency: "",
+      address_name: "",
+      countryList: "",
+      country: "",
+      address: "",
+      apt: "",
+      city: "",
+      stateorprovence: "",
+      zip: "",
+      message: "",
     };
   },
 
@@ -236,6 +262,7 @@ export default defineComponent({
     this.getbtcprice();
     this.get_shopping_cart_items();
     this.get_shopping_cart_order_summary();
+    this.getcurrentshipping();
   },
 
   methods: {
@@ -263,7 +290,7 @@ export default defineComponent({
       let payLoad = {
         new_currency: this.selectedpayment,
       };
-   
+
       await axios({
         method: "post",
         url: "/checkout/changepaymentoption/" + item.id,
@@ -295,10 +322,29 @@ export default defineComponent({
           this.xmrshippingprice = response.data.xmr_shipping_price;
           this.xmrtotalprice = response.data.xmr_total_price;
         }
-       
       });
     },
-
+    async getcurrentshipping() {
+      await axios({
+        method: "get",
+        url: "/info/getdefaultaddress",
+        withCredentials: true,
+        headers: authHeader(),
+      }).then((response) => {
+        if ((response.status = 200)) {
+          this.address_name = response.data.address_name;
+          this.country = response.data.country;
+          this.address = response.data.address;
+          this.apt = response.data.apt;
+          this.city = response.data.city;
+          this.address = response.data.address;
+          this.stateorprovence =
+            response.data.state_or_provence;
+          this.zip = response.data.zip;
+          this.message = response.data.message;
+        }
+      });
+    },
     //  Get prices of current coins
     async getxmrprice() {
       await axios({

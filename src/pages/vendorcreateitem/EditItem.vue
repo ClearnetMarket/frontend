@@ -33,6 +33,7 @@
       <div class="grid grid-cols-1 rounded-md p-6 max-w-3xl mx-auto">
         <div class="text-[24px]">Create a new Item</div>
         <UploadImages :item_id="item_id" />
+        
         <form
           class="rounded-md px-8 pt-6 pb-8 mb-4 w-full"
           enctype="multipart/form-data"
@@ -45,7 +46,8 @@
             >
             <input
               v-model="CreateItemForm.basicInfo.item_title"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              class="shadow appearance-none border rounded w-full py-2 px-3 
+              text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="item_title"
               type="text"
               placeholder="Enter title of your item .."
@@ -57,7 +59,9 @@
                 >Category</label
               >
               <select
-                class="shadow form-select appearance-none block w-full px-3 py-1.5 text-base font-normal focus:shadow-outline text-gray-500 bg-white bg-clip-padding bg-no-repeat border rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                class="shadow form-select appearance-none block w-full px-3 py-1.5 text-base
+                 font-normal focus:shadow-outline text-gray-500 bg-white bg-clip-padding bg-no-repeat border
+                  rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                 aria-label="Default select example"
                 id="category"
                 v-model="CreateItemForm.basicInfo.category_id_0"
@@ -77,7 +81,9 @@
                 >Condition</label
               >
               <select
-                class="shadow form-select appearance-none block w-full px-3 py-1.5 text-base font-normal focus:shadow-outline text-gray-500 bg-white bg-clip-padding bg-no-repeat border rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                class="shadow form-select appearance-none block w-full px-3 py-1.5 text-base font-normal 
+                focus:shadow-outline text-gray-500 bg-white bg-clip-padding bg-no-repeat border rounded 
+                transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                 aria-label="Default select example"
                 id="condition"
                 v-model="CreateItemForm.basicInfo.item_condition"
@@ -104,12 +110,12 @@
               >
               <input
                 v-model="CreateItemForm.pricingInfo.price"
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700
+                 leading-tight focus:outline-none focus:shadow-outline"
                 id="price"
-                type="number"
-                min="0"
+           
                 placeholder="Price in your currency..."
-                @keypress="onlyNumberWithDot"
+               @keypress="onlyNumberWithDot"
               />
             </div>
             <div class="mb-4 flex-1">
@@ -191,7 +197,7 @@
                 <input
                   type="checkbox"
                   checked="checked"
-                  v-model="CreateItemForm.pricingInfo.free_shipping"
+                  v-model="CreateItemForm.shippingInfo.free_shipping"
                 />
               </div>
               <div class="flex-1"></div>
@@ -201,7 +207,7 @@
                   placeholder="Estimated Days"
                   min="0"
                   class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  v-model="CreateItemForm.pricingInfo.free_shipping_days"
+                  v-model="CreateItemForm.shippingInfo.free_shipping_days"
                 />
               </div>
             </div>
@@ -215,7 +221,7 @@
                 <input
                   type="checkbox"
                   checked="checked"
-                  v-model="CreateItemForm.pricingInfo.shipping_2"
+                  v-model="CreateItemForm.shippingInfo.shipping_2"
                 />
               </div>
               <div class="flex-1">
@@ -224,7 +230,7 @@
                   placeholder="Price"
                   min="0"
                   class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  v-model="CreateItemForm.pricingInfo.shipping_2_price"
+                  v-model="CreateItemForm.shippingInfo.shipping_2_price"
                   @keypress="onlyNumberWithDot"
                 />
               </div>
@@ -234,7 +240,7 @@
                   placeholder="Estimated Days"
                   min="0"
                   class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  v-model="CreateItemForm.pricingInfo.shipping_2_days"
+                  v-model="CreateItemForm.shippingInfo.shipping_2_days"
                   @keypress="onlyNumber"
                 />
               </div>
@@ -249,7 +255,7 @@
                 <input
                   type="checkbox"
                   checked="checked"
-                  v-model="CreateItemForm.pricingInfo.shipping_3"
+                  v-model="CreateItemForm.shippingInfo.shipping_3"
                 />
               </div>
               <div class="flex-1">
@@ -258,7 +264,7 @@
                   placeholder="Price"
                   min="0"
                   class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  v-model="CreateItemForm.pricingInfo.shipping_3_price"
+                  v-model="CreateItemForm.shippingInfo.shipping_3_price"
                   @keypress="onlyNumberWithDot"
                 />
               </div>
@@ -268,7 +274,7 @@
                   placeholder="Estimated Days"
                   min="0"
                   class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  v-model="CreateItemForm.pricingInfo.shipping_3_days"
+                  v-model="CreateItemForm.shippingInfo.shipping_3_days"
                   @keypress="onlyNumber"
                 />
               </div>
@@ -324,6 +330,7 @@ export default defineComponent({
     this.getCategoryList(); // Query Categories
     this.getConditionList(); // Query Conditionlist
     this.getCountryList(); // Query Countries
+    this.getFormData();
   },
 
   data() {
@@ -334,20 +341,21 @@ export default defineComponent({
       categoryList: [],
       // conditionList: [],
       countryList: [],
+     
       CreateItemForm: {
         basicInfo: {
-          title: '',
-          category_id_0: '',
-          item_condition: '',
-          item_description: '',
-          keywords: '',
+          item_title: "",
+          category_id_0: "",
+          item_condition: "",
+          item_description: "",
+          keywords: "",
         },
         pricingInfo: {
-          digital_currency_1: '',
-          digital_currency_2: '',
-          digital_currency_3: '',
-          item_count: '',
-          price: '',
+          digital_currency_1: "",
+          digital_currency_2: "",
+          digital_currency_3: "",
+          item_count: "",
+          price: "",
         },
         shippingInfo: {
           worldwide_shipping: '',
@@ -363,7 +371,7 @@ export default defineComponent({
           shipping_to_country_two: '',
           shipping_to_country_three: '',
           shipping_to_country_four: '',
-          shipping_to_country_five: '',
+        
         },
       },
     };
@@ -436,7 +444,47 @@ export default defineComponent({
           }
         });
     },
+    async getFormData() {
+      // Get Countries
+      const path = "/vendorcreateitem/get-fields/" + this.item_id;
 
+      axios({
+        method: "get", //you can set what request you want to be
+        url: path,
+        withCredentials: true,
+                headers: authHeader(),
+      })
+        .then((response) => {
+          this.CreateItemForm.basicInfo.item_title = response.data.item_title;
+          this.CreateItemForm.pricingInfo.item_count = response.data.item_count;
+          this.CreateItemForm.basicInfo.item_description = response.data.item_description;
+          this.CreateItemForm.basicInfo.item_condition = response.data.item_condition;
+          this.CreateItemForm.basicInfo.keywords = response.data.keywords;
+          this.CreateItemForm.basicInfo.category_name_0 = response.data.category_name_0;
+          this.CreateItemForm.basicInfo.category_id_0 = response.data.category_id_0;
+          this.CreateItemForm.pricingInfo.price = response.data.price;
+          this.CreateItemForm.pricingInfo.digital_currency_1 = response.data.digital_currency_1;
+          this.CreateItemForm.pricingInfo.digital_currency_2 = response.data.digital_currency_2;
+          this.CreateItemForm.pricingInfo.digital_currency_3 = response.data.digital_currency_3;
+          this.CreateItemForm.shippingInfo.free_shipping = response.data.shipping_free;
+          this.CreateItemForm.shippingInfo.shipping_2 = response.data.shipping_two;
+          this.CreateItemForm.shippingInfo.shipping_3 = response.data.shipping_three;
+          this.CreateItemForm.shippingInfo.free_shipping_days = response.data.shipping_day_0;
+          this.CreateItemForm.shippingInfo.shipping_info_0 = response.data.shipping_info_0;
+          this.CreateItemForm.shippingInfo.shipping_2_price = response.data.shipping_price_2;
+          this.CreateItemForm.shippingInfo.shipping_2_days = response.data.shipping_day_2;
+          this.CreateItemForm.shippingInfo.shipping_3_price = response.data.shipping_price_3;
+          this.CreateItemForm.shippingInfo.shipping_3_days = response.data.shipping_day_3;
+          this.CreateItemForm.shippingInfo.destination_country_one = response.data.item_title;
+          this.CreateItemForm.shippingInfo.destination_country_two = response.data.item_title;
+          this.CreateItemForm.shippingInfo.destination_country_two_name = response.data.item_title;
+          this.CreateItemForm.shippingInfo.destination_country_three = response.data.item_title;
+          this.CreateItemForm.shippingInfo.destination_country_three_name = response.data.item_title;
+          this.CreateItemForm.shippingInfo.destination_country_four = response.data.item_title;
+          this.CreateItemForm.shippingInfo.destination_country_four_name = response.data.item_title;
+        })
+        .catch((error) => {});
+    },
     onlyNumber($event) {
       let keyCode = $event.keyCode ? $event.keyCode : $event.which;
       if (keyCode < 48 || keyCode > 57) {
@@ -472,7 +520,6 @@ export default defineComponent({
         })
         .catch((error) => {});
     },
-
     async getCountryList() {
       // Get Countries
       const path = "/vendorcreateitem/query/country";
@@ -517,7 +564,6 @@ export default defineComponent({
         .catch((error) => {});
     },
     onSubmit() {
-
       const payLoad = {
         item_id: this.item_id,
         item_title: this.CreateItemForm.basicInfo.item_title,
@@ -543,8 +589,6 @@ export default defineComponent({
         shipping_to_country_three:this.CreateItemForm.shippingInfo.shipping_to_country_three,
         shipping_to_country_four:this.CreateItemForm.shippingInfo.shipping_to_country_four,
       };
-      console.log("payload is ..")
-      console.log(payLoad)
       this.SendItemCreation(payLoad);
     },
   },

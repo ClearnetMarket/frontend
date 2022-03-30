@@ -26,13 +26,14 @@
     <div class="grid grid-cols-1 bg-white rounded-md p-6">
       <div class="text-[24px]">Items for Sale</div>
       <div class="flex justify-end">
-        <router-link :to="{ name: 'createquick' }">
+       
           <button
+            v-on:click="createanitem()"
             class="py-2 px-4 shadow-md no-underline rounded-full text-white font-sans text-sm hover:text-white bg-green-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2"
           >
             Create Item
           </button>
-        </router-link>
+   
       </div>
       <div class="mt-10 grid grid-cols-12">
         <div v-for="(item, index) in items" class="col-span-12">
@@ -170,6 +171,21 @@ export default defineComponent({
         }
       });
     },
+    async createanitem() {
+      await axios({
+        method: "post",
+        url: "/vendorcreateitem/create-item",
+        withCredentials: true,
+        headers: authHeader(),
+      }).then((response) => {
+        if ((response.status = 200)) {
+          this.newitemid = response.data.item_id
+          this.$router.push({ name: "edititem", params: { id: this.newitemid } });
+
+        }
+      });
+    },
+
     async cloneitem(itemid) {
       await axios({
         method: "get",

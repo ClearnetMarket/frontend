@@ -212,9 +212,6 @@ export default defineComponent({
         formData.append("image_four", this.$refs.fileInput4.files[0]);
       }
     
-    
-
-
       let path = "/vendorcreateitem/create-item-images/" + this.item_id;
       axios({
         method: "POST",

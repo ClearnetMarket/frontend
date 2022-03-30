@@ -4,7 +4,7 @@
   <MainHeaderBottom />
 
   <div v-if="user">
-    <MainHeaderVendor v-show="user.user_admin == 1"/>
+    <MainHeaderVendor v-show="user.user_admin == 1" />
   </div>
   <!-- Top Stuff-->
   <div class="container h-screen max-w-7xl mx-auto px-10">
@@ -31,23 +31,24 @@
     <!-- END Top Stuff-->
 
     <div class="grid sm:grid-cols-1 md:grid-cols-3 gap-5 my-3">
+      <router-link :to="{ name: 'defaultaddress' }">
       <div
         class="col-span-1 border border-1 rounded-md p-5 hover:bg-gray-100"
-        @click="$router.replace('/orders')"
+ 
         style="cursor: pointer"
       >
         <div class="grid grid-cols-4 grid-rows-2">
           <div class="col-span-1 row-span-2">Icon</div>
           <div class="col-span-3 row-span-1 text-[20px]">Orders</div>
           <div class="col-span-3 row-span-1 text-[14px] text-gray-600">
-            View all of your orders in one place
+            View your orders
           </div>
         </div>
       </div>
-
+      </router-link>
+      <router-link :to="{ name: 'changepassword' }">
       <div
         class="col-span-1 border border-1 rounded-md p-5 hover:bg-gray-100"
-        @click="$router.replace('/changepassword')"
         style="cursor: pointer"
       >
         <div class="grid grid-cols-4 grid-rows-2">
@@ -58,9 +59,10 @@
           </div>
         </div>
       </div>
+      </router-link>
+      <router-link :to="{ name: 'changepin' }">
       <div
         class="border border-1 rounded-md p-5 hover:bg-gray-100"
-        @click="$router.replace('/changepin')"
         style="cursor: pointer"
       >
         <div class="grid grid-cols-4 grid-rows-2">
@@ -71,11 +73,14 @@
           </div>
         </div>
       </div>
-    </div>
-    <div class="grid sm:grid-cols-1 md:grid-cols-3 gap-5 my-3">
+        </router-link>
+
+  
+
+ 
+        <router-link :to="{ name: 'profile' }">
       <div
         class="border border-1 rounded-md p-5 hover:bg-gray-100"
-        @click="$router.replace('/profile')"
         style="cursor: pointer"
       >
         <div class="grid grid-cols-4 grid-rows-2">
@@ -86,9 +91,10 @@
           </div>
         </div>
       </div>
+      </router-link>
+      <router-link :to="{ name: 'profile' }">
       <div
         class="border border-1 rounded-md p-5 hover:bg-gray-100"
-        @click="$router.replace('/profile')"
         style="cursor: pointer"
       >
         <div class="grid grid-cols-4 grid-rows-2">
@@ -99,9 +105,10 @@
           </div>
         </div>
       </div>
+      </router-link>
+      <router-link :to="{ name: 'defaultaddress' }">
       <div
         class="border border-1 rounded-md p-5 hover:bg-gray-100"
-        @click="$router.replace('/messages/messageshome')"
         style="cursor: pointer"
       >
         <div class="grid grid-cols-4 grid-rows-2">
@@ -112,7 +119,20 @@
           </div>
         </div>
       </div>
+      </router-link>
+      <router-link :to="{ name: 'defaultaddress' }">
+      <div class="border border-1 rounded-md p-5 hover:bg-gray-100" style="cursor: pointer">
+        <div class="grid grid-cols-4 grid-rows-2">
+          <div class="col-span-1 row-span-2">Icon</div>
+          <div class="col-span-3 row-span-1 text-[20px]">My Address</div>
+          <div class="col-span-3 row-span-1 text-[14px] text-gray-600">
+            Default Shipping Address
+          </div>
+        </div>
+      </div>
+      </router-link>
     </div>
+    
   </div>
   <!-- END container-->
   <MainFooter />

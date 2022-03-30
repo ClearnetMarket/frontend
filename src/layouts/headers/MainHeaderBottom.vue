@@ -3,22 +3,54 @@
     <div
       class="container flex justify-between max-w-7xl mx-auto text-bold text-center"
     >
-      <div class="flex ml-5 ">
-      <div class="pb-2">
-        <select
-          class="form-select mt-2 appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-200 bg-clip-padding bg-no-repeat rounded transition ease-in-out "
-          aria-label="Default select example"
-        >
-          <option selected>All Categories</option>
-          <option
-            class="shadow form-select appearance-none block w-full px-3 py-1.5 text-base font-normal focus:shadow-outline text-gray-500 bg-white bg-clip-padding bg-no-repeat border rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-            v-for="(item, index) in categoriesList"
-            :key="index"
-            :value="item.id"
+      <div class="flex ml-5">
+        <div class="pb-2">
+          <select
+            class="form-select mt-2 appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-200 bg-clip-padding bg-no-repeat rounded transition ease-in-out"
+            aria-label="Default select example"
           >
-            {{ item.name }}
-          </option>
-        </select>
+            <option selected @click="$router.replace({ name: 'categoryhome' })">
+              All Categories
+            </option>
+
+            <option @click="$router.replace({ name: 'categoryelectronics' })">
+              Electronics
+            </option>
+            <option @click="$router.replace({ name: 'categorycomputers' })">
+              Computers and Parts
+            </option>
+            <option @click="$router.replace({ name: 'categoryelectronics' })">
+              Smart Phones and Accessories
+            </option>name
+            <option @click="$router.replace({ name: 'categoryautomotive' })">
+              Automotive
+            </option>
+            <option @click="$router.replace({ name: 'categoryhobbies' })">
+              Hobbies and Collectibles
+            </option>
+            <option
+              @click="$router.replace({ name: 'categoryjewelrygoldcoins' })"
+            >
+              Jewelry Previous Metals and Coins
+            </option>
+            <option @click="$router.replace({ name: 'categoryapparel' })">
+              Apparel
+            </option>
+            <option @click="$router.replace({ name: 'categoryhomeandgarden' })">
+              Home and Garden
+            </option>
+            <option @click="$router.replace({ name: 'categoryartsandcrafts' })">
+              Arts and Crafts
+            </option>
+            <option
+              @click="$router.replace({ name: 'categorybooksmovies' })"
+            >
+              Books and Movies
+            </option>
+            <option @click="$router.replace({ name: 'categorydigitalitems' })">
+              Digital Items
+            </option>
+          </select>
         </div>
       </div>
 
@@ -64,7 +96,6 @@ export default defineComponent({
       xmrprice: null,
       bchprice: null,
 
-
       categoriesList: {},
     };
   },
@@ -74,11 +105,14 @@ export default defineComponent({
     this.getbchprice();
     this.getxmrprice();
 
-
     this.getCategoryList();
   },
 
   methods: {
+    gotoxmrwallet() {
+      this.$router.push({ name: "xmrwallet" });
+    },
+
     gotoxmrwallet() {
       this.$router.push({ name: "xmrwallet" });
     },
@@ -122,7 +156,6 @@ export default defineComponent({
       });
     },
 
-  
     async getCategoryList() {
       const path = "/category/sidebar";
       await axios
