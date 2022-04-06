@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-neutral-800 h-96 pt-12 pb-12 inset-x-0 bottom-0 footerclass">
+  <div class="bg-neutral-800 h-96 pt-12 pb-12 inset-x-0 bottom-0 footerclass mt-36">
     <div class="mx-32">
       <div class="flex flex-row">
         <div class="basis-1/4">
@@ -73,5 +73,6 @@ export default defineComponent({
   left: 0;
   padding: 1rem;
   text-align: center;
+  
 }
 </style>

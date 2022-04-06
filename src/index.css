@@ -10,4 +10,5 @@ input[type=file]::file-selector-button {
 
 .wrapper {
   min-height: calc(100vh - 564px);
+  margin-top: 20px;
 }

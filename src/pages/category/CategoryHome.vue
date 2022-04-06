@@ -94,6 +94,7 @@ export default defineComponent({
     MainHeaderBottom,
     MainHeaderVendor,
     MainFooter,
+   
   },
 
   data() {

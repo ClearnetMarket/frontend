@@ -67,7 +67,23 @@
           <div class="px-5 border border-rounded flex flex-col">
             <div class="px-5 text-[18px]">Vendor info</div>
             <div class="text-[12px] flex">
-              {{ vendorname }} ({{ vendortotalsales }})
+                    <div v-if="vendor_uuid">
+                            <div class="flex">
+                              <div class="">Sold by:</div>
+                              <router-link
+                                :to="{
+                                  name: 'userprofile',
+                                  params: { uuid: vendor_uuid },
+                                }"
+                              >
+                                <div
+                                  class="text-blue-500 hover:text-blue-300 hover:underline pl-3"
+                                >
+                                {{ vendorname }} ({{ vendortotalsales }})
+                                </div>
+                              </router-link>
+                            </div>
+                          </div>   
             </div>
 
             <div class="text-[12px] flex">

@@ -1,52 +1,18 @@
 <template>
-  <q-page class="docs-input">
+<template>
+  <MainHeaderTop />
+  <MainHeaderMid />
+  <MainHeaderBottom />
+  <div v-if="user">
+    <MainHeaderVendor v-show="user.user_admin == 1" />
+  </div>
+    <div class="max-w-7xl mx-auto wrapper">
 
-    <q-breadcrumbs class="text-info q-mt-md q-ml-lg">
-      <template v-slot:separator>
-        <q-icon size="1.5em" name="chevron_right" color="primary" />
-      </template>
-      <q-breadcrumbs-el label="Home" icon="home" to="/" />
-      <q-breadcrumbs-el label="Account" icon="person" to="/account" />
-    </q-breadcrumbs>
-    <div class="row justify-center">
-      <div class="col-xs-12 col-sm-6 col-md-6 q-pt-xs">
-        <div class="text-center">
-          <h5>Change Profile Information</h5>
-        </div>
 
-        <div class="col-xs-12 col-sm-6 col-md-6 q-py-sm q-pl-sm">Welcome {{ user_email }}</div>
-        <div class="col-xs-12 col-sm-6 col-md-6 q-py-sm q-pl-sm">Email: {{ user_name }}</div>
-        <q-form class="q-px-sm q-pt-xs" method="POST" @submit="onSubmit">
-          <div class="q-gutter-md formlayout">
-            <q-select
-              outlined
-              v-model="country"
-              :options="countryList"
-              option-value="id"
-              option-label="name"
-              label="Country"
-              :dense="dense"
-            />
-            <q-select
-              outlined
-              v-model="currency"
-              :options="currencyList"
-              option-value="id"
-              option-label="text"
-              label="Currency"
-              :dense="dense"
-            />
-            <q-space />
-            <div class="q-pa-md doc-container">
-              <div class="row justify-end">
-                <q-btn type="submit" class="full-width" color="secondary" label="Update" />
-              </div>
-            </div>
-          </div>
-        </q-form>
-      </div>
-    </div>
-  </q-page>
+    asdasd
+  </div>
+  <MainFooter />
+</template>
 </template>
 
 
@@ -55,19 +21,23 @@
 import { defineComponent } from 'vue';
 import axios from 'axios';
 import { ref } from 'vue';
-
-import authHeader from '../../../services/auth.header';
 import { mapGetters } from 'vuex';
+import authHeader from "../../services/auth.header";
+import MainHeaderTop from "../../layouts/headers/MainHeaderTop.vue";
+import MainHeaderMid from "../../layouts/headers/MainHeaderMid.vue";
+import MainHeaderBottom from "../../layouts/headers/MainHeaderBottom.vue";
+import MainHeaderVendor from "../../layouts/headers/MainHeaderVendor.vue";
+import MainFooter from "../../layouts/footers/FooterMain.vue";
 
 
 export default defineComponent({
-  name: 'Login',
-  components: {},
-
-  setup (){
-  
+  name: 'UserProfile',
+  components: {
+    MainHeaderTop,
+    MainHeaderMid,
+    MainHeaderBottom,
+    MainHeaderVendor,
   },
-
   data () {
     return {
       currencyList: [],
@@ -78,7 +48,7 @@ export default defineComponent({
       country: '',
       user_email: '',
       user_name:'',
-      dense: ref(true),
+  
     };
   },
 

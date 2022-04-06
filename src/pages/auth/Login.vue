@@ -97,9 +97,8 @@ export default defineComponent({
         })
         .catch((error) => {});
     },
-
-    sendLogin(payLoad: { username: string; password: string }) {
-      axios({
+    async sendLogin(payLoad: { username: string; password: string }) {
+      await axios({
         method: "post",
         url: "/auth/login",
         data: payLoad,

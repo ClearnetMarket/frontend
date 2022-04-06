@@ -50,8 +50,10 @@
                       {{ item.title_of_item }}
                     </div>
                     <div class="col-span-12 font-bold text-[18px] py-1">
-                      <span class="text-gray-600 text-xs">
+                      <span class="text-blue-600 hover:text-blue-300 text-xs">
+                       <router-link :to="{ name: 'userprofile', params: { username: item.vendor_user_name  }}">
                         Sold by: {{ item.vendor_user_name }}
+                        </router-link>
                       </span>
                     </div>
                     <div class="col-span-12 font-bold text-[18px] py-1">
@@ -60,15 +62,16 @@
                         v-model="item.quantity_of_item"
                       >
                         <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
+                    
+                        <option value="2" v-if="item.vendor_supply >= 2">2</option>
+                        <option value="3" v-if="item.vendor_supply >= 3">3</option>
+                        <option value="4" v-if="item.vendor_supply >= 4">4</option>
+                        <option value="5" v-if="item.vendor_supply >= 5">5</option>
+                        <option value="6" v-if="item.vendor_supply >= 6">6</option>
+                        <option value="7" v-if="item.vendor_supply >= 7">7</option>
+                        <option value="8" v-if="item.vendor_supply >= 8">8</option>
+                        <option value="9" v-if="item.vendor_supply >= 9">9</option>
+                        <option value="10" v-if="item.vendor_supply >= 10">10</option>
                       </select>
                     </div>
 
@@ -133,7 +136,7 @@
 
         <div v-if="shopping_cart_items_saved_list">
           <div v-for="(item, index) in shopping_cart_items_saved_list">
-            >
+            
             <div class="hover:bg-gray-100">
               <div class="grid grid-cols-12 px-1 py-1">
                 <!-- product -->
@@ -268,7 +271,7 @@ export default defineComponent({
 
   data() {
     return {
-      selected_shipping: "1",
+   
       shopping_cart_items_list: [],
       shopping_cart_items_saved_list: [],
       order_summary_count: "",
@@ -278,12 +281,27 @@ export default defineComponent({
     };
   },
   mounted() {
+    this.get_updated_prices_and_quantity();
     this.get_shopping_cart_items();
     this.get_shopping_cart_items_saved_for_later();
     this.get_shopping_cart_order_summary();
   },
   methods: {
     // Get How many items in shopping cart
+    async get_updated_prices_and_quantity() {
+      await axios({
+        method: "get",
+        url: "/checkout/update/price",
+        headers: authHeader(),
+        
+      })
+        .then((response) => {
+          if (response.status == 200) {
+          
+          } 
+        })
+        .catch((error) => {});
+    },
     async get_shopping_cart_items() {
       await axios({
         method: "get",
@@ -348,7 +366,7 @@ export default defineComponent({
         url: "/checkout/currentquantity/" + item.id,
         headers: authHeader(),
       }).then((response) => {
-        console.log(response.data.amount);
+      
         return 2;
       });
     },
@@ -368,7 +386,7 @@ export default defineComponent({
     },
     async itemamount(event, item) {
       this.quantity = event.target.value;
-      console.log(this.quantity);
+ 
       let payLoad = {
         new_amount: this.quantity,
       };
@@ -379,7 +397,7 @@ export default defineComponent({
         data: payLoad,
       }).then((response) => {
         this.shopping_cart_count = response.data.status;
-        console.log(this.shopping_cart_count);
+      
         this.get_shopping_cart_order_summary();
       });
     },

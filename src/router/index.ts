@@ -129,15 +129,26 @@ const routes = [
   },
   // Account  Logged in Required
   {
+    path: "/user/:uuid",
+    name: "userprofile",
+    component: () => import("../pages/profile/UserProfile.vue"),
+  },
+  {
+    path: "/user/orders",
+    name: "userorders",
+    component: () => import("../pages/orders/UserOrders.vue"),
+  },
+  {
+    path: "/user/orders/:uuid",
+    name: "vendorordersview",
+    component: () => import("../pages/orders/ViewOrder.vue"),
+  },
+  {
     path: "/account",
     name: "account",
     component: () => import("../pages/auth/account/AccountHome.vue"),
   },
-  {
-    path: "/account/profile",
-    name: "accountprofile",
-    component: () => import("../pages/auth/account/ProfileBasic.vue"),
-  },
+
   {
     path: "/account/defaultaddress",
     name: "defaultaddress",
@@ -172,12 +183,14 @@ const routes = [
   {
     path: "/category/electronics",
     name: "categoryelectronics",
-    component: () => import("../pages/category/electronics/ElectronicsHome.vue"),
+    component: () =>
+      import("../pages/category/electronics/ElectronicsHome.vue"),
   },
   {
     path: "/category/smartphones",
     name: "categorysmartphones",
-    component: () => import("../pages/category/smartphones/SmartPhonesHome.vue"),
+    component: () =>
+      import("../pages/category/smartphones/SmartPhonesHome.vue"),
   },
   {
     path: "/category/automotive",
@@ -192,7 +205,8 @@ const routes = [
   {
     path: "/category/jewlrygoldandcoins",
     name: "categoryjewelrygoldcoins",
-    component: () => import("../pages/category/jewelrygold/JewelryGoldHome.vue"),
+    component: () =>
+      import("../pages/category/jewelrygold/JewelryGoldHome.vue"),
   },
   {
     path: "/category/apparel",
@@ -202,7 +216,8 @@ const routes = [
   {
     path: "/category/homeandgarden",
     name: "categoryhomeandgarden",
-    component: () => import("../pages/category/homeandgarden/HomeandGardenHome.vue"),
+    component: () =>
+      import("../pages/category/homeandgarden/HomeandGardenHome.vue"),
   },
   {
     path: "/category/artandcrafts",
@@ -223,6 +238,43 @@ const routes = [
     path: "/category/booksandmovies",
     name: "categorybooksmovies",
     component: () => import("../pages/category/booksandmovies/BooksHome.vue"),
+  },
+
+  {
+    path: "/vendor/orders",
+    name: "vendororders",
+    component: () => import("../pages/vendor/orders/VendorOrders.vue"),
+  },
+
+  {
+    path: "/vendor/orders/new",
+    name: "vendorordersnew",
+    component: () => import("../pages/vendor/orders/VendorOrdersNew.vue"),
+  },
+  {
+    path: "/vendor/orders/waiting",
+    name: "vendororderswaiting",
+    component: () => import("../pages/vendor/orders/VendorOrdersWaiting.vue"),
+  },
+  {
+    path: "/vendor/orders/shipped",
+    name: "vendorordersshipped",
+    component: () => import("../pages/vendor/orders/VendorOrdersShipped.vue"),
+  },
+  {
+    path: "/vendor/orders/finalized",
+    name: "vendorordersfinalized",
+    component: () => import("../pages/vendor/orders/VendorOrdersFinalized.vue"),
+  },
+  {
+    path: "/vendor/orders/cancel",
+    name: "vendororderscancel",
+    component: () => import("../pages/vendor/orders/VendorOrdersCancel.vue"),
+  },
+  {
+    path: "/vendor/orders/dispute",
+    name: "vendorordersdispute",
+    component: () => import("../pages/vendor/orders/VendorOrdersDispute.vue"),
   },
   // Error Pages
   {

@@ -20,16 +20,22 @@
               </button>
             </router-link>
           </div>
-
-          <router-link :to="{ name: 'account' }">
+          <router-link :to="{ name: 'account' }" class="px-3">
             <button
               class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline"
             >
               Account
             </button>
           </router-link>
+          <router-link :to="{ name: 'userorders' }" class="px-3">
+            <button
+              class="bg-zinc-600  hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline"
+            >
+              Orders
+            </button>
+          </router-link>
 
-          <router-link :to="{ name: 'register' }" class="px-3">
+      
             <button
               class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline"
               type="button"
@@ -37,7 +43,7 @@
             >
               Logout
             </button>
-          </router-link>
+
         </div>
 
         <div v-else class="flex gap-2">

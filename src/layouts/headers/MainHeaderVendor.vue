@@ -16,22 +16,6 @@
       </button>
     </div>
 
-    <div v-if="returns">
-      <button
-        class="flex py-2 px-4 shadow-md no-underline rounded-full text-white font-sans text-sm hover:text-white bg-orange-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2"
-      >
-        <div class="px-2">{{ returns }}</div>
-        <div class>Returns</div>
-      </button>
-    </div>
-    <div v-else>
-      <button
-        class="py-2 px-4 shadow-md no-underline rounded-full text-white font-sans text-sm hover:text-white bg-zinc-600 hover:bg-zinc-400focus:outline-none active:shadow-none mr-2"
-      >
-        Returns
-      </button>
-    </div>
-
     <div v-if="feedback" class="q-mt-none">
       <button
         class="flex py-2 px-4 shadow-md text-sm no-underline rounded-full bg-orange-600 hover:bg-zinc-400 text-white font-sans hover:text-white focus:outline-none active:shadow-none mr-2"
@@ -49,20 +33,25 @@
     </div>
 
     <div v-if="orders">
-      <button
-        class="flex py-2 px-4 shadow-md no-underline rounded-full bg-orange-600 hover:bg-zinc-400 hover:text-white text-white font-sans text-sm btn-primary focus:outline-none active:shadow-none mr-2"
-      >
-        <div class="px-2">{{ orders }}</div>
-        <div class>Orders</div>
-      </button>
+      <router-link :to="{ name: 'vendororders' }">
+        <button
+          class="flex py-2 px-4 shadow-md no-underline rounded-full bg-orange-600 hover:bg-zinc-400 hover:text-white text-white font-sans text-sm btn-primary focus:outline-none active:shadow-none mr-2"
+        >
+          <div class="px-2">{{ orders }}</div>
+          <div class>Orders</div>
+        </button>
+      </router-link>
     </div>
     <div v-else>
-      <button
-        class="py-2 px-4 shadow-md no-underline rounded-full text-white font-sans text-sm hover:text-white bg-zinc-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2"
-      >
-        Orders
-      </button>
+      <router-link :to="{ name: 'vendororders' }">
+        <button
+          class="py-2 px-4 shadow-md no-underline rounded-full text-white font-sans text-sm hover:text-white bg-zinc-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2"
+        >
+          Orders
+        </button>
+      </router-link>
     </div>
+
     <router-link :to="{ name: 'forsale' }">
       <button
         class="py-2 px-4 shadow-md no-underline rounded-full text-white font-sans text-sm hover:text-white bg-zinc-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2"
@@ -88,7 +77,6 @@ export default defineComponent({
       orders: "",
       disputes: "",
       feedback: "",
-      returns: "",
     };
   },
 
@@ -111,10 +99,8 @@ export default defineComponent({
             this.getvendorfeedback();
             this.getvendordisputes();
             this.getvendororders();
-            this.getvendorreturns();
           }
         } else {
-          console.log("err");
         }
       });
     },
@@ -151,18 +137,6 @@ export default defineComponent({
       }).then((response) => {
         if (response.data) {
           this.orders = response.data.count;
-        }
-      });
-    },
-    async getvendorreturns() {
-      await axios({
-        method: "get",
-        url: "/vendor/returns-count",
-        withCredentials: true,
-        headers: authHeader(),
-      }).then((response) => {
-        if (response.data) {
-          this.returns = response.data.count;
         }
       });
     },

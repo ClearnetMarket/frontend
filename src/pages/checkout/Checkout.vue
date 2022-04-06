@@ -48,7 +48,7 @@
               <div class="">{{zip}}</div>
             </div>
           </div>
-          <div class="col-span-2 text-center text-[12px]">
+          <div class="col-span-2 text-center text-[12px] text-blue-600 hover:text-blue-400">
             <router-link :to="{ name: 'defaultaddress' }"> Change </router-link>
           </div>
         </div>
@@ -102,10 +102,10 @@
                   <div v-if="item.digital_currency_1 == true">
                     <input
                       v-on:change="checkoutpaymenttype($event, item)"
-                      v-model="selected_currency"
+                      v-model="item.selected_currency"
                       type="radio"
-                      id="{{item.id}}"
-                      name="{{item.id}}"
+                      :id="item.id"
+                      :name="item.id"
                       value="1"
                       :checked="item.selected_digital_currency == 1"
                     />
@@ -116,10 +116,10 @@
                   <div v-if="(item.digital_currency_2 = true)">
                     <input
                       v-on:change="checkoutpaymenttype($event, item)"
-                      v-model="selected_currency"
+                      v-model="item.selected_currency"
                       type="radio"
-                      id="{{item.id}}"
-                      name="{{item.id}}"
+                      :id="item.id"
+                      :name="item.id"
                       value="2"
                       :checked="item.selected_digital_currency == 2"
                     />
@@ -130,10 +130,10 @@
                   <div v-if="(item.digital_currency_3 = true)">
                     <input
                       v-on:change="checkoutpaymenttype($event, item)"
-                      v-model="selected_currency"
+                      v-model="item.selected_currency"
                       type="radio"
-                      id="{{item.id}}"
-                      name="{{item.id}}"
+                      :id="item.id"
+                      :name="item.id"
                       value="3"
                       :checked="item.selected_digital_currency == 3"
                     />
@@ -188,13 +188,13 @@
               </div>
             </div>
             <div class="mt-5 mb-5">
-              <router-link :to="{ name: 'home' }">
-                <button
-                  class="bg-yellow-500 rounded-md font-semibold hover:bg-yellow-600 py-3 text-sm text-white uppercase w-full"
-                >
-                  Place Order
-                </button>
-              </router-link>
+            
+              <button @click="checkoutorder()"
+                class="bg-yellow-500 rounded-md font-semibold hover:bg-yellow-600 py-3 text-sm text-white uppercase w-full"
+              >
+                Place Order
+              </button>
+            
             </div>
           </div>
         </div>
@@ -222,6 +222,7 @@ export default defineComponent({
     MainHeaderMid,
     MainHeaderBottom,
     MainHeaderVendor,
+    MainFooter
   },
 
   data() {
@@ -243,7 +244,6 @@ export default defineComponent({
       xmrprice: "",
       xmrshippingprice: "",
       xmrtotalprice: "",
-      selected_currency: "",
       address_name: "",
       countryList: "",
       country: "",
@@ -253,6 +253,7 @@ export default defineComponent({
       stateorprovence: "",
       zip: "",
       message: "",
+      interval:null
     };
   },
 
@@ -261,16 +262,45 @@ export default defineComponent({
     this.getbchprice();
     this.getbtcprice();
     this.get_shopping_cart_items();
+    this.updateprices();
     this.get_shopping_cart_order_summary();
     this.getcurrentshipping();
   },
-
+  created(){
+    this.interval = setInterval(() =>
+    {this.updateprices()},50000)
+  },
   methods: {
+        async checkoutorder() {
+      await axios({
+        method: "post",
+        url: "/checkout/payment",
+        withCredentials: true,
+        headers: authHeader(),
+      }).then((response) => {
+        if ((response.status = 200)) {
+        
+        }
+      });
+    },
+      async updateprices() {
+      await axios({
+        method: "get",
+        url: "/checkout/update/price",
+        withCredentials: true,
+        headers: authHeader(),
+      }).then((response) => {
+        if ((response.status = 200)) {
+        
+        }
+      });
+    },
     async get_shopping_cart_items() {
       await axios({
         method: "get",
         url: "/checkout/data/incart",
         headers: authHeader(),
+        withCredentials: true,
       })
         .then((response) => {
           this.cart_status = response.status;
@@ -338,8 +368,7 @@ export default defineComponent({
           this.apt = response.data.apt;
           this.city = response.data.city;
           this.address = response.data.address;
-          this.stateorprovence =
-            response.data.state_or_provence;
+          this.stateorprovence = response.data.state_or_provence;
           this.zip = response.data.zip;
           this.message = response.data.message;
         }

@@ -46,6 +46,7 @@
     v-bind:totalsold="totalsold"
     v-bind:currency="currency"
     v-bind:vendorname="vendorname"
+     v-bind:vendoruuid="vendoruuid"
     v-bind:vendortotalsales="vendortotalsales"
     v-bind:vendorrating="vendorrating"
     v-bind:imageoneserver="imageoneserver"
@@ -113,7 +114,6 @@ export default defineComponent({
     return {
       title: "",
       condition: "",
-
       price: "",
       pricebtc: "",
       pricebch: "",
@@ -127,17 +127,15 @@ export default defineComponent({
       totalsold: "",
       origincountry: "",
       currency: "",
-
       vendorname: "",
+      vendoruuid: "",
       vendortotalsales: "",
       vendorrating: "",
       imageoneserver: "",
       imagetwoserver: "",
       imagethreeserver: "",
       imagefourserver: "",
-
       description: "",
-
       origincountry: "",
       destinationcountryone: "",
       destinationcountrytwo: "",
@@ -247,6 +245,7 @@ export default defineComponent({
         .then((response) => {
           if ((response.status = 200)) {
             this.vendorname = response.data.vendorname;
+             this.vendoruuid = response.data.vendoruuid;
             this.vendorrating = response.data.vendorrating;
             this.vendortotalsales = response.data.vendortotalsales;
           }
