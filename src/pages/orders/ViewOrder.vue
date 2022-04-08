@@ -151,6 +151,46 @@
                   <fieldset class="rating">
                     <input
                       type="radio"
+                      id="itemstar10"
+                      name="itemrating"
+                      value="10"
+                      v-model="ItemRating.itemrating10"
+                    />
+                    <label class="full" for="itemstar10"></label>
+                    <input
+                      type="radio"
+                      id="itemstar9"
+                      name="itemrating"
+                      value="9"
+                      v-model="ItemRating.itemrating9"
+                    />
+                    <label class="full" for="itemstar9"></label>
+                    <input
+                      type="radio"
+                      id="itemstar8"
+                      name="itemrating"
+                      value="8"
+                      v-model="ItemRating.itemrating8"
+                    />
+                    <label class="full" for="itemstar8"></label>
+                    <input
+                      type="radio"
+                      id="itemstar7"
+                      name="itemrating"
+                      value="7"
+                      v-model="ItemRating.itemrating7"
+                    />
+                    <label class="full" for="itemstar7"></label>
+                    <input
+                      type="radio"
+                      id="itemstar6"
+                      name="itemrating"
+                      value="6"
+                      v-model="ItemRating.itemrating6"
+                    />
+                    <label class="full" for="itemstar6"></label>
+                    <input
+                      type="radio"
                       id="itemstar5"
                       name="itemrating"
                       value="5"
@@ -194,6 +234,41 @@
                 <div class="col-span-12">Vendor Rating</div>
                 <div class="col-span-12 mb-5">
                   <fieldset class="rating1">
+                    <input
+                      type="radio"
+                      id="vendorstar10"
+                      name="vendorrating"
+                      value="10"
+                      v-model="VendorRating.itemravendorrating1ting10"
+                    /><label class="full" for="vendorstar10"></label>
+                    <input
+                      type="radio"
+                      id="vendorstar9"
+                      name="vendorrating"
+                      value="9"
+                      v-model="VendorRating.itemravendorrating1ting9"
+                    /><label class="full" for="vendorstar9"></label>
+                    <input
+                      type="radio"
+                      id="vendorstar8"
+                      name="vendorrating"
+                      value="8"
+                      v-model="VendorRating.itemravendorrating1ting8"
+                    /><label class="full" for="vendorstar8"></label>
+                    <input
+                      type="radio"
+                      id="vendorstar7"
+                      name="vendorrating"
+                      value="7"
+                      v-model="VendorRating.itemravendorrating1ting7"
+                    /><label class="full" for="vendorstar7"></label>
+                    <input
+                      type="radio"
+                      id="vendorstar6"
+                      name="vendorrating"
+                      value="6"
+                      v-model="VendorRating.itemravendorrating1ting6"
+                    /><label class="full" for="vendorstar6"></label>
                     <input
                       type="radio"
                       id="vendorstar5"
@@ -261,9 +336,19 @@
           >
             <div class="col-span-12 text-[20px] mb-5">Feedback</div>
             <div class="col-span-12">
-             <div class="col-span-12">Vendor Rating</div>
-             {{rating_vendor}}
-             <div v-if="order.rating_item == 5">sad</div>
+              <div class="col-span-12">Vendor Rating</div>
+              <div v-if="loaded_feedback">
+                <StarRating v-bind:rating="rating_vendor" />
+              </div>
+              <div class="col-span-12 mt-5">Item Rating</div>
+              <div v-if="loaded_feedback">
+                <StarRating v-bind:rating="rating_item" />
+              </div>
+              <div class="col-span-12 mt-5">Review</div>
+              <div v-if="loaded_feedback">
+              {{review}}
+              </div>
+
             </div>
           </div>
         </div>
@@ -276,14 +361,15 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import axios from "axios";
+import { useRoute } from "vue-router";
+
 import authHeader from "../../services/auth.header";
 import MainHeaderTop from "../../layouts/headers/MainHeaderTop.vue";
 import MainHeaderMid from "../../layouts/headers/MainHeaderMid.vue";
 import MainHeaderBottom from "../../layouts/headers/MainHeaderBottom.vue";
 import MainHeaderVendor from "../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../layouts/footers/FooterMain.vue";
-import { useRoute } from "vue-router";
-
+import StarRating from "../../components/star_rating/Star.vue";
 export default defineComponent({
   name: "vendorordersview",
 
@@ -293,10 +379,12 @@ export default defineComponent({
     MainHeaderBottom,
     MainHeaderVendor,
     MainFooter,
+    StarRating,
   },
 
   data() {
     return {
+      loaded_feedback: false,
       order: [],
       tracking_number: "",
       carrier_name: "",
@@ -306,6 +394,11 @@ export default defineComponent({
         itemrating3: "",
         itemrating4: "",
         itemrating5: "",
+        itemrating6: "",
+        itemrating7: "",
+        itemrating8: "",
+        itemrating9: "",
+        itemrating10: "",
       },
       VendorRating: {
         vendorrating1: "",
@@ -313,6 +406,11 @@ export default defineComponent({
         vendorrating3: "",
         vendorrating4: "",
         vendorrating5: "",
+        vendorrating6: "",
+        vendorrating7: "",
+        vendorrating8: "",
+        vendorrating9: "",
+        vendorrating10: "",
       },
       review: "",
       rating_vendor: "",
@@ -326,6 +424,22 @@ export default defineComponent({
   },
 
   methods: {
+    async getorderfeedback() {
+      await axios({
+        method: "get",
+        url: "/orders/feedback/get/" + this.order.uuid,
+        withCredentials: true,
+        headers: authHeader(),
+      }).then((response) => {
+        if (response.status == 200) {
+          this.review = response.data.review;
+          this.rating_vendor = response.data.vendor_rating;
+          this.rating_item = response.data.item_rating;
+          this.loaded_feedback = true;
+        }
+      });
+    },
+
     onSubmitFeedback() {
       if (this.ItemRating.itemrating1 == 1) {
         this.rating_item = 1;
@@ -337,6 +451,16 @@ export default defineComponent({
         this.rating_item = 4;
       } else if (this.ItemRating.itemrating5 == 5) {
         this.rating_item = 5;
+      } else if (this.ItemRating.itemrating5 == 6) {
+        this.rating_item = 6;
+      } else if (this.ItemRating.itemrating5 == 7) {
+        this.rating_item = 7;
+      } else if (this.ItemRating.itemrating5 == 8) {
+        this.rating_item = 8;
+      } else if (this.ItemRating.itemrating5 == 9) {
+        this.rating_item = 9;
+      } else if (this.ItemRating.itemrating5 == 10) {
+        this.rating_item = 10;
       }
 
       if (this.VendorRating.vendorrating1 == 1) {
@@ -349,7 +473,18 @@ export default defineComponent({
         this.rating_vendor = 4;
       } else if (this.VendorRating.vendorrating5 == 5) {
         this.rating_vendor = 5;
+      } else if (this.VendorRating.vendorrating5 == 6) {
+        this.rating_vendor = 6;
+      } else if (this.VendorRating.vendorrating5 == 7) {
+        this.rating_vendor = 7;
+      } else if (this.VendorRating.vendorrating5 == 8) {
+        this.rating_vendor = 8;
+      } else if (this.VendorRating.vendorrating5 == 9) {
+        this.rating_vendor = 9;
+      } else if (this.VendorRating.vendorrating5 == 10) {
+        this.rating_vendor = 10;
       }
+
       const payLoad = {
         itemrating: this.rating_item,
         vendorrating: this.rating_vendor,
@@ -375,22 +510,7 @@ export default defineComponent({
           }
         });
     },
-    async getorderfeedback() {
 
-      await axios({
-        method: "get",
-        url: "/orders/feedback/get/" + this.order.uuid,
-        withCredentials: true,
-        headers: authHeader(),
-      }).then((response) => {
-        if (response.status == 200) {
-          console.log(response.data)
-          this.review = response.data.review;
-          this.rating_vendor = response.data.vendor_rating;
-          this.rating_item = response.data.item_rating;
-        }
-      });
-    },
     async getuserorder() {
       const order_id_route = useRoute();
       const order_id = order_id_route.params.uuid;
@@ -404,9 +524,8 @@ export default defineComponent({
       }).then((response) => {
         if (response.status == 200) {
           this.order = response.data;
-          if (this.order.user_feedback == 1){
-         
-            this.getorderfeedback()
+          if (this.order.user_feedback == 1) {
+            this.getorderfeedback();
           }
         }
       });

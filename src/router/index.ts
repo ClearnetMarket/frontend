@@ -134,6 +134,12 @@ const routes = [
     component: () => import("../pages/profile/UserProfile.vue"),
   },
   {
+    path: "/vendor/:uuid",
+    name: "vendorprofile",
+    component: () => import("../pages/profile/VendorProfile.vue"),
+  },
+
+  {
     path: "/user/orders",
     name: "userorders",
     component: () => import("../pages/orders/UserOrders.vue"),

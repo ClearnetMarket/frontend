@@ -51,7 +51,7 @@
                     </div>
                     <div class="col-span-12 font-bold text-[18px] py-1">
                       <span class="text-blue-600 hover:text-blue-300 text-xs">
-                       <router-link :to="{ name: 'userprofile', params: { username: item.vendor_user_name  }}">
+                       <router-link :to="{ name: 'userprofile', params: { uuid: item.vendor_uuid  }}">
                         Sold by: {{ item.vendor_user_name }}
                         </router-link>
                       </span>

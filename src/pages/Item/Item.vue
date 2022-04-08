@@ -46,7 +46,7 @@
     v-bind:totalsold="totalsold"
     v-bind:currency="currency"
     v-bind:vendorname="vendorname"
-     v-bind:vendoruuid="vendoruuid"
+    v-bind:vendoruuid="vendoruuid"
     v-bind:vendortotalsales="vendortotalsales"
     v-bind:vendorrating="vendorrating"
     v-bind:imageoneserver="imageoneserver"
@@ -70,7 +70,12 @@
     v-bind:shippingpricethree="shippingpricethree"
     v-bind:shippingdaythree="shippingdaythree"
   />
-  <ItemUserReviews v-bind:vendorreviews="vendorreviews" />
+   <div v-if="loaded_feedback">
+  <ItemUserReviews
+    v-bind:vendorreviews="vendorreviews"
+    v-bind:vendoruuid="vendoruuid"
+  />
+  </div>
 
   <MainFooter />
 </template>
@@ -112,6 +117,7 @@ export default defineComponent({
 
   data() {
     return {
+            loaded_feedback: false,
       title: "",
       condition: "",
       price: "",
@@ -148,12 +154,13 @@ export default defineComponent({
       shippingdaytwo: "",
       shippingpricethree: "",
       shippingdaythree: "",
-      vendorreviews: "",
+      vendorreviews: [],
     };
   },
 
   mounted() {
     this.getitem();
+     
   },
 
   methods: {
@@ -245,9 +252,10 @@ export default defineComponent({
         .then((response) => {
           if ((response.status = 200)) {
             this.vendorname = response.data.vendorname;
-             this.vendoruuid = response.data.vendoruuid;
+            this.vendoruuid = response.data.vendoruuid;
             this.vendorrating = response.data.vendorrating;
             this.vendortotalsales = response.data.vendortotalsales;
+             this.loaded_feedback = true;
           }
         })
         .catch((error) => {});
@@ -261,7 +269,7 @@ export default defineComponent({
       })
         .then((response) => {
           if ((response.status = 200)) {
-            this.vendorreviews = response.data.vendorname;
+            this.vendorreviews = response.data;
 
             if (this.vendorreviews == undefined) {
               this.vendorreviews = "No Reviews Yet";

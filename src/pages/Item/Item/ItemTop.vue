@@ -122,14 +122,8 @@ export default defineComponent({
   name: "ItemTop",
   props: [
     "condition",
-
-    "price",
-    "pricebtc",
-    "pricebch",
-    "pricexmr",
     "itemcount",
     "origincountry",
-
     "totalsold",
     "title",
     "currency",
@@ -141,13 +135,11 @@ export default defineComponent({
     "imagetwoserver",
     "imagethreeserver",
     "imagefourserver",
+
     "digitalcurrencyone",
     "digitalcurrencytwo",
     "digitalcurrencythree",
-    "vendorname",
-    "vendortotalsales",
-    "vendorrating",
-
+ 
     "freeshipping",
     "freeshippingdays",
     "shippingtwo",
@@ -155,6 +147,10 @@ export default defineComponent({
     "shippingthree",
     "shippingthreedays",
   
+      "price",
+    "pricebtc",
+    "pricebch",
+    "pricexmr",
   ],
 
   data() {

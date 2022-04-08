@@ -1,6 +1,6 @@
 <template>
 
-  <div class="max-w-7xl mx-auto px-10">
+  <div class="max-w-7xl mx-auto px-10 mt-10">
       <div class="grid grid-cols-1 text-[20px]">
 
       Shipping

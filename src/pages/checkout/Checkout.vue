@@ -253,6 +253,7 @@ export default defineComponent({
       stateorprovence: "",
       zip: "",
       message: "",
+      
       interval:null
     };
   },

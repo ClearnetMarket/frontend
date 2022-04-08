@@ -128,7 +128,7 @@
       <div v-for="order in orders" :key="order.uuid">
         <div v-if="order.uuid">
           <div
-            class="grid grid-cols-12 rounded border border-1 border-gray-300 bg-gray-200 p-5"
+            class="grid grid-cols-12 rounded border border-1 border-gray-300 bg-gray-100 p-5"
           >
             <div class="col-span-1">{{ relativeDate(order.created) }}</div>
             <router-link
@@ -168,6 +168,119 @@
 
                 <div class="flex">{{ order.price_total_xmr }} XMR</div>
               </div>
+            </div>
+         
+            <div v-if="order.vendor_feedback == 0" class="col-span-12 mt-10">
+              <div class="grid grid-cols-12">
+                <div class="col-span-12">
+                  <form @submit.prevent="onSubmitFeedback(order.uuid)">
+                    <div class="grid grid-cols-12 mb-5 p-5">
+                      <div class="col-span-12 text-[18px] mb-5">
+                        Leave Feedback for {{ order.customer_user_name }}
+                      </div>
+
+                      <div class="col-span-12">
+                        <div class="col-span-12">Customer Rating</div>
+                        <div class="col-span-12">
+                          <fieldset class="rating">
+                            <input
+                              type="radio"
+                              id="vendorstar10"
+                              name="vendorrating"
+                              value="10"
+                              v-model="VendorRating.vendorrating10"
+                            /><label class="full" for="vendorstar10"></label>
+                            <input
+                              type="radio"
+                              id="vendorstar9"
+                              name="vendorrating"
+                              value="9"
+                              v-model="VendorRating.vendorrating9"
+                            /><label class="full" for="vendorstar9"></label>
+                            <input
+                              type="radio"
+                              id="vendorstar8"
+                              name="vendorrating"
+                              value="8"
+                              v-model="VendorRating.vendorrating8"
+                            /><label class="full" for="vendorstar8"></label>
+                            <input
+                              type="radio"
+                              id="vendorstar7"
+                              name="vendorrating"
+                              value="7"
+                              v-model="VendorRating.vendorrating7"
+                            /><label class="full" for="vendorstar7"></label>
+                            <input
+                              type="radio"
+                              id="vendorstar6"
+                              name="vendorrating"
+                              value="6"
+                              v-model="VendorRating.vendorrating6"
+                            /><label class="full" for="vendorstar6"></label>
+                            <input
+                              type="radio"
+                              id="vendorstar5"
+                              name="vendorrating"
+                              value="5"
+                              v-model="VendorRating.vendorrating5"
+                            /><label class="full" for="vendorstar5"></label>
+                            <input
+                              type="radio"
+                              id="vendorstar4"
+                              name="vendorrating"
+                              value="4"
+                              v-model="VendorRating.vendorrating4"
+                            /><label class="full" for="vendorstar4"></label>
+                            <input
+                              type="radio"
+                              id="vendorstar3"
+                              name="vendorrating"
+                              value="3"
+                              v-model="VendorRating.vendorrating3"
+                            /><label class="full" for="vendorstar3"></label>
+                            <input
+                              type="radio"
+                              id="vendorstar2"
+                              name="vendorrating"
+                              value="2"
+                              v-model="VendorRating.vendorrating2"
+                            /><label class="full" for="vendorstar2"></label>
+                            <input
+                              type="radio"
+                              id="vendorstar1"
+                              name="vendorrating"
+                              value="1"
+                              v-model="VendorRating.vendorrating1"
+                            /><label class="full" for="vendorstar1"></label>
+                          </fieldset>
+                        </div>
+                      </div>
+                      <div class="col-span-12 mt-5 mb-1">Leave a review:</div>
+                      <div class="col-span-12">
+                        <textarea
+                          v-model="review"
+                          class="shadow appearance-none border border-gray-500 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                          id="message"
+                          type="textfield"
+                          placeholder="Customer Review .."
+                        />
+                      </div>
+                      <div class="col-span-12 text-center mt-5">
+                        <button
+                          class="bg-yellow-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                          type="submit"
+                        >
+                          Add Feedback
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div v-else class="col-span-12 mt-5">
+            Feedback Added
             </div>
           </div>
         </div>
@@ -211,6 +324,19 @@ export default defineComponent({
       vendor_orders_request_cancel: "",
       vendor_orders_cancelled: "",
       vendor_orders_dispute: "",
+
+      VendorRating: {
+        vendorrating1: "",
+        vendorrating2: "",
+        vendorrating3: "",
+        vendorrating4: "",
+        vendorrating5: "",
+        vendorrating6: "",
+        vendorrating7: "",
+        vendorrating8: "",
+        vendorrating9: "",
+        vendorrating10: "",
+      },
     };
   },
 
@@ -223,9 +349,59 @@ export default defineComponent({
       let d = value;
       let e = new Date(d).valueOf();
       return formatDistance(e, new Date());
+      
     },
+   
+
   },
   methods: {
+    onSubmitFeedback(uuid) {
+      if (this.VendorRating.vendorrating1 == 1) {
+        this.rating_vendor = 1;
+      } else if (this.VendorRating.vendorrating2 == 2) {
+        this.rating_vendor = 2;
+      } else if (this.VendorRating.vendorrating3 == 3) {
+        this.rating_vendor = 3;
+      } else if (this.VendorRating.vendorrating4 == 4) {
+        this.rating_vendor = 4;
+      } else if (this.VendorRating.vendorrating5 == 5) {
+        this.rating_vendor = 5;
+      } else if (this.VendorRating.vendorrating6 == 6) {
+        this.rating_vendor = 6;
+      } else if (this.VendorRating.vendorrating7 == 7) {
+        this.rating_vendor = 7;
+      } else if (this.VendorRating.vendorrating8 == 8) {
+        this.rating_vendor = 8;
+      } else if (this.VendorRating.vendorrating9 == 9) {
+        this.rating_vendor = 9;
+      } else if (this.VendorRating.vendorrating10 == 10) {
+        this.rating_vendor = 10;
+      }
+
+      const payLoad = {
+        customerrating: this.rating_vendor,
+        review: this.review,
+      };
+      this.sendFeedback(uuid, payLoad);
+      this.getuserorders();
+    },
+    async sendFeedback(uuid, payLoad: { customerrating: string; review: string }) {
+      console.log(payLoad)
+      await axios({
+        method: "post",
+        url: "/orders/feedback/vendor/" + uuid,
+        data: payLoad,
+        withCredentials: true,
+        headers: authHeader(),
+      })
+        .then((response) => {
+          console.log(response)
+          this.getuserorders();
+        })
+        .catch((error) => {
+         console.log(error)
+        });
+    },
     async getuserorders() {
       await axios({
         method: "get",
@@ -235,7 +411,6 @@ export default defineComponent({
       }).then((response) => {
         if (response.status == 200) {
           this.orders = response.data;
-        
         }
       });
     },
@@ -269,3 +444,52 @@ export default defineComponent({
   },
 });
 </script>
+<style>
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
+fieldset,
+label {
+  margin: 0;
+  padding: 0;
+}
+h1 {
+  font-size: 1.5em;
+  margin: 10px;
+}
+/****** Style Star Rating Widget *****/
+.rating {
+  border: none;
+  float: left;
+}
+.rating > input {
+  display: none;
+}
+.rating > label:before {
+  margin: 5px;
+  font-size: 1.25em;
+  font-family: FontAwesome;
+  display: inline-block;
+  content: "\f005";
+}
+.rating > .half:before {
+  content: "\f089";
+  position: absolute;
+}
+.rating > label {
+  color: #ddd;
+  float: right;
+}
+/***** CSS Magic to Highlight Stars on Hover *****/
+.rating > input:checked ~ label, /* show gold star when clicked */
+.rating:not(:checked) > label:hover, /* hover current star */
+.rating:not(:checked) > label:hover ~ label {
+  color: #ffd700;
+}
+/* hover previous stars in list */
+.rating > input:checked + label:hover, /* hover current star when changing rating */
+.rating > input:checked ~ label:hover,
+.rating > label:hover ~ input:checked ~ label, /* lighten current selection */
+.rating > input:checked ~ label:hover ~ label {
+  color: #ffed85;
+}
+</style>
