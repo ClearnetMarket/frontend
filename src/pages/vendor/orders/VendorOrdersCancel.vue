@@ -204,13 +204,7 @@ export default defineComponent({
     this.getuserorders();
     this.getuserneworderscount();
   },
-  filters: {
-    relativeDate(value) {
-      let d = value;
-      let e = new Date(d).valueOf();
-      return formatDistance(e, new Date());
-    },
-  },
+
   methods: {
     async getuserorders() {
       await axios({

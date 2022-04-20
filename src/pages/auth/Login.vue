@@ -106,6 +106,7 @@ export default defineComponent({
         .then((response) => {
           console.log(response);
           if (response.data.user) {
+       
             localStorage.setItem("auth_user", response.data.user);
             localStorage.setItem("auth_token", response.data.token);
             this.$store.dispatch("user", response.data.user);

@@ -1,6 +1,6 @@
 <template>
   <MainHeaderTop />
-  <MainHeaderMid />
+  <MainHeaderMid  :key="shoppingcartcount" />
   <MainHeaderBottom />
 
   <div v-if="user">
@@ -25,7 +25,8 @@
     </div>
   </div>
 
-  <ItemTop
+  <ItemTop @UpdateCart="UpdateCart"
+  v-bind:uuid="item_id"
     v-bind:condition="condition"
     v-bind:digitalcurrencyone="digitalcurrencyone"
     v-bind:digitalcurrencytwo="digitalcurrencytwo"
@@ -70,11 +71,11 @@
     v-bind:shippingpricethree="shippingpricethree"
     v-bind:shippingdaythree="shippingdaythree"
   />
-   <div v-if="loaded_feedback">
-  <ItemUserReviews
-    v-bind:vendorreviews="vendorreviews"
-    v-bind:vendoruuid="vendoruuid"
-  />
+  <div v-if="loaded_feedback">
+    <ItemUserReviews
+      v-bind:vendorreviews="vendorreviews"
+      v-bind:vendoruuid="vendoruuid"
+    />
   </div>
 
   <MainFooter />
@@ -117,8 +118,10 @@ export default defineComponent({
 
   data() {
     return {
-            loaded_feedback: false,
+        shoppingcartcount: 0,
+      loaded_feedback: false,
       title: "",
+      item_id: "",
       condition: "",
       price: "",
       pricebtc: "",
@@ -160,10 +163,12 @@ export default defineComponent({
 
   mounted() {
     this.getitem();
-     
   },
 
   methods: {
+     UpdateCart() {
+      this.shoppingcartcount += 1;
+    },
     async getitem() {
       const item_id_route = useRoute();
       const item_id = item_id_route.params.id;
@@ -176,46 +181,33 @@ export default defineComponent({
         .then((response) => {
           if ((response.status = 200)) {
             this.item = response.data;
-
+      
             this.title = response.data.item_title;
             this.itemcount = response.data.item_count;
             this.digitalcurrencyone = response.data.digital_currency_1;
             this.digitalcurrencytwo = response.data.digital_currency_2;
             this.digitalcurrencythree = response.data.digital_currency_3;
-
             this.imageoneserver = response.data.image_one_server;
             this.imagetwoserver = response.data.image_two_server;
             this.imagethreeserver = response.data.image_three_server;
             this.imagefourserver = response.data.image_four_server;
-
             this.totalsold = response.data.total_sold;
             this.freeshipping = response.data.shipping_free;
             this.freeshippingdays = response.data.shipping_day_0;
-
             this.description = response.data.item_description;
-
             this.origincountry = response.data.origin_country_name;
-            this.destinationcountryone =
-              response.data.destination_country_one_name;
-            this.destinationcountrytwo =
-              response.data.destination_country_two_name;
-            this.destinationcountrythree =
-              response.data.destination_country_three_name;
-            this.destinationcountryfour =
-              response.data.destination_country_four_name;
-
+            this.destinationcountryone = response.data.destination_country_one_name;
+            this.destinationcountrytwo = response.data.destination_country_two_name;
+            this.destinationcountrythree = response.data.destination_country_three_name;
+            this.destinationcountryfour = response.data.destination_country_four_name;
             this.shippingfree = response.data.shipping_free;
             this.shippingtwo = response.data.shipping_two;
             this.shippingthree = response.data.shipping_three;
-
             this.shippingpricetwo = response.data.shipping_price_2;
             this.shippingdaytwo = response.data.shipping_day_2;
-
             this.shippingpricethree = response.data.shipping_price_3;
             this.shippingdaythree = response.data.shipping_day_3;
-
             this.getitemcondition();
-
             this.getitemprice();
             this.getvendorinfo();
             this.getvendorreviews();
@@ -255,7 +247,9 @@ export default defineComponent({
             this.vendoruuid = response.data.vendoruuid;
             this.vendorrating = response.data.vendorrating;
             this.vendortotalsales = response.data.vendortotalsales;
-             this.loaded_feedback = true;
+            this.loaded_feedback = true;
+         
+           
           }
         })
         .catch((error) => {});

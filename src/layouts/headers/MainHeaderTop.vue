@@ -20,6 +20,13 @@
               </button>
             </router-link>
           </div>
+          <router-link :to="{ name: 'MsgHome' }" class="px-3">
+            <button
+              class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline"
+            >
+              Msg
+            </button>
+          </router-link>
           <router-link :to="{ name: 'account' }" class="px-3">
             <button
               class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline"
@@ -29,21 +36,19 @@
           </router-link>
           <router-link :to="{ name: 'userorders' }" class="px-3">
             <button
-              class="bg-zinc-600  hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline"
+              class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline"
             >
               Orders
             </button>
           </router-link>
 
-      
-            <button
-              class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline"
-              type="button"
-              @click="logout"
-            >
-              Logout
-            </button>
-
+          <button
+            class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline"
+            type="button"
+            @click="logout"
+          >
+            Logout
+          </button>
         </div>
 
         <div v-else class="flex gap-2">
@@ -81,6 +86,9 @@ export default defineComponent({
       localStorage.removeItem("user_token");
       localStorage.removeItem("auth_token");
       localStorage.clear();
+      this.$router.push({
+              name: "home",
+            });
     },
   },
 });

@@ -245,13 +245,11 @@ const routes = [
     name: "categorybooksmovies",
     component: () => import("../pages/category/booksandmovies/BooksHome.vue"),
   },
-
   {
     path: "/vendor/orders",
     name: "vendororders",
     component: () => import("../pages/vendor/orders/VendorOrders.vue"),
   },
-
   {
     path: "/vendor/orders/new",
     name: "vendorordersnew",
@@ -281,6 +279,32 @@ const routes = [
     path: "/vendor/orders/dispute",
     name: "vendorordersdispute",
     component: () => import("../pages/vendor/orders/VendorOrdersDispute.vue"),
+  },
+  // Messages
+  {
+    path: "/msg",
+    name: "MsgHome",
+    component: () => import("../pages/messages/MsgHome.vue"),
+  },
+  {
+    path: "/msg/create",
+    name: "MsgCreate",
+    component: () => import("../pages/messages/MsgCreate.vue"),
+  },
+  {
+    path: "/msg/create/:uuid",
+    name: "MsgCreateUser",
+    component: () => import("../pages/messages/MsgCreate.vue"),
+  },
+  {
+    path: "/msg/create/:uuid/:itemuuid",
+    name: "MsgCreateItem",
+    component: () => import("../pages/messages/MsgCreateItem.vue"),
+  },
+  {
+    path: "/msg/view/:postid",
+    name: "MsgView",
+    component: () => import("../pages/messages/MsgView.vue"),
   },
   // Error Pages
   {

@@ -92,7 +92,7 @@
           </div>
         </div>
       </router-link>
-      <router-link :to="{ name: 'defaultaddress' }">
+      <router-link :to="{ name: 'MsgHome' }">
         <div
           class="border border-1 rounded-md p-5 hover:bg-gray-100"
           style="cursor: pointer"

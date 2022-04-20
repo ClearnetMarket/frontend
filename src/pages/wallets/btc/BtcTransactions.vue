@@ -255,13 +255,7 @@ export default defineComponent({
       tab: [],
     };
   },
-  filters: {
-    relativeDate(value) {
-      let d = value;
-      let e = new Date(d).valueOf();
-      return formatDistance(e, new Date());
-    },
-  },
+
   computed: {
     ...mapGetters(["user"]),
   },

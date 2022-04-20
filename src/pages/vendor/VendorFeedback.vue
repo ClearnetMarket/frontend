@@ -165,13 +165,7 @@ export default defineComponent({
   components: {
     StarRating,
   },
-  filters: {
-    relativeDate(value) {
-      let d = value;
-      let e = new Date(d).valueOf();
-      return formatDistance(e, new Date());
-    },
-  },
+
   data() {
     return {
       date: Date.now(),
