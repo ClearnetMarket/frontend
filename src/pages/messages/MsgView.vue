@@ -239,7 +239,6 @@ export default defineComponent({
 
   methods: {
     async getmainpost() {
-
       await axios({
         method: "get",
         url: "/msg/main/post/" + this.postid,
@@ -272,6 +271,7 @@ export default defineComponent({
         }
       });
     },
+
     async gettheorder() {
       if (user_one_uuid == user.uuid) {
         await axios({
@@ -298,6 +298,7 @@ export default defineComponent({
         });
       }
     },
+
     async getmainpostcomments() {
       await axios({
         method: "get",
@@ -363,7 +364,6 @@ export default defineComponent({
       const payLoad = {
         textbody: this.SendMsgForm.msginfo,
       };
-
       this.sendcomment(payLoad);
     },
     relativeDate(value) {

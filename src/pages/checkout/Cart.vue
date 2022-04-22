@@ -62,7 +62,6 @@
                         v-model="item.quantity_of_item"
                       >
                         <option value="1">1</option>
-                    
                         <option value="2" v-if="item.vendor_supply >= 2">2</option>
                         <option value="3" v-if="item.vendor_supply >= 3">3</option>
                         <option value="4" v-if="item.vendor_supply >= 4">4</option>
@@ -271,7 +270,6 @@ export default defineComponent({
 
   data() {
     return {
-   
       shopping_cart_items_list: [],
       shopping_cart_items_saved_list: [],
       order_summary_count: "",
@@ -352,8 +350,7 @@ export default defineComponent({
             this.order_summary_count = response.data.total_items;
             this.order_summary_shipping_cost = response.data.total_shipping;
             this.order_summary_cost = response.data.total_price_before_shipping;
-            this.order_summary_shipping_and_price_cost =
-              response.data.total_price;
+            this.order_summary_shipping_and_price_cost = response.data.total_price;
           }
         })
         .catch((error) => {
@@ -366,8 +363,8 @@ export default defineComponent({
         url: "/checkout/currentquantity/" + item.id,
         headers: authHeader(),
       }).then((response) => {
-      
-        return 2;
+        
+        return response.data.amount;
       });
     },
     async selectedshipping(event, item) {
@@ -390,6 +387,7 @@ export default defineComponent({
       let payLoad = {
         new_amount: this.quantity,
       };
+
       await axios({
         method: "put",
         url: "/checkout/updateamount/" + item.id,

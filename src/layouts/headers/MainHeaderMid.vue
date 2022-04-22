@@ -10,6 +10,7 @@
     </div>
     <div class="sm:col-span-4 md:col-span-6 pt-5">
       <div class="grid grid-cols-12">
+     <form @submit="mainsearch()">
         <div class="sm:col-span-10 md:col-span-10">
           <input
             v-model="searchForm.searchInput"
@@ -28,7 +29,9 @@
             Search
           </button>
         </div>
+          </form>
       </div>
+    
     </div>
     <div
       class="sm:col-span-4 sm:col-start-8 md:col-span-3 md:col-start-11 pt-5"
@@ -63,7 +66,7 @@ export default defineComponent({
   components: { ShoppingBagIcon },
   data() {
     return {
-    shopping_cart_count: '',
+    shopping_cart_count: "",
       searchForm: {
         searchInput: "",
       },
@@ -74,6 +77,10 @@ export default defineComponent({
       this.get_shopping_cart_count()
   },
   methods: {
+     mainsearch() {
+        this.$router.push({ name: "search", params: {searchstring: this.searchForm.searchInput } });
+    },
+
     // Get How many items in shopping cart
     get_shopping_cart_count() {
       axios({

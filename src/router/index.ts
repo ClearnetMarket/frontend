@@ -106,11 +106,6 @@ const routes = [
     name: "checkout",
     component: () => import("../pages/checkout/Checkout.vue"),
   },
-  {
-    path: "/confirmpayment",
-    name: "confirmpayment",
-    component: () => import("../pages/checkout/ConfirmPayment.vue"),
-  },
   // Plain Stuff
   {
     path: "/auth/login",
@@ -305,6 +300,11 @@ const routes = [
     path: "/msg/view/:postid",
     name: "MsgView",
     component: () => import("../pages/messages/MsgView.vue"),
+  },
+  {
+    path: "/search/:searchstring",
+    name: "search",
+    component: () => import("../pages/search/SearchHome.vue"),
   },
   // Error Pages
   {

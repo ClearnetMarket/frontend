@@ -40,15 +40,19 @@
           <div class="col-span-3 font-bold text-">Shipping Options</div>
           <div class="col-span-6">
             <div class="grid grid-cols-1">
-            <div class="">{{ address_name }}</div>
+              <div class="">{{ address_name }}</div>
               <div class="">{{ address }}</div>
-              <div class="">{{apt}}</div>
-              <div class="">{{city}}</div>
-              <div class="">{{stateorprovence}}</div>
-              <div class="">{{zip}}</div>
+              <div class="">{{ apt }}</div>
+              <div class="flex">
+                <div class=" pr-1">{{ city }}</div>
+                <div class="px-1">{{ stateorprovence }}</div>
+                <div class="px-1">{{ zip }}</div>
+              </div>
             </div>
           </div>
-          <div class="col-span-2 text-center text-[12px] text-blue-600 hover:text-blue-400">
+          <div
+            class="col-span-2 text-center text-[12px] text-blue-600 hover:text-blue-400"
+          >
             <router-link :to="{ name: 'defaultaddress' }"> Change </router-link>
           </div>
         </div>
@@ -188,13 +192,12 @@
               </div>
             </div>
             <div class="mt-5 mb-5">
-            
-              <button @click="checkoutorder()"
+              <button
+                @click="checkoutorder()"
                 class="bg-yellow-500 rounded-md font-semibold hover:bg-yellow-600 py-3 text-sm text-white uppercase w-full"
               >
                 Place Order
               </button>
-            
             </div>
           </div>
         </div>
@@ -222,7 +225,7 @@ export default defineComponent({
     MainHeaderMid,
     MainHeaderBottom,
     MainHeaderVendor,
-    MainFooter
+    MainFooter,
   },
 
   data() {
@@ -253,8 +256,8 @@ export default defineComponent({
       stateorprovence: "",
       zip: "",
       message: "",
-      
-      interval:null
+
+      interval: null,
     };
   },
 
@@ -267,12 +270,13 @@ export default defineComponent({
     this.get_shopping_cart_order_summary();
     this.getcurrentshipping();
   },
-  created(){
-    this.interval = setInterval(() =>
-    {this.updateprices()},50000)
+  created() {
+    this.interval = setInterval(() => {
+      this.updateprices();
+    }, 50000);
   },
   methods: {
-        async checkoutorder() {
+    async checkoutorder() {
       await axios({
         method: "post",
         url: "/checkout/payment",
@@ -280,11 +284,10 @@ export default defineComponent({
         headers: authHeader(),
       }).then((response) => {
         if ((response.status = 200)) {
-        
         }
       });
     },
-      async updateprices() {
+    async updateprices() {
       await axios({
         method: "get",
         url: "/checkout/update/price",
@@ -292,7 +295,6 @@ export default defineComponent({
         headers: authHeader(),
       }).then((response) => {
         if ((response.status = 200)) {
-        
         }
       });
     },

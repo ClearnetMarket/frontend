@@ -418,7 +418,7 @@ export default defineComponent({
       shipping_to_country_three: string;
       shipping_to_country_four: string;
     }) {
-      let path = "/vendorcreateitem/create-item-main/" + this.item_id;
+      const path = "/vendorcreateitem/create-item-main/" + this.item_id;
       
       await axios({
         method: "post",
@@ -452,7 +452,7 @@ export default defineComponent({
         method: "get", //you can set what request you want to be
         url: path,
         withCredentials: true,
-                headers: authHeader(),
+        headers: authHeader(),
       })
         .then((response) => {
           this.CreateItemForm.basicInfo.item_title = response.data.item_title;

@@ -223,6 +223,7 @@ export default defineComponent({
         headers: authHeader(),
       }).then((response) => {
         if ((response.status = 200)) {
+  this.$router.push("/account");
         }
       });
     },
@@ -243,7 +244,6 @@ export default defineComponent({
           this.ChangeAddressForm.stateorprovence = response.data.state_or_provence;
           this.ChangeAddressForm.zip = response.data.zip;
           this.ChangeAddressForm.message = response.data.message;
-         
         }
       });
     },
@@ -269,6 +269,7 @@ export default defineComponent({
         zip: this.ChangeAddressForm.zip,
         message: this.ChangeAddressForm.message,
       };
+      console.log(payLoad)
       await this.addusershipping(payLoad);
     },
   },

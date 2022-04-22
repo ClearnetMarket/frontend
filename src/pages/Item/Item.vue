@@ -118,7 +118,7 @@ export default defineComponent({
 
   data() {
     return {
-        shoppingcartcount: 0,
+      shoppingcartcount: 0,
       loaded_feedback: false,
       title: "",
       item_id: "",
@@ -181,7 +181,6 @@ export default defineComponent({
         .then((response) => {
           if ((response.status = 200)) {
             this.item = response.data;
-      
             this.title = response.data.item_title;
             this.itemcount = response.data.item_count;
             this.digitalcurrencyone = response.data.digital_currency_1;
@@ -208,9 +207,12 @@ export default defineComponent({
             this.shippingpricethree = response.data.shipping_price_3;
             this.shippingdaythree = response.data.shipping_day_3;
             this.getitemcondition();
-            this.getitemprice();
             this.getvendorinfo();
             this.getvendorreviews();
+            this.getpricebch();
+            this.getpricebtc();
+            this.getpricexmr();
+            this.getitemprice();
           }
         })
         .catch((error) => {});
@@ -232,9 +234,45 @@ export default defineComponent({
     },
     getitemprice() {
       this.price = this.item.price;
-      this.currency = this.item.currency_symbol;
+      this.currency = this.item.currency;
     },
-
+    async getpricebtc() {
+      await axios({
+        method: "get",
+        url: "/price/btcprice/" + this.item.currency + "/" + this.item.price,
+        withCredentials: true,
+      })
+        .then((response) => {
+          if ((response.status = 200)) {
+            this.pricebtc = response.data.coin;
+          }
+        })
+    },
+        async getpricebch() {
+      await axios({
+        method: "get",
+        url: "/price/bchprice/" + this.item.currency + "/" + this.item.price,
+        withCredentials: true,
+      })
+        .then((response) => {
+          if ((response.status = 200)) {
+            this.pricebch = response.data.coin;
+          }
+        })
+    },
+        async getpricexmr() {
+      await axios({
+        method: "get",
+        url: "/price/xmrprice/" + this.item.currency + "/" + this.item.price,
+        withCredentials: true,
+      })
+        .then((response) => {
+          if ((response.status = 200)) {
+         
+            this.pricexmr = response.data.coin;
+          }
+        })
+    },
     async getvendorinfo() {
       await axios({
         method: "get",
@@ -248,8 +286,6 @@ export default defineComponent({
             this.vendorrating = response.data.vendorrating;
             this.vendortotalsales = response.data.vendortotalsales;
             this.loaded_feedback = true;
-         
-           
           }
         })
         .catch((error) => {});
@@ -272,6 +308,142 @@ export default defineComponent({
         })
         .catch((error) => {});
     },
+
+         returncurrencysymbol(currencydigit) {
+      if (currencydigit === 0) {
+        return "$";
+      } else if (currencydigit === 1) {
+        return "₱";
+      } else if (currencydigit === 2) {
+        return "CHF";
+      } else if (currencydigit === 3) {
+        return "SAD";
+      } else if (currencydigit === 4) {
+        return "B/.";
+      } else if (currencydigit === 5) {
+        return "₽";
+      } else if (currencydigit === 6) {
+        return "kr";
+      } else if (currencydigit === 7) {
+        return "kr";
+      } else if (currencydigit === 8) {
+        return "kr";
+      } else if (currencydigit === 9) {
+        return "₪";
+      } else if (currencydigit === 10) {
+        return "kr";
+      } else if (currencydigit === 11) {
+        return "฿";
+      } else if (currencydigit === 12) {
+        return "R$";
+      } else if (currencydigit === 13) {
+        return "₹";
+      } else if (currencydigit === 14) {
+        return "R";
+      } else if (currencydigit === 14) {
+        return "$";
+      } else if (currencydigit === 16) {
+        return "¥";
+      } else if (currencydigit === 17) {
+        return "Ft";
+      } else if (currencydigit === 18) {
+        return "$";
+      } else if (currencydigit === 19) {
+        return "¥";
+      } else if (currencydigit === 20) {
+        return "$";
+      } else if (currencydigit === 21) {
+        return "zł";
+      } else if (currencydigit === 22) {
+        return "£";
+      } else if (currencydigit === 23) {
+        return "₺";
+      } else if (currencydigit === 24) {
+        return "₩";
+      } else if (currencydigit === 25) {
+        return "Rp";
+      } else if (currencydigit === 26) {
+        return "$";
+      } else if (currencydigit === 27) {
+        return "RM";
+      } else if (currencydigit === 28) {
+        return "лв";
+      } else if (currencydigit === 29) {
+        return "€";
+      } else if (currencydigit === 31) {
+        return "kn";
+      } else if (currencydigit === 30) {
+        return "Kč";
+      }
+    },
+    returncurrency(currencydigit) {
+      if (currencydigit === 0) {
+        return "USD";
+      } else if (currencydigit === 1) {
+        return "PHP";
+      } else if (currencydigit === 2) {
+        return "CHF";
+      } else if (currencydigit === 3) {
+        return "SAD";
+      } else if (currencydigit === 4) {
+        return "SGD";
+      } else if (currencydigit === 5) {
+        return "RUB";
+      } else if (currencydigit === 6) {
+        return "DKK";
+      } else if (currencydigit === 7) {
+        return "RON";
+      } else if (currencydigit === 8) {
+        return "NOK";
+      } else if (currencydigit === 9) {
+        return "ILS";
+      } else if (currencydigit === 10) {
+        return "SEK";
+      } else if (currencydigit === 11) {
+        return "THB";
+      } else if (currencydigit === 12) {
+        return "BRL";
+      } else if (currencydigit === 13) {
+        return "INR";
+      } else if (currencydigit === 14) {
+        return "ZAR";
+      } else if (currencydigit === 14) {
+        return "HKD";
+      } else if (currencydigit === 16) {
+        return "JPY";
+      } else if (currencydigit === 17) {
+        return "HUF";
+      } else if (currencydigit === 18) {
+        return "MXN";
+      } else if (currencydigit === 19) {
+        return "CNY";
+      } else if (currencydigit === 20) {
+        return "AUD";
+      } else if (currencydigit === 21) {
+        return "PLN";
+      } else if (currencydigit === 22) {
+        return "GBP";
+      } else if (currencydigit === 23) {
+        return "TRY";
+      } else if (currencydigit === 24) {
+        return "KRW";
+      } else if (currencydigit === 25) {
+        return "IDR";
+      } else if (currencydigit === 26) {
+        return "NZD";
+      } else if (currencydigit === 27) {
+        return "MYR";
+      } else if (currencydigit === 28) {
+        return "BGN";
+      } else if (currencydigit === 29) {
+        return "EUR";
+      } else if (currencydigit === 31) {
+        return "HRK";
+      } else if (currencydigit === 30) {
+        return "CZK";
+      }
+    },
+    
   },
 });
 </script>
