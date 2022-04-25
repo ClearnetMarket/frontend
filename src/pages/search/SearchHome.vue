@@ -22,45 +22,14 @@
 
     <div class="grid grid-cols-12 gap-4">
       <div class="col-span-3">
-        <div class="text-[20px] font-bold">All Categories</div>
-        <router-link :to="{ name: 'categoryelectronics' }">
-          <div class="hover:underline">Electronics</div>
-        </router-link>
-        <router-link :to="{ name: 'categorysmartphones' }">
-          <div class="hover:underline">Smartphones and Tablets</div>
-        </router-link>
-        <router-link :to="{ name: 'categoryautomotive' }">
-          <div class="hover:underline">Automotive</div>
-        </router-link>
-        <router-link :to="{ name: 'categoryhobbies' }">
-          <div class="hover:underline">Hobbies and Collectibles</div>
-        </router-link>
-        <router-link :to="{ name: 'categoryjewelrygoldcoins' }">
-          <div class="hover:underline">Jewelry Gold and Coins</div>
-        </router-link>
-        <router-link :to="{ name: 'categoryapparel' }">
-          <div class="hover:underline">Apparel and Accessories</div>
-        </router-link>
-        <router-link :to="{ name: 'categoryhomeandgarden' }">
-          <div class="hover:underline">Home and Garden</div>
-        </router-link>
-        <router-link :to="{ name: 'categoryartsandcrafts' }">
-          <div class="hover:underline">Art and Crafts</div>
-        </router-link>
-        <router-link :to="{ name: 'categorycomputers' }">
-          <div class="hover:underline">Computers and Parts</div>
-        </router-link>
-        <router-link :to="{ name: 'categorybooksmovies' }">
-          <div class="hover:underline">Books and Movies</div>
-        </router-link>
-        <router-link :to="{ name: 'categorydigitalitems' }">
-          <div class="hover:underline">Digital Items</div>
-        </router-link>
+        <CategoryList />
       </div>
-      <div class="col-span-9">
-        <div class="grid grid-cols-3">
-         {{searchresults}}
-      </div>
+      <div class="col-span-9 ">
+        <div class="flex mb-2">{{searchresultscount}} results for {{searchstring}}</div>
+         <div v-for="(f, index) in searchresults">
+         <Searchitems :item='f' :selected-index='index' />
+         </div>
+   
     </div>
   </div>
   </div>
@@ -70,13 +39,16 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import axios from "axios";
+import { useRouter, useRoute } from "vue-router";
 import authHeader from "../../services/auth.header";
 import MainHeaderTop from "../../layouts/headers/MainHeaderTop.vue";
 import MainHeaderMid from "../../layouts/headers/MainHeaderMid.vue";
 import MainHeaderBottom from "../../layouts/headers/MainHeaderBottom.vue";
 import MainHeaderVendor from "../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../layouts/footers/FooterMain.vue";
-import { useRouter, useRoute } from "vue-router";
+import Searchitems from "../../components/search/search_results.vue";
+import CategoryList from "../../components/category_slides/categorylist.vue";
+
 export default defineComponent({
   name: "search",
   components: {
@@ -85,26 +57,27 @@ export default defineComponent({
     MainHeaderBottom,
     MainHeaderVendor,
     MainFooter,
+    Searchitems,
+    CategoryList
   },
 
   data() {
     return {
       searchresults:"",
+      searchresultscount:"",
       searchstring: "",
     };
-
   },
     watch: {
     $route() {
-
   
     this.main_search();
     },
   },
   mounted(){
- 
     this.searchstring = this.$route.params.searchstring;
     this.main_search();
+    this.main_search_count();
   },
   methods: {
      main_search() {
@@ -114,10 +87,19 @@ export default defineComponent({
         headers: authHeader(),
       }).then((response) => {
        this.searchresults = response.data
-       console.log(this.searchresults)
+
       });
     },
+     main_search_count() {
+      axios({
+        method: "get",
+        url: "/search/query/"  + this.searchstring + "/count",
+        headers: authHeader(),
+      }).then((response) => {
+       this.searchresultscount = response.data.count
 
+      });
+    },
   },
 });
 </script>

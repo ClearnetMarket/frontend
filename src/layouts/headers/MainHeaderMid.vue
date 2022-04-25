@@ -9,29 +9,27 @@
       <div class="row-span-1 text-[12px]">Privacy Sold Here</div>
     </div>
     <div class="sm:col-span-4 md:col-span-6 pt-5">
-      <div class="grid grid-cols-12">
-     <form @submit="mainsearch()">
-        <div class="sm:col-span-10 md:col-span-10">
-          <input
-            v-model="searchForm.searchInput"
-            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:shadow-outline focus:border"
-            id="search"
-            type="text"
-            autocomplete="off"
-            placeholder="Search for items..."
-          />
-        </div>
-        <div class="sm:col-span-2 col-span-2">
-          <button
-            class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            type="submit"
-          >
-            Search
-          </button>
-        </div>
-          </form>
-      </div>
-    
+      <form class="grid grid-cols-12" @submit.prevent="mainsearch()">
+       
+          <div class="col-span-10 ">
+            <input
+              v-model="searchForm.searchInput"
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:shadow-outline focus:border"
+              id="search"
+              type="text"
+              autocomplete="off"
+              placeholder="Search for items..."
+            />
+          </div>
+          <div class="col-span-2">
+            <button
+              class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              type="submit"
+            >
+              Search
+            </button>
+          </div>
+      </form>
     </div>
     <div
       class="sm:col-span-4 sm:col-start-8 md:col-span-3 md:col-start-11 pt-5"
@@ -47,7 +45,7 @@
             Shopping Cart
           </div>
           <div class="row-span-1 col-span-9 text-[14px] text-gray-700">
-            {{shopping_cart_count}} Items
+            {{ shopping_cart_count }} Items
           </div>
         </div>
       </router-link>
@@ -66,7 +64,7 @@ export default defineComponent({
   components: { ShoppingBagIcon },
   data() {
     return {
-    shopping_cart_count: "",
+      shopping_cart_count: "",
       searchForm: {
         searchInput: "",
       },
@@ -74,11 +72,15 @@ export default defineComponent({
   },
 
   mounted() {
-      this.get_shopping_cart_count()
+    this.get_shopping_cart_count();
   },
   methods: {
-     mainsearch() {
-        this.$router.push({ name: "search", params: {searchstring: this.searchForm.searchInput } });
+    mainsearch() {
+      console.log("here")
+      this.$router.push({
+        name: "search",
+        params: { searchstring: this.searchForm.searchInput },
+      });
     },
 
     // Get How many items in shopping cart
@@ -88,7 +90,7 @@ export default defineComponent({
         url: "/info/user-cart-count",
         headers: authHeader(),
       }).then((response) => {
-        this.shopping_cart_count = response.data.status
+        this.shopping_cart_count = response.data.status;
       });
     },
   },

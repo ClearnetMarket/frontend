@@ -62,10 +62,8 @@
                     </div>
                     <div v-if="order.overall_status == 3">Shipped</div>
                     <div v-if="order.overall_status == 4">Delivered</div>
-                    <div v-if="order.overall_status == 5">Finalized Early</div>
-                    <div v-if="order.overall_status == 6">
-                      Request to Cancel
-                    </div>
+                    <div v-if="order.overall_status == 5">Finalized Order</div>
+                    <div v-if="order.overall_status == 6">Requested Cancel</div>
                     <div v-if="order.overall_status == 7">Cancelled</div>
                     <div v-if="order.overall_status == 8">Disputed</div>
                   </div>
@@ -110,43 +108,73 @@
                 </div>
               </div>
               <div class="col-span-3">
-                <div class="my-2">
-                  <router-link
-                    :to="{
-                      name: 'vendorordersview',
-                      params: { uuid: order.uuid },
-                    }"
-                  >
+                <div
+                  v-if="
+                    order.overall_status == 3 ||
+                    order.overall_status == 2 ||
+                    order.overall_status == 4 ||
+                    order.overall_status == 8
+                  "
+                >
+                  <div class="my-2">
+                    <router-link
+                      :to="{
+                        name: 'vendorordersview',
+                        params: { uuid: order.uuid },
+                      }"
+                    >
+                      <button
+                        class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
+                        type="button"
+                      >
+                        Tracking Info
+                      </button>
+                    </router-link>
+                  </div>
+                </div>
+
+                <div
+                  v-if="order.overall_status == 3 || order.overall_status == 2"
+                >
+                  <div class="my-2">
                     <button
                       class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
                       type="button"
+                      @click="finalize(order.uuid)"
                     >
-                      Tracking Info
+                      Finalize Order
                     </button>
-                  </router-link>
+                  </div>
                 </div>
-                <div class="my-2">
-                  <button
-                    class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
-                    type="button"
-                  >
-                    Finalize Early
-                  </button>
-                </div>
-                <div class="my-2">
-                  <router-link
-                    :to="{
-                      name: 'vendorordersview',
-                      params: { uuid: order.uuid },
-                    }"
-                  >
+                <div
+                  v-if="order.overall_status == 3 || order.overall_status == 2"
+                >
+                  <div class="my-2">
                     <button
                       class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
                       type="button"
+                      @click="disputeorder(order.uuid)"
                     >
-                      Leave A Review
+                      Dispute Order
                     </button>
-                  </router-link>
+                  </div>
+                </div>
+                <div v-if="order.overall_status == 4">
+                  <div class="my-2">
+                    <router-link
+                      :to="{
+                        name: 'vendorordersview',
+                        params: { uuid: order.uuid },
+                      }"
+                    >
+                      <button
+                        class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
+                        type="button"
+                      >
+                        Leave A Review
+                      </button>
+                    </router-link>
+                  </div>
                 </div>
               </div>
             </div>
@@ -191,6 +219,30 @@ export default defineComponent({
 
   methods: {
     async getuserorders() {
+      await axios({
+        method: "get",
+        url: "/orders",
+        withCredentials: true,
+        headers: authHeader(),
+      }).then((response) => {
+        if (response.status == 200) {
+          this.orders = response.data;
+        }
+      });
+    },
+    async finalize(uuid) {
+      await axios({
+        method: "get",
+        url: "/orders/mark/delivered/" + uuid,
+        withCredentials: true,
+        headers: authHeader(),
+      }).then((response) => {
+        if (response.status == 200) {
+          this.orders = response.data;
+        }
+      });
+    },
+    async disputeorder(uuid) {
       await axios({
         method: "get",
         url: "/orders",

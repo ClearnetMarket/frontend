@@ -114,10 +114,10 @@
                       :checked="item.selected_digital_currency == 1"
                     />
 
-                    <label class="px-5" for="bitcoin">Bitcoin</label><br />
+                    <label class="px-5" for="btc">Bitcoin</label><br />
                   </div>
 
-                  <div v-if="(item.digital_currency_2 = true)">
+                  <div v-if="(item.digital_currency_2 == true)">
                     <input
                       v-on:change="checkoutpaymenttype($event, item)"
                       v-model="item.selected_currency"
@@ -128,10 +128,10 @@
                       :checked="item.selected_digital_currency == 2"
                     />
 
-                    <label class="px-5" for="css">Bitcoin Cash</label><br />
+                    <label class="px-5" for="bch">Bitcoin Cash</label><br />
                   </div>
 
-                  <div v-if="(item.digital_currency_3 = true)">
+                  <div v-if="(item.digital_currency_3 == true)">
                     <input
                       v-on:change="checkoutpaymenttype($event, item)"
                       v-model="item.selected_currency"
@@ -141,7 +141,7 @@
                       value="3"
                       :checked="item.selected_digital_currency == 3"
                     />
-                    <label class="px-5" for="javascript">Monero</label>
+                    <label class="px-5" for="xmr">Monero</label>
                   </div>
                 </div>
               </div>
@@ -256,7 +256,6 @@ export default defineComponent({
       stateorprovence: "",
       zip: "",
       message: "",
-
       interval: null,
     };
   },
@@ -284,6 +283,9 @@ export default defineComponent({
         headers: authHeader(),
       }).then((response) => {
         if ((response.status = 200)) {
+   
+          
+
         }
       });
     },
@@ -320,10 +322,11 @@ export default defineComponent({
 
     async checkoutpaymenttype(event, item) {
       this.selectedpayment = event.target.value;
+   
       let payLoad = {
         new_currency: this.selectedpayment,
       };
-
+     
       await axios({
         method: "post",
         url: "/checkout/changepaymentoption/" + item.id,
@@ -342,6 +345,7 @@ export default defineComponent({
       }).then((response) => {
         this.cart_status = response.status;
         if (this.cart_status == 200) {
+    
           this.btcsumofitem = response.data.btc_sum_of_item;
           this.btcprice = response.data.btc_price;
           this.btcshippingprice = response.data.btc_shipping_price;

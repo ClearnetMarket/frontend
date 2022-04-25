@@ -31,7 +31,7 @@
             <button
               class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline"
             >
-              Account
+              {{user.user_name}}
             </button>
           </router-link>
           <router-link :to="{ name: 'userorders' }" class="px-3">
