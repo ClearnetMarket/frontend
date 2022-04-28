@@ -65,7 +65,7 @@
                     <div v-if="order.overall_status == 5">Finalized Order</div>
                     <div v-if="order.overall_status == 6">Requested Cancel</div>
                     <div v-if="order.overall_status == 7">Cancelled</div>
-                    <div v-if="order.overall_status == 8">Disputed</div>
+                    <div class="text-red-600" v-if="order.overall_status == 8">Disputed</div>
                   </div>
                   <div class="col-span-12 text-[14px]">
                     <div class="grid grid-cols-12 pt-5">
@@ -145,20 +145,17 @@
                       Finalize Order
                     </button>
                   </div>
-                </div>
-                <div
-                  v-if="order.overall_status == 3 || order.overall_status == 2"
-                >
                   <div class="my-2">
                     <button
-                      class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
-                      type="button"
-                      @click="disputeorder(order.uuid)"
+                        class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
+                        type="button"
+                        @click="disputeorder(order.uuid)"
                     >
                       Dispute Order
                     </button>
                   </div>
                 </div>
+
                 <div v-if="order.overall_status == 4">
                   <div class="my-2">
                     <router-link
@@ -175,6 +172,21 @@
                       </button>
                     </router-link>
                   </div>
+                </div>
+                <div v-if="order.overall_status == 8">
+                  <router-link
+                      :to="{
+                        name: 'Dispute',
+                        params: { uuid: order.uuid },
+                      }"
+                  >
+                    <button
+                        class="bg-red-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
+                        type="button"
+                    >
+                      View Dispute
+                    </button>
+                  </router-link>
                 </div>
               </div>
             </div>
@@ -245,7 +257,7 @@ export default defineComponent({
     async disputeorder(uuid) {
       await axios({
         method: "get",
-        url: "/orders",
+        url: "/orders/mark/disputed/" + uuid,
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {

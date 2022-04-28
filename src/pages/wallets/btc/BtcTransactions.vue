@@ -276,6 +276,7 @@ export default defineComponent({
           this.$router.push("/login");
         });
     },
+
     async btctransactions() {
       await axios({
         method: "get",
@@ -291,8 +292,8 @@ export default defineComponent({
       });
     },
     relativeDate(value) {
-      var d = value;
-      var e = new Date(d).valueOf();
+      let d = value;
+      let e = new Date(d).valueOf();
       return formatDistance(e, new Date());
     },
   },
@@ -300,26 +301,5 @@ export default defineComponent({
 </script>
 
 <style type="ts" scoped>
-.widthstyle {
-  max-width: 900px;
-  margin: 0 auto;
-}
-.bordered {
-  border-style: solid;
-  border-width: 1px;
-  border-color: #f0f2f2;
-}
 
-. {
-  border-radius: 5px;
-}
-.greyhover:hover {
-  background-color: #eeeeee;
-}
-.wordcolor {
-  color: #6b6565;
-}
-.rcorners1 {
-  border-radius: 5px;
-}
 </style>

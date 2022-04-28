@@ -302,6 +302,12 @@ const routes = [
     component: () => import("../pages/messages/MsgView.vue"),
   },
   {
+    path: "/dispute/view/:uuid",
+    name: "Dispute",
+    component: () => import("../pages/moderator/Dispute.vue"),
+  },
+
+  {
     path: "/search/:searchstring",
     name: "search",
     component: () => import("../pages/search/SearchHome.vue"),

@@ -145,7 +145,6 @@ export default defineComponent({
       imagethreeserver: "",
       imagefourserver: "",
       description: "",
-      origincountry: "",
       destinationcountryone: "",
       destinationcountrytwo: "",
       destinationcountrythree: "",
