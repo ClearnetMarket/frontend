@@ -306,7 +306,16 @@ const routes = [
     name: "Dispute",
     component: () => import("../pages/moderator/Dispute.vue"),
   },
-
+  {
+    path: "/mod",
+    name: "ModHome",
+    component: () => import("../pages/moderator/Home.vue"),
+  },
+  {
+    path: "/mod/dispute/:uuid",
+    name: "ModDispute",
+    component: () => import("../pages/moderator/ModDispute.vue"),
+  },
   {
     path: "/search/:searchstring",
     name: "search",

@@ -65,19 +65,22 @@
         </div>
         <div class="rounded-md border border-gray-300 p-5">
           <div class="grid grid-cols-12">
-            <div class="col-span-12">
-              Please Write as detailed as possible the circumstances of the
-              order.
-              <div class="pl-5">
-                <ul style="list-style-type: square">
-                  <li>
-                    Include tracking # and other official shipping documents
-                  </li>
-                  <li>Describe the nature of why the dispute happened</li>
-                  <li>
-                    Please be thourough with any issue you think has arisen.
-                  </li>
-                </ul>
+            <div class="col-span-6">
+              <div class="">
+                Customer Ratings ({{ order.customer_user_name }})
+              </div>
+              <div v-for="customer in customerratings">
+                <div class="">{{ customer.customer_rating }}</div>
+                <div class="">{{ customer.review }}</div>
+              </div>
+            </div>
+             <div class="col-span-6">
+              <div class="">
+                Vendor Ratings ({{ order.vendor_user_name }})
+              </div>
+              <div v-for="vendor in vendorratings">
+                <div class="">{{ vendor.vendor_rating }}</div>
+                <div class="">{{ vendor.review }}</div>
               </div>
             </div>
             <div class="col-span-12">
@@ -146,7 +149,7 @@ import MainFooter from "../../layouts/footers/FooterMain.vue";
 import { useRoute } from "vue-router";
 
 export default defineComponent({
-  name: "Dispute",
+  name: "ModDispute",
 
   components: {
     MainHeaderTop,
@@ -160,6 +163,8 @@ export default defineComponent({
     return {
       order_id: "",
       order: "",
+      customerratings: [],
+      vendorratings: [],
       SendMsgForm: {
         msginfo: "",
       },
@@ -171,6 +176,8 @@ export default defineComponent({
     const order_id = order_id_route.params.uuid;
     this.order_id = order_id;
     this.getuserorder();
+    this.getcustomerfeedback();
+    this.getvendorfeedback();
   },
 
   methods: {
@@ -183,12 +190,101 @@ export default defineComponent({
     getuserorder: async function () {
       await axios({
         method: "get",
-        url: `/orders/${this.order_id}`,
+        url: `/mod/orderinfo/${this.order_id}`,
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
         if (response.status == 200) {
           this.order = response.data;
+        }
+      });
+    },
+    // gets the customer feedback
+    getcustomerfeedback: async function () {
+      await axios({
+        method: "get",
+        url: `/mod/customer/ratings/${this.order.customer_uuid}`,
+        withCredentials: true,
+        headers: authHeader(),
+      }).then((response) => {
+        if (response.status == 200) {
+          this.customerratings = response.data;
+        }
+      });
+    },
+    // gets the vendor feedback
+    getvendorfeedback: async function () {
+      await axios({
+        method: "get",
+        url: `/mod/vendor/ratings/${this.order.vendor_uuid}`,
+        withCredentials: true,
+        headers: authHeader(),
+      }).then((response) => {
+        if (response.status == 200) {
+          this.customerratings = response.data;
+        }
+      });
+    },
+    // Finishes an order Splits percentage to various users
+    async markdisputefinished(payLoad: {
+      percenttovendor: string;
+      percenttocustomer: string;
+    }) {
+      await axios({
+        method: "get",
+        url: `/mod/dispute/settle/${this.order_id}`,
+        withCredentials: true,
+        headers: authHeader(),
+        data: payLoad,
+      }).then((response) => {
+        if (response.status == 200) {
+        }
+      });
+    },
+    markdisputePayload() {
+      const payLoad = {
+        percenttovendor: this.loginForm.username,
+        percenttocustomer: this.loginForm.password,
+      };
+      this.markdisputefinished(payLoad);
+    },
+
+    //  Brings an order to open status
+    async markdisputecancelledstillopen() {
+      await axios({
+        method: "get",
+        url: `/mod/dispute/canceldispute/open/${this.order_id}`,
+        withCredentials: true,
+        headers: authHeader(),
+        data: payLoad,
+      }).then((response) => {
+        if (response.status == 200) {
+        }
+      });
+    },
+    //  Brings an order to closed status
+    async markdisputecancelledstillclosed() {
+      await axios({
+        method: "get",
+        url: `/mod/dispute/canceldispute/closed/${this.order_id}`,
+        withCredentials: true,
+        headers: authHeader(),
+        data: payLoad,
+      }).then((response) => {
+        if (response.status == 200) {
+        }
+      });
+    },
+    //  Extends the time on an order
+    async extenddisputetime() {
+      await axios({
+        method: "get",
+        url: `/mod/dispute/extend/${this.order_id}`,
+        withCredentials: true,
+        headers: authHeader(),
+        data: payLoad,
+      }).then((response) => {
+        if (response.status == 200) {
         }
       });
     },
@@ -205,9 +301,8 @@ export default defineComponent({
         })
         .catch((error) => {});
     },
-        // comments on the post
-    async sendMessageComment(payLoad: { textbody: string})
-     {
+    // comments on the post
+    async sendMessageComment(payLoad: { textbody: string }) {
       await axios({
         method: "post",
         url: "/msg/create/comment" + this.postid,
@@ -217,7 +312,7 @@ export default defineComponent({
       })
         .then((response) => {
           if ((response.status = 200)) {
-           this.getmainpostcomments();
+            this.getmainpostcomments();
           }
         })
         .catch((error) => {

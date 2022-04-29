@@ -366,6 +366,7 @@ export default defineComponent({
       };
       this.sendcomment(payLoad);
     },
+    
     relativeDate(value) {
       var d = value;
       var e = new Date(d).valueOf();
