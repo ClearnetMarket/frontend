@@ -20,7 +20,7 @@
         </nav>
       </div>
     </div>
-    <div class="grid grid-cols-12">
+    <div class="grid grid-cols-12" v-if="loaded">
       <div class="col-span-12 mt-5">
         <div class="grid grid-cols-12 rounded-md border border-gray-300 mb-5">
           <div class="col-span-12 bg-gray-200 px-5 py-5">
@@ -63,23 +63,93 @@
             </div>
           </div>
         </div>
-        <div class="rounded-md border border-gray-300 p-5">
+        <div class="rounded-md border border-gray-300 bg-gray-200 p-5 mb-5">
+          <div class="flex gap-4 text-[14px] mb-2">
+            <button
+              class="bg-gray-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              type="submit"
+              @click.prevent="extenddisputetime()"
+            >
+              Extend Time before Auto Finalize
+            </button>
+            <button
+              class="bg-purple-900 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              type="submit"
+              @click.prevent="markdisputecancelledstillclosed()"
+            >
+              Cancel-Close order
+            </button>
+
+            <button
+              class="bg-pink-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              type="submit"
+              @click.prevent="markdisputecancelledstillopen()"
+            >
+              Cancel-Open Order
+            </button>
+          </div>
+          <div class="flex gap-4 text-[14px]">
+            <button
+              class="bg-green-600 hover:bg-zinc-400 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              type="submit"
+              @click.prevent="sendsplit100vendor()"
+            >
+              100-V 0-C
+            </button>
+            <button
+              class="bg-green-600 hover:bg-zinc-400 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              type="submit"
+              @click.prevent="sendsplit75vendor()"
+            >
+              75-V 25-C
+            </button>
+            <button
+              class="bg-green-600 hover:bg-zinc-400 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              type="submit"
+              @click.prevent="sendsplit50vendor()"
+            >
+              50/50
+            </button>
+            <button
+              class="bg-green-600 hover:bg-zinc-400 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              type="submit"
+              @click.prevent="sendsplit25vendor()"
+            >
+              25-V 75-C
+            </button>
+            <button
+              class="bg-green-600 hover:bg-zinc-400 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              type="submit"
+              @click.prevent="sendsplit0vendor()"
+            >
+              0-V 100-C
+            </button>
+          </div>
+        </div>
+
+        <div class="rounded-md border border-gray-300 bg-gray-200 p-5">
           <div class="grid grid-cols-12">
             <div class="col-span-6">
-              <div class="">
+              <div class="mb-2">
                 Customer Ratings ({{ order.customer_user_name }})
               </div>
-              <div v-for="customer in customerratings">
-                <div class="">{{ customer.customer_rating }}</div>
-                <div class="">{{ customer.review }}</div>
+              <div v-for="customer in customerratings" class="mb-1">
+                <div class="border-t-1">
+                  <StarRatingCustomer
+                    v-bind:rating="customer.customer_rating"
+                  />
+
+                  <div class="">{{ customer.review }}</div>
+                </div>
               </div>
             </div>
-             <div class="col-span-6">
-              <div class="">
+            <div class="col-span-6">
+              <div class="mb-2">
                 Vendor Ratings ({{ order.vendor_user_name }})
               </div>
-              <div v-for="vendor in vendorratings">
-                <div class="">{{ vendor.vendor_rating }}</div>
+              <div v-for="vendor in vendorratings" class="mb-1">
+                <StarRating v-bind:rating="vendor.vendor_rating" />
+
                 <div class="">{{ vendor.review }}</div>
               </div>
             </div>
@@ -107,26 +177,44 @@
               </form>
             </div>
             <div class="col-span-12">
-              <div v-for="comment in mainpostcomments">
-                <div class="grid grid-cols-12 p-5">
-                  <div class="col-span-12 text-gray-600">
-                    <router-link
-                      class="hover:text-blue-500 hover:underline"
-                      :to="{
-                        name: 'userprofile',
-                        params: { uuid: comment.user_one_uuid },
-                      }"
-                    >
-                      {{ comment.user_one }}</router-link
-                    >
-                    - {{ relativeDate(comment.timestamp) }} ago
+              <div v-if="order.overall_status == 10">
+                <div class="font-bold">Add a post dispute message</div>
+                <form
+                  class="pb-8 mb-4 w-full"
+                  @submit.prevent="sendMessagePayloadDispute"
+                >
+                  <div class="">
+                    <textarea
+                      v-model="SendDisputeForm.disputemsginfo"
+                      id="item_description"
+                      placeholder="Leave a message saying split percent and overall reason for split percent .."
+                      class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-3"
+                    ></textarea>
                   </div>
-                  <div
-                    class="col-span-12 text-gray-800 bg-gray-200 p-3 border rounded-md"
-                  >
-                    {{ comment.body }}
+                  <div class="flex justify-end">
+                    <button
+                      class="bg-gray-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                      type="submit"
+                    >
+                      Send
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="col-span-12">
+              <div v-for="comment in mainpostcomments">
+                <div v-if="comment.mod_uuid != null">
+                  <div class="grid grid-cols-12 p-5 rounded bg-white mb-2">
+                    <div class="col-span-12 text-orange-500">
+                      Freeport Mod - {{ relativeDate(comment.timestamp) }} ago
+                    </div>
+                    <div class="col-span-12 text-gray-800 p-1">
+                      {{ comment.body }}
+                    </div>
                   </div>
                 </div>
+                <div v-if="comment.mod_uuid == null"></div>
               </div>
             </div>
           </div>
@@ -147,6 +235,9 @@ import MainHeaderBottom from "../../layouts/headers/MainHeaderBottom.vue";
 import MainHeaderVendor from "../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../layouts/footers/FooterMain.vue";
 import { useRoute } from "vue-router";
+import { formatDistance } from "date-fns";
+import StarRatingCustomer from "../../components/star_rating/StarCustomer.vue";
+import StarRating from "../../components/star_rating/Star.vue";
 
 export default defineComponent({
   name: "ModDispute",
@@ -157,27 +248,33 @@ export default defineComponent({
     MainHeaderBottom,
     MainHeaderVendor,
     MainFooter,
+    StarRating,
+    StarRatingCustomer,
   },
 
   data() {
     return {
       order_id: "",
+      loaded: false,
       order: "",
+      postid: "",
       customerratings: [],
       vendorratings: [],
       SendMsgForm: {
         msginfo: "",
       },
+      SendDisputeForm: {
+        disputemsginfo: "",
+      },
     };
   },
 
   mounted() {
+    this.userstatus();
     const order_id_route = useRoute();
     const order_id = order_id_route.params.uuid;
     this.order_id = order_id;
     this.getuserorder();
-    this.getcustomerfeedback();
-    this.getvendorfeedback();
   },
 
   methods: {
@@ -186,8 +283,24 @@ export default defineComponent({
       var e = new Date(d).valueOf();
       return formatDistance(e, new Date());
     },
+    async userstatus() {
+      await axios({
+        method: "get",
+        url: "/auth/whoami",
+        withCredentials: true,
+        headers: authHeader(),
+      }).then((response) => {
+        if (response.status == 200) {
+               console.log(response.data.user);
+          if (response.data.user.user_admin < 2) {
+       
+            this.$router.push({ name: "home" });
+          }
+        }
+      });
+    },
     // get the user order
-    getuserorder: async function () {
+    async getuserorder() {
       await axios({
         method: "get",
         url: `/mod/orderinfo/${this.order_id}`,
@@ -196,8 +309,26 @@ export default defineComponent({
       }).then((response) => {
         if (response.status == 200) {
           this.order = response.data;
+          this.postid = response.data.dispute_post_id;
+          this.getmainpostcomments();
+          this.getcustomerfeedback();
+          this.getvendorfeedback();
+          this.loaded = true;
         }
       });
+    },
+    // get the post comments
+    getmainpostcomments() {
+      axios({
+        method: "get",
+        url: "/msg/main/comment/orderuuid/" + this.order.uuid,
+        withCredentials: true,
+        headers: authHeader(),
+      })
+        .then((response) => {
+          this.mainpostcomments = response.data;
+        })
+        .catch((error) => {});
     },
     // gets the customer feedback
     getcustomerfeedback: async function () {
@@ -288,31 +419,195 @@ export default defineComponent({
         }
       });
     },
-    // get the post comments
-    async getmainpostcomments() {
-      await axios({
-        method: "get",
-        url: "/msg/main/comment/" + this.postid,
-        withCredentials: true,
-        headers: authHeader(),
-      })
-        .then((response) => {
-          this.mainpostcomments = response.data;
-        })
-        .catch((error) => {});
-    },
-    // comments on the post
-    async sendMessageComment(payLoad: { textbody: string }) {
+
+    // 100 to vendor
+    async split100vendor(payLoad: {
+      percenttovendor: string;
+      percenttocustomer: string;
+    }) {
       await axios({
         method: "post",
-        url: "/msg/create/comment" + this.postid,
+        url: `/mod/dispute/settle/${this.order_id}`,
         data: payLoad,
         withCredentials: true,
         headers: authHeader(),
       })
         .then((response) => {
           if ((response.status = 200)) {
-            this.getmainpostcomments();
+            this.getuserorder();
+          }
+        })
+        .catch((error) => {
+          if (error.response) {
+          }
+        });
+    },
+    sendsplit100vendor() {
+      const payLoad = {
+        percenttovendor: "100",
+        percenttocustomer: "0",
+      };
+      this.split100vendor(payLoad);
+    },
+
+    // 75 to vendor
+    async split75vendor(payLoad: {
+      percenttovendor: string;
+      percenttocustomer: string;
+    }) {
+      await axios({
+        method: "post",
+        url: `/mod/dispute/settle/${this.order_id}`,
+        data: payLoad,
+        withCredentials: true,
+        headers: authHeader(),
+      })
+        .then((response) => {
+          if ((response.status = 200)) {
+            this.getuserorder();
+          }
+        })
+        .catch((error) => {
+          if (error.response) {
+          }
+        });
+    },
+    sendsplit75vendor() {
+      const payLoad = {
+        percenttovendor: "75",
+        percenttocustomer: "25",
+      };
+      this.split75vendor(payLoad);
+    },
+
+    // 50 to vendor
+    async split50vendor(payLoad: {
+      percenttovendor: string;
+      percenttocustomer: string;
+    }) {
+      await axios({
+        method: "post",
+        url: `/mod/dispute/settle/${this.order_id}`,
+        data: payLoad,
+        withCredentials: true,
+        headers: authHeader(),
+      })
+        .then((response) => {
+          if ((response.status = 200)) {
+            this.getuserorder();
+          }
+        })
+        .catch((error) => {
+          if (error.response) {
+          }
+        });
+    },
+    sendsplit50vendor() {
+      const payLoad = {
+        percenttovendor: "50",
+        percenttocustomer: "50",
+      };
+      this.split50vendor(payLoad);
+    },
+
+    // 25 to vendor
+    async split25vendor(payLoad: {
+      percenttovendor: string;
+      percenttocustomer: string;
+    }) {
+      await axios({
+        method: "post",
+        url: `/mod/dispute/settle/${this.postid}`,
+        data: payLoad,
+        withCredentials: true,
+        headers: authHeader(),
+      })
+        .then((response) => {
+          if ((response.status = 200)) {
+            this.getuserorder();
+          }
+        })
+        .catch((error) => {
+          if (error.response) {
+          }
+        });
+    },
+    sendsplit25vendor() {
+      const payLoad = {
+        percenttovendor: "25",
+        percenttocustomer: "75",
+      };
+      this.split25vendor(payLoad);
+    },
+
+    // 0 to vendor
+    async split0vendor(payLoad: {
+      percenttovendor: string;
+      percenttocustomer: string;
+    }) {
+      await axios({
+        method: "post",
+        url: `/mod/dispute/settle/${this.postid}`,
+        data: payLoad,
+        withCredentials: true,
+        headers: authHeader(),
+      })
+        .then((response) => {
+          if ((response.status = 200)) {
+            this.getuserorder();
+          }
+        })
+        .catch((error) => {
+          if (error.response) {
+          }
+        });
+    },
+    sendsplit0vendor() {
+      const payLoad = {
+        percenttovendor: "0",
+        percenttocustomer: "100",
+      };
+      this.split0vendor(payLoad);
+    },
+    // comments on the post
+    async sendMessagePostDispute(payLoad: { textbody: string }) {
+      await axios({
+        method: "post",
+        url: "/mod/postdisputemsg/" + this.order.uuid,
+        data: payLoad,
+        withCredentials: true,
+        headers: authHeader(),
+      })
+        .then((response) => {
+          if ((response.status = 200)) {
+            this.getuserorder();
+            this.SendDisputeForm.disputemsginfo = "";
+          }
+        })
+        .catch((error) => {
+          if (error.response) {
+          }
+        });
+    },
+    sendMessagePayloadDispute() {
+      const payLoad = {
+        textbody: this.SendDisputeForm.disputemsginfo,
+      };
+      this.sendMessagePostDispute(payLoad);
+    },
+    // comments on the post
+    async sendMessageComment(payLoad: { textbody: string }) {
+      await axios({
+        method: "post",
+        url: "/msg/create/comment/" + this.postid,
+        data: payLoad,
+        withCredentials: true,
+        headers: authHeader(),
+      })
+        .then((response) => {
+          if ((response.status = 200)) {
+            this.getuserorder();
+            this.SendMsgForm.msginfo = "";
           }
         })
         .catch((error) => {

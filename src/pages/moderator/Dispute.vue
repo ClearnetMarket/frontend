@@ -29,7 +29,7 @@
                 class="col-span-12 text-orange-500 text-[18px] mb-5"
                 v-if="order.moderator_uuid"
               >
-                Moderator: {{ order.moderator_uuid }}
+                Moderator id#: {{ order.moderator_uuid }}
               </div>
               <div class="col-span-12 text-orange-500 text-[18px] mb-5" v-else>
                 Moderator: Waiting on a moderator to take the case ...
@@ -81,6 +81,7 @@
               </div>
             </div>
             <div class="col-span-12">
+            <div class="" v-if="order.overall_status == 8">
               <form
                 class="rounded-md pt-6 pb-8 mb-4 w-full"
                 @submit.prevent="sendMessagePayload"
@@ -102,26 +103,33 @@
                   </button>
                 </div>
               </form>
+              </div>
+              <div class="" v-else>
+              <div class=""> Dispute has been closed by the moderator</div>
+             
+             
+              </div>
             </div>
             <div class="col-span-12">
-              <div v-for="comment in mainpostcomments">
-                <div class="grid grid-cols-12 p-5">
-                  <div class="col-span-12 text-gray-600">
-                    <router-link
-                      class="hover:text-blue-500 hover:underline"
-                      :to="{
-                        name: 'userprofile',
-                        params: { uuid: comment.user_one_uuid },
-                      }"
-                    >
-                      {{ comment.user_one }}</router-link
-                    >
-                    - {{ relativeDate(comment.timestamp) }} ago
+               <div v-for="comment in mainpostcomments">
+                <div v-if="comment.mod_uuid != null">
+                  <div class="grid grid-cols-12 p-2 rounded bg-white mb-2">
+                    <div class="col-span-12 text-orange-500">
+                      Freeport Mod - {{ relativeDate(comment.timestamp) }} ago
+                    </div>
+                    <div class="col-span-12 text-gray-800 p-1">
+                      {{ comment.body }}
+                    </div>
                   </div>
-                  <div
-                    class="col-span-12 text-gray-800 bg-gray-200 p-3 border rounded-md"
-                  >
-                    {{ comment.body }}
+                </div>
+                <div v-if="comment.mod_uuid == null">
+                  <div class="grid grid-cols-12 p-2 rounded bg-white mb-2">
+                    <div class="col-span-12 text-gray-500">
+                      {{comment.user_one}} - {{ relativeDate(comment.timestamp) }} ago
+                    </div>
+                    <div class="col-span-12 text-gray-800 p-1">
+                      {{ comment.body }}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -144,7 +152,7 @@ import MainHeaderBottom from "../../layouts/headers/MainHeaderBottom.vue";
 import MainHeaderVendor from "../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../layouts/footers/FooterMain.vue";
 import { useRoute } from "vue-router";
-
+import { formatDistance } from "date-fns";
 export default defineComponent({
   name: "Dispute",
 
@@ -158,8 +166,10 @@ export default defineComponent({
 
   data() {
     return {
+      mainpostcomments: [],
       order_id: "",
       order: "",
+      postid:"",
       SendMsgForm: {
         msginfo: "",
       },
@@ -189,6 +199,8 @@ export default defineComponent({
       }).then((response) => {
         if (response.status == 200) {
           this.order = response.data;
+          this.postid = this.order.dispute_post_id;
+          this.getmainpostcomments();
         }
       });
     },
@@ -202,6 +214,7 @@ export default defineComponent({
       })
         .then((response) => {
           this.mainpostcomments = response.data;
+          console.log(this.mainpostcomments)
         })
         .catch((error) => {});
     },
@@ -210,7 +223,7 @@ export default defineComponent({
      {
       await axios({
         method: "post",
-        url: "/msg/create/comment" + this.postid,
+        url: "/msg/create/comment/" + this.postid,
         data: payLoad,
         withCredentials: true,
         headers: authHeader(),

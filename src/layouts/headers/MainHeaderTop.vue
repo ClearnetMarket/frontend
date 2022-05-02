@@ -20,6 +20,7 @@
               </button>
             </router-link>
           </div>
+          <div v-if="user.user_admin >= 2">
             <router-link :to="{ name: 'ModHome' }" class="px-3">
             <button
               class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline"
@@ -27,6 +28,7 @@
               Moderator
             </button>
           </router-link>
+          </div>
           <router-link :to="{ name: 'MsgHome' }" class="px-3">
             <button
               class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline"

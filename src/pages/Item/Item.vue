@@ -212,6 +212,7 @@ export default defineComponent({
             this.getpricebtc();
             this.getpricexmr();
             this.getitemprice();
+            this.add_view();
           }
         })
         .catch((error) => {});
@@ -307,7 +308,18 @@ export default defineComponent({
         })
         .catch((error) => {});
     },
-
+ async add_view() {
+      await axios({
+        method: "get",
+        url: "/item/count/" + this.item.uuid,
+        withCredentials: true,
+        headers: authHeader(),
+      }).then((response) => {
+        if ((response.status = 200)) {
+      
+        }
+      });
+    },
          returncurrencysymbol(currencydigit) {
       if (currencydigit === 0) {
         return "$";

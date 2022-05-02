@@ -26,14 +26,12 @@
     <div class="grid grid-cols-1 bg-white rounded-md p-6">
       <div class="text-[24px]">Items for Sale</div>
       <div class="flex justify-end">
-       
-          <button
-            v-on:click="createanitem()"
-            class="py-2 px-4 shadow-md no-underline rounded-full text-white font-sans text-sm hover:text-white bg-green-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2"
-          >
-            Create Item
-          </button>
-   
+        <button
+          v-on:click="createanitem()"
+          class="py-2 px-4 shadow-md no-underline rounded-full text-white font-sans text-sm hover:text-white bg-green-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2"
+        >
+          Create Item
+        </button>
       </div>
       <div class="mt-10 grid grid-cols-12">
         <div v-for="(item, index) in items" class="col-span-12">
@@ -49,14 +47,22 @@
             <div class="col-span-8">
               <div class="grid grid-cols-12 grid-row-5">
                 <div class="col-span-12 text-center text-[18px] px-1">
-                  {{ item.item_title }}
+                  <router-link
+                    :to="{ name: 'item', params: { id: item.uuid } }"
+                  >
+                    <div
+                      class="text-blue-600 hover:text-blue-400 hover:underline"
+                    >
+                      {{ item.item_title }}
+                    </div>
+                  </router-link>
                 </div>
                 <div class="flex col-span-12 text-[14px] p-1">
                   Online Status:
-                  <div v-if="(item.online = 0)" class="text-green-500">
-                    ONLINE
+                  <div v-if="item.online == 0" class="text-red-500">
+                    offline
                   </div>
-                  <div v-else class="text-red-500">OFFLINE</div>
+                  <div v-else class="text-green-500">online</div>
                 </div>
                 <div class="col-span-12 text-[14px] p-1">
                   Total Sold: {{ item.total_sold }}
@@ -71,9 +77,28 @@
             </div>
             <div class="col-span-2">
               <div class="mb-2">
+                <div class="" v-if="item.online == 0">
+                  <button
+                    @click.prevent="putonline(item.uuid)"
+                    class="py-2 px-4 shadow-md no-underline rounded-full text-white font-sans text-sm hover:text-white bg-gray-700 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2"
+                  >
+                    Turn On
+                  </button>
+                </div>
+                <div v-else>
+                  <button
+                    @click.prevent="putoffline(item.uuid)"
+                    class="py-2 px-4 shadow-md no-underline rounded-full text-white font-sans text-sm hover:text-white bg-gray-700 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2"
+                  >
+                    Turn Off
+                  </button>
+                </div>
+              </div>
+
+              <div class="mb-2">
                 <button
                   v-on:click="gotoitem(item.uuid)"
-                  class="py-2 px-4 shadow-md no-underline rounded-full text-white font-sans text-sm hover:text-white bg-zinc-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2"
+                  class="py-2 px-4 shadow-md no-underline rounded-full text-white font-sans text-sm hover:text-white bg-gray-700 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2"
                 >
                   Edit
                 </button>
@@ -81,11 +106,12 @@
               <div class="mb-2">
                 <button
                   @click.prevent="cloneitem(item.uuid)"
-                  class="py-2 px-4 shadow-md no-underline rounded-full text-white font-sans text-sm hover:text-white bg-violet-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2"
+                  class="py-2 px-4 shadow-md no-underline rounded-full text-white font-sans text-sm hover:text-white bg-gray-700 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2"
                 >
                   Clone
                 </button>
               </div>
+
               <div class="mb-2">
                 <button
                   @click.prevent="deleteitem(item.uuid)"
@@ -153,7 +179,6 @@ export default defineComponent({
         headers: authHeader(),
       }).then((response) => {
         if (response.status == 200) {
-          console.log(response.data);
           if (response.data.user.user_admin == 0) {
             this.$router.push({ name: "home" });
           }
@@ -180,9 +205,11 @@ export default defineComponent({
         headers: authHeader(),
       }).then((response) => {
         if ((response.status = 200)) {
-          this.newitemid = response.data.item_id
-          this.$router.push({ name: "edititem", params: { id: this.newitemid } });
-
+          this.newitemid = response.data.item_id;
+          this.$router.push({
+            name: "edititem",
+            params: { id: this.newitemid },
+          });
         }
       });
     },
@@ -203,6 +230,31 @@ export default defineComponent({
       await axios({
         method: "delete",
         url: "/vendorcreate/delete-item/" + itemid,
+        withCredentials: true,
+        headers: authHeader(),
+      }).then((response) => {
+        if ((response.status = 200)) {
+          this.getvendoritems();
+        }
+      });
+    },
+    async putonline(itemid) {
+      console.log(itemid);
+      await axios({
+        method: "get",
+        url: "/vendororders/online/" + itemid,
+        withCredentials: true,
+        headers: authHeader(),
+      }).then((response) => {
+        if ((response.status = 200)) {
+          this.getvendoritems();
+        }
+      });
+    },
+    async putoffline(itemid) {
+      await axios({
+        method: "get",
+        url: "/vendororders/offline/" + itemid,
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {

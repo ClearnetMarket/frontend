@@ -25,12 +25,16 @@
       <div class="col-span-12 mt-5 text-[16px]">Disputes Need Mod Support</div>
       <div class="col-span-12 mt-5">
         <div v-for="dispute in needmodorders">
-          <div class="grid grid-cols-12 border border-1 p-2 rounded bg-gray-400">
-            <div class="col-span-12">{{ dispute.uuid }}</div>
-            <div class="col-span-6">{{ dispute.vendor_user_name }}</div>
-            <div class="col-span-6">{{ dispute.customer_user_name }}</div>
+          <div
+            class="grid grid-cols-12 border border-1 p-2 rounded bg-gray-400"
+          >
+            <div class="col-span-12">Order id: {{ dispute.uuid }}</div>
+            <div class="col-span-6">Vendor: {{ dispute.vendor_user_name }}</div>
+            <div class="col-span-6">
+              Customer: {{ dispute.customer_user_name }}
+            </div>
             <div class="col-span-12">
-              <div class="my-2">
+              <div class="my-2 flex">
                 <router-link
                   :to="{
                     name: 'ModDispute',
@@ -44,19 +48,15 @@
                     View Dispute
                   </button>
                 </router-link>
-                <router-link
-                  :to="{
-                    name: 'ModDispute',
-                    params: { uuid: dispute.uuid },
-                  }"
-                >
+                <div v-if="dispute.moderator_uuid == null">
                   <button
                     class="bg-yellow-400 hover:bg-yellow-600 text-white font-bold py-1 px-3 ml-5 mr-5 rounded focus:outline-none focus:shadow-outline"
                     type="button"
+                    @click="becomemod(dispute.uuid)"
                   >
                     Become Moderator
                   </button>
-                </router-link>
+                </div>
               </div>
             </div>
           </div>
@@ -64,7 +64,37 @@
       </div>
       <div class="col-span-12 mt-5 text-[16px]">Disputes being moderatored</div>
       <div class="col-span-12 mt-5">
-        <div v-for="dispute in hadmodorders"></div>
+        <div v-for="dispute in hadmodorders">
+          <div
+            class="grid grid-cols-12 border border-1 p-2 rounded bg-gray-400"
+          >
+            <div class="col-span-12">Order id: {{ dispute.uuid }}</div>
+            <div class="col-span-6">Vendor: {{ dispute.vendor_user_name }}</div>
+            <div class="col-span-6">
+              Customer: {{ dispute.customer_user_name }}
+            </div>
+            <div class="col-span-12">
+              Modded by: {{ dispute.moderator_uuid }}
+            </div>
+            <div class="col-span-12">
+              <div class="my-2 flex">
+                <router-link
+                  :to="{
+                    name: 'ModDispute',
+                    params: { uuid: dispute.uuid },
+                  }"
+                >
+                  <button
+                    class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 ml-5 mr-5 rounded focus:outline-none focus:shadow-outline"
+                    type="button"
+                  >
+                    View Dispute
+                  </button>
+                </router-link>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -101,18 +131,47 @@ export default defineComponent({
   },
 
   mounted() {
+    this.userstatus();
     this.getdisputesneedmod();
     this.getdisputeshasmod();
   },
 
   methods: {
+        async userstatus() {
+      await axios({
+        method: "get",
+        url: "/auth/whoami",
+        withCredentials: true,
+        headers: authHeader(),
+      }).then((response) => {
+        if (response.status == 200) {
+          if (response.data.user.user_admin < 2) {
+            this.$router.push({ name: "home" });
+          }
+        }
+      });
+    },
     relativeDate(value) {
       var d = value;
       var e = new Date(d).valueOf();
       return formatDistance(e, new Date());
     },
     // get the user order
-    getdisputesneedmod: async function () {
+    async becomemod(uuid) {
+      await axios({
+        method: "get",
+        url: "/mod/takeonmod/" + uuid,
+        withCredentials: true,
+        headers: authHeader(),
+      }).then((response) => {
+        if (response.status == 200) {
+          this.getdisputesneedmod();
+          this.getdisputeshasmod();
+        }
+      });
+    },
+    // get the user order
+    async getdisputesneedmod() {
       await axios({
         method: "get",
         url: "/mod/disputes/available",
@@ -124,7 +183,7 @@ export default defineComponent({
         }
       });
     },
-    getdisputeshasmod: async function () {
+    async getdisputeshasmod() {
       await axios({
         method: "get",
         url: "/mod/disputes/modded",
