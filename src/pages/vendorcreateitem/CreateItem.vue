@@ -448,6 +448,7 @@ export default defineComponent({
     return {
       UploadImages: "",
       item_id: "",
+ 
       marketitem: Object,
       authtoken: "",
       image_main: "",
@@ -512,6 +513,7 @@ export default defineComponent({
     async CreateItem(payLoad: {
       item_id: string;
       title: string;
+      exact_address: string;
       item_condition: string;
       item_description: string;
       category_id_0: string;
@@ -626,6 +628,8 @@ export default defineComponent({
         })
         .catch((error) => {});
     },
+  
+
     async getCategoryList() {
       // Get Categories
       const path = "/vendorcreateitem/query/category";
@@ -659,6 +663,7 @@ export default defineComponent({
       const payLoad = {
         item_id: this.item_id,
         title: this.CreateItemForm.basicInfo.title,
+
         item_condition: this.CreateItemForm.basicInfo.item_condition,
         item_description: this.CreateItemForm.basicInfo.item_description,
         keywords: this.CreateItemForm.basicInfo.keywords,

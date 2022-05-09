@@ -5,8 +5,8 @@
       @click="$router.replace({ name: 'home' })"
       style="cursor: pointer"
     >
-      <div class="row-span-1 text-[20px]">Clearnet Market</div>
-      <div class="row-span-1 text-[12px]">Privacy Sold Here</div>
+      <div class="row-span-1 text-[22px] text-blue-600 font-semibold ">Freeport.cash</div>
+      <div class="row-span-1 text-[14px] font-semibold text-gray-700">Privacy Sold Here</div>
     </div>
     <div class="sm:col-span-4 md:col-span-6 pt-5">
       <form class="grid grid-cols-12" @submit.prevent="mainsearch()">

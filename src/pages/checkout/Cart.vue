@@ -5,7 +5,7 @@
   <div v-if="user">
     <MainHeaderVendor v-show="user.user_admin == 1" />
   </div>
-  <div class="max-w-7xl mx-auto mb-20 wrapper">
+  <div class="max-w-7xl mx-auto px-10 pb-36 wrapper">
     <div class="grid grid-cols-1 w-full gap-4">
       <div class="mb-10 mt-5">
         <nav class="rounded-md">
@@ -234,6 +234,7 @@
               </div>
               <router-link :to="{ name: 'checkout' }">
                 <button
+                v-if="order_summary_count > 0"
                   class="bg-yellow-500 font-semibold hover:bg-yellow-600 py-3 text-sm text-white uppercase w-full"
                 >
                   Checkout
@@ -281,9 +282,11 @@ export default defineComponent({
   mounted() {
     this.get_updated_prices_and_quantity();
     this.get_shopping_cart_items();
+    // this.set_amount_to_one();
     this.get_shopping_cart_items_saved_for_later();
     this.get_shopping_cart_order_summary();
   },
+
   methods: {
     // Get How many items in shopping cart
     async get_updated_prices_and_quantity() {
@@ -291,15 +294,26 @@ export default defineComponent({
         method: "get",
         url: "/checkout/update/price",
         headers: authHeader(),
-        
       })
         .then((response) => {
           if (response.status == 200) {
-          
           } 
         })
         .catch((error) => {});
     },
+        async set_amount_to_one() {
+      await axios({
+        method: "post",
+        url: "/checkout/setamount/one",
+        headers: authHeader(),
+      })
+        .then((response) => {
+          if (response.status == 200) {
+          } 
+        })
+        .catch((error) => {});
+    },
+
     async get_shopping_cart_items() {
       await axios({
         method: "get",

@@ -1,6 +1,6 @@
 <template>
   <MainHeaderTop />
-  <MainHeaderMid  :key="shoppingcartcount" />
+  <MainHeaderMid :key="shoppingcartcount" />
   <MainHeaderBottom />
 
   <div v-if="user">
@@ -25,8 +25,9 @@
     </div>
   </div>
 
-  <ItemTop @UpdateCart="UpdateCart"
-  v-bind:uuid="item_id"
+  <ItemTop
+    @UpdateCart="UpdateCart"
+    v-bind:uuid="item_id"
     v-bind:condition="condition"
     v-bind:digitalcurrencyone="digitalcurrencyone"
     v-bind:digitalcurrencytwo="digitalcurrencytwo"
@@ -41,9 +42,9 @@
     v-bind:freeshipping="freeshipping"
     v-bind:freeshippingdays="freeshippingdays"
     v-bind:shippingtwo="shippingtwo"
-    v-bind:shippingtwodays="shippingtwodays"
+    v-bind:shippingtwodays="shippingdaytwo"
     v-bind:shippingthree="shippingthree"
-    v-bind:shippingthreedays="shippingthreedays"
+    v-bind:shippingthreedays="shippingdaythree"
     v-bind:totalsold="totalsold"
     v-bind:currency="currency"
     v-bind:vendorname="vendorname"
@@ -67,9 +68,11 @@
     v-bind:shippingtwo="shippingtwo"
     v-bind:shippingthree="shippingthree"
     v-bind:shippingpricetwo="shippingpricetwo"
+    v-bind:shippingdayfree="shippingdayfree"
     v-bind:shippingdaytwo="shippingdaytwo"
     v-bind:shippingpricethree="shippingpricethree"
     v-bind:shippingdaythree="shippingdaythree"
+    v-bind:currency="currency"
   />
   <div v-if="loaded_feedback">
     <ItemUserReviews
@@ -124,6 +127,7 @@ export default defineComponent({
       item_id: "",
       condition: "",
       price: "",
+      currency: "",
       pricebtc: "",
       pricebch: "",
       pricexmr: "",
@@ -153,6 +157,7 @@ export default defineComponent({
       shippingtwo: "",
       shippingthree: "",
       shippingpricetwo: "",
+      shippingdayfree: "",
       shippingdaytwo: "",
       shippingpricethree: "",
       shippingdaythree: "",
@@ -165,7 +170,7 @@ export default defineComponent({
   },
 
   methods: {
-     UpdateCart() {
+    UpdateCart() {
       this.shoppingcartcount += 1;
     },
     async getitem() {
@@ -194,17 +199,24 @@ export default defineComponent({
             this.freeshippingdays = response.data.shipping_day_0;
             this.description = response.data.item_description;
             this.origincountry = response.data.origin_country_name;
-            this.destinationcountryone = response.data.destination_country_one_name;
-            this.destinationcountrytwo = response.data.destination_country_two_name;
-            this.destinationcountrythree = response.data.destination_country_three_name;
-            this.destinationcountryfour = response.data.destination_country_four_name;
+            this.destinationcountryone =
+              response.data.destination_country_one_name;
+            this.destinationcountrytwo =
+              response.data.destination_country_two_name;
+            this.destinationcountrythree =
+              response.data.destination_country_three_name;
+            this.destinationcountryfour =
+              response.data.destination_country_four_name;
             this.shippingfree = response.data.shipping_free;
             this.shippingtwo = response.data.shipping_two;
             this.shippingthree = response.data.shipping_three;
             this.shippingpricetwo = response.data.shipping_price_2;
+            this.shippingdayfree = response.data.shipping_day_0;
             this.shippingdaytwo = response.data.shipping_day_2;
             this.shippingpricethree = response.data.shipping_price_3;
             this.shippingdaythree = response.data.shipping_day_3;
+            this.vendorname = response.data.vendor_display_name;
+
             this.getitemcondition();
             this.getvendorinfo();
             this.getvendorreviews();
@@ -241,37 +253,33 @@ export default defineComponent({
         method: "get",
         url: "/price/btcprice/" + this.item.currency + "/" + this.item.price,
         withCredentials: true,
-      })
-        .then((response) => {
-          if ((response.status = 200)) {
-            this.pricebtc = response.data.coin;
-          }
-        })
+      }).then((response) => {
+        if ((response.status = 200)) {
+          this.pricebtc = response.data.coin;
+        }
+      });
     },
-        async getpricebch() {
+    async getpricebch() {
       await axios({
         method: "get",
         url: "/price/bchprice/" + this.item.currency + "/" + this.item.price,
         withCredentials: true,
-      })
-        .then((response) => {
-          if ((response.status = 200)) {
-            this.pricebch = response.data.coin;
-          }
-        })
+      }).then((response) => {
+        if ((response.status = 200)) {
+          this.pricebch = response.data.coin;
+        }
+      });
     },
-        async getpricexmr() {
+    async getpricexmr() {
       await axios({
         method: "get",
         url: "/price/xmrprice/" + this.item.currency + "/" + this.item.price,
         withCredentials: true,
-      })
-        .then((response) => {
-          if ((response.status = 200)) {
-         
-            this.pricexmr = response.data.coin;
-          }
-        })
+      }).then((response) => {
+        if ((response.status = 200)) {
+          this.pricexmr = response.data.coin;
+        }
+      });
     },
     async getvendorinfo() {
       await axios({
@@ -281,7 +289,7 @@ export default defineComponent({
       })
         .then((response) => {
           if ((response.status = 200)) {
-            this.vendorname = response.data.vendorname;
+          
             this.vendoruuid = response.data.vendoruuid;
             this.vendorrating = response.data.vendorrating;
             this.vendortotalsales = response.data.vendortotalsales;
@@ -308,7 +316,7 @@ export default defineComponent({
         })
         .catch((error) => {});
     },
- async add_view() {
+    async add_view() {
       await axios({
         method: "get",
         url: "/item/count/" + this.item.uuid,
@@ -316,11 +324,10 @@ export default defineComponent({
         headers: authHeader(),
       }).then((response) => {
         if ((response.status = 200)) {
-      
         }
       });
     },
-         returncurrencysymbol(currencydigit) {
+    returncurrencysymbol(currencydigit) {
       if (currencydigit === 0) {
         return "$";
       } else if (currencydigit === 1) {
@@ -454,7 +461,6 @@ export default defineComponent({
         return "CZK";
       }
     },
-    
   },
 });
 </script>

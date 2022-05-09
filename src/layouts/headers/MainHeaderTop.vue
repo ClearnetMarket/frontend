@@ -95,10 +95,10 @@ export default defineComponent({
       localStorage.removeItem("user_token");
       localStorage.removeItem("auth_token");
       localStorage.clear();
-      this.$router.push({
-              name: "home",
-            });
+      this.$router.go({name: "home" });
+        
     },
+    
   },
 });
 </script>

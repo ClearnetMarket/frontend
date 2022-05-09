@@ -259,9 +259,22 @@ export default defineComponent({
   mounted() {
     this.getuserneworders();
     this.getuserneworderscount();
+    this.deleteordernotice();
   },
 
   methods: {
+     async deleteordernotice() {
+      await axios({
+        method: "delete",
+        url: "/vendor/new-orders-count/markasread" ,
+        withCredentials: true,
+        headers: authHeader(),
+      }).then((response) => {
+        if (response.status == 200) {
+          this.getuserneworderscount();
+        }
+      });
+    },
     async getuserneworders() {
       await axios({
         method: "get",
@@ -290,7 +303,7 @@ export default defineComponent({
     },
     async rejectorder(uuid) {
       await axios({
-        method: "delete",
+        method: "post",
         url: "/vendororders/new/reject/" + uuid,
         withCredentials: true,
         headers: authHeader(),

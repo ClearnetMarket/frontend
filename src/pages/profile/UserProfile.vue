@@ -1,8 +1,9 @@
 <template>
+<div class="bg-gray-200">
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
-  <div class="max-w-7xl mx-auto mb-5 mt-5 px-10">
+  <div class="container max-w-7xl mx-auto px-10 wrapper">
    
       <nav class="rounded-md w-full">
         <ol class="list-reset flex">
@@ -17,13 +18,13 @@
         </ol>
       </nav>
     
-  </div>
+
 
   <div v-if="page_loaded">
-    <div class="max-w-4xl mx-auto px-10 mb-20">
+    <div class="max-w-4xl mx-auto px-10">
       <div class="flex justify-center">
         <div
-          class="grid grid-cols-12 mb-20  border border-1 rounded gap-4 w-full max-w-4xl p-5"
+          class="grid grid-cols-12 mb-20  border border-1 rounded gap-4 w-full max-w-4xl p-5 bg-white"
         >
           <div class="col-span-3">{{ user.profileimage }}</div>
           <div class="col-span-6">
@@ -34,13 +35,14 @@
             <div class="text-gray-600">{{ user.bio }}</div>
           </div>
           <div class="col-span-3">
-            <router-link
-              :to="{ name: 'userprofile', params: { uuid: user.uuid } }"
-            >
-              <div class="text-blue-600 hover:text-blue-500 hover:underline">
-                Message Seller
-              </div>
-            </router-link>
+            <router-link class="text-[14px] text-blue-500 hover:text-blue-300 hover:underline"
+                  :to="{
+                    name: 'MsgCreate',
+                    params: { uuid: vendoruuid },
+                  }"
+                >
+                  Contact Seller
+                </router-link>
           </div>
 
           <div v-if="user.admin_role == 1" class="col-span-12">
@@ -56,9 +58,9 @@
         </div>
       </div>
 
-      <div class="grid grid-cols-12">
+      <div class="grid grid-cols-12 text-gray-700 pb-36">
         <div class="col-span-4 gap-4">
-          <div class="flex">All User Reviews</div>
+          <div class="flex text-[18px]">All User Reviews</div>
           <div v-if="user_reviews_total == 0">
             User does not have any reviews right now ...
           </div>
@@ -253,6 +255,8 @@
         </div>
       </div>
     </div>
+     </div>
+       </div>
   </div>
   <MainFooter />
 </template>
@@ -334,6 +338,9 @@ export default defineComponent({
         if ((response.status = 200)) {
           this.user = response.data;
           this.page_loaded = true;
+        //   if (this.user.admin_role > 0){
+        //      this.$router.push({ name: "vendorprofile" });
+        // };
         }
       });
     },

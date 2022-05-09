@@ -1,6 +1,6 @@
 <template>
   <div class="mt-5 mx-10 flex gap-5">
-    <div v-for="item in todayfeatured" :key="item.id">
+    <div v-for="item in itemsforsale" :key="item.id">
       <div
         class=""
         @click="$router.replace({ name: 'item', params: { id: item.uuid } })"
@@ -23,40 +23,40 @@
                 alt="No Image Found .."
               />
             </div>
-           </div>
-            <!--- Item title -->
-            <div class="text-[16px] h-12 text-blue-600 hover:text-blue-500 hover:underline overflow-hidden p-1">
+          </div>
+          <!--- Item title -->
+          <div
+            class="text-[16px] h-12 text-blue-600 hover:text-blue-500 hover:underline overflow-hidden p-1"
+          >
             {{ item.item_title }}
-            </div>
-            <!--- Price and Currency -->
-            <div class="text-green-600 text-[18px] font-bold h-4">
-              {{ item.price }} {{ returncurrencysymbol(item.currency) }}
-            </div>
-            <!--- Location -->
-          <div class="text-[11px] h-6  overflow-hidden p-2 text-gray-500">
+          </div>
+          <!--- Price and Currency -->
+          <div class="text-green-600 text-[18px] font-bold h-4">
+            {{ item.price }} {{ returncurrencysymbol(item.currency) }}
+          </div>
+          <!--- Location -->
+          <div class="text-[11px] h-6 overflow-hidden p-2 text-gray-500">
             {{ item.origin_country_name }}
-            </div>
-            <!--- Currency accepted bubbles -->
-            <div class="flex justify-center pt-2">
-          
-              <span
+          </div>
+          <!--- Currency accepted bubbles -->
+          <div class="flex justify-center pt-2">
+            <span
               v-if="item.digital_currency_1 == true"
-                class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-orange-500 mr-2 mb-2"
-                >BTC</span
-              >
-              <span
-                        v-if="item.digital_currency_2 == true"
-                class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-orange-700 mr-2 mb-2"
-                >XMR</span
-              >
-              <span
-                        v-if="item.digital_currency_3 == true"
-                class="inline-block bg-gray-200 rounded-full px-2 py-1 text-sm font-semibold text-green-600 mr-2 mb-2"
-                >BCH</span
-              >
-            </div>
-             </div>
-      
+              class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-orange-500 mr-2 mb-2"
+              >BTC</span
+            >
+            <span
+              v-if="item.digital_currency_2 == true"
+              class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-orange-700 mr-2 mb-2"
+              >XMR</span
+            >
+            <span
+              v-if="item.digital_currency_3 == true"
+              class="inline-block bg-gray-200 rounded-full px-2 py-1 text-sm font-semibold text-green-600 mr-2 mb-2"
+              >BCH</span
+            >
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -67,34 +67,33 @@ import { defineComponent } from "vue";
 import axios from "axios";
 
 export default defineComponent({
-  name: "TodayFeatured",
+  name: "GetVendorItems",
+  props: ["vendoruuid"],
   data() {
     return {
-      todayfeatured: "",
+      itemsforsale: "",
       loadedbtcprice: false,
     };
   },
 
   mounted() {
-    this.gettodayfeatured();
+    this.getvendorsitemsforsale();
   },
   computed: {},
 
   methods: {
-    async gettodayfeatured() {
+    async getvendorsitemsforsale() {
       await axios({
         method: "get",
-        url: "/category/query/index/todayfeatured",
+        url: "/vendor/itemsforsale/" + this.vendoruuid,
         withCredentials: true,
       })
         .then((response) => {
           if ((response.status = 200)) {
-            this.todayfeatured = response.data;
+            this.itemsforsale = response.data;
           }
         })
-        .catch((error) => {
-          console.log(error);
-        });
+        .catch((error) => {});
     },
     returncurrencysymbol(currencydigit) {
       if (currencydigit === 0) {

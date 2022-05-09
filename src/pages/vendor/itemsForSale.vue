@@ -1,4 +1,5 @@
 <template>
+<div class="bg-gray-200">
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
@@ -7,8 +8,8 @@
     <MainHeaderVendor v-show="user.user_admin == 1" />
   </div>
 
-  <div class="container border border-top max-w-7xl mx-auto px-10 wrapper">
-    <div class="mt-5 mb-5">
+  <div class="container  max-w-7xl mx-auto px-10 wrapper">
+    <div class="mt-5 ">
       <nav class="rounded-md w-full">
         <ol class="list-reset flex">
           <li>
@@ -23,18 +24,27 @@
       </nav>
     </div>
 
-    <div class="grid grid-cols-1 bg-white rounded-md p-6">
-      <div class="text-[24px]">Items for Sale</div>
+    <div class="grid grid-cols-1 rounded-md">
+      <div class="text-[24px] text-center">Items for Sale</div>
+      <div class="">
+        <router-link :to="{ name: 'vendoraddress' }">
+          <div class="text-blue-600 hover:text-blue-400 hover:underline">
+            My Address
+          </div>
+        </router-link>
+      </div>
       <div class="flex justify-end">
         <button
           v-on:click="createanitem()"
-          class="py-2 px-4 shadow-md no-underline rounded-full text-white font-sans text-sm hover:text-white bg-green-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2"
+          class="py-2 px-4 shadow-md no-underline rounded-full
+           text-white font-sans text-sm hover:text-white 
+          bg-green-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2"
         >
           Create Item
         </button>
       </div>
-      <div class="mt-10 grid grid-cols-12">
-        <div v-for="(item, index) in items" class="col-span-12">
+      <div class="mt-10 grid grid-cols-12 pb-20">
+        <div v-for="(item, index) in items" class="col-span-12 bg-white ">
           <div
             class="grid grid-cols-12 shadow-md border-2 border-gray-200 rounded-md p-5"
           >
@@ -71,7 +81,7 @@
                   Total Views: {{ item.view_count }}
                 </div>
                 <div class="col-span-12 text-[14px] p-1">
-                  Total Views: {{ item.review_count }}
+                  Item Quantity: {{ item.item_count }}
                 </div>
               </div>
             </div>
@@ -80,7 +90,9 @@
                 <div class="" v-if="item.online == 0">
                   <button
                     @click.prevent="putonline(item.uuid)"
-                    class="py-2 px-4 shadow-md no-underline rounded-full text-white font-sans text-sm hover:text-white bg-gray-700 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2"
+                    class="py-2 px-4 shadow-md no-underline rounded-full
+                     text-white font-sans text-sm hover:text-white
+                      bg-gray-700 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2"
                   >
                     Turn On
                   </button>
@@ -88,7 +100,9 @@
                 <div v-else>
                   <button
                     @click.prevent="putoffline(item.uuid)"
-                    class="py-2 px-4 shadow-md no-underline rounded-full text-white font-sans text-sm hover:text-white bg-gray-700 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2"
+                    class="py-2 px-4 shadow-md no-underline rounded-full
+                     text-white font-sans text-sm hover:text-white
+                      bg-gray-700 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2"
                   >
                     Turn Off
                   </button>
@@ -98,7 +112,9 @@
               <div class="mb-2">
                 <button
                   v-on:click="gotoitem(item.uuid)"
-                  class="py-2 px-4 shadow-md no-underline rounded-full text-white font-sans text-sm hover:text-white bg-gray-700 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2"
+                  class="py-2 px-4 shadow-md no-underline rounded-full 
+                  text-white font-sans text-sm hover:text-white
+                   bg-gray-700 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2"
                 >
                   Edit
                 </button>
@@ -106,7 +122,9 @@
               <div class="mb-2">
                 <button
                   @click.prevent="cloneitem(item.uuid)"
-                  class="py-2 px-4 shadow-md no-underline rounded-full text-white font-sans text-sm hover:text-white bg-gray-700 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2"
+                  class="py-2 px-4 shadow-md no-underline rounded-full
+                   text-white font-sans text-sm hover:text-white bg-gray-700
+                    hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2"
                 >
                   Clone
                 </button>
@@ -115,13 +133,16 @@
               <div class="mb-2">
                 <button
                   @click.prevent="deleteitem(item.uuid)"
-                  class="py-2 px-4 shadow-md no-underline rounded-full text-white font-sans text-sm hover:text-white bg-red-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2"
+                  class="py-2 px-4 shadow-md no-underline rounded-full
+                   text-white font-sans text-sm hover:text-white bg-red-600
+                    hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2"
                 >
                   Delete
                 </button>
               </div>
             </div>
           </div>
+        </div>
         </div>
       </div>
     </div>

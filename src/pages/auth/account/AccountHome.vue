@@ -6,8 +6,8 @@
   <div v-if="user">
     <MainHeaderVendor v-show="user.user_admin == 1" />
   </div>
-  <!-- Top Stuff-->
-  <div class="container h-screen max-w-7xl mx-auto px-10">
+
+  <div class="container max-w-7xl mx-auto px-10 wrapper">
     <!-- Container-->
     <div class="mt-5 mb-5">
       <nav class="rounded-md w-full">
@@ -113,7 +113,7 @@
         >
           <div class="grid grid-cols-4 grid-rows-2">
             <div class="col-span-1 row-span-2">Icon</div>
-            <div class="col-span-3 row-span-1 text-[20px]">My Address</div>
+            <div class="col-span-3 row-span-1 text-[20px]">Shipping Address</div>
             <div class="col-span-3 row-span-1 text-[14px] text-gray-600">
               Default Shipping Address
             </div>

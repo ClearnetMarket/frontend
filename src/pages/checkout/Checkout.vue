@@ -83,7 +83,8 @@
           <div class="col-span-1 font-bold"></div>
           <div class="col-span-11 text-">
             <div v-for="(item, index) in shopping_cart_items_list">
-              <div class="grid grid-cols-12 gap-4 border border-gray-300 p-4">
+              <div class="grid grid-cols-12 gap-4 border border-gray-300 p-4" >
+            
                 <div class="col-span-2">
                   <img
                     class="h-24"
@@ -103,7 +104,7 @@
                   </div>
                 </div>
                 <div class="col-span-6">
-                  <div v-if="item.digital_currency_1 == true">
+                  <div v-if="item.digital_currency_1 == true" >
                     <input
                       v-on:change="checkoutpaymenttype($event, item)"
                       v-model="item.selected_currency"
@@ -116,8 +117,8 @@
 
                     <label class="px-5" for="btc">Bitcoin</label><br />
                   </div>
-
-                  <div v-if="(item.digital_currency_2 == true)">
+              
+                  <div v-if="(item.digital_currency_2 == true)" >
                     <input
                       v-on:change="checkoutpaymenttype($event, item)"
                       v-model="item.selected_currency"
@@ -131,7 +132,7 @@
                     <label class="px-5" for="bch">Bitcoin Cash</label><br />
                   </div>
 
-                  <div v-if="(item.digital_currency_3 == true)">
+                  <div v-if="(item.digital_currency_3 == true)" >
                     <input
                       v-on:change="checkoutpaymenttype($event, item)"
                       v-model="item.selected_currency"
@@ -192,7 +193,11 @@
               </div>
             </div>
             <div class="mt-5 mb-5">
+           
+            
+   
               <button
+                v-show="xmrtotalprice <= xmrbalance && bchtotalprice <= bchbalance && btctotalprice <= btcbalance" 
                 @click="checkoutorder()"
                 class="bg-yellow-500 rounded-md font-semibold hover:bg-yellow-600 py-3 text-sm text-white uppercase w-full"
               >
@@ -283,9 +288,7 @@ export default defineComponent({
         headers: authHeader(),
       }).then((response) => {
         if ((response.status = 200)) {
-   
-          
-
+         this.$router.push({name: "userorders" });
         }
       });
     },

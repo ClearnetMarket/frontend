@@ -29,6 +29,16 @@ const routes = [
     component: () => import("../pages/vendor/itemsForSale.vue"),
   },
   {
+    path: "/vendor/exactaddress",
+    name: "vendoraddress",
+    component: () => import("../pages/auth/account/VendorExactAddress.vue"),
+  },
+  {
+    path: "/vendor/feedback",
+    name: "vendorfeedback",
+    component: () => import("../pages/vendor/Feedback.vue"),
+  },
+  {
     path: "/item/:id",
     name: "item",
     component: () => import("../pages/Item/Item.vue"),

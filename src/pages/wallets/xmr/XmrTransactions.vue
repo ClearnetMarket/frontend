@@ -2,7 +2,7 @@
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
-  <div class="container max-w-7xl mx-auto px-10 min-h-screen flex flex-col">
+  <div class="container  max-w-7xl mx-auto px-10 wrapper">
     <!-- Container-->
     <div class="mt-5 mb-5">
       <nav class="rounded-md w-full">
@@ -40,17 +40,9 @@
     <div class="grid grid-cols-1">
       <div class="">Confirmed at 6 Confirmations</div>
     </div>
-    <div
-      class="grid sm:grid-cols-1 md:grid-cols-5 justify-center mt-5 bg-grey-3"
-    >
-      <div class="flex-1">Green: Deposit</div>
-      <div class="">Red: Withdrawl</div>
-      <div class="">Blue: Recieved XMR</div>
-      <div class="">Orange: Sent XMR</div>
-      <div class="">White: Pending</div>
-    </div>
 
-    <div v-if="transactions" class="mx-20">
+
+    <div v-if="transactions" class="mx-20 pb-20">
       <!--#1 = Wallet created -->
       <!--#2 = Withdrawl -->
       <!--#3 = Deposit -->
@@ -59,6 +51,7 @@
       <!--#6 = clearnet_webapp profit -->
       <!--#7 = sent coin to holdings -->
       <!--#8 = sent coin from holdings -->
+      <!--#9 = vendor rejected order -->
       <div class="grid grid-cols-12 p-5">
         <div class="col-span-2">Time</div>
         <div class="col-span-6">Description</div>
@@ -66,11 +59,11 @@
         <div class="col-span-2">Balance</div>
       </div>
 
-      <div v-for="t in transactions">
+      <div v-for="t in transactions" class="text-gray-700 font-semibold text-[14px]">
         <!-- Wallet Created -->
         <div
           v-if="t.category === 1"
-          class="grid grid-cols-12 grid-rows-1 bordered rounded-md bg-gray-200 m-1 p-1"
+          class="grid grid-cols-12 grid-rows-1 border-b rounded-md m-1 p-1"
           :key="t.id"
           :name="t.id"
         >
@@ -82,7 +75,7 @@
         <!-- WithDrawl -->
         <div
           v-if="t.category === 2"
-          class="grid grid-cols-12 grid-rows-3 bg-red-500 text-white bordered rounded-md m-1 p-1"
+          class="grid grid-cols-12 grid-rows-3  border-b rounded-md m-1 p-1"
           :key="t.id"
           :name="t.id"
         >
@@ -93,14 +86,14 @@
             <div class="col-span-6 row-span-1">TXID: {{ t.txid }}</div>
             <div class="col-span-6 row-span-1">Comment: {{ t.commentxmr }}</div>
           </div>
-          <div class="col-span-2 row-span-1">-{{ t.amount }}</div>
+          <div class="col-span-2 row-span-1 text-red-600">-{{ t.amount }}</div>
           <div class="col-span-2 row-span-1">Balance: {{ t.balance }}</div>
         </div>
 
         <!--#3 = Deposit -->
         <div
           v-if="t.category === 3"
-          class="grid grid-cols-12 grid-rows-3 bg-green-600 text-white bordered rounded-md m-1 p-1"
+          class="grid grid-cols-12 grid-rows-3  text-white border-b rounded-md m-1 p-1"
           :key="t.id"
           :name="t.id"
         >
@@ -118,8 +111,8 @@
             <div class="col-span-6 row-span-1">TXID: {{ t.txid }}</div>
           </div>
 
-          <div class="col-span-2 row-span-1">{{ t.amount }}</div>
-          <div class="col-span-2 row-span-1">
+          <div class="col-span-2 row-span-1 text-green-600">{{ t.amount }}</div>
+          <div class="col-span-2 row-span-1 ">
             <div v-if="t.confirmed === 0">
               <div v-if="t.balance - t.amount === 0">0 + {{ t.amount }}</div>
               <div v-else>{{ t.balance - t.amount }} + {{ t.amount }}</div>
@@ -130,7 +123,7 @@
         <!--#4 = send coin to escrow -->
         <div
           v-if="t.category === 4"
-          class="grid grid-cols-12 grid-rows-2 bg-orange-500 bordered rounded-md m-1 p-1"
+          class="grid grid-cols-12 grid-rows-2  border-b rounded-md m-1 p-1"
           :key="t.id"
           :name="t.id"
         >
@@ -139,19 +132,19 @@
             <div class="col-span-6 row-span-2">Transaction</div>
             <div v-if="t.orderid">
               <router-link
-                class="linkcolor_shopping"
-                :to="{ name: 'item', params: { id: t.orderid } }"
+                class="linkcolor_shopping hover:text-blue-400 hover:underline"
+              :to="{ name: 'vendorordersview', params: { uuid: t.order_uuid } }"
                 >Transaction Order # {{ t.orderid }}</router-link
               >
             </div>
           </div>
-          <div class="col-span-2 row-span-1">-{{ t.amount }}</div>
-          <div class="col-span-2 row-span-1">{{ t.balance }}</div>
+          <div class="col-span-2 row-span-1 text-red-600">-{{ t.amount }}</div>
+          <div class="col-span-2 row-span-1 ">{{ t.balance }}</div>
         </div>
         <!--#5 = sent coin to user -->
         <div
           v-if="t.category === 5"
-          class="grid grid-cols-12 grid-rows-2 bg-orange-500 bordered rounded-md m-1 p-1"
+          class="grid grid-cols-12 grid-rows-2 border-b rounded-md m-1 p-1"
           :key="t.id"
           :name="t.id"
         >
@@ -161,18 +154,18 @@
             <div v-if="t.orderid">
               <router-link
                 class="linkcolor_shopping"
-                :to="{ name: 'item', params: { id: t.orderid } }"
+                 :to="{ name: 'vendorordersview', params: { uuid: t.order_uuid } }"
                 >Transaction Order # {{ t.orderid }}</router-link
               >
             </div>
           </div>
-          <div class="col-span-2 row-span-1">{{ t.amount }}</div>
-          <div class="col-span-2 row-span-1">{{ t.balance }}</div>
+          <div class="col-span-2 row-span-1 text-red-600">{{ t.amount }}</div>
+          <div class="col-span-2 row-span-1 ">{{ t.balance }}</div>
         </div>
         <!--#6 = clearnet_webapp profit -->
         <div
           v-if="t.category === 6"
-          class="grid grid-cols-12 grid-rows-2 bg-blue-500 bordered rounded-md m-1 p-1"
+          class="grid grid-cols-12 grid-rows-2 border-b rounded-md m-1 p-1"
           :key="t.id"
           :name="t.id"
         >
@@ -182,18 +175,18 @@
             <div v-if="t.orderid">
               <router-link
                 class="linkcolor_shopping"
-                :to="{ name: 'item', params: { id: t.orderid } }"
+                 :to="{ name: 'vendorordersview', params: { uuid: t.order_uuid } }"
                 >Transaction Order # {{ t.orderid }}</router-link
               >
             </div>
           </div>
-          <div class="col-span-2 row-span-1">{{ t.amount }}</div>
-          <div class="col-span-2 row-span-1">{{ t.balance }}</div>
+          <div class="col-span-2 row-span-1 text-green-600">{{ t.amount }}</div>
+          <div class="col-span-2 row-span-1 ">{{ t.balance }}</div>
         </div>
         <!--#7 = sent coin to holdings -->
         <div
           v-if="t.category === 7"
-          class="grid grid-cols-4 grid-rows-2 bg-blue-500 bordered rounded-md m-1 p-1"
+          class="grid grid-cols-4 grid-rows-2  border-b rounded-md m-1 p-1"
           :key="t.id"
           :name="t.id"
         >
@@ -203,13 +196,53 @@
             <div v-if="t.orderid">
               <router-link
                 class="linkcolor_shopping"
-                :to="{ name: 'item', params: { id: t.orderid } }"
+               :to="{ name: 'vendorordersview', params: { uuid: t.order_uuid } }"
                 >Transaction Order # {{ t.orderid }}</router-link
               >
             </div>
           </div>
-          <div class="col-span-2 row-span-1">{{ t.amount }}</div>
-          <div class="col-span-2 row-span-1">{{ t.balance }}</div>
+          <div class="col-span-2 row-span-1 text-green-600">{{ t.amount }}</div>
+          <div class="col-span-2 row-span-1 ">{{ t.balance }}</div>
+        </div>
+                <div
+          v-if="t.category === 8"
+          class="grid grid-cols-12 grid-rows-2  border-b rounded-md m-1 p-1"
+          :key="t.id"
+          :name="t.id"
+        >
+          <div class="col-span-2 row-span-1">{{ relativeDate(t.created) }}</div>
+          <div class="col-span-6 row-span-2">
+            Transaction
+            <div v-if="t.orderid">
+              <router-link
+                class="linkcolor_shopping"
+               :to="{ name: 'vendorordersview', params: { uuid: t.order_uuid } }"
+                >Transaction Order # {{ t.orderid }}</router-link
+              >
+            </div>
+          </div>
+          <div class="col-span-2 row-span-1 text-green-600">{{ t.amount }}</div>
+          <div class="col-span-2 row-span-1 ">{{ t.balance }}</div>
+        </div>
+        <div
+          v-if="t.category === 9"
+          class="grid grid-cols-12 grid-rows-2  border-b m-1 p-1"
+          :key="t.id"
+          :name="t.id"
+        >
+          <div class="col-span-2 row-span-1">{{ relativeDate(t.created) }}</div>
+          <div class="col-span-6 row-span-2">
+            Refund from Escrow
+            <div v-if="t.orderid">
+              <router-link
+                class="linkcolor_shopping"
+           :to="{ name: 'vendorordersview', params: { uuid: t.order_uuid } }"
+                >Transaction Order # {{ t.orderid }}</router-link
+              >
+            </div>
+          </div>
+          <div class="col-span-2 row-span-1 text-green-600">{{ t.amount }}</div>
+          <div class="col-span-2 row-span-1 ">{{ t.balance }}</div>
         </div>
       </div>
     </div>
@@ -248,6 +281,7 @@ export default defineComponent({
   },
   mounted() {
     this.userstatus();
+    this.xmrtransactions();
   },
   data() {
     return {
@@ -285,9 +319,10 @@ export default defineComponent({
         headers: authHeader(),
       }).then((response) => {
         if ((response.status = 200)) {
-          if (response.data.length > 1) {
+        
             this.transactions = response.data;
-          }
+
+      
         }
       });
     },

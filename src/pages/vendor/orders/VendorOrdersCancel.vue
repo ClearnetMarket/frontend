@@ -123,8 +123,17 @@
     </div>
 
     <div class="grid grid-cols-1 w-full gap-4 mt-5">
-      <h1 class="col-span-1 font-semibold text-2xl">Request Cancel</h1>
-     
+      <div class="col-span-1 font-semibold text-2xl">Request Cancel</div>
+        <div class="col-span-1 text-[14px]">The orders below have requested to cancel. 
+         You can deny them the cancel and accept, but they can dispute this in the future.
+        
+        </div>
+        <div class="">Improve cancellation rate</div>
+        <ul style="list-style-type:disc">
+        <li>Your Accepting / Shipping actions are too slow</li>
+        <li>Prices are too high</li>
+        <li>Slow or poor communications</li>
+        </ul>
        <div v-for="order in orders" :key="order.id">
            <div v-if="order.uuid">
         <div class="grid grid-cols-12 rounded border border-1 border-gray-300 bg-gray-200 p-5" >
@@ -218,16 +227,15 @@ export default defineComponent({
         }
       });
     },
-
     async rejectorder(uuid) {
       await axios({
-        method: "delete",
-        url: "/vendororders/new/reject/"+ uuid ,
+        method: "post",
+        url: "/vendororders/new/reject/" + uuid,
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
         if (response.status == 200) {
-          this.getuserneworders();
+          this.getuserorders();
         }
       });
     },
@@ -239,7 +247,7 @@ export default defineComponent({
         headers: authHeader(),
       }).then((response) => {
         if (response.status == 200) {
-          this.getuserneworders();
+          this.getuserorders();
         }
       });
     },

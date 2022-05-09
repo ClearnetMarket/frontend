@@ -27,7 +27,9 @@
     <div class="grid grid-cols-4 mt-14">
       <div class="sm:col-span-4 md:col-span-1">
         <div class="text-[20px] text-gray-700 mb-10">Account Balances</div>
-        <div class="text-[20px] text-gray-700 mt-7">100.00$</div>
+        <div class="flex">
+        <div class="text-[14px] text-gray-700 ">{{wallettotal}}  </div><div class="text-[14px] text-gray-700 pl-3">{{usercurrency}}</div>
+        </div>
 
         <div class="text-[20px] text-orange-400 mt-7">Bitcoin</div>
         <div class="text-[14px] text-gray-700">
@@ -199,6 +201,7 @@ export default defineComponent({
   data() {
     return {
       user:'',
+      usercurrency: '',
       btcprice: '',
       xmrprice: '',
       bchprice: '',
@@ -206,9 +209,11 @@ export default defineComponent({
       xmrbalance: '',
       bchbalance: '',
       btcbalance: '',
+      wallettotal: '',
     };
   },
   mounted() {
+    this.userstatus();
     this.getbtcprice();
     this.getbchprice();
     this.getxmrprice();
@@ -216,6 +221,7 @@ export default defineComponent({
     this.getxmrbalance();
     this.getbchbalance();
     this.getbtcbalance();
+    
 
   },
   methods: {
@@ -228,11 +234,37 @@ export default defineComponent({
       }).then((response) => {
         if ((response.status = 200)) {
           this.user = response.data.user;
+          this.userinfo();
+          this.getwallettotals();
          
         }
       });
     },
-
+        async userinfo() {
+      await axios({
+        method: "get",
+        url: "/info/country-currency",
+        withCredentials: true,
+        headers: authHeader(),
+      }).then((response) => {
+        if ((response.status = 200)) {
+          this.usercurrency = response.data.currency;
+        }
+      });
+    },
+    async getwallettotals() {
+      await axios({
+        method: "get",
+        url: "/price/wallets/total/" + this.user.currency,
+                withCredentials: true,
+        headers: authHeader(),
+      }).then((response) => {
+        if (response.data) {
+          this.wallettotal = response.data.coin;
+    
+        }
+      });
+    },
     async getxmrprice() {
       await axios({
         method: "get",

@@ -1,13 +1,9 @@
 <template>
   <div class="max-w-7xl mx-auto px-10">
-      <div class="grid grid-cols-1 text-[20px]">
-
-      Item Description
-
-      </div>
-      <div class="border border-1 border-gray-300 rounded-md p-5">
-            {{description}}
-      </div>
+    <div class="grid grid-cols-1 text-[20px] font-semibold text-gray-600">Item Description</div>
+    <div class="rounded-md p-5">
+      {{ description }}
+    </div>
   </div>
 </template>
 
@@ -17,19 +13,13 @@ import axios from "axios";
 
 export default defineComponent({
   name: "ItemDescription",
-   props: ["description"],
+  props: ["description"],
   data() {
-    return {
-      
-    };
+    return {};
   },
 
-  mounted() {
-  
-  },
+  mounted() {},
 
-  methods: {
-    
-  },
+  methods: {},
 });
 </script>

@@ -3,7 +3,7 @@
   <MainHeaderMid />
   <MainHeaderBottom />
 
-  <div class="container h-screen max-w-7xl mx-auto px-10 ">
+  <div class="max-w-7xl mx-auto flex mb-0 wrapper">
     <!-- Container-->
     <div class="mt-5 mb-5">
       <nav class="rounded-md w-full">

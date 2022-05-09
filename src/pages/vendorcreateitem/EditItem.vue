@@ -339,7 +339,7 @@ export default defineComponent({
       marketitem: '',
       authtoken: '',
       categoryList: [],
-      // conditionList: [],
+
       countryList: [],
      
       CreateItemForm: {
@@ -444,6 +444,8 @@ export default defineComponent({
           }
         });
     },
+       
+
     async getFormData() {
       // Get Countries
       const path = "/vendorcreateitem/get-fields/" + this.item_id;

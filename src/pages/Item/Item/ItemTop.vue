@@ -1,129 +1,209 @@
 <template>
-  <div class="max-w-7xl mx-auto px-10">
+  <div class="max-w-7xl mx-auto px-10 border-b mb-10 ">
     <div class="grid sm:grid-cols-1 md:grid-cols-3 mt-5 gap-5">
       <div class="col-span-1">Images</div>
       <div class="col-span-1 px-5">
         <div class="text-[20px] mb-1 font-bold">{{ title }}</div>
-        <div class="flex pt-4 mb-2">
+        <div class="border border-gray-400 mb-5"></div>
+        <div class="flex gap-4">
+          <div class="text-[16px] font-weight-bold text-gray-700">
+            Conditon:
+          </div>
+          <div class="text-[16px] text-gray-700">
+            {{ condition }}
+          </div>
+        </div>
+         <div class="flex gap-4">
+          <div class="text-[16px] font-weight-bold text-gray-700">
+            Quantity:
+          </div>
+          <div class="text-[16px] text-gray-700">
+            {{ itemcount }}
+          </div>
+        </div>
+
+        <div class="flex pt-4 mb-1 justify-between">
           <div v-if="digitalcurrencyone == true">
-            <span
-              class="bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-orange-500 mr-2 mb-2"
+            <span class="text-sm font-semibold text-orange-500 mr-2 mb-2"
               >Bitcoin</span
             >
           </div>
           <div v-if="digitalcurrencythree == true">
-            <span
-              class="bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-orange-700 mr-2 mb-2"
-              >Monero</span
+            <span class="text-sm font-semibold text-orange-700 mr-2 mb-2">
+              Monero</span
             >
           </div>
           <div v-if="digitalcurrencytwo == true">
-            <span
-              class="bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-green-600 mr-2 mb-2"
+            <span class="text-sm font-semibold text-green-600 mr-2 mb-2"
               >Bitcoin Cash</span
             >
           </div>
         </div>
-        <div class="text-[16px] font-weight-bold">Conditon</div>
-        <div class="text-[14px] font-weight-bold mb-5">
-          {{ condition }}
-        </div>
-        <div class="text-[16px] font-weight-bold">Price</div>
-        <div class="text-[20px] font-weight-bold">
+        <div class="text-[24px] font-weight-bold text-gray-700 text-center">
           {{ price }} {{ returncurrencysymbol(currency) }}
         </div>
-        <div class="text-[18px] font-weight-bold">{{ pricebtc }} BTC</div>
-        <div class="text-[18px] font-weight-bold">{{ pricebch }} BCH</div>
-        <div class="text-[18px] font-weight-bold">{{ pricexmr }} XMR</div>
-        <div class="flex justify-center mb-10">
-          <div class=" ">
-            <button
-              class="bg-yellow-600 hover:bg-zinc-400 rounded-lg text-white font-bold py-2 px-10 focus:outline-none focus:shadow-outline content-center justify-center"
-              type="submit"
-              @click="addtocart()"
-            >
-              Add to Cart
-            </button>
-          </div>
-        </div>
 
-        <div class="text-[16px] font-weight-bold">Shipping</div>
-        <div class="text-[14px] font-weight-bold mb-5">
-          <div v-if="(shippingfree = true)">
-            <div class="">Free Shipping</div>
-            <div class="">
-              Estimated in {{ freeshippingdays }} days after purchase
+        <div class="mb-2 text-[14px]">
+          <div v-if="digitalcurrencyone == true">
+            <div class="flex">
+              <div class="text-orange-500 pr-5">BTC:</div>
+              <div class="font-weight-bold text-gray-700">
+                {{ pricebtc }}
+              </div>
             </div>
           </div>
-          <div v-else></div>
+          <div v-if="digitalcurrencytwo == true">
+            <div class="flex">
+              <div class="text-green-600 pr-5">BCH:</div>
+              <div class="] font-weight-bold text-gray-700">
+                {{ pricebch }}
+              </div>
+            </div>
+          </div>
+          <div v-if="digitalcurrencythree == true">
+            <div class="flex">
+              <div class="text-orange-700 pr-5">XMR:</div>
+              <div class="font-weight-bold text-gray-700">
+                {{ pricexmr }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mb-2 text-[14px] text-gray-700">
+          <div v-if="(exact_address = true)">
+            <div class="grid grid-cols-12 gap-4">
+              <div class="col-span-3">Located:</div>
+              <div class="col-span-9">
+                {{ exact_city }} {{ exact_stateorprovence }}
+                {{ exact_zipcode }} {{ origincountry }}
+              </div>
+            </div>
+          </div>
+
+          <div v-if="(shippingfree = true)">
+            <div class="grid grid-cols-12 gap-4">
+              <div class="font-[12px] col-span-3">Shipping:</div>
+
+              <div class="flex col-span-9">
+                Free Shipping Estimated {{ freeshippingdays }} days after
+                purchase
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="col-span-1">
+      <div class="col-span-1 px-5">
+        <div class="flex justify-center mb-5">
+          <button
+            class="bg-yellow-500 hover:bg-zinc-400 hover:text-white rounded-lg text-black font-semibold py-2 px-10 focus:outline-none focus:shadow-outline content-center justify-center"
+            type="submit"
+            @click="addtocart()"
+          >
+            Add to Cart
+          </button>
+
+       
+        </div>
+            <div class="text-center mb-2 text-yellow-600 font-bold" 
+            v-if="(shippingfree == true)">
+            Free Shipping
+            </div>
         <div class="flex flex-col">
-          <div class="px-5 border border-rounded-md mb-10 text-gray-600">
-            <div class="px-5 text-[16px]">Moderator Supported</div>
-            <div class="px-10 mb-10">
-              All Items are backed by moderator support.
+          <div class="px-2 mb-5 text-gray-700 font-semibold">
+            <div class="border rounded-lg px-2">
+              <div class="px-5 text-[16px] text-center">
+                Moderator Supported
+              </div>
+              <ul class="text-[11px] mb-5">
+                <li>-All Items are backed by moderator support.</li>
+                <li>-Dispute's prevent against fraud.</li>
+                 
+              </ul>
+              <div class="px-5 text-[16px] text-center">
+                Escrow Transaction
+              </div>
             </div>
           </div>
-          <div class="px-5 border border-rounded flex flex-col pb-5">
-            <div class="mb-5 text-[18px]">Vendor info</div>
-            <div class="text-[12px] flex">
-              <div v-if="vendoruuid">
-                <div class="flex">
-                  <div class="">Sold by:</div>
-                  <router-link
-                    :to="{
-                      name: 'userprofile',
-                      params: { uuid: vendoruuid },
-                    }"
-                  >
-                    <div
-                      class="text-blue-500 hover:text-blue-300 hover:underline pl-3"
-                    >
-                      {{ vendorname }} ({{ vendortotalsales }})
+          <div class="flex flex-col">
+            <div class="px-2 mb-10 text-gray-700 font-semibold">
+              <div class="border rounded-lg px-2">
+                <div class="text-[16px]">
+                  <div class="mb-5 text-[18px] text-center">Vendor Stats</div>
+                  <div class="text-[12px] flex">
+                    <div v-if="vendoruuid">
+                      <div class="flex">
+                        <div class="">Sold by:</div>
+                        <router-link
+                          :to="{
+                            name: 'vendorprofile',
+                            params: { uuid: vendoruuid },
+                          }"
+                        >
+                          <div
+                            class="text-blue-500 hover:text-blue-300 hover:underline pl-3"
+                          >
+                            {{ vendorname }} ({{ vendortotalsales }})
+                          </div>
+                        </router-link>
+                      </div>
                     </div>
-                  </router-link>
+                  </div>
+                  <div v-if="vendortotalsales > 0">
+                    <div class="text-[12px] flex">
+                      ({{ vendorrating }} Feedback rating
+                      <svg
+                        aria-hidden="true"
+                        focusable="false"
+                        data-prefix="fas"
+                        data-icon="star"
+                        class="w-4 text-yellow-500 mr-1"
+                        role="img"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 576 512"
+                      >
+                        <path
+                          fill="currentColor"
+                          d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 
+                            103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5
+                            105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"
+                        ></path></svg
+                      >)
+                    </div>
+                  </div>
+                  <div v-else>
+                    <div class="text-[12px]">Newbie Seller</div>
+                  </div>
+
+                  <div v-if="vendoruuid">
+                    <div
+                      class="mb-2 text-[14px] text-blue-500 hover:text-blue-300 hover:underline pl-3 text-center"
+                    >
+                      <router-link
+                        :to="{
+                          name: 'MsgCreateItem',
+                          params: { uuid: vendoruuid, itemuuid: uuid },
+                        }"
+                      >
+                        Contact Seller
+                      </router-link>
+                    </div>
+                  </div>
+                   <div v-if="vendoruuid">
+                    <div
+                      class="text-[14px] text-blue-500 hover:text-blue-300 hover:underline pl-3 text-center"
+                    >
+                      <router-link
+                        :to="{
+                          name: 'vendorprofile',
+                          params: { uuid: vendoruuid },
+                        }"
+                      >
+                        View Vendor Store
+                      </router-link>
+                    </div>
+                  </div>
+
                 </div>
-              </div>
-            </div>
-            <div v-if="vendortotalsales > 0">
-              <div class="text-[12px] flex">
-                ({{ vendorrating }} Feedback rating
-                <svg
-                  aria-hidden="true"
-                  focusable="false"
-                  data-prefix="fas"
-                  data-icon="star"
-                  class="w-4 text-yellow-500 mr-1"
-                  role="img"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 576 512"
-                >
-                  <path
-                    fill="currentColor"
-                    d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 
-                  103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5
-                  105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"
-                  ></path></svg
-                >)
-              </div>
-            </div>
-            <div v-else>
-              <div class="text-[12px]">Newbie Seller</div>
-            </div>
-            <div v-if="vendoruuid">
-              <div
-                class="mt-5 text-[14px] text-blue-500 hover:text-blue-300 hover:underline pl-3"
-              >
-                <router-link
-                  :to="{
-                    name: 'MsgCreateItem',
-                    params: { uuid: vendoruuid, itemuuid: uuid },
-                  }"
-                >
-                  Contact Seller
-                </router-link>
               </div>
             </div>
           </div>
@@ -179,6 +259,10 @@ export default defineComponent({
     return {
       shopping_cart_count: "",
       vendor_reviews_total: "",
+
+      exact_city: "",
+      exact_stateorprovence: "",
+      exact_zipcode: "",
     };
   },
   computed() {},
@@ -186,20 +270,40 @@ export default defineComponent({
   mounted() {
     const item_id_route = useRoute();
     this.item_id = item_id_route.params.id;
+    this.seeifuserhasdefaultaddress();
   },
 
   methods: {
+    // Add item to cart
     addtocart() {
-      const path = "/checkout/add/" + this.item_id;
       axios({
         method: "post",
-        url: path,
+        url: "/checkout/add/" + this.item_id,
         headers: authHeader(),
       }).then((response) => {
         this.get_shopping_cart_count();
       });
     },
-
+    // see if user has a default address
+    async seeifuserhasdefaultaddress() {
+      await axios({
+        method: "get",
+        url: "/vendor/get/defaultaddress",
+        withCredentials: true,
+        headers: authHeader(),
+      })
+        .then((response) => {
+          if ((response.status = 200)) {
+            this.exact_address = true;
+            this.exact_city = response.data.city;
+            this.exact_stateorprovence = response.data.stateorprovence;
+            this.exact_zipcode = response.data.zipcode;
+          } else {
+            this.exact_address = false;
+          }
+        })
+        .catch((error) => {});
+    },
     // Get How many items in shopping cart
     async get_shopping_cart_count() {
       await axios({
@@ -211,7 +315,7 @@ export default defineComponent({
         this.$emit("UpdateCart", this.shopping_cart_count);
       });
     },
-             returncurrencysymbol(currencydigit) {
+    returncurrencysymbol(currencydigit) {
       if (currencydigit === 0) {
         return "$";
       } else if (currencydigit === 1) {
@@ -345,7 +449,7 @@ export default defineComponent({
         return "CZK";
       }
     },
-
   },
 });
 </script>
+<style></style>

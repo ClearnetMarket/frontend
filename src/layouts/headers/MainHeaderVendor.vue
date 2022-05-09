@@ -1,47 +1,51 @@
 <template>
   <div class="text-center font-bold mt-2 flex justify-center">
     <div v-if="disputes">
-        <router-link :to="{ name: 'vendorordersdispute' }">
-      <button
-        class="flex py-2 px-4 shadow-md no-underline rounded-full text-white font-sans hover:text-white text-sm bg-orange-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2"
-      >
-        <div class="px-2">{{ disputes }}</div>
-        <div class>Disputes</div>
-      </button>
+      <router-link :to="{ name: 'vendorordersdispute' }">
+        <button
+          class="flex py-2 px-4 shadow-md no-underline rounded-full text-white font-sans hover:text-white text-sm bg-orange-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2"
+        >
+          <div class="px-2">{{ disputes }}</div>
+          <div class>Disputes</div>
+        </button>
       </router-link>
     </div>
     <div v-else>
-        <router-link :to="{ name: 'vendorordersdispute' }">
-      <button
-        class="py-2 px-4 shadow-md no-underline rounded-full text-white font-sans text-sm hover:text-white bg-zinc-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2"
-      >
-        Disputes
-      </button>
-           </router-link>
+      <router-link :to="{ name: 'vendorordersdispute' }">
+        <button
+          class="py-2 px-4 shadow-md no-underline rounded-full text-white font-sans text-sm hover:text-white bg-zinc-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2"
+        >
+          Disputes
+        </button>
+      </router-link>
     </div>
 
     <div v-if="feedback" class="q-mt-none">
-       <router-link :to="{ name: 'vendorprofile', params: { uuid: user.user_id } }">
-      <button
-        class="flex py-2 px-4 shadow-md text-sm no-underline rounded-full bg-orange-600 hover:bg-zinc-400 text-white font-sans hover:text-white focus:outline-none active:shadow-none mr-2"
+      <router-link
+        :to="{ name: 'vendorfeedback' }"
       >
-        <div class="px-2">{{ feedback }}</div>
-        <div class>Feedback</div>
-      </button>
-        </router-link>
+        <button
+          class="flex py-2 px-4 shadow-md text-sm no-underline rounded-full bg-orange-600 hover:bg-zinc-400 text-white font-sans hover:text-white focus:outline-none active:shadow-none mr-2"
+        >
+          <div class="px-2">{{ feedback }}</div>
+          <div class>Feedback</div>
+        </button>
+      </router-link>
     </div>
     <div v-else>
-      <router-link :to="{ name: 'vendorprofile', params: { uuid: user.user_id } }">
-      <button
-        class="py-2 px-4 shadow-md no-underline rounded-full text-white font-sans text-sm hover:text-white bg-zinc-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2"
+      <router-link
+        :to="{ name: 'vendorfeedback'}"
       >
-        Feedback
-      </button>
-            </router-link>
+        <button
+          class="py-2 px-4 shadow-md no-underline rounded-full text-white font-sans text-sm hover:text-white bg-zinc-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2"
+        >
+          Feedback
+        </button>
+      </router-link>
     </div>
 
     <div v-if="orders">
-      <router-link :to="{ name: 'vendororders' }">
+      <router-link :to="{ name: 'vendorordersnew' }">
         <button
           class="flex py-2 px-4 shadow-md no-underline rounded-full bg-orange-600 hover:bg-zinc-400 hover:text-white text-white font-sans text-sm btn-primary focus:outline-none active:shadow-none mr-2"
         >
@@ -51,7 +55,7 @@
       </router-link>
     </div>
     <div v-else>
-      <router-link :to="{ name: 'vendororders' }">
+      <router-link :to="{ name: 'vendorordersnew' }">
         <button
           class="py-2 px-4 shadow-md no-underline rounded-full text-white font-sans text-sm hover:text-white bg-zinc-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2"
         >
@@ -82,7 +86,7 @@ export default defineComponent({
   data() {
     return {
       login: null,
-   
+
       orders: "",
       disputes: "",
       feedback: "",

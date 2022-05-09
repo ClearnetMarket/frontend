@@ -1,33 +1,71 @@
 <template>
-  <MainHeaderTop />
-  <MainHeaderMid />
-  <MainHeaderBottom />
-  <div class="container max-w-7xl mx-auto px-10 wrapper mb-10">
-    <div class="grid grid-cols-12">
-      <div class="col-span-3">
-        <div class="text-[18px] mb-5">Message Center</div>
-        <div class="text-[12px]">Conversations</div>
-     
-        <div v-for="userobject in userlist">
+  <div class="bg-gray-200">
+    <MainHeaderTop />
+    <MainHeaderMid />
+    <MainHeaderBottom />
 
-            <router-link :to="{ name: 'MsgView', params: {postid: userobject.post_id }}">
-              <div v-if="userobject.user_one == user.user_name">
-              {{ userobject.user_two }}{{userobject.id}}
+    <div class="container max-w-7xl mx-auto px-10 wrapper pb-10">
+      <nav class="rounded-md w-full">
+        <ol class="list-reset flex">
+          <li>
+            <router-link :to="{ name: 'home' }">
+              <a class="text-blue-600 hover:text-blue-700">Home</a>
+            </router-link>
+          </li>
+          <li>
+            <span class="text-gray-500 mx-2">/</span>
+          </li>
+        </ol>
+      </nav>
+
+      <div class="grid grid-cols-12 pt-5  gap-4">
+        <div class="col-span-3 ">
+          <div
+            class="border border-1 bg-white rounded-md shadow-md text-gray-700 p-5"
+          >
+            <div class="text-[18px] mb-5">Message Center</div>
+
+            <div
+              v-for="userobject in userlist"
+              class="py-2 hover:bg-gray-200 hover:rounded-md"
+            >
+              <router-link
+                :to="{
+                  name: 'MsgView',
+                  params: { postid: userobject.post_id },
+                }"
+              >
+                <div v-if="userobject.user_one == user.user_name">
+                  <div class=" ">
+                    {{ userobject.user_two }}
+                  </div>
+                </div>
+                <div v-else>
+                  <div class="">
+                    {{ userobject.user_one }}
+                  </div>
+                </div>
+              </router-link>
+            </div>
+          </div>
+        </div>
+        <div class="col-span-9 border border-1 rounded ">
+        <div class="text-center">Currently only allowing messaging to vendors through items to prevent botting</div>
+          <div v-if="other_user_count > 0">
+            <div class="text-[18px] mb-5">
+              <div v-if="user_one != user">
+                <div class="">
+                  {{ user_one }}
+                </div>
               </div>
               <div v-else>
-              {{ userobject.user_one }}{{userobject.id}}
+                <div class="">
+                  {{ user_two }}
+                </div>
               </div>
-            </router-link>
-        </div>
-      </div>
-     
-      <div class="col-span-9 border border-1 rounded">
-        <div v-if="other_user_count > 0">
-          <div class="text-[18px] mb-5">
-            <div v-if="user_one != user">{{ user_one }}</div>
-            <div v-else>{{ user_two }}</div>
+            </div>
           </div>
-          <div class="">Conversation</div>
+          <div v-else></div>
         </div>
       </div>
     </div>
@@ -96,9 +134,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-      
           this.userlist = response.data;
-     
         })
         .catch((error) => {});
     },
