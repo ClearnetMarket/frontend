@@ -352,7 +352,7 @@ export default defineComponent({
         headers: authHeader(),
       }).then((response) => {
         if (response.status == 200) {
-          this.orders = response.data;
+    
           this.getuserorders();
         }
       });
@@ -365,7 +365,7 @@ export default defineComponent({
         headers: authHeader(),
       }).then((response) => {
         if (response.status == 200) {
-          this.orders = response.data;
+   
           this.getuserorders();
         }
       });

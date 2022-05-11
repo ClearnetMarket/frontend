@@ -159,7 +159,7 @@
               >
             </div>
           </div>
-          <div class="col-span-2 row-span-1 text-red-600">{{ t.amount }}</div>
+          <div class="col-span-2 row-span-1 text-green-600">{{ t.amount }}</div>
           <div class="col-span-2 row-span-1 ">{{ t.balance }}</div>
         </div>
         <!--#6 = clearnet_webapp profit -->
