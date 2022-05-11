@@ -170,17 +170,17 @@
               </div>
             </div>
          
-            <div v-if="order.vendor_feedback == 0" class="col-span-12 mt-10">
+            <div v-if="order.vendor_feedback == 0" class="col-span-12 ">
               <div class="grid grid-cols-12">
                 <div class="col-span-12">
                   <form @submit.prevent="onSubmitFeedback(order.uuid)">
-                    <div class="grid grid-cols-12 mb-5 p-5">
-                      <div class="col-span-12 text-[18px] mb-5">
+                    <div class="grid grid-cols-12 ">
+                      <div class="col-span-12 text-[14px] ">
                         Leave Feedback for {{ order.customer_user_name }}
                       </div>
 
                       <div class="col-span-12">
-                        <div class="col-span-12">Customer Rating</div>
+                        <div class="col-span-12">Rate this customer:</div>
                         <div class="col-span-12">
                           <fieldset class="rating">
                             <input
@@ -256,7 +256,7 @@
                           </fieldset>
                         </div>
                       </div>
-                      <div class="col-span-12 mt-5 mb-1">Leave a review:</div>
+                      <div class="col-span-12  mb-1">Leave a review:</div>
                       <div class="col-span-12">
                         <textarea
                           v-model="review"
@@ -266,7 +266,7 @@
                           placeholder="Customer Review .."
                         />
                       </div>
-                      <div class="col-span-12 text-center mt-5">
+                      <div class="col-span-12 text-center mt-2">
                         <button
                           class="bg-yellow-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                           type="submit"
@@ -280,7 +280,7 @@
               </div>
             </div>
             <div v-else class="col-span-12 mt-5">
-            Feedback Added
+            
             </div>
           </div>
         </div>

@@ -10,7 +10,7 @@
           <ol class="list-reset flex">
             <li>
               <router-link :to="{ name: 'home' }">
-                <a class="text-blue-600 hover:text-blue-700">Home</a>
+                <a class="text-blue-600 hover:text-blue-500">Home</a>
               </router-link>
             </li>
             <li>
@@ -23,7 +23,7 @@
     <div class="grid grid-cols-1 w-full gap-4">
       <h1 class="col-span-1 font-semibold text-2xl">Your Orders</h1>
       <div class="" v-if="orderscount > 0">
-        <div v-for="order in orders" :key="order.id" class="pb-5">
+        <div v-for="(order, i) in orders" :key="i" class="pb-5">
           <div class="grid grid-cols-12 rounded-md border border-gray-300 mb-5">
             <div class="col-span-12 bg-gray-200 px-5 py-5">
               <div class="grid grid-cols-12 text-[12px]">
@@ -45,8 +45,16 @@
                 </div>
                 <div class="col-span-2"></div>
                 <div class="col-span-4">
-                  <div class="">Order #{{ order.uuid }}</div>
-                  <div class=""></div>
+                  Order #
+                  <router-link
+                    class="text-blue-600 hover:text-blue-500 hover:underline"
+                    :to="{
+                      name: 'vendorordersview',
+                      params: { uuid: order.uuid },
+                    }"
+                  >
+                    {{ order.uuid }}
+                  </router-link>
                 </div>
               </div>
             </div>
@@ -76,13 +84,14 @@
                       >
                         Disputed
                       </div>
+                      <div v-if="order.overall_status == 10">Finalized</div>
                     </div>
                     <div class="col-span-12 text-[14px]">
                       <div class="grid grid-cols-12 pt-5">
                         <div class="col-span-2">Image</div>
                         <div class="col-span-10">
                           <div
-                            class="text-blue-500 hover:text-blue-300 hover:underline text-[18px]"
+                            class="text-blue-600 hover:text-blue-600 hover:underline text-[18px]"
                           >
                             <router-link
                               :to="{
@@ -104,7 +113,7 @@
                                   }"
                                 >
                                   <div
-                                    class="text-blue-500 hover:text-blue-300 hover:underline pl-3"
+                                    class="text-blue-600 hover:text-blue-500 hover:underline pl-3"
                                   >
                                     {{ order.vendor_user_name }}
                                   </div>
@@ -255,25 +264,122 @@
                     </router-link>
                   </div>
                   <!-- Finalized order -->
-                  <div v-if="order.overall_status == 10">
-                    <div class="my-2">
-                      <router-link
-                        :to="{
-                          name: 'vendorordersview',
-                          params: { uuid: order.uuid },
-                        }"
-                      >
-                        <button
-                          class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
-                          type="button"
-                        >
-                          Leave A Review
-                        </button>
-                      </router-link>
+                  <div v-if="order.overall_status == 10"></div>
+                </div>
+              </div>
+            </div>
+
+            <div v-if="order.vendor_feedback == 0" class="col-span-12">
+              <div class="grid grid-cols-12">
+                <div class="col-span-12">
+                  <div class="grid grid-cols-12 p-5">
+                    <div class="col-span-12">
+                      <div class="col-span-12">Rate this vendor:</div>
+                      <div class="col-span-12">
+                        <fieldset class="rating">
+                          <input
+                            type="radio"
+                            id="vendorstar10"
+                            name="vendorrating"
+                            value="10"
+                            @click.prevent="sendscore(order.uuid, '10')"
+                            v-model="order.vendor_rating"
+                          /><label class="full" for="vendorstar10"></label>
+                          <input
+                            type="radio"
+                            id="vendorstar9"
+                            name="vendorrating"
+                            value="9"
+                            @click.prevent="sendscore(order.uuid, '9')"
+                          /><label class="full" for="vendorstar9"></label>
+                          <input
+                            type="radio"
+                            id="vendorstar8"
+                            name="vendorrating"
+                            value="8"
+                            @click.prevent="sendscore(order.uuid, '8')"
+                          /><label class="full" for="vendorstar8"></label>
+                          <input
+                            type="radio"
+                            id="vendorstar7"
+                            name="vendorrating"
+                            value="7"
+                            @click.prevent="sendscore(order.uuid, '7')"
+                          /><label class="full" for="vendorstar7"></label>
+                          <input
+                            type="radio"
+                            id="vendorstar6"
+                            name="vendorrating"
+                            value="6"
+                            @click.prevent="sendscore(order.uuid, '6')"
+                          /><label class="full" for="vendorstar6"></label>
+                          <input
+                            type="radio"
+                            id="vendorstar5"
+                            name="vendorrating"
+                            value="5"
+                            @click.prevent="sendscore(order.uuid, '5')"
+                          /><label class="full" for="vendorstar5"></label>
+                          <input
+                            type="radio"
+                            id="vendorstar4"
+                            name="vendorrating"
+                            value="4"
+                            @click.prevent="sendscore(order.uuid, '4')"
+                          /><label class="full" for="vendorstar4"></label>
+                          <input
+                            type="radio"
+                            id="vendorstar3"
+                            name="vendorrating"
+                            value="3"
+                            @click.prevent="sendscore(order.uuid, '3')"
+                          /><label class="full" for="vendorstar3"></label>
+                          <input
+                            type="radio"
+                            id="vendorstar2"
+                            name="vendorrating"
+                            value="2"
+                            @click.prevent="sendscore(order.uuid, '2')"
+                          /><label class="full" for="vendorstar2"></label>
+                          <input
+                            type="radio"
+                            id="vendorstar1"
+                            name="vendorrating"
+                            value="1"
+                            @click.prevent="sendscore(order.uuid, '1')"
+                          /><label class="full" for="vendorstar1"></label>
+                        </fieldset>
+                      </div>
                     </div>
+                    <div class="col-span-12">Leave a review:</div>
+                    <form
+                      class="col-span-12"
+                      @submit.prevent="sendreview(order.uuid, i)"
+                    >
+                      <textarea
+                        class="shadow appearance-none border border-gray-500 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        id="message"
+                        type="textfield"
+                        placeholder="Customer Review .."
+                        name="order_review"
+                        v-model="review[i]"
+                      />
+
+                      <div class="col-span-12 text-center">
+                        <button
+                          class="bg-yellow-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                          type="submit"
+                        >
+                          Add Feedback
+                        </button>
+                      </div>
+                    </form>
                   </div>
                 </div>
               </div>
+            </div>
+            <div v-else class="col-span-12 mt-5">
+             
             </div>
           </div>
         </div>
@@ -296,8 +402,11 @@ import MainHeaderBottom from "../../layouts/headers/MainHeaderBottom.vue";
 import MainHeaderVendor from "../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../layouts/footers/FooterMain.vue";
 
+
+
 export default defineComponent({
   name: "userorders",
+
 
   components: {
     MainHeaderTop,
@@ -305,21 +414,67 @@ export default defineComponent({
     MainHeaderBottom,
     MainHeaderVendor,
     MainFooter,
+    
   },
 
   data() {
     return {
       orders: [],
       orderscount: "",
+      review: [],
+      rating_vendor: "",
+      rating_item: "",
     };
   },
 
-  mounted() {
+  mounted(uuid, rating) {
     this.getuserorderscount();
     this.getuserorders();
   },
 
   methods: {
+    sendscore(uuid: string, rating: string) {
+      const payLoad = { rating: rating };
+      this.sendFeedbackScore(uuid, payLoad);
+    },
+    async sendFeedbackScore(uuid: string, payLoad = { rating: string }) {
+      await axios({
+        method: "post",
+        url: "/orders/feedback/score/" + uuid,
+        data: payLoad,
+        withCredentials: true,
+        headers: authHeader(),
+      })
+        .then((response) => {
+          console.log(response);
+          this.getuserorders();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    sendreview(uuid, i) {
+      let user_review = this.review[i];
+      const payLoad = { review: user_review };
+      this.sendFeedbackReview(uuid, payLoad);
+    },
+    async sendFeedbackReview(uuid: string, payLoad = { review: string }) {
+      await axios({
+        method: "post",
+        url: "/orders/feedback/review/" + uuid,
+        data: payLoad,
+        withCredentials: true,
+        headers: authHeader(),
+      })
+        .then((response) => {
+          console.log(response);
+          this.getuserorders();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+
     async getuserorders() {
       await axios({
         method: "get",
@@ -352,7 +507,6 @@ export default defineComponent({
         headers: authHeader(),
       }).then((response) => {
         if (response.status == 200) {
-    
           this.getuserorders();
         }
       });
@@ -365,7 +519,6 @@ export default defineComponent({
         headers: authHeader(),
       }).then((response) => {
         if (response.status == 200) {
-   
           this.getuserorders();
         }
       });
@@ -377,9 +530,7 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
-      
         if (response.status == 200) {
-        
           this.getuserorderscount();
           this.getuserorders();
         }
@@ -412,3 +563,52 @@ export default defineComponent({
   },
 });
 </script>
+<style>
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
+fieldset,
+label {
+  margin: 0;
+  padding: 0;
+}
+h1 {
+  font-size: 1.5em;
+  margin: 10px;
+}
+/****** Style Star Rating Widget *****/
+.rating {
+  border: none;
+  float: left;
+}
+.rating > input {
+  display: none;
+}
+.rating > label:before {
+  margin: 5px;
+  font-size: 1.25em;
+  font-family: FontAwesome;
+  display: inline-block;
+  content: "\f005";
+}
+.rating > .half:before {
+  content: "\f089";
+  position: absolute;
+}
+.rating > label {
+  color: #ddd;
+  float: right;
+}
+/***** CSS Magic to Highlight Stars on Hover *****/
+.rating > input:checked ~ label, /* show gold star when clicked */
+.rating:not(:checked) > label:hover, /* hover current star */
+.rating:not(:checked) > label:hover ~ label {
+  color: #ffd700;
+}
+/* hover previous stars in list */
+.rating > input:checked + label:hover, /* hover current star when changing rating */
+.rating > input:checked ~ label:hover,
+.rating > label:hover ~ input:checked ~ label, /* lighten current selection */
+.rating > input:checked ~ label:hover ~ label {
+  color: #ffed85;
+}
+</style>

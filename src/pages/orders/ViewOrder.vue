@@ -28,6 +28,7 @@
         </nav>
       </div>
     </div>
+
     <div class="grid grid-cols-1 w-full gap-4">
       <h1 class="col-span-1 font-semibold text-2xl">{{ order.uuid }}</h1>
       <div class="grid grid-cols-12 rounded-md border border-gray-300 mb-5">
@@ -103,9 +104,30 @@
                             }"
                           >
                             <div
-                              class="text-blue-500 hover:text-blue-300 hover:underline pl-3"
+                              class="text-blue-500 hover:text-blue-300 hover:underline pl-3 flex"
                             >
                               {{ order.vendor_user_name }}
+
+                              <div class="text-[12px] flex">
+                                ({{ vendorrating }} Feedback rating
+                                <svg
+                                  aria-hidden="true"
+                                  focusable="false"
+                                  data-prefix="fas"
+                                  data-icon="star"
+                                  class="w-4 text-yellow-500 mr-1"
+                                  role="img"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  viewBox="0 0 576 512"
+                                >
+                                  <path
+                                    fill="currentColor"
+                                    d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 
+                            103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5
+                            105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"
+                                  ></path></svg
+                                >)
+                              </div>
                             </div>
                           </router-link>
                         </div>
@@ -116,13 +138,161 @@
               </div>
             </div>
             <div class="col-span-3">
-              <div class="my-2">
-                <button
-                  class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
-                  type="button"
+              <div
+                v-if="
+                  order.overall_status == 3 ||
+                  order.overall_status == 2 ||
+                  order.overall_status == 4 ||
+                  order.overall_status == 8
+                "
+              >
+                <div class="my-2">
+                  <router-link
+                    :to="{
+                      name: 'vendorordersview',
+                      params: { uuid: order.uuid },
+                    }"
+                  >
+                    <button
+                      class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
+                      type="button"
+                    >
+                      Tracking Info
+                    </button>
+                  </router-link>
+                </div>
+              </div>
+              <!-- waiting on vendor acceptance order -->
+              <div v-if="order.overall_status == 1">
+                <div class="my-2">
+                  <button
+                    class="bg-red-600 hover:bg-red-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
+                    type="button"
+                    @click="requestcancel(order.uuid)"
+                  >
+                    Request Cancel
+                  </button>
+                </div>
+              </div>
+              <!-- Accepted order -->
+              <div v-if="order.overall_status == 2">
+                <div class="my-2">
+                  <button
+                    class="bg-red-600 hover:bg-red-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
+                    type="button"
+                    @click="requestcancel(order.uuid)"
+                  >
+                    Request Cancel
+                  </button>
+                </div>
+                <div class="my-2">
+                  <button
+                    class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
+                    type="button"
+                    @click="finalize(order.uuid)"
+                  >
+                    Finalize Order
+                  </button>
+                </div>
+
+                <div class="my-2">
+                  <button
+                    class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
+                    type="button"
+                    @click="disputeorder(order.uuid)"
+                  >
+                    Dispute Order
+                  </button>
+                </div>
+              </div>
+              <!-- Shipped order -->
+              <div v-if="order.overall_status == 3">
+                <div class="my-2">
+                  <button
+                    class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
+                    type="button"
+                    @click="delivered(order.uuid)"
+                  >
+                    Mark as Delivered
+                  </button>
+                </div>
+                <div class="my-2">
+                  <button
+                    class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
+                    type="button"
+                    @click="finalize(order.uuid)"
+                  >
+                    Finalize Order
+                  </button>
+                </div>
+                <div class="my-2">
+                  <button
+                    class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
+                    type="button"
+                    @click="disputeorder(order.uuid)"
+                  >
+                    Dispute Order
+                  </button>
+                </div>
+              </div>
+              <!-- Delivered order -->
+              <div v-if="order.overall_status == 4">
+                <div class="my-2">
+                  <button
+                    class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
+                    type="button"
+                    @click="finalize(order.uuid)"
+                  >
+                    Finalize Order
+                  </button>
+                </div>
+                <div class="my-2">
+                  <button
+                    class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
+                    type="button"
+                    @click="disputeorder(order.uuid)"
+                  >
+                    Dispute Order
+                  </button>
+                </div>
+              </div>
+              <!-- Requested Cancel from vendor -->
+              <div v-if="order.overall_status == 6"></div>
+              <!-- Disputed order -->
+              <div v-if="order.overall_status == 8">
+                <router-link
+                  :to="{
+                    name: 'Dispute',
+                    params: { uuid: order.uuid },
+                  }"
                 >
-                  Finalize Early
-                </button>
+                  <button
+                    class="bg-red-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
+                    type="button"
+                  >
+                    View Dispute
+                  </button>
+                </router-link>
+              </div>
+              <!-- Finalized order -->
+              <div v-if="order.overall_status == 10">
+               <div v-if="order.vendor_feedback == 0">
+                <div class="my-2">
+                  <router-link
+                    :to="{
+                      name: 'vendorordersview',
+                      params: { uuid: order.uuid },
+                    }"
+                  >
+                    <button
+                      class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
+                      type="button"
+                    >
+                      Leave A Review
+                    </button>
+                  </router-link>
+                </div>
+              </div>
               </div>
             </div>
           </div>
@@ -138,8 +308,8 @@
         </div>
       </div>
 
-      <div v-if="order.overall_status == 4">
-        <div v-if="order.user_feedback == 0">
+      <div v-if="order.overall_status == 10" class="pb-40">
+        <div v-if="order.vendor_feedback == 0">
           <form @submit.prevent="onSubmitFeedback">
             <div
               class="grid grid-cols-12 rounded-md border border-gray-300 mb-5 p-5"
@@ -331,24 +501,18 @@
           </form>
         </div>
         <div v-else>
-          <div
-            class="grid grid-cols-12 rounded-md border border-gray-300 mb-5 p-5"
-          >
+          <div class="grid grid-cols-12 rounded-md border border-gray-300 p-5">
             <div class="col-span-12 text-[20px] mb-5">Feedback</div>
             <div class="col-span-12">
               <div class="col-span-12">Vendor Rating</div>
               <div v-if="loaded_feedback">
                 <StarRating v-bind:rating="rating_vendor" />
               </div>
-              <div class="col-span-12 mt-5">Item Rating</div>
-              <div v-if="loaded_feedback">
-                <StarRating v-bind:rating="rating_item" />
-              </div>
+
               <div class="col-span-12 mt-5">Review</div>
               <div v-if="loaded_feedback">
-              {{review}}
+                {{ review }}
               </div>
-
             </div>
           </div>
         </div>
@@ -362,7 +526,6 @@
 import { defineComponent } from "vue";
 import axios from "axios";
 import { useRoute } from "vue-router";
-
 import authHeader from "../../services/auth.header";
 import MainHeaderTop from "../../layouts/headers/MainHeaderTop.vue";
 import MainHeaderMid from "../../layouts/headers/MainHeaderMid.vue";
@@ -386,7 +549,8 @@ export default defineComponent({
   data() {
     return {
       loaded_feedback: false,
-      order: [],
+      order: "",
+      order_id: "",
       tracking_number: "",
       carrier_name: "",
       ItemRating: {
@@ -416,19 +580,64 @@ export default defineComponent({
       review: "",
       rating_vendor: "",
       rating_item: "",
+      vendoruuid: "",
+      vendortotalsales: "",
+      vendorrating: "",
+      vendorrating: "",
     };
   },
 
   mounted() {
     this.getuserorder();
     this.getordertracking();
+    this.getorderfeedback();
   },
 
   methods: {
+    //  get vendor info for stats
+    async getvendorinfo() {
+      await axios({
+        method: "get",
+        url: "/vendor/vendoriteminfo/" + this.order.vendor_uuid,
+        withCredentials: true,
+      })
+        .then((response) => {
+          if ((response.status = 200)) {
+            this.vendoruuid = response.data.vendoruuid;
+            this.vendorname = response.data.vendorname;
+            this.vendorrating = response.data.vendorrating;
+            this.vendortotalsales = response.data.vendortotalsales;
+            this.loaded_feedback = true;
+          }
+        })
+        .catch((error) => {});
+    },
+    //  get the order from the params
+    async getuserorder() {
+      const order_id_route = useRoute();
+      const order_id = order_id_route.params.uuid;
+      this.order_id = order_id;
+
+      await axios({
+        method: "get",
+        url: "/orders/" + this.order_id,
+        withCredentials: true,
+        headers: authHeader(),
+      }).then((response) => {
+        if (response.status == 200) {
+          this.order = response.data;
+          this.getvendorinfo();
+          if (this.order.user_feedback == 1) {
+            this.getorderfeedback();
+          }
+        }
+      });
+    },
+    // get the feedback on vendor
     async getorderfeedback() {
       await axios({
         method: "get",
-        url: "/orders/feedback/get/" + this.order.uuid,
+        url: "/orders/feedback/get/" + this.order_id,
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
@@ -440,7 +649,7 @@ export default defineComponent({
         }
       });
     },
-
+    // set variables for ratings
     onSubmitFeedback() {
       if (this.ItemRating.itemrating1 == 1) {
         this.rating_item = 1;
@@ -511,45 +720,8 @@ export default defineComponent({
           }
         });
     },
-
-    async getuserorder() {
-      const order_id_route = useRoute();
-      const order_id = order_id_route.params.uuid;
-      this.order_id = order_id;
-
-      await axios({
-        method: "get",
-        url: "/orders/" + this.order_id,
-        withCredentials: true,
-        headers: authHeader(),
-      }).then((response) => {
-        if (response.status == 200) {
-          this.order = response.data;
-          if (this.order.user_feedback == 1) {
-            this.getorderfeedback();
-          }
-        }
-      });
-    },
+    // get the trracking info
     async getordertracking() {
-      const order_id_route = useRoute();
-      const order_id = order_id_route.params.uuid;
-      this.order_id = order_id;
-
-      await axios({
-        method: "get",
-        url: "/vendororders/tracking/get/" + this.order_id,
-        withCredentials: true,
-        headers: authHeader(),
-      }).then((response) => {
-        if (response.status == 200) {
-          this.tracking_number = response.data.tracking_number;
-          this.carrier_name = response.data.carrier_name;
-        }
-      });
-    },
-
-    async getorderreview() {
       const order_id_route = useRoute();
       const order_id = order_id_route.params.uuid;
       this.order_id = order_id;
