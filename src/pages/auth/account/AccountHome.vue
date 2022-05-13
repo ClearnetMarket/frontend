@@ -24,13 +24,13 @@
       </nav>
     </div>
     <div v-if="loaded_user">
-    <div class="grid grid-cols-1 bg-white rounded-md p-6">
+    <div class="flex ">
       <div class="text-[24px]">My Account</div>
     </div>
 
     <!-- END Top Stuff-->
 
-    <div class="grid sm:grid-cols-1 md:grid-cols-3 gap-5 my-3">
+    <div class="grid sm:grid-cols-1 md:grid-cols-3 gap-5 my-3 pb-40">
 
       <router-link :to="{ name: 'userorders' }">
         <div

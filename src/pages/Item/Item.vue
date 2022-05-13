@@ -55,6 +55,10 @@
     v-bind:imagetwoserver="imagetwoserver"
     v-bind:imagethreeserver="imagethreeserver"
     v-bind:imagefourserver="imagefourserver"
+    v-bind:exactaddress="exactaddress"
+    v-bind:exactcity="exactcity"
+    v-bind:exactstateorprovence="exactstateorprovence"
+    v-bind:exactzipcode="exactzipcode"
   />
   <ItemDescription v-bind:description="description" />
 
@@ -162,6 +166,12 @@ export default defineComponent({
       shippingpricethree: "",
       shippingdaythree: "",
       vendorreviews: [],
+      shopping_cart_count: "",
+      vendor_reviews_total: "",
+  
+      exactcity: "",
+      exactstateorprovence: "",
+      exactzipcode: "",
     };
   },
 
@@ -170,9 +180,6 @@ export default defineComponent({
   },
 
   methods: {
-    UpdateCart() {
-      this.shoppingcartcount += 1;
-    },
     async getitem() {
       const item_id_route = useRoute();
       const item_id = item_id_route.params.id;
@@ -225,10 +232,35 @@ export default defineComponent({
             this.getpricexmr();
             this.getitemprice();
             this.add_view();
+            this.seeifuserhasdefaultaddress();
           }
         })
         .catch((error) => {});
     },
+    async seeifuserhasdefaultaddress() {
+      await axios({
+        method: "get",
+        url: "/vendor/get/defaultaddress/" +  this.item.vendor_uuid,
+        withCredentials: true,
+        headers: authHeader(),
+      })
+        .then((response) => {
+        
+          if ((response.status = 200)) {
+      
+            this.exactcity = response.data.city;
+            this.exactstateorprovence = response.data.stateorprovence;
+            this.exactzipcode = response.data.zipcode;
+          } else {
+     
+          }
+        })
+        .catch((error) => {});
+    },
+    UpdateCart() {
+      this.shoppingcartcount += 1;
+    },
+
     async getitemcondition() {
       if (this.item.item_condition === 1) {
         this.condition = "New";
@@ -289,7 +321,6 @@ export default defineComponent({
       })
         .then((response) => {
           if ((response.status = 200)) {
-          
             this.vendoruuid = response.data.vendoruuid;
             this.vendorrating = response.data.vendorrating;
             this.vendortotalsales = response.data.vendortotalsales;

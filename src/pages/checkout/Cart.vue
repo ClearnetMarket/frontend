@@ -216,7 +216,9 @@
             </div>
             <div class="col-span-12">
               <div v-if="order_summary_shipping_cost == 0">
-                <Div class="text-orange-500">Free Shipping</Div>
+                <div v-if="order_summary_count > 0">
+                <div class="text-orange-500">Free Shipping</div>
+                </div>
               </div>
               <div v-else>
                 <label class="font-medium inline-block mb-3 text-sm uppercase"

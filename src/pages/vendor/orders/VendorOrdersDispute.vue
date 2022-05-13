@@ -1,8 +1,9 @@
 <template>
+  <div class="bg-gray-300">
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
-
+  <MainHeaderVendor />
   <div class="max-w-4xl mx-auto wrapper px-10">
     <div class="grid grid-cols-1 w-full gap-4">
       <div class="mb-10 mt-5 px-5">
@@ -62,6 +63,7 @@
       <div v-else>You Currently have no disputes :)</div>
     </div>
   </div>
+  </div>
   <MainFooter />
 </template>
 
@@ -83,6 +85,7 @@ export default defineComponent({
     MainHeaderMid,
     MainHeaderBottom,
     MainFooter,
+    MainHeaderVendor
   },
   computed: {
     ...mapGetters(["user"]),

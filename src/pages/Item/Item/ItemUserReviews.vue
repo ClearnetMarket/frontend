@@ -134,12 +134,10 @@
             <div
               class="col-span-12 text-sm font-medium text-gray-500 dark:text-gray-400"
             >
-              Date Purchased: {{ relativeDate(review.timestamp) }}
+              Date Purchased: {{ relativeDate(review.timestamp) }} ago
             </div>
-            <div class="col-span-12">Item Rating</div>
-            <div class="col-span-12 mb-2">
-              <StarRating v-bind:rating="review.item_rating" />
-            </div>
+          
+           
             <div class="col-span-12">Vendor Rating</div>
             <div class="col-span-12 mb-2">
               <StarRating v-bind:rating="review.vendor_rating" />

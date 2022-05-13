@@ -70,15 +70,15 @@
           </div>
         </div>
         <div class="mb-2 text-[14px] text-gray-700">
-          <div v-if="(exact_address = true)">
+        
             <div class="grid grid-cols-12 gap-4">
               <div class="col-span-3">Located:</div>
               <div class="col-span-9">
-                {{ exact_city }} {{ exact_stateorprovence }}
-                {{ exact_zipcode }} {{ origincountry }}
+                {{ exactcity }} {{ exactstateorprovence }}
+                {{ exactzipcode }} {{ origincountry }}
               </div>
             </div>
-          </div>
+    
 
           <div v-if="(shippingfree = true)">
             <div class="grid grid-cols-12 gap-4">
@@ -250,6 +250,10 @@ export default defineComponent({
     "shippingthree",
     "shippingthreedays",
 
+    "exactcity",
+    "exactstateorprovence",
+    "exactzipcode",
+
     "price",
     "pricebtc",
     "pricebch",
@@ -260,7 +264,6 @@ export default defineComponent({
     return {
       shopping_cart_count: "",
       vendor_reviews_total: "",
-
       exact_city: "",
       exact_stateorprovence: "",
       exact_zipcode: "",
@@ -271,7 +274,7 @@ export default defineComponent({
   mounted() {
     const item_id_route = useRoute();
     this.item_id = item_id_route.params.id;
-    this.seeifuserhasdefaultaddress();
+ 
   },
 
   methods: {
@@ -285,26 +288,7 @@ export default defineComponent({
         this.get_shopping_cart_count();
       });
     },
-    // see if user has a default address
-    async seeifuserhasdefaultaddress() {
-      await axios({
-        method: "get",
-        url: "/vendor/get/defaultaddress",
-        withCredentials: true,
-        headers: authHeader(),
-      })
-        .then((response) => {
-          if ((response.status = 200)) {
-            this.exact_address = true;
-            this.exact_city = response.data.city;
-            this.exact_stateorprovence = response.data.stateorprovence;
-            this.exact_zipcode = response.data.zipcode;
-          } else {
-            this.exact_address = false;
-          }
-        })
-        .catch((error) => {});
-    },
+   
     // Get How many items in shopping cart
     async get_shopping_cart_count() {
       await axios({

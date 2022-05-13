@@ -1,10 +1,11 @@
 <template>
+  <div class="bg-gray-300">
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
-
+  <MainHeaderVendor />
   <!-- Top Stuff-->
-  <div class="container max-w-7xl mx-auto px-10 wrapper">
+  <div class="container max-w-7xl mx-auto px-10 wrapper pb-40">
     <nav class="rounded-md w-full">
       <ol class="list-reset flex">
         <li>
@@ -213,6 +214,7 @@
       </div>
     </div>
   </div>
+  </div>
   <MainFooter />
 </template>
 
@@ -267,6 +269,7 @@ export default defineComponent({
     this.user_id = user_uuid_route.params.uuid;
     console.log(this.user_id);
     this.getratings();
+    this.deleteordernotice();
   },
 
   methods: {
@@ -274,6 +277,18 @@ export default defineComponent({
       var d = value;
       var e = new Date(d).valueOf();
       return formatDistance(e, new Date());
+    },
+         async deleteordernotice() {
+      await axios({
+        method: "delete",
+        url: "/vendor/new-feedback-count/markasread" ,
+        withCredentials: true,
+        headers: authHeader(),
+      }).then((response) => {
+        if (response.status == 200) {
+          this.getuserneworderscount();
+        }
+      });
     },
     async getvendorreviews() {
       await axios({

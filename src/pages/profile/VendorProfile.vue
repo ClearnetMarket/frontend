@@ -1,5 +1,5 @@
 <template >
-<div class="bg-gray-200">
+<div class="bg-gray-300">
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
@@ -17,7 +17,7 @@
       </ol>
     </nav>
 
-    <div v-if="page_loaded">
+    <div v-if="page_loaded" class="pb-36">
       <div class="max-w-4xl mx-auto px-10">
         <div class="flex justify-center">
           <div
@@ -57,18 +57,18 @@
           </div>
         </div>
       </div>
-      <div class="max-w-7xl mx-auto mb-10">
+      <div class="max-w-5xl mx-auto mb-10 ">
         <div class="grid grid-cols-12">
           <GetVendorItems v-bind:vendoruuid="user.uuid" />
         </div>
       </div>
 
-      <div class="max-w-4xl mx-auto px-10 text-gray-700 pb-36">
-        <div class="grid grid-cols-12">
-          <div class="col-span-4 gap-4">
+      <div class="max-w-4xl mx-auto px-10 text-gray-700 ">
+        <div class="grid grid-cols-12 gap-4 ">
+          <div class="col-span-4 p-4 rounded bg-white shadow-md">
             <div class="flex text-[18px]">All User Reviews:</div>
             <div v-if="user_reviews_total == 0">
-              No Reviews for this vendor!
+              No Reviews for {{user.display_name}}
             </div>
             <div v-else>
               <p class="text-sm font-medium text-gray-500 dark:text-gray-400">
@@ -260,9 +260,9 @@
           </div>
           <div class="col-span-8">
             <div v-for="review in userreviews" :key="review.id">
-              <div class="grid grid-cols-12">
+              <div class="grid grid-cols-12 rounded bg-white shadow-md p-5">
                 <div
-                  class="col-span-12 text-sm font-medium text-gray-500 dark:text-gray-400"
+                  class="col-span-12 text-sm font-medium text-gray-800 dark:text-gray-800"
                 >
                   {{ review.vendor_name }}
                 </div>
@@ -281,10 +281,10 @@
 
                 <div class="col-span-12">User Rating</div>
                 <div class="col-span-12 mb-2">
-                  <StarRating v-bind:rating="review.customer_rating" />
+                  <StarRating v-bind:rating="review.vendor_rating" />
                 </div>
 
-                <div class="col-span-12 mt-2">{{ review.review }}</div>
+                <div class="col-span-12 mt-2 text-gray-600 dark:text-gray-800">{{ review.review }}</div>
               </div>
             </div>
           </div>
@@ -403,7 +403,7 @@ export default defineComponent({
     async getreviews() {
       await axios({
         method: "get",
-        url: "/info/user-feedback/" + this.user_uuid,
+        url: "/vendor/vendor-feedback/" + this.user_uuid,
         withCredentials: true,
       })
         .then((response) => {
@@ -412,6 +412,7 @@ export default defineComponent({
             if (this.userreviews == undefined) {
               this.userreviews = "No Reviews Yet";
             }
+     
           }
         })
         .catch((error) => {});

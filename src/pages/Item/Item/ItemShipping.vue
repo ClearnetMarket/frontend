@@ -24,11 +24,11 @@
       <div class="grid grid-cols-12 gap-4">
         <div class="sm:col-span-12 md:col-span-12">Shipping Options:</div>
         <div class="sm:col-span-12 md:col-span-12">
-          <div class="flex justify-evenly">
+          <div class="flex gap-4">
           <div v-if="shippingfree == true">
             <div
               class="border border-1 rounded-md p-5 hover:bg-gray-100"
-              style="cursor: pointer"
+      
             >
               <div class="grid grid-cols-4 grid-rows-2">
            
@@ -44,7 +44,7 @@
           <div v-if="shippingtwo == true">
             <div
               class="border border-1 rounded-md p-5 hover:bg-gray-100"
-              style="cursor: pointer"
+            
             >
               <div class="grid grid-cols-4 grid-rows-2">
               
@@ -60,7 +60,6 @@
           <div v-if="shippingthree == true">
            <div
               class="border border-1 rounded-md p-5 hover:bg-gray-100"
-              style="cursor: pointer"
             >
               <div class="grid grid-cols-4 grid-rows-2">
                
