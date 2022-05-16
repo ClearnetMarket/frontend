@@ -162,8 +162,9 @@ export default defineComponent({
     },
   },
   methods: {
+          //user Auth
     async userstatus() {
-      //user Auth
+
       await axios({
         method: "get",
         url: "/auth/whoami",
@@ -175,8 +176,9 @@ export default defineComponent({
         }
       });
     },
+    // Get the item thats being modified
     async getItemForSale() {
-      // Get the item thats being modified
+
 
       const path = "/item/" + this.item_id;
 
@@ -194,11 +196,8 @@ export default defineComponent({
         .catch((error) => {});
     },
 
-    async CreateItemImages() {
-
- 
+    async CreateItemImages() { 
       let formData = new FormData();
-
       if (this.$refs.fileInput1 !== null){
         formData.append("image_main", this.$refs.fileInput1.files[0]);
       }
@@ -316,16 +315,16 @@ export default defineComponent({
     onUploaded(info) {
       let files = info.files;
       files.forEach((item) => {});
-      // this.getItemForSale();
+
     },
-    // eslint-disable-next-line no-console
+
     onFailed(info) {
       let err = JSON.parse(info.xhr.response);
    
       let files = info.files;
       files.forEach((item) => {});
     },
-    // eslint-disable-next-line no-console
+
     onRejected(rejectedEntries) {},
   },
 });

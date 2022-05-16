@@ -161,13 +161,14 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import axios from "axios";
+import { notify } from "@kyvg/vue3-notification";
+import { formatDistance } from "date-fns";
 import authHeader from "../../../services/auth.header";
 import MainHeaderTop from "../../../layouts/headers/MainHeaderTop.vue";
 import MainHeaderMid from "../../../layouts/headers/MainHeaderMid.vue";
 import MainHeaderBottom from "../../../layouts/headers/MainHeaderBottom.vue";
 import MainHeaderVendor from "../../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../../layouts/footers/FooterMain.vue";
-import { formatDistance } from "date-fns";
 
 export default defineComponent({
   name: "vendororderscancel",
@@ -202,6 +203,7 @@ export default defineComponent({
   },
 
   methods: {
+    // gets the user orders
     async getuserorders() {
       await axios({
         method: "get",
@@ -212,8 +214,15 @@ export default defineComponent({
         if (response.status == 200) {
           this.orders = response.data;
         }
-      });
+      }).catch((error) => {
+          notify({
+            title: "Freeport Error",
+            text: "Error retrieving information.",
+            type: "error",
+          });
+        });
     },
+    // rejects the orders
     async rejectorder(uuid) {
       await axios({
         method: "post",
@@ -223,10 +232,22 @@ export default defineComponent({
       }).then((response) => {
         if (response.status == 200) {
           this.getuserorders();
-              this.getuserneworderscount();
+          this.getuserneworderscount();
+          notify({
+            title: "Message Center",
+            text: "Order Rejected",
+            type: "error",
+          });
         }
-      });
+      }).catch((error) => {
+          notify({
+            title: "Freeport Error",
+            text: "Error retrieving information.",
+            type: "error",
+          });
+        });
     },
+    // accepts the orders
     async acceptorder(uuid) {
       await axios({
         method: "put",
@@ -236,10 +257,22 @@ export default defineComponent({
       }).then((response) => {
         if (response.status == 200) {
           this.getuserorders();
-              this.getuserneworderscount();
+          this.getuserneworderscount();
+          notify({
+            title: "Message Center",
+            text: "Order Accepted!",
+            type: "success",
+          });
         }
-      });
+      }).catch((error) => {
+          notify({
+            title: "Freeport Error",
+            text: "Error retrieving information.",
+            type: "error",
+          });
+        });
     },
+    // gets the top bars count for orders
     async getuserneworderscount() {
       await axios({
         method: "get",
@@ -259,8 +292,15 @@ export default defineComponent({
           this.vendor_orders_cancelled = response.data.vendor_orders_cancelled;
           this.vendor_orders_dispute = response.data.vendor_orders_dispute;
         }
-      });
+      }).catch((error) => {
+          notify({
+            title: "Freeport Error",
+            text: "Error retrieving information.",
+            type: "error",
+          });
+        });
     },
+    // date conversion
     relativeDate(value) {
       var d = value;
       var e = new Date(d).valueOf();

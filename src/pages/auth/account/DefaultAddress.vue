@@ -20,7 +20,7 @@
           <li>
             <span class="text-gray-500 mx-2">/</span>
           </li>
-           <li>
+          <li>
             <router-link :to="{ name: 'account' }">
               <a class="text-blue-600 hover:text-blue-700">Account</a>
             </router-link>
@@ -28,7 +28,6 @@
           <li>
             <span class="text-gray-500 mx-2">/</span>
           </li>
-
         </ol>
       </nav>
     </div>
@@ -45,8 +44,7 @@
           >Country</label
         >
         <select
-          class="col-span-12 shadow form-select appearance-none block w-full px-3 py-1.5 text-base font-normal focus:shadow-outline border-gray-500 text-gray-700 bg-white bg-clip-padding 
-          bg-no-repeat border rounded transition ease-in-out m-0 focus:text-gray-900 focus:bg-white focus:border-blue-600 focus:outline-none"
+          class="col-span-12 shadow form-select appearance-none block w-full px-3 py-1.5 text-base font-normal focus:shadow-outline border-gray-500 text-gray-700 bg-white bg-clip-padding bg-no-repeat border rounded transition ease-in-out m-0 focus:text-gray-900 focus:bg-white focus:border-blue-600 focus:outline-none"
           aria-label="Default select example"
           v-model="ChangeAddressForm.country"
         >
@@ -161,6 +159,8 @@
 import axios from "axios";
 import { defineComponent } from "vue";
 import { ref } from "vue";
+import { notify } from "@kyvg/vue3-notification";
+
 import { mapGetters } from "vuex";
 import MainHeaderTop from "../../../layouts/headers/MainHeaderTop.vue";
 import MainHeaderMid from "../../../layouts/headers/MainHeaderMid.vue";
@@ -168,6 +168,7 @@ import MainHeaderBottom from "../../../layouts/headers/MainHeaderBottom.vue";
 import MainHeaderVendor from "../../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../../layouts/footers/FooterMain.vue";
 import authHeader from "../../../services/auth.header";
+
 
 export default defineComponent({
   name: "defaultaddress",
@@ -223,7 +224,12 @@ export default defineComponent({
         headers: authHeader(),
       }).then((response) => {
         if ((response.status = 200)) {
-  this.$router.push("/account");
+              notify({
+              title: "Updated Address",
+              text: "Success!",
+              type: "success",
+            });
+          this.$router.push("/account");
         }
       });
     },
@@ -241,7 +247,8 @@ export default defineComponent({
           this.ChangeAddressForm.apt = response.data.apt;
           this.ChangeAddressForm.city = response.data.city;
           this.ChangeAddressForm.address = response.data.address;
-          this.ChangeAddressForm.stateorprovence = response.data.state_or_provence;
+          this.ChangeAddressForm.stateorprovence =
+            response.data.state_or_provence;
           this.ChangeAddressForm.zip = response.data.zip;
           this.ChangeAddressForm.message = response.data.message;
         }
@@ -269,7 +276,7 @@ export default defineComponent({
         zip: this.ChangeAddressForm.zip,
         message: this.ChangeAddressForm.message,
       };
-      console.log(payLoad)
+      console.log(payLoad);
       await this.addusershipping(payLoad);
     },
   },

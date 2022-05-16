@@ -167,13 +167,14 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import axios from "axios";
+import { notify } from "@kyvg/vue3-notification";
+import { formatDistance } from "date-fns";
 import authHeader from "../../../services/auth.header";
 import MainHeaderTop from "../../../layouts/headers/MainHeaderTop.vue";
 import MainHeaderMid from "../../../layouts/headers/MainHeaderMid.vue";
 import MainHeaderBottom from "../../../layouts/headers/MainHeaderBottom.vue";
 import MainHeaderVendor from "../../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../../layouts/footers/FooterMain.vue";
-import { formatDistance } from "date-fns";
 
 export default defineComponent({
   name: "vendorordersshipped",
@@ -208,6 +209,7 @@ export default defineComponent({
   },
 
   methods: {
+    // gets the user new orders
     async getuserorders() {
       await axios({
         method: "get",
@@ -217,12 +219,10 @@ export default defineComponent({
       }).then((response) => {
         if (response.status == 200) {
           this.orders = response.data;
-          
-        
         }
       });
     },
-
+  // gets the user counts
     async getuserneworderscount() {
       await axios({
         method: "get",

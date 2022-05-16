@@ -21,12 +21,11 @@
       </nav>
     </div>
     <div class="mx-auto max-w-lg flex items-center justify-center mb-10 mt-12">
-        
       <form
         class="bg-gray-100 shadow-md border-2 border-gray-300 rounded-md px-8 pt-6 pb-8 mb-4 w-full"
         @submit.prevent="onSubmit"
       >
-         <div class="mb-4 text-center text-[28px] text-zinc-600">Change Pin</div>
+        <div class="mb-4 text-center text-[28px] text-zinc-600">Change Pin</div>
         <div class="mb-4">
           <label class="block text-gray-700 text-sm font-bold mb-2"
             >Enter current Password</label
@@ -76,20 +75,22 @@
       </form>
     </div>
   </div>
-  
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 import axios from "axios";
 import { ref } from "vue";
+import { notify } from "@kyvg/vue3-notification";
+
 import authHeader from "../../services/auth.header";
 import HeaderPlain from "../../layouts/headers/HeaderPlain.vue";
+
 
 export default defineComponent({
   name: "changepin",
   components: {
-    HeaderPlain
+    HeaderPlain,
   },
 
   data() {
@@ -111,12 +112,20 @@ export default defineComponent({
       })
         .then((response) => {
           if (response.data.status == "success") {
-           
-             this.$router.push({ name: "login" });
+            notify({
+              title: "Authorization",
+              text: "Success!",
+              type: "success",
+            });
+            this.$router.push({ name: "login" });
           }
         })
         .catch((error) => {
-         
+          notify({
+            title: "Authorization",
+            text: "Invalid Credentials.",
+            type: "error",
+          });
         });
     },
     onSubmit() {
@@ -130,4 +139,3 @@ export default defineComponent({
 });
 </script>
 
-<style type="ts" scoped></style>

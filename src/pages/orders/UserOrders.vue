@@ -378,9 +378,7 @@
                 </div>
               </div>
             </div>
-            <div v-else class="col-span-12 mt-5">
-             
-            </div>
+            <div v-else class="col-span-12 mt-5"></div>
           </div>
         </div>
       </div>
@@ -395,6 +393,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import axios from "axios";
+import { notify } from "@kyvg/vue3-notification";
 import authHeader from "../../services/auth.header";
 import MainHeaderTop from "../../layouts/headers/MainHeaderTop.vue";
 import MainHeaderMid from "../../layouts/headers/MainHeaderMid.vue";
@@ -402,11 +401,8 @@ import MainHeaderBottom from "../../layouts/headers/MainHeaderBottom.vue";
 import MainHeaderVendor from "../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../layouts/footers/FooterMain.vue";
 
-
-
 export default defineComponent({
   name: "userorders",
-
 
   components: {
     MainHeaderTop,
@@ -414,7 +410,6 @@ export default defineComponent({
     MainHeaderBottom,
     MainHeaderVendor,
     MainFooter,
-    
   },
 
   data() {
@@ -433,6 +428,7 @@ export default defineComponent({
   },
 
   methods: {
+    // sends the score
     sendscore(uuid: string, rating: string) {
       const payLoad = { rating: rating };
       this.sendFeedbackScore(uuid, payLoad);
@@ -446,13 +442,24 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          console.log(response);
-          this.getuserorders();
+          if ((response.status = 200)) {
+            notify({
+              title: "Message Center",
+              text: "Successfully sent feedback!",
+              type: "success",
+            });
+            this.getuserorders();
+          }
         })
         .catch((error) => {
-          console.log(error);
+          notify({
+            title: "Freeport Error",
+            text: "Error posting information.",
+            type: "error",
+          });
         });
     },
+    // sends the text review feedback
     sendreview(uuid, i) {
       let user_review = this.review[i];
       const payLoad = { review: user_review };
@@ -467,14 +474,24 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          console.log(response);
-          this.getuserorders();
+          if ((response.status = 200)) {
+            notify({
+              title: "Message Center",
+              text: "Successfully sent feedback!",
+              type: "success",
+            });
+            this.getuserorders();
+          }
         })
         .catch((error) => {
-          console.log(error);
+          notify({
+            title: "Freeport Error",
+            text: "Error posting information.",
+            type: "error",
+          });
         });
     },
-
+  // gets the user orders
     async getuserorders() {
       await axios({
         method: "get",
@@ -487,6 +504,7 @@ export default defineComponent({
         }
       });
     },
+      // gets how many orders
     async getuserorderscount() {
       await axios({
         method: "get",
@@ -499,6 +517,7 @@ export default defineComponent({
         }
       });
     },
+      // mark as delivered
     async delivered(uuid) {
       await axios({
         method: "get",
@@ -508,9 +527,15 @@ export default defineComponent({
       }).then((response) => {
         if (response.status == 200) {
           this.getuserorders();
+                        notify({
+              title: "Message Center",
+              text: "Successfully marked as delivered!",
+              type: "success",
+            });
         }
       });
     },
+    // marks as finalized
     async finalize(uuid) {
       await axios({
         method: "get",
@@ -520,9 +545,15 @@ export default defineComponent({
       }).then((response) => {
         if (response.status == 200) {
           this.getuserorders();
+                        notify({
+              title: "Message Center",
+              text: "Successfully finalized order!",
+              type: "success",
+            });
         }
       });
     },
+    // mark as requested to cancel
     async requestcancel(uuid) {
       await axios({
         method: "get",
@@ -531,11 +562,17 @@ export default defineComponent({
         headers: authHeader(),
       }).then((response) => {
         if (response.status == 200) {
+                        notify({
+              title: "Message Center",
+              text: "Successfully sent cancel request to vendor!",
+              type: "success",
+            });
           this.getuserorderscount();
           this.getuserorders();
         }
       });
     },
+    // mark as disputed
     async disputeorder(uuid) {
       await axios({
         method: "get",
@@ -544,11 +581,17 @@ export default defineComponent({
         headers: authHeader(),
       }).then((response) => {
         if (response.status == 200) {
+                        notify({
+              title: "Message Center",
+              text: "Successfully request a dispute.",
+              type: "success",
+            });
           this.createdisputechat(uuid);
           this.getuserorders();
         }
       });
     },
+    // creates dispute chat (background call)
     async createdisputechat(uuid) {
       await axios({
         method: "post",

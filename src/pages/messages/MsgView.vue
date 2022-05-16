@@ -121,7 +121,7 @@
 
             <!-- comment Form -->
             <form
-              class="rounded-md pt-6 pb-4  w-full"
+              class="rounded-md pt-6 pb-4 w-full"
               @submit.prevent="onSubmit"
             >
               <div class="">
@@ -144,8 +144,8 @@
             <!-- comments -->
             <!-- Top Post -->
             <div class="border border-1">
-              <div class="grid grid-cols-12 p-5  border-b border-gray-400">
-                <div class="col-span-12 text-gray-600 ">
+              <div class="grid grid-cols-12 p-5 border-b border-gray-400">
+                <div class="col-span-12 text-gray-600">
                   <router-link
                     class="hover:text-blue-500 hover:underline"
                     :to="{
@@ -204,6 +204,7 @@ import { ref } from "vue";
 import { mapGetters } from "vuex";
 import { useRoute } from "vue-router";
 import { formatDistance } from "date-fns";
+import { notify } from "@kyvg/vue3-notification";
 import authHeader from "../../services/auth.header";
 import MainHeaderTop from "../../layouts/headers/MainHeaderTop.vue";
 import MainHeaderMid from "../../layouts/headers/MainHeaderMid.vue";
@@ -252,6 +253,7 @@ export default defineComponent({
   },
 
   methods: {
+    // get the main post of the contect from api
     async getmainpost() {
       await axios({
         method: "get",
@@ -270,22 +272,36 @@ export default defineComponent({
           this.getmainpostcomments();
           this.loaded = true;
         })
-        .catch((error) => {});
+        .catch((error) => {
+          notify({
+            title: "Freeport Error",
+            text: "Error retrieving information",
+            type: "error",
+          });
+        });
     },
-
+    // get the item
     async gettheitem() {
       await axios({
         method: "get",
         url: "/item/" + this.item_uuid,
         withCredentials: true,
         headers: authHeader(),
-      }).then((response) => {
-        if ((response.status = 200)) {
-          this.itemforsale = response.data;
-        }
-      });
+      })
+        .then((response) => {
+          if ((response.status = 200)) {
+            this.itemforsale = response.data;
+          }
+        })
+        .catch((error) => {
+          notify({
+            title: "Freeport Error",
+            text: "Error retrieving information",
+            type: "error",
+          });
+        });
     },
-
+    // gets the order of the msg
     async gettheorder() {
       if (user_one_uuid == user.uuid) {
         await axios({
@@ -293,11 +309,19 @@ export default defineComponent({
           url: "/orders/vendor/" + this.order_uuid,
           withCredentials: true,
           headers: authHeader(),
-        }).then((response) => {
-          if ((response.status = 200)) {
-            this.order = response.data;
-          }
-        });
+        })
+          .then((response) => {
+            if ((response.status = 200)) {
+              this.order = response.data;
+            }
+          })
+          .catch((error) => {
+            notify({
+              title: "Freeport Error",
+              text: "Error retrieving information",
+              type: "error",
+            });
+          });
       }
       if (user_two_uuid == user.uuid) {
         await axios({
@@ -305,14 +329,22 @@ export default defineComponent({
           url: "/orders/" + this.order_uuid,
           withCredentials: true,
           headers: authHeader(),
-        }).then((response) => {
-          if ((response.status = 200)) {
-            this.order = response.data;
-          }
-        });
+        })
+          .then((response) => {
+            if ((response.status = 200)) {
+              this.order = response.data;
+            }
+          })
+          .catch((error) => {
+            notify({
+              title: "Freeport Error",
+              text: "Error retrieving information",
+              type: "error",
+            });
+          });
       }
     },
-
+    // gets coments of main post
     async getmainpostcomments() {
       await axios({
         method: "get",
@@ -323,9 +355,15 @@ export default defineComponent({
         .then((response) => {
           this.mainpostcomments = response.data;
         })
-        .catch((error) => {});
+       .catch((error) => {
+            notify({
+              title: "Freeport Error",
+              text: "Error retrieving information",
+              type: "error",
+            });
+          });
     },
-
+    // gets the count of posts
     async getcountofusers() {
       await axios({
         method: "get",
@@ -336,9 +374,15 @@ export default defineComponent({
         .then((response) => {
           this.other_user_count = response.data.get_count;
         })
-        .catch((error) => {});
+        .catch((error) => {
+            notify({
+              title: "Freeport Error",
+              text: "Error retrieving information",
+              type: "error",
+            });
+          });
     },
-
+    // gets the msds of the users
     async getmsgsofusers() {
       await axios({
         method: "get",
@@ -349,9 +393,15 @@ export default defineComponent({
         .then((response) => {
           this.userlist = response.data;
         })
-        .catch((error) => {});
+        .catch((error) => {
+            notify({
+              title: "Freeport Error",
+              text: "Error retrieving information",
+              type: "error",
+            });
+          });
     },
-
+    //sends a comment to the api
     async sendcomment(payLoad: { body: string }) {
       await axios({
         method: "post",
@@ -369,18 +419,21 @@ export default defineComponent({
           }
         })
         .catch((error) => {
-          if (error.response) {
-          }
-        });
+            notify({
+              title: "Freeport Error",
+              text: "Error retrieving information",
+              type: "error",
+            });
+          });
     },
-
+    //payload for submitting a comment
     onSubmit() {
       const payLoad = {
         textbody: this.SendMsgForm.msginfo,
       };
       this.sendcomment(payLoad);
     },
-
+  // get the date conversion
     relativeDate(value) {
       var d = value;
       var e = new Date(d).valueOf();

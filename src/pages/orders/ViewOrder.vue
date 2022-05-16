@@ -276,23 +276,23 @@
               </div>
               <!-- Finalized order -->
               <div v-if="order.overall_status == 10">
-               <div v-if="order.vendor_feedback == 0">
-                <div class="my-2">
-                  <router-link
-                    :to="{
-                      name: 'vendorordersview',
-                      params: { uuid: order.uuid },
-                    }"
-                  >
-                    <button
-                      class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
-                      type="button"
+                <div v-if="order.vendor_feedback == 0">
+                  <div class="my-2">
+                    <router-link
+                      :to="{
+                        name: 'vendorordersview',
+                        params: { uuid: order.uuid },
+                      }"
                     >
-                      Leave A Review
-                    </button>
-                  </router-link>
+                      <button
+                        class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
+                        type="button"
+                      >
+                        Leave A Review
+                      </button>
+                    </router-link>
+                  </div>
                 </div>
-              </div>
               </div>
             </div>
           </div>
@@ -525,6 +525,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import axios from "axios";
+import { notify } from "@kyvg/vue3-notification";
 import { useRoute } from "vue-router";
 import authHeader from "../../services/auth.header";
 import MainHeaderTop from "../../layouts/headers/MainHeaderTop.vue";
@@ -702,6 +703,7 @@ export default defineComponent({
       };
       this.sendFeedback(payLoad);
     },
+    // send the feedback rating
     async sendFeedback(payLoad: {
       itemrating: string;
       vendorrating: string;
@@ -714,13 +716,28 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       })
-        .then((response) => {})
-        .catch((error) => {
-          if (error.response) {
+        .then((response) => {
+          if ((response.status = 200)) {
+            notify({
+              title: "Message Center",
+              text: "Successfully sent feedback!",
+              type: "success",
+            });
+            this.$router.push({
+              name: "item",
+              params: { id: this.itemforsale.uuid },
+            });
           }
+        })
+        .catch((error) => {
+          notify({
+            title: "Freeport Error",
+            text: "Error posting information.",
+            type: "error",
+          });
         });
     },
-    // get the trracking info
+    // get the tracking info
     async getordertracking() {
       const order_id_route = useRoute();
       const order_id = order_id_route.params.uuid;

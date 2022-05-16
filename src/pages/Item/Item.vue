@@ -92,6 +92,7 @@
 import { mapGetters } from "vuex";
 import { defineComponent } from "vue";
 import axios from "axios";
+import { notify } from "@kyvg/vue3-notification";
 import { useRoute } from "vue-router";
 import authHeader from "../../services/auth.header";
 import MainHeaderTop from "../../layouts/headers/MainHeaderTop.vue";
@@ -168,7 +169,7 @@ export default defineComponent({
       vendorreviews: [],
       shopping_cart_count: "",
       vendor_reviews_total: "",
-  
+
       exactcity: "",
       exactstateorprovence: "",
       exactzipcode: "",
@@ -235,27 +236,35 @@ export default defineComponent({
             this.seeifuserhasdefaultaddress();
           }
         })
-        .catch((error) => {});
+        .catch((error) => {
+          notify({
+            title: "Freeport Error",
+            text: "Error retrieving information.",
+            type: "error",
+          });
+        });
     },
     async seeifuserhasdefaultaddress() {
       await axios({
         method: "get",
-        url: "/vendor/get/defaultaddress/" +  this.item.vendor_uuid,
+        url: "/vendor/get/defaultaddress/" + this.item.vendor_uuid,
         withCredentials: true,
         headers: authHeader(),
       })
         .then((response) => {
-        
           if ((response.status = 200)) {
-      
             this.exactcity = response.data.city;
             this.exactstateorprovence = response.data.stateorprovence;
             this.exactzipcode = response.data.zipcode;
-          } else {
-     
           }
         })
-        .catch((error) => {});
+        .catch((error) => {
+          notify({
+            title: "Freeport Error",
+            text: "Error retrieving information.",
+            type: "error",
+          });
+        });
     },
     UpdateCart() {
       this.shoppingcartcount += 1;
@@ -285,33 +294,57 @@ export default defineComponent({
         method: "get",
         url: "/price/btcprice/" + this.item.currency + "/" + this.item.price,
         withCredentials: true,
-      }).then((response) => {
-        if ((response.status = 200)) {
-          this.pricebtc = response.data.coin;
-        }
-      });
+      })
+        .then((response) => {
+          if ((response.status = 200)) {
+            this.pricebtc = response.data.coin;
+          }
+        })
+        .catch((error) => {
+          notify({
+            title: "Freeport Error",
+            text: "Error retrieving information.",
+            type: "error",
+          });
+        });
     },
     async getpricebch() {
       await axios({
         method: "get",
         url: "/price/bchprice/" + this.item.currency + "/" + this.item.price,
         withCredentials: true,
-      }).then((response) => {
-        if ((response.status = 200)) {
-          this.pricebch = response.data.coin;
-        }
-      });
+      })
+        .then((response) => {
+          if ((response.status = 200)) {
+            this.pricebch = response.data.coin;
+          }
+        })
+        .catch((error) => {
+          notify({
+            title: "Freeport Error",
+            text: "Error retrieving information.",
+            type: "error",
+          });
+        });
     },
     async getpricexmr() {
       await axios({
         method: "get",
         url: "/price/xmrprice/" + this.item.currency + "/" + this.item.price,
         withCredentials: true,
-      }).then((response) => {
-        if ((response.status = 200)) {
-          this.pricexmr = response.data.coin;
-        }
-      });
+      })
+        .then((response) => {
+          if ((response.status = 200)) {
+            this.pricexmr = response.data.coin;
+          }
+        })
+        .catch((error) => {
+          notify({
+            title: "Freeport Error",
+            text: "Error retrieving information.",
+            type: "error",
+          });
+        });
     },
     async getvendorinfo() {
       await axios({
@@ -327,7 +360,14 @@ export default defineComponent({
             this.loaded_feedback = true;
           }
         })
-        .catch((error) => {});
+        .catch((error) => {
+
+            notify({
+            title: "Freeport Error",
+            text: "Error retrieving  information.",
+            type: "error",
+          });
+        });
     },
 
     async getvendorreviews() {
@@ -339,13 +379,19 @@ export default defineComponent({
         .then((response) => {
           if ((response.status = 200)) {
             this.vendorreviews = response.data;
-
             if (this.vendorreviews == undefined) {
               this.vendorreviews = "No Reviews Yet";
             }
           }
         })
-        .catch((error) => {});
+         .catch((error) => {
+
+            notify({
+            title: "Freeport Error",
+            text: "Error retrieving information.",
+            type: "error",
+          });
+        });
     },
     async add_view() {
       await axios({

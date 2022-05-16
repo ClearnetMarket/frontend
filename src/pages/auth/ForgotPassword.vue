@@ -90,8 +90,11 @@
 import { defineComponent } from "vue";
 import axios from "axios";
 import { ref } from "vue";
+import { notify } from "@kyvg/vue3-notification";
+
 import authHeader from "../../services/auth.header";
 import HeaderPlain from "../../layouts/headers/HeaderPlain.vue";
+
 
 export default defineComponent({
   name: "forgotpassword",
@@ -128,10 +131,21 @@ export default defineComponent({
       })
         .then((response) => {
           if (response.data.status == "success") {
+            notify({
+              title: "Authorization",
+              text: "Success",
+              type: "success",
+            });
              this.$router.push({ name: "login" });
           }
         })
-        .catch((error) => {});
+        .catch((error) => {
+            notify({
+              title: "Authorization",
+              text: "Incorrect Credentials",
+              type: "error",
+            });
+        });
     },
     onSubmit() {
       const payLoad = {

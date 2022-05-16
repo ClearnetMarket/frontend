@@ -278,12 +278,10 @@
                 >
                   Date Purchased: {{ relativeDate(review.timestamp) }}
                 </div>
-
                 <div class="col-span-12">User Rating</div>
                 <div class="col-span-12 mb-2">
                   <StarRating v-bind:rating="review.vendor_rating" />
                 </div>
-
                 <div class="col-span-12 mt-2 text-gray-600 dark:text-gray-800">{{ review.review }}</div>
               </div>
             </div>
@@ -300,8 +298,9 @@
 import { defineComponent } from "vue";
 import axios from "axios";
 import { formatDistance } from "date-fns";
-import StarRating from "../../components/star_rating/Star.vue";
 import { useRouter, useRoute } from "vue-router";
+import { notify } from "@kyvg/vue3-notification";
+import StarRating from "../../components/star_rating/Star.vue";
 import authHeader from "../../services/auth.header";
 import MainHeaderTop from "../../layouts/headers/MainHeaderTop.vue";
 import MainHeaderMid from "../../layouts/headers/MainHeaderMid.vue";
@@ -412,7 +411,6 @@ export default defineComponent({
             if (this.userreviews == undefined) {
               this.userreviews = "No Reviews Yet";
             }
-     
           }
         })
         .catch((error) => {});

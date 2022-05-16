@@ -77,10 +77,12 @@
 import { defineComponent } from "vue";
 import axios from "axios";
 import { ref } from "vue";
+import { notify } from "@kyvg/vue3-notification";
 import { mapGetters } from "vuex";
 import { useRoute } from "vue-router";
 import authHeader from "../../services/auth.header";
 import HeaderPlain from "../../layouts/headers/HeaderPlain.vue";
+
 
 export default defineComponent({
   name: "accountseed",
@@ -153,7 +155,13 @@ export default defineComponent({
             this.word6 = response.data.word6;
           }
         })
-        .catch((error) => {});
+        .catch((error) => {
+          notify({
+            title: "Authorization",
+            text: "Invalid Credentials.",
+            type: "error",
+          });
+        });
     },
   },
 });

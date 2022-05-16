@@ -7,7 +7,9 @@
         style="cursor: pointer"
       >
         <!--Card 1-->
-        <div class="rounded overflow-hidden border border-gray-200 text-center w-64 h-64 bg-white shadow-md">
+        <div
+          class="rounded overflow-hidden border border-gray-200 text-center w-64 h-64 bg-white shadow-md"
+        >
           <div class="flex justify-center w-full">
             <div class="bg-red-200" v-if="item.image_one != null">
               <img
@@ -64,6 +66,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { notify } from "@kyvg/vue3-notification";
 import axios from "axios";
 
 export default defineComponent({
@@ -93,7 +96,13 @@ export default defineComponent({
             this.itemsforsale = response.data;
           }
         })
-        .catch((error) => {});
+        .catch((error) => {
+          notify({
+            title: "Freeport Error",
+            text: "Error retrieving information.",
+            type: "error",
+          });
+        });
     },
     returncurrencysymbol(currencydigit) {
       if (currencydigit === 0) {

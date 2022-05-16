@@ -153,6 +153,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import axios from "axios";
+import { notify } from "@kyvg/vue3-notification";
 import authHeader from "../../../services/auth.header";
 import MainHeaderTop from "../../../layouts/headers/MainHeaderTop.vue";
 import MainHeaderMid from "../../../layouts/headers/MainHeaderMid.vue";
@@ -190,6 +191,7 @@ export default defineComponent({
   },
 
   methods: {
+    // gets the count of orders for top bars
     async getuserneworderscount() {
       await axios({
         method: "get",
@@ -209,6 +211,7 @@ export default defineComponent({
         }
       });
     },
+    // delete the order notices
     async deleteordernotice() {
       await axios({
         method: "delete",

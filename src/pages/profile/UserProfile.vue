@@ -1,10 +1,9 @@
 <template>
-<div class="bg-gray-300">
-  <MainHeaderTop />
-  <MainHeaderMid />
-  <MainHeaderBottom />
-  <div class="container max-w-7xl mx-auto px-10 wrapper">
-   
+  <div class="bg-gray-300">
+    <MainHeaderTop />
+    <MainHeaderMid />
+    <MainHeaderBottom />
+    <div class="container max-w-7xl mx-auto px-10 wrapper">
       <nav class="rounded-md w-full">
         <ol class="list-reset flex">
           <li>
@@ -17,238 +16,239 @@
           </li>
         </ol>
       </nav>
-    
 
-
-  <div v-if="page_loaded">
-    <div class="max-w-4xl mx-auto px-10">
-      <div class="flex justify-center">
-        <div
-          class="grid grid-cols-12 mb-5 border border-1 rounded gap-4 w-full max-w-4xl p-5 bg-white"
-        >
-          <div class="col-span-3">{{ user.profileimage }}</div>
-          <div class="col-span-6">
-            <div class="text-[20px]">{{ user.display_name }}</div>
-            <div class="text-gray-500">
-              Member Since: {{ relativeDate(user.member_since) }} ago
-            </div>
-            <div class="text-gray-600">{{ user.bio }}</div>
-          </div>
-          <div class="col-span-3">
-           
-          </div>
-
-          <div v-if="user.admin_role == 1" class="col-span-12">
-            <div class="grid grid-cols-12">
-              <div class="col-span-6 text-gray-500">
-                Selling From: {{ country }}
+      <div v-if="page_loaded">
+        <div class="max-w-4xl mx-auto px-10">
+          <div class="flex justify-center">
+            <div
+              class="grid grid-cols-12 mb-5 border border-1 rounded gap-4 w-full max-w-4xl p-5 bg-white"
+            >
+              <div class="col-span-3">{{ user.profileimage }}</div>
+              <div class="col-span-6">
+                <div class="text-[20px]">{{ user.display_name }}</div>
+                <div class="text-gray-500">
+                  Member Since: {{ relativeDate(user.member_since) }} ago
+                </div>
+                <div class="text-gray-600">{{ user.bio }}</div>
               </div>
-              <div class="col-span-6 text-gray-500">
-                Total Items Bought: {{ user_stats.total_items_bought }}
+              <div class="col-span-3"></div>
+
+              <div v-if="user.admin_role == 1" class="col-span-12">
+                <div class="grid grid-cols-12">
+                  <div class="col-span-6 text-gray-500">
+                    Selling From: {{ country }}
+                  </div>
+                  <div class="col-span-6 text-gray-500">
+                    Total Items Bought: {{ user_stats.total_items_bought }}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
 
-      <div class="grid grid-cols-12 gap-4 text-gray-700 pb-36">
-        <div class="col-span-4 p-2 rounded bg-white shadow-md">
-          <div class="flex text-[18px]">All User Reviews</div>
-          <div v-if="user_reviews_total == 0">
-            User does not have any reviews right now ...
-          </div>
-          <div v-else>
-            <p class="text-sm font-medium text-gray-500 dark:text-gray-400">
-              {{ user_reviews_total }} total ratings
-            </p>
-            <div class="flex items-center mt-4">
-              <span class="text-sm font-medium text-gray-600"
-                >10 star</span
-              >
-              <div class="mx-4 w-2/4 h-5 bg-gray-200 rounded dark:bg-gray-700">
-                <div
-                  class="h-5 bg-yellow-400 rounded"
-                  :style="{ width: user_reviews_percent_ten }"
-                ></div>
+          <div class="grid grid-cols-12 gap-4 text-gray-700 pb-36">
+            <div class="col-span-4 p-2 rounded bg-white shadow-md">
+              <div class="flex text-[18px]">All User Reviews</div>
+              <div v-if="user_reviews_total == 0">
+                User does not have any reviews right now ...
               </div>
-              <span class="text-sm font-medium text-gray-600"
-                >{{ user_reviews_percent_ten }}%</span
-              >
+              <div v-else>
+                <p class="text-sm font-medium text-gray-500 dark:text-gray-400">
+                  {{ user_reviews_total }} total ratings
+                </p>
+                <div class="flex items-center mt-4">
+                  <span class="text-sm font-medium text-gray-600">10 star</span>
+                  <div
+                    class="mx-4 w-2/4 h-5 bg-gray-200 rounded dark:bg-gray-700"
+                  >
+                    <div
+                      class="h-5 bg-yellow-400 rounded"
+                      :style="{ width: user_reviews_percent_ten }"
+                    ></div>
+                  </div>
+                  <span class="text-sm font-medium text-gray-600"
+                    >{{ user_reviews_percent_ten }}%</span
+                  >
+                </div>
+                <div class="flex items-center mt-4">
+                  <span class="text-sm font-medium text-gray-600 pr-2"
+                    >9 star</span
+                  >
+                  <div
+                    class="mx-4 w-2/4 h-5 bg-gray-200 rounded dark:bg-gray-700"
+                  >
+                    <div
+                      class="h-5 bg-yellow-400 rounded"
+                      :style="{ width: user_reviews_percent_nine }"
+                    ></div>
+                  </div>
+                  <span class="text-sm font-medium text-gray-600"
+                    >{{ user_reviews_percent_nine }}%</span
+                  >
+                </div>
+                <div class="flex items-center mt-4">
+                  <span class="text-sm font-medium text-gray-600 pr-2"
+                    >8 star</span
+                  >
+                  <div
+                    class="mx-4 w-2/4 h-5 bg-gray-200 rounded dark:bg-gray-700"
+                  >
+                    <div
+                      class="h-5 bg-yellow-400 rounded"
+                      :style="{ width: user_reviews_percent_eight }"
+                    ></div>
+                  </div>
+                  <span class="text-sm font-medium text-gray-600">
+                    {{ user_reviews_percent_eight }}%</span
+                  >
+                </div>
+                <div class="flex items-center mt-4">
+                  <span class="text-sm font-medium text-gray-600 pr-2"
+                    >7 star</span
+                  >
+                  <div
+                    class="mx-4 w-2/4 h-5 bg-gray-200 rounded dark:bg-gray-700"
+                  >
+                    <div
+                      class="h-5 bg-yellow-400 rounded"
+                      :style="{ width: user_reviews_percent_seven }"
+                    ></div>
+                  </div>
+                  <span class="text-sm font-medium text-gray-600">
+                    {{ user_reviews_percent_seven }}%</span
+                  >
+                </div>
+                <div class="flex items-center mt-4">
+                  <span class="text-sm font-medium text-gray-600 pr-2"
+                    >6 star</span
+                  >
+                  <div
+                    class="mx-4 w-2/4 h-5 bg-gray-200 rounded dark:bg-gray-700"
+                  >
+                    <div
+                      class="h-5 bg-yellow-400 rounded"
+                      :style="{ width: user_reviews_percent_six }"
+                    ></div>
+                  </div>
+                  <span class="text-sm font-medium text-gray-600 pr-2"
+                    >{{ user_reviews_percent_six }}%</span
+                  >
+                </div>
+                <div class="flex items-center mt-4">
+                  <span class="text-sm font-medium text-gray-600 pr-2"
+                    >5 star</span
+                  >
+                  <div
+                    class="mx-4 w-2/4 h-5 bg-gray-200 rounded dark:bg-gray-700"
+                  >
+                    <div
+                      class="h-5 bg-yellow-400 rounded"
+                      :style="{ width: user_reviews_percent_five }"
+                    ></div>
+                  </div>
+                  <span class="text-sm font-medium text-gray-600"
+                    >{{ user_reviews_percent_five }}%</span
+                  >
+                </div>
+                <div class="flex items-center mt-4">
+                  <span class="text-sm font-medium text-gray-600 pr-2"
+                    >4 star</span
+                  >
+                  <div
+                    class="mx-4 w-2/4 h-5 bg-gray-200 rounded dark:bg-gray-700"
+                  >
+                    <div
+                      class="h-5 bg-yellow-400 rounded"
+                      :style="{ width: user_reviews_percent_four }"
+                    ></div>
+                  </div>
+                  <span class="text-sm font-medium text-gray-600"
+                    >{{ user_reviews_percent_four }}%</span
+                  >
+                </div>
+                <div class="flex items-center mt-4">
+                  <span class="text-sm font-medium text-gray-600 pr-2"
+                    >3 star</span
+                  >
+                  <div
+                    class="mx-4 w-2/4 h-5 bg-gray-200 rounded dark:bg-gray-700"
+                  >
+                    <div
+                      class="h-5 bg-yellow-400 rounded"
+                      :style="{ width: user_reviews_percent_three }"
+                    ></div>
+                  </div>
+                  <span class="text-sm font-medium text-gray-600 pr-2"
+                    >{{ user_reviews_percent_three }}%</span
+                  >
+                </div>
+                <div class="flex items-center mt-4">
+                  <span class="text-sm font-medium text-gray-600 pr-2"
+                    >2 star</span
+                  >
+                  <div
+                    class="mx-4 w-2/4 h-5 bg-gray-200 rounded dark:bg-gray-700"
+                  >
+                    <div
+                      class="h-5 bg-yellow-400 rounded"
+                      :style="{ width: user_reviews_percent_two }"
+                    ></div>
+                  </div>
+                  <span class="text-sm font-medium text-gray-600"
+                    >{{ user_reviews_percent_two }}%</span
+                  >
+                </div>
+                <div class="flex items-center mt-4">
+                  <span class="text-sm font-medium text-gray-600 pr-2"
+                    >1 star</span
+                  >
+                  <div
+                    class="mx-4 w-2/4 h-5 bg-gray-200 rounded dark:bg-gray-700"
+                  >
+                    <div
+                      class="h-5 bg-yellow-400 rounded"
+                      :style="{ width: user_reviews_percent_one }"
+                    ></div>
+                  </div>
+                  <span class="text-sm font-medium text-gray-600"
+                    >{{ user_reviews_percent_one }}%</span
+                  >
+                </div>
+              </div>
             </div>
-            <div class="flex items-center mt-4">
-              <span
-                class="text-sm font-medium text-gray-600 pr-2"
-                >9 star</span
-              >
-              <div class="mx-4 w-2/4 h-5 bg-gray-200 rounded dark:bg-gray-700">
-                <div
-                  class="h-5 bg-yellow-400 rounded"
-                  :style="{ width: user_reviews_percent_nine }"
-                ></div>
-              </div>
-              <span class="text-sm font-medium text-gray-600"
-                >{{ user_reviews_percent_nine }}%</span
-              >
-            </div>
-            <div class="flex items-center mt-4">
-              <span
-                class="text-sm font-medium text-gray-600 pr-2"
-                >8 star</span
-              >
-              <div class="mx-4 w-2/4 h-5 bg-gray-200 rounded dark:bg-gray-700">
-                <div
-                  class="h-5 bg-yellow-400 rounded"
-                  :style="{ width: user_reviews_percent_eight }"
-                ></div>
-              </div>
-              <span
-                class="text-sm font-medium text-gray-600"
-              >
-                {{ user_reviews_percent_eight }}%</span
-              >
-            </div>
-            <div class="flex items-center mt-4">
-              <span
-                class="text-sm font-medium text-gray-600 pr-2"
-                >7 star</span
-              >
-              <div class="mx-4 w-2/4 h-5 bg-gray-200 rounded dark:bg-gray-700">
-                <div
-                  class="h-5 bg-yellow-400 rounded"
-                  :style="{ width: user_reviews_percent_seven }"
-                ></div>
-              </div>
-              <span
-                class="text-sm font-medium text-gray-600"
-              >
-                {{ user_reviews_percent_seven }}%</span
-              >
-            </div>
-            <div class="flex items-center mt-4">
-              <span
-                class="text-sm font-medium text-gray-600 pr-2"
-                >6 star</span
-              >
-              <div class="mx-4 w-2/4 h-5 bg-gray-200 rounded dark:bg-gray-700">
-                <div
-                  class="h-5 bg-yellow-400 rounded"
-                  :style="{ width: user_reviews_percent_six }"
-                ></div>
-              </div>
-              <span
-                class="text-sm font-medium text-gray-600 pr-2"
-                >{{ user_reviews_percent_six }}%</span
-              >
-            </div>
-            <div class="flex items-center mt-4">
-              <span
-                class="text-sm font-medium text-gray-600 pr-2"
-                >5 star</span
-              >
-              <div class="mx-4 w-2/4 h-5 bg-gray-200 rounded dark:bg-gray-700">
-                <div
-                  class="h-5 bg-yellow-400 rounded"
-                  :style="{ width: user_reviews_percent_five }"
-                ></div>
-              </div>
-              <span class="text-sm font-medium text-gray-600"
-                >{{ user_reviews_percent_five }}%</span
-              >
-            </div>
-            <div class="flex items-center mt-4">
-              <span
-                class="text-sm font-medium text-gray-600 pr-2"
-                >4 star</span
-              >
-              <div class="mx-4 w-2/4 h-5 bg-gray-200 rounded dark:bg-gray-700">
-                <div
-                  class="h-5 bg-yellow-400 rounded"
-                  :style="{ width: user_reviews_percent_four }"
-                ></div>
-              </div>
-              <span class="text-sm font-medium text-gray-600"
-                >{{ user_reviews_percent_four }}%</span
-              >
-            </div>
-            <div class="flex items-center mt-4">
-              <span
-                class="text-sm font-medium text-gray-600 pr-2"
-                >3 star</span
-              >
-              <div class="mx-4 w-2/4 h-5 bg-gray-200 rounded dark:bg-gray-700">
-                <div
-                  class="h-5 bg-yellow-400 rounded"
-                  :style="{ width: user_reviews_percent_three }"
-                ></div>
-              </div>
-              <span
-                class="text-sm font-medium text-gray-600 pr-2"
-                >{{ user_reviews_percent_three }}%</span
-              >
-            </div>
-            <div class="flex items-center mt-4">
-              <span
-                class="text-sm font-medium text-gray-600 pr-2"
-                >2 star</span
-              >
-              <div class="mx-4 w-2/4 h-5 bg-gray-200 rounded dark:bg-gray-700">
-                <div
-                  class="h-5 bg-yellow-400 rounded"
-                  :style="{ width: user_reviews_percent_two }"
-                ></div>
-              </div>
-              <span class="text-sm font-medium text-gray-600"
-                >{{ user_reviews_percent_two }}%</span
-              >
-            </div>
-            <div class="flex items-center mt-4">
-              <span
-                class="text-sm font-medium text-gray-600 pr-2"
-                >1 star</span
-              >
-              <div class="mx-4 w-2/4 h-5 bg-gray-200 rounded dark:bg-gray-700">
-                <div
-                  class="h-5 bg-yellow-400 rounded"
-                  :style="{ width: user_reviews_percent_one }"
-                ></div>
-              </div>
-              <span class="text-sm font-medium text-gray-600"
-                >{{ user_reviews_percent_one }}%</span
-              >
-            </div>
-          </div>
-        </div>
-        <div class="col-span-8 ">
-          <div v-for="review in userreviews" :key="review.id" class="pb-5">
-            <div class="grid grid-cols-12 px-5 rounded bg-white shadow-md">
-              <div
-                class="col-span-12 text-sm font-medium text-gray-500 dark:text-gray-400"
-              >
-                Vendor: {{ review.vendor_name }}
-              </div>
-              <div class="col-span-12">
-                <router-link :to="{name: 'item', params: {id: review.item_uuid }}">
-                {{ getitemname(review.item_uuid) }}
-                </router-link>
-              </div>
-              <div
-                class="col-span-12 text-sm font-medium text-gray-500 dark:text-gray-400"
-              >
-                Date Purchased: {{ relativeDate(review.timestamp) }}
-              </div>
-             
-             <div class="col-span-12 mb-2">
-                <StarRating v-bind:rating="review.customer_rating" />
-              </div>
+            <div class="col-span-8">
+              <div v-for="review in userreviews" :key="review.id" class="pb-5">
+                <div class="grid grid-cols-12 px-5 rounded bg-white shadow-md">
+                  <div
+                    class="col-span-12 text-sm font-medium text-gray-500 dark:text-gray-400"
+                  >
+                    Vendor: {{ review.vendor_name }}
+                  </div>
+                  <div class="col-span-12">
+                    <router-link
+                      :to="{ name: 'item', params: { id: review.item_uuid } }"
+                    >
+                      {{ getitemname(review.item_uuid) }}
+                    </router-link>
+                  </div>
+                  <div
+                    class="col-span-12 text-sm font-medium text-gray-500 dark:text-gray-400"
+                  >
+                    Date Purchased: {{ relativeDate(review.timestamp) }}
+                  </div>
 
-              <div class="col-span-12 mt-2">{{ review.review }}</div>
+                  <div class="col-span-12 mb-2">
+                    <StarRating v-bind:rating="review.customer_rating" />
+                  </div>
+
+                  <div class="col-span-12 mt-2">{{ review.review }}</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-     </div>
-       </div>
   </div>
   <MainFooter />
 </template>
@@ -256,9 +256,10 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import axios from "axios";
+import { notify } from "@kyvg/vue3-notification";
 import { formatDistance } from "date-fns";
-import StarRating from "../../components/star_rating/Star.vue";
 import { useRouter, useRoute } from "vue-router";
+import StarRating from "../../components/star_rating/Star.vue";
 import authHeader from "../../services/auth.header";
 import MainHeaderTop from "../../layouts/headers/MainHeaderTop.vue";
 import MainHeaderMid from "../../layouts/headers/MainHeaderMid.vue";
@@ -277,7 +278,6 @@ export default defineComponent({
     StarRating,
   },
 
-  
   data() {
     return {
       page_loaded: false,
@@ -299,7 +299,6 @@ export default defineComponent({
       user_reviews_percent_eight: "",
       user_reviews_percent_nine: "",
       use_reviews_percent_ten: "",
-
     };
   },
   mounted() {
@@ -310,10 +309,7 @@ export default defineComponent({
     this.getuser();
     this.getuserstats();
     this.getusercountryandcurrency();
-
- 
- 
-},
+  },
   methods: {
     relativeDate(value) {
       var d = value;
@@ -330,9 +326,7 @@ export default defineComponent({
         if ((response.status = 200)) {
           this.user = response.data;
           this.page_loaded = true;
-        //   if (this.user.admin_role > 0){
-        //      this.$router.push({ name: "vendorprofile" });
-        // };
+          
         }
       });
     },
@@ -402,15 +396,14 @@ export default defineComponent({
         })
         .catch((error) => {});
     },
-     getitemname(order_uuid) {
+    getitemname(order_uuid) {
       axios({
         method: "get",
         url: "/item/info/" + order_uuid,
       }).then((response) => {
         if ((response.status = 200)) {
           this.item_title = response.data.item_title;
-          return this.item_title
-
+          return this.item_title;
         }
       });
     },

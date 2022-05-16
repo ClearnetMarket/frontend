@@ -59,6 +59,7 @@ import axios from "axios";
 import { ref } from "vue";
 import { mapGetters } from "vuex";
 import { useRoute } from "vue-router";
+import { notify } from "@kyvg/vue3-notification";
 import authHeader from "../../services/auth.header";
 import MainHeaderTop from "../../layouts/headers/MainHeaderTop.vue";
 import MainHeaderMid from "../../layouts/headers/MainHeaderMid.vue";
@@ -117,7 +118,12 @@ export default defineComponent({
         .then((response) => {
           this.userlist = response.data;
         })
-        .catch((error) => {});
+     .catch((error) => {
+          notify({
+            title: "Freeport Error",
+            text: "Error retrieving information.",
+            type: "error",
+          });
     },
     async getcountofusers() {
       await axios({
@@ -128,7 +134,12 @@ export default defineComponent({
         .then((response) => {
           this.other_user_count = response.data.get_count;
         })
-        .catch((error) => {});
+        . .catch((error) => {
+          notify({
+            title: "Freeport Error",
+            text: "Error retrieving information.",
+            type: "error",
+          });
     },
     async sendMessage(payLoad: {
       order_uuid: string;
@@ -142,14 +153,22 @@ export default defineComponent({
       })
         .then((response) => {
           if ((response.status = 200)) {
+            notify({
+              title: "Message Center",
+              text: "Successfully sent message!",
+              type: "success",
+            });
             this.$router.push({
               name: "MsgHome",
             });
           }
         })
         .catch((error) => {
-          if (error.response) {
-          }
+          notify({
+            title: "Freeport Error",
+            text: "Error posting information.",
+            type: "error",
+          });
         });
     },
 

@@ -49,7 +49,7 @@
         </div>
 
         <div class="flex flex-col justify-center mt-5">
-            <router-link
+          <router-link
             :to="{ name: 'register' }"
             class="text-center font-bold text-sm text-blue-500 hover:text-blue-800"
             >Register Here</router-link
@@ -63,8 +63,10 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import axios from "axios";
+import { notify } from "@kyvg/vue3-notification";
 import HeaderPlain from "../../layouts/headers/HeaderPlain.vue";
 import authHeader from "../../services/auth.header";
+
 
 export default defineComponent({
   name: "Login",
@@ -98,7 +100,6 @@ export default defineComponent({
         .catch((error) => {});
     },
     async sendLogin(payLoad: { username: string; password: string }) {
-
       await axios({
         method: "post",
         url: "/auth/login",
@@ -107,15 +108,26 @@ export default defineComponent({
         .then((response) => {
           console.log(response);
           if (response.data.user) {
-       
             localStorage.setItem("auth_user", response.data.user);
             localStorage.setItem("auth_token", response.data.token);
             this.$store.dispatch("user", response.data.user);
             this.$router.push({ name: "home" });
+            notify({
+              title: "Authorization",
+              text: "You have been logged in!",
+              type:"success",
+          
+            });
           }
         })
         .catch((error) => {
           if (error.response) {
+            console.log("here")
+            notify({
+              title: "Authorization",
+              text: "Login Failure!",
+                  type: 'error',
+            });
           }
         });
     },

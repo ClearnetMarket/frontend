@@ -228,14 +228,16 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import axios from "axios";
+import { notify } from "@kyvg/vue3-notification";
+import { useRoute } from "vue-router";
+import { formatDistance } from "date-fns";
 import authHeader from "../../services/auth.header";
 import MainHeaderTop from "../../layouts/headers/MainHeaderTop.vue";
 import MainHeaderMid from "../../layouts/headers/MainHeaderMid.vue";
 import MainHeaderBottom from "../../layouts/headers/MainHeaderBottom.vue";
 import MainHeaderVendor from "../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../layouts/footers/FooterMain.vue";
-import { useRoute } from "vue-router";
-import { formatDistance } from "date-fns";
+
 import StarRatingCustomer from "../../components/star_rating/StarCustomer.vue";
 import StarRating from "../../components/star_rating/Star.vue";
 
@@ -278,11 +280,13 @@ export default defineComponent({
   },
 
   methods: {
+    // get date conversion
     relativeDate(value) {
       var d = value;
       var e = new Date(d).valueOf();
       return formatDistance(e, new Date());
     },
+    // gets the user status
     async userstatus() {
       await axios({
         method: "get",
@@ -367,11 +371,9 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
         data: payLoad,
-      }).then((response) => {
-        if (response.status == 200) {
-        }
-      });
+      }).then((response) => {});
     },
+    // payload for the dispute
     markdisputePayload() {
       const payLoad = {
         percenttovendor: this.loginForm.username,
@@ -379,7 +381,6 @@ export default defineComponent({
       };
       this.markdisputefinished(payLoad);
     },
-
     //  Brings an order to open status
     async markdisputecancelledstillopen() {
       await axios({
@@ -402,8 +403,7 @@ export default defineComponent({
         headers: authHeader(),
         data: payLoad,
       }).then((response) => {
-        if (response.status == 200) {
-        }
+       
       });
     },
     //  Extends the time on an order
@@ -415,8 +415,7 @@ export default defineComponent({
         headers: authHeader(),
         data: payLoad,
       }).then((response) => {
-        if (response.status == 200) {
-        }
+       
       });
     },
 
@@ -467,10 +466,7 @@ export default defineComponent({
             this.getuserorder();
           }
         })
-        .catch((error) => {
-          if (error.response) {
-          }
-        });
+        .catch((error) => {});
     },
     sendsplit75vendor() {
       const payLoad = {
@@ -497,10 +493,7 @@ export default defineComponent({
             this.getuserorder();
           }
         })
-        .catch((error) => {
-          if (error.response) {
-          }
-        });
+        .catch((error) => {});
     },
     sendsplit50vendor() {
       const payLoad = {
@@ -527,10 +520,7 @@ export default defineComponent({
             this.getuserorder();
           }
         })
-        .catch((error) => {
-          if (error.response) {
-          }
-        });
+        .catch((error) => {});
     },
     sendsplit25vendor() {
       const payLoad = {
@@ -557,10 +547,7 @@ export default defineComponent({
             this.getuserorder();
           }
         })
-        .catch((error) => {
-          if (error.response) {
-          }
-        });
+        .catch((error) => {});
     },
     sendsplit0vendor() {
       const payLoad = {
@@ -584,10 +571,7 @@ export default defineComponent({
             this.SendDisputeForm.disputemsginfo = "";
           }
         })
-        .catch((error) => {
-          if (error.response) {
-          }
-        });
+        .catch((error) => {});
     },
     sendMessagePayloadDispute() {
       const payLoad = {
@@ -610,10 +594,7 @@ export default defineComponent({
             this.SendMsgForm.msginfo = "";
           }
         })
-        .catch((error) => {
-          if (error.response) {
-          }
-        });
+        .catch((error) => {});
     },
     sendMessagePayload() {
       const payLoad = {

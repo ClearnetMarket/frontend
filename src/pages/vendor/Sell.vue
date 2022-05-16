@@ -98,6 +98,7 @@ import axios from "axios";
 import { ref } from "vue";
 import { mapGetters } from "vuex";
 import { useRoute } from "vue-router";
+import { notify } from "@kyvg/vue3-notification";
 import authHeader from "../../services/auth.header";
 import MainHeaderTop from "../../layouts/headers/MainHeaderTop.vue";
 import MainHeaderMid from "../../layouts/headers/MainHeaderMid.vue";
@@ -160,8 +161,11 @@ export default defineComponent({
       }).then((response) => {
         if ((response.status = 200)) {
           localStorage.setItem("auth_user", response.data.user);
-          console.log("reponse is")
-          console.log(response.dat)
+          notify({
+            title: "Message Center",
+            text: "Welcome to Freeport.  You are now a vendor!",
+            type: "success",
+          });
           this.$router.push({ name: "forsale" });
         }
       });
@@ -176,6 +180,4 @@ export default defineComponent({
 });
 </script>
 
-<style>
-
-</style>
+<style></style>

@@ -33,7 +33,7 @@
       <div class="grid grid-cols-1 rounded-md p-6 max-w-3xl mx-auto">
         <div class="text-[24px]">Create a new Item</div>
         <UploadImages :item_id="item_id" />
-        
+
         <form
           class="rounded-md px-8 pt-6 pb-8 mb-4 w-full"
           enctype="multipart/form-data"
@@ -46,8 +46,7 @@
             >
             <input
               v-model="CreateItemForm.basicInfo.item_title"
-              class="shadow appearance-none border rounded w-full py-2 px-3 
-              text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="item_title"
               type="text"
               placeholder="Enter title of your item .."
@@ -59,9 +58,7 @@
                 >Category</label
               >
               <select
-                class="shadow form-select appearance-none block w-full px-3 py-1.5 text-base
-                 font-normal focus:shadow-outline text-gray-500 bg-white bg-clip-padding bg-no-repeat border
-                  rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                class="shadow form-select appearance-none block w-full px-3 py-1.5 text-base font-normal focus:shadow-outline text-gray-500 bg-white bg-clip-padding bg-no-repeat border rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                 aria-label="Default select example"
                 id="category"
                 v-model="CreateItemForm.basicInfo.category_id_0"
@@ -81,9 +78,7 @@
                 >Condition</label
               >
               <select
-                class="shadow form-select appearance-none block w-full px-3 py-1.5 text-base font-normal 
-                focus:shadow-outline text-gray-500 bg-white bg-clip-padding bg-no-repeat border rounded 
-                transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                class="shadow form-select appearance-none block w-full px-3 py-1.5 text-base font-normal focus:shadow-outline text-gray-500 bg-white bg-clip-padding bg-no-repeat border rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                 aria-label="Default select example"
                 id="condition"
                 v-model="CreateItemForm.basicInfo.item_condition"
@@ -110,12 +105,10 @@
               >
               <input
                 v-model="CreateItemForm.pricingInfo.price"
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700
-                 leading-tight focus:outline-none focus:shadow-outline"
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="price"
-           
                 placeholder="Price in your currency..."
-               @keypress="onlyNumberWithDot"
+                @keypress="onlyNumberWithDot"
               />
             </div>
             <div class="mb-4 flex-1">
@@ -303,6 +296,7 @@ import { ref } from "vue";
 import authHeader from "../../services/auth.header";
 import { mapGetters } from "vuex";
 import { constants } from "perf_hooks";
+import { notify } from "@kyvg/vue3-notification";
 import MainHeaderTop from "../../layouts/headers/MainHeaderTop.vue";
 import MainHeaderMid from "../../layouts/headers/MainHeaderMid.vue";
 import MainHeaderBottom from "../../layouts/headers/MainHeaderBottom.vue";
@@ -335,13 +329,13 @@ export default defineComponent({
 
   data() {
     return {
-      item_id: '',
-      marketitem: '',
-      authtoken: '',
+      item_id: "",
+      marketitem: "",
+      authtoken: "",
       categoryList: [],
 
       countryList: [],
-     
+
       CreateItemForm: {
         basicInfo: {
           item_title: "",
@@ -358,20 +352,19 @@ export default defineComponent({
           price: "",
         },
         shippingInfo: {
-          worldwide_shipping: '',
-          free_shipping: '',
-          free_shipping_days: '',
-          shipping_2: '',
-          shipping_2_days: '',
-          shipping_2_price: '',
-          shipping_3: '',
-          shipping_3_days: '',
-          shipping_3_price: '',
-          shipping_to_country_one: '',
-          shipping_to_country_two: '',
-          shipping_to_country_three: '',
-          shipping_to_country_four: '',
-        
+          worldwide_shipping: "",
+          free_shipping: "",
+          free_shipping_days: "",
+          shipping_2: "",
+          shipping_2_days: "",
+          shipping_2_price: "",
+          shipping_3: "",
+          shipping_3_days: "",
+          shipping_3_price: "",
+          shipping_to_country_one: "",
+          shipping_to_country_two: "",
+          shipping_to_country_three: "",
+          shipping_to_country_four: "",
         },
       },
     };
@@ -393,6 +386,26 @@ export default defineComponent({
         }
       });
     },
+    // gets the item from paramater router
+    async getItemForSale() {
+      const item_id_route = useRoute();
+      const item_id = item_id_route.params.id;
+      this.item_id = item_id;
+      const path = "/item/" + this.item_id;
+
+      await axios({
+        method: "get",
+        url: path,
+        withCredentials: true,
+      })
+        .then((response) => {
+          if (response.status === 200) {
+            this.marketitem = response.data;
+          }
+        })
+        .catch((error) => {});
+    },
+    // main item recreation function
     async SendItemCreation(payLoad: {
       item_id: string;
       item_title: string;
@@ -418,8 +431,7 @@ export default defineComponent({
       shipping_to_country_three: string;
       shipping_to_country_four: string;
     }) {
-      const path = "/vendorcreateitem/create-item-main/" + this.item_id;
-      
+      let path = "/vendorcreateitem/create-item-main/" + this.item_id;
       await axios({
         method: "post",
         url: path,
@@ -430,25 +442,43 @@ export default defineComponent({
         .then((response) => {
           if (response.data.status == "success") {
             this.$router.push("/vendor/itemsforsale");
+            notify({
+              title: "Freeport",
+              text: "Item Created successfully",
+              type: "success",
+            });
           }
           if (response.data.status == "error") {
             this.$router.push({ name: "edititem", params: { id: itemid } });
+            notify({
+              title: "Freeport Error",
+              text: "Error creating item",
+              type: "error",
+            });
           }
         })
         .catch((error) => {
           if (error.response) {
+            notify({
+              title: "Freeport Error",
+              text: "Item Created successfully",
+              type: "success",
+            });
             if (error.response.status === 401) {
               this.$store.commit("loginFailure");
             } else if (error.response.status === 403) {
+               notify({
+              title: "Freeport Error",
+              text: "Error.  Not logged in!",
+              type: "error",
+            });
             }
           }
         });
     },
-       
-
+    // pre fill form data
     async getFormData() {
-      // Get Countries
-      const path = "/vendorcreateitem/get-fields/" + this.item_id;
+      let path = "/vendorcreateitem/get-fields/" + this.item_id;
 
       axios({
         method: "get", //you can set what request you want to be
@@ -459,34 +489,64 @@ export default defineComponent({
         .then((response) => {
           this.CreateItemForm.basicInfo.item_title = response.data.item_title;
           this.CreateItemForm.pricingInfo.item_count = response.data.item_count;
-          this.CreateItemForm.basicInfo.item_description = response.data.item_description;
-          this.CreateItemForm.basicInfo.item_condition = response.data.item_condition;
+          this.CreateItemForm.basicInfo.item_description =
+            response.data.item_description;
+          this.CreateItemForm.basicInfo.item_condition =
+            response.data.item_condition;
           this.CreateItemForm.basicInfo.keywords = response.data.keywords;
-          this.CreateItemForm.basicInfo.category_name_0 = response.data.category_name_0;
-          this.CreateItemForm.basicInfo.category_id_0 = response.data.category_id_0;
+          this.CreateItemForm.basicInfo.category_name_0 =
+            response.data.category_name_0;
+          this.CreateItemForm.basicInfo.category_id_0 =
+            response.data.category_id_0;
           this.CreateItemForm.pricingInfo.price = response.data.price;
-          this.CreateItemForm.pricingInfo.digital_currency_1 = response.data.digital_currency_1;
-          this.CreateItemForm.pricingInfo.digital_currency_2 = response.data.digital_currency_2;
-          this.CreateItemForm.pricingInfo.digital_currency_3 = response.data.digital_currency_3;
-          this.CreateItemForm.shippingInfo.free_shipping = response.data.shipping_free;
-          this.CreateItemForm.shippingInfo.shipping_2 = response.data.shipping_two;
-          this.CreateItemForm.shippingInfo.shipping_3 = response.data.shipping_three;
-          this.CreateItemForm.shippingInfo.free_shipping_days = response.data.shipping_day_0;
-          this.CreateItemForm.shippingInfo.shipping_info_0 = response.data.shipping_info_0;
-          this.CreateItemForm.shippingInfo.shipping_2_price = response.data.shipping_price_2;
-          this.CreateItemForm.shippingInfo.shipping_2_days = response.data.shipping_day_2;
-          this.CreateItemForm.shippingInfo.shipping_3_price = response.data.shipping_price_3;
-          this.CreateItemForm.shippingInfo.shipping_3_days = response.data.shipping_day_3;
-          this.CreateItemForm.shippingInfo.destination_country_one = response.data.item_title;
-          this.CreateItemForm.shippingInfo.destination_country_two = response.data.item_title;
-          this.CreateItemForm.shippingInfo.destination_country_two_name = response.data.item_title;
-          this.CreateItemForm.shippingInfo.destination_country_three = response.data.item_title;
-          this.CreateItemForm.shippingInfo.destination_country_three_name = response.data.item_title;
-          this.CreateItemForm.shippingInfo.destination_country_four = response.data.item_title;
-          this.CreateItemForm.shippingInfo.destination_country_four_name = response.data.item_title;
+          this.CreateItemForm.pricingInfo.digital_currency_1 =
+            response.data.digital_currency_1;
+          this.CreateItemForm.pricingInfo.digital_currency_2 =
+            response.data.digital_currency_2;
+          this.CreateItemForm.pricingInfo.digital_currency_3 =
+            response.data.digital_currency_3;
+          this.CreateItemForm.shippingInfo.free_shipping =
+            response.data.shipping_free;
+          this.CreateItemForm.shippingInfo.shipping_2 =
+            response.data.shipping_two;
+          this.CreateItemForm.shippingInfo.shipping_3 =
+            response.data.shipping_three;
+          this.CreateItemForm.shippingInfo.free_shipping_days =
+            response.data.shipping_day_0;
+          this.CreateItemForm.shippingInfo.shipping_info_0 =
+            response.data.shipping_info_0;
+          this.CreateItemForm.shippingInfo.shipping_2_price =
+            response.data.shipping_price_2;
+          this.CreateItemForm.shippingInfo.shipping_2_days =
+            response.data.shipping_day_2;
+          this.CreateItemForm.shippingInfo.shipping_3_price =
+            response.data.shipping_price_3;
+          this.CreateItemForm.shippingInfo.shipping_3_days =
+            response.data.shipping_day_3;
+          this.CreateItemForm.shippingInfo.destination_country_one =
+            response.data.item_title;
+          this.CreateItemForm.shippingInfo.destination_country_two =
+            response.data.item_title;
+          this.CreateItemForm.shippingInfo.destination_country_two_name =
+            response.data.item_title;
+          this.CreateItemForm.shippingInfo.destination_country_three =
+            response.data.item_title;
+          this.CreateItemForm.shippingInfo.destination_country_three_name =
+            response.data.item_title;
+          this.CreateItemForm.shippingInfo.destination_country_four =
+            response.data.item_title;
+          this.CreateItemForm.shippingInfo.destination_country_four_name =
+            response.data.item_title;
         })
-        .catch((error) => {});
+        .catch((error) => {
+          notify({
+            title: "Freeport Error",
+            text: "Error retrieving item information.",
+            type: "error",
+          });
+        });
     },
+    // function to allow only numbers
     onlyNumber($event) {
       let keyCode = $event.keyCode ? $event.keyCode : $event.which;
       if (keyCode < 48 || keyCode > 57) {
@@ -494,6 +554,7 @@ export default defineComponent({
         $event.preventDefault();
       }
     },
+    // function allows only a dot
     onlyNumberWithDot($event) {
       let keyCode = $event.keyCode ? $event.keyCode : $event.which;
       if ((keyCode < 48 || keyCode > 57) && keyCode !== 46) {
@@ -501,36 +562,14 @@ export default defineComponent({
         $event.preventDefault();
       }
     },
-
-    async getItemForSale() {
-      // Get the item thats being modified
-
-      const item_id_route = useRoute();
-      const item_id = item_id_route.params.id;
-      this.item_id = item_id;
-      const path = "/item/" + this.item_id;
-
-      await axios({
-        method: "get",
-        url: path,
-        withCredentials: true,
-      })
-        .then((response) => {
-          if (response.status === 200) {
-            this.marketitem = response.data;
-          }
-        })
-        .catch((error) => {});
-    },
+    // gets the list of countrys
     async getCountryList() {
-      // Get Countries
-      const path = "/vendorcreateitem/query/country";
+      let path = "/vendorcreateitem/query/country";
 
       axios({
         method: "get", //you can set what request you want to be
         url: path,
         withCredentials: true,
-
       })
         .then((response) => {
           // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
@@ -538,9 +577,9 @@ export default defineComponent({
         })
         .catch((error) => {});
     },
+    // gets the categories
     async getCategoryList() {
-      // Get Categories
-      const path = "/vendorcreateitem/query/category";
+      let path = "/vendorcreateitem/query/category";
 
       await axios({
         method: "get", //you can set what request you want to be
@@ -552,9 +591,9 @@ export default defineComponent({
         })
         .catch((error) => {});
     },
+    // gets list of item conditions
     async getConditionList() {
-      // Get Conditions
-      const path = "/vendorcreateitem/query/condition";
+      let path = "/vendorcreateitem/query/condition";
       await axios({
         method: "get",
         url: path,
@@ -565,8 +604,9 @@ export default defineComponent({
         })
         .catch((error) => {});
     },
+    // payload for form data
     onSubmit() {
-      const payLoad = {
+      let payLoad = {
         item_id: this.item_id,
         item_title: this.CreateItemForm.basicInfo.item_title,
         item_condition: this.CreateItemForm.basicInfo.item_condition,
@@ -586,10 +626,14 @@ export default defineComponent({
         shipping_3: this.CreateItemForm.shippingInfo.shipping_3,
         shipping_3_days: this.CreateItemForm.shippingInfo.shipping_3_days,
         shipping_3_price: this.CreateItemForm.shippingInfo.shipping_3_price,
-        shipping_to_country_one:this.CreateItemForm.shippingInfo.shipping_to_country_one,
-        shipping_to_country_two:this.CreateItemForm.shippingInfo.shipping_to_country_two,
-        shipping_to_country_three:this.CreateItemForm.shippingInfo.shipping_to_country_three,
-        shipping_to_country_four:this.CreateItemForm.shippingInfo.shipping_to_country_four,
+        shipping_to_country_one:
+          this.CreateItemForm.shippingInfo.shipping_to_country_one,
+        shipping_to_country_two:
+          this.CreateItemForm.shippingInfo.shipping_to_country_two,
+        shipping_to_country_three:
+          this.CreateItemForm.shippingInfo.shipping_to_country_three,
+        shipping_to_country_four:
+          this.CreateItemForm.shippingInfo.shipping_to_country_four,
       };
       this.SendItemCreation(payLoad);
     },

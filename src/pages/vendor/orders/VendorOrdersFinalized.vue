@@ -124,11 +124,11 @@
                   <div>{{ order.title_of_item }}</div>
                 </router-link>
               </div>
-               <div class="col-span-12">{{order.uuid}}</div>
+              <div class="col-span-12">{{ order.uuid }}</div>
               <div class="col-span-1">{{ relativeDate(order.created) }}</div>
 
               <div class="col-span-2">{{ order.customer_user_name }}</div>
-              <div class="col-span-4 ">
+              <div class="col-span-4">
                 <div
                   class="flex justify-between"
                   v-if="order.digital_currency == 1"
@@ -160,9 +160,7 @@
 
                   <div class="flex">{{ order.price_total_xmr }} XMR</div>
                 </div>
-                
               </div>
-              
 
               <div v-if="order.user_feedback == 0" class="col-span-12">
                 <div class="grid grid-cols-12">
@@ -284,13 +282,14 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import axios from "axios";
+import { notify } from "@kyvg/vue3-notification";
+import { formatDistance } from "date-fns";
 import authHeader from "../../../services/auth.header";
 import MainHeaderTop from "../../../layouts/headers/MainHeaderTop.vue";
 import MainHeaderMid from "../../../layouts/headers/MainHeaderMid.vue";
 import MainHeaderBottom from "../../../layouts/headers/MainHeaderBottom.vue";
 import MainHeaderVendor from "../../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../../layouts/footers/FooterMain.vue";
-import { formatDistance } from "date-fns";
 
 export default defineComponent({
   name: "vendorordersfinalized",
@@ -308,7 +307,7 @@ export default defineComponent({
       date: Date.now(),
       tab: [],
       orders: [],
-          review: [],
+      review: [],
       vendor_orders_new: "",
       vendor_orders_accepted: "",
       vendor_orders_shipped: "",
@@ -326,10 +325,13 @@ export default defineComponent({
   },
 
   methods: {
+    //payload for the score
     sendscore(uuid: string, rating: string) {
       const payLoad = { rating: rating };
       this.sendFeedbackScore(uuid, payLoad);
     },
+    // send the score for a feedback
+    // accepts payload
     async sendFeedbackScore(uuid: string, payLoad = { rating: string }) {
       await axios({
         method: "post",
@@ -339,18 +341,32 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          this.getuserorders();
-              this.getuserneworderscount();
+          if ((response.status = 200)) {
+            notify({
+              title: "Message Center",
+              text: "Successfully sent feedback score!",
+              type: "success",
+            });
+            this.getuserorders();
+            this.getuserneworderscount();
+          }
         })
         .catch((error) => {
-          console.log(error);
+          notify({
+              title: "Freeport Error",
+              text: "Error posting information.",
+              type: "error",
+            });
         });
     },
+    // payload for sending feedback
     sendreview(uuid, i) {
       let user_review = this.review[i];
       const payLoad = { review: user_review };
       this.sendFeedbackReview(uuid, payLoad);
     },
+    // send the feedback
+    // accepts a payload
     async sendFeedbackReview(uuid: string, payLoad = { review: string }) {
       await axios({
         method: "post",
@@ -360,16 +376,25 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-           if (response.status == 200) {
-             console.log(response)
-          this.getuserorders();
-              this.getuserneworderscount();
-               }
+          if (response.status == 200) {
+            notify({
+              title: "Message Center",
+              text: "Successfully sent feedback",
+              type: "success",
+            });
+            this.getuserorders();
+            this.getuserneworderscount();
+          }
         })
         .catch((error) => {
-          console.log(error);
+          notify({
+              title: "Freeport Error",
+              text: "Error posting information.",
+              type: "error",
+            });
         });
     },
+    // gets the user orders
     async getuserorders() {
       await axios({
         method: "get",
@@ -379,11 +404,10 @@ export default defineComponent({
       }).then((response) => {
         if (response.status == 200) {
           this.orders = response.data;
-     
         }
       });
     },
-
+    // gets the count for the top bars count
     async getuserneworderscount() {
       await axios({
         method: "get",
@@ -405,6 +429,7 @@ export default defineComponent({
         }
       });
     },
+    // get the date conversion
     relativeDate(value) {
       var d = value;
       var e = new Date(d).valueOf();

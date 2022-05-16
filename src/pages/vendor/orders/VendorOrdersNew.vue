@@ -209,13 +209,14 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import axios from "axios";
+import { notify } from "@kyvg/vue3-notification";
+import { formatDistance } from "date-fns";
 import authHeader from "../../../services/auth.header";
 import MainHeaderTop from "../../../layouts/headers/MainHeaderTop.vue";
 import MainHeaderMid from "../../../layouts/headers/MainHeaderMid.vue";
 import MainHeaderBottom from "../../../layouts/headers/MainHeaderBottom.vue";
 import MainHeaderVendor from "../../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../../layouts/footers/FooterMain.vue";
-import { formatDistance } from "date-fns";
 
 export default defineComponent({
   name: "vendorordersnew",
@@ -251,6 +252,7 @@ export default defineComponent({
   },
 
   methods: {
+    // marks the orders as read
      async deleteordernotice() {
       await axios({
         method: "delete",
@@ -263,6 +265,7 @@ export default defineComponent({
         }
       });
     },
+    // gets the new user orders
     async getuserneworders() {
       await axios({
         method: "get",
@@ -275,6 +278,7 @@ export default defineComponent({
         }
       });
     },
+    // accepts the new order
     async acceptorder(uuid) {
       console.log(uuid);
       await axios({
@@ -284,11 +288,17 @@ export default defineComponent({
         headers: authHeader(),
       }).then((response) => {
         if (response.status == 200) {
+                                notify({
+              title: "Freeport",
+              text: "Order Accepted",
+              type: "success",
+            });
           this.getuserneworders();
            this.getuserneworderscount();
         }
       });
     },
+    // rejects the orders
     async rejectorder(uuid) {
       await axios({
         method: "post",
@@ -298,9 +308,15 @@ export default defineComponent({
       }).then((response) => {
         if (response.status == 200) {
           this.getuserneworders();
+                      notify({
+              title: "Freeport",
+              text: "Order Rejected",
+              type: "error",
+            });
         }
       });
     },
+    // gets the count for the top bar
     async getuserneworderscount() {
       await axios({
         method: "get",

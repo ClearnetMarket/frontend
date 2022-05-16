@@ -9,11 +9,7 @@
               Account Home
             </div>
           </router-link>
-          <router-link :to="{ name: 'profile' }">
-            <div class="text-[16px] py-1 text-white hover:text-gray-400">
-              Profile
-            </div>
-          </router-link>
+          
           <router-link :to="{ name: 'forgotpassword' }">
             <div class="text-[16px] py-1 text-white hover:text-gray-400">
               Forgot Password

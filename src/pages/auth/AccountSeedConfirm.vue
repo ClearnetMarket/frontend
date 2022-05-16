@@ -41,7 +41,7 @@
             type="text"
             autocomplete="off"
             placeholder="Word 2"
-             v-model.trim="wordForm.word1"
+            v-model.trim="wordForm.word1"
           />
           <input
             v-model="wordForm.word2"
@@ -49,7 +49,7 @@
             type="text"
             autocomplete="off"
             placeholder="Word 3"
-             v-model.trim="wordForm.word2"
+            v-model.trim="wordForm.word2"
           />
           <input
             v-model="wordForm.word3"
@@ -57,7 +57,7 @@
             type="text"
             autocomplete="off"
             placeholder="Word 4"
-             v-model.trim="wordForm.word3"
+            v-model.trim="wordForm.word3"
           />
           <input
             v-model="wordForm.word4"
@@ -65,7 +65,7 @@
             type="text"
             autocomplete="off"
             placeholder="Word 5"
-             v-model.trim="wordForm.word4"
+            v-model.trim="wordForm.word4"
           />
           <input
             v-model="wordForm.word5"
@@ -73,7 +73,7 @@
             type="text"
             autocomplete="off"
             placeholder="Word 6"
-             v-model.trim="wordForm.word5"
+            v-model.trim="wordForm.word5"
           />
           <div class="flex p-md justify-center">
             <button
@@ -93,8 +93,10 @@
 import { defineComponent } from "vue";
 import axios from "axios";
 import { ref } from "vue";
+import { notify } from "@kyvg/vue3-notification";
 import authHeader from "../../services/auth.header";
 import HeaderPlain from "../../layouts/headers/HeaderPlain.vue";
+
 
 export default defineComponent({
   name: "accountseedconfirm",
@@ -125,7 +127,6 @@ export default defineComponent({
         headers: authHeader(),
       }).then((response) => {
         if (response.status == 200) {
-      
           if (response.data.confirmed == true) {
             this.$router.push({ name: "home" });
           }
@@ -141,7 +142,6 @@ export default defineComponent({
       word4: string;
       word5: string;
     }) {
-    
       axios({
         method: "post",
         url: "/auth/accountseedconfirm",
@@ -150,19 +150,24 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          
           if (response.data.status == "success") {
+            notify({
+              title: "Authorization",
+              text: "Success! Welcome to freeport!!",
+              type: "success",
+            });
             this.$router.push({ name: "home" });
           }
         })
         .catch((error) => {
-          if (error.response) {
-        
-          }
+          notify({
+            title: "Authorization",
+            text: "Invalid Credentials.",
+            type: "error",
+          });
         });
     },
     onSubmit() {
-  
       const payLoad = {
         word0: this.wordForm.word0,
         word1: this.wordForm.word1,

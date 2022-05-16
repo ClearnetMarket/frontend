@@ -74,7 +74,7 @@
             for="password"
             >Amount</label
           >
-          
+
           <div class="flex flex-row">
             <input
               v-model="wallet.xmr_amount"
@@ -118,11 +118,11 @@
 </template>
 
 <script lang="ts">
-
-import { defineComponent } from 'vue';
-import axios from 'axios';
-import { ref } from 'vue';
-import { mapGetters } from 'vuex';
+import { defineComponent } from "vue";
+import axios from "axios";
+import { ref } from "vue";
+import { mapGetters } from "vuex";
+import { notify } from "@kyvg/vue3-notification";
 import MainHeaderTop from "../../../layouts/headers/MainHeaderTop.vue";
 import MainHeaderMid from "../../../layouts/headers/MainHeaderMid.vue";
 import MainHeaderBottom from "../../../layouts/headers/MainHeaderBottom.vue";
@@ -130,10 +130,8 @@ import MainHeaderVendor from "../../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../../layouts/footers/FooterMain.vue";
 import authHeader from "../../../services/auth.header.ts";
 
-
-
 export default defineComponent({
-    name: 'bchsend',
+  name: "bchsend",
   components: {
     MainHeaderTop,
     MainHeaderMid,
@@ -141,113 +139,121 @@ export default defineComponent({
     MainHeaderVendor,
     MainFooter,
   },
-  
-    mounted () {
-        this.userstatus()
-    },
-    data () {
-        return {
-            dense: ref(true),
-            wallet: {
-                bch_address: '',
-                bch_decscription: '',
-                bch_amount: '',
-                pin: '',
-            },
-        };
-    },
-    computed: {
-        ...mapGetters(['user']),
-    },
 
-    methods: {
-        async userstatus () {
-            await axios({
-                method: 'get',
-                url: '/auth/whoami',
-                withCredentials: true,
-                headers: authHeader()
-            })
-                .then((response) => {
-                    if (response.status = 200) {
-                    }
-                   
-                })
-                                .catch((error)=>{
-                this.$router.push("/login")
-            })
-        },
-        async SendCoin (payLoad: {
-            bch_address: string,
-            bch_decscription: string,
-            bch_amount: string,
-            pin: string,
-        }) {
-            await axios({
-                method: 'post',
-                url: '/bch/send',
-                data: payLoad,
-                withCredentials: true,
-                headers: authHeader()
-            })
-                .then((response) => {
-                    if (response.status = 200) {
-                        const message_sent = 'Success! Sent ' + this.wallet.bch_amount + ' to ' + this.wallet.bch_address
-                        this.$q.notify({
-                            type: 'positive',
-                            message: message_sent,
-                            position: 'top'
-                        })
-                        this.$router.push('/vendor/itemsforsale');
-                    }
-                })
-        },
-        async onSubmit () {
+  mounted() {
+    this.userstatus();
+  },
+  data() {
+    return {
+      dense: ref(true),
+      wallet: {
+        bch_address: "",
+        bch_decscription: "",
+        bch_amount: "",
+        pin: "",
+      },
+    };
+  },
+  computed: {
+    ...mapGetters(["user"]),
+  },
 
-            const payLoad = {
-                bch_address: this.wallet.bch_address,
-                bch_decscription: this.wallet.bch_decscription,
-                bch_amount: this.wallet.bch_amount,
-                pin: this.wallet.pin,
-            };
-            await this.SendCoin(payLoad);
-        },
+  methods: {
+    async userstatus() {
+      await axios({
+        method: "get",
+        url: "/auth/whoami",
+        withCredentials: true,
+        headers: authHeader(),
+      })
+        .then((response) => {
+          if ((response.status = 200)) {
+          }
+        })
+        .catch((error) => {
+          this.$router.push("/login");
+        });
     },
+    async SendCoin(payLoad: {
+      bch_address: string;
+      bch_decscription: string;
+      bch_amount: string;
+      pin: string;
+    }) {
+      await axios({
+        method: "post",
+        url: "/bch/send",
+        data: payLoad,
+        withCredentials: true,
+        headers: authHeader(),
+      })
+        .then((response) => {
+          if ((response.status = 200)) {
+            const message_sent =
+              "Success! Sent " +
+              this.wallet.bch_amount +
+              " to " +
+              this.wallet.bch_address;
+            notify({
+              title: "Message Center",
+              text: message_sent,
+              type: "success",
+            });
+            this.$router.push("/vendor/itemsforsale");
+          }
+        })
+        .catch((error) => {
+          notify({
+            title: "Freeport Error",
+            text: "Error With Sending Money",
+            type: "error",
+          });
+        });
+    },
+    async onSubmit() {
+      const payLoad = {
+        bch_address: this.wallet.bch_address,
+        bch_decscription: this.wallet.bch_decscription,
+        bch_amount: this.wallet.bch_amount,
+        pin: this.wallet.pin,
+      };
+      await this.SendCoin(payLoad);
+    },
+  },
 });
 </script>
 
-
 <style type="ts" scoped>
 .widthstyle {
-    max-width: 900px;
-    margin: 0 auto;
+  max-width: 900px;
+  margin: 0 auto;
 }
 .bordered {
-    border-style: solid;
-    border-width: 1px;
-    border-color: #f0f2f2;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #f0f2f2;
 }
 .bordered {
-    border-style: solid;
-    border-width: 1px;
-    border-color: #a7a0a0;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #a7a0a0;
 }
 .rcorners1 {
-    border-radius: 5px;
+  border-radius: 5px;
 }
 .greyhover:hover {
-    background-color: #eeeeee;
+  background-color: #eeeeee;
 }
 .wordcolor {
-    color: #6b6565;
+  color: #6b6565;
 }
 .rcorners1 {
-    border-radius: 5px;
+  border-radius: 5px;
 }
 .greyhover:hover {
-    background-color: #eeeeee;
+  background-color: #eeeeee;
 }
 .wordcolor {
-    color: #6b6565;
+  color: #6b6565;
 }
 </style>

@@ -81,37 +81,35 @@
               </div>
             </div>
             <div class="col-span-12">
-            <div class="" v-if="order.overall_status == 8">
-              <form
-                class="rounded-md pt-6 pb-8 mb-4 w-full"
-                @submit.prevent="sendMessagePayload"
-              >
-                <div class="">
-                  <textarea
-                    v-model="SendMsgForm.msginfo"
-                    id="item_description"
-                    placeholder="Write something .."
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-3"
-                  ></textarea>
-                </div>
-                <div class="flex justify-end">
-                  <button
-                    class="bg-gray-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                    type="submit"
-                  >
-                    Send
-                  </button>
-                </div>
-              </form>
+              <div class="" v-if="order.overall_status == 8">
+                <form
+                  class="rounded-md pt-6 pb-8 mb-4 w-full"
+                  @submit.prevent="sendMessagePayload"
+                >
+                  <div class="">
+                    <textarea
+                      v-model="SendMsgForm.msginfo"
+                      id="item_description"
+                      placeholder="Write something .."
+                      class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-3"
+                    ></textarea>
+                  </div>
+                  <div class="flex justify-end">
+                    <button
+                      class="bg-gray-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                      type="submit"
+                    >
+                      Send
+                    </button>
+                  </div>
+                </form>
               </div>
               <div class="" v-else>
-              <div class=""> Dispute has been closed by the moderator</div>
-             
-             
+                <div class="">Dispute has been closed by the moderator</div>
               </div>
             </div>
             <div class="col-span-12">
-               <div v-for="comment in mainpostcomments">
+              <div v-for="comment in mainpostcomments">
                 <div v-if="comment.mod_uuid != null">
                   <div class="grid grid-cols-12 p-2 rounded bg-white mb-2">
                     <div class="col-span-12 text-orange-500">
@@ -125,7 +123,8 @@
                 <div v-if="comment.mod_uuid == null">
                   <div class="grid grid-cols-12 p-2 rounded bg-white mb-2">
                     <div class="col-span-12 text-gray-500">
-                      {{comment.user_one}} - {{ relativeDate(comment.timestamp) }} ago
+                      {{ comment.user_one }} -
+                      {{ relativeDate(comment.timestamp) }} ago
                     </div>
                     <div class="col-span-12 text-gray-800 p-1">
                       {{ comment.body }}
@@ -144,6 +143,9 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { useRoute } from "vue-router";
+import { formatDistance } from "date-fns";
+import { notify } from "@kyvg/vue3-notification";
 import axios from "axios";
 import authHeader from "../../services/auth.header";
 import MainHeaderTop from "../../layouts/headers/MainHeaderTop.vue";
@@ -151,8 +153,7 @@ import MainHeaderMid from "../../layouts/headers/MainHeaderMid.vue";
 import MainHeaderBottom from "../../layouts/headers/MainHeaderBottom.vue";
 import MainHeaderVendor from "../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../layouts/footers/FooterMain.vue";
-import { useRoute } from "vue-router";
-import { formatDistance } from "date-fns";
+
 export default defineComponent({
   name: "Dispute",
 
@@ -169,7 +170,7 @@ export default defineComponent({
       mainpostcomments: [],
       order_id: "",
       order: "",
-      postid:"",
+      postid: "",
       SendMsgForm: {
         msginfo: "",
       },
@@ -214,13 +215,12 @@ export default defineComponent({
       })
         .then((response) => {
           this.mainpostcomments = response.data;
-          console.log(this.mainpostcomments)
+          console.log(this.mainpostcomments);
         })
         .catch((error) => {});
     },
-        // comments on the post
-    async sendMessageComment(payLoad: { textbody: string})
-     {
+    // comments on the post
+    async sendMessageComment(payLoad: { textbody: string }) {
       await axios({
         method: "post",
         url: "/msg/create/comment/" + this.postid,
@@ -230,13 +230,21 @@ export default defineComponent({
       })
         .then((response) => {
           if ((response.status = 200)) {
-           this.getmainpostcomments();
+            notify({
+              title: "Message Center",
+              text: "Successfully sent message!",
+              type: "success",
+            });
+            this.getmainpostcomments();
           }
         })
-        .catch((error) => {
-          if (error.response) {
-          }
-        });
+    .catch((error) => {
+            notify({
+              title: "Freeport Error",
+              text: "Error posting information.",
+              type: "error",
+            });
+          });
     },
     sendMessagePayload() {
       const payLoad = {

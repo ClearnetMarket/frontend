@@ -271,13 +271,14 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import axios from "axios";
+import { notify } from "@kyvg/vue3-notification";
+import { formatDistance } from "date-fns";
 import authHeader from "../../../services/auth.header";
 import MainHeaderTop from "../../../layouts/headers/MainHeaderTop.vue";
 import MainHeaderMid from "../../../layouts/headers/MainHeaderMid.vue";
 import MainHeaderBottom from "../../../layouts/headers/MainHeaderBottom.vue";
 import MainHeaderVendor from "../../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../../layouts/footers/FooterMain.vue";
-import { formatDistance } from "date-fns";
 
 export default defineComponent({
   name: "vendororderswaiting",
@@ -325,7 +326,7 @@ export default defineComponent({
       modal = document.getElementById("modal");
       modal.classList.add("hidden");
     },
-
+    // gets the new user orders
     async getuserorders() {
       await axios({
         method: "get",
@@ -338,6 +339,7 @@ export default defineComponent({
         }
       });
     },
+    //accepted orders
     async acceptorder(uuid) {
       await axios({
         method: "put",
@@ -346,11 +348,17 @@ export default defineComponent({
         headers: authHeader(),
       }).then((response) => {
         if (response.status == 200) {
+                        notify({
+              title: "Freeport",
+              text: "Order Accepted.",
+              type: "success",
+            });
           this.getuserorders();
           this.getuserneworderscount();
         }
       });
     },
+    // rejects orders
     async rejectorder(uuid) {
       await axios({
         method: "delete",
@@ -359,11 +367,17 @@ export default defineComponent({
         headers: authHeader(),
       }).then((response) => {
         if (response.status == 200) {
+                                notify({
+              title: "Freeport",
+              text: "Order Rejected",
+              type: "error",
+            });
           this.getuserorders();
           this.getuserneworderscount();
         }
       });
     },
+    // send the tracking info on a popup modal
     async sendtrackinginfo(payLoad: {
       order_uuid: string;
       carrier_name: string;
@@ -380,6 +394,7 @@ export default defineComponent({
         }
       });
     },
+    // creates the payload for gettrackingdata
     onSendTracking(uuid) {
       const payLoad = {
         order_uuid: uuid,
@@ -388,6 +403,7 @@ export default defineComponent({
       };
       this.sendtrackinginfo(payLoad);
     },
+    // gets the tracking data
     async gettrackingdata(uuid) {
       await axios({
         method: "delete",
@@ -400,7 +416,7 @@ export default defineComponent({
         }
       });
     },
-
+  // gets the user order count
     async getuserneworderscount() {
       await axios({
         method: "get",
@@ -422,6 +438,7 @@ export default defineComponent({
         }
       });
     },
+    // converts time
     relativeDate(value) {
       var d = value;
       var e = new Date(d).valueOf();

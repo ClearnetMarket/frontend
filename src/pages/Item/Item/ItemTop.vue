@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-7xl mx-auto px-10 border-b mb-10 ">
+  <div class="max-w-7xl mx-auto px-10 border-b mb-10">
     <div class="grid sm:grid-cols-1 md:grid-cols-3 mt-5 gap-5">
       <div class="col-span-1">Images</div>
       <div class="col-span-1 px-5">
@@ -13,7 +13,7 @@
             {{ condition }}
           </div>
         </div>
-         <div class="flex gap-4">
+        <div class="flex gap-4">
           <div class="text-[16px] font-weight-bold text-gray-700">
             Quantity:
           </div>
@@ -70,15 +70,13 @@
           </div>
         </div>
         <div class="mb-2 text-[14px] text-gray-700">
-        
-            <div class="grid grid-cols-12 gap-4">
-              <div class="col-span-3">Located:</div>
-              <div class="col-span-9">
-                {{ exactcity }} {{ exactstateorprovence }}
-                {{ exactzipcode }} {{ origincountry }}
-              </div>
+          <div class="grid grid-cols-12 gap-4">
+            <div class="col-span-3">Located:</div>
+            <div class="col-span-9">
+              {{ exactcity }} {{ exactstateorprovence }} {{ exactzipcode }}
+              {{ origincountry }}
             </div>
-    
+          </div>
 
           <div v-if="(shippingfree = true)">
             <div class="grid grid-cols-12 gap-4">
@@ -101,13 +99,13 @@
           >
             Add to Cart
           </button>
-
-       
         </div>
-            <div class="text-center mb-2 text-yellow-600 font-bold" 
-            v-if="(shippingfree == true)">
-            Free Shipping
-            </div>
+        <div
+          class="text-center mb-2 text-yellow-600 font-bold"
+          v-if="shippingfree == true"
+        >
+          Free Shipping
+        </div>
         <div class="flex flex-col">
           <div class="px-2 mb-5 text-gray-700 font-semibold">
             <div class="border rounded-lg px-2">
@@ -117,11 +115,8 @@
               <ul class="text-[11px] mb-5">
                 <li>-All Items are backed by moderator support.</li>
                 <li>-Dispute's prevent against fraud.</li>
-                 
               </ul>
-              <div class="px-5 text-[16px] text-center">
-                Escrow Transaction
-              </div>
+              <div class="px-5 text-[16px] text-center">Escrow Transaction</div>
             </div>
           </div>
           <div class="flex flex-col">
@@ -188,7 +183,7 @@
                       </router-link>
                     </div>
                   </div>
-                   <div v-if="vendoruuid">
+                  <div v-if="vendoruuid">
                     <div
                       class="text-[14px] text-blue-500 hover:text-blue-300 hover:underline pl-3 text-center"
                     >
@@ -202,7 +197,6 @@
                       </router-link>
                     </div>
                   </div>
-
                 </div>
               </div>
             </div>
@@ -216,6 +210,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import axios from "axios";
+import { notify } from "@kyvg/vue3-notification";
 import { useRouter, useRoute } from "vue-router";
 import authHeader from "../../../services/auth.header";
 
@@ -274,7 +269,6 @@ export default defineComponent({
   mounted() {
     const item_id_route = useRoute();
     this.item_id = item_id_route.params.id;
- 
   },
 
   methods: {
@@ -284,11 +278,28 @@ export default defineComponent({
         method: "post",
         url: "/checkout/add/" + this.item_id,
         headers: authHeader(),
-      }).then((response) => {
-        this.get_shopping_cart_count();
-      });
+      })
+        .then((response) => {
+          if ((response.status = 200)) {
+            notify({
+              title: "Shoppinng cart message",
+              text: "Successfully added item to cart",
+              type: "success",
+            });
+            this.get_shopping_cart_count();
+          }
+        })
+        .catch((error) => {
+          if (error.response) {
+            notify({
+              title: "Shopping Cart Error",
+              text: "Error.  Could not add item to cart.",
+              type: "error",
+            });
+          }
+        });
     },
-   
+
     // Get How many items in shopping cart
     async get_shopping_cart_count() {
       await axios({

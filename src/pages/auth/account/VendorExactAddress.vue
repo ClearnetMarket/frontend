@@ -20,7 +20,7 @@
           <li>
             <span class="text-gray-500 mx-2">/</span>
           </li>
-           <li>
+          <li>
             <router-link :to="{ name: 'forsale' }">
               <a class="text-blue-600 hover:text-blue-700">My Items</a>
             </router-link>
@@ -28,7 +28,6 @@
           <li>
             <span class="text-gray-500 mx-2">/</span>
           </li>
-
         </ol>
       </nav>
     </div>
@@ -42,7 +41,6 @@
           Set your address to help customers find nearby vendors
         </div>
 
-     
         <div class="col-span-4">
           <label class="block text-gray-700 text-sm font-bold mb-2">City</label>
           <input
@@ -77,7 +75,7 @@
             placeholder="Zip"
           />
         </div>
-        
+
         <div class="col-span-4 col-start-5 mt-5 mb-5">
           <button
             class="bg-yellow-500 rounded-md font-semibold hover:bg-yellow-600 py-3 text-sm text-black uppercase w-full"
@@ -107,6 +105,8 @@ import MainHeaderBottom from "../../../layouts/headers/MainHeaderBottom.vue";
 import MainHeaderVendor from "../../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../../layouts/footers/FooterMain.vue";
 import authHeader from "../../../services/auth.header";
+import { notify } from "@kyvg/vue3-notification";
+
 
 export default defineComponent({
   name: "vendoraddress",
@@ -121,11 +121,9 @@ export default defineComponent({
   data() {
     return {
       ChangeAddressForm: {
-
         city: "",
         stateorprovence: "",
         zip: "",
- 
       },
     };
   },
@@ -135,19 +133,15 @@ export default defineComponent({
   },
 
   mounted() {
-
     this.getcurrentshipping();
   },
 
   methods: {
     async addusershipping(payLoad: {
-   
       city: string;
       stateorprovence: string;
       zip: string;
-
     }) {
-        console.log(payLoad)
       await axios({
         method: "put",
         url: "/vendor/update/defaultaddress",
@@ -156,12 +150,16 @@ export default defineComponent({
         headers: authHeader(),
       }).then((response) => {
         if ((response.status = 200)) {
-            this.$router.push({ name: "forsale" });
+              notify({
+              title: "Authorization",
+              text: "Success!",
+              type: "success",
+            });
+          this.$router.push({ name: "forsale" });
         }
       });
     },
 
-    
     async getcurrentshipping() {
       await axios({
         method: "get",
@@ -170,25 +168,29 @@ export default defineComponent({
         headers: authHeader(),
       }).then((response) => {
         if ((response.status = 200)) {
-    
           this.ChangeAddressForm.city = response.data.city;
-          this.ChangeAddressForm.stateorprovence = response.data.state_or_provence;
+          this.ChangeAddressForm.stateorprovence =
+            response.data.state_or_provence;
           this.ChangeAddressForm.zip = response.data.zip;
 
         }
-      });
+      })
+       .catch((error) => {
+          notify({
+            title: "Data",
+            text: "Error retrieving data.",
+            type: "error",
+          });
+        });
     },
-
-
 
     async onSubmit() {
       const payLoad = {
-   
         city: this.ChangeAddressForm.city,
         stateorprovence: this.ChangeAddressForm.stateorprovence,
         zip: this.ChangeAddressForm.zip,
       };
- 
+
       await this.addusershipping(payLoad);
     },
   },

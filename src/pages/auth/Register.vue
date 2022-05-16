@@ -48,7 +48,7 @@
             for="username"
             >Email</label
           >
-          
+
           <input
             v-model="registerForm.email"
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -70,7 +70,7 @@
             type="password"
             autocomplete="off"
             placeholder="Password"
-              v-model.trim="registerForm.password"
+            v-model.trim="registerForm.password"
           />
         </div>
         <div class="mb-4">
@@ -86,7 +86,7 @@
             type="password"
             autocomplete="off"
             placeholder="Confirm Password"
-              v-model.trim="registerForm.password_confirm"
+            v-model.trim="registerForm.password_confirm"
           />
         </div>
         <div class="flex">
@@ -183,7 +183,10 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import axios from "axios";
+import { notify } from "@kyvg/vue3-notification";
+
 import HeaderPlain from "../../layouts/headers/HeaderPlain.vue";
+
 
 export default defineComponent({
   name: "Register",
@@ -233,9 +236,20 @@ export default defineComponent({
             localStorage.setItem("auth_token", response.data.token);
             this.$store.dispatch("user", response.data.user);
             this.$router.push({ name: "accountseed" });
+            notify({
+              title: "Authorization",
+              text: "Success",
+              type: "success",
+            });
           }
         })
-        .catch((error) => {});
+        .catch((error) => {
+            notify({
+              title: "Authorization",
+              text: "Failed to Register.  Check form for errors!",
+              type: "error",
+            });
+        });
     },
     async getCurrencyList() {
       const path = "/auth/query/currency";
@@ -257,7 +271,14 @@ export default defineComponent({
         .then((response) => {
           this.countryList = response.data;
         })
-        .catch((error) => {});
+        .catch((error) => {
+            notify({
+              title: "Data Retrieval Failure",
+              text: "Failed to get country list",
+              type: "error",
+            });
+
+        });
     },
     async onSubmit() {
       const payLoad = {

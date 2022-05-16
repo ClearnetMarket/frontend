@@ -74,7 +74,7 @@
             for="password"
             >Amount</label
           >
-          
+
           <div class="flex flex-row">
             <input
               v-model="wallet.btc_amount"
@@ -113,7 +113,7 @@
         </div>
       </form>
     </div>
-   </div>
+  </div>
   <MainFooter />
 </template>
 
@@ -121,6 +121,7 @@
 import { defineComponent } from "vue";
 import axios from "axios";
 import { ref } from "vue";
+import { notify } from "@kyvg/vue3-notification";
 import { mapGetters } from "vuex";
 import MainHeaderTop from "../../../layouts/headers/MainHeaderTop.vue";
 import MainHeaderMid from "../../../layouts/headers/MainHeaderMid.vue";
@@ -196,21 +197,29 @@ export default defineComponent({
         data: payLoad,
         withCredentials: true,
         headers: authHeader(),
-      }).then((response) => {
-        if ((response.status = 200)) {
-          const message_sent =
-            "Success! Sent " +
-            this.wallet.btc_amount +
-            " to " +
-            this.wallet.btc_address;
-          this.$q.notify({
-            type: "positive",
-            message: message_sent,
-            position: "top",
+      })
+        .then((response) => {
+          if ((response.status = 200)) {
+            const message_sent =
+              "Success! Sent " +
+              this.wallet.btc_amount +
+              " to " +
+              this.wallet.btc_address;
+            notify({
+              title: "Freeport",
+              text: message_sent,
+              type: "success",
+            });
+            this.$router.push("/vendor/itemsforsale");
+          }
+        })
+        .catch((error) => {
+          notify({
+            title: "Freeport Error",
+            text: "Error With Sending Money",
+            type: "error",
           });
-          this.$router.push("/vendor/itemsforsale");
-        }
-      });
+        });
     },
     async onSubmit() {
       const payLoad = {

@@ -51,8 +51,13 @@
                     </div>
                     <div class="col-span-12 font-bold text-[18px] py-1">
                       <span class="text-blue-600 hover:text-blue-300 text-xs">
-                       <router-link :to="{ name: 'userprofile', params: { uuid: item.vendor_uuid  }}">
-                        Sold by: {{ item.vendor_user_name }}
+                        <router-link
+                          :to="{
+                            name: 'userprofile',
+                            params: { uuid: item.vendor_uuid },
+                          }"
+                        >
+                          Sold by: {{ item.vendor_user_name }}
                         </router-link>
                       </span>
                     </div>
@@ -62,15 +67,33 @@
                         v-model="item.quantity_of_item"
                       >
                         <option value="1">1</option>
-                        <option value="2" v-if="item.vendor_supply >= 2">2</option>
-                        <option value="3" v-if="item.vendor_supply >= 3">3</option>
-                        <option value="4" v-if="item.vendor_supply >= 4">4</option>
-                        <option value="5" v-if="item.vendor_supply >= 5">5</option>
-                        <option value="6" v-if="item.vendor_supply >= 6">6</option>
-                        <option value="7" v-if="item.vendor_supply >= 7">7</option>
-                        <option value="8" v-if="item.vendor_supply >= 8">8</option>
-                        <option value="9" v-if="item.vendor_supply >= 9">9</option>
-                        <option value="10" v-if="item.vendor_supply >= 10">10</option>
+                        <option value="2" v-if="item.vendor_supply >= 2">
+                          2
+                        </option>
+                        <option value="3" v-if="item.vendor_supply >= 3">
+                          3
+                        </option>
+                        <option value="4" v-if="item.vendor_supply >= 4">
+                          4
+                        </option>
+                        <option value="5" v-if="item.vendor_supply >= 5">
+                          5
+                        </option>
+                        <option value="6" v-if="item.vendor_supply >= 6">
+                          6
+                        </option>
+                        <option value="7" v-if="item.vendor_supply >= 7">
+                          7
+                        </option>
+                        <option value="8" v-if="item.vendor_supply >= 8">
+                          8
+                        </option>
+                        <option value="9" v-if="item.vendor_supply >= 9">
+                          9
+                        </option>
+                        <option value="10" v-if="item.vendor_supply >= 10">
+                          10
+                        </option>
                       </select>
                     </div>
 
@@ -135,7 +158,6 @@
 
         <div v-if="shopping_cart_items_saved_list">
           <div v-for="(item, index) in shopping_cart_items_saved_list">
-            
             <div class="hover:bg-gray-100">
               <div class="grid grid-cols-12 px-1 py-1">
                 <!-- product -->
@@ -217,7 +239,7 @@
             <div class="col-span-12">
               <div v-if="order_summary_shipping_cost == 0">
                 <div v-if="order_summary_count > 0">
-                <div class="text-orange-500">Free Shipping</div>
+                  <div class="text-orange-500">Free Shipping</div>
                 </div>
               </div>
               <div v-else>
@@ -236,7 +258,7 @@
               </div>
               <router-link :to="{ name: 'checkout' }">
                 <button
-                v-if="order_summary_count > 0"
+                  v-if="order_summary_count > 0"
                   class="bg-yellow-500 font-semibold hover:bg-yellow-600 py-3 text-sm text-white uppercase w-full"
                 >
                   Checkout
@@ -254,6 +276,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import axios from "axios";
+import { notify } from "@kyvg/vue3-notification";
 import authHeader from "../../services/auth.header";
 import MainHeaderTop from "../../layouts/headers/MainHeaderTop.vue";
 import MainHeaderMid from "../../layouts/headers/MainHeaderMid.vue";
@@ -284,13 +307,12 @@ export default defineComponent({
   mounted() {
     this.get_updated_prices_and_quantity();
     this.get_shopping_cart_items();
-    // this.set_amount_to_one();
     this.get_shopping_cart_items_saved_for_later();
     this.get_shopping_cart_order_summary();
   },
 
   methods: {
-    // Get How many items in shopping cart
+    // gets the item to update price and quanity for cart
     async get_updated_prices_and_quantity() {
       await axios({
         method: "get",
@@ -299,11 +321,19 @@ export default defineComponent({
       })
         .then((response) => {
           if (response.status == 200) {
-          } 
+          }
         })
-        .catch((error) => {});
+        .catch((error) => {
+          notify({
+            title: "Freeport Error",
+            text: "Error retrieving information.",
+            type: "error",
+          });
+        });
     },
-        async set_amount_to_one() {
+    // was a bug so it would set items to one
+    // not used currently
+    async set_amount_to_one() {
       await axios({
         method: "post",
         url: "/checkout/setamount/one",
@@ -311,11 +341,18 @@ export default defineComponent({
       })
         .then((response) => {
           if (response.status == 200) {
-          } 
+          }
         })
-        .catch((error) => {});
+       .catch((error) => {
+          notify({
+            title: "Freeport Error",
+            text: "Error retrieving information.",
+            type: "error",
+          });
+        });
     },
 
+    // gets the items in the shopping cart
     async get_shopping_cart_items() {
       await axios({
         method: "get",
@@ -334,6 +371,7 @@ export default defineComponent({
           this.shopping_cart_items_list = null;
         });
     },
+    // gets items saved for later
     async get_shopping_cart_items_saved_for_later() {
       await axios({
         method: "get",
@@ -354,6 +392,7 @@ export default defineComponent({
           this.shopping_cart_items_saved_list = null;
         });
     },
+    // getts the " order summary" information
     async get_shopping_cart_order_summary() {
       await axios({
         method: "get",
@@ -366,23 +405,25 @@ export default defineComponent({
             this.order_summary_count = response.data.total_items;
             this.order_summary_shipping_cost = response.data.total_shipping;
             this.order_summary_cost = response.data.total_price_before_shipping;
-            this.order_summary_shipping_and_price_cost = response.data.total_price;
+            this.order_summary_shipping_and_price_cost =
+              response.data.total_price;
           }
         })
         .catch((error) => {
           this.shopping_cart_items_saved_list = null;
         });
     },
+    // get the item current amount
     async currentitemamount(item, index) {
       await axios({
         method: "get",
         url: "/checkout/currentquantity/" + item.id,
         headers: authHeader(),
       }).then((response) => {
-        
         return response.data.amount;
       });
     },
+    // changes the shipping option
     async selectedshipping(event, item) {
       this.option = event.target.value;
       let payLoad = {
@@ -397,56 +438,118 @@ export default defineComponent({
         this.get_shopping_cart_order_summary();
       });
     },
+    // update item amount
     async itemamount(event, item) {
       this.quantity = event.target.value;
- 
       let payLoad = {
         new_amount: this.quantity,
       };
-
       await axios({
         method: "put",
         url: "/checkout/updateamount/" + item.id,
         headers: authHeader(),
         data: payLoad,
-      }).then((response) => {
-        this.shopping_cart_count = response.data.status;
-      
-        this.get_shopping_cart_order_summary();
-      });
+      })
+        .then((response) => {
+          if ((response.status = 200)) {
+            notify({
+              title: "Shopping Cart",
+              text: "Item amount updated!",
+              type: "success",
+            });
+            this.shopping_cart_count = response.data.status;
+
+            this.get_shopping_cart_order_summary();
+          }
+        })
+        .catch((error) => {
+          notify({
+            title: "Freeport Error",
+            text: "Error posting information.",
+            type: "error",
+          });
+        });
     },
+    // delete an item
     async deleteitem(item) {
       await axios({
         method: "delete",
         url: "/checkout/delete/" + item.id,
         headers: authHeader(),
-      }).then((response) => {
-        this.get_shopping_cart_items();
-        this.get_shopping_cart_items_saved_for_later();
-        this.get_shopping_cart_order_summary();
-      });
+      })
+        .then((response) => {
+          if ((response.status = 200)) {
+            notify({
+              title: "Freeport Error",
+              text: "Item deleted from shopping cart.",
+              type: "error",
+            });
+            this.get_shopping_cart_items();
+            this.get_shopping_cart_items_saved_for_later();
+            this.get_shopping_cart_order_summary();
+          }
+        })
+        .catch((error) => {
+          notify({
+            title: "Freeport Error",
+            text: "Error posting information.",
+            type: "error",
+          });
+        });
     },
+    // save an item for later
     async saveforlateritem(item) {
       await axios({
         method: "put",
         url: "/checkout/saveforlater/" + item.id,
         headers: authHeader(),
-      }).then((response) => {
-        this.get_shopping_cart_items();
-        this.get_shopping_cart_items_saved_for_later();
-        this.get_shopping_cart_order_summary();
-      });
+      })
+        .then((response) => {
+          if ((response.status = 200)) {
+            notify({
+              title: "Shopping Cart",
+              text: "Item saved for later!",
+              type: "success",
+            });
+            this.get_shopping_cart_items();
+            this.get_shopping_cart_items_saved_for_later();
+            this.get_shopping_cart_order_summary();
+          }
+        })
+        .catch((error) => {
+          notify({
+            title: "Freeport Error",
+            text: "Error posting information.",
+            type: "error",
+          });
+        });
     },
+    // move item to sart from saved
     async movetocartitem(item) {
       await axios({
         method: "put",
         url: "/checkout/movecartitem/" + item.id,
         headers: authHeader(),
-      }).then((response) => {
-        this.get_shopping_cart_items();
-        this.get_shopping_cart_items_saved_for_later();
-        this.get_shopping_cart_order_summary();
-      });
+      })
+        .then((response) => {
+          if ((response.status = 200)) {
+            notify({
+              title: "Shopping Cart",
+              text: "Item moved to cart!",
+              type: "success",
+            });
+            this.get_shopping_cart_items();
+            this.get_shopping_cart_items_saved_for_later();
+            this.get_shopping_cart_order_summary();
+          }
+        })
+        .catch((error) => {
+          notify({
+            title: "Freeport Error",
+            text: "Error posting information.",
+            type: "error",
+          });
+        });
     },
   },
 });

@@ -44,7 +44,7 @@
               <div class="">{{ address }}</div>
               <div class="">{{ apt }}</div>
               <div class="flex">
-                <div class=" pr-1">{{ city }}</div>
+                <div class="pr-1">{{ city }}</div>
                 <div class="px-1">{{ stateorprovence }}</div>
                 <div class="px-1">{{ zip }}</div>
               </div>
@@ -83,8 +83,7 @@
           <div class="col-span-1 font-bold"></div>
           <div class="col-span-11 text-">
             <div v-for="(item, index) in shopping_cart_items_list">
-              <div class="grid grid-cols-12 gap-4 border border-gray-300 p-4" >
-            
+              <div class="grid grid-cols-12 gap-4 border border-gray-300 p-4">
                 <div class="col-span-2">
                   <img
                     class="h-24"
@@ -104,7 +103,7 @@
                   </div>
                 </div>
                 <div class="col-span-6">
-                  <div v-if="item.digital_currency_1 == true" >
+                  <div v-if="item.digital_currency_1 == true">
                     <input
                       v-on:change="checkoutpaymenttype($event, item)"
                       v-model="item.selected_currency"
@@ -117,8 +116,8 @@
 
                     <label class="px-5" for="btc">Bitcoin</label><br />
                   </div>
-              
-                  <div v-if="(item.digital_currency_2 == true)" >
+
+                  <div v-if="item.digital_currency_2 == true">
                     <input
                       v-on:change="checkoutpaymenttype($event, item)"
                       v-model="item.selected_currency"
@@ -132,7 +131,7 @@
                     <label class="px-5" for="bch">Bitcoin Cash</label><br />
                   </div>
 
-                  <div v-if="(item.digital_currency_3 == true)" >
+                  <div v-if="item.digital_currency_3 == true">
                     <input
                       v-on:change="checkoutpaymenttype($event, item)"
                       v-model="item.selected_currency"
@@ -193,11 +192,12 @@
               </div>
             </div>
             <div class="mt-5 mb-5">
-           
-            
-   
               <button
-                v-show="xmrtotalprice <= xmrbalance && bchtotalprice <= bchbalance && btctotalprice <= btcbalance" 
+                v-show="
+                  xmrtotalprice <= xmrbalance &&
+                  bchtotalprice <= bchbalance &&
+                  btctotalprice <= btcbalance
+                "
                 @click="checkoutorder()"
                 class="bg-yellow-500 rounded-md font-semibold hover:bg-yellow-600 py-3 text-sm text-white uppercase w-full"
               >
@@ -215,6 +215,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import axios from "axios";
+import { notify } from "@kyvg/vue3-notification";
 import authHeader from "../../services/auth.header";
 import MainHeaderTop from "../../layouts/headers/MainHeaderTop.vue";
 import MainHeaderMid from "../../layouts/headers/MainHeaderMid.vue";
@@ -286,11 +287,24 @@ export default defineComponent({
         url: "/checkout/payment",
         withCredentials: true,
         headers: authHeader(),
-      }).then((response) => {
-        if ((response.status = 200)) {
-         this.$router.push({name: "userorders" });
-        }
-      });
+      })
+        .then((response) => {
+          if ((response.status = 200)) {
+            notify({
+              title: "Freeport Message",
+              text: "Successfully completed order!",
+              type: "success",
+            });
+            this.$router.push({ name: "userorders" });
+          }
+        })
+        .catch((error) => {
+          notify({
+            title: "Freeport Error",
+            text: "Error retrieving information.",
+            type: "error",
+          });
+        });
     },
     async updateprices() {
       await axios({
@@ -298,10 +312,18 @@ export default defineComponent({
         url: "/checkout/update/price",
         withCredentials: true,
         headers: authHeader(),
-      }).then((response) => {
-        if ((response.status = 200)) {
-        }
-      });
+      })
+        .then((response) => {
+          if ((response.status = 200)) {
+          }
+        })
+        .catch((error) => {
+          notify({
+            title: "Freeport Error",
+            text: "Error retrieving information.",
+            type: "error",
+          });
+        });
     },
     async get_shopping_cart_items() {
       await axios({
@@ -320,24 +342,36 @@ export default defineComponent({
         })
         .catch((error) => {
           this.shopping_cart_items_list = null;
+          notify({
+            title: "Freeport Error",
+            text: "Error retrieving information.",
+            type: "error",
+          });
         });
     },
 
     async checkoutpaymenttype(event, item) {
       this.selectedpayment = event.target.value;
-   
       let payLoad = {
         new_currency: this.selectedpayment,
       };
-     
       await axios({
         method: "post",
         url: "/checkout/changepaymentoption/" + item.id,
         headers: authHeader(),
         data: payLoad,
-      }).then((response) => {
-        this.get_shopping_cart_order_summary();
-      });
+      })
+        .then((response) => {
+          this.get_shopping_cart_order_summary();
+        })
+        .catch((error) => {
+          this.shopping_cart_items_list = null;
+          notify({
+            title: "Freeport Error",
+            text: "Error retrieving information.",
+            type: "error",
+          });
+        });
     },
 
     async get_shopping_cart_order_summary() {
@@ -348,7 +382,6 @@ export default defineComponent({
       }).then((response) => {
         this.cart_status = response.status;
         if (this.cart_status == 200) {
-    
           this.btcsumofitem = response.data.btc_sum_of_item;
           this.btcprice = response.data.btc_price;
           this.btcshippingprice = response.data.btc_shipping_price;
@@ -362,7 +395,13 @@ export default defineComponent({
           this.xmrshippingprice = response.data.xmr_shipping_price;
           this.xmrtotalprice = response.data.xmr_total_price;
         }
-      });
+      }).catch((error) => {
+          notify({
+            title: "Freeport Error",
+            text: "Error retrieving information.",
+            type: "error",
+          });
+        });
     },
     async getcurrentshipping() {
       await axios({
@@ -390,33 +429,60 @@ export default defineComponent({
         method: "get",
         url: "/xmr/balance",
         headers: authHeader(),
-      }).then((response) => {
-        if (response.data) {
-          this.xmrbalance = response.data.xmr_balance;
-        }
-      });
+      })
+        .then((response) => {
+          if (response.data) {
+            this.xmrbalance = response.data.xmr_balance;
+          }
+        })
+        .catch((error) => {
+          this.shopping_cart_items_list = null;
+          notify({
+            title: "Freeport Error",
+            text: "Error retrieving information.",
+            type: "error",
+          });
+        });
     },
     async getbchprice() {
       await axios({
         method: "get",
         url: "/bch/balance",
         headers: authHeader(),
-      }).then((response) => {
-        if (response.data) {
-          this.bchbalance = response.data.bch_balance;
-        }
-      });
+      })
+        .then((response) => {
+          if (response.data) {
+            this.bchbalance = response.data.bch_balance;
+          }
+        })
+        .catch((error) => {
+          this.shopping_cart_items_list = null;
+          notify({
+            title: "Freeport Error",
+            text: "Error retrieving information.",
+            type: "error",
+          });
+        });
     },
     async getbtcprice() {
       await axios({
         method: "get",
         url: "/btc/balance",
         headers: authHeader(),
-      }).then((response) => {
-        if (response.data) {
-          this.btcbalance = response.data.btc_balance;
-        }
-      });
+      })
+        .then((response) => {
+          if (response.data) {
+            this.btcbalance = response.data.btc_balance;
+          }
+        })
+        .catch((error) => {
+          this.shopping_cart_items_list = null;
+          notify({
+            title: "Freeport Error",
+            text: "Error retrieving information.",
+            type: "error",
+          });
+        });
     },
   },
 });
