@@ -97,11 +97,7 @@ export default defineComponent({
           }
         })
         .catch((error) => {
-          notify({
-            title: "Freeport Error",
-            text: "Error retrieving information.",
-            type: "error",
-          });
+        
         });
     },
     returncurrencysymbol(currencydigit) {

@@ -253,6 +253,12 @@ export default defineComponent({
   },
 
   methods: {
+      // get the date conversion
+    relativeDate(value) {
+      var d = value;
+      var e = new Date(d).valueOf();
+      return formatDistance(e, new Date());
+    },
     // get the main post of the contect from api
     async getmainpost() {
       await axios({
@@ -273,11 +279,7 @@ export default defineComponent({
           this.loaded = true;
         })
         .catch((error) => {
-          notify({
-            title: "Freeport Error",
-            text: "Error retrieving information",
-            type: "error",
-          });
+         
         });
     },
     // get the item
@@ -293,13 +295,7 @@ export default defineComponent({
             this.itemforsale = response.data;
           }
         })
-        .catch((error) => {
-          notify({
-            title: "Freeport Error",
-            text: "Error retrieving information",
-            type: "error",
-          });
-        });
+        .catch((error) => {  });
     },
     // gets the order of the msg
     async gettheorder() {
@@ -315,13 +311,7 @@ export default defineComponent({
               this.order = response.data;
             }
           })
-          .catch((error) => {
-            notify({
-              title: "Freeport Error",
-              text: "Error retrieving information",
-              type: "error",
-            });
-          });
+          .catch((error) => { });
       }
       if (user_two_uuid == user.uuid) {
         await axios({
@@ -335,13 +325,7 @@ export default defineComponent({
               this.order = response.data;
             }
           })
-          .catch((error) => {
-            notify({
-              title: "Freeport Error",
-              text: "Error retrieving information",
-              type: "error",
-            });
-          });
+          .catch((error) => { });
       }
     },
     // gets coments of main post
@@ -355,13 +339,7 @@ export default defineComponent({
         .then((response) => {
           this.mainpostcomments = response.data;
         })
-       .catch((error) => {
-            notify({
-              title: "Freeport Error",
-              text: "Error retrieving information",
-              type: "error",
-            });
-          });
+       .catch((error) => { });
     },
     // gets the count of posts
     async getcountofusers() {
@@ -374,13 +352,7 @@ export default defineComponent({
         .then((response) => {
           this.other_user_count = response.data.get_count;
         })
-        .catch((error) => {
-            notify({
-              title: "Freeport Error",
-              text: "Error retrieving information",
-              type: "error",
-            });
-          });
+        .catch((error) => {});
     },
     // gets the msds of the users
     async getmsgsofusers() {
@@ -393,13 +365,7 @@ export default defineComponent({
         .then((response) => {
           this.userlist = response.data;
         })
-        .catch((error) => {
-            notify({
-              title: "Freeport Error",
-              text: "Error retrieving information",
-              type: "error",
-            });
-          });
+        .catch((error) => {});
     },
     //sends a comment to the api
     async sendcomment(payLoad: { body: string }) {
@@ -418,13 +384,7 @@ export default defineComponent({
             this.getmainpost();
           }
         })
-        .catch((error) => {
-            notify({
-              title: "Freeport Error",
-              text: "Error retrieving information",
-              type: "error",
-            });
-          });
+        .catch((error) => {});
     },
     //payload for submitting a comment
     onSubmit() {
@@ -432,12 +392,7 @@ export default defineComponent({
         textbody: this.SendMsgForm.msginfo,
       };
       this.sendcomment(payLoad);
-    },
-  // get the date conversion
-    relativeDate(value) {
-      var d = value;
-      var e = new Date(d).valueOf();
-      return formatDistance(e, new Date());
+      }
     },
   },
 });

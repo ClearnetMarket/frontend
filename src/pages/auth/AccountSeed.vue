@@ -78,11 +78,11 @@ import { defineComponent } from "vue";
 import axios from "axios";
 import { ref } from "vue";
 import { notify } from "@kyvg/vue3-notification";
+
 import { mapGetters } from "vuex";
 import { useRoute } from "vue-router";
 import authHeader from "../../services/auth.header";
 import HeaderPlain from "../../layouts/headers/HeaderPlain.vue";
-
 
 export default defineComponent({
   name: "accountseed",
@@ -100,6 +100,7 @@ export default defineComponent({
       word6: "",
     };
   },
+
   mounted() {
     this.userstatus();
     this.userstatusconfirmed();

@@ -124,12 +124,8 @@ export default defineComponent({
         .then((response) => {
           this.other_user_count = response.data.get_count;
         })
-      .catch((error) => {
-          notify({
-            title: "Freeport Error",
-            text: "Error retrieving information.",
-            type: "error",
-          });
+     .catch((error) => {});
+        
     },
 
     async getmsgsofusers() {
@@ -142,12 +138,8 @@ export default defineComponent({
         .then((response) => {
           this.userlist = response.data;
         })
-       .catch((error) => {
-          notify({
-            title: "Freeport Error",
-            text: "Error retrieving information.",
-            type: "error",
-          });
+      .catch((error) => {});
+         
     },
   },
 });

@@ -215,11 +215,7 @@ export default defineComponent({
           this.orders = response.data;
         }
       }).catch((error) => {
-          notify({
-            title: "Freeport Error",
-            text: "Error retrieving information.",
-            type: "error",
-          });
+        
         });
     },
     // rejects the orders
@@ -240,11 +236,7 @@ export default defineComponent({
           });
         }
       }).catch((error) => {
-          notify({
-            title: "Freeport Error",
-            text: "Error retrieving information.",
-            type: "error",
-          });
+         
         });
     },
     // accepts the orders
@@ -265,11 +257,7 @@ export default defineComponent({
           });
         }
       }).catch((error) => {
-          notify({
-            title: "Freeport Error",
-            text: "Error retrieving information.",
-            type: "error",
-          });
+        
         });
     },
     // gets the top bars count for orders
@@ -293,11 +281,7 @@ export default defineComponent({
           this.vendor_orders_dispute = response.data.vendor_orders_dispute;
         }
       }).catch((error) => {
-          notify({
-            title: "Freeport Error",
-            text: "Error retrieving information.",
-            type: "error",
-          });
+        
         });
     },
     // date conversion

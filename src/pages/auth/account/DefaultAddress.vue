@@ -80,6 +80,10 @@
             type="text"
             placeholder="Address"
           />
+                     <span
+              v-if="v$.ChangeAddressForm.address.$error"
+              class="text-red-600 text-center"
+            >
         </div>
         <div class="col-span-12">
           <input
@@ -99,6 +103,10 @@
             type="text"
             placeholder="City"
           />
+                               <span
+              v-if="v$.ChangeAddressForm.city.$error"
+              class="text-red-600 text-center"
+            >
         </div>
         <div class="col-span-4">
           <label class="block text-gray-700 text-sm font-bold mb-2"
@@ -111,6 +119,10 @@
             type="text"
             placeholder="State or Provence"
           />
+                                         <span
+              v-if="v$.ChangeAddressForm.stateorprovence.$error"
+              class="text-red-600 text-center"
+            >
         </div>
         <div class="col-span-4">
           <label class="block text-gray-700 text-sm font-bold mb-2"
@@ -123,6 +135,10 @@
             type="text"
             placeholder="Zip"
           />
+            <span
+              v-if="v$.ChangeAddressForm.zip.$error"
+              class="text-red-600 text-center"
+            >
         </div>
         <div class="col-span-12">
           <label class="block text-gray-700 text-sm font-bold mb-2"
@@ -160,8 +176,9 @@ import axios from "axios";
 import { defineComponent } from "vue";
 import { ref } from "vue";
 import { notify } from "@kyvg/vue3-notification";
-
 import { mapGetters } from "vuex";
+import useValidate from "@vuelidate/core";
+import { required, email, minLength, sameAs } from "@vuelidate/validators";
 import MainHeaderTop from "../../../layouts/headers/MainHeaderTop.vue";
 import MainHeaderMid from "../../../layouts/headers/MainHeaderMid.vue";
 import MainHeaderBottom from "../../../layouts/headers/MainHeaderBottom.vue";
@@ -182,6 +199,7 @@ export default defineComponent({
 
   data() {
     return {
+              v$: useValidate(),
       ChangeAddressForm: {
         countryList: "",
         address_name: "",
@@ -195,7 +213,16 @@ export default defineComponent({
       },
     };
   },
-
+  validations() {
+    return {
+      ChangeAddressForm: {
+        address: { required, minLength: minLength(6) },
+        city: { required, minLength: minLength(2) },
+        stateorprovence: { required, minLength: minLength(2) },
+        zip: { required, minLength: minLength(2) },
+      },
+    };
+  },
   computed: {
     ...mapGetters(["user"]),
   },
@@ -265,7 +292,7 @@ export default defineComponent({
         .catch((error) => {});
     },
 
-    async onSubmit() {
+     onSubmit() {
       const payLoad = {
         country: this.ChangeAddressForm.country,
         address: this.ChangeAddressForm.address,
@@ -276,8 +303,20 @@ export default defineComponent({
         zip: this.ChangeAddressForm.zip,
         message: this.ChangeAddressForm.message,
       };
-      console.log(payLoad);
-      await this.addusershipping(payLoad);
+         if (this.v$.$invalid) {
+        notify({
+          title: "Authorization",
+          text: "Form Failure",
+          type: "error",
+        });
+         } else {
+        notify({
+          title: "Authorization",
+          text: "Form success",
+          type: "success",
+        });
+       this.addusershipping(payLoad);
+      }
     },
   },
 });

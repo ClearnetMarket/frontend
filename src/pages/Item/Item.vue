@@ -236,13 +236,7 @@ export default defineComponent({
             this.seeifuserhasdefaultaddress();
           }
         })
-        .catch((error) => {
-          notify({
-            title: "Freeport Error",
-            text: "Error retrieving information.",
-            type: "error",
-          });
-        });
+        .catch((error) => {});
     },
     async seeifuserhasdefaultaddress() {
       await axios({
@@ -259,11 +253,7 @@ export default defineComponent({
           }
         })
         .catch((error) => {
-          notify({
-            title: "Freeport Error",
-            text: "Error retrieving information.",
-            type: "error",
-          });
+          
         });
     },
     UpdateCart() {
@@ -301,11 +291,7 @@ export default defineComponent({
           }
         })
         .catch((error) => {
-          notify({
-            title: "Freeport Error",
-            text: "Error retrieving information.",
-            type: "error",
-          });
+         
         });
     },
     async getpricebch() {
@@ -320,11 +306,7 @@ export default defineComponent({
           }
         })
         .catch((error) => {
-          notify({
-            title: "Freeport Error",
-            text: "Error retrieving information.",
-            type: "error",
-          });
+         
         });
     },
     async getpricexmr() {
@@ -339,11 +321,7 @@ export default defineComponent({
           }
         })
         .catch((error) => {
-          notify({
-            title: "Freeport Error",
-            text: "Error retrieving information.",
-            type: "error",
-          });
+         
         });
     },
     async getvendorinfo() {
@@ -361,12 +339,6 @@ export default defineComponent({
           }
         })
         .catch((error) => {
-
-            notify({
-            title: "Freeport Error",
-            text: "Error retrieving  information.",
-            type: "error",
-          });
         });
     },
 
@@ -385,12 +357,6 @@ export default defineComponent({
           }
         })
          .catch((error) => {
-
-            notify({
-            title: "Freeport Error",
-            text: "Error retrieving information.",
-            type: "error",
-          });
         });
     },
     async add_view() {

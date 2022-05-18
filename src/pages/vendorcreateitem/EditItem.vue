@@ -110,6 +110,12 @@
                 placeholder="Price in your currency..."
                 @keypress="onlyNumberWithDot"
               />
+              <span
+                v-if="v$.CreateItemForm.pricingInfo.price.$error"
+                class="text-red-600 text-center"
+              >
+                {{ v$.CreateItemForm.pricingInfo.price.$errors[0].$message }}
+              </span>
             </div>
             <div class="mb-4 flex-1">
               <label class="block text-gray-700 text-sm font-bold mb-2"
@@ -127,6 +133,14 @@
                 placeholder="How many your are selling ..."
                 @keypress="onlyNumber"
               />
+              <span
+                v-if="v$.CreateItemForm.pricingInfo.item_count.$error"
+                class="text-red-600 text-center"
+              >
+                {{
+                  v$.CreateItemForm.pricingInfo.item_count.$errors[0].$message
+                }}
+              </span>
             </div>
           </div>
           <div class="flex gap-5">
@@ -171,6 +185,12 @@
               id="item_description"
               class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             ></textarea>
+            <span
+              v-if="v$.CreateItemForm.basicInfo.item_description.$error"
+              class="text-red-600 text-center"
+            >
+              {{ v$.CreateItemForm.basicInfo.item_description.$errors[0].$message }}
+            </span>
           </div>
 
           <div class="text-[18px] mt-5 mb-5">Shipping</div>
@@ -297,6 +317,8 @@ import authHeader from "../../services/auth.header";
 import { mapGetters } from "vuex";
 import { constants } from "perf_hooks";
 import { notify } from "@kyvg/vue3-notification";
+import useValidate from "@vuelidate/core";
+import { required, email, minLength, sameAs } from "@vuelidate/validators";
 import MainHeaderTop from "../../layouts/headers/MainHeaderTop.vue";
 import MainHeaderMid from "../../layouts/headers/MainHeaderMid.vue";
 import MainHeaderBottom from "../../layouts/headers/MainHeaderBottom.vue";
@@ -329,6 +351,7 @@ export default defineComponent({
 
   data() {
     return {
+      v$: useValidate(),
       item_id: "",
       marketitem: "",
       authtoken: "",
@@ -342,7 +365,6 @@ export default defineComponent({
           category_id_0: "",
           item_condition: "",
           item_description: "",
-          keywords: "",
         },
         pricingInfo: {
           digital_currency_1: "",
@@ -365,6 +387,25 @@ export default defineComponent({
           shipping_to_country_two: "",
           shipping_to_country_three: "",
           shipping_to_country_four: "",
+        },
+      },
+    };
+  },
+  validations() {
+    return {
+      CreateItemForm: {
+        basicInfo: {
+          item_title: { required, minLength: minLength(6) },
+          category_id_0: { required },
+          item_condition: { required },
+          item_description: { required },
+        },
+        pricingInfo: {
+          item_count: { required },
+          price: { required },
+        },
+        shippingInfo: {
+          shipping_to_country_one: { required },
         },
       },
     };
@@ -467,11 +508,11 @@ export default defineComponent({
             if (error.response.status === 401) {
               this.$store.commit("loginFailure");
             } else if (error.response.status === 403) {
-               notify({
-              title: "Freeport Error",
-              text: "Error.  Not logged in!",
-              type: "error",
-            });
+              notify({
+                title: "Freeport Error",
+                text: "Error.  Not logged in!",
+                type: "error",
+              });
             }
           }
         });
@@ -538,13 +579,7 @@ export default defineComponent({
           this.CreateItemForm.shippingInfo.destination_country_four_name =
             response.data.item_title;
         })
-        .catch((error) => {
-          notify({
-            title: "Freeport Error",
-            text: "Error retrieving item information.",
-            type: "error",
-          });
-        });
+        .catch((error) => {});
     },
     // function to allow only numbers
     onlyNumber($event) {
@@ -635,7 +670,21 @@ export default defineComponent({
         shipping_to_country_four:
           this.CreateItemForm.shippingInfo.shipping_to_country_four,
       };
-      this.SendItemCreation(payLoad);
+      this.v$.$validate(); // checks all inputs
+      if (this.v$.$invalid) {
+        notify({
+          title: "Authorization",
+          text: "Form Failure",
+          type: "error",
+        });
+      } else {
+        notify({
+          title: "Authorization",
+          text: "Form success",
+          type: "success",
+        });
+        this.SendItemCreation(payLoad);
+      }
     },
   },
 });

@@ -10,6 +10,8 @@
   "dependencies": {
     "@heroicons/vue": "^1.0.6",
     "@kyvg/vue3-notification": "^2.3.4",
+    "@vuelidate/core": "^2.0.0-alpha.41",
+    "@vuelidate/validators": "^2.0.0-alpha.29",
     "axios": "^0.26.1",
     "date-fns": "^2.28.0",
     "vue": "^3.2.25",

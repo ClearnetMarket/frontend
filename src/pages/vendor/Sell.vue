@@ -75,6 +75,10 @@
           </div>
           <div class="">
             <input type="checkbox" v-model="accept" name="acceptTerms" />
+
+            <span v-if="v$.accept.$error" class="text-red-600 text-center">
+              {{ v$.accept.$errors[0].$message }}
+            </span>
           </div>
         </div>
         <div class="mt-5">
@@ -99,6 +103,8 @@ import { ref } from "vue";
 import { mapGetters } from "vuex";
 import { useRoute } from "vue-router";
 import { notify } from "@kyvg/vue3-notification";
+import useValidate from "@vuelidate/core";
+import { required, email, minLength, sameAs } from "@vuelidate/validators";
 import authHeader from "../../services/auth.header";
 import MainHeaderTop from "../../layouts/headers/MainHeaderTop.vue";
 import MainHeaderMid from "../../layouts/headers/MainHeaderMid.vue";
@@ -121,6 +127,7 @@ export default defineComponent({
   },
   data() {
     return {
+        v$: useValidate(),
       verification: "",
       accept: ref(false),
       user_admin: "",
@@ -129,7 +136,11 @@ export default defineComponent({
   computed: {
     ...mapGetters(["user"]),
   },
-
+validations() {
+    return {
+        accept: { required },
+    };
+  },
   methods: {
     async userstatus() {
       await axios({
@@ -174,8 +185,24 @@ export default defineComponent({
       const payLoad = {
         accept: this.accept,
       };
+      this.v$.$validate(); // checks all inputs
+      if (this.v$.$invalid) {
+        notify({
+          title: "Authorization",
+          text: "Form Failure",
+          type: "error",
+        });
+      } else {
+        // if ANY fail validation
+
+        notify({
+          title: "Authorization",
+          text: "Form success",
+          type: "success",
+        });
       this.becomevendor(payLoad);
     },
+  },
   },
 });
 </script>

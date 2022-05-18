@@ -39,6 +39,9 @@
             type="password"
             placeholder="Password"
           />
+      <span v-if="v$.ChangePasswordForm.password.$error" class="text-red-600 text-center">
+        {{ v$.ChangePasswordForm.password.$errors[0].$message }}
+      </span>
         </div>
         <div class="mb-6">
           <label class="block text-gray-700 text-sm font-bold mb-2"
@@ -52,6 +55,9 @@
             autocomplete="off"
             placeholder="Confirm Password"
           />
+      <span v-if="v$.ChangePasswordForm.password_confirm.$error" class="text-red-600 text-center">
+        {{ v$.ChangePasswordForm.password_confirm.$errors[0].$message }}
+      </span>
         </div>
         <div class="flex items-center justify-center mb-6">
           <button
@@ -71,7 +77,8 @@ import { defineComponent } from "vue";
 import axios from "axios";
 import { ref } from "vue";
 import { notify } from "@kyvg/vue3-notification";
-
+import useValidate from "@vuelidate/core";
+import { required, email, minLength, sameAs } from "@vuelidate/validators";
 import authHeader from "../../services/auth.header";
 import HeaderPlain from "../../layouts/headers/HeaderPlain.vue";
 
@@ -83,13 +90,21 @@ export default defineComponent({
   },
   data() {
     return {
+        v$: useValidate(),
       ChangePasswordForm: {
         password: "",
         password_confirm: "",
       },
     };
   },
-
+  validations() {
+    return {
+      ChangePasswordForm: {
+        password: { required, minLength: minLength(6) },
+        password_confirm: { required, minLength: minLength(6) },
+      },
+    };
+  },
   methods: {
     sendWordRequest(payLoad: { password: string; password_confirm: string }) {
       axios({
@@ -119,7 +134,21 @@ export default defineComponent({
         password: this.ChangePasswordForm.password,
         password_confirm: this.ChangePasswordForm.password_confirm,
       };
+        this.v$.$validate(); // checks all inputs
+      if (this.v$.$invalid) {
+        notify({
+          title: "Authorization",
+          text: "Form Failure",
+          type: "error",
+        });
+      } else {
+        notify({
+          title: "Authorization",
+          text: "Form success",
+          type: "success",
+        });
       this.sendWordRequest(payLoad);
+      }
     },
   },
 });

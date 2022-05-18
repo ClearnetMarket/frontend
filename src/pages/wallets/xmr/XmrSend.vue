@@ -48,6 +48,12 @@
             type="text"
             placeholder="Address"
           />
+          <span
+            v-if="v$.wallet.xmr_address.$error"
+            class="text-red-600 text-center"
+          >
+            {{ v$.wallet.xmr_address.$errors[0].$message }}
+          </span>
         </div>
         <div class="mb-4">
           <label
@@ -84,6 +90,12 @@
               autocomplete="off"
               placeholder="Amount"
             />
+            <span
+              v-if="v$.wallet.xmr_amount.$error"
+              class="text-red-600 text-center"
+            >
+              {{ v$.wallet.xmr_amount.$errors[0].$message }}
+            </span>
           </div>
         </div>
         <div class="mb-4">
@@ -101,6 +113,9 @@
               autocomplete="off"
               placeholder="Pin"
             />
+            <span v-if="v$.wallet.pin.$error" class="text-red-600 text-center">
+              {{ v$.wallet.pin.$errors[0].$message }}
+            </span>
           </div>
         </div>
         <div class="flex items-center justify-center mb-6">
@@ -123,6 +138,8 @@ import axios from "axios";
 import { ref } from "vue";
 import { mapGetters } from "vuex";
 import { notify } from "@kyvg/vue3-notification";
+import useValidate from "@vuelidate/core";
+import { required, email, minLength, sameAs } from "@vuelidate/validators";
 import MainHeaderTop from "../../../layouts/headers/MainHeaderTop.vue";
 import MainHeaderMid from "../../../layouts/headers/MainHeaderMid.vue";
 import MainHeaderBottom from "../../../layouts/headers/MainHeaderBottom.vue";
@@ -145,12 +162,21 @@ export default defineComponent({
   },
   data() {
     return {
-      dense: ref(true),
+      v$: useValidate(),
       wallet: {
         xmr_address: "",
         xmr_decscription: "",
         xmr_amount: "",
         pin: "",
+      },
+    };
+  },
+    validations() {
+    return {
+      wallet: {
+        xmr_address: { required, minLength: minLength(25) },
+        xmr_amount: { required, minLength: minLength(1) },
+        pin: { required, minLength: minLength(4) },
       },
     };
   },
@@ -217,43 +243,21 @@ export default defineComponent({
         xmr_amount: this.wallet.xmr_amount,
         pin: this.wallet.pin,
       };
+      this.v$.$validate(); // checks all inputs
+      if (this.v$.$invalid) {
+        notify({
+          title: "Wallet",
+          text: "Form Failure",
+          type: "error",
+        });
+      } else {
+        notify({
+          title: "Wallet",
+          text: "Success Sending Coin. It will be sent shortly.",
+          type: "success",
+        });
       await this.SendCoin(payLoad);
     },
   },
 });
 </script>
-
-<style type="ts" scoped>
-.widthstyle {
-  max-width: 900px;
-  margin: 0 auto;
-}
-.bordered {
-  border-style: solid;
-  border-width: 1px;
-  border-color: #f0f2f2;
-}
-.bordered {
-  border-style: solid;
-  border-width: 1px;
-  border-color: #a7a0a0;
-}
-.rcorners1 {
-  border-radius: 5px;
-}
-.greyhover:hover {
-  background-color: #eeeeee;
-}
-.wordcolor {
-  color: #6b6565;
-}
-.rcorners1 {
-  border-radius: 5px;
-}
-.greyhover:hover {
-  background-color: #eeeeee;
-}
-.wordcolor {
-  color: #6b6565;
-}
-</style>

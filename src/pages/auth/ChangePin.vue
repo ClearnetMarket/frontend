@@ -37,6 +37,12 @@
             type="password"
             placeholder="Password"
           />
+          <span
+            v-if="v$.ChangePinForm.password.$error"
+            class="text-red-600 text-center"
+          >
+            {{ v$.ChangePinForm.password.$errors[0].$message }}
+          </span>
         </div>
         <div class="mb-4">
           <label class="block text-gray-700 text-sm font-bold mb-2"
@@ -49,6 +55,12 @@
             type="password"
             placeholder="Password"
           />
+          <span
+            v-if="v$.ChangePinForm.pin.$error"
+            class="text-red-600 text-center"
+          >
+            {{ v$.ChangePinForm.pin.$errors[0].$message }}
+          </span>
         </div>
 
         <div class="mb-6">
@@ -63,6 +75,12 @@
             autocomplete="off"
             placeholder="Confirm Password"
           />
+          <span
+            v-if="v$.ChangePinForm.pin_confirm.$error"
+            class="text-red-600 text-center"
+          >
+            {{ v$.ChangePinForm.pin_confirm.$errors[0].$message }}
+          </span>
         </div>
         <div class="flex items-center justify-center mb-6">
           <button
@@ -82,10 +100,10 @@ import { defineComponent } from "vue";
 import axios from "axios";
 import { ref } from "vue";
 import { notify } from "@kyvg/vue3-notification";
-
+import useValidate from "@vuelidate/core";
+import { required, email, minLength, sameAs } from "@vuelidate/validators";
 import authHeader from "../../services/auth.header";
 import HeaderPlain from "../../layouts/headers/HeaderPlain.vue";
-
 
 export default defineComponent({
   name: "changepin",
@@ -95,6 +113,7 @@ export default defineComponent({
 
   data() {
     return {
+      v$: useValidate(),
       ChangePinForm: {
         pin: "",
         pin_confirm: "",
@@ -102,7 +121,15 @@ export default defineComponent({
       },
     };
   },
-
+  validations() {
+    return {
+      ChangePinForm: {
+        pin: { required, minLength: minLength(4) },
+        pin_confirm: { required, minLength: minLength(4) },
+        password: { required, minLength: minLength(6) },
+      },
+    };
+  },
   methods: {
     sendRequest(payLoad: { pin: string; pin_confirm: string }) {
       axios({
@@ -133,9 +160,22 @@ export default defineComponent({
         pin: this.ChangePinForm.pin,
         pin_confirm: this.ChangePinForm.pin_confirm,
       };
-      this.sendRequest(payLoad);
+      this.v$.$validate(); // checks all inputs
+      if (this.v$.$invalid) {
+        notify({
+          title: "Authorization",
+          text: "Form Failure",
+          type: "error",
+        });
+      } else {
+        notify({
+          title: "Authorization",
+          text: "Form success",
+          type: "success",
+        });
+        this.sendRequest(payLoad);
+      }
     },
   },
 });
 </script>
-

@@ -19,7 +19,14 @@
             placeholder="Username"
           />
         </div>
-        <div class="mb-6">
+        <span
+          v-if="v$.loginForm.username.$error"
+          class="text-red-600 text-center"
+        >
+          {{ v$.loginForm.username.$errors[0].$message }}
+        </span>
+
+        <div class="">
           <label class="block text-gray-700 text-sm font-bold mb-2"
             >Password</label
           >
@@ -31,7 +38,14 @@
             autocomplete="off"
             placeholder="Password"
           />
+          <span
+            v-if="v$.loginForm.username.$error"
+            class="text-red-600 text-center"
+          >
+            {{ v$.loginForm.username.$errors[0].$message }}
+          </span>
         </div>
+
         <div class="flex items-center justify-center mb-6">
           <button
             class="bg-yellow-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
@@ -64,9 +78,10 @@
 import { defineComponent } from "vue";
 import axios from "axios";
 import { notify } from "@kyvg/vue3-notification";
+import useValidate from "@vuelidate/core";
+import { required, email, minLength, sameAs } from "@vuelidate/validators";
 import HeaderPlain from "../../layouts/headers/HeaderPlain.vue";
 import authHeader from "../../services/auth.header";
-
 
 export default defineComponent({
   name: "Login",
@@ -74,6 +89,7 @@ export default defineComponent({
 
   data() {
     return {
+      v$: useValidate(),
       loginForm: {
         username: "",
         password: "",
@@ -83,7 +99,14 @@ export default defineComponent({
   mounted() {
     this.userstatus();
   },
-
+  validations() {
+    return {
+      loginForm: {
+        password: { required, minLength: minLength(6) },
+        username: { required, minLength: minLength(6) },
+      },
+    };
+  },
   methods: {
     async userstatus() {
       await axios({
@@ -115,18 +138,16 @@ export default defineComponent({
             notify({
               title: "Authorization",
               text: "You have been logged in!",
-              type:"success",
-          
+              type: "success",
             });
           }
         })
         .catch((error) => {
           if (error.response) {
-            console.log("here")
             notify({
               title: "Authorization",
               text: "Login Failure!",
-                  type: 'error',
+              type: "error",
             });
           }
         });
@@ -136,11 +157,25 @@ export default defineComponent({
         username: this.loginForm.username,
         password: this.loginForm.password,
       };
+      this.v$.$validate(); // checks all inputs
+      if (this.v$.$invalid) {
+        notify({
+          title: "Authorization",
+          text: "Form Failure",
+          type: "error",
+        });
+      } else {
+        // if ANY fail validation
 
-      this.sendLogin(payLoad);
+        notify({
+          title: "Authorization",
+          text: "Form success",
+          type: "success",
+        });
+        this.sendLogin(payLoad);
+      }
     },
   },
 });
 </script>
 
-<style type="ts" scoped></style>

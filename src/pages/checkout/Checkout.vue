@@ -299,11 +299,7 @@ export default defineComponent({
           }
         })
         .catch((error) => {
-          notify({
-            title: "Freeport Error",
-            text: "Error retrieving information.",
-            type: "error",
-          });
+          
         });
     },
     async updateprices() {
@@ -318,11 +314,7 @@ export default defineComponent({
           }
         })
         .catch((error) => {
-          notify({
-            title: "Freeport Error",
-            text: "Error retrieving information.",
-            type: "error",
-          });
+        
         });
     },
     async get_shopping_cart_items() {
@@ -342,11 +334,7 @@ export default defineComponent({
         })
         .catch((error) => {
           this.shopping_cart_items_list = null;
-          notify({
-            title: "Freeport Error",
-            text: "Error retrieving information.",
-            type: "error",
-          });
+         
         });
     },
 
@@ -366,11 +354,7 @@ export default defineComponent({
         })
         .catch((error) => {
           this.shopping_cart_items_list = null;
-          notify({
-            title: "Freeport Error",
-            text: "Error retrieving information.",
-            type: "error",
-          });
+       
         });
     },
 
@@ -396,11 +380,7 @@ export default defineComponent({
           this.xmrtotalprice = response.data.xmr_total_price;
         }
       }).catch((error) => {
-          notify({
-            title: "Freeport Error",
-            text: "Error retrieving information.",
-            type: "error",
-          });
+          
         });
     },
     async getcurrentshipping() {
@@ -437,11 +417,7 @@ export default defineComponent({
         })
         .catch((error) => {
           this.shopping_cart_items_list = null;
-          notify({
-            title: "Freeport Error",
-            text: "Error retrieving information.",
-            type: "error",
-          });
+        
         });
     },
     async getbchprice() {
@@ -457,11 +433,7 @@ export default defineComponent({
         })
         .catch((error) => {
           this.shopping_cart_items_list = null;
-          notify({
-            title: "Freeport Error",
-            text: "Error retrieving information.",
-            type: "error",
-          });
+        
         });
     },
     async getbtcprice() {
@@ -477,11 +449,7 @@ export default defineComponent({
         })
         .catch((error) => {
           this.shopping_cart_items_list = null;
-          notify({
-            title: "Freeport Error",
-            text: "Error retrieving information.",
-            type: "error",
-          });
+         
         });
     },
   },

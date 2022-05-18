@@ -48,6 +48,12 @@
             type="text"
             placeholder="Address"
           />
+          <span
+            v-if="v$.wallet.btc_address.$error"
+            class="text-red-600 text-center"
+          >
+            {{ v$.wallet.btc_address.$errors[0].$message }}
+          </span>
         </div>
         <div class="mb-4">
           <label
@@ -84,6 +90,12 @@
               autocomplete="off"
               placeholder="Amount"
             />
+            <span
+              v-if="v$.wallet.btc_amount.$error"
+              class="text-red-600 text-center"
+            >
+              {{ v$.wallet.btc_amount.$errors[0].$message }}
+            </span>
           </div>
         </div>
         <div class="mb-4">
@@ -101,6 +113,9 @@
               autocomplete="off"
               placeholder="Pin"
             />
+            <span v-if="v$.wallet.pin.$error" class="text-red-600 text-center">
+              {{ v$.wallet.pin.$errors[0].$message }}
+            </span>
           </div>
         </div>
         <div class="flex items-center justify-center mb-6">
@@ -145,12 +160,21 @@ export default defineComponent({
   },
   data() {
     return {
-      dense: ref(true),
+      v$: useValidate(),
       wallet: {
         btc_address: "",
         btc_decscription: "",
         btc_amount: "",
         pin: "",
+      },
+    };
+  },
+  validations() {
+    return {
+      wallet: {
+        btc_address: { required, minLength: minLength(25) },
+        btc_amount: { required, minLength: minLength(1) },
+        pin: { required, minLength: minLength(4) },
       },
     };
   },
@@ -228,7 +252,21 @@ export default defineComponent({
         btc_amount: this.wallet.btc_amount,
         pin: this.wallet.pin,
       };
-      await this.SendCoin(payLoad);
+      this.v$.$validate(); // checks all inputs
+      if (this.v$.$invalid) {
+        notify({
+          title: "Authorization",
+          text: "Form Failure",
+          type: "error",
+        });
+      } else {
+        notify({
+          title: "Wallet",
+          text: "Success Sending Coin. It will be sent shortly.",
+          type: "success",
+        });
+        await this.SendCoin(payLoad);
+      }
     },
   },
 });

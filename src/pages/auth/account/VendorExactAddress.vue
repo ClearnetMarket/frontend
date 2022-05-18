@@ -176,11 +176,7 @@ export default defineComponent({
         }
       })
        .catch((error) => {
-          notify({
-            title: "Data",
-            text: "Error retrieving data.",
-            type: "error",
-          });
+          
         });
     },
 

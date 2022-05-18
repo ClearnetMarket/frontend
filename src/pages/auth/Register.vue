@@ -23,6 +23,12 @@
             placeholder="Login Username"
             v-model.trim="registerForm.username"
           />
+          <span
+            v-if="v$.registerForm.username.$error"
+            class="text-red-600 text-center"
+          >
+            {{ v$.registerForm.username.$errors[0].$message }}
+          </span>
         </div>
         <div class="mb-4">
           <label
@@ -41,6 +47,12 @@
             type="text"
             placeholder="Username"
           />
+          <span
+            v-if="v$.registerForm.display_username.$error"
+            class="text-red-600 text-center"
+          >
+            {{ v$.registerForm.display_username.$errors[0].$message }}
+          </span>
         </div>
         <div class="mb-4">
           <label
@@ -56,6 +68,12 @@
             type="text"
             placeholder="Email"
           />
+          <span
+            v-if="v$.registerForm.email.$error"
+            class="text-red-600 text-center"
+          >
+            {{ v$.registerForm.email.$errors[0].$message }}
+          </span>
         </div>
         <div class="mb-4">
           <label
@@ -72,6 +90,12 @@
             placeholder="Password"
             v-model.trim="registerForm.password"
           />
+          <span
+            v-if="v$.registerForm.password.$error"
+            class="text-red-600 text-center"
+          >
+            {{ v$.registerForm.password.$errors[0].$message }}
+          </span>
         </div>
         <div class="mb-4">
           <label
@@ -88,6 +112,12 @@
             placeholder="Confirm Password"
             v-model.trim="registerForm.password_confirm"
           />
+          <span
+            v-if="v$.registerForm.password_confirm.$error"
+            class="text-red-600 text-center"
+          >
+            {{ v$.registerForm.password_confirm.$errors[0].$message }}
+          </span>
         </div>
         <div class="flex">
           <div class="mb-4 w-1/3">
@@ -107,6 +137,12 @@
               autocomplete="off"
               placeholder="Pin"
             />
+            <span
+              v-if="v$.registerForm.pin.$error"
+              class="text-red-600 text-center"
+            >
+              {{ v$.registerForm.pin.$errors[0].$message }}
+            </span>
           </div>
         </div>
         <div class="mb-4">
@@ -129,6 +165,12 @@
               {{ country.name }}
             </option>
           </select>
+          <span
+            v-if="v$.registerForm.country.$error"
+            class="text-red-600 text-center"
+          >
+            {{ v$.registerForm.country.$errors[0].$message }}
+          </span>
         </div>
 
         <div class="mb-4">
@@ -150,6 +192,12 @@
             >
               {{ currency.text }}
             </option>
+            <span
+              v-if="v$.registerForm.currency.$error"
+              class="text-red-600 text-center"
+            >
+              {{ v$.registerForm.currency.$errors[0].$message }}
+            </span>
           </select>
         </div>
 
@@ -184,15 +232,16 @@
 import { defineComponent } from "vue";
 import axios from "axios";
 import { notify } from "@kyvg/vue3-notification";
-
+import useValidate from "@vuelidate/core";
+import { required, email, minLength, sameAs } from "@vuelidate/validators";
 import HeaderPlain from "../../layouts/headers/HeaderPlain.vue";
-
 
 export default defineComponent({
   name: "Register",
   components: { HeaderPlain },
   data() {
     return {
+      v$: useValidate(),
       isAuthenticated: false,
       currencyList: [],
       countryList: [],
@@ -212,8 +261,55 @@ export default defineComponent({
     this.getCountryList();
     this.getCurrencyList();
   },
-
+  validations() {
+    return {
+      registerForm: {
+        password: { required, minLength: minLength(6) },
+        username: { required, minLength: minLength(6) },
+        display_username: { required, minLength: minLength(6) },
+        email: { email, required },
+        pin: { required, minLength: minLength(4) },
+        password: { required, minLength: minLength(6) },
+        password_confirm: {
+          required,
+          minLength: minLength(6),
+          sameAs: sameAs(this.registerForm.password),
+        },
+        currency: { required },
+        country: { required },
+        currency: { required },
+      },
+    };
+  },
   methods: {
+    onSubmit() {
+      const payLoad = {
+        username: this.registerForm.username,
+        pin: this.registerForm.pin,
+        display_username: this.registerForm.display_username,
+        password: this.registerForm.password,
+        email: this.registerForm.email,
+        currency: this.registerForm.currency,
+        country: this.registerForm.country,
+      };
+      this.v$.$validate(); // checks all inputs
+      if (this.v$.$invalid) {
+        notify({
+          title: "Authorization",
+          text: "Form Failure",
+          type: "error",
+        });
+      } else {
+        // if ANY fail validation
+
+        notify({
+          title: "Authorization",
+          text: "Form success",
+          type: "success",
+        });
+        this.Register(payLoad);
+      }
+    },
     async Register(payLoad: {
       display_username: string;
       username: string;
@@ -244,11 +340,11 @@ export default defineComponent({
           }
         })
         .catch((error) => {
-            notify({
-              title: "Authorization",
-              text: "Failed to Register.  Check form for errors!",
-              type: "error",
-            });
+          notify({
+            title: "Authorization",
+            text: "Failed to Register.  Check form for errors!",
+            type: "error",
+          });
         });
     },
     async getCurrencyList() {
@@ -272,25 +368,12 @@ export default defineComponent({
           this.countryList = response.data;
         })
         .catch((error) => {
-            notify({
-              title: "Data Retrieval Failure",
-              text: "Failed to get country list",
-              type: "error",
-            });
-
+          notify({
+            title: "Data Retrieval Failure",
+            text: "Failed to get country list",
+            type: "error",
+          });
         });
-    },
-    async onSubmit() {
-      const payLoad = {
-        username: this.registerForm.username,
-        pin: this.registerForm.pin,
-        display_username: this.registerForm.display_username,
-        password: this.registerForm.password,
-        email: this.registerForm.email,
-        currency: this.registerForm.currency,
-        country: this.registerForm.country,
-      };
-      await this.Register(payLoad);
     },
   },
 });

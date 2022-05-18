@@ -326,7 +326,6 @@ export default defineComponent({
         if ((response.status = 200)) {
           this.user = response.data;
           this.page_loaded = true;
-          
         }
       });
     },

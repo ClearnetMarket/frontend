@@ -26,6 +26,12 @@
               placeholder="Write something .."
               class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-3"
             ></textarea>
+            <span
+              v-if="v$.SendMsgForm.msginfo.$error"
+              class="text-red-600 text-center"
+            >
+              {{ v$.SendMsgForm.msginfo.$errors[0].$message }}
+            </span>
           </div>
           <div class="flex justify-end">
             <button
@@ -60,6 +66,8 @@ import { ref } from "vue";
 import { mapGetters } from "vuex";
 import { useRoute } from "vue-router";
 import { notify } from "@kyvg/vue3-notification";
+import useValidate from "@vuelidate/core";
+import { required, email, minLength, sameAs } from "@vuelidate/validators";
 import authHeader from "../../services/auth.header";
 import MainHeaderTop from "../../layouts/headers/MainHeaderTop.vue";
 import MainHeaderMid from "../../layouts/headers/MainHeaderMid.vue";
@@ -76,14 +84,10 @@ export default defineComponent({
     MainHeaderVendor,
     MainFooter,
   },
-  mounted() {
-    const user_uuid_route = useRoute();
-    this.other_user_uuid = user_uuid_route.params.uuid;
-    console.log(this.other_user_uuid);
-    this.getotheruser();
-  },
+
   data() {
     return {
+      v$: useValidate(),
       other_user: [],
       other_user_uuid: "",
       SendMsgForm: {
@@ -91,8 +95,21 @@ export default defineComponent({
       },
     };
   },
+  mounted() {
+    const user_uuid_route = useRoute();
+    this.other_user_uuid = user_uuid_route.params.uuid;
+    console.log(this.other_user_uuid);
+    this.getotheruser();
+  },
   computed: {
     ...mapGetters(["user"]),
+  },
+  validations() {
+    return {
+      SendMsgForm: {
+        msginfo: { required, minLength: minLength(4) },
+      },
+    };
   },
   methods: {
     async getotheruser() {
@@ -118,12 +135,7 @@ export default defineComponent({
         .then((response) => {
           this.userlist = response.data;
         })
-     .catch((error) => {
-          notify({
-            title: "Freeport Error",
-            text: "Error retrieving information.",
-            type: "error",
-          });
+        .catch((error) => {});
     },
     async getcountofusers() {
       await axios({
@@ -134,12 +146,7 @@ export default defineComponent({
         .then((response) => {
           this.other_user_count = response.data.get_count;
         })
-        . .catch((error) => {
-          notify({
-            title: "Freeport Error",
-            text: "Error retrieving information.",
-            type: "error",
-          });
+        .catch((error) => {});
     },
     async sendMessage(payLoad: {
       order_uuid: string;
@@ -178,8 +185,22 @@ export default defineComponent({
         textbody: this.SendMsgForm.msginfo,
         order_uuid: null,
       };
+      this.v$.$validate(); // checks all inputs
+      if (this.v$.$invalid) {
+        notify({
+          title: "Message",
+          text: "Form Failure",
+          type: "error",
+        });
+      } else {
+        notify({
+          title: "Message",
+          text: "Form success",
+          type: "success",
+        });
 
-      this.sendLogin(payLoad);
+        this.sendMessage(payLoad);
+      }
     },
   },
 });

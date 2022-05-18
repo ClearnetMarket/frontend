@@ -491,7 +491,7 @@ export default defineComponent({
           });
         });
     },
-  // gets the user orders
+    // gets the user orders
     async getuserorders() {
       await axios({
         method: "get",
@@ -504,7 +504,7 @@ export default defineComponent({
         }
       });
     },
-      // gets how many orders
+    // gets how many orders
     async getuserorderscount() {
       await axios({
         method: "get",
@@ -517,7 +517,7 @@ export default defineComponent({
         }
       });
     },
-      // mark as delivered
+    // mark as delivered
     async delivered(uuid) {
       await axios({
         method: "get",
@@ -527,11 +527,11 @@ export default defineComponent({
       }).then((response) => {
         if (response.status == 200) {
           this.getuserorders();
-                        notify({
-              title: "Message Center",
-              text: "Successfully marked as delivered!",
-              type: "success",
-            });
+          notify({
+            title: "Message Center",
+            text: "Successfully marked as delivered!",
+            type: "success",
+          });
         }
       });
     },
@@ -545,11 +545,11 @@ export default defineComponent({
       }).then((response) => {
         if (response.status == 200) {
           this.getuserorders();
-                        notify({
-              title: "Message Center",
-              text: "Successfully finalized order!",
-              type: "success",
-            });
+          notify({
+            title: "Message Center",
+            text: "Successfully finalized order!",
+            type: "success",
+          });
         }
       });
     },
@@ -562,11 +562,11 @@ export default defineComponent({
         headers: authHeader(),
       }).then((response) => {
         if (response.status == 200) {
-                        notify({
-              title: "Message Center",
-              text: "Successfully sent cancel request to vendor!",
-              type: "success",
-            });
+          notify({
+            title: "Message Center",
+            text: "Successfully sent cancel request to vendor!",
+            type: "success",
+          });
           this.getuserorderscount();
           this.getuserorders();
         }
@@ -581,11 +581,11 @@ export default defineComponent({
         headers: authHeader(),
       }).then((response) => {
         if (response.status == 200) {
-                        notify({
-              title: "Message Center",
-              text: "Successfully request a dispute.",
-              type: "success",
-            });
+          notify({
+            title: "Message Center",
+            text: "Successfully request a dispute.",
+            type: "success",
+          });
           this.createdisputechat(uuid);
           this.getuserorders();
         }
@@ -599,8 +599,7 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
-        if (response.status == 200) {
-        }
+      
       });
     },
   },

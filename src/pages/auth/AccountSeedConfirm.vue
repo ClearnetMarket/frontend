@@ -35,6 +35,12 @@
             placeholder="Word 1"
             v-model.trim="wordForm.word0"
           />
+          <span
+            v-if="v$.wordForm.word0.$error"
+            class="text-red-600 text-center"
+          >
+            {{ v$.wordForm.word0.$errors[0].$message }}
+          </span>
           <input
             v-model="wordForm.word1"
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-blue-300 focus:outline-none focus:shadow-outline"
@@ -43,6 +49,12 @@
             placeholder="Word 2"
             v-model.trim="wordForm.word1"
           />
+          <span
+            v-if="v$.wordForm.word1.$error"
+            class="text-red-600 text-center"
+          >
+            {{ v$.wordForm.word1.$errors[0].$message }}
+          </span>
           <input
             v-model="wordForm.word2"
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-blue-300 focus:outline-none focus:shadow-outline"
@@ -51,6 +63,12 @@
             placeholder="Word 3"
             v-model.trim="wordForm.word2"
           />
+          <span
+            v-if="v$.wordForm.word2.$error"
+            class="text-red-600 text-center"
+          >
+            {{ v$.wordForm.word2.$errors[0].$message }}
+          </span>
           <input
             v-model="wordForm.word3"
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-blue-300 focus:outline-none focus:shadow-outline"
@@ -59,6 +77,12 @@
             placeholder="Word 4"
             v-model.trim="wordForm.word3"
           />
+          <span
+            v-if="v$.wordForm.word3.$error"
+            class="text-red-600 text-center"
+          >
+            {{ v$.wordForm.word3.$errors[0].$message }}
+          </span>
           <input
             v-model="wordForm.word4"
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-blue-300 focus:outline-none focus:shadow-outline"
@@ -67,6 +91,13 @@
             placeholder="Word 5"
             v-model.trim="wordForm.word4"
           />
+          <span
+            v-if="v$.wordForm.word5.$error"
+            class="text-red-600 text-center"
+          >
+            {{ v$.wordForm.word5.$errors[0].$message }}
+          </span>
+
           <input
             v-model="wordForm.word5"
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-blue-300 focus:outline-none focus:shadow-outline"
@@ -75,6 +106,12 @@
             placeholder="Word 6"
             v-model.trim="wordForm.word5"
           />
+          <span
+            v-if="v$.wordForm.word5.$error"
+            class="text-red-600 text-center"
+          >
+            {{ v$.wordForm.word5.$errors[0].$message }}
+          </span>
           <div class="flex p-md justify-center">
             <button
               class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-blue-300 focus:outline-none focus:shadow-outline"
@@ -94,9 +131,10 @@ import { defineComponent } from "vue";
 import axios from "axios";
 import { ref } from "vue";
 import { notify } from "@kyvg/vue3-notification";
+import useValidate from "@vuelidate/core";
+import { required, email, minLength, sameAs } from "@vuelidate/validators";
 import authHeader from "../../services/auth.header";
 import HeaderPlain from "../../layouts/headers/HeaderPlain.vue";
-
 
 export default defineComponent({
   name: "accountseedconfirm",
@@ -105,6 +143,7 @@ export default defineComponent({
   },
   data() {
     return {
+      v$: useValidate(),
       wordForm: {
         word0: "",
         word1: "",
@@ -112,6 +151,18 @@ export default defineComponent({
         word3: "",
         word4: "",
         word5: "",
+      },
+    };
+  },
+  validations() {
+    return {
+      ChangePasswordForm: {
+        word0: { required },
+        word1: { required },
+        word2: { required },
+        word3: { required },
+        word4: { required },
+        word5: { required },
       },
     };
   },
@@ -176,10 +227,22 @@ export default defineComponent({
         word4: this.wordForm.word4,
         word5: this.wordForm.word5,
       };
-      this.sendWordRequest(payLoad);
+      this.v$.$validate(); // checks all inputs
+      if (this.v$.$invalid) {
+        notify({
+          title: "Authorization",
+          text: "Form Failure",
+          type: "error",
+        });
+      } else {
+        notify({
+          title: "Authorization",
+          text: "Form success",
+          type: "success",
+        });
+        this.sendWordRequest(payLoad);
+      }
     },
   },
 });
 </script>
-
-<style type="ts" scoped></style>

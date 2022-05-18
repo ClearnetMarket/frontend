@@ -324,11 +324,7 @@ export default defineComponent({
           }
         })
         .catch((error) => {
-          notify({
-            title: "Freeport Error",
-            text: "Error retrieving information.",
-            type: "error",
-          });
+         
         });
     },
     // was a bug so it would set items to one
@@ -344,11 +340,7 @@ export default defineComponent({
           }
         })
        .catch((error) => {
-          notify({
-            title: "Freeport Error",
-            text: "Error retrieving information.",
-            type: "error",
-          });
+       
         });
     },
 

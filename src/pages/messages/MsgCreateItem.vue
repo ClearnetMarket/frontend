@@ -50,6 +50,12 @@
               placeholder="Write something .."
               class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-3"
             ></textarea>
+            <span
+              v-if="v$.SendMsgForm.msginfo.$error"
+              class="text-red-600 text-center"
+            >
+              {{ v$.SendMsgForm.msginfo.$errors[0].$message }}
+            </span>
           </div>
           <div class="flex justify-end">
             <button
@@ -73,6 +79,8 @@ import { ref } from "vue";
 import { mapGetters } from "vuex";
 import { useRoute } from "vue-router";
 import { notify } from "@kyvg/vue3-notification";
+import useValidate from "@vuelidate/core";
+import { required, email, minLength, sameAs } from "@vuelidate/validators";
 import authHeader from "../../services/auth.header";
 import MainHeaderTop from "../../layouts/headers/MainHeaderTop.vue";
 import MainHeaderMid from "../../layouts/headers/MainHeaderMid.vue";
@@ -98,12 +106,20 @@ export default defineComponent({
   },
   data() {
     return {
+      v$: useValidate(),
       itemforsale: [],
       other_user: [],
       other_user_uuid: "",
       item_uuid: "",
       SendMsgForm: {
         msginfo: "",
+      },
+    };
+  },
+  validations() {
+    return {
+      SendMsgForm: {
+        msginfo: { required, minLength: minLength(4) },
       },
     };
   },
@@ -117,16 +133,13 @@ export default defineComponent({
         url: "/item/" + this.item_uuid,
         withCredentials: true,
         headers: authHeader(),
-      }).then((response) => {
-        if ((response.status = 200)) {
-          this.itemforsale = response.data;
-        }
-      }) .catch((error) => {
-          notify({
-            title: "Freeport Error",
-            text: "Error retrieving information.",
-            type: "error",
-          });
+      })
+        .then((response) => {
+          if ((response.status = 200)) {
+            this.itemforsale = response.data;
+          }
+        })
+        .catch((error) => {});
     },
 
     async getotheruser() {
@@ -135,16 +148,13 @@ export default defineComponent({
         url: "/info/user-info/" + this.other_user_uuid,
         withCredentials: true,
         headers: authHeader(),
-      }).then((response) => {
-        if ((response.status = 200)) {
-          this.other_user = response.data;
-        }
-      }) .catch((error) => {
-          notify({
-            title: "Freeport Error",
-            text: "Error retrieving information.",
-            type: "error",
-          });
+      })
+        .then((response) => {
+          if ((response.status = 200)) {
+            this.other_user = response.data;
+          }
+        })
+        .catch((error) => {});
     },
 
     async getmsgsofusers() {
@@ -167,12 +177,7 @@ export default defineComponent({
         .then((response) => {
           this.other_user_count = response.data.get_count;
         })
-         .catch((error) => {
-          notify({
-            title: "Freeport Error",
-            text: "Error retrieving information.",
-            type: "error",
-          });
+        .catch((error) => {});
     },
     async sendMessage(payLoad: {
       order_uuid: string;
@@ -189,7 +194,7 @@ export default defineComponent({
       })
         .then((response) => {
           if ((response.status = 200)) {
-              notify({
+            notify({
               title: "Message Center",
               text: "Successfully sent message!",
               type: "success",
@@ -200,13 +205,13 @@ export default defineComponent({
             });
           }
         })
-       .catch((error) => {
-            notify({
-              title: "Freeport Error",
-              text: "Error posting information.",
-              type: "error",
-            });
+        .catch((error) => {
+          notify({
+            title: "Freeport Error",
+            text: "Error posting information.",
+            type: "error",
           });
+        });
     },
 
     onSubmit() {
@@ -215,8 +220,21 @@ export default defineComponent({
         textbody: this.SendMsgForm.msginfo,
         item_uuid: this.item_uuid,
       };
-
-      this.sendMessage(payLoad);
+      this.v$.$validate(); // checks all inputs
+      if (this.v$.$invalid) {
+        notify({
+          title: "Message",
+          text: "Form Failure",
+          type: "error",
+        });
+      } else {
+        notify({
+          title: "Message",
+          text: "Sent Message",
+          type: "success",
+        });
+        this.sendMessage(payLoad);
+      }
     },
   },
 });

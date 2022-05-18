@@ -42,12 +42,18 @@
             >Address of the wallet you are sending coin too.</label
           >
           <input
-            v-model="wallet.xmr_address"
+            v-model="wallet.bch_address"
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="username"
             type="text"
             placeholder="Address"
           />
+          <span
+            v-if="v$.wallet.bch_address.$error"
+            class="text-red-600 text-center"
+          >
+            {{ v$.wallet.bch_address.$errors[0].$message }}
+          </span>
         </div>
         <div class="mb-4">
           <label
@@ -60,7 +66,7 @@
             of your store.</label
           >
           <input
-            v-model="wallet.xmr_decscription"
+            v-model="wallet.bch_decscription"
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="username"
             type="text"
@@ -77,13 +83,19 @@
 
           <div class="flex flex-row">
             <input
-              v-model="wallet.xmr_amount"
+              v-model="wallet.bch_amount"
               class="basis-1/3 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="amount"
               type="text"
               autocomplete="off"
               placeholder="Amount"
             />
+            <span
+              v-if="v$.wallet.bch_amount.$error"
+              class="text-red-600 text-center"
+            >
+              {{ v$.wallet.bch_amount.$errors[0].$message }}
+            </span>
           </div>
         </div>
         <div class="mb-4">
@@ -101,6 +113,9 @@
               autocomplete="off"
               placeholder="Pin"
             />
+            <span v-if="v$.wallet.pin.$error" class="text-red-600 text-center">
+              {{ v$.wallet.pin.$errors[0].$message }}
+            </span>
           </div>
         </div>
         <div class="flex items-center justify-center mb-6">
@@ -123,6 +138,8 @@ import axios from "axios";
 import { ref } from "vue";
 import { mapGetters } from "vuex";
 import { notify } from "@kyvg/vue3-notification";
+import useValidate from "@vuelidate/core";
+import { required, email, minLength, sameAs } from "@vuelidate/validators";
 import MainHeaderTop from "../../../layouts/headers/MainHeaderTop.vue";
 import MainHeaderMid from "../../../layouts/headers/MainHeaderMid.vue";
 import MainHeaderBottom from "../../../layouts/headers/MainHeaderBottom.vue";
@@ -145,12 +162,22 @@ export default defineComponent({
   },
   data() {
     return {
-      dense: ref(true),
+      v$: useValidate(),
+
       wallet: {
         bch_address: "",
         bch_decscription: "",
         bch_amount: "",
         pin: "",
+      },
+    };
+  },
+  validations() {
+    return {
+      wallet: {
+        bch_address: { required, minLength: minLength(25) },
+        bch_amount: { required, minLength: minLength(1) },
+        pin: { required, minLength: minLength(4) },
       },
     };
   },
@@ -217,43 +244,22 @@ export default defineComponent({
         bch_amount: this.wallet.bch_amount,
         pin: this.wallet.pin,
       };
-      await this.SendCoin(payLoad);
+      this.v$.$validate();
+      if (this.v$.$invalid) {
+        notify({
+          title: "Authorization",
+          text: "Form Failure",
+          type: "error",
+        });
+      } else {
+        notify({
+          title: "Wallet",
+          text: "Success Sending Coin. It will be sent shortly.",
+          type: "success",
+        });
+        await this.SendCoin(payLoad);
+      }
     },
   },
 });
 </script>
-
-<style type="ts" scoped>
-.widthstyle {
-  max-width: 900px;
-  margin: 0 auto;
-}
-.bordered {
-  border-style: solid;
-  border-width: 1px;
-  border-color: #f0f2f2;
-}
-.bordered {
-  border-style: solid;
-  border-width: 1px;
-  border-color: #a7a0a0;
-}
-.rcorners1 {
-  border-radius: 5px;
-}
-.greyhover:hover {
-  background-color: #eeeeee;
-}
-.wordcolor {
-  color: #6b6565;
-}
-.rcorners1 {
-  border-radius: 5px;
-}
-.greyhover:hover {
-  background-color: #eeeeee;
-}
-.wordcolor {
-  color: #6b6565;
-}
-</style>
