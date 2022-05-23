@@ -174,6 +174,7 @@
                       class="mb-2 text-[14px] text-blue-500 hover:text-blue-300 hover:underline pl-3 text-center"
                     >
                       <router-link
+                      v-if="user"
                         :to="{
                           name: 'MsgCreateItem',
                           params: { uuid: vendoruuid, itemuuid: uuid },

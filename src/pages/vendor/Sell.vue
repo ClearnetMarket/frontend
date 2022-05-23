@@ -131,7 +131,7 @@ export default defineComponent({
       verification: "",
       accept: ref(false),
       user_admin: "",
-    };
+    }
   },
   computed: {
     ...mapGetters(["user"]),
@@ -139,7 +139,7 @@ export default defineComponent({
 validations() {
     return {
         accept: { required },
-    };
+    }
   },
   methods: {
     async userstatus() {
@@ -160,7 +160,6 @@ validations() {
         }
       });
     },
-
     async becomevendor(payLoad: { accept: string }) {
       await axios({
         method: "post",
@@ -184,8 +183,8 @@ validations() {
     async onSubmit() {
       const payLoad = {
         accept: this.accept,
-      };
-      this.v$.$validate(); // checks all inputs
+      }
+      this.v$.$validate(); 
       if (this.v$.$invalid) {
         notify({
           title: "Authorization",
@@ -193,15 +192,13 @@ validations() {
           type: "error",
         });
       } else {
-        // if ANY fail validation
-
         notify({
           title: "Authorization",
           text: "Form success",
           type: "success",
         });
       this.becomevendor(payLoad);
-    },
+    }
   },
   },
 });

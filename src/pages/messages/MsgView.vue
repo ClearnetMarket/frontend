@@ -246,7 +246,7 @@ export default defineComponent({
       SendMsgForm: {
         msginfo: "",
       },
-    };
+    }
   },
   computed: {
     ...mapGetters(["user"]),
@@ -388,13 +388,10 @@ export default defineComponent({
     },
     //payload for submitting a comment
     onSubmit() {
-      const payLoad = {
-        textbody: this.SendMsgForm.msginfo,
-      };
+      const payLoad = {textbody: this.SendMsgForm.msginfo}
       this.sendcomment(payLoad);
       }
     },
-  },
 });
 </script>
 
