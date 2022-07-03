@@ -374,6 +374,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
+<<<<<<< HEAD
           if ((response.status = 200)) {
             this.current_user = response.data.user;
 
@@ -382,6 +383,12 @@ export default defineComponent({
          .catch((error) => {
            current_user = null
 
+=======
+          if ((response.status = 200)) 
+          {this.current_user = response.data.user };
+        })
+         .catch((error) => {current_user  = null});
+>>>>>>> a8414566b417d6574f1e158832101ef214fe4865
     },
     async getuser() {
       await axios({

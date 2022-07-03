@@ -113,12 +113,12 @@ import { required, email, minLength, sameAs } from "@vuelidate/validators";
 import authHeader from "../../services/auth.header";
 import HeaderPlain from "../../layouts/headers/HeaderPlain.vue";
 
+
 export default defineComponent({
   name: "forgotpassword",
   components: {
     HeaderPlain,
   },
-
   data() {
     return {
       v$: useValidate(),
@@ -130,7 +130,7 @@ export default defineComponent({
         word4: "",
         word5: "",
       },
-    };
+    }
   },
   validations() {
     return {
@@ -142,7 +142,7 @@ export default defineComponent({
         word4: { required },
         word5: { required },
       },
-    };
+    }
   },
   methods: {
     sendWordRequest(payLoad: {
@@ -184,7 +184,8 @@ export default defineComponent({
         word3: this.wordForm.word3,
         word4: this.wordForm.word4,
         word5: this.wordForm.word5,
-      };
+      }
+      
       this.v$.$validate(); // checks all inputs
       if (this.v$.$invalid) {
         notify({
@@ -192,7 +193,8 @@ export default defineComponent({
           text: "Form Failure",
           type: "error",
         });
-      } else {
+      } 
+      else {
 
         notify({
           title: "Authorization",
@@ -201,6 +203,7 @@ export default defineComponent({
         });
       this.sendWordRequest(payLoad);
     }
+  },
   },
 });
 </script>

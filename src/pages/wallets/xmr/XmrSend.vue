@@ -192,13 +192,8 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       })
-        .then((response) => {
-          if ((response.status = 200)) {
-          }
-        })
-        .catch((error) => {
-          this.$router.push("/login");
-        });
+        .then((response) => {})
+        .catch((error) => { this.$router.push("/login") });
     },
     async SendCoin(payLoad: {
       xmr_address: string;
@@ -225,7 +220,7 @@ export default defineComponent({
               text: message_sent,
               type: "success",
             });
-            this.$router.push("/vendor/itemsforsale");
+            this.$router.push("/vendor/itemsforsale")
           }
         })
         .catch((error) => {
@@ -242,7 +237,7 @@ export default defineComponent({
         xmr_decscription: this.wallet.xmr_decscription,
         xmr_amount: this.wallet.xmr_amount,
         pin: this.wallet.pin,
-      };
+      }
       this.v$.$validate(); // checks all inputs
       if (this.v$.$invalid) {
         notify({
@@ -256,7 +251,8 @@ export default defineComponent({
           text: "Success Sending Coin. It will be sent shortly.",
           type: "success",
         });
-      await this.SendCoin(payLoad);
+      await this.SendCoin(payLoad)
+      }
     },
   },
 });
