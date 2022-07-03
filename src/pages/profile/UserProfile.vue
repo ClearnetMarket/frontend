@@ -327,7 +327,7 @@ export default defineComponent({
           this.user = response.data;
           this.page_loaded = true;
         }
-      });
+      })
     },
     async getuserstats() {
       await axios({

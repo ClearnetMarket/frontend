@@ -4,7 +4,7 @@
   <MainHeaderBottom />
 
   <div v-if="user">
-    <MainHeaderVendor v-show="user.user_admin == 1"/>
+    <MainHeaderVendor v-show="user.user_admin == 1" />
   </div>
   <!-- Top Stuff-->
   <div class="container h-screen max-w-7xl mx-auto px-10">
@@ -28,24 +28,24 @@
       <div class="sm:col-span-4 md:col-span-1">
         <div class="text-[20px] text-gray-700 mb-10">Account Balances</div>
         <div class="flex">
-        <div class="text-[14px] text-gray-700 ">{{wallettotal}}  </div><div class="text-[14px] text-gray-700 pl-3">{{usercurrency}}</div>
+          <div class="text-[14px] text-gray-700">{{ wallettotal }}</div>
+          <div class="text-[14px] text-gray-700 pl-3">{{ usercurrency }}</div>
         </div>
 
         <div class="text-[20px] text-orange-400 mt-7">Bitcoin</div>
         <div class="text-[14px] text-gray-700">
-        <div v-if="btcbalance == 0.00000000">0.00000000</div>
-           <div v-else>{{btcbalance}}</div>
-        
+          <div v-if="btcbalance == 0.0">0.00000000</div>
+          <div v-else>{{ btcbalance }}</div>
         </div>
         <div class="text-[20px] text-green-600 mt-7">Bitcoin Cash</div>
         <div class="text-[14px] text-gray-700">
-             <div v-if="bchbalance == 0.00000000">0.00000000</div>
-           <div v-else>{{bchbalance}}</div>
+          <div v-if="bchbalance == 0.0">0.00000000</div>
+          <div v-else>{{ bchbalance }}</div>
         </div>
         <div class="text-[20px] text-orange-600 mt-7">Monero</div>
         <div class="text-[14px] text-gray-700">
-             <div v-if="xmrbalance == 0.00000000">0.00000000</div>
-           <div v-else>{{xmrbalance}}</div>
+          <div v-if="xmrbalance == 0.0">0.00000000</div>
+          <div v-else>{{ xmrbalance }}</div>
         </div>
       </div>
       <div
@@ -200,16 +200,16 @@ export default defineComponent({
 
   data() {
     return {
-      user:'',
-      usercurrency: '',
-      btcprice: '',
-      xmrprice: '',
-      bchprice: '',
+      user: "",
+      usercurrency: "",
+      btcprice: "",
+      xmrprice: "",
+      bchprice: "",
 
-      xmrbalance: '',
-      bchbalance: '',
-      btcbalance: '',
-      wallettotal: '',
+      xmrbalance: "",
+      bchbalance: "",
+      btcbalance: "",
+      wallettotal: "",
     };
   },
   mounted() {
@@ -221,8 +221,6 @@ export default defineComponent({
     this.getxmrbalance();
     this.getbchbalance();
     this.getbtcbalance();
-    
-
   },
   methods: {
     async userstatus() {
@@ -231,16 +229,19 @@ export default defineComponent({
         url: "/auth/whoami",
         withCredentials: true,
         headers: authHeader(),
-      }).then((response) => {
-        if ((response.status = 200)) {
-          this.user = response.data.user;
-          this.userinfo();
-          this.getwallettotals();
-         
-        }
-      });
+      })
+        .then((response) => {
+          if ((response.status = 200)) {
+            this.user = response.data.user;
+            this.userinfo();
+            this.getwallettotals();
+          }
+        })
+        .catch((error) => {
+          this.$router.push({ name: "login" });
+        });
     },
-        async userinfo() {
+    async userinfo() {
       await axios({
         method: "get",
         url: "/info/country-currency",
@@ -256,12 +257,11 @@ export default defineComponent({
       await axios({
         method: "get",
         url: "/price/wallets/total/" + this.user.currency,
-                withCredentials: true,
+        withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
         if (response.data) {
           this.wallettotal = response.data.coin;
-    
         }
       });
     },
@@ -296,44 +296,42 @@ export default defineComponent({
       });
     },
 
-
-  //  Get balances for dropdowns
-  async getxmrbalance() {
-    await axios({
-      method: "get",
-      url: "/xmr/balance",
-      headers: authHeader(),
-    }).then((response) => {
-      if (response.data) {
-        this.xmrbalance = response.data.xmr_balance;
-      }
-    });
-  },
-
-  async getbchbalance() {
-    await axios({
-      method: "get",
-      url: "/bch/balance",
-      headers: authHeader(),
-    }).then((response) => {
-      if (response.data) {
-        this.bchbalance = response.data.bch_balance;
-      }
-    });
-  },
-  async getbtcbalance() {
-    await axios({
-      method: "get",
-      url: "/btc/balance",
-      headers: authHeader(),
-    }).then((response) => {
-      if (response.data) {
-        this.btcbalance = response.data.btc_balance;
-      
-      }
-    });
-  },
+    //  Get balances for dropdowns
+    async getxmrbalance() {
+      await axios({
+        method: "get",
+        url: "/xmr/balance",
+        headers: authHeader(),
+      }).then((response) => {
+        if (response.data) {
+          this.xmrbalance = response.data.xmr_balance;
+        }
+      });
     },
+
+    async getbchbalance() {
+      await axios({
+        method: "get",
+        url: "/bch/balance",
+        headers: authHeader(),
+      }).then((response) => {
+        if (response.data) {
+          this.bchbalance = response.data.bch_balance;
+        }
+      });
+    },
+    async getbtcbalance() {
+      await axios({
+        method: "get",
+        url: "/btc/balance",
+        headers: authHeader(),
+      }).then((response) => {
+        if (response.data) {
+          this.btcbalance = response.data.btc_balance;
+        }
+      });
+    },
+  },
 });
 </script>
 

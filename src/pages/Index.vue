@@ -47,6 +47,7 @@ export default defineComponent({
     return {
       token: null,
       confirmed: "",
+      current_user: "",
     };
   },
   computed: {
@@ -67,10 +68,11 @@ export default defineComponent({
       })
         .then((response) => {
           if ((response.status = 200)) {
+              current_user = response.data.user
             this.$store.dispatch("user", response.data.user);
           }
         })
-        .catch((error) => {});
+        .catch((error) => {current_user = null});
     },
     async userstatusconfirmed() {
       await axios({
@@ -86,6 +88,8 @@ export default defineComponent({
             this.confirmed = false;
           }
         }
+      }).catch((error) => {
+        
       });
     },
   },

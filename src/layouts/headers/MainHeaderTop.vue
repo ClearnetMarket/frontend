@@ -95,7 +95,9 @@ export default defineComponent({
       localStorage.removeItem("user_token");
       localStorage.removeItem("auth_token");
       localStorage.clear();
+       this.$store.dispatch("user", null);
       this.$router.go({name: "home" });
+     
         
     },
     
