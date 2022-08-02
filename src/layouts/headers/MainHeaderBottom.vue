@@ -9,45 +9,45 @@
             class="form-select mt-2 appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-200 bg-clip-padding bg-no-repeat rounded transition ease-in-out"
             aria-label="Default select example"
           >
-            <option selected @click="$router.replace({ name: 'categoryhome' })">
+            <option selected @click="gotourl('categoryhome' )">
               All Categories
             </option>
 
-            <option @click="$router.replace({ name: 'categoryelectronics' })">
+            <option @click="gotourl('categoryelectronics')">
               Electronics
             </option>
-            <option @click="$router.replace({ name: 'categorycomputers' })">
+            <option @click="gotourl('categorycomputers')">
               Computers and Parts
             </option>
-            <option @click="$router.replace({ name: 'categoryelectronics' })">
+            <option @click="gotourl('categoryelectronics')">
               Smart Phones and Accessories
             </option>name
-            <option @click="$router.replace({ name: 'categoryautomotive' })">
+            <option @click="gotourl('categoryautomotive')">
               Automotive
             </option>
-            <option @click="$router.replace({ name: 'categoryhobbies' })">
+            <option @click="gotourl('categoryhobbies')">
               Hobbies and Collectibles
             </option>
             <option
-              @click="$router.replace({ name: 'categoryjewelrygoldcoins' })"
+              @click="gotourl('categoryjewelrygoldcoins')"
             >
               Jewelry Previous Metals and Coins
             </option>
-            <option @click="$router.replace({ name: 'categoryapparel' })">
+            <option @click="gotourl('categoryapparel' )">
               Apparel
             </option>
-            <option @click="$router.replace({ name: 'categoryhomeandgarden' })">
+            <option @click="gotourl('categoryhomeandgarden' )">
               Home and Garden
             </option>
-            <option @click="$router.replace({ name: 'categoryartsandcrafts' })">
+            <option @click="gotourl('categoryartsandcrafts')" >
               Arts and Crafts
             </option>
             <option
-              @click="$router.replace({ name: 'categorybooksmovies' })"
+              @click="gotourl('categorybooksmovies')"
             >
               Books and Movies
             </option>
-            <option @click="$router.replace({ name: 'categorydigitalitems' })">
+            <option @click="gotourl('categorydigitalitems')">
               Digital Items
             </option>
           </select>
@@ -83,7 +83,6 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { mapGetters } from "vuex";
 import axios from "axios";
 import { MenuIcon } from "@heroicons/vue/solid";
 
@@ -95,7 +94,6 @@ export default defineComponent({
       btcprice: null,
       xmrprice: null,
       bchprice: null,
-
       categoriesList: {},
     };
   },
@@ -104,39 +102,28 @@ export default defineComponent({
     this.getbtcprice();
     this.getbchprice();
     this.getxmrprice();
-
     this.getCategoryList();
   },
 
   methods: {
-    gotoxmrwallet() {
-      this.$router.push({ name: "xmrwallet" });
+    //  change url in dropdown
+    gotourl(nameofurl) {
+      this.$router.replace({ name: nameofurl })
     },
-
-    gotoxmrwallet() {
-      this.$router.push({ name: "xmrwallet" });
-    },
-    gotobtcwallet() {
-      this.$router.push({ name: "btcwallet" });
-    },
-
-    gotobchwallet() {
-      this.$router.push({ name: "bchwallet" });
-    },
-
     //  Get prices of current coins
-    async getxmrprice() {
-      await axios({
+     getxmrprice() {
+      return axios({
         method: "get",
         url: "/xmr/price",
       }).then((response) => {
         if (response.data) {
           this.xmrprice = response.data.price_xmr_usd;
+
         }
       });
     },
-    async getbchprice() {
-      await axios({
+     getbchprice() {
+      return axios({
         method: "get",
         url: "/bch/price",
       }).then((response) => {
@@ -145,8 +132,8 @@ export default defineComponent({
         }
       });
     },
-    async getbtcprice() {
-      await axios({
+     getbtcprice() {
+      return axios({
         method: "get",
         url: "/btc/price",
       }).then((response) => {
@@ -157,13 +144,12 @@ export default defineComponent({
     },
 
     async getCategoryList() {
-      const path = "/category/sidebar";
-      await axios
-        .get(path, { withCredentials: true })
+      let path = "/category/sidebar";
+      return axios
+        .get(path)
         .then((response) => {
           this.categoriesList = response.data;
         })
-        .catch((error) => {});
     },
   },
 });

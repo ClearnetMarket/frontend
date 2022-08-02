@@ -1,10 +1,11 @@
+
 <template>
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
 
   <div v-if="user">
-    <MainHeaderVendor v-show="user.user_admin == 1" />
+    <MainHeaderVendor v-show="user.user_admin === 1" />
   </div>
 
   <div class="container max-w-7xl mx-auto px-10 wrapper mb-10">
@@ -22,7 +23,7 @@
         </ol>
       </nav>
     </div>
-    <img src="../../assets/vendor/tsr.jpg" />
+    <img alt="" src="../../assets/vendor/tsr.jpg" />
     <div class="flex justify-center my-10">
       <div class="text-center text-[20px]">
         <h4>Vendor Signup</h4>
@@ -75,7 +76,6 @@
           </div>
           <div class="">
             <input type="checkbox" v-model="accept" name="acceptTerms" />
-
             <span v-if="v$.accept.$error" class="text-red-600 text-center">
               {{ v$.accept.$errors[0].$message }}
             </span>
@@ -101,10 +101,9 @@ import { defineComponent } from "vue";
 import axios from "axios";
 import { ref } from "vue";
 import { mapGetters } from "vuex";
-import { useRoute } from "vue-router";
 import { notify } from "@kyvg/vue3-notification";
 import useValidate from "@vuelidate/core";
-import { required, email, minLength, sameAs } from "@vuelidate/validators";
+import { required } from "@vuelidate/validators";
 import authHeader from "../../services/auth.header";
 import MainHeaderTop from "../../layouts/headers/MainHeaderTop.vue";
 import MainHeaderMid from "../../layouts/headers/MainHeaderMid.vue";
@@ -127,10 +126,10 @@ export default defineComponent({
   },
   data() {
     return {
-        v$: useValidate(),
-      verification: "",
+      v$: useValidate(),
+      user: null,
       accept: ref(false),
-      user_admin: "",
+      user_admin: 0,
     }
   },
   computed: {
@@ -142,8 +141,8 @@ validations() {
     }
   },
   methods: {
-    async userstatus() {
-      await axios({
+     userstatus() {
+      return axios({
         method: "get",
         url: "/auth/whoami",
         withCredentials: true,
@@ -160,13 +159,11 @@ validations() {
         }
       });
     },
-    async becomevendor(payLoad: { accept: string }) {
-      await axios({
+     becomevendor(payLoad: { accept: string }) {
+      return axios({
         method: "post",
         url: "/vendor/becomevendor",
         data: payLoad,
-        contentType: "text/plain",
-        dataType: "text",
         headers: authHeader(),
       }).then((response) => {
         if ((response.status = 200)) {
@@ -180,7 +177,7 @@ validations() {
         }
       });
     },
-    async onSubmit() {
+     onSubmit() {
       const payLoad = {
         accept: this.accept,
       }

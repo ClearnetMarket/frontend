@@ -1,3 +1,4 @@
+
 <template>
   <form
     class="rounded-md px-8 pt-6 pb-8 mb-4 w-full"
@@ -14,7 +15,7 @@
             <div class="block bg-cover bg-center">
               <div class="flex flex-col">
                 <div class="font-bold text-center">Main Image</div>
-                <img class="w-48 h-48" src="http://picsum.photos/50/50" />
+                <img alt="" class="w-48 h-48" src="https://picsum.photos/50/50" />
                 <button
                   class="bg-red-600 mt-5 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                   type="submit"
@@ -40,7 +41,7 @@
             <div class="block bg-cover bg-center">
               <div class="flex flex-col">
                 <div class="font-bold text-center">Image Two</div>
-                <img class="w-48 h-48" src="http://picsum.photos/50/50" />
+                <img alt="" class="w-48 h-48" src="https://picsum.photos/50/50" />
                 <button
                   class="bg-red-600 mt-5 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                   type="submit"
@@ -66,7 +67,7 @@
             <div class="block bg-cover bg-center">
               <div class="flex flex-col">
                 <div class="font-bold text-center">Image Three</div>
-                <img class="w-48 h-48" src="http://picsum.photos/50/50" />
+                <img alt="" class="w-48 h-48" src="https://picsum.photos/50/50" />
               </div>
               <div class="flex flex-col">
                 <button
@@ -94,7 +95,7 @@
             <div class="block bg-cover bg-center">
               <div class="flex flex-col">
                 <div class="font-bold text-center">Image Four</div>
-                <img class="w-48 h-48" src="http://picsum.photos/50/50" />
+                <img alt="" class="w-48 h-48" src="https://picsum.photos/50/50" />
               </div>
               <div class="flex flex-col">
                 <button
@@ -133,9 +134,18 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import axios from "axios";
-import { ref } from "vue";
+
 import authHeader from "../../../services/auth.header";
 import { mapGetters } from "vuex";
+
+/**
+ *
+ @typedef {Object} marketitem.image_one_server
+ @typedef {Object} marketitem.image_two_server
+ @typedef {Object} marketitem.image_three_server
+ @typedef {Object} marketitem.image_four_server
+ *
+ */
 
 export default defineComponent({
   name: "UploadImages",
@@ -152,20 +162,24 @@ export default defineComponent({
   data() {
     return {
       previewimageone: null,
-      marketitem: "",
+      previewImage1: null,
+      previewImage2: null,
+      previewImage3: null,
+      previewImage4: null,
+      marketitem: [],
     };
   },
   computed: {
     ...mapGetters(["user"]),
-    showImage: function () {
+    showImage() {
       this.$refs.clicktoshow.click();
     },
   },
   methods: {
-          //user Auth
-    async userstatus() {
+    //user Auth
+     userstatus() {
 
-      await axios({
+      return axios({
         method: "get",
         url: "/auth/whoami",
         withCredentials: true,
@@ -177,12 +191,9 @@ export default defineComponent({
       });
     },
     // Get the item thats being modified
-    async getItemForSale() {
-
-
+     getItemForSale() {
       const path = "/item/" + this.item_id;
-
-      await axios({
+      return axios({
         method: "get",
         url: path,
         withCredentials: true,
@@ -193,10 +204,10 @@ export default defineComponent({
 
           }
         })
-        .catch((error) => {});
+        .catch(() => {});
     },
 
-    async CreateItemImages() { 
+     CreateItemImages() {
       let formData = new FormData();
       if (this.$refs.fileInput1 !== null){
         formData.append("image_main", this.$refs.fileInput1.files[0]);
@@ -212,7 +223,7 @@ export default defineComponent({
       }
     
       let path = "/vendorcreateitem/create-item-images/" + this.item_id;
-      axios({
+      return axios({
         method: "POST",
         url: path,
         data: formData,
@@ -297,10 +308,10 @@ export default defineComponent({
       }
     },
 
-    async deleteitemimage(imagename) {
+     deleteitemimage(imagename) {
       let path =
         "/vendorcreateitem/delete-image/" + this.item_id + "/" + imagename;
-      await axios({
+      return axios({
         method: "delete",
         url: path,
         withCredentials: true,
@@ -311,21 +322,19 @@ export default defineComponent({
         }
       });
     },
-
-    onUploaded(info) {
+   /* onUploaded(info) {
       let files = info.files;
       files.forEach((item) => {});
-
-    },
-
-    onFailed(info) {
+    },*/
+   /* onFailed(info) {
       let err = JSON.parse(info.xhr.response);
    
       let files = info.files;
       files.forEach((item) => {});
-    },
-
-    onRejected(rejectedEntries) {},
+    },*/
+   /*onRejected(rejectedEntries)
+    {
+    },*/
   },
 });
 </script>

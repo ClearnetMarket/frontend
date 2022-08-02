@@ -1,335 +1,396 @@
 import { createRouter, createWebHistory } from "vue-router";
 
+import home from "../pages/Index.vue";
+import sell from "../pages/vendor/Sell.vue"
+import vendoragreement from "../pages/legal/VendorAgreement.vue";
+import forsale from "../pages/vendor/itemsForSale.vue";
+import vendoraddress from "../pages/auth/account/VendorExactAddress.vue";
+import vendorfeedback from "../pages/vendor/Feedback.vue";
+import createquick from "../pages/vendorcreateitem/CreateItem.vue";
+import edititem from "../pages/vendorcreateitem/EditItem.vue";
+import wallet from "../pages/wallets/WalletHome.vue";
+import btcwallet from "../pages/wallets/btc/BtcTransactions.vue";
+import btcwalletsend from "../pages/wallets/btc/BtcSend.vue";
+import btcwalletrecieve from "../pages/wallets/btc/BtcRecieve.vue";
+import bchwallet from "../pages/wallets/bch/BchTransactions.vue";
+import bchwalletsend from "../pages/wallets/bch/BchSend.vue";
+import bchwalletrecieve from "../pages/wallets/bch/BchRecieve.vue";
+import xmrwallet from "../pages/wallets/xmr/XmrTransactions.vue";
+import xmrwalletsend from "../pages/wallets/xmr/XmrSend.vue";
+import xmrwalletrecieve from "../pages/wallets/xmr/XmrRecieve.vue";
+import cart from "../pages/checkout/Cart.vue";
+import MarketItem from "../pages/Item/Item.vue";
+import checkout from "../pages/checkout/Checkout.vue";
+import login from "../pages/auth/Login.vue";
+import register from "../pages/auth/Register.vue";
+import forgotpassword from "../pages/auth/ForgotPassword.vue";
+import userprofile from "../pages/profile/UserProfile.vue";
+import vendorprofile from "../pages/profile/VendorProfile.vue";
+import userorders from "../pages/orders/UserOrders.vue";
+import vendorordersview from "../pages/orders/ViewOrder.vue";
+import account from "../pages/auth/account/AccountHome.vue";
+import defaultaddress from "../pages/auth/account/DefaultAddress.vue";
+import changepassword from "../pages/auth/ChangePassword.vue";
+import changepin from "../pages/auth/ChangePin.vue";
+import accountseed from "../pages/auth/AccountSeed.vue";
+import accountseedconfirm from "../pages/auth/AccountSeedConfirm.vue";
+import vendororders from "../pages/vendor/orders/VendorOrders.vue";
+import vendorordersnew from "../pages/vendor/orders/VendorOrdersNew.vue";
+import vendororderswaiting from "../pages/vendor/orders/VendorOrdersWaiting.vue";
+import vendorordersshipped from "../pages/vendor/orders/VendorOrdersShipped.vue";
+import vendorordersfinalized from "../pages/vendor/orders/VendorOrdersFinalized.vue";
+import vendororderscancel from "../pages/vendor/orders/VendorOrdersCancel.vue";
+import vendorordersdispute from "../pages/vendor/orders/VendorOrdersDispute.vue";
+import MsgHome from "../pages/messages/MsgHome.vue";
+import MsgCreate from "../pages/messages/MsgCreate.vue";
+import MsgCreateOrder from "../pages/messages/MsgCreateOrder.vue";
+import MsgCreateUser from "../pages/messages/MsgCreate.vue";
+import MsgCreateItem from "../pages/messages/MsgCreateItem.vue";
+import MsgView from "../pages/messages/MsgView.vue";
+import Dispute from "../pages/moderator/Dispute.vue"
+import ModDispute from "../pages/moderator/ModDispute.vue";
+import search from "../pages/search/SearchHome.vue";
+
+import Error404 from "../pages/error/Error404.vue";
+
+import categoryhome from "../pages/category/CategoryHome.vue";
+import categoryelectronics from "../pages/category/electronics/ElectronicsHome.vue";
+import categorysmartphones from "../pages/category/smartphones/SmartPhonesHome.vue";
+import categoryautomotive from "../pages/category/automotive/AutomotiveHome.vue";
+import categoryhobbies from "../pages/category/hobbies/HobbiesHome.vue";
+import categoryjewelrygoldcoins from "../pages/category/jewelrygold/JewelryGoldHome.vue";
+import categoryapparel from "../pages/category/apparel/ApparelHome.vue";
+import categoryhomeandgarden from "../pages/category/homeandgarden/HomeandGardenHome.vue";
+import categoryartsandcrafts from "../pages/category/art/ArtHome.vue";
+import categorycomputers from "../pages/category/computers/ComputersHome.vue";
+import categorydigitalitems from "../pages/category/digital/DigitalHome.vue";
+import categorybooksmovies from "../pages/category/booksandmovies/BooksHome.vue";
+
 const routes = [
-  // Main Pages no login
 
   {
     path: "/",
     name: "home",
-    component: () => import("../pages/Index.vue"),
+    component: () => home,
   },
   {
     path: "/sell",
     name: "sell",
-    component: () => import("../pages/vendor/Sell.vue"),
+    component: () => sell,
   },
   {
     path: "/vendoragreement",
     name: "vendoragreement",
-    component: () => import("../pages/legal/VendorAgreement.vue"),
+    component: () => vendoragreement,
   },
   {
     path: "/vendor/itemsforsale",
     name: "forsale",
-    component: () => import("../pages/vendor/itemsForSale.vue"),
+    component: () => forsale,
   },
   {
     path: "/vendor/exactaddress",
     name: "vendoraddress",
-    component: () => import("../pages/auth/account/VendorExactAddress.vue"),
+    component: () => vendoraddress,
   },
   {
     path: "/vendor/feedback",
     name: "vendorfeedback",
-    component: () => import("../pages/vendor/Feedback.vue"),
+    component: () => vendorfeedback,
   },
   {
     path: "/item/:id",
-    name: "item",
-    component: () => import("../pages/Item/Item.vue"),
+    name: "MarketItem",
+    component: () => MarketItem,
   },
-
   {
     path: "/vendor/createitem",
     name: "createquick",
-    component: () => import("../pages/vendorcreateitem/CreateItem.vue"),
+    component: () => createquick,
   },
   {
     path: "/vendor/edititem/:id",
     name: "edititem",
-    component: () => import("../pages/vendorcreateitem/EditItem.vue"),
+    component: () => edititem,
   },
   {
     path: "/wallet",
     name: "wallet",
-    component: () => import("../pages/wallets/WalletHome.vue"),
+    component: () => wallet,
   },
   {
     path: "/wallet/btc",
     name: "btcwallet",
-    component: () => import("../pages/wallets/btc/BtcTransactions.vue"),
+    component: () => btcwallet,
   },
   {
     path: "/wallet/btc/send",
     name: "btcwalletsend",
-    component: () => import("../pages/wallets/btc/BtcSend.vue"),
+    component: () => btcwalletsend,
   },
   {
     path: "/wallet/btc/recieve",
     name: "btcwalletrecieve",
-    component: () => import("../pages/wallets/btc/BtcRecieve.vue"),
+    component: () => btcwalletrecieve,
   },
   {
     path: "/wallet/bch",
     name: "bchwallet",
-    component: () => import("../pages/wallets/bch/BchTransactions.vue"),
+    component: () => bchwallet,
   },
-
   {
     path: "/wallet/bch/send",
     name: "bchwalletsend",
-    component: () => import("../pages/wallets/bch/BchSend.vue"),
+    component: () => bchwalletsend,
   },
   {
     path: "/wallet/bch/recieve",
     name: "bchwalletrecieve",
-    component: () => import("../pages/wallets/bch/BchRecieve.vue"),
+    component: () => bchwalletrecieve,
   },
   {
     path: "/wallet/xmr",
     name: "xmrwallet",
-    component: () => import("../pages/wallets/xmr/XmrTransactions.vue"),
+    component: () => xmrwallet,
   },
   {
     path: "/wallet/xmr/send",
     name: "xmrwalletsend",
-    component: () => import("../pages/wallets/xmr/XmrSend.vue"),
+    component: () => xmrwalletsend,
   },
   {
     path: "/wallet/xmr/recieve",
     name: "xmrwalletrecieve",
-    component: () => import("../pages/wallets/xmr/XmrRecieve.vue"),
+    component: () => xmrwalletrecieve,
   },
   // checkout
   {
     path: "/cart",
     name: "cart",
-    component: () => import("../pages/checkout/Cart.vue"),
+    component: () => cart,
   },
   {
     path: "/checkout",
     name: "checkout",
-    component: () => import("../pages/checkout/Checkout.vue"),
+    component: () => checkout,
   },
   // Plain Stuff
   {
     path: "/auth/login",
     name: "login",
-    component: () => import("../pages/auth/Login.vue"),
+    component: () => login,
   },
   {
     path: "/auth/register",
     name: "register",
-    component: () => import("../pages/auth/Register.vue"),
+    component: () => register,
   },
   {
     path: "/auth/forgotpassword",
     name: "forgotpassword",
-    component: () => import("../pages/auth/ForgotPassword.vue"),
+    component: () => forgotpassword,
   },
   // Account  Logged in Required
   {
     path: "/user/:uuid",
     name: "userprofile",
-    component: () => import("../pages/profile/UserProfile.vue"),
+    component: () => userprofile,
   },
   {
     path: "/vendor/:uuid",
     name: "vendorprofile",
-    component: () => import("../pages/profile/VendorProfile.vue"),
+    component: () => vendorprofile,
   },
 
   {
     path: "/user/orders",
     name: "userorders",
-    component: () => import("../pages/orders/UserOrders.vue"),
+    component: () => userorders,
   },
   {
     path: "/user/orders/:uuid",
     name: "vendorordersview",
-    component: () => import("../pages/orders/ViewOrder.vue"),
+    component: () => vendorordersview,
   },
   {
     path: "/account",
     name: "account",
-    component: () => import("../pages/auth/account/AccountHome.vue"),
+    component: () => account,
   },
 
   {
     path: "/account/defaultaddress",
     name: "defaultaddress",
-    component: () => import("../pages/auth/account/DefaultAddress.vue"),
+    component: () =>defaultaddress,
   },
   {
     path: "/auth/changepassword",
     name: "changepassword",
-    component: () => import("../pages/auth/ChangePassword.vue"),
+    component: () => changepassword,
   },
   {
     path: "/auth/changepin",
     name: "changepin",
-    component: () => import("../pages/auth/ChangePin.vue"),
+    component: () => changepin,
   },
   {
     path: "/auth/account-seed",
     name: "accountseed",
-    component: () => import("../pages/auth/AccountSeed.vue"),
+    component: () => accountseed,
   },
   {
     path: "/auth/account-seed-confirm",
     name: "accountseedconfirm",
-    component: () => import("../pages/auth/AccountSeedConfirm.vue"),
+    component: () => accountseedconfirm,
   },
   // Category Pages
   {
     path: "/category",
     name: "categoryhome",
-    component: () => import("../pages/category/CategoryHome.vue"),
+    component: () => categoryhome,
   },
   {
     path: "/category/electronics",
     name: "categoryelectronics",
-    component: () =>
-      import("../pages/category/electronics/ElectronicsHome.vue"),
+    component: () => categoryelectronics,
   },
   {
     path: "/category/smartphones",
     name: "categorysmartphones",
-    component: () =>
-      import("../pages/category/smartphones/SmartPhonesHome.vue"),
+    component: () => categorysmartphones,
   },
   {
     path: "/category/automotive",
     name: "categoryautomotive",
-    component: () => import("../pages/category/automotive/AutomotiveHome.vue"),
+    component: () => categoryautomotive,
   },
   {
     path: "/category/hobbiesandcollectibles",
     name: "categoryhobbies",
-    component: () => import("../pages/category/hobbies/HobbiesHome.vue"),
+    component: () => categoryhobbies,
   },
   {
     path: "/category/jewlrygoldandcoins",
     name: "categoryjewelrygoldcoins",
-    component: () =>
-      import("../pages/category/jewelrygold/JewelryGoldHome.vue"),
+    component: () => categoryjewelrygoldcoins,
   },
   {
     path: "/category/apparel",
     name: "categoryapparel",
-    component: () => import("../pages/category/apparel/ApparelHome.vue"),
+    component: () => categoryapparel,
   },
   {
     path: "/category/homeandgarden",
     name: "categoryhomeandgarden",
-    component: () =>
-      import("../pages/category/homeandgarden/HomeandGardenHome.vue"),
+    component: () =>categoryhomeandgarden,
   },
   {
     path: "/category/artandcrafts",
     name: "categoryartsandcrafts",
-    component: () => import("../pages/category/art/ArtHome.vue"),
+    component: () => categoryartsandcrafts,
   },
   {
     path: "/category/computers",
     name: "categorycomputers",
-    component: () => import("../pages/category/computers/ComputersHome.vue"),
+    component: () => categorycomputers,
   },
   {
     path: "/category/digitalitems",
     name: "categorydigitalitems",
-    component: () => import("../pages/category/digital/DigitalHome.vue"),
+    component: () => categorydigitalitems,
   },
   {
     path: "/category/booksandmovies",
     name: "categorybooksmovies",
-    component: () => import("../pages/category/booksandmovies/BooksHome.vue"),
+    component: () => categorybooksmovies,
   },
   {
     path: "/vendor/orders",
     name: "vendororders",
-    component: () => import("../pages/vendor/orders/VendorOrders.vue"),
+    component: () => vendororders,
   },
   {
     path: "/vendor/orders/new",
     name: "vendorordersnew",
-    component: () => import("../pages/vendor/orders/VendorOrdersNew.vue"),
+    component: () => vendorordersnew,
   },
   {
     path: "/vendor/orders/waiting",
     name: "vendororderswaiting",
-    component: () => import("../pages/vendor/orders/VendorOrdersWaiting.vue"),
+    component: () => vendororderswaiting,
   },
   {
     path: "/vendor/orders/shipped",
     name: "vendorordersshipped",
-    component: () => import("../pages/vendor/orders/VendorOrdersShipped.vue"),
+    component: () => vendorordersshipped,
   },
   {
     path: "/vendor/orders/finalized",
     name: "vendorordersfinalized",
-    component: () => import("../pages/vendor/orders/VendorOrdersFinalized.vue"),
+    component: () => vendorordersfinalized,
   },
   {
     path: "/vendor/orders/cancel",
     name: "vendororderscancel",
-    component: () => import("../pages/vendor/orders/VendorOrdersCancel.vue"),
+    component: () => vendororderscancel,
   },
   {
     path: "/vendor/orders/dispute",
     name: "vendorordersdispute",
-    component: () => import("../pages/vendor/orders/VendorOrdersDispute.vue"),
+    component: () => vendorordersdispute,
   },
   // Messages
   {
     path: "/msg",
     name: "MsgHome",
-    component: () => import("../pages/messages/MsgHome.vue"),
+    component: () => MsgHome,
   },
   {
     path: "/msg/create",
     name: "MsgCreate",
-    component: () => import("../pages/messages/MsgCreate.vue"),
+    component: () => MsgCreate,
   },
   {
     path: "/msg/create/:uuid",
     name: "MsgCreateUser",
-    component: () => import("../pages/messages/MsgCreate.vue"),
+    component: () => MsgCreateUser,
   },
   {
     path: "/msg/create/:uuid/:itemuuid",
     name: "MsgCreateItem",
-    component: () => import("../pages/messages/MsgCreateItem.vue"),
+    component: () => MsgCreateItem,
   },
   {
     path: "/msg/view/:postid",
     name: "MsgView",
-    component: () => import("../pages/messages/MsgView.vue"),
+    component: () => MsgView,
   },
   {
     path: "/dispute/view/:uuid",
     name: "Dispute",
-    component: () => import("../pages/moderator/Dispute.vue"),
+    component: () => Dispute,
   },
+
+
   {
-    path: "/mod",
-    name: "ModHome",
-    component: () => import("../pages/moderator/Home.vue"),
+    path: "/msg/create/order/",
+    name: "MsgCreateOrder",
+    component: () => MsgCreateOrder,
   },
   {
     path: "/mod/dispute/:uuid",
     name: "ModDispute",
-    component: () => import("../pages/moderator/ModDispute.vue"),
+    component: () => ModDispute,
   },
   {
     path: "/search/:searchstring",
     name: "search",
-    component: () => import("../pages/search/SearchHome.vue"),
+    component: () => search,
   },
   // Error Pages
   {
     path: "/:catchAll(.*)*",
-    component: () => import("../pages/error/Error404.vue"),
+    component: () => Error404,
   },
 ];
 

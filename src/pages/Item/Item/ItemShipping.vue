@@ -1,3 +1,4 @@
+
 <template>
   <div class="max-w-7xl mx-auto px-10 mt-10">
     <div class="grid grid-cols-1 text-[20px] font-semibold text-gray-600">
@@ -25,7 +26,7 @@
         <div class="sm:col-span-12 md:col-span-12">Shipping Options:</div>
         <div class="sm:col-span-12 md:col-span-12">
           <div class="flex gap-4">
-          <div v-if="shippingfree == true">
+          <div v-if="shippingfree === true">
             <div
               class="border border-1 rounded-md p-5 hover:bg-gray-100"
       
@@ -41,7 +42,7 @@
               </div>
             </div>
           </div>
-          <div v-if="shippingtwo == true">
+          <div v-if="shippingtwo === true">
             <div
               class="border border-1 rounded-md p-5 hover:bg-gray-100"
             
@@ -57,7 +58,7 @@
               </div>
             </div>
           </div>
-          <div v-if="shippingthree == true">
+          <div v-if="shippingthree === true">
            <div
               class="border border-1 rounded-md p-5 hover:bg-gray-100"
             >
@@ -81,7 +82,6 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import axios from "axios";
 
 export default defineComponent({
   name: "ItemShipping",

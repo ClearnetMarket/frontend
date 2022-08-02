@@ -1,9 +1,7 @@
+
 <template>
   <HeaderPlain />
 
-  <div v-if="user">
-    <MainHeaderVendor v-show="user.user_admin == 1" />
-  </div>
 
   <div class="container max-w-7xl mx-auto px-10">
     <div class="mt-5 mb-5">
@@ -75,13 +73,10 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import axios from "axios";
-import { ref } from "vue";
 import { notify } from "@kyvg/vue3-notification";
 import useValidate from "@vuelidate/core";
-import { required, email, minLength, sameAs } from "@vuelidate/validators";
-import authHeader from "../../services/auth.header";
+import { required, minLength } from "@vuelidate/validators";
 import HeaderPlain from "../../layouts/headers/HeaderPlain.vue";
-
 
 export default defineComponent({
   name: "changepassword",
@@ -90,7 +85,7 @@ export default defineComponent({
   },
   data() {
     return {
-        v$: useValidate(),
+      v$: useValidate(),
       ChangePasswordForm: {
         password: "",
         password_confirm: "",
@@ -121,7 +116,7 @@ export default defineComponent({
           this.$router.push({ name: "login" });
         }
       })
-      .catch((error) => {
+      .catch(() => {
           notify({
             title: "Authorization",
             text: "Invalid Credentials.",

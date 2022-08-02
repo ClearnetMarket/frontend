@@ -1,3 +1,4 @@
+
 <template>
   <div class="mt-5 mx-10 flex gap-5">
     <div v-for="item in itemsforsale" :key="item.id">
@@ -43,17 +44,17 @@
           <!--- Currency accepted bubbles -->
           <div class="flex justify-center pt-2">
             <span
-              v-if="item.digital_currency_1 == true"
+              v-if="item.digital_currency_1 === true"
               class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-orange-500 mr-2 mb-2"
               >BTC</span
             >
             <span
-              v-if="item.digital_currency_2 == true"
+              v-if="item.digital_currency_2 === true"
               class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-orange-700 mr-2 mb-2"
               >XMR</span
             >
             <span
-              v-if="item.digital_currency_3 == true"
+              v-if="item.digital_currency_3 === true"
               class="inline-block bg-gray-200 rounded-full px-2 py-1 text-sm font-semibold text-green-600 mr-2 mb-2"
               >BCH</span
             >
@@ -66,9 +67,15 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { notify } from "@kyvg/vue3-notification";
 import axios from "axios";
 
+
+/**
+ *
+ @typedef {Object} item.image_one
+
+ *
+ */
 export default defineComponent({
   name: "GetVendorItems",
   props: ["vendoruuid"],
@@ -85,8 +92,8 @@ export default defineComponent({
   computed: {},
 
   methods: {
-    async getvendorsitemsforsale() {
-      await axios({
+     getvendorsitemsforsale() {
+      return axios({
         method: "get",
         url: "/vendor/itemsforsale/" + this.vendoruuid,
         withCredentials: true,
@@ -97,6 +104,7 @@ export default defineComponent({
           }
         })
         .catch((error) => {
+          console.log(error)
         
         });
     },

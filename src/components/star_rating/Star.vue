@@ -1,6 +1,6 @@
 <template>
 
-  <div v-if="final_rating == 0">
+  <div v-if="final_rating === 0">
     <div class="flex items-center">
 
 
@@ -10,7 +10,7 @@
     </div>
   </div>
 
-  <div v-if="final_rating == 1">
+  <div v-if="final_rating === 1">
     <div class="flex items-center">
       <svg
         class="w-5 h-5 text-yellow-400"
@@ -126,7 +126,7 @@
     </div>
   </div>
 
-  <div v-if="final_rating == 2">
+  <div v-if="final_rating === 2">
       <div class="flex items-center">
       <svg
         class="w-5 h-5 text-yellow-400"
@@ -242,7 +242,7 @@
     </div>
   </div>
 
-  <div v-if="final_rating == 3">
+  <div v-if="final_rating === 3">
       <div class="flex items-center">
       <svg
         class="w-5 h-5 text-yellow-400"
@@ -358,7 +358,7 @@
     </div>
   </div>
 
-  <div v-if="final_rating == 4">
+  <div v-if="final_rating === 4">
       <div class="flex items-center">
       <svg
         class="w-5 h-5 text-yellow-400"
@@ -474,7 +474,7 @@
     </div>
   </div>
 
-  <div v-if="final_rating == 5">
+  <div v-if="final_rating === 5">
       <div class="flex items-center">
       <svg
         class="w-5 h-5 text-yellow-400"
@@ -589,7 +589,7 @@
       </p>
     </div>
   </div>
-  <div v-if="final_rating == 6">
+  <div v-if="final_rating === 6">
       <div class="flex items-center">
       <svg
         class="w-5 h-5 text-yellow-400"
@@ -704,7 +704,7 @@
     </div>
   </div>
 
-  <div v-if="final_rating == 7">
+  <div v-if="final_rating === 7">
       <div class="flex items-center">
       <svg
         class="w-5 h-5 text-yellow-400"
@@ -819,7 +819,7 @@
     </div>
   </div>
 
-  <div v-if="final_rating == 8">
+  <div v-if="final_rating === 8">
     <div class="flex items-center">
     <svg
     class="w-5 h-5 text-yellow-400"
@@ -933,7 +933,7 @@
     </p></div>
   </div>
 
-  <div v-if="final_rating == 9">
+  <div v-if="final_rating === 9">
       <div class="flex items-center">
       <svg
         class="w-5 h-5 text-yellow-400"
@@ -1048,7 +1048,7 @@
     </div>
   </div>
 
-  <div v-if="final_rating == 10">
+  <div v-if="final_rating === 10">
     <div class="flex items-center">
     <svg
     class="w-5 h-5 text-yellow-400"
@@ -1166,14 +1166,14 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import axios from "axios";
+
 
 export default defineComponent({
   name: "StarRating",
   props: ["rating"],
   data() {
     return {
-      final_rating: "",
+      final_rating: 0,
     };
   },
   mounted() {

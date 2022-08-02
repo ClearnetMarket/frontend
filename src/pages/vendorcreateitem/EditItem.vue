@@ -1,10 +1,11 @@
+
 <template>
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
 
   <div v-if="user">
-    <MainHeaderVendor v-show="user.user_admin == 1" />
+    <MainHeaderVendor v-show="user.user_admin === 1" />
   </div>
   <div class="">
     <div class="container max-w-7xl mx-auto px-10">
@@ -216,7 +217,7 @@
               <div class="flex-1"></div>
               <div class="flex-1">
                 <input
-                  type="integer"
+                  type="number"
                   placeholder="Estimated Days"
                   min="0"
                   class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -239,7 +240,7 @@
               </div>
               <div class="flex-1">
                 <input
-                  type="integer"
+                  type="number"
                   placeholder="Price"
                   min="0"
                   class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -249,7 +250,7 @@
               </div>
               <div class="flex-1">
                 <input
-                  type="integer"
+                  type="number"
                   placeholder="Estimated Days"
                   min="0"
                   class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -273,7 +274,7 @@
               </div>
               <div class="flex-1">
                 <input
-                  type="integer"
+                  type="number"
                   placeholder="Price"
                   min="0"
                   class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -283,7 +284,7 @@
               </div>
               <div class="flex-1">
                 <input
-                  type="integer"
+                  type="number"
                   placeholder="Estimated Days"
                   min="0"
                   class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -309,16 +310,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import {defineComponent, ref} from "vue";
 import axios from "axios";
-import { useRoute } from "vue-router";
-import { ref } from "vue";
+import {useRoute} from "vue-router";
 import authHeader from "../../services/auth.header";
-import { mapGetters } from "vuex";
-import { constants } from "perf_hooks";
-import { notify } from "@kyvg/vue3-notification";
+import {mapGetters} from "vuex";
+import {notify} from "@kyvg/vue3-notification";
 import useValidate from "@vuelidate/core";
-import { required, email, minLength, sameAs } from "@vuelidate/validators";
+import {minLength, required} from "@vuelidate/validators";
 import MainHeaderTop from "../../layouts/headers/MainHeaderTop.vue";
 import MainHeaderMid from "../../layouts/headers/MainHeaderMid.vue";
 import MainHeaderBottom from "../../layouts/headers/MainHeaderBottom.vue";
@@ -352,11 +351,10 @@ export default defineComponent({
   data() {
     return {
       v$: useValidate(),
-      item_id: "",
-      marketitem: "",
-      authtoken: "",
+      user: null,
+      item_id: null,
       categoryList: [],
-
+      conditionList: [],
       countryList: [],
 
       CreateItemForm: {
@@ -384,9 +382,17 @@ export default defineComponent({
           shipping_3_days: "",
           shipping_3_price: "",
           shipping_to_country_one: "",
+          destination_country_one: "",
+          destination_country_one_name: "",
           shipping_to_country_two: "",
+          destination_country_two: "",
+          destination_country_two_name: "",
           shipping_to_country_three: "",
+          destination_country_three_name: "",
+          destination_country_three: "",
           shipping_to_country_four: "",
+          destination_country_four: "",
+          destination_country_four_name: "",
         },
       },
     };
@@ -414,9 +420,9 @@ export default defineComponent({
     ...mapGetters(["user"]),
   },
   methods: {
-    async userstatus() {
+     userstatus() {
       //user Auth
-      await axios({
+      return axios({
         method: "get",
         url: "/auth/whoami",
         withCredentials: true,
@@ -428,13 +434,12 @@ export default defineComponent({
       });
     },
     // gets the item from paramater router
-    async getItemForSale() {
-      const item_id_route = useRoute();
-      const item_id = item_id_route.params.id;
-      this.item_id = item_id;
-      const path = "/item/" + this.item_id;
+     getItemForSale() {
+      let item_id_route = useRoute();
+      this.item_id = item_id_route.params.id;
+      let path = "/item/" + this.item_id;
 
-      await axios({
+      return axios({
         method: "get",
         url: path,
         withCredentials: true,
@@ -444,16 +449,16 @@ export default defineComponent({
             this.marketitem = response.data;
           }
         })
-        .catch((error) => {});
+        .catch(() => {});
     },
     // main item recreation function
-    async SendItemCreation(payLoad: {
+     SendItemCreation(payLoad: {
       item_id: string;
       item_title: string;
       item_condition: string;
       item_description: string;
       category_id_0: string;
-      keywords: string;
+
       item_count: string;
       digital_currency_1: string;
       digital_currency_2: string;
@@ -473,7 +478,8 @@ export default defineComponent({
       shipping_to_country_four: string;
     }) {
       let path = "/vendorcreateitem/create-item-main/" + this.item_id;
-      await axios({
+
+      return axios({
         method: "post",
         url: path,
         data: payLoad,
@@ -490,7 +496,7 @@ export default defineComponent({
             });
           }
           if (response.data.status == "error") {
-            this.$router.push({ name: "edititem", params: { id: itemid } });
+            this.$router.push({ name: "edititem", params: { id: this.item_idid } });
             notify({
               title: "Freeport Error",
               text: "Error creating item",
@@ -518,10 +524,10 @@ export default defineComponent({
         });
     },
     // pre fill form data
-    async getFormData() {
+     getFormData() {
       let path = "/vendorcreateitem/get-fields/" + this.item_id;
 
-      axios({
+      return axios({
         method: "get", //you can set what request you want to be
         url: path,
         withCredentials: true,
@@ -534,7 +540,6 @@ export default defineComponent({
             response.data.item_description;
           this.CreateItemForm.basicInfo.item_condition =
             response.data.item_condition;
-          this.CreateItemForm.basicInfo.keywords = response.data.keywords;
           this.CreateItemForm.basicInfo.category_name_0 =
             response.data.category_name_0;
           this.CreateItemForm.basicInfo.category_id_0 =
@@ -579,7 +584,7 @@ export default defineComponent({
           this.CreateItemForm.shippingInfo.destination_country_four_name =
             response.data.item_title;
         })
-        .catch((error) => {});
+        .catch(() => {});
     },
     // function to allow only numbers
     onlyNumber($event) {
@@ -598,10 +603,10 @@ export default defineComponent({
       }
     },
     // gets the list of countrys
-    async getCountryList() {
+     getCountryList() {
       let path = "/vendorcreateitem/query/country";
 
-      axios({
+      return axios({
         method: "get", //you can set what request you want to be
         url: path,
         withCredentials: true,
@@ -610,13 +615,13 @@ export default defineComponent({
           // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
           this.countryList = response.data;
         })
-        .catch((error) => {});
+        .catch(() => {});
     },
     // gets the categories
-    async getCategoryList() {
+     getCategoryList() {
       let path = "/vendorcreateitem/query/category";
 
-      await axios({
+      return axios({
         method: "get", //you can set what request you want to be
         url: path,
         withCredentials: true,
@@ -624,12 +629,12 @@ export default defineComponent({
         .then((response) => {
           this.categoryList = response.data;
         })
-        .catch((error) => {});
+        .catch(() => {});
     },
     // gets list of item conditions
-    async getConditionList() {
+     getConditionList() {
       let path = "/vendorcreateitem/query/condition";
-      await axios({
+      return axios({
         method: "get",
         url: path,
         withCredentials: true,
@@ -637,7 +642,7 @@ export default defineComponent({
         .then((response) => {
           this.conditionList = response.data;
         })
-        .catch((error) => {});
+        .catch(() => {});
     },
     // payload for form data
     onSubmit() {
@@ -646,7 +651,6 @@ export default defineComponent({
         item_title: this.CreateItemForm.basicInfo.item_title,
         item_condition: this.CreateItemForm.basicInfo.item_condition,
         item_description: this.CreateItemForm.basicInfo.item_description,
-        keywords: this.CreateItemForm.basicInfo.keywords,
         category_id_0: this.CreateItemForm.basicInfo.category_id_0,
         digital_currency_1: this.CreateItemForm.pricingInfo.digital_currency_1,
         digital_currency_2: this.CreateItemForm.pricingInfo.digital_currency_2,

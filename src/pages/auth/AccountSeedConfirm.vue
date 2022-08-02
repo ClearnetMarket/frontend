@@ -1,3 +1,4 @@
+
 <template>
   <HeaderPlain />
 
@@ -128,11 +129,10 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import axios from "axios";
-import { ref } from "vue";
+import axios  from "axios";
 import { notify } from "@kyvg/vue3-notification";
 import useValidate from "@vuelidate/core";
-import { required, email, minLength, sameAs } from "@vuelidate/validators";
+import { required } from "@vuelidate/validators";
 import authHeader from "../../services/auth.header";
 import HeaderPlain from "../../layouts/headers/HeaderPlain.vue";
 
@@ -143,20 +143,21 @@ export default defineComponent({
   },
   data() {
     return {
-      v$: useValidate(),
-      wordForm: {
-        word0: "",
-        word1: "",
-        word2: "",
-        word3: "",
-        word4: "",
-        word5: "",
+
+    v$: useValidate(),
+    wordForm: {
+      word0: "",
+      word1: "",
+      word2: "",
+      word3: "",
+      word4: "",
+      word5: "",
       },
     };
   },
   validations() {
     return {
-      ChangePasswordForm: {
+      wordForm: {
         word0: { required },
         word1: { required },
         word2: { required },
@@ -170,13 +171,14 @@ export default defineComponent({
     this.userstatusconfirmed();
   },
   methods: {
-    async userstatusconfirmed() {
-      await axios({
-        method: "get",
-        url: "/auth/amiconfirmed",
-        withCredentials: true,
-        headers: authHeader(),
-      }).then((response) => {
+     userstatusconfirmed() {
+      let url = "/auth/amiconfirmed";
+      const config = {
+      headers: authHeader(),
+      withCredentials: true
+    };
+      return axios.get(url, config)
+          .then((response) => {
         if (response.status == 200) {
           if (response.data.confirmed == true) {
             this.$router.push({ name: "home" });
@@ -193,6 +195,7 @@ export default defineComponent({
       word4: string;
       word5: string;
     }) {
+
       axios({
         method: "post",
         url: "/auth/accountseedconfirm",
@@ -210,7 +213,7 @@ export default defineComponent({
             this.$router.push({ name: "home" });
           }
         })
-        .catch((error) => {
+        .catch(() => {
           notify({
             title: "Authorization",
             text: "Invalid Credentials.",

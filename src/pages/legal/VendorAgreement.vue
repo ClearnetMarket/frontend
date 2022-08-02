@@ -1,10 +1,11 @@
+
 <template>
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
 
   <div v-if="user">
-    <MainHeaderVendor v-show="user.user_admin == 1" />
+    <MainHeaderVendor v-show="user.user_admin === 1" />
   </div>
 
   <div class="container  max-w-7xl mx-auto px-10">
@@ -29,11 +30,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import axios from "axios";
-import { ref } from "vue";
 import { mapGetters } from "vuex";
-import { useRoute } from "vue-router";
-import authHeader from "../../services/auth.header";
 import MainHeaderTop from "../../layouts/headers/MainHeaderTop.vue";
 import MainHeaderMid from "../../layouts/headers/MainHeaderMid.vue";
 import MainHeaderBottom from "../../layouts/headers/MainHeaderBottom.vue";
@@ -55,7 +52,7 @@ export default defineComponent({
   },
   data() {
     return {
-     
+     user: null
     };
   },
   computed: {

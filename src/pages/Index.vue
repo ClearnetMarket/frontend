@@ -2,8 +2,8 @@
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
-  <div v-if="user">
-    <div v-if="user.confirmed == false">
+  <div v-if="current_user">
+    <div v-if="current_user.confirmed === false">
       <Confirmed />
     </div>
   </div>
@@ -42,12 +42,13 @@ export default defineComponent({
     MainFooter,
     Confirmed,
   },
-
+  props: {
+    user: Object,
+    current_user: Object
+  },
   data() {
     return {
       token: null,
-      confirmed: "",
-      current_user: "",
     };
   },
   computed: {
@@ -59,8 +60,8 @@ export default defineComponent({
   },
 
   methods: {
-    async userstatus() {
-      await axios({
+     userstatus() {
+      return axios({
         method: "get",
         url: "/auth/whoami",
         withCredentials: true,
@@ -68,14 +69,15 @@ export default defineComponent({
       })
         .then((response) => {
           if ((response.status = 200)) {
-              current_user = response.data.user
+            this.current_user = response.data.user
+            this.current_user.confirmed = response.data.user.confirmed
             this.$store.dispatch("user", response.data.user);
           }
         })
-        .catch((error) => {current_user = null});
+        .catch(() => {this.current_user = null});
     },
-    async userstatusconfirmed() {
-      await axios({
+     userstatusconfirmed() {
+      return axios({
         method: "get",
         url: "/auth/amiconfirmed",
         withCredentials: true,
@@ -88,8 +90,7 @@ export default defineComponent({
             this.confirmed = false;
           }
         }
-      }).catch((error) => {
-        
+      }).catch(() => {
       });
     },
   },

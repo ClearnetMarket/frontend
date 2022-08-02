@@ -1,3 +1,4 @@
+
 <template>
   <MainHeaderTop />
   <MainHeaderMid />
@@ -135,17 +136,17 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import axios from "axios";
-import { ref } from "vue";
 import { mapGetters } from "vuex";
 import { notify } from "@kyvg/vue3-notification";
 import useValidate from "@vuelidate/core";
-import { required, email, minLength, sameAs } from "@vuelidate/validators";
+import { required, minLength } from "@vuelidate/validators";
 import MainHeaderTop from "../../../layouts/headers/MainHeaderTop.vue";
 import MainHeaderMid from "../../../layouts/headers/MainHeaderMid.vue";
 import MainHeaderBottom from "../../../layouts/headers/MainHeaderBottom.vue";
 import MainHeaderVendor from "../../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../../layouts/footers/FooterMain.vue";
-import authHeader from "../../../services/auth.header.ts";
+import authHeader from "../../../services/auth.header";
+
 
 export default defineComponent({
   name: "bchsend",
@@ -186,8 +187,8 @@ export default defineComponent({
   },
 
   methods: {
-    async userstatus() {
-      await axios({
+     userstatus() {
+      return axios({
         method: "get",
         url: "/auth/whoami",
         withCredentials: true,
@@ -197,17 +198,17 @@ export default defineComponent({
           if ((response.status = 200)) {
           }
         })
-        .catch((error) => {
+        .catch(() => {
           this.$router.push("/login");
         });
     },
-    async SendCoin(payLoad: {
+     SendCoin(payLoad: {
       bch_address: string;
       bch_decscription: string;
       bch_amount: string;
       pin: string;
     }) {
-      await axios({
+      return axios({
         method: "post",
         url: "/bch/send",
         data: payLoad,
@@ -229,7 +230,7 @@ export default defineComponent({
             this.$router.push("/vendor/itemsforsale");
           }
         })
-        .catch((error) => {
+        .catch(() => {
           notify({
             title: "Freeport Error",
             text: "Error With Sending Money",
@@ -237,7 +238,7 @@ export default defineComponent({
           });
         });
     },
-    async onSubmit() {
+     onSubmit() {
       const payLoad = {
         bch_address: this.wallet.bch_address,
         bch_decscription: this.wallet.bch_decscription,
@@ -257,7 +258,7 @@ export default defineComponent({
           text: "Success Sending Coin. It will be sent shortly.",
           type: "success",
         });
-        await this.SendCoin(payLoad);
+         this.SendCoin(payLoad);
       }
     },
   },

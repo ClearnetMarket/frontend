@@ -1,3 +1,4 @@
+
 <template>
   <div class="max-w-7xl mx-auto px-10 border-b mb-10">
     <div class="grid sm:grid-cols-1 md:grid-cols-3 mt-5 gap-5">
@@ -23,17 +24,17 @@
         </div>
 
         <div class="flex pt-4 mb-1 justify-between">
-          <div v-if="digitalcurrencyone == true">
+          <div v-if="digitalcurrencyone === true">
             <span class="text-sm font-semibold text-orange-500 mr-2 mb-2"
               >Bitcoin</span
             >
           </div>
-          <div v-if="digitalcurrencythree == true">
+          <div v-if="digitalcurrencythree === true">
             <span class="text-sm font-semibold text-orange-700 mr-2 mb-2">
               Monero</span
             >
           </div>
-          <div v-if="digitalcurrencytwo == true">
+          <div v-if="digitalcurrencytwo === true">
             <span class="text-sm font-semibold text-green-600 mr-2 mb-2"
               >Bitcoin Cash</span
             >
@@ -44,7 +45,7 @@
         </div>
 
         <div class="mb-2 text-[14px]">
-          <div v-if="digitalcurrencyone == true">
+          <div v-if="digitalcurrencyone === true">
             <div class="flex">
               <div class="text-orange-500 pr-5">BTC:</div>
               <div class="font-weight-bold text-gray-700">
@@ -52,7 +53,7 @@
               </div>
             </div>
           </div>
-          <div v-if="digitalcurrencytwo == true">
+          <div v-if="digitalcurrencytwo === true">
             <div class="flex">
               <div class="text-green-600 pr-5">BCH:</div>
               <div class="] font-weight-bold text-gray-700">
@@ -60,7 +61,7 @@
               </div>
             </div>
           </div>
-          <div v-if="digitalcurrencythree == true">
+          <div v-if="digitalcurrencythree === true">
             <div class="flex">
               <div class="text-orange-700 pr-5">XMR:</div>
               <div class="font-weight-bold text-gray-700">
@@ -78,7 +79,7 @@
             </div>
           </div>
 
-          <div v-if="(shippingfree = true)">
+          <div v-if="(freeshipping = true)">
             <div class="grid grid-cols-12 gap-4">
               <div class="font-[12px] col-span-3">Shipping:</div>
 
@@ -102,7 +103,7 @@
         </div>
         <div
           class="text-center mb-2 text-yellow-600 font-bold"
-          v-if="shippingfree == true"
+          v-if="freeshipping === true"
         >
           Free Shipping
         </div>
@@ -212,8 +213,9 @@
 import { defineComponent } from "vue";
 import axios from "axios";
 import { notify } from "@kyvg/vue3-notification";
-import { useRouter, useRoute } from "vue-router";
+import { useRoute } from "vue-router";
 import authHeader from "../../../services/auth.header";
+import {mapGetters} from "vuex";
 
 export default defineComponent({
   name: "ItemTop",
@@ -229,27 +231,23 @@ export default defineComponent({
     "vendortotalsales",
     "vendorrating",
     "vendoruuid",
-
+    "freeshipping",
     "imageoneserver",
     "imagetwoserver",
     "imagethreeserver",
     "imagefourserver",
-
     "digitalcurrencyone",
     "digitalcurrencytwo",
     "digitalcurrencythree",
-
     "freeshipping",
     "freeshippingdays",
     "shippingtwo",
     "shippingtwodays",
     "shippingthree",
     "shippingthreedays",
-
     "exactcity",
     "exactstateorprovence",
     "exactzipcode",
-
     "price",
     "pricebtc",
     "pricebch",
@@ -258,6 +256,7 @@ export default defineComponent({
 
   data() {
     return {
+      user: null,
       shopping_cart_count: "",
       vendor_reviews_total: "",
       exact_city: "",
@@ -265,13 +264,15 @@ export default defineComponent({
       exact_zipcode: "",
     };
   },
-  computed() {},
+
 
   mounted() {
     const item_id_route = useRoute();
     this.item_id = item_id_route.params.id;
   },
-
+  computed: {
+    ...mapGetters(["user"]),
+  },
   methods: {
     // Add item to cart
     addtocart() {
@@ -302,8 +303,8 @@ export default defineComponent({
     },
 
     // Get How many items in shopping cart
-    async get_shopping_cart_count() {
-      await axios({
+     get_shopping_cart_count() {
+      return axios({
         method: "get",
         url: "/info/user-cart-count",
         headers: authHeader(),

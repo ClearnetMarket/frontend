@@ -1,10 +1,11 @@
+
 <template>
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
 
   <div v-if="user">
-    <MainHeaderVendor v-show="user.user_admin == 1" />
+    <MainHeaderVendor v-show="user.user_admin === 1" />
   </div>
   <!-- Top Stuff-->
   <div class="container h-screen max-w-7xl mx-auto px-10">
@@ -34,17 +35,17 @@
 
         <div class="text-[20px] text-orange-400 mt-7">Bitcoin</div>
         <div class="text-[14px] text-gray-700">
-          <div v-if="btcbalance == 0.0">0.00000000</div>
+          <div v-if="btcbalance === 0.0">0.00000000</div>
           <div v-else>{{ btcbalance }}</div>
         </div>
         <div class="text-[20px] text-green-600 mt-7">Bitcoin Cash</div>
         <div class="text-[14px] text-gray-700">
-          <div v-if="bchbalance == 0.0">0.00000000</div>
+          <div v-if="bchbalance === 0.0">0.00000000</div>
           <div v-else>{{ bchbalance }}</div>
         </div>
         <div class="text-[20px] text-orange-600 mt-7">Monero</div>
         <div class="text-[14px] text-gray-700">
-          <div v-if="xmrbalance == 0.0">0.00000000</div>
+          <div v-if="xmrbalance === 0.0">0.00000000</div>
           <div v-else>{{ xmrbalance }}</div>
         </div>
       </div>
@@ -59,7 +60,7 @@
               style="cursor: default"
               class="bg-orange-400 text-white font-bold py-1 px-8 rounded"
             >
-              <div>${{ btcprice }}</div>
+             ${{ btcprice }}
             </button>
           </div>
           <div class="flex-1 pt-6">
@@ -99,7 +100,7 @@
               class="bg-green-600 text-white font-bold py-1 px-8 rounded focus:outline-none focus:shadow-outline"
               type="button"
             >
-              <div>${{ bchprice }}</div>
+              ${{ bchprice }}
             </button>
           </div>
           <div class="flex-1 pt-6">
@@ -139,7 +140,7 @@
               class="bg-orange-600 text-white font-bold py-1 px-8 rounded focus:outline-none focus:shadow-outline"
               type="button"
             >
-              <div>${{ xmrprice }}</div>
+              ${{ xmrprice }}
             </button>
           </div>
           <div class="flex-1 pt-6">
@@ -180,7 +181,6 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import axios from "axios";
-import { ref } from "vue";
 import MainHeaderTop from "../../layouts/headers/MainHeaderTop.vue";
 import MainHeaderMid from "../../layouts/headers/MainHeaderMid.vue";
 import MainHeaderBottom from "../../layouts/headers/MainHeaderBottom.vue";
@@ -200,16 +200,15 @@ export default defineComponent({
 
   data() {
     return {
-      user: "",
-      usercurrency: "",
+      user: null,
+      usercurrency: null,
       btcprice: "",
       xmrprice: "",
       bchprice: "",
-
-      xmrbalance: "",
-      bchbalance: "",
-      btcbalance: "",
-      wallettotal: "",
+      xmrbalance: 0,
+      bchbalance: 0,
+      btcbalance: 0,
+      wallettotal: 0,
     };
   },
   mounted() {
@@ -223,8 +222,8 @@ export default defineComponent({
     this.getbtcbalance();
   },
   methods: {
-    async userstatus() {
-      await axios({
+     userstatus() {
+      return axios({
         method: "get",
         url: "/auth/whoami",
         withCredentials: true,
@@ -237,12 +236,13 @@ export default defineComponent({
             this.getwallettotals();
           }
         })
-        .catch((error) => {
+        .catch(() => {
           this.$router.push({ name: "login" });
         });
     },
-    async userinfo() {
-      await axios({
+
+     userinfo() {
+      return axios({
         method: "get",
         url: "/info/country-currency",
         withCredentials: true,
@@ -253,8 +253,9 @@ export default defineComponent({
         }
       });
     },
-    async getwallettotals() {
-      await axios({
+
+     getwallettotals() {
+      return axios({
         method: "get",
         url: "/price/wallets/total/" + this.user.currency,
         withCredentials: true,
@@ -265,8 +266,9 @@ export default defineComponent({
         }
       });
     },
-    async getxmrprice() {
-      await axios({
+
+     getxmrprice() {
+      return axios({
         method: "get",
         url: "/xmr/price",
       }).then((response) => {
@@ -275,8 +277,9 @@ export default defineComponent({
         }
       });
     },
-    async getbchprice() {
-      await axios({
+
+     getbchprice() {
+      return axios({
         method: "get",
         url: "/bch/price",
       }).then((response) => {
@@ -285,8 +288,9 @@ export default defineComponent({
         }
       });
     },
-    async getbtcprice() {
-      await axios({
+
+     getbtcprice() {
+      return axios({
         method: "get",
         url: "/btc/price",
       }).then((response) => {
@@ -297,8 +301,8 @@ export default defineComponent({
     },
 
     //  Get balances for dropdowns
-    async getxmrbalance() {
-      await axios({
+     getxmrbalance() {
+      return axios({
         method: "get",
         url: "/xmr/balance",
         headers: authHeader(),
@@ -309,8 +313,8 @@ export default defineComponent({
       });
     },
 
-    async getbchbalance() {
-      await axios({
+     getbchbalance() {
+      return axios({
         method: "get",
         url: "/bch/balance",
         headers: authHeader(),
@@ -320,8 +324,9 @@ export default defineComponent({
         }
       });
     },
-    async getbtcbalance() {
-      await axios({
+
+     getbtcbalance() {
+      return axios({
         method: "get",
         url: "/btc/balance",
         headers: authHeader(),

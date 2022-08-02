@@ -1,3 +1,4 @@
+
 <template>
   <div class="bg-gray-300">
     <MainHeaderTop />
@@ -5,7 +6,7 @@
     <MainHeaderBottom />
 
     <div v-if="user">
-      <MainHeaderVendor v-show="user.user_admin == 1" />
+      <MainHeaderVendor v-show="user.user_admin === 1" />
     </div>
 
     <div class="container max-w-7xl mx-auto px-10 wrapper">
@@ -42,13 +43,13 @@
           </button>
         </div>
         <div class="mt-10 grid grid-cols-12 pb-20">
-          <div v-for="(item, index) in items" class="col-span-12 bg-white">
+          <div v-for="item in items" class="col-span-12 bg-white">
             <div
               class="grid grid-cols-12 shadow-md border-2 border-gray-200 rounded-md p-5"
             >
               <div class="col-span-2">
                 <img
-                  src="http://picsum.photos/100/100"
+                  src="https://picsum.photos/100/100"
                   alt="{{item.item_title}}"
                 />
               </div>
@@ -67,7 +68,7 @@
                   </div>
                   <div class="flex col-span-12 text-[14px] p-1">
                     Online Status:
-                    <div v-if="item.online == 0" class="text-red-500">
+                    <div v-if="item.online === 0" class="text-red-500">
                       offline
                     </div>
                     <div v-else class="text-green-500">online</div>
@@ -85,7 +86,7 @@
               </div>
               <div class="col-span-2">
                 <div class="mb-2">
-                  <div class="" v-if="item.online == 0">
+                  <div class="" v-if="item.online === 0">
                     <button
                       @click.prevent="putonline(item.uuid)"
                       class="py-2 px-4 shadow-md no-underline rounded-full text-white font-sans text-sm hover:text-white bg-gray-700 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2"
@@ -145,13 +146,25 @@ import axios from "axios";
 import { ref } from "vue";
 import { mapGetters } from "vuex";
 import { notify } from "@kyvg/vue3-notification";
-import { useRoute } from "vue-router";
 import authHeader from "../../services/auth.header";
 import MainHeaderTop from "../../layouts/headers/MainHeaderTop.vue";
 import MainHeaderMid from "../../layouts/headers/MainHeaderMid.vue";
 import MainHeaderBottom from "../../layouts/headers/MainHeaderBottom.vue";
 import MainHeaderVendor from "../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../layouts/footers/FooterMain.vue";
+
+
+/**
+ *
+ @typedef {Object} item.total_sold
+ @typedef {Object} item.view_count
+ @typedef {Object} t.category
+ @typedef {Object} t.confirmations
+ @typedef {Object} t.fee
+ @typedef {Object} t.commentxmr
+ @typedef {Object} t.txid
+ *
+ */
 
 export default defineComponent({
   name: "forsale",
@@ -169,6 +182,7 @@ export default defineComponent({
   },
   data() {
     return {
+      user: [],
       items: [],
       accept: ref(false),
     };
@@ -181,8 +195,8 @@ export default defineComponent({
       this.$router.push({ name: "edititem", params: { id: itemid } });
     },
 
-    async userstatus() {
-      await axios({
+     userstatus() {
+      return axios({
         method: "get",
         url: "/auth/whoami",
         withCredentials: true,
@@ -196,8 +210,8 @@ export default defineComponent({
       });
     },
     // gets the vendor items
-    async getvendoritems() {
-      await axios({
+     getvendoritems() {
+      return axios({
         method: "get",
         url: "/vendorcreate/itemsforsale",
         withCredentials: true,
@@ -209,8 +223,8 @@ export default defineComponent({
       });
     },
     // creates an item
-    async createanitem() {
-      await axios({
+     createanitem() {
+      return axios({
         method: "post",
         url: "/vendorcreateitem/create-item",
         withCredentials: true,
@@ -225,6 +239,7 @@ export default defineComponent({
         }
       })
              .catch((error) => {
+               console.log(error)
             notify({
               title: "Freeport Error",
               text: "Error posting information.",
@@ -233,8 +248,8 @@ export default defineComponent({
           });
     },
     // clones an item
-    async cloneitem(itemid) {
-      await axios({
+     cloneitem(itemid) {
+      return axios({
         method: "get",
         url: "/vendorcreate/clone-item/" + itemid,
         withCredentials: true,
@@ -249,17 +264,18 @@ export default defineComponent({
           });
         }
       })
-             .catch((error) => {
-            notify({
-              title: "Freeport Error",
-              text: "Error posting information.",
-              type: "error",
-            });
-          });
+     .catch((error) => {
+       console.log(error)
+    notify({
+      title: "Freeport Error",
+      text: "Error posting information.",
+      type: "error",
+    });
+  });
     },
     // deletes an item
-    async deleteitem(itemid) {
-      await axios({
+     deleteitem(itemid) {
+      return axios({
         method: "delete",
         url: "/vendorcreate/delete-item/" + itemid,
         withCredentials: true,
@@ -274,13 +290,14 @@ export default defineComponent({
           });
         }
       })
-             .catch((error) => {
-            notify({
-              title: "Freeport Error",
-              text: "Error posting information.",
-              type: "error",
-            });
-          });
+     .catch((error) => {
+       console.log(error)
+    notify({
+      title: "Freeport Error",
+      text: "Error posting information.",
+      type: "error",
+    });
+  });
     },
     // put item online
     async putonline(itemid) {
@@ -302,8 +319,8 @@ export default defineComponent({
       });
     },
     // put item offline
-    async putoffline(itemid) {
-      await axios({
+     putoffline(itemid) {
+      return axios({
         method: "get",
         url: "/vendororders/offline/" + itemid,
         withCredentials: true,

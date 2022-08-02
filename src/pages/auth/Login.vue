@@ -1,3 +1,4 @@
+
 <template>
   <HeaderPlain />
   <div class="max-w-7xl mx-auto">
@@ -79,7 +80,7 @@ import { defineComponent } from "vue";
 import axios from "axios";
 import { notify } from "@kyvg/vue3-notification";
 import useValidate from "@vuelidate/core";
-import { required, email, minLength, sameAs } from "@vuelidate/validators";
+import { required, minLength } from "@vuelidate/validators";
 import HeaderPlain from "../../layouts/headers/HeaderPlain.vue";
 import authHeader from "../../services/auth.header";
 
@@ -108,22 +109,23 @@ export default defineComponent({
     };
   },
   methods: {
-    async userstatus() {
-      await axios({
+     userstatus() {
+     return  axios({
         method: "get",
         url: "/auth/whoami",
         withCredentials: true,
         headers: authHeader(),
       })
+
         .then((response) => {
           if ((response.status = 200)) {
             this.$router.push({ name: "home" });
           }
         })
-        .catch((error) => {});
+        .catch(() => {});
     },
-    async sendLogin(payLoad: { username: string; password: string }) {
-      await axios({
+     sendLogin(payLoad: { username: string; password: string }) {
+      return axios({
         method: "post",
         url: "/auth/login",
         data: payLoad,
@@ -166,7 +168,6 @@ export default defineComponent({
         });
       } else {
         // if ANY fail validation
-
         notify({
           title: "Authorization",
           text: "Form success",

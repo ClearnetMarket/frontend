@@ -1,3 +1,4 @@
+
 <template>
   <MainHeaderTop />
   <MainHeaderMid />
@@ -17,7 +18,7 @@
 
         <form
           class="rounded-md pt-6 pb-8 mb-4 w-full"
-          @submit.prevent="CreateItem"
+          @submit.prevent="onSubmit"
         >
           <div class="">
             <textarea
@@ -62,12 +63,11 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import axios from "axios";
-import { ref } from "vue";
 import { mapGetters } from "vuex";
 import { useRoute } from "vue-router";
 import { notify } from "@kyvg/vue3-notification";
 import useValidate from "@vuelidate/core";
-import { required, email, minLength, sameAs } from "@vuelidate/validators";
+import { required, minLength } from "@vuelidate/validators";
 import authHeader from "../../services/auth.header";
 import MainHeaderTop from "../../layouts/headers/MainHeaderTop.vue";
 import MainHeaderMid from "../../layouts/headers/MainHeaderMid.vue";
@@ -89,7 +89,7 @@ export default defineComponent({
     return {
       v$: useValidate(),
       other_user: [],
-      other_user_uuid: "",
+      other_user_uuid: null,
       SendMsgForm: {
         msginfo: "",
       },
@@ -98,7 +98,6 @@ export default defineComponent({
   mounted() {
     const user_uuid_route = useRoute();
     this.other_user_uuid = user_uuid_route.params.uuid;
-    console.log(this.other_user_uuid);
     this.getotheruser();
   },
   computed: {
@@ -112,9 +111,8 @@ export default defineComponent({
     };
   },
   methods: {
-    async getotheruser() {
-      console.log(this.other_user_uuid);
-      await axios({
+     getotheruser() {
+      return axios({
         method: "get",
         url: "/info/user-info/" + this.other_user_uuid,
         withCredentials: true,
@@ -126,8 +124,8 @@ export default defineComponent({
       });
     },
 
-    async getmsgsofusers() {
-      await axios({
+     getmsgsofusers() {
+      return axios({
         method: "get",
         url: "/msg/count",
         withCredentials: true,
@@ -135,10 +133,12 @@ export default defineComponent({
         .then((response) => {
           this.userlist = response.data;
         })
-        .catch((error) => {});
+        .catch((error) => {
+          console.log(error)
+        });
     },
-    async getcountofusers() {
-      await axios({
+     getcountofusers() {
+      return axios({
         method: "get",
         url: "/msg/msgs/all",
         withCredentials: true,
@@ -146,14 +146,16 @@ export default defineComponent({
         .then((response) => {
           this.other_user_count = response.data.get_count;
         })
-        .catch((error) => {});
+        .catch((error) => {
+          console.log(error)
+        });
     },
-    async sendMessage(payLoad: {
+     sendMessage(payLoad: {
       order_uuid: string;
       user_two_uuid: string;
       body: string;
     }) {
-      await axios({
+      return axios({
         method: "post",
         url: "/msg/create",
         data: payLoad,
@@ -171,6 +173,7 @@ export default defineComponent({
           }
         })
         .catch((error) => {
+          console.log(error)
           notify({
             title: "Freeport Error",
             text: "Error posting information.",

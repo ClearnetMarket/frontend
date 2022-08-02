@@ -11,8 +11,8 @@
         <button
           class="flex py-2 px-4 shadow-md no-underline rounded-full text-white font-sans hover:text-white text-sm bg-zinc-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2"
         >
-          <div class="px-2">{{ vendor_orders_new }}</div>
-          <div class>New Orders</div>
+          <span class="px-2">{{ vendor_orders_new }}</span>
+          <span class>New Orders</span>
         </button>
       </div>
       <div v-else>
@@ -28,8 +28,8 @@
           <button
             class="flex py-2 px-4 shadow-md text-sm no-underline rounded-full bg-zinc-600 hover:bg-zinc-400 text-white font-sans hover:text-white focus:outline-none active:shadow-none mr-2"
           >
-            <div class="px-2">{{ vendor_orders_accepted }}</div>
-            <div class>Waiting on Shipment</div>
+            <span class="px-2">{{ vendor_orders_accepted }}</span>
+            <span class>Waiting on Shipment</span>
           </button>
         </router-link>
       </div>
@@ -48,8 +48,8 @@
           <button
             class="flex py-2 px-4 shadow-md no-underline rounded-full bg-zinc-600 hover:bg-zinc-400 hover:text-white text-white font-sans text-sm btn-primary focus:outline-none active:shadow-none mr-2"
           >
-            <div class="px-2">{{ vendor_orders_shipped }}</div>
-            <div class>Shipped</div>
+            <span class="px-2">{{ vendor_orders_shipped }}</span>
+            <span class>Shipped</span>
           </button>
         </router-link>
       </div>
@@ -68,8 +68,8 @@
           <button
             class="flex py-2 px-4 shadow-md no-underline rounded-full bg-zinc-600 hover:bg-zinc-400 hover:text-white text-white font-sans text-sm btn-primary focus:outline-none active:shadow-none mr-2"
           >
-            <div class="px-2">{{ vendor_orders_finalized }}</div>
-            <div class>Finalized</div>
+            <span class="px-2">{{ vendor_orders_finalized }}</span>
+            <span class>Finalized</span>
           </button>
         </router-link>
       </div>
@@ -88,8 +88,8 @@
           <button
             class="flex py-2 px-4 shadow-md no-underline rounded-full bg-zinc-600 hover:bg-zinc-400 hover:text-white text-white font-sans text-sm btn-primary focus:outline-none active:shadow-none mr-2"
           >
-            <div class="px-2">{{ vendor_orders_request_cancel }}</div>
-            <div class>Request Cancel</div>
+            <span class="px-2">{{ vendor_orders_request_cancel }}</span>
+            <span class>Request Cancel</span>
           </button>
         </router-link>
       </div>
@@ -136,13 +136,13 @@
                   </router-link>
                 </div>
                 <div class="col-span-12">
-                  <div v-if="order.digital_currency == 1">
+                  <div v-if="order.digital_currency === 1">
                     <span class="text-sm font-semibold text-orange-500"
                       >Bitcoin</span
                     >
                     {{ order.price_total_btc }} Price Total with shipping
                   </div>
-                  <div v-if="order.digital_currency == 2">
+                  <div v-if="order.digital_currency === 2">
                     <div class="">
                       <span class="text-sm font-semibold text-green-600"
                         >Bitcoin Cash</span
@@ -152,7 +152,7 @@
                       {{ order.price_total_bch }} Price Total with shipping
                     </div>
                   </div>
-                  <div v-if="order.digital_currency == 3">
+                  <div v-if="order.digital_currency === 3">
                     <span class="text-sm font-semibold text-orange-700"
                       >Monero</span
                     >
@@ -218,6 +218,22 @@ import MainHeaderBottom from "../../../layouts/headers/MainHeaderBottom.vue";
 import MainHeaderVendor from "../../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../../layouts/footers/FooterMain.vue";
 
+/**
+ *
+ @typedef {Object} order.price_total_xmr
+ @typedef {Object} order.digital_currency
+ @typedef {Object} order.shipping_price_btc
+ @typedef {Object} order.shipping_price_xmr
+ @typedef {Object} order.shipping_price_btc
+ @typedef {Object} order.price_total_bch
+ @typedef {Object} order.shipping_price_bch
+ @typedef {Object} order.quantity
+ @typedef {Object} order.customer_uuid
+ @typedef {Object} order.price_total_btc
+ @typedef {Object} order.price_total_btc
+ *
+ */
+
 export default defineComponent({
   name: "vendorordersnew",
 
@@ -234,14 +250,14 @@ export default defineComponent({
       date: Date.now(),
       tab: [],
       orders: [],
-      vendor_orders_new: "",
-      vendor_orders_accepted: "",
-      vendor_orders_shipped: "",
-      vendor_orders_finalized: "",
-      vendor_orders_finalized_early: "",
-      vendor_orders_request_cancel: "",
-      vendor_orders_cancelled: "",
-      vendor_orders_dispute: "",
+      vendor_orders_new: 0,
+      vendor_orders_accepted: 0,
+      vendor_orders_shipped: 0,
+      vendor_orders_finalized: 0,
+      vendor_orders_finalized_early: 0,
+      vendor_orders_request_cancel: 0,
+      vendor_orders_cancelled: 0,
+      vendor_orders_dispute: 0,
     };
   },
 
@@ -279,9 +295,9 @@ export default defineComponent({
       });
     },
     // accepts the new order
-    async acceptorder(uuid) {
-      console.log(uuid);
-      await axios({
+     acceptorder(uuid) {
+
+      return axios({
         method: "put",
         url: "/vendororders/new/accept/" + uuid,
         withCredentials: true,
@@ -299,8 +315,8 @@ export default defineComponent({
       });
     },
     // rejects the orders
-    async rejectorder(uuid) {
-      await axios({
+     rejectorder(uuid) {
+      return axios({
         method: "post",
         url: "/vendororders/new/reject/" + uuid,
         withCredentials: true,
@@ -317,8 +333,8 @@ export default defineComponent({
       });
     },
     // gets the count for the top bar
-    async getuserneworderscount() {
-      await axios({
+     getuserneworderscount() {
+      return axios({
         method: "get",
         url: "/vendororders/count",
         withCredentials: true,
@@ -339,8 +355,8 @@ export default defineComponent({
       });
     },
     relativeDate(value) {
-      var d = value;
-      var e = new Date(d).valueOf();
+
+      let e = new Date(value).valueOf();
       return formatDistance(e, new Date());
     },
   },

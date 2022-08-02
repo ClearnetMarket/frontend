@@ -1,9 +1,10 @@
+
 <template>
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
   <div v-if="user">
-    <MainHeaderVendor v-show="user.user_admin == 1" />
+    <MainHeaderVendor v-show="user.user_admin === 1" />
   </div>
   <div class="max-w-7xl mx-auto mb-20 wrapper px-10">
     <div class="grid grid-cols-1 w-full gap-4">
@@ -78,13 +79,12 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import axios from "axios";
-import authHeader from "../../services/auth.header";
 import MainHeaderTop from "../../layouts/headers/MainHeaderTop.vue";
 import MainHeaderMid from "../../layouts/headers/MainHeaderMid.vue";
 import MainHeaderBottom from "../../layouts/headers/MainHeaderBottom.vue";
 import MainHeaderVendor from "../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../layouts/footers/FooterMain.vue";
+import {mapGetters} from "vuex";
 
 export default defineComponent({
   name: "categoryhome",
@@ -96,9 +96,14 @@ export default defineComponent({
     MainFooter,
    
   },
-
+  computed: {
+    ...mapGetters(["user"]),
+  },
   data() {
-    return {};
+    return {
+      user: null
+    };
+
   },
   mounted() {},
   methods: {},

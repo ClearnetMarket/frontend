@@ -1,3 +1,4 @@
+
 <template>
   <MainHeaderTop />
   <MainHeaderMid />
@@ -33,7 +34,7 @@
     <div class="flex flex-row mx-10 justify-center mt-20">
       Address: {{ bch_address }}
 
-      <img class="w-48 h-48" src="" />
+      <img class="w-48 h-48" alt=""  src="" />
     </div>
   </div>
   <MainFooter />
@@ -42,14 +43,13 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import axios from "axios";
-import { ref } from "vue";
 import { mapGetters } from "vuex";
 import MainHeaderTop from "../../../layouts/headers/MainHeaderTop.vue";
 import MainHeaderMid from "../../../layouts/headers/MainHeaderMid.vue";
 import MainHeaderBottom from "../../../layouts/headers/MainHeaderBottom.vue";
 import MainHeaderVendor from "../../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../../layouts/footers/FooterMain.vue";
-import authHeader from "../../../services/auth.header.ts";
+import authHeader from "../../../services/auth.header";
 
 export default defineComponent({
   name: "bchrecieve",
@@ -74,8 +74,8 @@ export default defineComponent({
   },
 
   methods: {
-    async userstatus() {
-      await axios({
+     userstatus() {
+      return axios({
         method: "get",
         url: "/auth/whoami",
         withCredentials: true,
@@ -89,8 +89,8 @@ export default defineComponent({
             console.log(error)
         });
     },
-    async getbchaddress() {
-      await axios({
+     getbchaddress() {
+      return axios({
         method: "get",
         url: "/bch/receive",
         withCredentials: true,
@@ -98,9 +98,7 @@ export default defineComponent({
       })
         .then((response) => {
           if ((response.status = 200)) {
-
             this.bch_address = response.data.bch_address;
-        
           }
         })
         .catch((error) => {
@@ -111,4 +109,6 @@ export default defineComponent({
 });
 </script>
 
-<style type="ts" scoped></style>
+<style type="ts" scoped>
+
+</style>

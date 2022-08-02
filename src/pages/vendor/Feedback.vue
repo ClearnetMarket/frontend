@@ -1,3 +1,4 @@
+
 <template>
   <div class="bg-gray-300">
     <MainHeaderTop />
@@ -223,8 +224,7 @@ import { defineComponent } from "vue";
 import axios from "axios";
 import { mapGetters } from "vuex";
 import { formatDistance } from "date-fns";
-import { useRouter, useRoute } from "vue-router";
-import { notify } from "@kyvg/vue3-notification";
+import {  useRoute } from "vue-router";
 import MainHeaderTop from "../../layouts/headers/MainHeaderTop.vue";
 import MainHeaderMid from "../../layouts/headers/MainHeaderMid.vue";
 import MainHeaderBottom from "../../layouts/headers/MainHeaderBottom.vue";
@@ -232,6 +232,19 @@ import MainHeaderVendor from "../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../layouts/footers/FooterMain.vue";
 import authHeader from "../../services/auth.header";
 import StarRating from "../../components/star_rating/Star.vue";
+
+
+/**
+ *
+ @typedef {Object} review.customer_name
+ @typedef {Object} review.item_rating
+ @typedef {Object} review.vendor_rating
+ @typedef {Object} user.user_name
+
+ *
+ */
+
+
 
 export default defineComponent({
   name: "Feedback",
@@ -252,23 +265,23 @@ export default defineComponent({
       date: Date.now(),
       tab: [],
       orders: [],
-      vendor_reviews_total: "",
-      vendor_reviews_percent_one: "",
-      vendor_reviews_percent_two: "",
-      vendor_reviews_percent_three: "",
-      vendor_reviews_percent_four: "",
-      vendor_reviews_percent_five: "",
-      vendor_reviews_percent_six: "",
-      vendor_reviews_percent_seven: "",
-      vendor_reviews_percent_eight: "",
-      vendor_reviews_percent_nine: "",
-      vendor_reviews_percent_ten: "",
+      vendorreviews: [],
+      vendor_reviews_total: 0,
+      vendor_reviews_percent_one: 0,
+      vendor_reviews_percent_two: 0,
+      vendor_reviews_percent_three: 0,
+      vendor_reviews_percent_four: 0,
+      vendor_reviews_percent_five: 0,
+      vendor_reviews_percent_six: 0,
+      vendor_reviews_percent_seven: 0,
+      vendor_reviews_percent_eight: 0,
+      vendor_reviews_percent_nine: 0,
+      vendor_reviews_percent_ten: 0,
     };
   },
   mounted() {
     const user_uuid_route = useRoute();
     this.user_id = user_uuid_route.params.uuid;
-    console.log(this.user_id);
     this.getratings();
     this.deleteordernotice();
   },
@@ -276,13 +289,12 @@ export default defineComponent({
   methods: {
     // converts the time
     relativeDate(value) {
-      var d = value;
-      var e = new Date(d).valueOf();
+      let e = new Date(value).valueOf();
       return formatDistance(e, new Date());
     },
     // deletes feeeback notification
-    async deleteordernotice() {
-      await axios({
+     deleteordernotice() {
+      return axios({
         method: "delete",
         url: "/vendor/new-feedback-count/markasread",
         withCredentials: true,
@@ -294,8 +306,8 @@ export default defineComponent({
       });
     },
     // gets the vendor reviews
-    async getvendorreviews() {
-      await axios({
+     getvendorreviews() {
+      return axios({
         method: "get",
         url: "/vendor/vendor-feedback/" + this.user_id,
         withCredentials: true,
@@ -308,11 +320,13 @@ export default defineComponent({
             }
           }
         })
-        .catch((error) => {});
+        .catch((error) => {
+          console.log(error)
+        });
     },
     // gets the overall ratings on sidebar
-    async getratings() {
-      await axios({
+     getratings() {
+      return axios({
         method: "get",
         url: "/vendor/all-feedback/" + this.user_id,
         withCredentials: true,
@@ -332,7 +346,9 @@ export default defineComponent({
             this.vendor_reviews_percent_ten = response.data.feedback_ten;
           }
         })
-        .catch((error) => {});
+        .catch((error) => {
+          console.log(error)
+        });
     },
   },
 });

@@ -1,3 +1,4 @@
+
 <template>
   <MainHeaderTop />
   <MainHeaderMid />
@@ -66,7 +67,7 @@
             of your store.</label
           >
           <input
-            v-model="wallet.xmr_decscription"
+            v-model="wallet.xmr_desccription"
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="username"
             type="text"
@@ -135,17 +136,18 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import axios from "axios";
-import { ref } from "vue";
 import { mapGetters } from "vuex";
 import { notify } from "@kyvg/vue3-notification";
 import useValidate from "@vuelidate/core";
-import { required, email, minLength, sameAs } from "@vuelidate/validators";
+import { required, minLength } from "@vuelidate/validators";
 import MainHeaderTop from "../../../layouts/headers/MainHeaderTop.vue";
 import MainHeaderMid from "../../../layouts/headers/MainHeaderMid.vue";
 import MainHeaderBottom from "../../../layouts/headers/MainHeaderBottom.vue";
 import MainHeaderVendor from "../../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../../layouts/footers/FooterMain.vue";
-import authHeader from "../../../services/auth.header.ts";
+import authHeader from "../../../services/auth.header.js";
+
+
 
 export default defineComponent({
   name: "xmrsell",
@@ -165,7 +167,7 @@ export default defineComponent({
       v$: useValidate(),
       wallet: {
         xmr_address: "",
-        xmr_decscription: "",
+        xmr_desccription: "",
         xmr_amount: "",
         pin: "",
       },
@@ -185,23 +187,29 @@ export default defineComponent({
   },
 
   methods: {
-    async userstatus() {
-      await axios({
+     userstatus() {
+      return axios({
         method: "get",
         url: "/auth/whoami",
         withCredentials: true,
         headers: authHeader(),
       })
-        .then((response) => {})
-        .catch((error) => { this.$router.push("/login") });
+        .then((response) => {
+          console.log(response)
+
+        })
+        .catch((error) => {
+          console.log(error)
+          this.$router.push("/login")
+        });
     },
-    async SendCoin(payLoad: {
+     SendCoin(payLoad: {
       xmr_address: string;
-      xmr_decscription: string;
+       xmr_desccription: string;
       xmr_amount: string;
       pin: string;
     }) {
-      await axios({
+      return axios({
         method: "post",
         url: "/xmr/send",
         data: payLoad,
@@ -224,6 +232,7 @@ export default defineComponent({
           }
         })
         .catch((error) => {
+          console.log(error)
           notify({
             title: "Freeport Error",
             text: "Error With Sending Money",
@@ -231,10 +240,10 @@ export default defineComponent({
           });
         });
     },
-    async onSubmit() {
+     onSubmit() {
       const payLoad = {
         xmr_address: this.wallet.xmr_address,
-        xmr_decscription: this.wallet.xmr_decscription,
+        xmr_desccription: this.wallet.xmr_decscription,
         xmr_amount: this.wallet.xmr_amount,
         pin: this.wallet.pin,
       }
@@ -251,7 +260,7 @@ export default defineComponent({
           text: "Success Sending Coin. It will be sent shortly.",
           type: "success",
         });
-      await this.SendCoin(payLoad)
+       this.SendCoin(payLoad)
       }
     },
   },

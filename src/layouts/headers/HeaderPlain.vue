@@ -46,7 +46,6 @@ export default defineComponent({
       localStorage.clear();
       this.$store.dispatch('user', null);
 
-
     },
   },
 });

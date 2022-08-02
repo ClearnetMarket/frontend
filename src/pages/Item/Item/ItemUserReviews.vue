@@ -1,3 +1,4 @@
+
 <template>
   <div class="max-w-7xl mx-auto px-10 pb-36 mt-20">
     <div class="grid grid-cols-1 text-[20px] font-semibold text-gray-600 pb-4">
@@ -198,6 +199,8 @@ import { defineComponent } from "vue";
 import axios from "axios";
 import { formatDistance } from "date-fns";
 import StarRating from "../../../components/star_rating/Star.vue";
+
+
 export default defineComponent({
   name: "ItemUserReviews",
   props: ["vendorreviews", "vendoruuid"],
@@ -210,17 +213,17 @@ export default defineComponent({
       date: Date.now(),
       tab: [],
       orders: [],
-      vendor_reviews_total: "",
-      vendor_reviews_percent_one: "",
-      vendor_reviews_percent_two: "",
-      vendor_reviews_percent_three: "",
-      vendor_reviews_percent_four: "",
-      vendor_reviews_percent_five: "",
-      vendor_reviews_percent_six: "",
-      vendor_reviews_percent_seven: "",
-      vendor_reviews_percent_eight: "",
-      vendor_reviews_percent_nine: "",
-      vendor_reviews_percent_ten: "",
+      vendor_reviews_total: 0,
+      vendor_reviews_percent_one: null,
+      vendor_reviews_percent_two: null,
+      vendor_reviews_percent_three: null,
+      vendor_reviews_percent_four: null,
+      vendor_reviews_percent_five: null,
+      vendor_reviews_percent_six: null,
+      vendor_reviews_percent_seven: null,
+      vendor_reviews_percent_eight: null,
+      vendor_reviews_percent_nine: null,
+      vendor_reviews_percent_ten: null,
     };
   },
   mounted() {
@@ -229,13 +232,12 @@ export default defineComponent({
 
   methods: {
     relativeDate(value) {
-      var d = value;
-      var e = new Date(d).valueOf();
+      let e = new Date(value).valueOf();
       return formatDistance(e, new Date());
     },
 
-    async getratings() {
-      await axios({
+     getratings() {
+      return axios({
         method: "get",
         url: "/vendor/all-feedback/" + this.vendoruuid,
         withCredentials: true,
@@ -255,7 +257,9 @@ export default defineComponent({
             this.vendor_reviews_percent_ten = response.data.feedback_ten;
           }
         })
-        .catch((error) => {});
+        .catch((error) => {
+          console.log(error)
+        });
     },
   },
 });

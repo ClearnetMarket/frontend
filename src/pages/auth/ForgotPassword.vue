@@ -1,9 +1,7 @@
+
 <template>
   <HeaderPlain />
 
-  <div v-if="user">
-    <MainHeaderVendor v-show="user.user_admin == 1" />
-  </div>
 
   <div class="container max-w-7xl mx-auto px-10">
     <div class="mt-5 mb-5">
@@ -106,12 +104,12 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import axios from "axios";
-import { ref } from "vue";
+
 import { notify } from "@kyvg/vue3-notification";
 import useValidate from "@vuelidate/core";
-import { required, email, minLength, sameAs } from "@vuelidate/validators";
-import authHeader from "../../services/auth.header";
+import { required } from "@vuelidate/validators";
 import HeaderPlain from "../../layouts/headers/HeaderPlain.vue";
+import {mapGetters} from "vuex";
 
 
 export default defineComponent({
@@ -144,6 +142,9 @@ export default defineComponent({
       },
     }
   },
+  computed: {
+    ...mapGetters(["user"]),
+  },
   methods: {
     sendWordRequest(payLoad: {
       word0: string;
@@ -168,7 +169,7 @@ export default defineComponent({
             this.$router.push({ name: "login" });
           }
         })
-        .catch((error) => {
+        .catch(() => {
           notify({
             title: "Authorization",
             text: "Incorrect Credentials",

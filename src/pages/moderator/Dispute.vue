@@ -1,3 +1,4 @@
+
 <template>
   <MainHeaderTop />
   <MainHeaderMid />
@@ -40,13 +41,13 @@
               </div>
               <div class="col-span-3">
                 <div class="">Total</div>
-                <div v-if="order.digital_currency == 1">
+                <div v-if="order.digital_currency === 1">
                   {{ order.price_total_btc }} BTC
                 </div>
-                <div v-if="order.digital_currency == 2">
+                <div v-if="order.digital_currency === 2">
                   {{ order.price_total_bch }} BCH
                 </div>
-                <div v-if="order.digital_currency == 3">
+                <div v-if="order.digital_currency === 3">
                   {{ order.price_total_xmr }} XMR
                 </div>
               </div>
@@ -81,7 +82,7 @@
               </div>
             </div>
             <div class="col-span-12">
-              <div class="" v-if="order.overall_status == 8">
+              <div class="" v-if="order.overall_status === 8">
                 <form
                   class="rounded-md pt-6 pb-8 mb-4 w-full"
                   @submit.prevent="sendMessagePayload"
@@ -154,6 +155,15 @@ import MainHeaderBottom from "../../layouts/headers/MainHeaderBottom.vue";
 import MainHeaderVendor from "../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../layouts/footers/FooterMain.vue";
 
+/**
+ *
+ @typedef {Object} comment.mod_uuid
+ @typedef {Object} order.date_shipped
+ @typedef {Object} order.moderator_uuid
+
+ *
+ */
+
 export default defineComponent({
   name: "Dispute",
 
@@ -168,8 +178,8 @@ export default defineComponent({
   data() {
     return {
       mainpostcomments: [],
-      order_id: "",
-      order: "",
+      order_id: null,
+      order: null,
       postid: "",
       SendMsgForm: {
         msginfo: "",
@@ -178,21 +188,20 @@ export default defineComponent({
   },
 
   mounted() {
-    const order_id_route = useRoute();
-    const order_id = order_id_route.params.uuid;
-    this.order_id = order_id;
+    let order_id_route = useRoute();
+    this.order_id = order_id_route.params.uuid;
     this.getuserorder();
   },
 
   methods: {
     relativeDate(value) {
-      var d = value;
-      var e = new Date(d).valueOf();
+
+      let e = new Date(value).valueOf();
       return formatDistance(e, new Date());
     },
     // get the user order
-    getuserorder: async function () {
-      await axios({
+    getuserorder() {
+      return axios({
         method: "get",
         url: `/orders/${this.order_id}`,
         withCredentials: true,
@@ -206,8 +215,8 @@ export default defineComponent({
       });
     },
     // get the post comments
-    async getmainpostcomments() {
-      await axios({
+     getmainpostcomments() {
+      return axios({
         method: "get",
         url: "/msg/main/comment/" + this.postid,
         withCredentials: true,
@@ -217,11 +226,13 @@ export default defineComponent({
           this.mainpostcomments = response.data;
           console.log(this.mainpostcomments);
         })
-        .catch((error) => {});
+        .catch((error) => {
+          console.log(error)
+        });
     },
     // comments on the post
-    async sendMessageComment(payLoad: { textbody: string }) {
-      await axios({
+     sendMessageComment(payLoad: { textbody: string }) {
+      return axios({
         method: "post",
         url: "/msg/create/comment/" + this.postid,
         data: payLoad,
@@ -239,6 +250,7 @@ export default defineComponent({
           }
         })
     .catch((error) => {
+      console.log(error)
             notify({
               title: "Freeport Error",
               text: "Error posting information.",

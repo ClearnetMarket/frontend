@@ -1,10 +1,11 @@
+
 <template>
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
 
   <div v-if="user">
-    <MainHeaderVendor v-show="user.user_admin == 1" />
+    <MainHeaderVendor v-show="user.user_admin === 1" />
   </div>
   <!-- Top Stuff-->
   <div class="container h-screen max-w-7xl mx-auto px-10">
@@ -84,6 +85,7 @@
               v-if="v$.ChangeAddressForm.address.$error"
               class="text-red-600 text-center"
             >
+                     </span>
         </div>
         <div class="col-span-12">
           <input
@@ -103,10 +105,11 @@
             type="text"
             placeholder="City"
           />
-                               <span
+           <span
               v-if="v$.ChangeAddressForm.city.$error"
               class="text-red-600 text-center"
             >
+        </span>
         </div>
         <div class="col-span-4">
           <label class="block text-gray-700 text-sm font-bold mb-2"
@@ -119,10 +122,11 @@
             type="text"
             placeholder="State or Provence"
           />
-                                         <span
+         <span
               v-if="v$.ChangeAddressForm.stateorprovence.$error"
               class="text-red-600 text-center"
             >
+      </span>
         </div>
         <div class="col-span-4">
           <label class="block text-gray-700 text-sm font-bold mb-2"
@@ -139,6 +143,7 @@
               v-if="v$.ChangeAddressForm.zip.$error"
               class="text-red-600 text-center"
             >
+        </span>
         </div>
         <div class="col-span-12">
           <label class="block text-gray-700 text-sm font-bold mb-2"
@@ -162,9 +167,7 @@
         </div>
       </div>
     </form>
-
     <!-- END Top Stuff-->
-
     <div class="grid sm:grid-cols-1 md:grid-cols-3 gap-5 my-3"></div>
   </div>
   <!-- END container-->
@@ -174,11 +177,10 @@
 <script lang="ts">
 import axios from "axios";
 import { defineComponent } from "vue";
-import { ref } from "vue";
 import { notify } from "@kyvg/vue3-notification";
 import { mapGetters } from "vuex";
 import useValidate from "@vuelidate/core";
-import { required, email, minLength, sameAs } from "@vuelidate/validators";
+import { required,  minLength } from "@vuelidate/validators";
 import MainHeaderTop from "../../../layouts/headers/MainHeaderTop.vue";
 import MainHeaderMid from "../../../layouts/headers/MainHeaderMid.vue";
 import MainHeaderBottom from "../../../layouts/headers/MainHeaderBottom.vue";
@@ -199,9 +201,11 @@ export default defineComponent({
 
   data() {
     return {
-              v$: useValidate(),
+      countryList: [],
+      user: [],
+    v$: useValidate(),
       ChangeAddressForm: {
-        countryList: "",
+        countryList: [],
         address_name: "",
         country: "",
         address: "",
@@ -233,7 +237,7 @@ export default defineComponent({
   },
 
   methods: {
-    async addusershipping(payLoad: {
+     addusershipping(payLoad: {
       country: string;
       address: string;
       address_name: string;
@@ -243,7 +247,7 @@ export default defineComponent({
       zip: string;
       message: string;
     }) {
-      await axios({
+      return axios({
         method: "put",
         url: "/info/defaultaddress",
         data: payLoad,
@@ -260,8 +264,8 @@ export default defineComponent({
         }
       });
     },
-    async getcurrentshipping() {
-      await axios({
+     getcurrentshipping() {
+      return axios({
         method: "get",
         url: "/info/getdefaultaddress",
         withCredentials: true,
@@ -282,14 +286,14 @@ export default defineComponent({
       });
     },
 
-    async getCountryList() {
+     getCountryList() {
       const path = "/auth/query/country";
-      await axios
+      return axios
         .get(path, { withCredentials: true })
         .then((response) => {
           this.countryList = response.data;
         })
-        .catch((error) => {});
+
     },
 
      onSubmit() {
@@ -322,4 +326,4 @@ export default defineComponent({
 });
 </script>
 
-<style type="ts" scoped></style>
+

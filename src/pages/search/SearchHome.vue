@@ -1,3 +1,4 @@
+
 <template>
   <MainHeaderTop />
   <MainHeaderMid />
@@ -29,7 +30,6 @@
          <div v-for="(f, index) in searchresults">
          <Searchitems :item='f' :selected-index='index' />
          </div>
-   
     </div>
   </div>
   </div>
@@ -39,7 +39,6 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import axios from "axios";
-import { useRouter, useRoute } from "vue-router";
 import authHeader from "../../services/auth.header";
 import MainHeaderTop from "../../layouts/headers/MainHeaderTop.vue";
 import MainHeaderMid from "../../layouts/headers/MainHeaderMid.vue";
@@ -63,14 +62,13 @@ export default defineComponent({
 
   data() {
     return {
-      searchresults:"",
-      searchresultscount:"",
+      searchresults: [],
+      searchresultscount:0,
       searchstring: "",
     };
   },
     watch: {
     $route() {
-  
     this.main_search();
     },
   },
@@ -85,9 +83,9 @@ export default defineComponent({
         method: "get",
         url: "/search/query/"  + this.searchstring,
         headers: authHeader(),
-      }).then((response) => {
-       this.searchresults = response.data
-
+      })
+      .then((response) => {
+        this.searchresults = response.data
       });
     },
      main_search_count() {
@@ -95,9 +93,9 @@ export default defineComponent({
         method: "get",
         url: "/search/query/"  + this.searchstring + "/count",
         headers: authHeader(),
-      }).then((response) => {
-       this.searchresultscount = response.data.count
-
+      })
+      .then((response) => {
+        this.searchresultscount = response.data.count
       });
     },
   },

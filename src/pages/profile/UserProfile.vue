@@ -1,3 +1,4 @@
+
 <template>
   <div class="bg-gray-300">
     <MainHeaderTop />
@@ -33,7 +34,7 @@
               </div>
               <div class="col-span-3"></div>
 
-              <div v-if="user.admin_role == 1" class="col-span-12">
+              <div v-if="user.admin_role === 1" class="col-span-12">
                 <div class="grid grid-cols-12">
                   <div class="col-span-6 text-gray-500">
                     Selling From: {{ country }}
@@ -49,7 +50,7 @@
           <div class="grid grid-cols-12 gap-4 text-gray-700 pb-36">
             <div class="col-span-4 p-2 rounded bg-white shadow-md">
               <div class="flex text-[18px]">All User Reviews</div>
-              <div v-if="user_reviews_total == 0">
+              <div v-if="user_reviews_total === 0">
                 User does not have any reviews right now ...
               </div>
               <div v-else>
@@ -256,9 +257,8 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import axios from "axios";
-import { notify } from "@kyvg/vue3-notification";
 import { formatDistance } from "date-fns";
-import { useRouter, useRoute } from "vue-router";
+import {  useRoute } from "vue-router";
 import StarRating from "../../components/star_rating/Star.vue";
 import authHeader from "../../services/auth.header";
 import MainHeaderTop from "../../layouts/headers/MainHeaderTop.vue";
@@ -277,28 +277,35 @@ export default defineComponent({
     MainFooter,
     StarRating,
   },
-
+    props: {
+      orders: Array,
+      user: Object,
+      user_stats: Object,
+      userreviews: Array,
+      user_reviews_total: {
+        type: Number,
+        default: 0
+      },
+      user_reviews_percent_one: {
+        type: Number,
+        default: 0
+      },
+      user_reviews_percent_two: String,
+      user_reviews_percent_three: String,
+      user_reviews_percent_four: String,
+      user_reviews_percent_five: String,
+      user_reviews_percent_six: String,
+      user_reviews_percent_seven: String,
+      user_reviews_percent_eight: String,
+      user_reviews_percent_nine: String,
+      user_reviews_percent_ten: String,
+      country: String,
+      currency: String,
+    },
   data() {
     return {
       page_loaded: false,
       date: Date.now(),
-      tab: [],
-      orders: [],
-      user: [],
-      user_stats: [],
-      country: "",
-      currency: "",
-      user_reviews_total: "",
-      user_reviews_percent_one: "",
-      user_reviews_percent_two: "",
-      user_reviews_percent_three: "",
-      user_reviews_percent_four: "",
-      user_reviews_percent_five: "",
-      user_reviews_percent_six: "",
-      user_reviews_percent_seven: "",
-      user_reviews_percent_eight: "",
-      user_reviews_percent_nine: "",
-      use_reviews_percent_ten: "",
     };
   },
   mounted() {
@@ -312,12 +319,11 @@ export default defineComponent({
   },
   methods: {
     relativeDate(value) {
-      var d = value;
-      var e = new Date(d).valueOf();
+      let e = new Date(value).valueOf();
       return formatDistance(e, new Date());
     },
-    async getuser() {
-      await axios({
+     getuser() {
+      return axios({
         method: "get",
         url: "/info/user-info/" + this.user_uuid,
         withCredentials: true,
@@ -325,12 +331,20 @@ export default defineComponent({
       }).then((response) => {
         if ((response.status = 200)) {
           this.user = response.data;
+          this.user.profileimage = response.data.profileimage;
+          this.user.display_name = response.data.display_name;
+          this.user.member_since = response.data.member_since;
+          this.user.bio = response.data.bio;
+          this.user.admin_role = response.data.admin_role;
+
+          this.user.vendor_name = response.data.vendor_name;
+          this.user.customer_rating = response.data.customer_rating;
           this.page_loaded = true;
         }
       })
     },
-    async getuserstats() {
-      await axios({
+     getuserstats() {
+      return axios({
         method: "get",
         url: "/info/user-stats/" + this.user_uuid,
         withCredentials: true,
@@ -338,11 +352,12 @@ export default defineComponent({
       }).then((response) => {
         if ((response.status = 200)) {
           this.user_stats = response.data;
+          this.user_stats.total_items_bought = response.data.total_items_bought;
         }
       });
     },
-    async getusercountryandcurrency() {
-      await axios({
+     getusercountryandcurrency() {
+      return axios({
         method: "get",
         url: "/info/country-currency",
         withCredentials: true,
@@ -356,8 +371,8 @@ export default defineComponent({
         }
       });
     },
-    async getreviews() {
-      await axios({
+     getreviews() {
+      return axios({
         method: "get",
         url: "/info/user-feedback/" + this.user_uuid,
         withCredentials: true,
@@ -370,10 +385,10 @@ export default defineComponent({
             }
           }
         })
-        .catch((error) => {});
+        .catch(() => {});
     },
-    async getratings() {
-      await axios({
+     getratings() {
+      return axios({
         method: "get",
         url: "/info/user-feedback-stats/" + this.user_uuid,
         withCredentials: true,
@@ -393,10 +408,10 @@ export default defineComponent({
             this.user_reviews_percent_ten = response.data.feedback_ten;
           }
         })
-        .catch((error) => {});
+        .catch(() => {});
     },
     getitemname(order_uuid) {
-      axios({
+      return axios({
         method: "get",
         url: "/item/info/" + order_uuid,
       }).then((response) => {

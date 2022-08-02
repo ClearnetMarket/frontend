@@ -1,3 +1,4 @@
+
 <template>
   <div class="bg-gray-300">
   <MainHeaderTop />
@@ -12,8 +13,8 @@
           <button
             class="flex py-2 px-4 shadow-md no-underline rounded-full text-white font-sans hover:text-white text-sm bg-orange-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2"
           >
-            <div class="px-2">{{ vendor_orders_new }}</div>
-            <div class>New Orders</div>
+            <span class="px-2">{{ vendor_orders_new }}</span>
+            <span class>New Orders</span>
           </button>
         </router-link>
       </div>
@@ -32,8 +33,8 @@
           <button
             class="flex py-2 px-4 shadow-md text-sm no-underline rounded-full bg-orange-600 hover:bg-zinc-400 text-white font-sans hover:text-white focus:outline-none active:shadow-none mr-2"
           >
-            <div class="px-2">{{ vendor_orders_accepted }}</div>
-            <div class>Waiting on Shipment</div>
+            <span class="px-2">{{ vendor_orders_accepted }}</span>
+            <span class>Waiting on Shipment</span>
           </button>
         </router-link>
       </div>
@@ -52,8 +53,8 @@
           <button
             class="flex py-2 px-4 shadow-md no-underline rounded-full bg-orange-600 hover:bg-zinc-400 hover:text-white text-white font-sans text-sm btn-primary focus:outline-none active:shadow-none mr-2"
           >
-            <div class="px-2">{{ vendor_orders_shipped }}</div>
-            <div class>Shipped</div>
+            <span class="px-2">{{ vendor_orders_shipped }}</span>
+            <span class>Shipped</span>
           </button>
         </router-link>
       </div>
@@ -72,8 +73,8 @@
           <button
             class="flex py-2 px-4 shadow-md no-underline rounded-full bg-orange-600 hover:bg-zinc-400 hover:text-white text-white font-sans text-sm btn-primary focus:outline-none active:shadow-none mr-2"
           >
-            <div class="px-2">{{ vendor_orders_finalized }}</div>
-            <div class>Finalized</div>
+            <span class="px-2">{{ vendor_orders_finalized }}</span>
+            <span class>Finalized</span>
           </button>
         </router-link>
       </div>
@@ -92,8 +93,8 @@
           <button
             class="flex py-2 px-4 shadow-md no-underline rounded-full bg-orange-600 hover:bg-zinc-400 hover:text-white text-white font-sans text-sm btn-primary focus:outline-none active:shadow-none mr-2"
           >
-            <div class="px-2">{{ vendor_orders_request_cancel }}</div>
-            <div class>Request Cancel</div>
+            <span class="px-2">{{ vendor_orders_request_cancel }}</span>
+            <span class>Request Cancel</span>
           </button>
         </router-link>
       </div>
@@ -129,14 +130,14 @@
             <button
               class="bg-green-600 m-2 hover:bg-green-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
               type="button"
-              @click="logout()"
+              @click="getuserneworderscount()"
             >
               Accept
             </button>
             <button
               class="bg-red-600 m-2 hover:bg-red-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
               type="button"
-              @click="logout()"
+              @click="getuserneworderscount()"
             >
               Reject
             </button>
@@ -153,13 +154,13 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import axios from "axios";
-import { notify } from "@kyvg/vue3-notification";
 import authHeader from "../../../services/auth.header";
 import MainHeaderTop from "../../../layouts/headers/MainHeaderTop.vue";
 import MainHeaderMid from "../../../layouts/headers/MainHeaderMid.vue";
 import MainHeaderBottom from "../../../layouts/headers/MainHeaderBottom.vue";
 import MainHeaderVendor from "../../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../../layouts/footers/FooterMain.vue";
+import {formatDistance} from "date-fns";
 
 export default defineComponent({
   name: "userorders",
@@ -174,14 +175,15 @@ export default defineComponent({
 
   data() {
     return {
-      vendor_orders_new: "",
-      vendor_orders_accepted: "",
-      vendor_orders_shipped: "",
-      vendor_orders_finalized: "",
-      vendor_orders_finalized_early: "",
-      vendor_orders_request_cancel: "",
-      vendor_orders_cancelled: "",
-      vendor_orders_dispute: "",
+      orders: [],
+      vendor_orders_new: 0,
+      vendor_orders_accepted: 0,
+      vendor_orders_shipped: 0,
+      vendor_orders_finalized: 0,
+      vendor_orders_finalized_early: 0,
+      vendor_orders_request_cancel: 0,
+      vendor_orders_cancelled: 0,
+      vendor_orders_dispute: 0,
     };
   },
 
@@ -192,8 +194,8 @@ export default defineComponent({
 
   methods: {
     // gets the count of orders for top bars
-    async getuserneworderscount() {
-      await axios({
+     getuserneworderscount() {
+      return axios({
         method: "get",
         url: "/vendororders/count",
         withCredentials: true,
@@ -212,8 +214,8 @@ export default defineComponent({
       });
     },
     // delete the order notices
-    async deleteordernotice() {
-      await axios({
+     deleteordernotice() {
+      return axios({
         method: "delete",
         url: "/vendor/new-orders-count/markasread" ,
         withCredentials: true,
@@ -224,7 +226,11 @@ export default defineComponent({
         }
       });
     },
-
+    // date conversion
+    relativeDate(value) {
+      let e = new Date(value).valueOf();
+      return formatDistance(e, new Date());
+    },
   },
 });
 </script>

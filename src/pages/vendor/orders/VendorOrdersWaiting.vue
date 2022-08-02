@@ -12,8 +12,8 @@
           <button
             class="flex py-2 px-4 shadow-md no-underline rounded-full text-white font-sans hover:text-white text-sm bg-zinc-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2"
           >
-            <div class="px-2">{{ vendor_orders_new }}</div>
-            <div class>New Orders</div>
+            <span class="px-2">{{ vendor_orders_new }}</span>
+            <span class>New Orders</span>
           </button>
         </router-link>
       </div>
@@ -32,8 +32,8 @@
           <button
             class="flex py-2 px-4 shadow-md text-sm no-underline rounded-full bg-zinc-600 hover:bg-zinc-400 text-white font-sans hover:text-white focus:outline-none active:shadow-none mr-2"
           >
-            <div class="px-2">{{ vendor_orders_accepted }}</div>
-            <div class>Waiting on Shipment</div>
+            <span class="px-2">{{ vendor_orders_accepted }}</span>
+            <span class>Waiting on Shipment</span>
           </button>
         </router-link>
       </div>
@@ -52,8 +52,8 @@
           <button
             class="flex py-2 px-4 shadow-md no-underline rounded-full bg-zinc-600 hover:bg-zinc-400 hover:text-white text-white font-sans text-sm btn-primary focus:outline-none active:shadow-none mr-2"
           >
-            <div class="px-2">{{ vendor_orders_shipped }}</div>
-            <div class>Shipped</div>
+            <span class="px-2">{{ vendor_orders_shipped }}</span>
+            <span class>Shipped</span>
           </button>
         </router-link>
       </div>
@@ -72,8 +72,8 @@
           <button
             class="flex py-2 px-4 shadow-md no-underline rounded-full bg-zinc-600 hover:bg-zinc-400 hover:text-white text-white font-sans text-sm btn-primary focus:outline-none active:shadow-none mr-2"
           >
-            <div class="px-2">{{ vendor_orders_finalized }}</div>
-            <div class>Finalized</div>
+            <span class="px-2">{{ vendor_orders_finalized }}</span>
+            <span class>Finalized</span>
           </button>
         </router-link>
       </div>
@@ -92,8 +92,8 @@
           <button
             class="flex py-2 px-4 shadow-md no-underline rounded-full bg-zinc-600 hover:bg-zinc-400 hover:text-white text-white font-sans text-sm btn-primary focus:outline-none active:shadow-none mr-2"
           >
-            <div class="px-2">{{ vendor_orders_request_cancel }}</div>
-            <div class>Request Cancel</div>
+            <span class="px-2">{{ vendor_orders_request_cancel }}</span>
+            <span class>Request Cancel</span>
           </button>
         </router-link>
       </div>
@@ -280,6 +280,15 @@ import MainHeaderBottom from "../../../layouts/headers/MainHeaderBottom.vue";
 import MainHeaderVendor from "../../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../../layouts/footers/FooterMain.vue";
 
+
+/**
+ *
+ @typedef {Object} order.shipping_description
+ @typedef {Object} order.title_of_item
+ @typedef {Object} order.customer_user_name
+ *
+ */
+
 export default defineComponent({
   name: "vendororderswaiting",
 
@@ -296,14 +305,14 @@ export default defineComponent({
       date: Date.now(),
       tab: [],
       orders: [],
-      vendor_orders_new: "",
-      vendor_orders_accepted: "",
-      vendor_orders_shipped: "",
-      vendor_orders_finalized: "",
-      vendor_orders_finalized_early: "",
-      vendor_orders_request_cancel: "",
-      vendor_orders_cancelled: "",
-      vendor_orders_dispute: "",
+      vendor_orders_new: 0,
+      vendor_orders_accepted: 0,
+      vendor_orders_shipped: 0,
+      vendor_orders_finalized: 0,
+      vendor_orders_finalized_early: 0,
+      vendor_orders_request_cancel: 0,
+      vendor_orders_cancelled: 0,
+      vendor_orders_dispute: 0,
       trackingForm: {
         carrier: "",
         tracking: "",
@@ -318,17 +327,17 @@ export default defineComponent({
 
   methods: {
     openModal(modalId) {
-      modal = document.getElementById(modalId);
+      let modal = document.getElementById(modalId);
       modal.classList.remove("hidden");
     },
 
     closeModal() {
-      modal = document.getElementById("modal");
+      let modal = document.getElementById("modal");
       modal.classList.add("hidden");
     },
     // gets the new user orders
-    async getuserorders() {
-      await axios({
+     getuserorders() {
+      return axios({
         method: "get",
         url: "/vendororders/waiting",
         withCredentials: true,
@@ -340,8 +349,8 @@ export default defineComponent({
       });
     },
     //accepted orders
-    async acceptorder(uuid) {
-      await axios({
+     acceptorder(uuid) {
+      return axios({
         method: "put",
         url: "/vendororders/waiting/markasshipped/" + uuid,
         withCredentials: true,
@@ -359,8 +368,8 @@ export default defineComponent({
       });
     },
     // rejects orders
-    async rejectorder(uuid) {
-      await axios({
+     rejectorder(uuid) {
+      return axios({
         method: "delete",
         url: "/vendororders/new/reject/" + uuid,
         withCredentials: true,
@@ -378,12 +387,12 @@ export default defineComponent({
       });
     },
     // send the tracking info on a popup modal
-    async sendtrackinginfo(payLoad: {
+     sendtrackinginfo(payLoad: {
       order_uuid: string;
       carrier_name: string;
       tracking_number: string;
     }) {
-      await axios({
+      return axios({
         method: "post",
         url: "/vendororders/tracking/add",
         withCredentials: true,
@@ -403,22 +412,10 @@ export default defineComponent({
       };
       this.sendtrackinginfo(payLoad);
     },
-    // gets the tracking data
-    async gettrackingdata(uuid) {
-      await axios({
-        method: "delete",
-        url: "/vendororders/tracking/get/" + uuid,
-        withCredentials: true,
-        headers: authHeader(),
-      }).then((response) => {
-        if (response.status == 200) {
-          this.tracking_number = response.data.tracking;
-        }
-      });
-    },
+
   // gets the user order count
-    async getuserneworderscount() {
-      await axios({
+     getuserneworderscount() {
+      return axios({
         method: "get",
         url: "/vendororders/count",
         withCredentials: true,
@@ -440,8 +437,7 @@ export default defineComponent({
     },
     // converts time
     relativeDate(value) {
-      var d = value;
-      var e = new Date(d).valueOf();
+      let e = new Date(value).valueOf();
       return formatDistance(e, new Date());
     },
   },

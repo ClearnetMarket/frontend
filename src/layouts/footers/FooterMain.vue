@@ -3,7 +3,7 @@
     <div class="mx-32">
       <div class="flex flex-row w-full">
         <div class="basis-1/4">
-          <div v-if="current_user">
+          <div v-if="user">
             <div class="text-[20px] mt-5 mb-5 text-yellow-600">Navigation</div>
             <router-link :to="{ name: 'account' }">
               <div class="text-[16px] py-1 text-white hover:text-gray-400">
@@ -25,7 +25,7 @@
         </div>
 
         <div class="basis-1/4">
-          <div v-if="current_user">
+          <div v-if="user">
             <div class="text-[20px] mt-5 mb-5 text-yellow-600">Wallets</div>
             <router-link :to="{ name: 'forgotpassword' }">
               <div class="text-[16px] py-1 text-white hover:text-gray-400">
@@ -69,30 +69,15 @@ export default defineComponent({
     ...mapGetters(["user"]),
   },
   mounted() {
-    this.userstatus();
+
   },
   methods: {
     data() {
       return {
-        current_user: "",
+        user: null,
       };
     },
-    async userstatus() {
-      await axios({
-        method: "get",
-        url: "/auth/whoami",
-        withCredentials: true,
-        headers: authHeader(),
-      })
-        .then((response) => {
-          if ((response.status = 200)) {
-            this.current_user = response.data.user;
-          }
-        })
-        .catch((error) => {
-          current_user = null;
-        });
-    },
+
   },
 });
 </script>

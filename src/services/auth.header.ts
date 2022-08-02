@@ -1,4 +1,5 @@
-export default function authHeader () {
+
+export default function authHeader (): Record<string, string> {
    
         let user_token = localStorage.getItem('auth_user')
         let auth_token = localStorage.getItem('auth_token')
@@ -6,8 +7,6 @@ export default function authHeader () {
         if (user_token && auth_token) {
             return { 'Authorization': 'bearer ' + auth_token };
         } else {
-            return {};
+             return {'Authorization': null};
         }
- 
-  
 }

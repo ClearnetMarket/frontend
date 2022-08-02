@@ -1,10 +1,11 @@
+
 <template>
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
 
   <div v-if="user">
-    <MainHeaderVendor v-show="user.user_admin == 1" />
+    <MainHeaderVendor v-show="user.user_admin === 1" />
   </div>
   <!-- Top Stuff-->
   <div class="container h-screen max-w-7xl mx-auto px-10">
@@ -97,7 +98,6 @@
 <script lang="ts">
 import axios from "axios";
 import { defineComponent } from "vue";
-import { ref } from "vue";
 import { mapGetters } from "vuex";
 import MainHeaderTop from "../../../layouts/headers/MainHeaderTop.vue";
 import MainHeaderMid from "../../../layouts/headers/MainHeaderMid.vue";
@@ -120,6 +120,7 @@ export default defineComponent({
 
   data() {
     return {
+      user: null,
       ChangeAddressForm: {
         city: "",
         stateorprovence: "",
@@ -137,12 +138,12 @@ export default defineComponent({
   },
 
   methods: {
-    async addusershipping(payLoad: {
+     addusershipping(payLoad: {
       city: string;
       stateorprovence: string;
       zip: string;
     }) {
-      await axios({
+      return axios({
         method: "put",
         url: "/vendor/update/defaultaddress",
         data: payLoad,
@@ -160,8 +161,8 @@ export default defineComponent({
       });
     },
 
-    async getcurrentshipping() {
-      await axios({
+     getcurrentshipping() {
+      return axios({
         method: "get",
         url: "/vendor/get/defaultaddress",
         withCredentials: true,
@@ -175,19 +176,17 @@ export default defineComponent({
 
         }
       })
-       .catch((error) => {
-          
-        });
+
     },
 
-    async onSubmit() {
+     onSubmit() {
       const payLoad = {
         city: this.ChangeAddressForm.city,
         stateorprovence: this.ChangeAddressForm.stateorprovence,
         zip: this.ChangeAddressForm.zip,
       };
 
-      await this.addusershipping(payLoad);
+       this.addusershipping(payLoad);
     },
   },
 });

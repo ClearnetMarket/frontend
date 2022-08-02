@@ -1,3 +1,4 @@
+
 <template>
   <div class="bg-gray-300">
     <MainHeaderTop />
@@ -11,8 +12,8 @@
             <button
               class="flex py-2 px-4 shadow-md no-underline rounded-full text-white font-sans hover:text-white text-sm bg-zinc-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2"
             >
-              <div class="px-2">{{ vendor_orders_new }}</div>
-              <div class>New Orders</div>
+              <span class="px-2">{{ vendor_orders_new }}</span>
+              <span class>New Orders</span>
             </button>
           </router-link>
         </div>
@@ -31,8 +32,8 @@
             <button
               class="flex py-2 px-4 shadow-md text-sm no-underline rounded-full bg-zinc-600 hover:bg-zinc-400 text-white font-sans hover:text-white focus:outline-none active:shadow-none mr-2"
             >
-              <div class="px-2">{{ vendor_orders_accepted }}</div>
-              <div class>Waiting on Shipment</div>
+              <span class="px-2">{{ vendor_orders_accepted }}</span>
+              <span class>Waiting on Shipment</span>
             </button>
           </router-link>
         </div>
@@ -51,8 +52,8 @@
             <button
               class="flex py-2 px-4 shadow-md no-underline rounded-full bg-zinc-600 hover:bg-zinc-400 hover:text-white text-white font-sans text-sm btn-primary focus:outline-none active:shadow-none mr-2"
             >
-              <div class="px-2">{{ vendor_orders_shipped }}</div>
-              <div class>Shipped</div>
+              <span class="px-2">{{ vendor_orders_shipped }}</span>
+              <span class>Shipped</span>
             </button>
           </router-link>
         </div>
@@ -71,8 +72,8 @@
             <button
               class="flex py-2 px-4 shadow-md no-underline rounded-full bg-zinc-600 hover:bg-zinc-400 hover:text-white text-white font-sans text-sm btn-primary focus:outline-none active:shadow-none mr-2"
             >
-              <div class="px-2">{{ vendor_orders_finalized }}</div>
-              <div class>Finalized</div>
+              <span class="px-2">{{ vendor_orders_finalized }}</span>
+              <span class>Finalized</span>
             </button>
           </router-link>
         </div>
@@ -91,8 +92,8 @@
             <button
               class="flex py-2 px-4 shadow-md no-underline rounded-full bg-zinc-600 hover:bg-zinc-400 hover:text-white text-white font-sans text-sm btn-primary focus:outline-none active:shadow-none mr-2"
             >
-              <div class="px-2">{{ vendor_orders_request_cancel }}</div>
-              <div class>Request Cancel</div>
+              <span class="px-2">{{ vendor_orders_request_cancel }}</span>
+              <span class>Request Cancel</span>
             </button>
           </router-link>
         </div>
@@ -131,28 +132,28 @@
               <div class="col-span-4">
                 <div
                   class="flex justify-between"
-                  v-if="order.digital_currency == 1"
+                  v-if="order.digital_currency === 1"
                 >
-                  <div v-if="order.shipping_price_btc == 0">Free Shipping</div>
+                  <div v-if="order.shipping_price_btc === 0">Free Shipping</div>
                   <div v-else>{{ order.shipping_price_btc }}</div>
 
                   <div class="">{{ order.price_total_btc }} BTC</div>
                 </div>
                 <div
                   class="flex justify-between"
-                  v-if="order.digital_currency == 2"
+                  v-if="order.digital_currency === 2"
                 >
-                  <div v-if="order.shipping_price_bch == 0">Free Shipping</div>
+                  <div v-if="order.shipping_price_bch === 0">Free Shipping</div>
                   <div v-else>{{ order.shipping_price_bch }}</div>
 
                   <div class="">{{ order.price_total_bch }} BCH</div>
                 </div>
                 <div
                   class="flex justify-between"
-                  v-if="order.digital_currency == 3"
+                  v-if="order.digital_currency === 3"
                 >
                   <div class="">
-                    <div v-if="order.shipping_price_xmr == 0">
+                    <div v-if="order.shipping_price_xmr === 0">
                       Free Shipping
                     </div>
                     <div v-else>{{ order.shipping_price_xmr }}</div>
@@ -162,7 +163,7 @@
                 </div>
               </div>
 
-              <div v-if="order.user_feedback == 0" class="col-span-12">
+              <div v-if="order.user_feedback === 0" class="col-span-12">
                 <div class="grid grid-cols-12">
                   <div class="col-span-12">
                     <div class="grid grid-cols-12">
@@ -291,6 +292,24 @@ import MainHeaderBottom from "../../../layouts/headers/MainHeaderBottom.vue";
 import MainHeaderVendor from "../../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../../layouts/footers/FooterMain.vue";
 
+/**
+ *
+ @typedef {Object} order.price_total_xmr
+ @typedef {Object} order.digital_currency
+ @typedef {Object} order.shipping_price_btc
+ @typedef {Object} order.shipping_price_xmr
+ @typedef {Object} order.shipping_price_btc
+ @typedef {Object} order.price_total_bch
+ @typedef {Object} order.shipping_price_bch
+ @typedef {Object} order.quantity
+ @typedef {Object} order.user_feedback
+ @typedef {Object} order.customer_uuid
+ @typedef {Object} order.price_total_btc
+ @typedef {Object} order.price_total_btc
+ *
+ */
+
+
 export default defineComponent({
   name: "vendorordersfinalized",
 
@@ -308,14 +327,14 @@ export default defineComponent({
       tab: [],
       orders: [],
       review: [],
-      vendor_orders_new: "",
-      vendor_orders_accepted: "",
-      vendor_orders_shipped: "",
-      vendor_orders_finalized: "",
-      vendor_orders_finalized_early: "",
-      vendor_orders_request_cancel: "",
-      vendor_orders_cancelled: "",
-      vendor_orders_dispute: "",
+      vendor_orders_new: 0,
+      vendor_orders_accepted: 0,
+      vendor_orders_shipped: 0,
+      vendor_orders_finalized: 0,
+      vendor_orders_finalized_early: 0,
+      vendor_orders_request_cancel: 0,
+      vendor_orders_cancelled: 0,
+      vendor_orders_dispute: 0,
     };
   },
 
@@ -327,13 +346,13 @@ export default defineComponent({
   methods: {
     //payload for the score
     sendscore(uuid: string, rating: string) {
-      const payLoad = { rating: rating };
+      let payLoad = { rating: rating };
       this.sendFeedbackScore(uuid, payLoad);
     },
     // send the score for a feedback
     // accepts payload
-    async sendFeedbackScore(uuid: string, payLoad = { rating: string }) {
-      await axios({
+     sendFeedbackScore(uuid: string, payLoad = this.payLoad) {
+      return axios({
         method: "post",
         url: "/orders/vendor/feedback/score/" + uuid,
         data: payLoad,
@@ -352,6 +371,7 @@ export default defineComponent({
           }
         })
         .catch((error) => {
+          console.log(error)
           notify({
               title: "Freeport Error",
               text: "Error posting information.",
@@ -366,9 +386,8 @@ export default defineComponent({
       this.sendFeedbackReview(uuid, payLoad);
     },
     // send the feedback
-    // accepts a payload
-    async sendFeedbackReview(uuid: string, payLoad = { review: string }) {
-      await axios({
+     sendFeedbackReview(uuid: string, payLoad = this.payLoad) {
+      return axios({
         method: "post",
         url: "/orders/vendor/feedback/review/" + uuid,
         data: payLoad,
@@ -387,6 +406,7 @@ export default defineComponent({
           }
         })
         .catch((error) => {
+          console.log(error)
           notify({
               title: "Freeport Error",
               text: "Error posting information.",
@@ -395,26 +415,28 @@ export default defineComponent({
         });
     },
     // gets the user orders
-    async getuserorders() {
-      await axios({
+     getuserorders() {
+      return axios({
         method: "get",
         url: "/vendororders/finalized",
         withCredentials: true,
         headers: authHeader(),
-      }).then((response) => {
-        if (response.status == 200) {
+      })
+        .then((response) => {
+          if (response.status == 200) {
           this.orders = response.data;
         }
       });
     },
     // gets the count for the top bars count
-    async getuserneworderscount() {
-      await axios({
+     getuserneworderscount() {
+      return axios({
         method: "get",
         url: "/vendororders/count",
         withCredentials: true,
         headers: authHeader(),
-      }).then((response) => {
+      })
+        .then((response) => {
         if (response.status == 200) {
           this.vendor_orders_new = response.data.vendor_orders_new;
           this.vendor_orders_accepted = response.data.vendor_orders_accepted;
@@ -431,8 +453,7 @@ export default defineComponent({
     },
     // get the date conversion
     relativeDate(value) {
-      var d = value;
-      var e = new Date(d).valueOf();
+      let e = new Date(value).valueOf();
       return formatDistance(e, new Date());
     },
   },
@@ -461,13 +482,9 @@ h1 {
 .rating > label:before {
   margin: 5px;
   font-size: 1.25em;
-  font-family: FontAwesome;
+  font-family: 'FontAwesome', sans-serif;
   display: inline-block;
   content: "\f005";
-}
-.rating > .half:before {
-  content: "\f089";
-  position: absolute;
 }
 .rating > label {
   color: #ddd;

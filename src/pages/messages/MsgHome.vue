@@ -1,3 +1,4 @@
+
 <template>
   <div class="bg-gray-300">
     <MainHeaderTop />
@@ -32,10 +33,10 @@
               <router-link
                 :to="{
                   name: 'MsgView',
-                  params: { postid: userobject.post_id },
+                  params: { postid: userobject.post_id }
                 }"
               >
-                <div v-if="userobject.user_one == user.user_name">
+                <div v-if="userobject.user_one === user.user_name">
                   <div class=" ">
                     {{ userobject.user_two }}
                   </div>
@@ -53,7 +54,7 @@
         <div class="text-center">Currently only allowing messaging to vendors through items to prevent botting</div>
           <div v-if="other_user_count > 0">
             <div class="text-[18px] mb-5">
-              <div v-if="user_one != user">
+              <div v-if="user_one !== user">
                 <div class="">
                   {{ user_one }}
                 </div>
@@ -76,10 +77,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import axios from "axios";
-import { ref } from "vue";
 import { mapGetters } from "vuex";
-import { useRoute } from "vue-router";
-import { notify } from "@kyvg/vue3-notification";
 import authHeader from "../../services/auth.header";
 import MainHeaderTop from "../../layouts/headers/MainHeaderTop.vue";
 import MainHeaderMid from "../../layouts/headers/MainHeaderMid.vue";
@@ -112,10 +110,9 @@ export default defineComponent({
   computed: {
     ...mapGetters(["user"]),
   },
-
   methods: {
-    async getcountofusers() {
-      await axios({
+     getcountofusers() {
+      return axios({
         method: "get",
         url: "/msg/count",
         withCredentials: true,
@@ -124,12 +121,13 @@ export default defineComponent({
         .then((response) => {
           this.other_user_count = response.data.get_count;
         })
-     .catch((error) => {});
+     .catch((error) => {
+       console.log(error)
+     });
         
     },
-
-    async getmsgsofusers() {
-      await axios({
+     getmsgsofusers() {
+      return axios({
         method: "get",
         url: "/msg/msgs/all",
         withCredentials: true,
@@ -138,8 +136,7 @@ export default defineComponent({
         .then((response) => {
           this.userlist = response.data;
         })
-      .catch((error) => {});
-         
+      .catch((error) => {console.log(error)})
     },
   },
 });

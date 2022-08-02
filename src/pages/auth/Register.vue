@@ -1,3 +1,4 @@
+
 <template>
   <HeaderPlain />
   <div class="max-w-7xl mx-auto">
@@ -269,7 +270,7 @@ export default defineComponent({
         display_username: { required, minLength: minLength(6) },
         email: { email, required },
         pin: { required, minLength: minLength(4) },
-        password: { required, minLength: minLength(6) },
+
         password_confirm: {
           required,
           minLength: minLength(6),
@@ -277,7 +278,7 @@ export default defineComponent({
         },
         currency: { required },
         country: { required },
-        currency: { required },
+
       },
     };
   },
@@ -310,7 +311,7 @@ export default defineComponent({
         this.Register(payLoad);
       }
     },
-    async Register(payLoad: {
+     Register(payLoad: {
       display_username: string;
       username: string;
       password: string;
@@ -320,7 +321,7 @@ export default defineComponent({
       currency: string;
     }) {
       const path = "/auth/register";
-      axios({
+      return axios({
         method: "post",
         url: path,
         data: payLoad,
@@ -339,7 +340,8 @@ export default defineComponent({
             });
           }
         })
-        .catch((error) => {
+        .catch(() => {
+
           notify({
             title: "Authorization",
             text: "Failed to Register.  Check form for errors!",
@@ -347,10 +349,10 @@ export default defineComponent({
           });
         });
     },
-    async getCurrencyList() {
+     getCurrencyList() {
       const path = "/auth/query/currency";
 
-      axios({
+      return axios({
         method: "get",
         url: path,
         withCredentials: true,
@@ -358,16 +360,18 @@ export default defineComponent({
         .then((response) => {
           this.currencyList = response.data;
         })
-        .catch((error) => {});
+        .catch(() => {
+
+        });
     },
-    async getCountryList() {
+     getCountryList() {
       const path = "/auth/query/country";
-      await axios
+      return axios
         .get(path, { withCredentials: true })
         .then((response) => {
           this.countryList = response.data;
         })
-        .catch((error) => {
+        .catch(() => {
           notify({
             title: "Data Retrieval Failure",
             text: "Failed to get country list",

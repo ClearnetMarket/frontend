@@ -1,3 +1,4 @@
+
 <template>
   <MainHeaderTop />
   <MainHeaderMid />
@@ -104,14 +105,13 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import axios from "axios";
-import { useRoute } from "vue-router";
-import { notify } from "@kyvg/vue3-notification";
 import authHeader from "../../services/auth.header";
 import MainHeaderTop from "../../layouts/headers/MainHeaderTop.vue";
 import MainHeaderMid from "../../layouts/headers/MainHeaderMid.vue";
 import MainHeaderBottom from "../../layouts/headers/MainHeaderBottom.vue";
 import MainHeaderVendor from "../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../layouts/footers/FooterMain.vue";
+import { formatDistance } from "date-fns";
 
 export default defineComponent({
   name: "ModHome",
@@ -139,8 +139,8 @@ export default defineComponent({
 
   methods: {
     // get user status
-    async userstatus() {
-      await axios({
+     userstatus() {
+      return axios({
         method: "get",
         url: "/auth/whoami",
         withCredentials: true,
@@ -155,13 +155,12 @@ export default defineComponent({
     },
     // date conversion
     relativeDate(value) {
-      var d = value;
-      var e = new Date(d).valueOf();
+      let e = new Date(value).valueOf();
       return formatDistance(e, new Date());
     },
     // become the moderator of the order
-    async becomemod(uuid) {
-      await axios({
+     becomemod(uuid) {
+      return axios({
         method: "get",
         url: "/mod/takeonmod/" + uuid,
         withCredentials: true,
@@ -174,8 +173,8 @@ export default defineComponent({
       });
     },
     // get the disputes that need mods
-    async getdisputesneedmod() {
-      await axios({
+     getdisputesneedmod() {
+      return axios({
         method: "get",
         url: "/mod/disputes/available",
         withCredentials: true,
@@ -186,9 +185,9 @@ export default defineComponent({
         }
       });
     },
-    // get disputes that has mods
-    async getdisputeshasmod() {
-      await axios({
+    // get disputes that already has mods
+     getdisputeshasmod() {
+      return axios({
         method: "get",
         url: "/mod/disputes/modded",
         withCredentials: true,

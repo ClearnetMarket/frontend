@@ -2,7 +2,7 @@
   <div class="max-w-7xl mx-auto grid sm:grid-cols-12 md:grid-cols-12 mb-0">
     <div
       class="grid sm:col-span-12 md:col-span-3 grid-rows-2 text-center pt-5 m-0 text-gray-800 hover:text-gray-600"
-      @click="$router.replace({ name: 'home' })"
+      @click="gotourl('home')"
       style="cursor: pointer"
     >
       <div class="row-span-1 text-[22px] text-blue-600 font-semibold ">Freeport.cash</div>
@@ -55,16 +55,17 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { ref } from "vue";
 import { ShoppingBagIcon } from "@heroicons/vue/solid";
 import axios from "axios";
 import authHeader from "../../services/auth.header";
+
+
 export default defineComponent({
   name: "MainHeaderMid",
   components: { ShoppingBagIcon },
   data() {
     return {
-      shopping_cart_count: "",
+      shopping_cart_count: 0,
       searchForm: {
         searchInput: "",
       },
@@ -73,23 +74,30 @@ export default defineComponent({
 
   mounted() {
     this.get_shopping_cart_count();
+       console.log("sad")
+        console.log(authHeader())
   },
   methods: {
+    //  change url in dropdown
+    gotourl(nameofurl) {
+      this.$router.replace({ name: nameofurl })
+    },
     mainsearch() {
-      console.log("here")
       this.$router.push({
         name: "search",
         params: { searchstring: this.searchForm.searchInput },
       });
     },
-
     // Get How many items in shopping cart
-    get_shopping_cart_count() {
-      axios({
+    get_shopping_cart_count()  {
+
+       axios({
         method: "get",
         url: "/info/user-cart-count",
+        withCredentials: true,
         headers: authHeader(),
-      }).then((response) => {
+      })
+        .then((response) => {
         this.shopping_cart_count = response.data.status;
       });
     },

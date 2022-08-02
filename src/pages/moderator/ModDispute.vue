@@ -1,3 +1,4 @@
+
 <template>
   <MainHeaderTop />
   <MainHeaderMid />
@@ -40,13 +41,13 @@
               </div>
               <div class="col-span-3">
                 <div class="">Total</div>
-                <div v-if="order.digital_currency == 1">
+                <div v-if="order.digital_currency === 1">
                   {{ order.price_total_btc }} BTC
                 </div>
-                <div v-if="order.digital_currency == 2">
+                <div v-if="order.digital_currency === 2">
                   {{ order.price_total_bch }} BCH
                 </div>
-                <div v-if="order.digital_currency == 3">
+                <div v-if="order.digital_currency === 3">
                   {{ order.price_total_xmr }} XMR
                 </div>
               </div>
@@ -177,7 +178,7 @@
               </form>
             </div>
             <div class="col-span-12">
-              <div v-if="order.overall_status == 10">
+              <div v-if="order.overall_status === 10">
                 <div class="font-bold">Add a post dispute message</div>
                 <form
                   class="pb-8 mb-4 w-full"
@@ -228,7 +229,6 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import axios from "axios";
-import { notify } from "@kyvg/vue3-notification";
 import { useRoute } from "vue-router";
 import { formatDistance } from "date-fns";
 import authHeader from "../../services/auth.header";
@@ -237,7 +237,6 @@ import MainHeaderMid from "../../layouts/headers/MainHeaderMid.vue";
 import MainHeaderBottom from "../../layouts/headers/MainHeaderBottom.vue";
 import MainHeaderVendor from "../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../layouts/footers/FooterMain.vue";
-
 import StarRatingCustomer from "../../components/star_rating/StarCustomer.vue";
 import StarRating from "../../components/star_rating/Star.vue";
 
@@ -256,9 +255,10 @@ export default defineComponent({
 
   data() {
     return {
+      mainpostcomments: [],
       order_id: "",
       loaded: false,
-      order: "",
+      order: null,
       postid: "",
       customerratings: [],
       vendorratings: [],
@@ -274,21 +274,19 @@ export default defineComponent({
   mounted() {
     this.userstatus();
     const order_id_route = useRoute();
-    const order_id = order_id_route.params.uuid;
-    this.order_id = order_id;
+    this.order_id = order_id_route.params.uuid;
     this.getuserorder();
   },
 
   methods: {
     // get date conversion
     relativeDate(value) {
-      var d = value;
-      var e = new Date(d).valueOf();
+      let e = new Date(value).valueOf();
       return formatDistance(e, new Date());
     },
     // gets the user status
-    async userstatus() {
-      await axios({
+     userstatus() {
+      return axios({
         method: "get",
         url: "/auth/whoami",
         withCredentials: true,
@@ -297,15 +295,14 @@ export default defineComponent({
         if (response.status == 200) {
                console.log(response.data.user);
           if (response.data.user.user_admin < 2) {
-       
             this.$router.push({ name: "home" });
           }
         }
       });
     },
     // get the user order
-    async getuserorder() {
-      await axios({
+     getuserorder() {
+      return axios({
         method: "get",
         url: `/mod/orderinfo/${this.order_id}`,
         withCredentials: true,
@@ -332,48 +329,39 @@ export default defineComponent({
         .then((response) => {
           this.mainpostcomments = response.data;
         })
-        .catch((error) => {});
+        .catch((error) => {
+          console.log(error)
+        });
     },
     // gets the customer feedback
-    getcustomerfeedback: async function () {
-      await axios({
+    getcustomerfeedback() {
+      return axios({
         method: "get",
         url: `/mod/customer/ratings/${this.order.customer_uuid}`,
         withCredentials: true,
         headers: authHeader(),
-      }).then((response) => {
+      })
+          .then((response) => {
         if (response.status == 200) {
           this.customerratings = response.data;
         }
       });
     },
     // gets the vendor feedback
-    getvendorfeedback: async function () {
-      await axios({
+    getvendorfeedback() {
+      return axios({
         method: "get",
         url: `/mod/vendor/ratings/${this.order.vendor_uuid}`,
         withCredentials: true,
         headers: authHeader(),
-      }).then((response) => {
+      })
+          .then((response) => {
         if (response.status == 200) {
           this.customerratings = response.data;
         }
       });
     },
-    // Finishes an order Splits percentage to various users
-    async markdisputefinished(payLoad: {
-      percenttovendor: string;
-      percenttocustomer: string;
-    }) {
-      await axios({
-        method: "get",
-        url: `/mod/dispute/settle/${this.order_id}`,
-        withCredentials: true,
-        headers: authHeader(),
-        data: payLoad,
-      }).then((response) => {});
-    },
-    // payload for the dispute
+/*    // payload for the dispute
     markdisputePayload() {
       const payLoad = {
         percenttovendor: this.loginForm.username,
@@ -381,50 +369,68 @@ export default defineComponent({
       };
       this.markdisputefinished(payLoad);
     },
+    // Finishes an order Splits percentage to various users
+     markdisputefinished(payLoad: {
+      percenttovendor: string;
+      percenttocustomer: string;
+    }) {
+      return axios({
+        method: "get",
+        url: `/mod/dispute/settle/${this.order_id}`,
+        withCredentials: true,
+        headers: authHeader(),
+        data: payLoad,
+      })
+          .then(() => {
+        console.log("finished")
+      });
+    },*/
+
     //  Brings an order to open status
-    async markdisputecancelledstillopen() {
-      await axios({
+     markdisputecancelledstillopen() {
+      return axios({
         method: "get",
         url: `/mod/dispute/canceldispute/open/${this.order_id}`,
         withCredentials: true,
         headers: authHeader(),
-        data: payLoad,
+
       }).then((response) => {
         if (response.status == 200) {
         }
       });
     },
     //  Brings an order to closed status
-    async markdisputecancelledstillclosed() {
-      await axios({
+     markdisputecancelledstillclosed() {
+      return axios({
         method: "get",
         url: `/mod/dispute/canceldispute/closed/${this.order_id}`,
         withCredentials: true,
         headers: authHeader(),
-        data: payLoad,
-      }).then((response) => {
+
+      })
+          .then(() => {
        
       });
     },
     //  Extends the time on an order
-    async extenddisputetime() {
-      await axios({
+     extenddisputetime() {
+      return axios({
         method: "get",
         url: `/mod/dispute/extend/${this.order_id}`,
         withCredentials: true,
         headers: authHeader(),
-        data: payLoad,
-      }).then((response) => {
+
+      })
+          .then(() => {
        
       });
     },
-
     // 100 to vendor
-    async split100vendor(payLoad: {
+     split100vendor(payLoad: {
       percenttovendor: string;
       percenttocustomer: string;
     }) {
-      await axios({
+      return axios({
         method: "post",
         url: `/mod/dispute/settle/${this.order_id}`,
         data: payLoad,
@@ -450,11 +456,11 @@ export default defineComponent({
     },
 
     // 75 to vendor
-    async split75vendor(payLoad: {
+     split75vendor(payLoad: {
       percenttovendor: string;
       percenttocustomer: string;
     }) {
-      await axios({
+      return axios({
         method: "post",
         url: `/mod/dispute/settle/${this.order_id}`,
         data: payLoad,
@@ -466,7 +472,9 @@ export default defineComponent({
             this.getuserorder();
           }
         })
-        .catch((error) => {});
+        .catch((error) => {
+          console.log(error)
+        });
     },
     sendsplit75vendor() {
       const payLoad = {
@@ -477,11 +485,11 @@ export default defineComponent({
     },
 
     // 50 to vendor
-    async split50vendor(payLoad: {
+     split50vendor(payLoad: {
       percenttovendor: string;
       percenttocustomer: string;
     }) {
-      await axios({
+      return axios({
         method: "post",
         url: `/mod/dispute/settle/${this.order_id}`,
         data: payLoad,
@@ -493,7 +501,9 @@ export default defineComponent({
             this.getuserorder();
           }
         })
-        .catch((error) => {});
+        .catch((error) => {
+          console.log(error)
+        });
     },
     sendsplit50vendor() {
       const payLoad = {
@@ -504,11 +514,11 @@ export default defineComponent({
     },
 
     // 25 to vendor
-    async split25vendor(payLoad: {
+     split25vendor(payLoad: {
       percenttovendor: string;
       percenttocustomer: string;
     }) {
-      await axios({
+      return axios({
         method: "post",
         url: `/mod/dispute/settle/${this.postid}`,
         data: payLoad,
@@ -520,7 +530,9 @@ export default defineComponent({
             this.getuserorder();
           }
         })
-        .catch((error) => {});
+        .catch((error) => {
+          console.log(error)
+        });
     },
     sendsplit25vendor() {
       const payLoad = {
@@ -529,13 +541,12 @@ export default defineComponent({
       };
       this.split25vendor(payLoad);
     },
-
     // 0 to vendor
-    async split0vendor(payLoad: {
+     split0vendor(payLoad: {
       percenttovendor: string;
       percenttocustomer: string;
     }) {
-      await axios({
+      return axios({
         method: "post",
         url: `/mod/dispute/settle/${this.postid}`,
         data: payLoad,
@@ -547,7 +558,9 @@ export default defineComponent({
             this.getuserorder();
           }
         })
-        .catch((error) => {});
+        .catch((error) => {
+          console.log(error)
+        });
     },
     sendsplit0vendor() {
       const payLoad = {
@@ -557,8 +570,8 @@ export default defineComponent({
       this.split0vendor(payLoad);
     },
     // comments on the post
-    async sendMessagePostDispute(payLoad: { textbody: string }) {
-      await axios({
+     sendMessagePostDispute(payLoad: { textbody: string }) {
+      return axios({
         method: "post",
         url: "/mod/postdisputemsg/" + this.order.uuid,
         data: payLoad,
@@ -571,7 +584,9 @@ export default defineComponent({
             this.SendDisputeForm.disputemsginfo = "";
           }
         })
-        .catch((error) => {});
+        .catch((error) => {
+          console.log(error)
+        });
     },
     sendMessagePayloadDispute() {
       const payLoad = {
@@ -580,8 +595,8 @@ export default defineComponent({
       this.sendMessagePostDispute(payLoad);
     },
     // comments on the post
-    async sendMessageComment(payLoad: { textbody: string }) {
-      await axios({
+     sendMessageComment(payLoad: { textbody: string }) {
+      return axios({
         method: "post",
         url: "/msg/create/comment/" + this.postid,
         data: payLoad,
@@ -594,7 +609,9 @@ export default defineComponent({
             this.SendMsgForm.msginfo = "";
           }
         })
-        .catch((error) => {});
+        .catch((error) => {
+          console.log(error)
+        });
     },
     sendMessagePayload() {
       const payLoad = {

@@ -1,10 +1,11 @@
+
 <template>
   <MainHeaderTop />
   <MainHeaderMid :key="shoppingcartcount" />
   <MainHeaderBottom />
 
   <div v-if="user">
-    <MainHeaderVendor v-show="user.user_admin == 1" />
+    <MainHeaderVendor v-show="user.user_admin === 1" />
   </div>
   <div class="container max-w-7xl mx-auto">
     <div class="mx-auto flex mb-5 px-10">
@@ -55,7 +56,6 @@
     v-bind:imagetwoserver="imagetwoserver"
     v-bind:imagethreeserver="imagethreeserver"
     v-bind:imagefourserver="imagefourserver"
-    v-bind:exactaddress="exactaddress"
     v-bind:exactcity="exactcity"
     v-bind:exactstateorprovence="exactstateorprovence"
     v-bind:exactzipcode="exactzipcode"
@@ -89,10 +89,8 @@
 </template>
 
 <script lang="ts">
-import { mapGetters } from "vuex";
 import { defineComponent } from "vue";
 import axios from "axios";
-import { notify } from "@kyvg/vue3-notification";
 import { useRoute } from "vue-router";
 import authHeader from "../../services/auth.header";
 import MainHeaderTop from "../../layouts/headers/MainHeaderTop.vue";
@@ -106,9 +104,10 @@ import ItemUserReviews from "./Item/ItemUserReviews.vue";
 import ItemTop from "./Item/ItemTop.vue";
 import ItemShipping from "./Item/ItemShipping.vue";
 import ItemSimiliarItems from "./Item/ItemSimiliarItems.vue";
+import {mapGetters} from "vuex";
 
 export default defineComponent({
-  name: "Home",
+  name: "MarketItem",
 
   components: {
     MainHeaderTop,
@@ -132,22 +131,21 @@ export default defineComponent({
       item_id: "",
       condition: "",
       price: "",
-      currency: "",
+      currency: 0,
       pricebtc: "",
       pricebch: "",
       pricexmr: "",
-      digitalcurrencyone: "",
-      digitalcurrencytwo: "",
-      digitalcurrencythree: "",
+      digitalcurrencyone: false,
+      digitalcurrencytwo: true,
+      digitalcurrencythree: false,
       itemcount: "",
-      freeshipping: "",
-      freeshippingdays: "",
-      totalsold: "",
+      freeshipping: false,
+      freeshippingdays: 0,
+      totalsold: 0,
       origincountry: "",
-      currency: "",
       vendorname: "",
       vendoruuid: "",
-      vendortotalsales: "",
+      vendortotalsales: 0,
       vendorrating: "",
       imageoneserver: "",
       imagetwoserver: "",
@@ -158,18 +156,17 @@ export default defineComponent({
       destinationcountrytwo: "",
       destinationcountrythree: "",
       destinationcountryfour: "",
-      shippingfree: "",
-      shippingtwo: "",
-      shippingthree: "",
-      shippingpricetwo: "",
-      shippingdayfree: "",
-      shippingdaytwo: "",
+      shippingfree: false,
+      shippingtwo: false,
+      shippingthree: false,
       shippingpricethree: "",
-      shippingdaythree: "",
+      shippingpricetwo: "",
+      shippingdayfree: 0,
+      shippingdaytwo: 0,
+      shippingdaythree: 0,
       vendorreviews: [],
-      shopping_cart_count: "",
-      vendor_reviews_total: "",
-
+      shopping_cart_count: 0,
+      vendor_reviews_total: 0,
       exactcity: "",
       exactstateorprovence: "",
       exactzipcode: "",
@@ -179,13 +176,14 @@ export default defineComponent({
   mounted() {
     this.getitem();
   },
-
+  computed: {
+    ...mapGetters(["user"]),
+  },
   methods: {
-    async getitem() {
-      const item_id_route = useRoute();
-      const item_id = item_id_route.params.id;
-      this.item_id = item_id;
-      await axios({
+     getitem() {
+      let item_id_route = useRoute();
+      this.item_id = item_id_route.params.id;
+      return axios({
         method: "get",
         url: "/item/" + this.item_id,
         withCredentials: true,
@@ -236,10 +234,12 @@ export default defineComponent({
             this.seeifuserhasdefaultaddress();
           }
         })
-        .catch((error) => {});
+        .catch((error) => {
+          console.log(error)
+        });
     },
-    async seeifuserhasdefaultaddress() {
-      await axios({
+     seeifuserhasdefaultaddress() {
+      return axios({
         method: "get",
         url: "/vendor/get/defaultaddress/" + this.item.vendor_uuid,
         withCredentials: true,
@@ -253,14 +253,14 @@ export default defineComponent({
           }
         })
         .catch((error) => {
-          
+          console.log(error)
         });
     },
     UpdateCart() {
       this.shoppingcartcount += 1;
     },
 
-    async getitemcondition() {
+     getitemcondition() {
       if (this.item.item_condition === 1) {
         this.condition = "New";
       } else if (this.item.item_condition === 2) {
@@ -279,8 +279,8 @@ export default defineComponent({
       this.price = this.item.price;
       this.currency = this.item.currency;
     },
-    async getpricebtc() {
-      await axios({
+     getpricebtc() {
+      return axios({
         method: "get",
         url: "/price/btcprice/" + this.item.currency + "/" + this.item.price,
         withCredentials: true,
@@ -291,11 +291,11 @@ export default defineComponent({
           }
         })
         .catch((error) => {
-         
+          console.log(error)
         });
     },
-    async getpricebch() {
-      await axios({
+     getpricebch() {
+      return axios({
         method: "get",
         url: "/price/bchprice/" + this.item.currency + "/" + this.item.price,
         withCredentials: true,
@@ -306,11 +306,11 @@ export default defineComponent({
           }
         })
         .catch((error) => {
-         
+          console.log(error)
         });
     },
-    async getpricexmr() {
-      await axios({
+     getpricexmr() {
+      return axios({
         method: "get",
         url: "/price/xmrprice/" + this.item.currency + "/" + this.item.price,
         withCredentials: true,
@@ -321,11 +321,11 @@ export default defineComponent({
           }
         })
         .catch((error) => {
-         
+          console.log(error)
         });
     },
-    async getvendorinfo() {
-      await axios({
+     getvendorinfo() {
+      return axios({
         method: "get",
         url: "/vendor/vendoriteminfo/" + this.item.vendor_uuid,
         withCredentials: true,
@@ -339,11 +339,12 @@ export default defineComponent({
           }
         })
         .catch((error) => {
+          console.log(error)
         });
     },
 
-    async getvendorreviews() {
-      await axios({
+     getvendorreviews() {
+      return axios({
         method: "get",
         url: "/vendor/vendor-feedback/" + this.item.vendor_uuid,
         withCredentials: true,
@@ -357,10 +358,11 @@ export default defineComponent({
           }
         })
          .catch((error) => {
+           console.log(error)
         });
     },
-    async add_view() {
-      await axios({
+     add_view() {
+      return axios({
         method: "get",
         url: "/item/count/" + this.item.uuid,
         withCredentials: true,

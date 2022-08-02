@@ -5,8 +5,8 @@
         <button
           class="flex py-2 px-4 shadow-md no-underline rounded-full text-white font-sans hover:text-white text-sm bg-orange-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2"
         >
-          <div class="px-2">{{ disputes }}</div>
-          <div class>Disputes</div>
+          <span class="px-2">{{ disputes }}</span >
+          <span class>Disputes</span >
         </button>
       </router-link>
     </div>
@@ -27,8 +27,8 @@
         <button
           class="flex py-2 px-4 shadow-md text-sm no-underline rounded-full bg-orange-600 hover:bg-zinc-400 text-white font-sans hover:text-white focus:outline-none active:shadow-none mr-2"
         >
-          <div class="px-2">{{ feedback }}</div>
-          <div class>Feedback</div>
+          <span class="px-2">{{ feedback }}</span >
+          <span class>Feedback</span >
         </button>
       </router-link>
     </div>
@@ -49,8 +49,8 @@
         <button
           class="flex py-2 px-4 shadow-md no-underline rounded-full bg-orange-600 hover:bg-zinc-400 hover:text-white text-white font-sans text-sm btn-primary focus:outline-none active:shadow-none mr-2"
         >
-          <div class="px-2">{{ orders }}</div>
-          <div class>Orders</div>
+          <span  class="px-2">{{ orders }}</span >
+          <span  class>Orders</span >
         </button>
       </router-link>
     </div>

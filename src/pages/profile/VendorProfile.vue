@@ -1,3 +1,4 @@
+
 <template>
   <div class="bg-gray-300">
     <MainHeaderTop />
@@ -45,7 +46,7 @@
                 </router-link>
               </div>
 
-              <div v-if="user.admin_role == 1" class="col-span-12">
+              <div v-if="user.admin_role === 1" class="col-span-12">
                 <div class="grid grid-cols-12">
                   <div class="col-span-6 text-gray-500">
                     Selling From: {{ country }}
@@ -68,7 +69,7 @@
           <div class="grid grid-cols-12 gap-4">
             <div class="col-span-4 p-4 rounded bg-white shadow-md">
               <div class="flex text-[18px]">All User Reviews:</div>
-              <div v-if="user_reviews_total == 0">
+              <div v-if="user_reviews_total === 0">
                 No Reviews for {{ user.display_name }}
               </div>
               <div v-else>
@@ -303,8 +304,7 @@
 import { defineComponent } from "vue";
 import axios from "axios";
 import { formatDistance } from "date-fns";
-import { useRouter, useRoute } from "vue-router";
-import { notify } from "@kyvg/vue3-notification";
+import { useRoute } from "vue-router";
 import StarRating from "../../components/star_rating/Star.vue";
 import authHeader from "../../services/auth.header";
 import MainHeaderTop from "../../layouts/headers/MainHeaderTop.vue";
@@ -325,19 +325,20 @@ export default defineComponent({
     StarRating,
     GetVendorItems,
   },
+  props: {
 
+  },
   data() {
     return {
       page_loaded: false,
       date: Date.now(),
       tab: [],
-      orders: [],
-      user: "",
-      current_user: "",
+      user: [],
+      current_user: [],
       user_stats: [],
-      country: "",
-      currency: "",
-      user_reviews_total: "",
+      orders: [],
+      userreviews: [],
+      user_reviews_total: [],
       user_reviews_percent_one: "",
       user_reviews_percent_two: "",
       user_reviews_percent_three: "",
@@ -347,7 +348,9 @@ export default defineComponent({
       user_reviews_percent_seven: "",
       user_reviews_percent_eight: "",
       user_reviews_percent_nine: "",
-      use_reviews_percent_ten: "",
+      user_reviews_percent_ten: "",
+      country: null,
+      currency: 0,
     };
   },
   mounted() {
@@ -362,36 +365,27 @@ export default defineComponent({
   },
   methods: {
     relativeDate(value) {
-      var d = value;
-      var e = new Date(d).valueOf();
+      let e = new Date(value).valueOf();
       return formatDistance(e, new Date());
     },
-        async userstatus() {
-      await axios({
+         userstatus() {
+      return axios({
         method: "get",
         url: "/auth/whoami",
         withCredentials: true,
         headers: authHeader(),
       })
         .then((response) => {
-<<<<<<< HEAD
           if ((response.status = 200)) {
             this.current_user = response.data.user;
-
           }
         })
-         .catch((error) => {
-           current_user = null
-
-=======
-          if ((response.status = 200)) 
-          {this.current_user = response.data.user };
-        })
-         .catch((error) => {current_user  = null});
->>>>>>> a8414566b417d6574f1e158832101ef214fe4865
+         .catch(() => {
+           this.current_user = null
+           });
     },
-    async getuser() {
-      await axios({
+     getuser() {
+      return axios({
         method: "get",
         url: "/info/user-info/" + this.user_uuid,
         withCredentials: true,
@@ -403,8 +397,8 @@ export default defineComponent({
         }
       });
     },
-    async getuserstats() {
-      await axios({
+     getuserstats() {
+      return axios({
         method: "get",
         url: "/info/user-stats/" + this.user_uuid,
         withCredentials: true,
@@ -415,8 +409,8 @@ export default defineComponent({
         }
       });
     },
-    async getusercountryandcurrency() {
-      await axios({
+     getusercountryandcurrency() {
+      return axios({
         method: "get",
         url: "/info/country-currency",
         withCredentials: true,
@@ -430,8 +424,8 @@ export default defineComponent({
         }
       });
     },
-    async getreviews() {
-      await axios({
+     getreviews() {
+      return axios({
         method: "get",
         url: "/vendor/vendor-feedback/" + this.user_uuid,
         withCredentials: true,
@@ -444,10 +438,10 @@ export default defineComponent({
             }
           }
         })
-        .catch((error) => {});
+        .catch(() => {});
     },
-    async getratings() {
-      await axios({
+     getratings() {
+      return axios({
         method: "get",
         url: "/info/user-feedback-stats/" + this.user_uuid,
         withCredentials: true,
@@ -467,10 +461,10 @@ export default defineComponent({
             this.user_reviews_percent_ten = response.data.feedback_ten;
           }
         })
-        .catch((error) => {});
+        .catch(() => {});
     },
     getitemname(order_uuid) {
-      axios({
+      return axios({
         method: "get",
         url: "/item/info/" + order_uuid,
       }).then((response) => {

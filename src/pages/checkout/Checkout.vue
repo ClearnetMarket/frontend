@@ -1,9 +1,10 @@
+
 <template>
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
   <div v-if="user">
-    <MainHeaderVendor v-show="user.user_admin == 1" />
+    <MainHeaderVendor v-show="user.user_admin === 1" />
   </div>
 
   <div class="max-w-7xl mx-auto wrapper">
@@ -63,15 +64,15 @@
           <div class="col-span-6">
             <div class="grid grid-cols-1">
               <div class="text-[12px]">
-                <div v-if="btcbalance == 0">BTC Balance: 0.00000000</div>
+                <div v-if="btcbalance === 0">BTC Balance: 0.00000000</div>
                 <div v-else>BTC Balance: {{ btcbalance }}</div>
               </div>
               <div class="text-[12px]">
-                <div v-if="bchbalance == 0">BCH Balance: 0.00000000</div>
+                <div v-if="bchbalance === 0">BCH Balance: 0.00000000</div>
                 <div v-else>BCH Balance: {{ bchbalance }}</div>
               </div>
               <div class="text-[12px]">
-                <div v-if="xmrbalance == 0">XMR Balance: 0.000000000000</div>
+                <div v-if="xmrbalance === 0">XMR Balance: 0.000000000000</div>
                 <div v-else>XMR Balance: {{ xmrbalance }}</div>
               </div>
             </div>
@@ -82,7 +83,7 @@
         <div class="grid grid-cols-12 pb-4">
           <div class="col-span-1 font-bold"></div>
           <div class="col-span-11 text-">
-            <div v-for="(item, index) in shopping_cart_items_list">
+            <div v-for="item in shopping_cart_items_list">
               <div class="grid grid-cols-12 gap-4 border border-gray-300 p-4">
                 <div class="col-span-2">
                   <img
@@ -103,7 +104,7 @@
                   </div>
                 </div>
                 <div class="col-span-6">
-                  <div v-if="item.digital_currency_1 == true">
+                  <div v-if="item.digital_currency_1 === true">
                     <input
                       v-on:change="checkoutpaymenttype($event, item)"
                       v-model="item.selected_currency"
@@ -111,13 +112,13 @@
                       :id="item.id"
                       :name="item.id"
                       value="1"
-                      :checked="item.selected_digital_currency == 1"
+                      :checked="item.selected_digital_currency === 1"
                     />
 
                     <label class="px-5" for="btc">Bitcoin</label><br />
                   </div>
 
-                  <div v-if="item.digital_currency_2 == true">
+                  <div v-if="item.digital_currency_2 === true">
                     <input
                       v-on:change="checkoutpaymenttype($event, item)"
                       v-model="item.selected_currency"
@@ -125,13 +126,13 @@
                       :id="item.id"
                       :name="item.id"
                       value="2"
-                      :checked="item.selected_digital_currency == 2"
+                      :checked="item.selected_digital_currency === 2"
                     />
 
                     <label class="px-5" for="bch">Bitcoin Cash</label><br />
                   </div>
 
-                  <div v-if="item.digital_currency_3 == true">
+                  <div v-if="item.digital_currency_3 === true">
                     <input
                       v-on:change="checkoutpaymenttype($event, item)"
                       v-model="item.selected_currency"
@@ -139,7 +140,7 @@
                       :id="item.id"
                       :name="item.id"
                       value="3"
-                      :checked="item.selected_digital_currency == 3"
+                      :checked="item.selected_digital_currency === 3"
                     />
                     <label class="px-5" for="xmr">Monero</label>
                   </div>
@@ -222,6 +223,16 @@ import MainHeaderMid from "../../layouts/headers/MainHeaderMid.vue";
 import MainHeaderBottom from "../../layouts/headers/MainHeaderBottom.vue";
 import MainHeaderVendor from "../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../layouts/footers/FooterMain.vue";
+import {mapGetters} from "vuex";
+
+/**
+ *
+ @typedef {Object} item.selected_currency
+ @typedef {Object} item.selected_digital_currency
+ @typedef {Object} item.quantity_of_item
+ @typedef {Object} item.price_of_item
+ *
+ */
 
 export default defineComponent({
   name: "Checkout",
@@ -233,15 +244,18 @@ export default defineComponent({
     MainHeaderVendor,
     MainFooter,
   },
+  computed: {
+    ...mapGetters(["user"]),
+  },
 
   data() {
     return {
-      checkoutitems: "",
-      shopping_cart_items_list: "",
-      xmrbalance: "",
-      bchbalance: "",
-      btcbalance: "",
-      btcsumofitem: "",
+      user: null,
+      shopping_cart_items_list: [],
+      xmrbalance: 0,
+      bchbalance: 0,
+      btcbalance: 0,
+      btcsumofitem: 0,
       btcprice: "",
       btcshippingprice: "",
       btctotalprice: "",
@@ -281,8 +295,8 @@ export default defineComponent({
     }, 50000);
   },
   methods: {
-    async checkoutorder() {
-      await axios({
+     checkoutorder() {
+      return axios({
         method: "post",
         url: "/checkout/payment",
         withCredentials: true,
@@ -299,11 +313,11 @@ export default defineComponent({
           }
         })
         .catch((error) => {
-          
+          console.log(error)
         });
     },
-    async updateprices() {
-      await axios({
+     updateprices() {
+      return axios({
         method: "get",
         url: "/checkout/update/price",
         withCredentials: true,
@@ -314,11 +328,11 @@ export default defineComponent({
           }
         })
         .catch((error) => {
-        
+          console.log(error)
         });
     },
-    async get_shopping_cart_items() {
-      await axios({
+     get_shopping_cart_items() {
+      return axios({
         method: "get",
         url: "/checkout/data/incart",
         headers: authHeader(),
@@ -332,34 +346,35 @@ export default defineComponent({
             this.shopping_cart_items_list = null;
           }
         })
-        .catch((error) => {
+        .catch(() => {
+
           this.shopping_cart_items_list = null;
          
         });
     },
 
-    async checkoutpaymenttype(event, item) {
+     checkoutpaymenttype(event, item) {
       this.selectedpayment = event.target.value;
       let payLoad = {
         new_currency: this.selectedpayment,
       };
-      await axios({
+      return axios({
         method: "post",
         url: "/checkout/changepaymentoption/" + item.id,
         headers: authHeader(),
         data: payLoad,
       })
-        .then((response) => {
+        .then(() => {
           this.get_shopping_cart_order_summary();
         })
-        .catch((error) => {
+        .catch(() => {
           this.shopping_cart_items_list = null;
        
         });
     },
 
-    async get_shopping_cart_order_summary() {
-      await axios({
+     get_shopping_cart_order_summary() {
+      return axios({
         method: "get",
         url: "/checkout/data/cart/total",
         headers: authHeader(),
@@ -379,12 +394,12 @@ export default defineComponent({
           this.xmrshippingprice = response.data.xmr_shipping_price;
           this.xmrtotalprice = response.data.xmr_total_price;
         }
-      }).catch((error) => {
-          
+      }).catch(() => {
+
         });
     },
-    async getcurrentshipping() {
-      await axios({
+     getcurrentshipping() {
+      return axios({
         method: "get",
         url: "/info/getdefaultaddress",
         withCredentials: true,
@@ -404,8 +419,8 @@ export default defineComponent({
       });
     },
     //  Get prices of current coins
-    async getxmrprice() {
-      await axios({
+     getxmrprice() {
+      return axios({
         method: "get",
         url: "/xmr/balance",
         headers: authHeader(),
@@ -415,13 +430,13 @@ export default defineComponent({
             this.xmrbalance = response.data.xmr_balance;
           }
         })
-        .catch((error) => {
+        .catch(() => {
           this.shopping_cart_items_list = null;
         
         });
     },
-    async getbchprice() {
-      await axios({
+     getbchprice() {
+      return axios({
         method: "get",
         url: "/bch/balance",
         headers: authHeader(),
@@ -431,13 +446,13 @@ export default defineComponent({
             this.bchbalance = response.data.bch_balance;
           }
         })
-        .catch((error) => {
+        .catch(() => {
           this.shopping_cart_items_list = null;
         
         });
     },
-    async getbtcprice() {
-      await axios({
+     getbtcprice() {
+      return axios({
         method: "get",
         url: "/btc/balance",
         headers: authHeader(),
@@ -447,7 +462,7 @@ export default defineComponent({
             this.btcbalance = response.data.btc_balance;
           }
         })
-        .catch((error) => {
+        .catch(() => {
           this.shopping_cart_items_list = null;
          
         });

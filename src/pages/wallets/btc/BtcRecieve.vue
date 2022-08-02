@@ -1,3 +1,4 @@
+
 <template>
   <MainHeaderTop />
   <MainHeaderMid />
@@ -33,7 +34,7 @@
     <div class="flex flex-row mx-10 justify-center mt-20">
       Address: {{ btc_address }}
 
-      <img class="w-48 h-48" src="" />
+
     </div>
   </div>
   <MainFooter />
@@ -42,14 +43,13 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import axios from "axios";
-import { ref } from "vue";
 import { mapGetters } from "vuex";
 import MainHeaderTop from "../../../layouts/headers/MainHeaderTop.vue";
 import MainHeaderMid from "../../../layouts/headers/MainHeaderMid.vue";
 import MainHeaderBottom from "../../../layouts/headers/MainHeaderBottom.vue";
 import MainHeaderVendor from "../../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../../layouts/footers/FooterMain.vue";
-import authHeader from "../../../services/auth.header.ts";
+import authHeader from "../../../services/auth.header";
 
 export default defineComponent({
   name: "btcrecieve",
@@ -75,8 +75,8 @@ export default defineComponent({
   },
 
   methods: {
-    async userstatus() {
-      await axios({
+     userstatus() {
+      return axios({
         method: "get",
         url: "/auth/whoami",
         withCredentials: true,
@@ -87,11 +87,12 @@ export default defineComponent({
           }
         })
         .catch((error) => {
+          console.log(error)
          
         });
     },
-    async getbtcaddress() {
-      await axios({
+     getbtcaddress() {
+      return axios({
         method: "get",
         url: "/btc/receive",
         withCredentials: true,
@@ -103,6 +104,7 @@ export default defineComponent({
           }
         })
         .catch((error) => {
+          console.log(error)
           this.$router.push("/login");
         });
     },

@@ -1,3 +1,4 @@
+
 <template>
   <div class="bg-gray-300">
     <MainHeaderTop />
@@ -11,8 +12,8 @@
             <button
               class="flex py-2 px-4 shadow-md no-underline rounded-full text-white font-sans hover:text-white text-sm bg-zinc-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2"
             >
-              <div class="px-2">{{ vendor_orders_new }}</div>
-              <div class>New Orders</div>
+              <span class="px-2">{{ vendor_orders_new }}</span>
+              <span class>New Orders</span>
             </button>
           </router-link>
         </div>
@@ -31,8 +32,8 @@
             <button
               class="flex py-2 px-4 shadow-md text-sm no-underline rounded-full bg-zinc-600 hover:bg-zinc-400 text-white font-sans hover:text-white focus:outline-none active:shadow-none mr-2"
             >
-              <div class="px-2">{{ vendor_orders_accepted }}</div>
-              <div class>Waiting on Shipment</div>
+              <span class="px-2">{{ vendor_orders_accepted }}</span>
+              <span class>Waiting on Shipment</span>
             </button>
           </router-link>
         </div>
@@ -51,8 +52,8 @@
             <button
               class="flex py-2 px-4 shadow-md no-underline rounded-full bg-zinc-600 hover:bg-zinc-400 hover:text-white text-white font-sans text-sm btn-primary focus:outline-none active:shadow-none mr-2"
             >
-              <div class="px-2">{{ vendor_orders_shipped }}</div>
-              <div class>Shipped</div>
+              <span class="px-2">{{ vendor_orders_shipped }}</span>
+              <span class>Shipped</span>
             </button>
           </router-link>
         </div>
@@ -71,8 +72,8 @@
             <button
               class="flex py-2 px-4 shadow-md no-underline rounded-full bg-zinc-600 hover:bg-zinc-400 hover:text-white text-white font-sans text-sm btn-primary focus:outline-none active:shadow-none mr-2"
             >
-              <div class="px-2">{{ vendor_orders_finalized }}</div>
-              <div class>Finalized</div>
+              <span class="px-2">{{ vendor_orders_finalized }}</span>
+              <span class>Finalized</span>
             </button>
           </router-link>
         </div>
@@ -91,8 +92,8 @@
             <button
               class="flex py-2 px-4 shadow-md no-underline rounded-full bg-zinc-600 hover:bg-zinc-400 hover:text-white text-white font-sans text-sm btn-primary focus:outline-none active:shadow-none mr-2"
             >
-              <div class="px-2">{{ vendor_orders_request_cancel }}</div>
-              <div class>Request Cancel</div>
+              <span class="px-2">{{ vendor_orders_request_cancel }}</span>
+              <span class>Request Cancel</span>
             </button>
           </router-link>
         </div>
@@ -170,6 +171,8 @@ import MainHeaderBottom from "../../../layouts/headers/MainHeaderBottom.vue";
 import MainHeaderVendor from "../../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../../layouts/footers/FooterMain.vue";
 
+
+
 export default defineComponent({
   name: "vendororderscancel",
 
@@ -186,14 +189,14 @@ export default defineComponent({
       date: Date.now(),
       tab: [],
       orders: [],
-      vendor_orders_new: "",
-      vendor_orders_accepted: "",
-      vendor_orders_shipped: "",
-      vendor_orders_finalized: "",
-      vendor_orders_finalized_early: "",
-      vendor_orders_request_cancel: "",
-      vendor_orders_cancelled: "",
-      vendor_orders_dispute: "",
+      vendor_orders_new: 0,
+      vendor_orders_accepted: 0,
+      vendor_orders_shipped: 0,
+      vendor_orders_finalized: 0,
+      vendor_orders_finalized_early: 0,
+      vendor_orders_request_cancel: 0,
+      vendor_orders_cancelled: 0,
+      vendor_orders_dispute: 0,
     };
   },
 
@@ -204,8 +207,8 @@ export default defineComponent({
 
   methods: {
     // gets the user orders
-    async getuserorders() {
-      await axios({
+     getuserorders() {
+      return axios({
         method: "get",
         url: "/vendororders/requestcancel",
         withCredentials: true,
@@ -215,12 +218,12 @@ export default defineComponent({
           this.orders = response.data;
         }
       }).catch((error) => {
-        
+        console.log(error)
         });
     },
     // rejects the orders
-    async rejectorder(uuid) {
-      await axios({
+     rejectorder(uuid) {
+      return axios({
         method: "post",
         url: "/vendororders/new/reject/" + uuid,
         withCredentials: true,
@@ -236,12 +239,12 @@ export default defineComponent({
           });
         }
       }).catch((error) => {
-         
+        console.log(error)
         });
     },
     // accepts the orders
-    async acceptorder(uuid) {
-      await axios({
+     acceptorder(uuid) {
+      return axios({
         method: "put",
         url: "/vendororders/new/accept/" + uuid,
         withCredentials: true,
@@ -257,12 +260,12 @@ export default defineComponent({
           });
         }
       }).catch((error) => {
-        
+        console.log(error)
         });
     },
     // gets the top bars count for orders
-    async getuserneworderscount() {
-      await axios({
+     getuserneworderscount() {
+      return axios({
         method: "get",
         url: "/vendororders/count",
         withCredentials: true,
@@ -281,13 +284,12 @@ export default defineComponent({
           this.vendor_orders_dispute = response.data.vendor_orders_dispute;
         }
       }).catch((error) => {
-        
+        console.log(error)
         });
     },
     // date conversion
     relativeDate(value) {
-      var d = value;
-      var e = new Date(d).valueOf();
+      let e = new Date(value).valueOf();
       return formatDistance(e, new Date());
     },
   },

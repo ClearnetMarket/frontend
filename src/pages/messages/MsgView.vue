@@ -1,3 +1,4 @@
+
 <template>
   <div class="bg-gray-300">
     <MainHeaderTop />
@@ -13,7 +14,7 @@
               <div class="text-[18px] mb-5">Message Center</div>
 
               <div v-for="userobject in userlist">
-                <div v-if="userobject.post_id == postid">
+                <div v-if="userobject.post_id === postid">
                   <router-link
                     :to="{
                       name: 'MsgView',
@@ -24,7 +25,7 @@
                       class="grid grid-cols-12 mb-5 border-y-1 border rounded-md bg-blue-300 p-2 hover:bg-gray-100"
                     >
                       <div class="col-span-6">
-                        <div v-if="userobject.user_one == user.user_name">
+                        <div v-if="userobject.user_one === user.user_name">
                           {{ userobject.user_two }}
                         </div>
                         <div v-else>{{ userobject.user_one }}</div>
@@ -35,8 +36,8 @@
                     </div>
                   </router-link>
                 </div>
-                <div v-if="userobject.post_id != postid">
-                  <div v-if="userobject.read == 0">
+                <div v-if="userobject.post_id !== postid">
+                  <div v-if="userobject.read === 0">
                     <router-link
                       :to="{
                         name: 'MsgView',
@@ -47,7 +48,7 @@
                         class="grid grid-cols-12 mb-5 border-y-1 rounded-md p-2 hover:bg-gray-100"
                       >
                         <div class="col-span-6">
-                          <div v-if="userobject.user_one == user.user_name">
+                          <div v-if="userobject.user_one === user.user_name">
                             {{ userobject.user_two }}
                           </div>
                           <div v-else>{{ userobject.user_one }}</div>
@@ -58,7 +59,7 @@
                       </div>
                     </router-link>
                   </div>
-                  <div v-if="userobject.read == 1">
+                  <div v-if="userobject.read === 1">
                     <router-link
                       :to="{
                         name: 'MsgView',
@@ -69,7 +70,7 @@
                         class="grid grid-cols-12 mb-5 border-y-1 bg-yellow-300 rounded-md p-2 hover:bg-gray-100"
                       >
                         <div class="col-span-6">
-                          <div v-if="userobject.user_one == user.user_name">
+                          <div v-if="userobject.user_one === user.user_name">
                             {{ userobject.user_two }}
                           </div>
                           <div v-else>{{ userobject.user_one }}</div>
@@ -90,7 +91,7 @@
               class="grid grid-cols-12 gap-4 mb-4 border border-1 bg-white rounded-md shadow-md text-gray-700 p-5"
             >
               <div class="col-span-2">
-                <img class="w-full" src="{{itemforsale.image_one_url}}" />
+                <img alt="" class="w-full" src="{{ itemforsale.image_one_url }}" />
               </div>
               <div class="col-span-10">
                 <div class="font-bold text-[18px]">
@@ -162,7 +163,7 @@
               </div>
             </div>
             <div class="">
-              <div v-for="comment in mainpostcomments">
+              <div v-for="comment in mainpostcomments" :key="comment.id">
                 <div class="grid grid-cols-12 p-5 border-b border-gray-400">
                   <div
                     class="col-span-12 text-gray-600"
@@ -200,17 +201,30 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import axios from "axios";
-import { ref } from "vue";
-import { mapGetters } from "vuex";
+import { mapGetters} from "vuex";
 import { useRoute } from "vue-router";
 import { formatDistance } from "date-fns";
-import { notify } from "@kyvg/vue3-notification";
 import authHeader from "../../services/auth.header";
 import MainHeaderTop from "../../layouts/headers/MainHeaderTop.vue";
 import MainHeaderMid from "../../layouts/headers/MainHeaderMid.vue";
 import MainHeaderBottom from "../../layouts/headers/MainHeaderBottom.vue";
 import MainHeaderVendor from "../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../layouts/footers/FooterMain.vue";
+
+/**
+ *
+ @typedef {Object} mainpost.user_one_uuid
+ @typedef {Object} mainpost.body
+ @typedef {Object} mainpost.timestamp
+ @typedef {Object} mainpost.user_one
+ @typedef {Object} mainpost.user_one_uuid
+ @typedef {Object} itemforsale.shipping_info_2
+ @typedef {Object} itemforsale.origin_country_name
+ @typedef {Object} itemforsale.image_one_url
+ @typedef {Object} userobject.post_id
+ *
+ */
+
 
 export default defineComponent({
   name: "MsgView",
@@ -222,7 +236,7 @@ export default defineComponent({
     MainFooter,
   },
   watch: {
-    $route() {
+    '$route'() {
       this.postid = this.$route.params.postid;
       this.getmainpost();
     },
@@ -237,12 +251,14 @@ export default defineComponent({
       date: Date.now(),
       loaded: false,
       itemforsale: [],
-      order: [],
-      postid: "",
-      item_uuid: "",
-      order_uuid: "",
-      mainpost: [],
+      userlist: [],
+      user:[],
+      order: null,
+      mainpost: null,
       mainpostcomments: [],
+      postid: null,
+      item_uuid: undefined,
+      order_uuid: undefined,
       SendMsgForm: {
         msginfo: "",
       },
@@ -251,17 +267,15 @@ export default defineComponent({
   computed: {
     ...mapGetters(["user"]),
   },
-
   methods: {
       // get the date conversion
     relativeDate(value) {
-      var d = value;
-      var e = new Date(d).valueOf();
+      let e = new Date(value).valueOf();
       return formatDistance(e, new Date());
     },
     // get the main post of the contect from api
-    async getmainpost() {
-      await axios({
+     getmainpost() {
+      return axios({
         method: "get",
         url: "/msg/main/post/" + this.postid,
         withCredentials: true,
@@ -278,13 +292,13 @@ export default defineComponent({
           this.getmainpostcomments();
           this.loaded = true;
         })
-        .catch((error) => {
-         
-        });
+          .catch((error) => {
+            console.log(error)
+          });
     },
     // get the item
-    async gettheitem() {
-      await axios({
+     gettheitem() {
+      return axios({
         method: "get",
         url: "/item/" + this.item_uuid,
         withCredentials: true,
@@ -295,42 +309,14 @@ export default defineComponent({
             this.itemforsale = response.data;
           }
         })
-        .catch((error) => {  });
-    },
-    // gets the order of the msg
-    async gettheorder() {
-      if (user_one_uuid == user.uuid) {
-        await axios({
-          method: "get",
-          url: "/orders/vendor/" + this.order_uuid,
-          withCredentials: true,
-          headers: authHeader(),
-        })
-          .then((response) => {
-            if ((response.status = 200)) {
-              this.order = response.data;
-            }
-          })
-          .catch((error) => { });
-      }
-      if (user_two_uuid == user.uuid) {
-        await axios({
-          method: "get",
-          url: "/orders/" + this.order_uuid,
-          withCredentials: true,
-          headers: authHeader(),
-        })
-          .then((response) => {
-            if ((response.status = 200)) {
-              this.order = response.data;
-            }
-          })
-          .catch((error) => { });
-      }
+          .catch((error) => {
+            console.log(error)
+          });
     },
     // gets coments of main post
-    async getmainpostcomments() {
-      await axios({
+
+     getmainpostcomments() {
+      return axios({
         method: "get",
         url: "/msg/main/comment/" + this.postid,
         withCredentials: true,
@@ -339,11 +325,13 @@ export default defineComponent({
         .then((response) => {
           this.mainpostcomments = response.data;
         })
-       .catch((error) => { });
+       .catch((error) => {
+         console.log(error)
+       });
     },
     // gets the count of posts
-    async getcountofusers() {
-      await axios({
+     getcountofusers() {
+      return axios({
         method: "get",
         url: "/msg/main/comment/" + this.postid,
         withCredentials: true,
@@ -352,11 +340,11 @@ export default defineComponent({
         .then((response) => {
           this.other_user_count = response.data.get_count;
         })
-        .catch((error) => {});
+        .catch(() => {});
     },
     // gets the msds of the users
-    async getmsgsofusers() {
-      await axios({
+     getmsgsofusers() {
+      return axios({
         method: "get",
         url: "/msg/msgs/all",
         withCredentials: true,
@@ -365,11 +353,13 @@ export default defineComponent({
         .then((response) => {
           this.userlist = response.data;
         })
-        .catch((error) => {});
+          .catch((error) => {
+            console.log(error)
+          });
     },
     //sends a comment to the api
-    async sendcomment(payLoad: { body: string }) {
-      await axios({
+     sendcomment(payLoad: { body: string }) {
+      return axios({
         method: "post",
         url: "/msg/create/comment/" + this.postid,
         data: payLoad,
@@ -384,9 +374,10 @@ export default defineComponent({
             this.getmainpost();
           }
         })
-        .catch((error) => {});
+          .catch((error) => {
+            console.log(error)
+          });
     },
-    //payload for submitting a comment
     onSubmit() {
       const payLoad = {textbody: this.SendMsgForm.msginfo}
       this.sendcomment(payLoad);

@@ -1,10 +1,11 @@
+
 <template>
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
 
   <div v-if="user">
-    <MainHeaderVendor v-show="user.user_admin == 1" />
+    <MainHeaderVendor v-show="user.user_admin === 1" />
   </div>
 
   <div class="container max-w-7xl mx-auto px-10 wrapper">
@@ -77,8 +78,7 @@
         </div>
       </router-link>
 
-     
-           <router-link :to="{name: 'userprofile', params: {uuid: user.user_id }}">
+           <router-link :to="{name: 'userprofile', params: {uuid: user_id }}">
         <div
           class="border border-1 rounded-md p-5 hover:bg-gray-100"
           style="cursor: pointer"
@@ -129,7 +129,6 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import axios from "axios";
-import { ref } from "vue";
 import MainHeaderTop from "../../../layouts/headers/MainHeaderTop.vue";
 import MainHeaderMid from "../../../layouts/headers/MainHeaderMid.vue";
 import MainHeaderBottom from "../../../layouts/headers/MainHeaderBottom.vue";
@@ -151,6 +150,7 @@ export default defineComponent({
     return {
       loaded_user: false,
       user: [],
+      user_id: null
 
     };
   },
@@ -159,8 +159,8 @@ export default defineComponent({
   },
 
   methods: {
-    async userstatus() {
-      await axios({
+     userstatus() {
+      return axios({
         method: "get",
         url: "/auth/whoami",
         withCredentials: true,
@@ -168,13 +168,14 @@ export default defineComponent({
       }).then((response) => {
         if ((response.status = 200)) {
           this.user = response.data.user;
+          this.user_id = response.data.user.user_id;
           this.loaded_user = true;
   
         }
       });
     },
-    async userprofile() {
-      await axios({
+     userprofile() {
+      return axios({
         method: "get",
         url: "/profile/profile_home",
         withCredentials: true,

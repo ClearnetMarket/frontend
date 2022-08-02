@@ -11,7 +11,7 @@
       </div>
       <div class="flex mr-5">
         <div v-if="user" class="flex">
-          <div v-show="user.user_admin == 0">
+          <div v-show="user.user_admin === 0">
             <router-link :to="{ name: 'sell' }">
               <button
                 class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mx-3"
@@ -95,12 +95,11 @@ export default defineComponent({
       localStorage.removeItem("user_token");
       localStorage.removeItem("auth_token");
       localStorage.clear();
-       this.$store.dispatch("user", null);
-      this.$router.go({name: "home" });
-     
-        
+      this.$store.dispatch("user", null);
+      this.$router.push(
+          {name: "home" }
+      );
     },
-    
   },
 });
 </script>

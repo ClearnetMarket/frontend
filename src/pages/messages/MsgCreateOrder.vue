@@ -1,3 +1,4 @@
+
 <template>
   <MainHeaderTop />
   <MainHeaderMid />
@@ -13,7 +14,7 @@
       <div class="col-span-9">
         <div class="grid grid-cols-12 gap-4 border border-1 p-4 mb-4">
           <div class="col-span-2">
-            <img class="w-full" src="{{itemforsale.image_one_url}}" />
+            <img alt="" class="w-full" src="{{itemforsale.image_one_url}}" />
           </div>
           <div class="col-span-10">
             <div class="font-bold text-[18px]">
@@ -72,11 +73,10 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import axios from "axios";
-import { ref } from "vue";
 import { mapGetters } from "vuex";
 import { useRoute } from "vue-router";
 import useValidate from "@vuelidate/core";
-import { required, email, minLength, sameAs } from "@vuelidate/validators";
+import { required, minLength } from "@vuelidate/validators";
 import { notify } from "@kyvg/vue3-notification";
 import authHeader from "../../services/auth.header";
 import MainHeaderTop from "../../layouts/headers/MainHeaderTop.vue";
@@ -106,8 +106,8 @@ export default defineComponent({
       v$: useValidate(),
       itemforsale: [],
       other_user: [],
-      other_user_uuid: "",
-      item_uuid: "",
+      other_user_uuid: null,
+      item_uuid: null,
       SendMsgForm: {
         msginfo: "",
       },
@@ -124,8 +124,8 @@ export default defineComponent({
     ...mapGetters(["user"]),
   },
   methods: {
-    async gettheitem() {
-      await axios({
+     gettheitem() {
+      return axios({
         method: "get",
         url: "/item/" + this.item_uuid,
         withCredentials: true,
@@ -134,11 +134,13 @@ export default defineComponent({
         if ((response.status = 200)) {
           this.itemforsale = response.data;
         }
-      }) .catch((error) => {});  
+      }) .catch((error) => {
+        console.log(error)
+      });
     },
 
-    async getotheruser() {
-      await axios({
+     getotheruser() {
+      return axios({
         method: "get",
         url: "/info/user-info/" + this.other_user_uuid,
         withCredentials: true,
@@ -148,11 +150,13 @@ export default defineComponent({
           this.other_user = response.data;
         }
       })
-    .catch((error) => {});
+    .catch((error) => {
+      console.log(error)
+      });
     },
 
-    async getmsgsofusers() {
-      await axios({
+     getmsgsofusers() {
+      return axios({
         method: "get",
         url: "/msg/count",
         withCredentials: true,
@@ -160,10 +164,10 @@ export default defineComponent({
         .then((response) => {
           this.userlist = response.data;
         })
-        .catch((error) => {});
+        .catch((error) => {console.log(error)});
     },
-    async getcountofusers() {
-      await axios({
+     getcountofusers() {
+      return axios({
         method: "get",
         url: "/msg/msgs/all",
         withCredentials: true,
@@ -171,15 +175,17 @@ export default defineComponent({
         .then((response) => {
           this.other_user_count = response.data.get_count;
         })
-     .catch((error) => {}); 
+     .catch((error) => {
+       console.log(error)
+     });
     },
-    async sendMessage(payLoad: {
+     sendMessage(payLoad: {
       order_uuid: string;
       user_two_uuid: string;
       body: string;
       item_uuid: string;
     }) {
-      await axios({
+      return axios({
         method: "post",
         url: "/msg/create",
         data: payLoad,
@@ -199,7 +205,9 @@ export default defineComponent({
             });
           }
         })
-       .catch((error) => {});
+       .catch((error) => {
+         console.log(error)
+       });
     },
 
     onSubmit() {

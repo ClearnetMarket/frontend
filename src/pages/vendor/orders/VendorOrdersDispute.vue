@@ -70,14 +70,17 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import axios from "axios";
-import { notify } from "@kyvg/vue3-notification";
 import { mapGetters } from "vuex";
+import { formatDistance } from "date-fns";
 import authHeader from "../../../services/auth.header";
+
 import MainHeaderTop from "../../../layouts/headers/MainHeaderTop.vue";
 import MainHeaderMid from "../../../layouts/headers/MainHeaderMid.vue";
 import MainHeaderBottom from "../../../layouts/headers/MainHeaderBottom.vue";
 import MainHeaderVendor from "../../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../../layouts/footers/FooterMain.vue";
+
+
 export default defineComponent({
   name: "userordersdisputed",
 
@@ -93,8 +96,9 @@ export default defineComponent({
   },
   data() {
     return {
-      orders: "",
-      dispute_count: "",
+      orders: [],
+      dispute: null,
+      dispute_count: 0,
     };
   },
 
@@ -106,8 +110,8 @@ export default defineComponent({
 
   methods: {
     // gets the count of how many disputes
-    async getdisputescount() {
-      await axios({
+     getdisputescount() {
+      return axios({
         method: "get",
         url: "/vendor/new-disputes-count",
         withCredentials: true,
@@ -119,8 +123,8 @@ export default defineComponent({
       });
     },
     // gets the disputed orders
-    async getdisputedorders() {
-      await axios({
+     getdisputedorders() {
+      return axios({
         method: "get",
         url: "/vendororders/disputed",
         withCredentials: true,
@@ -131,8 +135,8 @@ export default defineComponent({
         }
       });
     },
-    async deleteordernotice() {
-      await axios({
+     deleteordernotice() {
+      return axios({
         method: "delete",
         url: "/vendor/new-orders-count/markasread",
         withCredentials: true,
@@ -142,6 +146,12 @@ export default defineComponent({
        
         }
       });
+    },
+    // date conversion
+    relativeDate(value) {
+
+      let e = new Date(value).valueOf();
+      return formatDistance(e, new Date());
     },
   },
 });

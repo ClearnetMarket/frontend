@@ -1,9 +1,10 @@
+
 <template>
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
   <div v-if="user">
-    <MainHeaderVendor v-show="user.user_admin == 1" />
+    <MainHeaderVendor v-show="user.user_admin === 1" />
   </div>
   <div class="max-w-7xl mx-auto px-10 pb-36 wrapper">
     <div class="grid grid-cols-1 w-full gap-4">
@@ -103,13 +104,13 @@
                         :key="item.id"
                         v-model="item.selected_shipping"
                       >
-                        <option value="1" v-if="item.shipping_free == true">
+                        <option value="1" v-if="item.shipping_free === true">
                           {{ item.shipping_info_0 }}
                         </option>
-                        <option value="2" v-if="item.shipping_two == true">
+                        <option value="2" v-if="item.shipping_two === true">
                           {{ item.shipping_info_2 }}
                         </option>
-                        <option value="3" v-if="item.shipping_three == true">
+                        <option value="3" v-if="item.shipping_three === true">
                           {{ item.shipping_info_3 }}
                         </option>
                       </select>
@@ -157,7 +158,7 @@
         </div>
 
         <div v-if="shopping_cart_items_saved_list">
-          <div v-for="(item, index) in shopping_cart_items_saved_list">
+          <div v-for="item in shopping_cart_items_saved_list">
             <div class="hover:bg-gray-100">
               <div class="grid grid-cols-12 px-1 py-1">
                 <!-- product -->
@@ -237,7 +238,7 @@
               >
             </div>
             <div class="col-span-12">
-              <div v-if="order_summary_shipping_cost == 0">
+              <div v-if="order_summary_shipping_cost === 0">
                 <div v-if="order_summary_count > 0">
                   <div class="text-orange-500">Free Shipping</div>
                 </div>
@@ -283,6 +284,20 @@ import MainHeaderMid from "../../layouts/headers/MainHeaderMid.vue";
 import MainHeaderBottom from "../../layouts/headers/MainHeaderBottom.vue";
 import MainHeaderVendor from "../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../layouts/footers/FooterMain.vue";
+import {mapGetters} from "vuex";
+
+/**
+ *
+ @typedef {Object} item.selected_shipping
+ @typedef {Object} item.shipping_free
+ @typedef {Object} item.quantity_of_item
+ @typedef {Object} item.shipping_two
+ @typedef {Object} item.shipping_info_3
+ @typedef {Object} item.vendor_supply
+ @typedef {Object} item.shipping_three
+ @typedef {Object} item.shipping_three
+ *
+ */
 
 export default defineComponent({
   name: "Cart",
@@ -293,14 +308,16 @@ export default defineComponent({
     MainHeaderVendor,
     MainFooter,
   },
-
+  computed: {
+    ...mapGetters(["user"]),
+  },
   data() {
     return {
       shopping_cart_items_list: [],
       shopping_cart_items_saved_list: [],
-      order_summary_count: "",
+      order_summary_count: 0,
       order_summary_cost: "",
-      order_summary_shipping_cost: "",
+      order_summary_shipping_cost: 0,
       order_summary_shipping_and_price_cost: "",
     };
   },
@@ -313,8 +330,8 @@ export default defineComponent({
 
   methods: {
     // gets the item to update price and quanity for cart
-    async get_updated_prices_and_quantity() {
-      await axios({
+     get_updated_prices_and_quantity() {
+      return axios({
         method: "get",
         url: "/checkout/update/price",
         headers: authHeader(),
@@ -324,13 +341,13 @@ export default defineComponent({
           }
         })
         .catch((error) => {
+          console.log(error)
          
         });
     },
-    // was a bug so it would set items to one
-    // not used currently
-    async set_amount_to_one() {
-      await axios({
+/*    // was a bug it would set items to one. not used currently
+     set_amount_to_one() {
+      return axios({
         method: "post",
         url: "/checkout/setamount/one",
         headers: authHeader(),
@@ -340,13 +357,14 @@ export default defineComponent({
           }
         })
        .catch((error) => {
+         console.log(error)
        
         });
-    },
+    },*/
 
     // gets the items in the shopping cart
-    async get_shopping_cart_items() {
-      await axios({
+     get_shopping_cart_items() {
+      return axios({
         method: "get",
         url: "/checkout/data/incart",
         headers: authHeader(),
@@ -359,13 +377,13 @@ export default defineComponent({
             this.shopping_cart_items_list = null;
           }
         })
-        .catch((error) => {
+        .catch(() => {
           this.shopping_cart_items_list = null;
         });
     },
     // gets items saved for later
-    async get_shopping_cart_items_saved_for_later() {
-      await axios({
+     get_shopping_cart_items_saved_for_later() {
+      return axios({
         method: "get",
         url: "/checkout/data/saved",
         headers: authHeader(),
@@ -380,13 +398,13 @@ export default defineComponent({
             }
           }
         })
-        .catch((error) => {
+        .catch(() => {
           this.shopping_cart_items_saved_list = null;
         });
     },
-    // getts the " order summary" information
-    async get_shopping_cart_order_summary() {
-      await axios({
+    // gets the " order summary" information
+     get_shopping_cart_order_summary() {
+      return axios({
         method: "get",
         url: "/checkout/data/total",
         headers: authHeader(),
@@ -401,42 +419,42 @@ export default defineComponent({
               response.data.total_price;
           }
         })
-        .catch((error) => {
+        .catch(() => {
           this.shopping_cart_items_saved_list = null;
         });
     },
-    // get the item current amount
-    async currentitemamount(item, index) {
-      await axios({
+/*    // get the item current amount.  Not used currently
+     currentitemamount(item, index) {
+      return axios({
         method: "get",
         url: "/checkout/currentquantity/" + item.id,
         headers: authHeader(),
       }).then((response) => {
         return response.data.amount;
       });
-    },
+    },*/
     // changes the shipping option
-    async selectedshipping(event, item) {
+     selectedshipping(event, item) {
       this.option = event.target.value;
       let payLoad = {
         new_shipping_option: this.option,
       };
-      await axios({
+      return axios({
         method: "put",
         url: "/checkout/changeshippingoption/" + item.id,
         headers: authHeader(),
         data: payLoad,
-      }).then((response) => {
+      }).then(() => {
         this.get_shopping_cart_order_summary();
       });
     },
     // update item amount
-    async itemamount(event, item) {
+     itemamount(event, item) {
       this.quantity = event.target.value;
       let payLoad = {
         new_amount: this.quantity,
       };
-      await axios({
+      return axios({
         method: "put",
         url: "/checkout/updateamount/" + item.id,
         headers: authHeader(),
@@ -454,7 +472,7 @@ export default defineComponent({
             this.get_shopping_cart_order_summary();
           }
         })
-        .catch((error) => {
+        .catch(() => {
           notify({
             title: "Freeport Error",
             text: "Error posting information.",
@@ -463,8 +481,8 @@ export default defineComponent({
         });
     },
     // delete an item
-    async deleteitem(item) {
-      await axios({
+     deleteitem(item) {
+      return axios({
         method: "delete",
         url: "/checkout/delete/" + item.id,
         headers: authHeader(),
@@ -481,7 +499,7 @@ export default defineComponent({
             this.get_shopping_cart_order_summary();
           }
         })
-        .catch((error) => {
+        .catch(() => {
           notify({
             title: "Freeport Error",
             text: "Error posting information.",
@@ -490,8 +508,8 @@ export default defineComponent({
         });
     },
     // save an item for later
-    async saveforlateritem(item) {
-      await axios({
+     saveforlateritem(item) {
+      return axios({
         method: "put",
         url: "/checkout/saveforlater/" + item.id,
         headers: authHeader(),
@@ -508,7 +526,7 @@ export default defineComponent({
             this.get_shopping_cart_order_summary();
           }
         })
-        .catch((error) => {
+        .catch(() => {
           notify({
             title: "Freeport Error",
             text: "Error posting information.",
@@ -517,8 +535,8 @@ export default defineComponent({
         });
     },
     // move item to sart from saved
-    async movetocartitem(item) {
-      await axios({
+     movetocartitem(item) {
+      return axios({
         method: "put",
         url: "/checkout/movecartitem/" + item.id,
         headers: authHeader(),
@@ -535,7 +553,7 @@ export default defineComponent({
             this.get_shopping_cart_order_summary();
           }
         })
-        .catch((error) => {
+        .catch(() => {
           notify({
             title: "Freeport Error",
             text: "Error posting information.",

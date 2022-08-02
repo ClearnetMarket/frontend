@@ -1,3 +1,4 @@
+
 <template>
   <MainHeaderTop />
   <MainHeaderMid />
@@ -135,7 +136,6 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import axios from "axios";
-import { ref } from "vue";
 import { notify } from "@kyvg/vue3-notification";
 import { mapGetters } from "vuex";
 import MainHeaderTop from "../../../layouts/headers/MainHeaderTop.vue";
@@ -143,7 +143,9 @@ import MainHeaderMid from "../../../layouts/headers/MainHeaderMid.vue";
 import MainHeaderBottom from "../../../layouts/headers/MainHeaderBottom.vue";
 import MainHeaderVendor from "../../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../../layouts/footers/FooterMain.vue";
-import authHeader from "../../../services/auth.header.ts";
+import authHeader from "../../../services/auth.header";
+import useValidate from "@vuelidate/core";
+import { required, minLength } from "@vuelidate/validators";
 
 export default defineComponent({
   name: "btcsend",
@@ -164,7 +166,7 @@ export default defineComponent({
       wallet: {
         btc_address: "",
         btc_decscription: "",
-        btc_amount: "",
+        btc_amount: 0,
         pin: "",
       },
     };
@@ -183,8 +185,8 @@ export default defineComponent({
   },
 
   methods: {
-    async userstatus() {
-      await axios({
+     userstatus() {
+      return axios({
         method: "get",
         url: "/auth/whoami",
         withCredentials: true,
@@ -195,11 +197,12 @@ export default defineComponent({
           }
         })
         .catch((error) => {
+          console.log(error)
           this.$router.push("/login");
         });
     },
-    async getbtcbalance() {
-      await axios({
+     getbtcbalance() {
+      return axios({
         method: "get",
         url: "/btc/balance",
         headers: authHeader(),
@@ -209,13 +212,13 @@ export default defineComponent({
         }
       });
     },
-    async SendCoin(payLoad: {
+     SendCoin(payLoad: {
       btc_address: string;
       btc_decscription: string;
       btc_amount: string;
       pin: string;
     }) {
-      await axios({
+      return axios({
         method: "post",
         url: "/btc/send",
         data: payLoad,
@@ -238,6 +241,7 @@ export default defineComponent({
           }
         })
         .catch((error) => {
+          console.log(error)
           notify({
             title: "Freeport Error",
             text: "Error With Sending Money",
@@ -245,7 +249,7 @@ export default defineComponent({
           });
         });
     },
-    async onSubmit() {
+     onSubmit() {
       const payLoad = {
         btc_address: this.wallet.btc_address,
         btc_decscription: this.wallet.btc_decscription,
@@ -265,7 +269,7 @@ export default defineComponent({
           text: "Success Sending Coin. It will be sent shortly.",
           type: "success",
         });
-        await this.SendCoin(payLoad);
+         this.SendCoin(payLoad);
       }
     },
   },

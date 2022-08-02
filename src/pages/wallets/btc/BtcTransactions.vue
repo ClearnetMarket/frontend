@@ -1,3 +1,4 @@
+
 <template>
   <MainHeaderTop />
   <MainHeaderMid />
@@ -63,7 +64,7 @@
           v-if="t.category === 1"
           class="grid grid-cols-12 grid-rows-1 border-b  rounded-md  m-1 p-1"
           :key="t.id"
-          :name="t.id"
+
         >
           <div class="col-span-2">{{ relativeDate(t.created) }}</div>
           <div class="col-span-6">Wallet Created</div>
@@ -75,7 +76,7 @@
           v-if="t.category === 2"
           class="grid grid-cols-12 grid-rows-3  border-b rounded-md m-1 p-1"
           :key="t.id"
-          :name="t.id"
+
         >
           <div class="col-span-2 row-span-1">{{ relativeDate(t.created) }}</div>
           <div class="col-span-6 row-span-3">
@@ -93,7 +94,7 @@
           v-if="t.category === 3"
           class="grid grid-cols-12 grid-rows-3 border-b rounded-md m-1 p-1"
           :key="t.id"
-          :name="t.id"
+
         >
           <div class="col-span-2 row-span-1">{{ relativeDate(t.created) }}</div>
           <div class="col-span-6 row-span-3">
@@ -123,7 +124,7 @@
           v-if="t.category === 4"
           class="grid grid-cols-12 grid-rows-2 border-b m-1 p-1"
           :key="t.id"
-          :name="t.id"
+
         >
           <div class="col-span-2 row-span-1">{{ relativeDate(t.created) }}</div>
           <div class="col-span-6 row-span-1">
@@ -144,7 +145,7 @@
           v-if="t.category === 5"
           class="grid grid-cols-12 grid-rows-2 border-b m-1 p-1"
           :key="t.id"
-          :name="t.id"
+
         >
           <div class="col-span-2 row-span-1">{{ relativeDate(t.created) }}</div>
           <div class="col-span-6 row-span-2">
@@ -165,7 +166,7 @@
           v-if="t.category === 6"
           class="grid grid-cols-12 grid-rows-2 border-b rounded-md m-1 p-1"
           :key="t.id"
-          :name="t.id"
+
         >
           <div class="col-span-2 row-span-1">{{ relativeDate(t.created) }}</div>
           <div class="col-span-6 row-span-2">
@@ -186,7 +187,7 @@
           v-if="t.category === 7"
           class="grid grid-cols-4 grid-rows-2  rounded-md m-1 p-1"
           :key="t.id"
-          :name="t.id"
+
         >
           <div class="col-span-2 row-span-1">{{ relativeDate(t.created) }}</div>
           <div class="col-span-6 row-span-2">
@@ -206,7 +207,7 @@
           v-if="t.category === 8"
           class="grid grid-cols-12 grid-rows-2  bordered rounded-md m-1 p-1"
           :key="t.id"
-          :name="t.id"
+
         >
           <div class="col-span-2 row-span-1">{{ relativeDate(t.created) }}</div>
           <div class="col-span-6 row-span-2">
@@ -226,7 +227,7 @@
           v-if="t.category === 9"
           class="grid grid-cols-12 grid-rows-2 bordered rounded-md m-1 p-1"
           :key="t.id"
-          :name="t.id"
+
         >
           <div class="col-span-2 row-span-1">{{ relativeDate(t.created) }}</div>
           <div class="col-span-6 row-span-2">
@@ -256,16 +257,22 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import axios from "axios";
-import { ref } from "vue";
 import { mapGetters } from "vuex";
 import { formatDistance } from "date-fns";
-
 import MainHeaderTop from "../../../layouts/headers/MainHeaderTop.vue";
 import MainHeaderMid from "../../../layouts/headers/MainHeaderMid.vue";
 import MainHeaderBottom from "../../../layouts/headers/MainHeaderBottom.vue";
 import MainHeaderVendor from "../../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../../layouts/footers/FooterMain.vue";
-import authHeader from "../../../services/auth.header.ts";
+import authHeader from "../../../services/auth.header";
+
+/**
+ *
+ @typedef {Object} t.amount
+ @typedef {Object} t.commentbch
+
+ *
+ */
 
 export default defineComponent({
   name: "btctransactions",
@@ -291,8 +298,8 @@ export default defineComponent({
     ...mapGetters(["user"]),
   },
   methods: {
-    async userstatus() {
-      await axios({
+     userstatus() {
+      return axios({
         method: "get",
         url: "/auth/whoami",
         withCredentials: true,
@@ -304,12 +311,13 @@ export default defineComponent({
           }
         })
         .catch((error) => {
+          console.log(error)
           this.$router.push("/login");
         });
     },
 
-    async btctransactions() {
-      await axios({
+     btctransactions() {
+      return axios({
         method: "get",
         url: "/btc/transactions",
         withCredentials: true,
@@ -323,8 +331,7 @@ export default defineComponent({
       });
     },
     relativeDate(value) {
-      let d = value;
-      let e = new Date(d).valueOf();
+      let e = new Date(value).valueOf();
       return formatDistance(e, new Date());
     },
   },

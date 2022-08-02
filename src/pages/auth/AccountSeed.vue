@@ -1,3 +1,4 @@
+
 <template>
   <HeaderPlain />
 
@@ -76,11 +77,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import axios from "axios";
-import { ref } from "vue";
 import { notify } from "@kyvg/vue3-notification";
-
-import { mapGetters } from "vuex";
-import { useRoute } from "vue-router";
 import authHeader from "../../services/auth.header";
 import HeaderPlain from "../../layouts/headers/HeaderPlain.vue";
 
@@ -92,12 +89,12 @@ export default defineComponent({
 
   data() {
     return {
-      word1: "",
-      word2: "",
-      word3: "",
-      word4: "",
-      word5: "",
-      word6: "",
+      word1: null,
+      word2: null,
+      word3: null,
+      word4: null,
+      word5: null,
+      word6: null,
     };
   },
 
@@ -108,9 +105,8 @@ export default defineComponent({
   },
 
   methods: {
-    async userstatus() {
-      console.log();
-      await axios({
+     userstatus() {
+      return axios({
         method: "get",
         url: "/auth/whoami",
         withCredentials: true,
@@ -121,11 +117,11 @@ export default defineComponent({
             this.$store.dispatch("user", response.data.user);
           }
         })
-        .catch((error) => {});
+        .catch(() => {});
     },
 
-    async userstatusconfirmed() {
-      await axios({
+     userstatusconfirmed() {
+       axios({
         method: "get",
         url: "/auth/amiconfirmed",
         withCredentials: true,
@@ -142,7 +138,6 @@ export default defineComponent({
       axios({
         method: "get",
         url: "/auth/account-seed",
-
         withCredentials: true,
         headers: authHeader(),
       })
@@ -156,7 +151,7 @@ export default defineComponent({
             this.word6 = response.data.word6;
           }
         })
-        .catch((error) => {
+        .catch(() => {
           notify({
             title: "Authorization",
             text: "Invalid Credentials.",

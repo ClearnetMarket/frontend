@@ -8,10 +8,13 @@ import Axios from "axios";
 import Notifications from '@kyvg/vue3-notification'
 
 
-const baseURL = 'http://192.168.1.101:5000';
+const baseURL = 'http://172.29.107.64:5000';
+
 Axios.defaults.baseURL = baseURL;
+
 createApp(App)
 .use(store)
 .use(router)
+
 .use(Notifications)
 .mount("#app");

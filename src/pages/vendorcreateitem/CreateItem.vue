@@ -1,10 +1,11 @@
+
 <template>
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
 
   <div v-if="user">
-    <MainHeaderVendor v-show="user.user_admin == 1" />
+    <MainHeaderVendor v-show="user.user_admin === 1" />
   </div>
   <div class="">
     <div class="container max-w-7xl mx-auto px-10">
@@ -317,7 +318,7 @@
               <div class="flex-1"></div>
               <div class="flex-1">
                 <input
-                  type="integer"
+                  type="number"
                   placeholder="Estimated Days"
                   min="0"
                   class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -340,7 +341,7 @@
               </div>
               <div class="flex-1">
                 <input
-                  type="integer"
+                  type="number"
                   placeholder="Price"
                   min="0"
                   class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -350,7 +351,7 @@
               </div>
               <div class="flex-1">
                 <input
-                  type="integer"
+                  type="number"
                   placeholder="Estimated Days"
                   min="0"
                   class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -374,7 +375,7 @@
               </div>
               <div class="flex-1">
                 <input
-                  type="integer"
+                  type="number"
                   placeholder="Price"
                   min="0"
                   class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -384,7 +385,7 @@
               </div>
               <div class="flex-1">
                 <input
-                  type="integer"
+                  type="number"
                   placeholder="Estimated Days"
                   min="0"
                   class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -447,8 +448,7 @@ export default defineComponent({
   data() {
     return {
       UploadImages: "",
-      item_id: "",
- 
+      item_id: null,
       marketitem: Object,
       authtoken: "",
       image_main: "",
@@ -496,9 +496,9 @@ export default defineComponent({
     ...mapGetters(["user"]),
   },
   methods: {
-    async userstatus() {
+     userstatus() {
       //user Auth
-      await axios({
+      return axios({
         method: "get",
         url: "/auth/whoami",
         withCredentials: true,
@@ -510,25 +510,25 @@ export default defineComponent({
       });
     },
 
-    async CreateItem(payLoad: {
+     CreateItem(payLoad: {
       item_id: string;
       title: string;
-      exact_address: string;
+
       item_condition: string;
       item_description: string;
       category_id_0: string;
       keywords: string;
       item_count: string;
-      digital_currency_1: string;
-      digital_currency_2: string;
-      digital_currency_3: string;
+      digital_currency_1: boolean;
+      digital_currency_2: boolean;
+      digital_currency_3: boolean;
       price: string;
-      free_shipping: string;
+      free_shipping: boolean;
       free_shipping_days: string;
-      shipping_2: string;
+      shipping_2: boolean;
       shipping_2_days: string;
       shipping_2_price: string;
-      shipping_3: string;
+      shipping_3: boolean;
       shipping_3_days: string;
       shipping_3_price: string;
       shipping_to_country_one: string;
@@ -537,7 +537,7 @@ export default defineComponent({
       shipping_to_country_four: string;
     }) {
       let path = "/vendorcreateitem/create-item-main/" + this.item_id;
-      axios({
+      return axios({
         method: "POST",
         url: path,
         data: payLoad,
@@ -577,11 +577,11 @@ export default defineComponent({
       }
     },
 
-    async getItemForSale() {
+     getItemForSale() {
       // Get the item thats being modified
 
       const path = "/item/" + this.item_id;
-      await axios({
+      return axios({
         method: "get",
         url: path,
         withCredentials: true,
@@ -595,11 +595,11 @@ export default defineComponent({
             this.image_four = response.data.image_four_server;
           }
         })
-        .catch((error) => {});
+        .catch(() => {});
     },
-    async createitemtemporary() {
+     createitemtemporary() {
       // Create an Item.  // Using thi
-      await axios({
+      return axios({
         method: "GET",
         url: "/vendorcreateitem/create-item",
         withCredentials: true,
@@ -612,11 +612,11 @@ export default defineComponent({
       });
     },
 
-    async getCountryList() {
+     getCountryList() {
       // Get Countries
       const path = "/vendorcreateitem/query/country";
 
-      axios({
+      return axios({
         method: "get", //you can set what request you want to be
         url: path,
         withCredentials: true,
@@ -626,15 +626,15 @@ export default defineComponent({
           // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
           this.countryList = response.data;
         })
-        .catch((error) => {});
+        .catch(() => {});
     },
   
 
-    async getCategoryList() {
+     getCategoryList() {
       // Get Categories
       const path = "/vendorcreateitem/query/category";
 
-      await axios({
+      return axios({
         method: "get", //you can set what request you want to be
         url: path,
         withCredentials: true,
@@ -642,12 +642,12 @@ export default defineComponent({
         .then((response) => {
           this.categoryList = response.data;
         })
-        .catch((error) => {});
+        .catch(() => {});
     },
-    async getConditionList() {
+     getConditionList() {
       // Get Conditions
       const path = "/vendorcreateitem/query/condition";
-      await axios({
+      return axios({
         method: "get",
         url: path,
         withCredentials: true,
@@ -655,9 +655,9 @@ export default defineComponent({
         .then((response) => {
           this.conditionList = response.data;
         })
-        .catch((error) => {});
+        .catch(() => {});
     },
-    async onSubmit() {
+     onSubmit() {
       // Submit Data for payload
 
       const payLoad = {

@@ -1,14 +1,16 @@
+FROM node:lts
 
-FROM node:17 as build-stage
+ENV PATH /app/node_modules/.bin:$PATH
+
+RUN mkdir /app
+
+COPY package*.json /app
 
 WORKDIR /app
 
-ENV PATH /app/node_modules/.bin:$PATH
-COPY package*.json ./
+RUN npm -g install
 
 
-RUN npm install 
-COPY . .
-
-EXPOSE 3100:3000
+COPY . /app
+EXPOSE 5173
 CMD ["npm", "run", "dev"]

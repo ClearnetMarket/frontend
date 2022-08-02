@@ -1,3 +1,4 @@
+
 <template>
   <MainHeaderTop />
   <MainHeaderMid />
@@ -40,13 +41,13 @@
             </div>
             <div class="col-span-3">
               <div class="">Total</div>
-              <div v-if="order.digital_currency == 1">
+              <div v-if="order.digital_currency === 1">
                 {{ order.price_total_btc }} BTC
               </div>
-              <div v-if="order.digital_currency == 2">
+              <div v-if="order.digital_currency === 2">
                 {{ order.price_total_bch }} BCH
               </div>
-              <div v-if="order.digital_currency == 3">
+              <div v-if="order.digital_currency === 3">
                 {{ order.price_total_xmr }} XMR
               </div>
             </div>
@@ -62,18 +63,18 @@
             <div class="col-span-9">
               <div class="grid grid-cols-12">
                 <div class="col-span-12 text-[20px]">
-                  <div v-if="order.overall_status == 1">
+                  <div v-if="order.overall_status === 1">
                     Waiting to be accepted
                   </div>
-                  <div v-if="order.overall_status == 2">
+                  <div v-if="order.overall_status === 2">
                     Waiting on Shipment
                   </div>
-                  <div v-if="order.overall_status == 3">Shipped</div>
-                  <div v-if="order.overall_status == 4">Delivered</div>
-                  <div v-if="order.overall_status == 5">Finalized Early</div>
-                  <div v-if="order.overall_status == 6">Request to Cancel</div>
-                  <div v-if="order.overall_status == 7">Cancelled</div>
-                  <div v-if="order.overall_status == 8">Disputed</div>
+                  <div v-if="order.overall_status === 3">Shipped</div>
+                  <div v-if="order.overall_status === 4">Delivered</div>
+                  <div v-if="order.overall_status === 5">Finalized Early</div>
+                  <div v-if="order.overall_status === 6">Request to Cancel</div>
+                  <div v-if="order.overall_status === 7">Cancelled</div>
+                  <div v-if="order.overall_status === 8">Disputed</div>
                 </div>
                 <div class="col-span-12 text-[14px]">
                   <div class="grid grid-cols-12 pt-5">
@@ -140,10 +141,10 @@
             <div class="col-span-3">
               <div
                 v-if="
-                  order.overall_status == 3 ||
-                  order.overall_status == 2 ||
-                  order.overall_status == 4 ||
-                  order.overall_status == 8
+                  order.overall_status === 3 ||
+                  order.overall_status === 2 ||
+                  order.overall_status === 4 ||
+                  order.overall_status === 8
                 "
               >
                 <div class="my-2">
@@ -163,7 +164,7 @@
                 </div>
               </div>
               <!-- waiting on vendor acceptance order -->
-              <div v-if="order.overall_status == 1">
+              <div v-if="order.overall_status === 1">
                 <div class="my-2">
                   <button
                     class="bg-red-600 hover:bg-red-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
@@ -175,7 +176,7 @@
                 </div>
               </div>
               <!-- Accepted order -->
-              <div v-if="order.overall_status == 2">
+              <div v-if="order.overall_status === 2">
                 <div class="my-2">
                   <button
                     class="bg-red-600 hover:bg-red-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
@@ -206,7 +207,7 @@
                 </div>
               </div>
               <!-- Shipped order -->
-              <div v-if="order.overall_status == 3">
+              <div v-if="order.overall_status === 3">
                 <div class="my-2">
                   <button
                     class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
@@ -236,7 +237,7 @@
                 </div>
               </div>
               <!-- Delivered order -->
-              <div v-if="order.overall_status == 4">
+              <div v-if="order.overall_status === 4">
                 <div class="my-2">
                   <button
                     class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
@@ -257,9 +258,9 @@
                 </div>
               </div>
               <!-- Requested Cancel from vendor -->
-              <div v-if="order.overall_status == 6"></div>
+              <div v-if="order.overall_status === 6"></div>
               <!-- Disputed order -->
-              <div v-if="order.overall_status == 8">
+              <div v-if="order.overall_status === 8">
                 <router-link
                   :to="{
                     name: 'Dispute',
@@ -275,8 +276,8 @@
                 </router-link>
               </div>
               <!-- Finalized order -->
-              <div v-if="order.overall_status == 10">
-                <div v-if="order.vendor_feedback == 0">
+              <div v-if="order.overall_status === 10">
+                <div v-if="order.vendor_feedback === 0">
                   <div class="my-2">
                     <router-link
                       :to="{
@@ -308,8 +309,8 @@
         </div>
       </div>
 
-      <div v-if="order.overall_status == 10" class="pb-40">
-        <div v-if="order.vendor_feedback == 0">
+      <div v-if="order.overall_status === 10" class="pb-40">
+        <div v-if="order.vendor_feedback === 0">
           <form @submit.prevent="onSubmitFeedback">
             <div
               class="grid grid-cols-12 rounded-md border border-gray-300 mb-5 p-5"
@@ -524,7 +525,7 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import axios from "axios";
+import axios from 'axios';
 import { notify } from "@kyvg/vue3-notification";
 import { useRoute } from "vue-router";
 import authHeader from "../../services/auth.header";
@@ -534,6 +535,25 @@ import MainHeaderBottom from "../../layouts/headers/MainHeaderBottom.vue";
 import MainHeaderVendor from "../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../layouts/footers/FooterMain.vue";
 import StarRating from "../../components/star_rating/Star.vue";
+
+/**
+ *
+ @typedef {Object} order.overall_status
+ @typedef {Object} order.vendor_uuid
+ @typedef {Object} order.vendor_user_name
+ @typedef {Object} order.vendor_feedback
+ @typedef {Object} VendorRating.itemravendorrating1ting10
+ @typedef {Object} VendorRating.itemravendorrating1ting9
+ @typedef {Object} VendorRating.itemravendorrating1ting8
+ @typedef {Object} VendorRating.itemravendorrating1ting7
+ @typedef {Object} VendorRating.itemravendorrating1ting6
+ @typedef {Object} VendorRating.itemravendorrating1ting5
+ @typedef {Object} VendorRating.itemravendorrating1ting4
+ @typedef {Object} VendorRating.itemravendorrating1ting3
+ @typedef {Object} VendorRating.itemravendorrating1ting2
+ @typedef {Object} VendorRating.itemravendorrating1ting1
+ *
+ */
 
 export default defineComponent({
   name: "vendorordersview",
@@ -550,76 +570,72 @@ export default defineComponent({
   data() {
     return {
       loaded_feedback: false,
-      order: "",
-      order_id: "",
+      order: null,
+      order_id: null,
       tracking_number: "",
       carrier_name: "",
+      review: "",
+      rating_vendor: 0,
+      rating_item: 0,
+      vendoruuid: null,
+      vendortotalsales: 0,
+      vendorrating: 0,
       ItemRating: {
-        itemrating1: "",
-        itemrating2: "",
-        itemrating3: "",
-        itemrating4: "",
-        itemrating5: "",
-        itemrating6: "",
-        itemrating7: "",
-        itemrating8: "",
-        itemrating9: "",
-        itemrating10: "",
+        itemrating1: 0,
+        itemrating2: 0,
+        itemrating3: 0,
+        itemrating4: 0,
+        itemrating5: 0,
+        itemrating6: 0,
+        itemrating7: 0,
+        itemrating8: 0,
+        itemrating9: 0,
+        itemrating10: 0,
       },
       VendorRating: {
-        vendorrating1: "",
-        vendorrating2: "",
-        vendorrating3: "",
-        vendorrating4: "",
-        vendorrating5: "",
-        vendorrating6: "",
-        vendorrating7: "",
-        vendorrating8: "",
-        vendorrating9: "",
-        vendorrating10: "",
+        vendorrating1: 0,
+        vendorrating2: 0,
+        vendorrating3: 0,
+        vendorrating4: 0,
+        vendorrating5: 0,
+        vendorrating6: 0,
+        vendorrating7: 0,
+        vendorrating8: 0,
+        vendorrating9: 0,
+        vendorrating10: 0,
       },
-      review: "",
-      rating_vendor: "",
-      rating_item: "",
-      vendoruuid: "",
-      vendortotalsales: "",
-      vendorrating: "",
-      vendorrating: "",
+
     };
   },
 
   mounted() {
-    this.getuserorder();
-    this.getordertracking();
-    this.getorderfeedback();
+      let order_id_route = useRoute();
+      this.order_id = order_id_route.params.uuid;
+      this.getuserorder();
+      this.getordertracking();
+      this.getorderfeedback();
   },
 
   methods: {
     //  get vendor info for stats
-    async getvendorinfo() {
-      await axios({
-        method: "get",
-        url: "/vendor/vendoriteminfo/" + this.order.vendor_uuid,
-        withCredentials: true,
-      })
+      getvendorinfo() {
+         return axios({
+               method: "get",
+               baseURL: "/vendor/vendoriteminfo/" + this.order.vendor_uuid,
+               headers: authHeader(),
+         })
         .then((response) => {
           if ((response.status = 200)) {
             this.vendoruuid = response.data.vendoruuid;
-            this.vendorname = response.data.vendorname;
             this.vendorrating = response.data.vendorrating;
             this.vendortotalsales = response.data.vendortotalsales;
             this.loaded_feedback = true;
           }
         })
-        .catch((error) => {});
     },
     //  get the order from the params
-    async getuserorder() {
-      const order_id_route = useRoute();
-      const order_id = order_id_route.params.uuid;
-      this.order_id = order_id;
-
-      await axios({
+     getuserorder() {
+      return axios({
         method: "get",
         url: "/orders/" + this.order_id,
         withCredentials: true,
@@ -635,8 +651,8 @@ export default defineComponent({
       });
     },
     // get the feedback on vendor
-    async getorderfeedback() {
-      await axios({
+     getorderfeedback() {
+      return axios({
         method: "get",
         url: "/orders/feedback/get/" + this.order_id,
         withCredentials: true,
@@ -696,7 +712,7 @@ export default defineComponent({
         this.rating_vendor = 10;
       }
 
-      const payLoad = {
+      let payLoad = {
         itemrating: this.rating_item,
         vendorrating: this.rating_vendor,
         review: this.review,
@@ -704,12 +720,12 @@ export default defineComponent({
       this.sendFeedback(payLoad);
     },
     // send the feedback rating
-    async sendFeedback(payLoad: {
-      itemrating: string;
-      vendorrating: string;
+     sendFeedback(payLoad: {
+      itemrating: number;
+      vendorrating: number;
       review: string;
     }) {
-      await axios({
+      return axios({
         method: "post",
         url: "/orders/feedback/" + this.order.uuid,
         data: payLoad,
@@ -724,12 +740,11 @@ export default defineComponent({
               type: "success",
             });
             this.$router.push({
-              name: "item",
-              params: { id: this.itemforsale.uuid },
+              name: "userorders",
             });
           }
         })
-        .catch((error) => {
+        .catch(() => {
           notify({
             title: "Freeport Error",
             text: "Error posting information.",
@@ -738,23 +753,71 @@ export default defineComponent({
         });
     },
     // get the tracking info
-    async getordertracking() {
+     getordertracking() {
       const order_id_route = useRoute();
-      const order_id = order_id_route.params.uuid;
-      this.order_id = order_id;
-
-      await axios({
+       this.order_id = order_id_route.params.uuid;
+      return axios({
         method: "get",
         url: "/vendororders/tracking/get/" + this.order_id,
         withCredentials: true,
         headers: authHeader(),
-      }).then((response) => {
+      })
+      .then((response) => {
         if (response.status == 200) {
           this.tracking_number = response.data.tracking_number;
           this.carrier_name = response.data.carrier_name;
         }
       });
     },
+    // request to cancel an order
+    delivered(uuid)     {
+      return axios({
+        method: "get",
+        url: "/mark/delivered/" + uuid,
+        withCredentials: true,
+        headers: authHeader(),
+      })
+          .then((response) => {
+            if (response.status == 200) {}
+          });
+    },
+    // request to cancel an order
+    disputeorder(uuid) {
+      return axios({
+        method: "get",
+        url: "/mark/disputed/" + uuid,
+        withCredentials: true,
+        headers: authHeader(),
+      })
+          .then((response) => {
+            if (response.status == 200) {}
+          });
+    },
+    // request to cancel an order
+    finalize(uuid) {
+      return axios({
+        method: "get",
+        url: "/mark/finalized/" + uuid,
+        withCredentials: true,
+        headers: authHeader(),
+      })
+          .then((response) => {
+            if (response.status == 200) {}
+          });
+    },
+    // request to cancel an order
+    requestcancel(uuid) {
+      return axios({
+        method: "get",
+        url: "/orders/request/cancel/" + uuid,
+        withCredentials: true,
+        headers: authHeader(),
+      })
+          .then((response) => {
+            if (response.status == 200) {}
+          });
+    },
+
   },
 });
 </script>
@@ -781,14 +844,14 @@ h1 {
 .rating > label:before {
   margin: 5px;
   font-size: 1.25em;
-  font-family: FontAwesome;
+  font-family: 'FontAwesome', sans-serif;
   display: inline-block;
   content: "\f005";
 }
-.rating > .half:before {
+/*.rating > .half:before {
   content: "\f089";
   position: absolute;
-}
+}*/
 .rating > label {
   color: #ddd;
   float: right;
@@ -819,14 +882,14 @@ h1 {
 .rating1 > label:before {
   margin: 5px;
   font-size: 1.25em;
-  font-family: FontAwesome;
+  font-family: 'FontAwesome', sans-serif;
   display: inline-block;
   content: "\f005";
 }
-.rating1 > .half:before {
+/*.rating1 > .half:before {
   content: "\f089";
   position: absolute;
-}
+}*/
 .rating1 > label {
   color: #ddd;
   float: right;
