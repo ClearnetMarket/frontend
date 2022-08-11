@@ -320,7 +320,7 @@ export default defineComponent({
       country: string;
       currency: string;
     }) {
-      const path = "/auth/register";
+      let path = "/auth/register";
       return axios({
         method: "post",
         url: path,

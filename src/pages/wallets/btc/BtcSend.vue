@@ -163,8 +163,10 @@ export default defineComponent({
   data() {
     return {
       v$: useValidate(),
+      btcbalance: 0,
       wallet: {
-        btc_address: "",
+        btc_address: null,
+
         btc_decscription: "",
         btc_amount: 0,
         pin: "",
@@ -212,12 +214,7 @@ export default defineComponent({
         }
       });
     },
-     SendCoin(payLoad: {
-      btc_address: string;
-      btc_decscription: string;
-      btc_amount: string;
-      pin: string;
-    }) {
+     SendCoin(payLoad) {
       return axios({
         method: "post",
         url: "/btc/send",

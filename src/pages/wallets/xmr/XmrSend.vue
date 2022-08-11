@@ -67,7 +67,7 @@
             of your store.</label
           >
           <input
-            v-model="wallet.xmr_desccription"
+            v-model="wallet.xmr_description"
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="username"
             type="text"
@@ -167,7 +167,7 @@ export default defineComponent({
       v$: useValidate(),
       wallet: {
         xmr_address: "",
-        xmr_desccription: "",
+        xmr_description: "",
         xmr_amount: "",
         pin: "",
       },
@@ -243,7 +243,7 @@ export default defineComponent({
      onSubmit() {
       const payLoad = {
         xmr_address: this.wallet.xmr_address,
-        xmr_desccription: this.wallet.xmr_decscription,
+        xmr_desccription: this.wallet.xmr_description,
         xmr_amount: this.wallet.xmr_amount,
         pin: this.wallet.pin,
       }

@@ -257,6 +257,7 @@ export default defineComponent({
   data() {
     return {
       user: null,
+      item_id: null,
       shopping_cart_count: "",
       vendor_reviews_total: "",
       exact_city: "",

@@ -87,7 +87,7 @@
                           <router-link
                             :to="{
                               name: 'item',
-                              params: { id: order.item_uuid },
+                              params: { id: order.item_uuid }
                             }"
                           >
                             {{ order.title_of_item }}
@@ -101,7 +101,7 @@
                           <router-link
                             :to="{
                               name: 'userprofile',
-                              params: { uuid: order.vendor_uuid },
+                              params: { uuid: order.vendor_uuid }
                             }"
                           >
                             <div
@@ -151,7 +151,7 @@
                   <router-link
                     :to="{
                       name: 'vendorordersview',
-                      params: { uuid: order.uuid },
+                      params: { uuid: order.uuid }
                     }"
                   >
                     <button
@@ -264,7 +264,7 @@
                 <router-link
                   :to="{
                     name: 'Dispute',
-                    params: { uuid: order.uuid },
+                    params: { uuid: order.uuid }
                   }"
                 >
                   <button
@@ -282,7 +282,7 @@
                     <router-link
                       :to="{
                         name: 'vendorordersview',
-                        params: { uuid: order.uuid },
+                        params: { uuid: order.uuid }
                       }"
                     >
                       <button
@@ -410,35 +410,35 @@
                       id="vendorstar10"
                       name="vendorrating"
                       value="10"
-                      v-model="VendorRating.itemravendorrating1ting10"
+                      v-model="VendorRating.vendorrating10"
                     /><label class="full" for="vendorstar10"></label>
                     <input
                       type="radio"
                       id="vendorstar9"
                       name="vendorrating"
                       value="9"
-                      v-model="VendorRating.itemravendorrating1ting9"
+                      v-model="VendorRating.vendorrating9"
                     /><label class="full" for="vendorstar9"></label>
                     <input
                       type="radio"
                       id="vendorstar8"
                       name="vendorrating"
                       value="8"
-                      v-model="VendorRating.itemravendorrating1ting8"
+                      v-model="VendorRating.vendorrating8"
                     /><label class="full" for="vendorstar8"></label>
                     <input
                       type="radio"
                       id="vendorstar7"
                       name="vendorrating"
                       value="7"
-                      v-model="VendorRating.itemravendorrating1ting7"
+                      v-model="VendorRating.vendorrating7"
                     /><label class="full" for="vendorstar7"></label>
                     <input
                       type="radio"
                       id="vendorstar6"
                       name="vendorrating"
                       value="6"
-                      v-model="VendorRating.itemravendorrating1ting6"
+                      v-model="VendorRating.vendorrating6"
                     /><label class="full" for="vendorstar6"></label>
                     <input
                       type="radio"
@@ -473,7 +473,7 @@
                       id="vendorstar1"
                       name="vendorrating"
                       value="1"
-                      v-model="VendorRating.itemravendorrating1ting1"
+                      v-model="VendorRating.vendorrating1"
                     /><label class="full" for="vendorstar1"></label>
                   </fieldset>
                 </div>
@@ -542,16 +542,16 @@ import StarRating from "../../components/star_rating/Star.vue";
  @typedef {Object} order.vendor_uuid
  @typedef {Object} order.vendor_user_name
  @typedef {Object} order.vendor_feedback
- @typedef {Object} VendorRating.itemravendorrating1ting10
- @typedef {Object} VendorRating.itemravendorrating1ting9
- @typedef {Object} VendorRating.itemravendorrating1ting8
- @typedef {Object} VendorRating.itemravendorrating1ting7
- @typedef {Object} VendorRating.itemravendorrating1ting6
- @typedef {Object} VendorRating.itemravendorrating1ting5
- @typedef {Object} VendorRating.itemravendorrating1ting4
- @typedef {Object} VendorRating.itemravendorrating1ting3
- @typedef {Object} VendorRating.itemravendorrating1ting2
- @typedef {Object} VendorRating.itemravendorrating1ting1
+ @typedef {Object} VendorRating.vendorrating10
+ @typedef {Object} VendorRating.vendorrating9
+ @typedef {Object} VendorRating.vendorrating8
+ @typedef {Object} VendorRating.vendorrating7
+ @typedef {Object} VendorRating.vendorrating6
+ @typedef {Object} VendorRating.vendorrating5
+ @typedef {Object} VendorRating.vendorrating4
+ @typedef {Object} VendorRating.vendorrating3
+ @typedef {Object} VendorRating.vendorrating2
+ @typedef {Object} VendorRating.vendorrating1
  *
  */
 

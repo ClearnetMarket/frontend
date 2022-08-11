@@ -15,11 +15,11 @@
             <div class="bg-red-200" v-if="item.image_one != null">
               <img
                 class="object-contain w-24"
-                src="{{item.image_one_server}}"
+                :src=item.image_one_server
                 alt=""
               />
             </div>
-            <div v-else class="">
+            <div v-else >
               <img
                 class="object-contain w-24"
                 src="https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg"
@@ -69,11 +69,16 @@
 import { defineComponent } from "vue";
 import axios from "axios";
 
-
 /**
  *
  @typedef {Object} item.image_one
-
+ @typedef {Object} item.id
+ @typedef {Object} item.uuid
+ @typedef {Object} item.image_one_server
+ @typedef {Object} item.item_title
+ @typedef {Object} item.price
+ @typedef {Object} item.currency
+ @typedef {Object} item.origin_country_name
  *
  */
 export default defineComponent({
@@ -81,7 +86,7 @@ export default defineComponent({
   props: ["vendoruuid"],
   data() {
     return {
-      itemsforsale: "",
+      itemsforsale: [],
       loadedbtcprice: false,
     };
   },

@@ -90,6 +90,11 @@ export default defineComponent({
   computed: {
     ...mapGetters(["user"]),
   },
+  data() {
+    return {
+      user: null,
+    };
+  },
   methods: {
     logout() {
       localStorage.removeItem("user_token");

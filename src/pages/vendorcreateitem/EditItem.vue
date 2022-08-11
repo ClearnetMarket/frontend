@@ -140,6 +140,7 @@
               >
                 {{
                   v$.CreateItemForm.pricingInfo.item_count.$errors[0].$message
+
                 }}
               </span>
             </div>
@@ -356,29 +357,32 @@ export default defineComponent({
       categoryList: [],
       conditionList: [],
       countryList: [],
+      marketitem: null,
 
       CreateItemForm: {
         basicInfo: {
           item_title: "",
           category_id_0: "",
+          category_name_0: "",
           item_condition: "",
           item_description: "",
         },
         pricingInfo: {
-          digital_currency_1: "",
-          digital_currency_2: "",
-          digital_currency_3: "",
+          digital_currency_1: false,
+          digital_currency_2: false,
+          digital_currency_3: false,
           item_count: "",
           price: "",
         },
         shippingInfo: {
           worldwide_shipping: "",
-          free_shipping: "",
+          shipping_info_0: "",
+          free_shipping: false,
           free_shipping_days: "",
-          shipping_2: "",
+          shipping_2: false,
           shipping_2_days: "",
           shipping_2_price: "",
-          shipping_3: "",
+          shipping_3: false,
           shipping_3_days: "",
           shipping_3_price: "",
           shipping_to_country_one: "",
@@ -421,7 +425,6 @@ export default defineComponent({
   },
   methods: {
      userstatus() {
-      //user Auth
       return axios({
         method: "get",
         url: "/auth/whoami",
@@ -458,18 +461,19 @@ export default defineComponent({
       item_condition: string;
       item_description: string;
       category_id_0: string;
-
+       category_name_0: string;
       item_count: string;
-      digital_currency_1: string;
-      digital_currency_2: string;
-      digital_currency_3: string;
+       shipping_info_0: string;
+      digital_currency_1: boolean;
+      digital_currency_2: boolean;
+      digital_currency_3: boolean;
       price: string;
-      free_shipping: string;
+      free_shipping: boolean;
       free_shipping_days: string;
-      shipping_2: string;
+      shipping_2: boolean;
       shipping_2_days: string;
       shipping_2_price: string;
-      shipping_3: string;
+      shipping_3: boolean;
       shipping_3_days: string;
       shipping_3_price: string;
       shipping_to_country_one: string;
@@ -496,7 +500,7 @@ export default defineComponent({
             });
           }
           if (response.data.status == "error") {
-            this.$router.push({ name: "edititem", params: { id: this.item_idid } });
+            this.$router.push({ name: "edititem", params: { id: this.item_id } });
             notify({
               title: "Freeport Error",
               text: "Error creating item",
@@ -525,6 +529,7 @@ export default defineComponent({
     },
     // pre fill form data
      getFormData() {
+
       let path = "/vendorcreateitem/get-fields/" + this.item_id;
 
       return axios({
@@ -652,6 +657,7 @@ export default defineComponent({
         item_condition: this.CreateItemForm.basicInfo.item_condition,
         item_description: this.CreateItemForm.basicInfo.item_description,
         category_id_0: this.CreateItemForm.basicInfo.category_id_0,
+        category_name_0: this.CreateItemForm.basicInfo.category_name_0,
         digital_currency_1: this.CreateItemForm.pricingInfo.digital_currency_1,
         digital_currency_2: this.CreateItemForm.pricingInfo.digital_currency_2,
         digital_currency_3: this.CreateItemForm.pricingInfo.digital_currency_3,
@@ -663,6 +669,7 @@ export default defineComponent({
         shipping_2_days: this.CreateItemForm.shippingInfo.shipping_2_days,
         shipping_2_price: this.CreateItemForm.shippingInfo.shipping_2_price,
         shipping_3: this.CreateItemForm.shippingInfo.shipping_3,
+        shipping_info_0: this.CreateItemForm.shippingInfo.shipping_info_0,
         shipping_3_days: this.CreateItemForm.shippingInfo.shipping_3_days,
         shipping_3_price: this.CreateItemForm.shippingInfo.shipping_3_price,
         shipping_to_country_one:

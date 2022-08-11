@@ -32,7 +32,7 @@
               v-bind:style="{ 'background-image': `url(${previewImage1})` }"
               @click="selectImage1"
             ></div>
-            <input class="" ref="fileInput1" type="file" @input="pickFile1" />
+            <input class="" ref="fileInput1" type="file" @input="pickFile1"  accept=".jpg,.jpeg,.png"/>
           </div>
         </div>
 
@@ -58,7 +58,7 @@
               v-bind:style="{ 'background-image': `url(${previewImage2})` }"
               @click="selectImage2"
             ></div>
-            <input class="" ref="fileInput2" type="file" @input="pickFile2" />
+            <input class="" ref="fileInput2" type="file" @input="pickFile2"  accept=".jpg,.jpeg,.png"/>
           </div>
         </div>
 
@@ -86,7 +86,7 @@
               v-bind:style="{ 'background-image': `url(${previewImage3})` }"
               @click="selectImage3"
             ></div>
-            <input class="" ref="fileInput3" type="file" @input="pickFile3" />
+            <input class="" ref="fileInput3" type="file" @input="pickFile3"  accept=".jpg,.jpeg,.png"/>
           </div>
         </div>
 
@@ -114,7 +114,7 @@
               v-bind:style="{ 'background-image': `url(${previewImage4})` }"
               @click="selectImage4"
             ></div>
-            <input class="" ref="fileInput4" type="file" @input="pickFile4" />
+            <input class="" ref="fileInput4" type="file" @input="pickFile4"  accept=".jpg,.jpeg,.png"/>
           </div>
         </div>
       </div>
@@ -134,7 +134,6 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import axios from "axios";
-
 import authHeader from "../../../services/auth.header";
 import { mapGetters } from "vuex";
 
@@ -155,10 +154,16 @@ export default defineComponent({
     image_two: String,
     image_three: String,
     image_four: String,
+    fileInput1: {
+      type: Object
+    }
+
+
   },
   mounted() {
     this.userstatus();
   },
+
   data() {
     return {
       previewimageone: null,
@@ -166,25 +171,25 @@ export default defineComponent({
       previewImage2: null,
       previewImage3: null,
       previewImage4: null,
-      marketitem: [],
+      marketitem: null,
+      file: null,
+      input: null
+
+
     };
   },
   computed: {
     ...mapGetters(["user"]),
-    showImage() {
-      this.$refs.clicktoshow.click();
-    },
+
   },
   methods: {
-    //user Auth
      userstatus() {
-
       return axios({
         method: "get",
         url: "/auth/whoami",
         withCredentials: true,
         headers: authHeader(),
-      }).then((response) => {
+      }).then((response) => {`1`
         if ((response.status = 200)) {
           this.getItemForSale();
         }
@@ -201,27 +206,38 @@ export default defineComponent({
         .then((response) => {
           if (response.status === 200) {
             this.marketitem = response.data;
-
           }
         })
         .catch(() => {});
     },
-
      CreateItemImages() {
       let formData = new FormData();
+
       if (this.$refs.fileInput1 !== null){
-        formData.append("image_main", this.$refs.fileInput1.files[0]);
+        const fileInput1 = this.$refs.fileInput1 as HTMLInputElement
+        if (fileInput1?.files && fileInput1.files[0]){
+          formData.append('image_main', fileInput1.files[0])
+        }
       }
       if (this.$refs.fileInput2 !== null){
-        formData.append("image_two", this.$refs.fileInput2.files[0]);
+        const fileInput2 = this.$refs.fileInput2 as HTMLInputElement
+        if (fileInput2?.files && fileInput2.files[0]){
+          formData.append('image_two', fileInput2.files[0])
+        }
       }
       if (this.$refs.fileInput3 !== null){
-        formData.append("image_three", this.$refs.fileInput3.files[0]);
+        const fileInput3 = this.$refs.fileInput3 as HTMLInputElement
+        if (fileInput3?.files && fileInput3.files[0]){
+          formData.append('image_three', fileInput3.files[0])
+        }
       }
       if (this.$refs.fileInput4 !== null){
-        formData.append("image_four", this.$refs.fileInput4.files[0]);
+        const fileInput4 = this.$refs.fileInput4 as HTMLInputElement
+        if (fileInput4?.files && fileInput4.files[0]){
+          formData.append('image_main', fileInput4.files[0])
+        }
       }
-    
+
       let path = "/vendorcreateitem/create-item-images/" + this.item_id;
       return axios({
         method: "POST",
@@ -245,19 +261,23 @@ export default defineComponent({
     },
 
     selectImage1() {
-      this.$refs.fileInput1.click();
+      let clickit1 =  this.$refs.fileInput1 as HTMLInputElement;
+       clickit1.click();
     },
     selectImage2() {
-      this.$refs.fileInput2.click();
+       let clickit2 =  this.$refs.fileInput2 as HTMLInputElement;
+       clickit2.click();
     },
     selectImage3() {
-      this.$refs.fileInput3.click();
+      let clickit3 =  this.$refs.fileInput3 as HTMLInputElement;
+      clickit3.click();
     },
     selectImage4() {
-      this.$refs.fileInput4.click();
+      let clickit4 =  this.$refs.fileInput4 as HTMLInputElement;
+      clickit4.click();
     },
     pickFile1() {
-      let input = this.$refs.fileInput1;
+      let input = this.$refs.fileInput1 as HTMLInputElement;
       let file = input.files;
 
       if (file && file[0]) {
@@ -267,12 +287,12 @@ export default defineComponent({
         };
         reader.readAsDataURL(file[0]);
         this.$emit("input", file[0]);
-
-        this.$refs.clicktoshow.click();
+        let clicker = this.$refs.clicktoshow as HTMLInputElement;
+        clicker.click();
       }
     },
     pickFile2() {
-      let input = this.$refs.fileInput2;
+      let input = this.$refs.fileInput2 as HTMLInputElement;
       let file = input.files;
       if (file && file[0]) {
         let reader = new FileReader();
@@ -284,7 +304,8 @@ export default defineComponent({
       }
     },
     pickFile3() {
-      let input = this.$refs.fileInput3;
+      const input = this.$refs.fileInput3 as HTMLInputElement;
+
       let file = input.files;
       if (file && file[0]) {
         let reader = new FileReader();
@@ -296,7 +317,7 @@ export default defineComponent({
       }
     },
     pickFile4() {
-      let input = this.$refs.fileInput4;
+      const input = this.$refs.fileInput4 as HTMLInputElement;
       let file = input.files;
       if (file && file[0]) {
         let reader = new FileReader();
@@ -316,25 +337,11 @@ export default defineComponent({
         url: path,
         withCredentials: true,
         headers: authHeader(),
-      }).then((response) => {
-        if ((response.status = 200)) {
-        } else {
-        }
+      }).then(() => {
+
       });
     },
-   /* onUploaded(info) {
-      let files = info.files;
-      files.forEach((item) => {});
-    },*/
-   /* onFailed(info) {
-      let err = JSON.parse(info.xhr.response);
-   
-      let files = info.files;
-      files.forEach((item) => {});
-    },*/
-   /*onRejected(rejectedEntries)
-    {
-    },*/
   },
+
 });
 </script>

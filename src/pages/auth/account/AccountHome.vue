@@ -78,7 +78,7 @@
         </div>
       </router-link>
 
-           <router-link :to="{name: 'userprofile', params: {uuid: user_id }}">
+           <router-link :to="{name: 'userprofile', params: {uuid: user.user_id }}">
         <div
           class="border border-1 rounded-md p-5 hover:bg-gray-100"
           style="cursor: pointer"
@@ -136,6 +136,15 @@ import MainHeaderVendor from "../../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../../layouts/footers/FooterMain.vue";
 import authHeader from "../../../services/auth.header";
 
+
+/**
+ *
+ @typedef {Object} user.user_admin
+
+ *
+ */
+
+
 export default defineComponent({
   name: "account",
   components: {
@@ -149,7 +158,7 @@ export default defineComponent({
   data() {
     return {
       loaded_user: false,
-      user: [],
+      user: null,
       user_id: null
 
     };

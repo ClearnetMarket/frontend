@@ -256,10 +256,10 @@ export default defineComponent({
   data() {
     return {
       mainpostcomments: [],
-      order_id: "",
+      order_id: null,
       loaded: false,
       order: null,
-      postid: "",
+      postid: null,
       customerratings: [],
       vendorratings: [],
       SendMsgForm: {

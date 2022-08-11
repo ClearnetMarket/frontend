@@ -91,7 +91,7 @@
               class="grid grid-cols-12 gap-4 mb-4 border border-1 bg-white rounded-md shadow-md text-gray-700 p-5"
             >
               <div class="col-span-2">
-                <img alt="" class="w-full" src="{{ itemforsale.image_one_url }}" />
+                <img alt="" class="w-full" src="" />
               </div>
               <div class="col-span-10">
                 <div class="font-bold text-[18px]">
@@ -250,9 +250,10 @@ export default defineComponent({
     return {
       date: Date.now(),
       loaded: false,
-      itemforsale: [],
-      userlist: [],
-      user:[],
+      other_user_count: null,
+      itemforsale: null,
+      userlist: null,
+      user: null,
       order: null,
       mainpost: null,
       mainpostcomments: [],
@@ -379,7 +380,7 @@ export default defineComponent({
           });
     },
     onSubmit() {
-      const payLoad = {textbody: this.SendMsgForm.msginfo}
+      let payLoad = {body: this.SendMsgForm.msginfo}
       this.sendcomment(payLoad);
       }
     },

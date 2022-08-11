@@ -159,7 +159,7 @@ validations() {
         }
       });
     },
-     becomevendor(payLoad: { accept: string }) {
+     becomevendor(payLoad) {
       return axios({
         method: "post",
         url: "/vendor/becomevendor",
@@ -178,9 +178,7 @@ validations() {
       });
     },
      onSubmit() {
-      const payLoad = {
-        accept: this.accept,
-      }
+      const payLoad = {accept: this.accept}
       this.v$.$validate(); 
       if (this.v$.$invalid) {
         notify({

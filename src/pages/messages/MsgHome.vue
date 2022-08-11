@@ -102,9 +102,10 @@ export default defineComponent({
   data() {
     return {
       userlist: [],
-      user_one: "",
-      user_two: "",
-      other_user_count: "",
+      user: null,
+      user_one: null,
+      user_two: null,
+      other_user_count: 0,
     };
   },
   computed: {
@@ -121,10 +122,7 @@ export default defineComponent({
         .then((response) => {
           this.other_user_count = response.data.get_count;
         })
-     .catch((error) => {
-       console.log(error)
-     });
-        
+     .catch((error) => { console.log(error)});
     },
      getmsgsofusers() {
       return axios({

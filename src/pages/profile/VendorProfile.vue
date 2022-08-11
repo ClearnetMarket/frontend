@@ -314,6 +314,13 @@ import MainHeaderVendor from "../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../layouts/footers/FooterMain.vue";
 import GetVendorItems from "./items/VendorItemsForSale.vue";
 
+
+
+/**
+ *
+ @typedef {Object} user_stats.total_items_bought
+ *
+ */
 export default defineComponent({
   name: "UserProfile",
   components: {
@@ -325,20 +332,22 @@ export default defineComponent({
     StarRating,
     GetVendorItems,
   },
-  props: {
 
-  },
   data() {
     return {
       page_loaded: false,
       date: Date.now(),
       tab: [],
-      user: [],
-      current_user: [],
-      user_stats: [],
+      user: null,
+      current_user: null,
+      user_uuid: null,
+      user_stats: null,
       orders: [],
       userreviews: [],
-      user_reviews_total: [],
+      item_title: null,
+      currencydefault: null,
+      countrydefault: null,
+      user_reviews_total: 0,
       user_reviews_percent_one: "",
       user_reviews_percent_two: "",
       user_reviews_percent_three: "",
@@ -434,7 +443,7 @@ export default defineComponent({
           if ((response.status = 200)) {
             this.userreviews = response.data;
             if (this.userreviews == undefined) {
-              this.userreviews = "No Reviews Yet";
+              this.userreviews = null;
             }
           }
         })

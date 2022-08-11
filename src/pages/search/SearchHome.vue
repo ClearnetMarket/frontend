@@ -64,7 +64,7 @@ export default defineComponent({
     return {
       searchresults: [],
       searchresultscount:0,
-      searchstring: "",
+      searchstring: null,
     };
   },
     watch: {

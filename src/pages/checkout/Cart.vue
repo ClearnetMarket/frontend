@@ -313,10 +313,15 @@ export default defineComponent({
   },
   data() {
     return {
+      user: null,
+      quantity: 0,
+      cart_status: null,
+      option: null,
+      shopping_cart_count: 0,
       shopping_cart_items_list: [],
       shopping_cart_items_saved_list: [],
       order_summary_count: 0,
-      order_summary_cost: "",
+      order_summary_cost: 0,
       order_summary_shipping_cost: 0,
       order_summary_shipping_and_price_cost: "",
     };

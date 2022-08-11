@@ -351,7 +351,7 @@ export default defineComponent({
     },
     // send the score for a feedback
     // accepts payload
-     sendFeedbackScore(uuid: string, payLoad = this.payLoad) {
+     sendFeedbackScore(uuid, payLoad) {
       return axios({
         method: "post",
         url: "/orders/vendor/feedback/score/" + uuid,
@@ -382,15 +382,15 @@ export default defineComponent({
     // payload for sending feedback
     sendreview(uuid, i) {
       let user_review = this.review[i];
-      const payLoad = { review: user_review };
-      this.sendFeedbackReview(uuid, payLoad);
+
+      this.sendFeedbackReview(uuid, user_review);
     },
     // send the feedback
-     sendFeedbackReview(uuid: string, payLoad = this.payLoad) {
+     sendFeedbackReview(uuid: string, user_review: string) {
       return axios({
         method: "post",
         url: "/orders/vendor/feedback/review/" + uuid,
-        data: payLoad,
+        data: user_review,
         withCredentials: true,
         headers: authHeader(),
       })

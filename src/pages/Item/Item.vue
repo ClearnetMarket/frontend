@@ -106,6 +106,10 @@ import ItemShipping from "./Item/ItemShipping.vue";
 import ItemSimiliarItems from "./Item/ItemSimiliarItems.vue";
 import {mapGetters} from "vuex";
 
+
+
+
+
 export default defineComponent({
   name: "MarketItem",
 
@@ -125,10 +129,11 @@ export default defineComponent({
 
   data() {
     return {
+      item_id: null,
+      item: null,
       shoppingcartcount: 0,
       loaded_feedback: false,
       title: "",
-      item_id: "",
       condition: "",
       price: "",
       currency: 0,
@@ -353,7 +358,7 @@ export default defineComponent({
           if ((response.status = 200)) {
             this.vendorreviews = response.data;
             if (this.vendorreviews == undefined) {
-              this.vendorreviews = "No Reviews Yet";
+              this.vendorreviews = null;
             }
           }
         })

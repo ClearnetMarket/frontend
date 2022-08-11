@@ -1,16 +1,16 @@
-FROM node:lts
+FROM node:lts-alpine as build-stage
+
+RUN mkdir -p /app
+
+COPY . /app
 
 ENV PATH /app/node_modules/.bin:$PATH
 
-RUN mkdir /app
-
-COPY package*.json /app
-
 WORKDIR /app
 
-RUN npm -g install
+RUN npm install
+RUN npm install -g npm@8.16.0
 
+EXPOSE 3000:3000
 
-COPY . /app
-EXPOSE 5173
-CMD ["npm", "run", "dev"]
+CMD ["npm", "run", "build"]

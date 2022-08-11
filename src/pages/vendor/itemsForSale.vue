@@ -184,6 +184,7 @@ export default defineComponent({
     return {
       user: [],
       items: [],
+      newitemid: null,
       accept: ref(false),
     };
   },

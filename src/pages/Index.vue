@@ -42,13 +42,13 @@ export default defineComponent({
     MainFooter,
     Confirmed,
   },
-  props: {
-    user: Object,
-    current_user: Object
-  },
+
   data() {
     return {
       token: null,
+      user: null,
+      current_user: null,
+      confirmed: false
     };
   },
   computed: {

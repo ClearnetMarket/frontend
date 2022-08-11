@@ -68,7 +68,9 @@ export default defineComponent({
   },
 
   data() {
-    return {};
+    return {
+      user: null
+    };
   },
   mounted() {},
   methods: {},

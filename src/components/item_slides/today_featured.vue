@@ -12,7 +12,7 @@
             <div class="bg-red-200" v-if="item.image_one != null">
               <img
                 class="object-contain w-24"
-                src="{{item.image_one_server}}"
+                :src=item.image_one_server
                 alt=""
               />
             </div>
@@ -40,21 +40,22 @@
             <div class="flex justify-center pt-2">
           
               <span
-              v-if="item.digital_currency_1 == true"
+              v-if="item.digital_currency_1 === true"
                 class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-orange-500 mr-2 mb-2"
                 >BTC</span
               >
               <span
-                        v-if="item.digital_currency_2 == true"
+                        v-if="item.digital_currency_2 === true"
                 class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-orange-700 mr-2 mb-2"
                 >XMR</span
               >
               <span
-                        v-if="item.digital_currency_3 == true"
+                        v-if="item.digital_currency_3 === true"
                 class="inline-block bg-gray-200 rounded-full px-2 py-1 text-sm font-semibold text-green-600 mr-2 mb-2"
                 >BCH</span
               >
             </div>
+
              </div>
       
       </div>
@@ -66,11 +67,24 @@
 import { defineComponent } from "vue";
 import axios from "axios";
 
+/**
+ *
+ @typedef {Object} item.id
+ @typedef {Object} item.uuid
+ @typedef {Object} item.image_one
+ @typedef {Object} item.image_one_server
+ @typedef {Object} item.item_title
+ @typedef {Object} item.currency
+ @typedef {Object} item.price
+ @typedef {Object} item.origin_country_name
+ *
+ */
+
 export default defineComponent({
   name: "TodayFeatured",
   data() {
     return {
-      todayfeatured: "",
+      todayfeatured: [],
       loadedbtcprice: false,
     };
   },
@@ -92,9 +106,7 @@ export default defineComponent({
             this.todayfeatured = response.data;
           }
         })
-        .catch((error) => {
-          console.log(error);
-        });
+        .catch((error) => { console.log(error); });
     },
     returncurrencysymbol(currencydigit) {
       if (currencydigit === 0) {

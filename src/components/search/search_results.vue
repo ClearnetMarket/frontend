@@ -2,7 +2,7 @@
   <div class="grid grid-cols-12 gap-4 border border-gray-200 p-4 mb-2">
     <div class="col-span-3">
       <router-link :to="{ name: 'item', params: { id: item.uuid } }">
-        <img class="object-cover h-48 w-96" src="{{item.image_one_server}}" />
+        <img alt="" class="object-cover h-48 w-96" :src=item.image_one_server />
       </router-link>
     </div>
     <div class="col-span-9">
@@ -18,27 +18,27 @@
         <div class="col-span-12 text-[24px] my-1">
           {{ item.price }}{{ returncurrencysymbol(item.currency) }}
         </div>
-        <div class="col-span-12" v-if="(shipping_free = true)">
+        <div class="col-span-12" v-if="(item.shipping_free === true)">
           <div class="text-gray-500">Free Shipping</div>
         </div>
         <div class="col-span-12" v-else>
-          {{ shipping_info_2 }}
+          {{ item.shipping_info_2 }}
         </div>
         <div class="col-span-12 my-1">{{ item.item_count }} left</div>
         <div class="flex">
-          <div v-if="item.digital_currency_1 == true">
+          <div v-if="item.digital_currency_1 === true">
             <span
               class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-orange-500 mr-2 mb-2"
               >Bitcoin</span
             >
           </div>
-          <div v-if="item.digital_currency_2 == true">
+          <div v-if="item.digital_currency_2 === true">
             <span
               class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-orange-700 mr-2 mb-2"
               >Monero</span
             >
           </div>
-          <div v-if="item.digital_currency_3 == true">
+          <div v-if="item.digital_currency_3 === true">
             <span
               class="whitespace-nowrap inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-green-600 mr-2 mb-2"
               >Bitcoin Cash</span
@@ -54,6 +54,8 @@
 import { defineComponent } from "vue";
 import axios from "axios";
 import StarRating from "../../components/star_rating/Star.vue";
+
+
 export default defineComponent({
   name: "Searchitems",
   props: ["item"],
@@ -61,7 +63,9 @@ export default defineComponent({
     StarRating,
   },
   data() {
-    return {};
+    return {
+      vendorreviews: [],
+    };
   },
 
   mounted() {},
@@ -77,13 +81,12 @@ export default defineComponent({
         .then((response) => {
           if ((response.status = 200)) {
             this.vendorreviews = response.data;
-
             if (this.vendorreviews == undefined) {
-              this.vendorreviews = "No Reviews Yet";
+              this.vendorreviews = null;
             }
           }
         })
-        .catch((error) => {});
+        .catch(() => {});
     },
 
     returncurrencysymbol(currencydigit) {

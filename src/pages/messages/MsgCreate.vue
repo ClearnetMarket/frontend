@@ -88,7 +88,9 @@ export default defineComponent({
   data() {
     return {
       v$: useValidate(),
-      other_user: [],
+      other_user: null,
+      userlist: [],
+      other_user_count: 0,
       other_user_uuid: null,
       SendMsgForm: {
         msginfo: "",
@@ -183,9 +185,9 @@ export default defineComponent({
     },
 
     onSubmit() {
-      const payLoad = {
+      let payLoad = {
         user_two_uuid: this.other_user.uuid,
-        textbody: this.SendMsgForm.msginfo,
+        body: this.SendMsgForm.msginfo,
         order_uuid: null,
       };
       this.v$.$validate(); // checks all inputs

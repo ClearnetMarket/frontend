@@ -63,6 +63,7 @@
 import { defineComponent } from "vue";
 import { mapGetters } from "vuex";
 
+
 export default defineComponent({
   name: "MainFooter",
   computed: {
@@ -71,12 +72,13 @@ export default defineComponent({
   mounted() {
 
   },
+  data() {
+    return {
+      user: null,
+    };
+  },
   methods: {
-    data() {
-      return {
-        user: null,
-      };
-    },
+
 
   },
 });

@@ -277,35 +277,32 @@ export default defineComponent({
     MainFooter,
     StarRating,
   },
-    props: {
-      orders: Array,
-      user: Object,
-      user_stats: Object,
-      userreviews: Array,
-      user_reviews_total: {
-        type: Number,
-        default: 0
-      },
-      user_reviews_percent_one: {
-        type: Number,
-        default: 0
-      },
-      user_reviews_percent_two: String,
-      user_reviews_percent_three: String,
-      user_reviews_percent_four: String,
-      user_reviews_percent_five: String,
-      user_reviews_percent_six: String,
-      user_reviews_percent_seven: String,
-      user_reviews_percent_eight: String,
-      user_reviews_percent_nine: String,
-      user_reviews_percent_ten: String,
-      country: String,
-      currency: String,
-    },
+
   data() {
     return {
       page_loaded: false,
       date: Date.now(),
+      orders: [],
+      user_uuid: null,
+      user: null,
+      user_stats: null,
+      item_title: null,
+      userreviews: [],
+      currencydefault: null,
+      countrydefault: null,
+      user_reviews_total: 0,
+      user_reviews_percent_one: "",
+      user_reviews_percent_two: "",
+      user_reviews_percent_three: "",
+      user_reviews_percent_four: "",
+      user_reviews_percent_five: "",
+      user_reviews_percent_six: "",
+      user_reviews_percent_seven: "",
+      user_reviews_percent_eight: "",
+      user_reviews_percent_nine: "",
+      user_reviews_percent_ten: "",
+      country: "",
+      currency: "",
     };
   },
   mounted() {
@@ -381,7 +378,7 @@ export default defineComponent({
           if ((response.status = 200)) {
             this.userreviews = response.data;
             if (this.userreviews == undefined) {
-              this.userreviews = "No Reviews Yet";
+              this.userreviews = null;
             }
           }
         })

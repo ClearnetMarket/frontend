@@ -152,6 +152,7 @@
 </template>
 
 <script lang="ts">
+
 import { defineComponent } from "vue";
 import axios from "axios";
 import authHeader from "../../../services/auth.header";
@@ -161,7 +162,14 @@ import MainHeaderBottom from "../../../layouts/headers/MainHeaderBottom.vue";
 import MainHeaderVendor from "../../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../../layouts/footers/FooterMain.vue";
 import {formatDistance} from "date-fns";
+/**
+ *
 
+ @typedef {Object} order.item_uuid
+
+
+ *
+ */
 export default defineComponent({
   name: "userorders",
 
@@ -175,6 +183,7 @@ export default defineComponent({
 
   data() {
     return {
+
       orders: [],
       vendor_orders_new: 0,
       vendor_orders_accepted: 0,

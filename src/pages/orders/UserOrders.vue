@@ -429,8 +429,8 @@ export default defineComponent({
   methods: {
     // sends the score
     sendscore(uuid: string, rating: string) {
-      let payLoad = { rating: rating };
-      this.sendFeedbackScore(uuid, payLoad);
+
+      this.sendFeedbackScore(uuid, rating);
     },
      sendFeedbackScore(uuid: string, rating: string) {
        let payLoad = { rating: rating };

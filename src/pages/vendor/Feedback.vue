@@ -263,7 +263,9 @@ export default defineComponent({
   data() {
     return {
       date: Date.now(),
+      user: null,
       tab: [],
+      user_id: null,
       orders: [],
       vendorreviews: [],
       vendor_reviews_total: 0,
@@ -301,7 +303,7 @@ export default defineComponent({
         headers: authHeader(),
       }).then((response) => {
         if (response.status == 200) {
-          this.getuserneworderscount();
+        console.log('success')
         }
       });
     },
@@ -316,7 +318,7 @@ export default defineComponent({
           if ((response.status = 200)) {
             this.vendorreviews = response.data;
             if (this.vendorreviews == undefined) {
-              this.vendorreviews = "No Reviews Yet";
+              this.vendorreviews = null;
             }
           }
         })

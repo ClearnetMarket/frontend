@@ -44,7 +44,7 @@
         <form
           class="rounded-md px-8 pt-6 pb-8 mb-4 w-full"
           enctype="multipart/form-data"
-          @submit.prevent="CreateItem"
+          @submit.prevent="onSubmit"
         >
           <div class="text-[18px] mt-5 mb-5">General Info</div>
           <div class="mb-4">
@@ -52,7 +52,7 @@
               >Item Title</label
             >
             <input
-              v-model="CreateItemForm.item_title"
+              v-model="CreateItemForm.basicInfo.title"
               class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               id="title"
               type="text"
@@ -279,7 +279,7 @@
                   class="shadow form-select appearance-none block w-full px-3 py-1.5 text-base font-normal focus:shadow-outline text-gray-500 bg-white bg-clip-padding bg-no-repeat border rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                   aria-label="Default select example"
                   id="category"
-                  v-model="CreateItemForm.basicInfo.shipping_to_country_four"
+                  v-model="CreateItemForm.shippingInfo.shipping_to_country_four"
                   :disabled="isSelectDisabled"
                 >
                   <option
@@ -312,7 +312,7 @@
                 <input
                   type="checkbox"
                   checked="checked"
-                  v-model="CreateItemForm.pricingInfo.free_shipping"
+                  v-model="CreateItemForm.shippingInfo.free_shipping"
                 />
               </div>
               <div class="flex-1"></div>
@@ -322,7 +322,7 @@
                   placeholder="Estimated Days"
                   min="0"
                   class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  v-model="CreateItemForm.pricingInfo.free_shipping_days"
+                  v-model="CreateItemForm.shippingInfo.free_shipping_days"
                 />
               </div>
             </div>
@@ -336,7 +336,7 @@
                 <input
                   type="checkbox"
                   checked="checked"
-                  v-model="CreateItemForm.pricingInfo.shipping_2"
+                  v-model="CreateItemForm.shippingInfo.shipping_2"
                 />
               </div>
               <div class="flex-1">
@@ -345,7 +345,7 @@
                   placeholder="Price"
                   min="0"
                   class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  v-model="CreateItemForm.pricingInfo.shipping_2_price"
+                  v-model="CreateItemForm.shippingInfo.shipping_2_price"
                   @keypress="onlyNumberWithDot"
                 />
               </div>
@@ -355,7 +355,7 @@
                   placeholder="Estimated Days"
                   min="0"
                   class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  v-model="CreateItemForm.pricingInfo.shipping_2_days"
+                  v-model="CreateItemForm.shippingInfo.shipping_2_days"
                   @keypress="onlyNumber"
                 />
               </div>
@@ -370,7 +370,7 @@
                 <input
                   type="checkbox"
                   checked="checked"
-                  v-model="CreateItemForm.pricingInfo.shipping_3"
+                  v-model="CreateItemForm.shippingInfo.shipping_3"
                 />
               </div>
               <div class="flex-1">
@@ -379,7 +379,7 @@
                   placeholder="Price"
                   min="0"
                   class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  v-model="CreateItemForm.pricingInfo.shipping_3_price"
+                  v-model="CreateItemForm.shippingInfo.shipping_3_price"
                   @keypress="onlyNumberWithDot"
                 />
               </div>
@@ -389,7 +389,7 @@
                   placeholder="Estimated Days"
                   min="0"
                   class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  v-model="CreateItemForm.pricingInfo.shipping_3_days"
+                  v-model="CreateItemForm.shippingInfo.shipping_3_days"
                   @keypress="onlyNumber"
                 />
               </div>
@@ -423,6 +423,8 @@ import MainHeaderVendor from "../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../layouts/footers/FooterMain.vue";
 import UploadImages from "./ItemCreation/UploadImages.vue";
 
+
+
 export default defineComponent({
   name: "createitem",
   components: {
@@ -447,14 +449,15 @@ export default defineComponent({
 
   data() {
     return {
-      UploadImages: "",
+
+      user: null,
       item_id: null,
       marketitem: Object,
-      authtoken: "",
-      image_main: "",
-      image_two: "",
-      image_three: "",
-      image_four: "",
+      authtoken: null,
+      image_main: null,
+      image_two: null,
+      image_three: null,
+      image_four: null,
       currencyList: [],
       categoryList: [],
       conditionList: [],
@@ -510,10 +513,9 @@ export default defineComponent({
       });
     },
 
-     CreateItem(payLoad: {
+     CreateItem(payload: {
       item_id: string;
       title: string;
-
       item_condition: string;
       item_description: string;
       category_id_0: string;
@@ -540,7 +542,7 @@ export default defineComponent({
       return axios({
         method: "POST",
         url: path,
-        data: payLoad,
+        data: payload,
         withCredentials: true,
         headers: authHeader(),
       })
@@ -658,9 +660,8 @@ export default defineComponent({
         .catch(() => {});
     },
      onSubmit() {
-      // Submit Data for payload
 
-      const payLoad = {
+      let payload = {
         item_id: this.item_id,
         title: this.CreateItemForm.basicInfo.title,
 
@@ -690,7 +691,7 @@ export default defineComponent({
         shipping_to_country_four:
           this.CreateItemForm.shippingInfo.shipping_to_country_four,
       };
-      this.CreateItem(payLoad);
+      this.CreateItem(payload);
     },
   },
 });

@@ -14,7 +14,7 @@
       <div class="col-span-9">
         <div class="grid grid-cols-12 gap-4 border border-1 p-4 mb-4">
           <div class="col-span-2">
-            <img alt="" class="w-full" src="{{itemforsale.image_one_url}}" />
+            <img alt="" class="w-full" src="" />
           </div>
           <div class="col-span-10">
             <div class="font-bold text-[18px]">
@@ -107,8 +107,10 @@ export default defineComponent({
   data() {
     return {
       v$: useValidate(),
-      itemforsale: [],
-      other_user: [],
+      itemforsale: null,
+      other_user: null,
+      other_user_count: 0,
+      userlist: null,
       other_user_uuid: null,
       item_uuid: null,
       SendMsgForm: {
@@ -224,8 +226,9 @@ export default defineComponent({
     onSubmit() {
       const payLoad = {
         user_two_uuid: this.other_user.uuid,
-        textbody: this.SendMsgForm.msginfo,
+        body: this.SendMsgForm.msginfo,
         item_uuid: this.item_uuid,
+        order_uuid: null,
       };
       this.v$.$validate(); // checks all inputs
       if (this.v$.$invalid) {
