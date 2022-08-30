@@ -182,13 +182,11 @@ export default defineComponent({
       },
     };
   },
-  computed: {
-    ...mapGetters(["user"]),
-  },
+
 
   methods: {
      userstatus() {
-      return axios({
+       axios({
         method: "get",
         url: "/auth/whoami",
         withCredentials: true,
@@ -204,7 +202,7 @@ export default defineComponent({
         });
     },
      getbtcbalance() {
-      return axios({
+       axios({
         method: "get",
         url: "/btc/balance",
         headers: authHeader(),
@@ -214,8 +212,8 @@ export default defineComponent({
         }
       });
     },
-     SendCoin(payLoad) {
-      return axios({
+     SendCoin(payLoad: any) {
+       axios({
         method: "post",
         url: "/btc/send",
         data: payLoad,

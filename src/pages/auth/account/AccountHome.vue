@@ -169,12 +169,13 @@ export default defineComponent({
 
   methods: {
      userstatus() {
-      return axios({
+       axios({
         method: "get",
         url: "/auth/whoami",
         withCredentials: true,
         headers: authHeader(),
-      }).then((response) => {
+      })
+     .then((response) => {
         if ((response.status = 200)) {
           this.user = response.data.user;
           this.user_id = response.data.user.user_id;
@@ -184,12 +185,13 @@ export default defineComponent({
       });
     },
      userprofile() {
-      return axios({
+       axios({
         method: "get",
         url: "/profile/profile_home",
         withCredentials: true,
         headers: authHeader(),
-      }).then((response) => {
+      })
+     .then((response) => {
         if ((response.status = 200)) {
         }
       });

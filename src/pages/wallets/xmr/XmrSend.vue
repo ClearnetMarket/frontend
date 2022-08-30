@@ -182,13 +182,11 @@ export default defineComponent({
       },
     };
   },
-  computed: {
-    ...mapGetters(["user"]),
-  },
+
 
   methods: {
      userstatus() {
-      return axios({
+       axios({
         method: "get",
         url: "/auth/whoami",
         withCredentials: true,
@@ -204,12 +202,12 @@ export default defineComponent({
         });
     },
      SendCoin(payLoad: {
-      xmr_address: string;
+       xmr_address: string;
        xmr_desccription: string;
-      xmr_amount: string;
-      pin: string;
+       xmr_amount: string;
+       pin: string;
     }) {
-      return axios({
+      axios({
         method: "post",
         url: "/xmr/send",
         data: payLoad,
@@ -254,7 +252,8 @@ export default defineComponent({
           text: "Form Failure",
           type: "error",
         });
-      } else {
+      }
+      else {
         notify({
           title: "Wallet",
           text: "Success Sending Coin. It will be sent shortly.",

@@ -55,342 +55,284 @@ import Error404 from "../pages/error/Error404.vue";
 
 import categoryhome from "../pages/category/CategoryHome.vue";
 import categoryelectronics from "../pages/category/electronics/ElectronicsHome.vue";
-import categorysmartphones from "../pages/category/smartphones/SmartPhonesHome.vue";
-import categoryautomotive from "../pages/category/automotive/AutomotiveHome.vue";
-import categoryhobbies from "../pages/category/hobbies/HobbiesHome.vue";
-import categoryjewelrygoldcoins from "../pages/category/jewelrygold/JewelryGoldHome.vue";
-import categoryapparel from "../pages/category/apparel/ApparelHome.vue";
-import categoryhomeandgarden from "../pages/category/homeandgarden/HomeandGardenHome.vue";
-import categoryartsandcrafts from "../pages/category/art/ArtHome.vue";
-import categorycomputers from "../pages/category/computers/ComputersHome.vue";
-import categorydigitalitems from "../pages/category/digital/DigitalHome.vue";
-import categorybooksmovies from "../pages/category/booksandmovies/BooksHome.vue";
+
 
 const routes = [
 
   {
     path: "/",
     name: "home",
-    component: () => home,
+    component: home,
   },
   {
     path: "/sell",
     name: "sell",
-    component: () => sell,
+    component: sell,
   },
   {
     path: "/vendoragreement",
     name: "vendoragreement",
-    component: () => vendoragreement,
+    component: vendoragreement,
   },
   {
     path: "/vendor/itemsforsale",
     name: "forsale",
-    component: () => forsale,
+    component:  forsale,
   },
   {
     path: "/vendor/exactaddress",
     name: "vendoraddress",
-    component: () => vendoraddress,
+    component: vendoraddress,
   },
   {
     path: "/vendor/feedback",
     name: "vendorfeedback",
-    component: () => vendorfeedback,
+    component: vendorfeedback,
   },
   {
     path: "/item/:id",
     name: "MarketItem",
-    component: () => MarketItem,
+    component: MarketItem,
   },
   {
     path: "/vendor/createitem",
     name: "createquick",
-    component: () => createquick,
+    component: createquick,
   },
   {
     path: "/vendor/edititem/:id",
     name: "edititem",
-    component: () => edititem,
+    component: edititem,
   },
   {
     path: "/wallet",
     name: "wallet",
-    component: () => wallet,
+    component: wallet,
   },
   {
     path: "/wallet/btc",
     name: "btcwallet",
-    component: () => btcwallet,
+    component: btcwallet,
   },
   {
     path: "/wallet/btc/send",
     name: "btcwalletsend",
-    component: () => btcwalletsend,
+    component:  btcwalletsend,
   },
   {
     path: "/wallet/btc/recieve",
     name: "btcwalletrecieve",
-    component: () => btcwalletrecieve,
+    component:  btcwalletrecieve,
   },
   {
     path: "/wallet/bch",
     name: "bchwallet",
-    component: () => bchwallet,
+    component:  bchwallet,
   },
   {
     path: "/wallet/bch/send",
     name: "bchwalletsend",
-    component: () => bchwalletsend,
+    component: bchwalletsend,
   },
   {
     path: "/wallet/bch/recieve",
     name: "bchwalletrecieve",
-    component: () => bchwalletrecieve,
+    component:  bchwalletrecieve,
   },
   {
     path: "/wallet/xmr",
     name: "xmrwallet",
-    component: () => xmrwallet,
+    component: xmrwallet,
   },
   {
     path: "/wallet/xmr/send",
     name: "xmrwalletsend",
-    component: () => xmrwalletsend,
+    component:  xmrwalletsend,
   },
   {
     path: "/wallet/xmr/recieve",
     name: "xmrwalletrecieve",
-    component: () => xmrwalletrecieve,
+    component: xmrwalletrecieve,
   },
   // checkout
   {
     path: "/cart",
     name: "cart",
-    component: () => cart,
+    component:  cart,
   },
   {
     path: "/checkout",
     name: "checkout",
-    component: () => checkout,
+    component:  checkout,
   },
   // Plain Stuff
   {
     path: "/auth/login",
     name: "login",
-    component: () => login,
+    component: login,
   },
   {
     path: "/auth/register",
     name: "register",
-    component: () => register,
+    component: register,
   },
   {
     path: "/auth/forgotpassword",
     name: "forgotpassword",
-    component: () => forgotpassword,
+    component: forgotpassword,
   },
   // Account  Logged in Required
   {
     path: "/user/:uuid",
     name: "userprofile",
-    component: () => userprofile,
+    component:  userprofile,
   },
   {
     path: "/vendor/:uuid",
     name: "vendorprofile",
-    component: () => vendorprofile,
+    component:  vendorprofile,
   },
 
   {
     path: "/user/orders",
     name: "userorders",
-    component: () => userorders,
+    component:  userorders,
   },
   {
     path: "/user/orders/:uuid",
     name: "vendorordersview",
-    component: () => vendorordersview,
+    component: vendorordersview,
   },
   {
     path: "/account",
     name: "account",
-    component: () => account,
+    component:  account,
   },
 
   {
     path: "/account/defaultaddress",
     name: "defaultaddress",
-    component: () =>defaultaddress,
+    component: defaultaddress,
   },
   {
     path: "/auth/changepassword",
     name: "changepassword",
-    component: () => changepassword,
+    component: changepassword,
   },
   {
     path: "/auth/changepin",
     name: "changepin",
-    component: () => changepin,
+    component: changepin,
   },
   {
     path: "/auth/account-seed",
     name: "accountseed",
-    component: () => accountseed,
+    component: accountseed,
   },
   {
     path: "/auth/account-seed-confirm",
     name: "accountseedconfirm",
-    component: () => accountseedconfirm,
+    component:  accountseedconfirm,
   },
   // Category Pages
   {
     path: "/category",
     name: "categoryhome",
-    component: () => categoryhome,
+    component:  categoryhome,
   },
   {
     path: "/category/electronics",
     name: "categoryelectronics",
-    component: () => categoryelectronics,
+    component:  categoryelectronics,
   },
-  {
-    path: "/category/smartphones",
-    name: "categorysmartphones",
-    component: () => categorysmartphones,
-  },
-  {
-    path: "/category/automotive",
-    name: "categoryautomotive",
-    component: () => categoryautomotive,
-  },
-  {
-    path: "/category/hobbiesandcollectibles",
-    name: "categoryhobbies",
-    component: () => categoryhobbies,
-  },
-  {
-    path: "/category/jewlrygoldandcoins",
-    name: "categoryjewelrygoldcoins",
-    component: () => categoryjewelrygoldcoins,
-  },
-  {
-    path: "/category/apparel",
-    name: "categoryapparel",
-    component: () => categoryapparel,
-  },
-  {
-    path: "/category/homeandgarden",
-    name: "categoryhomeandgarden",
-    component: () =>categoryhomeandgarden,
-  },
-  {
-    path: "/category/artandcrafts",
-    name: "categoryartsandcrafts",
-    component: () => categoryartsandcrafts,
-  },
-  {
-    path: "/category/computers",
-    name: "categorycomputers",
-    component: () => categorycomputers,
-  },
-  {
-    path: "/category/digitalitems",
-    name: "categorydigitalitems",
-    component: () => categorydigitalitems,
-  },
-  {
-    path: "/category/booksandmovies",
-    name: "categorybooksmovies",
-    component: () => categorybooksmovies,
-  },
+
   {
     path: "/vendor/orders",
     name: "vendororders",
-    component: () => vendororders,
+    component:  vendororders,
   },
   {
     path: "/vendor/orders/new",
     name: "vendorordersnew",
-    component: () => vendorordersnew,
+    component: vendorordersnew,
   },
   {
     path: "/vendor/orders/waiting",
     name: "vendororderswaiting",
-    component: () => vendororderswaiting,
+    component:  vendororderswaiting,
   },
   {
     path: "/vendor/orders/shipped",
     name: "vendorordersshipped",
-    component: () => vendorordersshipped,
+    component:  vendorordersshipped,
   },
   {
     path: "/vendor/orders/finalized",
     name: "vendorordersfinalized",
-    component: () => vendorordersfinalized,
+    component:  vendorordersfinalized,
   },
   {
     path: "/vendor/orders/cancel",
     name: "vendororderscancel",
-    component: () => vendororderscancel,
+    component:  vendororderscancel,
   },
   {
     path: "/vendor/orders/dispute",
     name: "vendorordersdispute",
-    component: () => vendorordersdispute,
+    component:  vendorordersdispute,
   },
   // Messages
   {
     path: "/msg",
     name: "MsgHome",
-    component: () => MsgHome,
+    component: MsgHome,
   },
   {
     path: "/msg/create",
     name: "MsgCreate",
-    component: () => MsgCreate,
+    component:  MsgCreate,
   },
   {
     path: "/msg/create/:uuid",
     name: "MsgCreateUser",
-    component: () => MsgCreateUser,
+    component:  MsgCreateUser,
   },
   {
     path: "/msg/create/:uuid/:itemuuid",
     name: "MsgCreateItem",
-    component: () => MsgCreateItem,
+    component: MsgCreateItem,
   },
   {
     path: "/msg/view/:postid",
     name: "MsgView",
-    component: () => MsgView,
+    component:  MsgView,
   },
   {
     path: "/dispute/view/:uuid",
     name: "Dispute",
-    component: () => Dispute,
+    component:  Dispute,
   },
 
 
   {
     path: "/msg/create/order/",
     name: "MsgCreateOrder",
-    component: () => MsgCreateOrder,
+    component:  MsgCreateOrder,
   },
   {
     path: "/mod/dispute/:uuid",
     name: "ModDispute",
-    component: () => ModDispute,
+    component:  ModDispute,
   },
   {
     path: "/search/:searchstring",
     name: "search",
-    component: () => search,
+    component:  search,
   },
   // Error Pages
   {
     path: "/:catchAll(.*)*",
-    component: () => Error404,
+    component: Error404,
   },
 ];
 

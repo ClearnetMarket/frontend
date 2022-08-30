@@ -129,9 +129,7 @@ export default defineComponent({
     };
   },
 
-  computed: {
-    ...mapGetters(["user"]),
-  },
+
 
   mounted() {
     this.getcurrentshipping();
@@ -143,7 +141,7 @@ export default defineComponent({
       stateorprovence: string;
       zip: string;
     }) {
-      return axios({
+       axios({
         method: "put",
         url: "/vendor/update/defaultaddress",
         data: payLoad,
@@ -162,7 +160,7 @@ export default defineComponent({
     },
 
      getcurrentshipping() {
-      return axios({
+       axios({
         method: "get",
         url: "/vendor/get/defaultaddress",
         withCredentials: true,

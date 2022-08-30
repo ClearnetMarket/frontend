@@ -280,13 +280,13 @@ export default defineComponent({
 
   methods: {
     // get date conversion
-    relativeDate(value) {
+    relativeDate(value: any) {
       let e = new Date(value).valueOf();
       return formatDistance(e, new Date());
     },
     // gets the user status
      userstatus() {
-      return axios({
+       axios({
         method: "get",
         url: "/auth/whoami",
         withCredentials: true,
@@ -302,7 +302,7 @@ export default defineComponent({
     },
     // get the user order
      getuserorder() {
-      return axios({
+       axios({
         method: "get",
         url: `/mod/orderinfo/${this.order_id}`,
         withCredentials: true,
@@ -335,7 +335,7 @@ export default defineComponent({
     },
     // gets the customer feedback
     getcustomerfeedback() {
-      return axios({
+       axios({
         method: "get",
         url: `/mod/customer/ratings/${this.order.customer_uuid}`,
         withCredentials: true,
@@ -349,7 +349,7 @@ export default defineComponent({
     },
     // gets the vendor feedback
     getvendorfeedback() {
-      return axios({
+      axios({
         method: "get",
         url: `/mod/vendor/ratings/${this.order.vendor_uuid}`,
         withCredentials: true,
@@ -374,7 +374,7 @@ export default defineComponent({
       percenttovendor: string;
       percenttocustomer: string;
     }) {
-      return axios({
+       axios({
         method: "get",
         url: `/mod/dispute/settle/${this.order_id}`,
         withCredentials: true,
@@ -388,7 +388,7 @@ export default defineComponent({
 
     //  Brings an order to open status
      markdisputecancelledstillopen() {
-      return axios({
+      axios({
         method: "get",
         url: `/mod/dispute/canceldispute/open/${this.order_id}`,
         withCredentials: true,
@@ -401,7 +401,7 @@ export default defineComponent({
     },
     //  Brings an order to closed status
      markdisputecancelledstillclosed() {
-      return axios({
+      axios({
         method: "get",
         url: `/mod/dispute/canceldispute/closed/${this.order_id}`,
         withCredentials: true,
@@ -414,7 +414,7 @@ export default defineComponent({
     },
     //  Extends the time on an order
      extenddisputetime() {
-      return axios({
+       axios({
         method: "get",
         url: `/mod/dispute/extend/${this.order_id}`,
         withCredentials: true,
@@ -430,7 +430,7 @@ export default defineComponent({
       percenttovendor: string;
       percenttocustomer: string;
     }) {
-      return axios({
+      axios({
         method: "post",
         url: `/mod/dispute/settle/${this.order_id}`,
         data: payLoad,
@@ -460,7 +460,7 @@ export default defineComponent({
       percenttovendor: string;
       percenttocustomer: string;
     }) {
-      return axios({
+       axios({
         method: "post",
         url: `/mod/dispute/settle/${this.order_id}`,
         data: payLoad,
@@ -489,7 +489,7 @@ export default defineComponent({
       percenttovendor: string;
       percenttocustomer: string;
     }) {
-      return axios({
+      axios({
         method: "post",
         url: `/mod/dispute/settle/${this.order_id}`,
         data: payLoad,
@@ -518,7 +518,7 @@ export default defineComponent({
       percenttovendor: string;
       percenttocustomer: string;
     }) {
-      return axios({
+       axios({
         method: "post",
         url: `/mod/dispute/settle/${this.postid}`,
         data: payLoad,
@@ -546,7 +546,7 @@ export default defineComponent({
       percenttovendor: string;
       percenttocustomer: string;
     }) {
-      return axios({
+       axios({
         method: "post",
         url: `/mod/dispute/settle/${this.postid}`,
         data: payLoad,
@@ -571,7 +571,7 @@ export default defineComponent({
     },
     // comments on the post
      sendMessagePostDispute(payLoad: { textbody: string }) {
-      return axios({
+       axios({
         method: "post",
         url: "/mod/postdisputemsg/" + this.order.uuid,
         data: payLoad,
@@ -596,7 +596,7 @@ export default defineComponent({
     },
     // comments on the post
      sendMessageComment(payLoad: { textbody: string }) {
-      return axios({
+       axios({
         method: "post",
         url: "/msg/create/comment/" + this.postid,
         data: payLoad,

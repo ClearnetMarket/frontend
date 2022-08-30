@@ -302,12 +302,10 @@ export default defineComponent({
     };
   },
 
-  computed: {
-    ...mapGetters(["user"]),
-  },
+
   methods: {
      userstatus() {
-      return axios({
+       axios({
         method: "get",
         url: "/auth/whoami",
         withCredentials: true,
@@ -324,7 +322,7 @@ export default defineComponent({
         });
     },
      xmrtransactions() {
-      return axios({
+       axios({
         method: "get",
         url: "/xmr/transactions",
         withCredentials: true,
@@ -339,7 +337,7 @@ export default defineComponent({
         console.log(error)
       });
     },
-    relativeDate(value) {
+    relativeDate(value: any) {
       let e = new Date(value).valueOf();
       return formatDistance(e, new Date());
     },

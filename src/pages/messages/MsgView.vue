@@ -265,18 +265,16 @@ export default defineComponent({
       },
     }
   },
-  computed: {
-    ...mapGetters(["user"]),
-  },
+
   methods: {
       // get the date conversion
-    relativeDate(value) {
+    relativeDate(value: any) {
       let e = new Date(value).valueOf();
       return formatDistance(e, new Date());
     },
     // get the main post of the contect from api
      getmainpost() {
-      return axios({
+       axios({
         method: "get",
         url: "/msg/main/post/" + this.postid,
         withCredentials: true,
@@ -299,25 +297,25 @@ export default defineComponent({
     },
     // get the item
      gettheitem() {
-      return axios({
+      axios({
         method: "get",
         url: "/item/" + this.item_uuid,
         withCredentials: true,
         headers: authHeader(),
       })
-        .then((response) => {
-          if ((response.status = 200)) {
-            this.itemforsale = response.data;
-          }
-        })
-          .catch((error) => {
-            console.log(error)
-          });
+      .then((response) => {
+        if ((response.status = 200)) {
+          this.itemforsale = response.data;
+        }
+      })
+      .catch((error) => {
+        console.log(error)
+      });
     },
     // gets coments of main post
 
      getmainpostcomments() {
-      return axios({
+       axios({
         method: "get",
         url: "/msg/main/comment/" + this.postid,
         withCredentials: true,
@@ -332,7 +330,7 @@ export default defineComponent({
     },
     // gets the count of posts
      getcountofusers() {
-      return axios({
+       axios({
         method: "get",
         url: "/msg/main/comment/" + this.postid,
         withCredentials: true,
@@ -345,7 +343,7 @@ export default defineComponent({
     },
     // gets the msds of the users
      getmsgsofusers() {
-      return axios({
+       axios({
         method: "get",
         url: "/msg/msgs/all",
         withCredentials: true,
@@ -360,7 +358,7 @@ export default defineComponent({
     },
     //sends a comment to the api
      sendcomment(payLoad: { body: string }) {
-      return axios({
+      axios({
         method: "post",
         url: "/msg/create/comment/" + this.postid,
         data: payLoad,

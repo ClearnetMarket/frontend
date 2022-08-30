@@ -171,20 +171,15 @@ export default defineComponent({
     this.userstatusconfirmed();
   },
   methods: {
-     userstatusconfirmed() {
-      let url = "/auth/amiconfirmed";
-      const config = {
-      headers: authHeader(),
-      withCredentials: true
-    };
-      return axios.get(url, config)
-          .then((response) => {
-        if (response.status == 200) {
-          if (response.data.confirmed == true) {
-            this.$router.push({ name: "home" });
-          }
-        }
-      });
+    userstatusconfirmed() {
+     axios({
+        method: "get",
+        url: "/auth/amiconfirmed",
+        withCredentials: true,
+        headers: authHeader(),
+      }).then((response) => {
+        if (response.status == 200) { }
+      }).catch(() => { });
     },
 
     sendWordRequest(payLoad: {
@@ -196,7 +191,7 @@ export default defineComponent({
       word5: string;
     }) {
 
-      axios({
+     axios({
         method: "post",
         url: "/auth/accountseedconfirm",
         data: payLoad,

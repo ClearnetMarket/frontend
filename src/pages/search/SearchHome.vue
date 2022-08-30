@@ -68,9 +68,9 @@ export default defineComponent({
     };
   },
     watch: {
-    $route() {
+   /* $route() {
     this.main_search();
-    },
+    },*/
   },
   mounted(){
     this.searchstring = this.$route.params.searchstring;

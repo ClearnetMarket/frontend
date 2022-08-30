@@ -92,16 +92,14 @@ export default defineComponent({
       feedback: "",
     };
   },
-  computed: {
-    ...mapGetters(["user"]),
-  },
+
   mounted() {
     this.userstatus();
   },
 
   methods: {
-    async userstatus() {
-      await axios({
+     userstatus() {
+       axios({
         method: "get",
         url: "/auth/whoami",
         withCredentials: true,
@@ -119,8 +117,8 @@ export default defineComponent({
         }
       });
     },
-    async getvendorfeedback() {
-      await axios({
+     getvendorfeedback() {
+       axios({
         method: "get",
         url: "/vendor/new-feedback-count",
         withCredentials: true,
@@ -131,8 +129,8 @@ export default defineComponent({
         }
       });
     },
-    async getvendordisputes() {
-      await axios({
+     getvendordisputes() {
+       axios({
         method: "get",
         url: "/vendor/new-disputes-count",
         withCredentials: true,
@@ -143,8 +141,8 @@ export default defineComponent({
         }
       });
     },
-    async getvendororders() {
-      await axios({
+     getvendororders() {
+       axios({
         method: "get",
         url: "/vendor/new-orders-count",
         withCredentials: true,

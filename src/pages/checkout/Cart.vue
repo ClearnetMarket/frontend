@@ -308,9 +308,7 @@ export default defineComponent({
     MainHeaderVendor,
     MainFooter,
   },
-  computed: {
-    ...mapGetters(["user"]),
-  },
+
   data() {
     return {
       user: null,
@@ -336,7 +334,7 @@ export default defineComponent({
   methods: {
     // gets the item to update price and quanity for cart
      get_updated_prices_and_quantity() {
-      return axios({
+       axios({
         method: "get",
         url: "/checkout/update/price",
         headers: authHeader(),
@@ -352,7 +350,7 @@ export default defineComponent({
     },
 /*    // was a bug it would set items to one. not used currently
      set_amount_to_one() {
-      return axios({
+       axios({
         method: "post",
         url: "/checkout/setamount/one",
         headers: authHeader(),
@@ -369,7 +367,7 @@ export default defineComponent({
 
     // gets the items in the shopping cart
      get_shopping_cart_items() {
-      return axios({
+       axios({
         method: "get",
         url: "/checkout/data/incart",
         headers: authHeader(),
@@ -388,7 +386,7 @@ export default defineComponent({
     },
     // gets items saved for later
      get_shopping_cart_items_saved_for_later() {
-      return axios({
+      axios({
         method: "get",
         url: "/checkout/data/saved",
         headers: authHeader(),
@@ -409,7 +407,7 @@ export default defineComponent({
     },
     // gets the " order summary" information
      get_shopping_cart_order_summary() {
-      return axios({
+      axios({
         method: "get",
         url: "/checkout/data/total",
         headers: authHeader(),
@@ -430,7 +428,7 @@ export default defineComponent({
     },
 /*    // get the item current amount.  Not used currently
      currentitemamount(item, index) {
-      return axios({
+       axios({
         method: "get",
         url: "/checkout/currentquantity/" + item.id,
         headers: authHeader(),
@@ -439,12 +437,12 @@ export default defineComponent({
       });
     },*/
     // changes the shipping option
-     selectedshipping(event, item) {
+     selectedshipping(event: any, item: any) {
       this.option = event.target.value;
       let payLoad = {
         new_shipping_option: this.option,
       };
-      return axios({
+       axios({
         method: "put",
         url: "/checkout/changeshippingoption/" + item.id,
         headers: authHeader(),
@@ -454,12 +452,12 @@ export default defineComponent({
       });
     },
     // update item amount
-     itemamount(event, item) {
+     itemamount(event: any, item: any) {
       this.quantity = event.target.value;
       let payLoad = {
         new_amount: this.quantity,
       };
-      return axios({
+       axios({
         method: "put",
         url: "/checkout/updateamount/" + item.id,
         headers: authHeader(),
@@ -486,8 +484,8 @@ export default defineComponent({
         });
     },
     // delete an item
-     deleteitem(item) {
-      return axios({
+     deleteitem(item: any) {
+       axios({
         method: "delete",
         url: "/checkout/delete/" + item.id,
         headers: authHeader(),
@@ -513,8 +511,8 @@ export default defineComponent({
         });
     },
     // save an item for later
-     saveforlateritem(item) {
-      return axios({
+     saveforlateritem(item: any) {
+       axios({
         method: "put",
         url: "/checkout/saveforlater/" + item.id,
         headers: authHeader(),
@@ -540,8 +538,8 @@ export default defineComponent({
         });
     },
     // move item to sart from saved
-     movetocartitem(item) {
-      return axios({
+     movetocartitem(item: any) {
+       axios({
         method: "put",
         url: "/checkout/movecartitem/" + item.id,
         headers: authHeader(),

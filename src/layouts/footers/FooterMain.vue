@@ -66,9 +66,7 @@ import { mapGetters } from "vuex";
 
 export default defineComponent({
   name: "MainFooter",
-  computed: {
-    ...mapGetters(["user"]),
-  },
+
   mounted() {
 
   },

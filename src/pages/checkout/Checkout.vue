@@ -244,9 +244,7 @@ export default defineComponent({
     MainHeaderVendor,
     MainFooter,
   },
-  computed: {
-    ...mapGetters(["user"]),
-  },
+
 
   data() {
     return {
@@ -298,7 +296,7 @@ export default defineComponent({
   },
   methods: {
      checkoutorder() {
-      return axios({
+       axios({
         method: "post",
         url: "/checkout/payment",
         withCredentials: true,
@@ -319,7 +317,7 @@ export default defineComponent({
         });
     },
      updateprices() {
-      return axios({
+      axios({
         method: "get",
         url: "/checkout/update/price",
         withCredentials: true,
@@ -334,7 +332,7 @@ export default defineComponent({
         });
     },
      get_shopping_cart_items() {
-      return axios({
+       axios({
         method: "get",
         url: "/checkout/data/incart",
         headers: authHeader(),
@@ -342,25 +340,26 @@ export default defineComponent({
       })
         .then((response) => {
           this.cart_status = response.status;
-          if (this.cart_status == 200) {
+          if (this.cart_status == 200)
+          {
             this.shopping_cart_items_list = response.data;
-          } else {
+          }
+          else
+          {
             this.shopping_cart_items_list = null;
           }
         })
         .catch(() => {
-
           this.shopping_cart_items_list = null;
-         
         });
     },
 
-     checkoutpaymenttype(event, item) {
+     checkoutpaymenttype(event: any, item: any) {
       this.selectedpayment = event.target.value;
       let payLoad = {
         new_currency: this.selectedpayment,
       };
-      return axios({
+        axios({
         method: "post",
         url: "/checkout/changepaymentoption/" + item.id,
         headers: authHeader(),
@@ -371,16 +370,16 @@ export default defineComponent({
         })
         .catch(() => {
           this.shopping_cart_items_list = null;
-       
         });
     },
 
      get_shopping_cart_order_summary() {
-      return axios({
+      axios({
         method: "get",
         url: "/checkout/data/cart/total",
         headers: authHeader(),
-      }).then((response) => {
+      })
+      .then((response) => {
         this.cart_status = response.status;
         if (this.cart_status == 200) {
           this.btcsumofitem = response.data.btc_sum_of_item;
@@ -396,17 +395,16 @@ export default defineComponent({
           this.xmrshippingprice = response.data.xmr_shipping_price;
           this.xmrtotalprice = response.data.xmr_total_price;
         }
-      }).catch(() => {
-
-        });
+      }).catch(() => { });
     },
      getcurrentshipping() {
-      return axios({
+       axios({
         method: "get",
         url: "/info/getdefaultaddress",
         withCredentials: true,
         headers: authHeader(),
-      }).then((response) => {
+      })
+      .then((response) => {
         if ((response.status = 200)) {
           this.address_name = response.data.address_name;
           this.country = response.data.country;
@@ -422,12 +420,12 @@ export default defineComponent({
     },
     //  Get prices of current coins
      getxmrprice() {
-      return axios({
+      axios({
         method: "get",
         url: "/xmr/balance",
         headers: authHeader(),
       })
-        .then((response) => {
+      .then((response) => {
           if (response.data) {
             this.xmrbalance = response.data.xmr_balance;
           }
@@ -438,23 +436,22 @@ export default defineComponent({
         });
     },
      getbchprice() {
-      return axios({
+       axios({
         method: "get",
         url: "/bch/balance",
         headers: authHeader(),
       })
-        .then((response) => {
+      .then((response) => {
           if (response.data) {
             this.bchbalance = response.data.bch_balance;
           }
         })
         .catch(() => {
           this.shopping_cart_items_list = null;
-        
         });
     },
      getbtcprice() {
-      return axios({
+      axios({
         method: "get",
         url: "/btc/balance",
         headers: authHeader(),

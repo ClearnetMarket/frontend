@@ -106,7 +106,7 @@ export default defineComponent({
 
   methods: {
      userstatus() {
-      return axios({
+     axios({
         method: "get",
         url: "/auth/whoami",
         withCredentials: true,
@@ -121,7 +121,7 @@ export default defineComponent({
     },
 
      userstatusconfirmed() {
-       axios({
+    axios({
         method: "get",
         url: "/auth/amiconfirmed",
         withCredentials: true,
@@ -135,7 +135,7 @@ export default defineComponent({
       });
     },
     sendwordrequest() {
-      axios({
+       axios({
         method: "get",
         url: "/auth/account-seed",
         withCredentials: true,

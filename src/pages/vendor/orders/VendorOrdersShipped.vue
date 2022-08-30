@@ -224,7 +224,7 @@ export default defineComponent({
   methods: {
     // gets the user new orders
      getuserorders() {
-      return axios({
+      axios({
         method: "get",
         url: "/vendororders/shipped",
         withCredentials: true,
@@ -237,7 +237,7 @@ export default defineComponent({
     },
   // gets the user counts
      getuserneworderscount() {
-      return axios({
+       axios({
         method: "get",
         url: "/vendororders/count",
         withCredentials: true,
@@ -257,7 +257,7 @@ export default defineComponent({
         }
       });
     },
-    relativeDate(value) {
+    relativeDate(value: any) {
 
       let e = new Date(value).valueOf();
       return formatDistance(e, new Date());

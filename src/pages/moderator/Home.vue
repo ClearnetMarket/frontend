@@ -140,12 +140,13 @@ export default defineComponent({
   methods: {
     // get user status
      userstatus() {
-      return axios({
+      axios({
         method: "get",
         url: "/auth/whoami",
         withCredentials: true,
         headers: authHeader(),
-      }).then((response) => {
+      })
+      .then((response) => {
         if (response.status == 200) {
           if (response.data.user.user_admin < 2) {
             this.$router.push({ name: "home" });
@@ -154,18 +155,19 @@ export default defineComponent({
       });
     },
     // date conversion
-    relativeDate(value) {
+    relativeDate(value: any) {
       let e = new Date(value).valueOf();
       return formatDistance(e, new Date());
     },
     // become the moderator of the order
-     becomemod(uuid) {
-      return axios({
+     becomemod(uuid: string) {
+       axios({
         method: "get",
         url: "/mod/takeonmod/" + uuid,
         withCredentials: true,
         headers: authHeader(),
-      }).then((response) => {
+      })
+      .then((response) => {
         if (response.status == 200) {
           this.getdisputesneedmod();
           this.getdisputeshasmod();
@@ -174,12 +176,13 @@ export default defineComponent({
     },
     // get the disputes that need mods
      getdisputesneedmod() {
-      return axios({
+       axios({
         method: "get",
         url: "/mod/disputes/available",
         withCredentials: true,
         headers: authHeader(),
-      }).then((response) => {
+      })
+      .then((response) => {
         if (response.status == 200) {
           this.needmodorders = response.data;
         }
@@ -187,12 +190,13 @@ export default defineComponent({
     },
     // get disputes that already has mods
      getdisputeshasmod() {
-      return axios({
+      axios({
         method: "get",
         url: "/mod/disputes/modded",
         withCredentials: true,
         headers: authHeader(),
-      }).then((response) => {
+      })
+      .then((response) => {
         if (response.status == 200) {
           this.hadmodorders = response.data;
         }

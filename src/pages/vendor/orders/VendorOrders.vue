@@ -204,7 +204,7 @@ export default defineComponent({
   methods: {
     // gets the count of orders for top bars
      getuserneworderscount() {
-      return axios({
+      axios({
         method: "get",
         url: "/vendororders/count",
         withCredentials: true,
@@ -224,7 +224,7 @@ export default defineComponent({
     },
     // delete the order notices
      deleteordernotice() {
-      return axios({
+       axios({
         method: "delete",
         url: "/vendor/new-orders-count/markasread" ,
         withCredentials: true,
@@ -236,7 +236,7 @@ export default defineComponent({
       });
     },
     // date conversion
-    relativeDate(value) {
+    relativeDate(value: any) {
       let e = new Date(value).valueOf();
       return formatDistance(e, new Date());
     },

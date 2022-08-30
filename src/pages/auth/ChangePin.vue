@@ -128,7 +128,7 @@ export default defineComponent({
   },
   methods: {
     sendRequest(payLoad: { pin: string; pin_confirm: string }) {
-      axios({
+    axios({
         method: "post",
         url: "/auth/change-pin",
         data: payLoad,

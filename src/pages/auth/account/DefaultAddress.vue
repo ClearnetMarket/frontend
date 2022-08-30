@@ -178,7 +178,7 @@
 import axios from "axios";
 import { defineComponent } from "vue";
 import { notify } from "@kyvg/vue3-notification";
-import { mapGetters } from "vuex";
+
 import useValidate from "@vuelidate/core";
 import { required,  minLength } from "@vuelidate/validators";
 import MainHeaderTop from "../../../layouts/headers/MainHeaderTop.vue";
@@ -188,6 +188,12 @@ import MainHeaderVendor from "../../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../../layouts/footers/FooterMain.vue";
 import authHeader from "../../../services/auth.header";
 
+/**
+ *
+ @typedef {Object} user.user_admin
+
+ *
+ */
 
 export default defineComponent({
   name: "defaultaddress",
@@ -202,7 +208,7 @@ export default defineComponent({
   data() {
     return {
       countryList: [],
-      user: [],
+      user: null,
     v$: useValidate(),
       ChangeAddressForm: {
         countryList: [],
@@ -227,9 +233,7 @@ export default defineComponent({
       },
     };
   },
-  computed: {
-    ...mapGetters(["user"]),
-  },
+
 
   mounted() {
     this.getCountryList();
@@ -247,13 +251,14 @@ export default defineComponent({
       zip: string;
       message: string;
     }) {
-      return axios({
+     axios({
         method: "put",
         url: "/info/defaultaddress",
         data: payLoad,
         withCredentials: true,
         headers: authHeader(),
-      }).then((response) => {
+      })
+     .then((response) => {
         if ((response.status = 200)) {
               notify({
               title: "Updated Address",
@@ -265,7 +270,7 @@ export default defineComponent({
       });
     },
      getcurrentshipping() {
-      return axios({
+       axios({
         method: "get",
         url: "/info/getdefaultaddress",
         withCredentials: true,
@@ -288,7 +293,7 @@ export default defineComponent({
 
      getCountryList() {
       const path = "/auth/query/country";
-      return axios
+        axios
         .get(path, { withCredentials: true })
         .then((response) => {
           this.countryList = response.data;

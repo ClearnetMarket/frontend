@@ -321,7 +321,7 @@ export default defineComponent({
       currency: string;
     }) {
       let path = "/auth/register";
-      return axios({
+       axios({
         method: "post",
         url: path,
         data: payLoad,
@@ -352,7 +352,7 @@ export default defineComponent({
      getCurrencyList() {
       const path = "/auth/query/currency";
 
-      return axios({
+       axios({
         method: "get",
         url: path,
         withCredentials: true,
@@ -366,7 +366,7 @@ export default defineComponent({
     },
      getCountryList() {
       const path = "/auth/query/country";
-      return axios
+       axios
         .get(path, { withCredentials: true })
         .then((response) => {
           this.countryList = response.data;

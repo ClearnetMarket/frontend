@@ -91,9 +91,7 @@ export default defineComponent({
     MainFooter,
     MainHeaderVendor
   },
-  computed: {
-    ...mapGetters(["user"]),
-  },
+
   data() {
     return {
       orders: [],
@@ -111,7 +109,7 @@ export default defineComponent({
   methods: {
     // gets the count of how many disputes
      getdisputescount() {
-      return axios({
+       axios({
         method: "get",
         url: "/vendor/new-disputes-count",
         withCredentials: true,
@@ -124,7 +122,7 @@ export default defineComponent({
     },
     // gets the disputed orders
      getdisputedorders() {
-      return axios({
+      axios({
         method: "get",
         url: "/vendororders/disputed",
         withCredentials: true,
@@ -136,7 +134,7 @@ export default defineComponent({
       });
     },
      deleteordernotice() {
-      return axios({
+       axios({
         method: "delete",
         url: "/vendor/new-orders-count/markasread",
         withCredentials: true,
@@ -148,7 +146,7 @@ export default defineComponent({
       });
     },
     // date conversion
-    relativeDate(value) {
+    relativeDate(value: any) {
 
       let e = new Date(value).valueOf();
       return formatDistance(e, new Date());

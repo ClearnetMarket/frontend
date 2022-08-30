@@ -351,8 +351,8 @@ export default defineComponent({
     },
     // send the score for a feedback
     // accepts payload
-     sendFeedbackScore(uuid, payLoad) {
-      return axios({
+     sendFeedbackScore(uuid: any, payLoad: any) {
+       axios({
         method: "post",
         url: "/orders/vendor/feedback/score/" + uuid,
         data: payLoad,
@@ -380,14 +380,14 @@ export default defineComponent({
         });
     },
     // payload for sending feedback
-    sendreview(uuid, i) {
+    sendreview(uuid: any, i: any) {
       let user_review = this.review[i];
 
       this.sendFeedbackReview(uuid, user_review);
     },
     // send the feedback
      sendFeedbackReview(uuid: string, user_review: string) {
-      return axios({
+       axios({
         method: "post",
         url: "/orders/vendor/feedback/review/" + uuid,
         data: user_review,
@@ -416,7 +416,7 @@ export default defineComponent({
     },
     // gets the user orders
      getuserorders() {
-      return axios({
+       axios({
         method: "get",
         url: "/vendororders/finalized",
         withCredentials: true,
@@ -430,7 +430,7 @@ export default defineComponent({
     },
     // gets the count for the top bars count
      getuserneworderscount() {
-      return axios({
+       axios({
         method: "get",
         url: "/vendororders/count",
         withCredentials: true,
@@ -452,7 +452,7 @@ export default defineComponent({
       });
     },
     // get the date conversion
-    relativeDate(value) {
+    relativeDate(value: any) {
       let e = new Date(value).valueOf();
       return formatDistance(e, new Date());
     },

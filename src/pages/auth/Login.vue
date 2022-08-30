@@ -110,7 +110,7 @@ export default defineComponent({
   },
   methods: {
      userstatus() {
-     return  axios({
+     axios({
         method: "get",
         url: "/auth/whoami",
         withCredentials: true,
@@ -125,7 +125,7 @@ export default defineComponent({
         .catch(() => {});
     },
      sendLogin(payLoad: { username: string; password: string }) {
-      return axios({
+     axios({
         method: "post",
         url: "/auth/login",
         data: payLoad,

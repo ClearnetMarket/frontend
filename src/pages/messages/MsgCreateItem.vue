@@ -125,67 +125,65 @@ export default defineComponent({
       },
     };
   },
-  computed: {
-    ...mapGetters(["user"]),
-  },
+
   methods: {
      gettheitem() {
-      return axios({
+      axios({
         method: "get",
         url: "/item/" + this.item_uuid,
         withCredentials: true,
         headers: authHeader(),
       })
-        .then((response) => {
-          if ((response.status = 200)) {
-            this.itemforsale = response.data;
-          }
-        })
-        .catch((error) => {
-          console.log(error)
-        });
+      .then((response) => {
+        if ((response.status = 200)) {
+          this.itemforsale = response.data;
+        }
+      })
+      .catch((error) => {
+        console.log(error)
+      });
     },
 
      getotheruser() {
-      return axios({
+       axios({
         method: "get",
         url: "/info/user-info/" + this.other_user_uuid,
         withCredentials: true,
         headers: authHeader(),
       })
-        .then((response) => {
-          if ((response.status = 200)) {
-            this.other_user = response.data;
-          }
-        })
-        .catch((error) => {
-          console.log(error)
-        });
+      .then((response) => {
+        if ((response.status = 200)) {
+          this.other_user = response.data;
+        }
+      })
+      .catch((error) => {
+        console.log(error)
+      });
     },
 
      getmsgsofusers() {
-      return axios({
+      axios({
         method: "get",
         url: "/msg/count",
         withCredentials: true,
       })
-        .then((response) => {
-          this.userlist = response.data;
-        })
-        .catch((error) => {
-          console.log(error)
-        });
+      .then((response) => {
+        this.userlist = response.data;
+      })
+      .catch((error) => {
+        console.log(error)
+      });
     },
      getcountofusers() {
-      return axios({
+       axios({
         method: "get",
         url: "/msg/msgs/all",
         withCredentials: true,
       })
-        .then((response) => {
-          this.other_user_count = response.data.get_count;
-        })
-        .catch(() => {});
+      .then((response) => {
+        this.other_user_count = response.data.get_count;
+      })
+      .catch(() => {});
     },
      sendMessage(payLoad: {
       order_uuid: string;
@@ -193,7 +191,7 @@ export default defineComponent({
       body: string;
       item_uuid: string;
     }) {
-      return axios({
+       axios({
         method: "post",
         url: "/msg/create/item",
         data: payLoad,
@@ -228,7 +226,7 @@ export default defineComponent({
         user_two_uuid: this.other_user.uuid,
         body: this.SendMsgForm.msginfo,
         item_uuid: this.item_uuid,
-        order_uuid: null,
+        order_uuid: '',
       };
       this.v$.$validate(); // checks all inputs
       if (this.v$.$invalid) {

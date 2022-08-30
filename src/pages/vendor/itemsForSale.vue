@@ -185,6 +185,7 @@ export default defineComponent({
       user: [],
       items: [],
       newitemid: null,
+
       accept: ref(false),
     };
   },
@@ -192,12 +193,12 @@ export default defineComponent({
     ...mapGetters(["user"]),
   },
   methods: {
-    gotoitem(itemid) {
+    gotoitem(itemid: any) {
       this.$router.push({ name: "edititem", params: { id: itemid } });
     },
 
      userstatus() {
-      return axios({
+       axios({
         method: "get",
         url: "/auth/whoami",
         withCredentials: true,
@@ -212,7 +213,7 @@ export default defineComponent({
     },
     // gets the vendor items
      getvendoritems() {
-      return axios({
+       axios({
         method: "get",
         url: "/vendorcreate/itemsforsale",
         withCredentials: true,
@@ -225,12 +226,13 @@ export default defineComponent({
     },
     // creates an item
      createanitem() {
-      return axios({
+       axios({
         method: "post",
         url: "/vendorcreateitem/create-item",
         withCredentials: true,
         headers: authHeader(),
-      }).then((response) => {
+      })
+     .then((response) => {
         if ((response.status = 200)) {
           this.newitemid = response.data.item_id;
           this.$router.push({
@@ -239,7 +241,7 @@ export default defineComponent({
           });
         }
       })
-             .catch((error) => {
+     .catch((error) => {
                console.log(error)
             notify({
               title: "Freeport Error",
@@ -249,13 +251,14 @@ export default defineComponent({
           });
     },
     // clones an item
-     cloneitem(itemid) {
-      return axios({
+     cloneitem(itemid: any) {
+       axios({
         method: "get",
         url: "/vendorcreate/clone-item/" + itemid,
         withCredentials: true,
         headers: authHeader(),
-      }).then((response) => {
+      })
+     .then((response) => {
         if ((response.status = 200)) {
           this.getvendoritems();
           notify({
@@ -267,16 +270,16 @@ export default defineComponent({
       })
      .catch((error) => {
        console.log(error)
-    notify({
-      title: "Freeport Error",
-      text: "Error posting information.",
-      type: "error",
-    });
+        notify({
+          title: "Freeport Error",
+          text: "Error posting information.",
+          type: "error",
+        });
   });
     },
     // deletes an item
-     deleteitem(itemid) {
-      return axios({
+     deleteitem(itemid: any) {
+       axios({
         method: "delete",
         url: "/vendorcreate/delete-item/" + itemid,
         withCredentials: true,
@@ -301,9 +304,9 @@ export default defineComponent({
   });
     },
     // put item online
-    async putonline(itemid) {
+     putonline(itemid: any) {
       console.log(itemid);
-      await axios({
+       axios({
         method: "get",
         url: "/vendororders/online/" + itemid,
         withCredentials: true,
@@ -320,8 +323,8 @@ export default defineComponent({
       });
     },
     // put item offline
-     putoffline(itemid) {
-      return axios({
+     putoffline(itemid: any) {
+       axios({
         method: "get",
         url: "/vendororders/offline/" + itemid,
         withCredentials: true,

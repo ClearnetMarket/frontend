@@ -132,9 +132,7 @@ export default defineComponent({
       user_admin: 0,
     }
   },
-  computed: {
-    ...mapGetters(["user"]),
-  },
+
 validations() {
     return {
         accept: { required },
@@ -142,7 +140,7 @@ validations() {
   },
   methods: {
      userstatus() {
-      return axios({
+       axios({
         method: "get",
         url: "/auth/whoami",
         withCredentials: true,
@@ -154,13 +152,15 @@ validations() {
           if (this.user_admin == 1) {
             this.$router.push({ name: "forsale" });
           }
-        } else {
+        }
+        else {
           this.$router.push({ name: "login" });
         }
       });
     },
-     becomevendor(payLoad) {
-      return axios({
+     becomevendor(payLoad: {
+       accept: boolean}) {
+       axios({
         method: "post",
         url: "/vendor/becomevendor",
         data: payLoad,

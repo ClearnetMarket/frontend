@@ -72,8 +72,8 @@ export default defineComponent({
   computed: {},
 
   methods: {
-    async getvendorreviews() {
-      await axios({
+     getvendorreviews() {
+       axios({
         method: "get",
         url: "/vendor/vendor-feedback/" + this.item.vendor_uuid,
         withCredentials: true,
@@ -89,7 +89,7 @@ export default defineComponent({
         .catch(() => {});
     },
 
-    returncurrencysymbol(currencydigit) {
+    returncurrencysymbol(currencydigit: number) {
       if (currencydigit === 0) {
         return "$";
       } else if (currencydigit === 1) {
@@ -156,7 +156,7 @@ export default defineComponent({
         return "Kč";
       }
     },
-    returncurrency(currencydigit) {
+    returncurrency(currencydigit: number) {
       if (currencydigit === 0) {
         return "USD";
       } else if (currencydigit === 1) {

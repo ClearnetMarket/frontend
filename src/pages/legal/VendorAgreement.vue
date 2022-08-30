@@ -55,9 +55,7 @@ export default defineComponent({
      user: null
     };
   },
-  computed: {
-    ...mapGetters(["user"]),
-  },
+
 
   methods: {
     

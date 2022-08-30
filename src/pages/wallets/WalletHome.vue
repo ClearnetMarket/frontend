@@ -223,7 +223,7 @@ export default defineComponent({
   },
   methods: {
      userstatus() {
-      return axios({
+       axios({
         method: "get",
         url: "/auth/whoami",
         withCredentials: true,
@@ -242,12 +242,13 @@ export default defineComponent({
     },
 
      userinfo() {
-      return axios({
+       axios({
         method: "get",
         url: "/info/country-currency",
         withCredentials: true,
         headers: authHeader(),
-      }).then((response) => {
+      })
+     .then((response) => {
         if ((response.status = 200)) {
           this.usercurrency = response.data.currency;
         }
@@ -255,12 +256,13 @@ export default defineComponent({
     },
 
      getwallettotals() {
-      return axios({
+       axios({
         method: "get",
         url: "/price/wallets/total/" + this.user.currency,
         withCredentials: true,
         headers: authHeader(),
-      }).then((response) => {
+      })
+       .then((response) => {
         if (response.data) {
           this.wallettotal = response.data.coin;
         }
@@ -268,10 +270,11 @@ export default defineComponent({
     },
 
      getxmrprice() {
-      return axios({
+       axios({
         method: "get",
         url: "/xmr/price",
-      }).then((response) => {
+      })
+     .then((response) => {
         if (response.data) {
           this.xmrprice = response.data.price_xmr_usd;
         }
@@ -279,10 +282,11 @@ export default defineComponent({
     },
 
      getbchprice() {
-      return axios({
+       axios({
         method: "get",
         url: "/bch/price",
-      }).then((response) => {
+      })
+       .then((response) => {
         if (response.data) {
           this.bchprice = response.data.bch_price_usd;
         }
@@ -290,10 +294,11 @@ export default defineComponent({
     },
 
      getbtcprice() {
-      return axios({
+       axios({
         method: "get",
         url: "/btc/price",
-      }).then((response) => {
+      })
+     .then((response) => {
         if (response.data) {
           this.btcprice = response.data.btc_price_usd;
         }
@@ -302,7 +307,7 @@ export default defineComponent({
 
     //  Get balances for dropdowns
      getxmrbalance() {
-      return axios({
+       axios({
         method: "get",
         url: "/xmr/balance",
         headers: authHeader(),
@@ -314,11 +319,12 @@ export default defineComponent({
     },
 
      getbchbalance() {
-      return axios({
+       axios({
         method: "get",
         url: "/bch/balance",
         headers: authHeader(),
-      }).then((response) => {
+      })
+     .then((response) => {
         if (response.data) {
           this.bchbalance = response.data.bch_balance;
         }
@@ -326,11 +332,12 @@ export default defineComponent({
     },
 
      getbtcbalance() {
-      return axios({
+       axios({
         method: "get",
         url: "/btc/balance",
         headers: authHeader(),
-      }).then((response) => {
+      })
+     .then((response) => {
         if (response.data) {
           this.btcbalance = response.data.btc_balance;
         }

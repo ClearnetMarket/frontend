@@ -231,13 +231,13 @@ export default defineComponent({
   },
 
   methods: {
-    relativeDate(value) {
+    relativeDate(value: any) {
       let e = new Date(value).valueOf();
       return formatDistance(e, new Date());
     },
 
      getratings() {
-      return axios({
+       axios({
         method: "get",
         url: "/vendor/all-feedback/" + this.vendoruuid,
         withCredentials: true,

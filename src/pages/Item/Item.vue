@@ -177,18 +177,18 @@ export default defineComponent({
       exactzipcode: "",
     };
   },
-
-  mounted() {
-    this.getitem();
-  },
   computed: {
     ...mapGetters(["user"]),
   },
+  mounted() {
+    this.getitem();
+  },
+
   methods: {
      getitem() {
       let item_id_route = useRoute();
       this.item_id = item_id_route.params.id;
-      return axios({
+       axios({
         method: "get",
         url: "/item/" + this.item_id,
         withCredentials: true,
@@ -244,7 +244,7 @@ export default defineComponent({
         });
     },
      seeifuserhasdefaultaddress() {
-      return axios({
+       axios({
         method: "get",
         url: "/vendor/get/defaultaddress/" + this.item.vendor_uuid,
         withCredentials: true,
@@ -285,99 +285,99 @@ export default defineComponent({
       this.currency = this.item.currency;
     },
      getpricebtc() {
-      return axios({
+       axios({
         method: "get",
         url: "/price/btcprice/" + this.item.currency + "/" + this.item.price,
         withCredentials: true,
       })
-        .then((response) => {
-          if ((response.status = 200)) {
-            this.pricebtc = response.data.coin;
-          }
-        })
-        .catch((error) => {
-          console.log(error)
-        });
+      .then((response) => {
+        if ((response.status = 200)) {
+          this.pricebtc = response.data.coin;
+        }
+      })
+      .catch((error) => {
+        console.log(error)
+      });
     },
      getpricebch() {
-      return axios({
+       axios({
         method: "get",
         url: "/price/bchprice/" + this.item.currency + "/" + this.item.price,
         withCredentials: true,
       })
-        .then((response) => {
-          if ((response.status = 200)) {
-            this.pricebch = response.data.coin;
-          }
-        })
-        .catch((error) => {
-          console.log(error)
-        });
+      .then((response) => {
+        if ((response.status = 200)) {
+          this.pricebch = response.data.coin;
+        }
+      })
+      .catch((error) => {
+        console.log(error)
+      });
     },
      getpricexmr() {
-      return axios({
+       axios({
         method: "get",
         url: "/price/xmrprice/" + this.item.currency + "/" + this.item.price,
         withCredentials: true,
       })
-        .then((response) => {
-          if ((response.status = 200)) {
-            this.pricexmr = response.data.coin;
-          }
-        })
-        .catch((error) => {
-          console.log(error)
-        });
+      .then((response) => {
+        if ((response.status = 200)) {
+          this.pricexmr = response.data.coin;
+        }
+      })
+      .catch((error) => {
+        console.log(error)
+      });
     },
      getvendorinfo() {
-      return axios({
+       axios({
         method: "get",
         url: "/vendor/vendoriteminfo/" + this.item.vendor_uuid,
         withCredentials: true,
       })
-        .then((response) => {
-          if ((response.status = 200)) {
-            this.vendoruuid = response.data.vendoruuid;
-            this.vendorrating = response.data.vendorrating;
-            this.vendortotalsales = response.data.vendortotalsales;
-            this.loaded_feedback = true;
-          }
-        })
-        .catch((error) => {
-          console.log(error)
-        });
+      .then((response) => {
+        if ((response.status = 200)) {
+          this.vendoruuid = response.data.vendoruuid;
+          this.vendorrating = response.data.vendorrating;
+          this.vendortotalsales = response.data.vendortotalsales;
+          this.loaded_feedback = true;
+        }
+      })
+      .catch((error) => {
+        console.log(error)
+      });
     },
 
      getvendorreviews() {
-      return axios({
+       axios({
         method: "get",
         url: "/vendor/vendor-feedback/" + this.item.vendor_uuid,
         withCredentials: true,
       })
-        .then((response) => {
-          if ((response.status = 200)) {
-            this.vendorreviews = response.data;
-            if (this.vendorreviews == undefined) {
-              this.vendorreviews = null;
-            }
+      .then((response) => {
+        if ((response.status = 200)) {
+          this.vendorreviews = response.data;
+          if (this.vendorreviews == undefined) {
+            this.vendorreviews = null;
           }
-        })
-         .catch((error) => {
-           console.log(error)
-        });
+        }
+      })
+       .catch((error) => {
+         console.log(error)
+      });
     },
      add_view() {
-      return axios({
+       axios({
         method: "get",
         url: "/item/count/" + this.item.uuid,
         withCredentials: true,
         headers: authHeader(),
-      }).then((response) => {
-        if ((response.status = 200)) {
-        }
+      })
+      .then(() => {
+
       });
     },
-    returncurrencysymbol(currencydigit) {
+    returncurrencysymbol(currencydigit: number) {
       if (currencydigit === 0) {
         return "$";
       } else if (currencydigit === 1) {
@@ -444,7 +444,7 @@ export default defineComponent({
         return "Kč";
       }
     },
-    returncurrency(currencydigit) {
+    returncurrency(currencydigit: any) {
       if (currencydigit === 0) {
         return "USD";
       } else if (currencydigit === 1) {

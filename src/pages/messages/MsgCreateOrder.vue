@@ -137,32 +137,33 @@ export default defineComponent({
       },
     };
   },
-  computed: {
-    ...mapGetters(["user"]),
-  },
+
   methods: {
      gettheitem() {
-      return axios({
+       axios({
         method: "get",
         url: "/item/" + this.item_uuid,
         withCredentials: true,
         headers: authHeader(),
-      }).then((response) => {
+      })
+      .then((response) => {
         if ((response.status = 200)) {
           this.itemforsale = response.data;
         }
-      }) .catch((error) => {
+      })
+      .catch((error) => {
         console.log(error)
       });
     },
 
      getotheruser() {
-      return axios({
+       axios({
         method: "get",
         url: "/info/user-info/" + this.other_user_uuid,
         withCredentials: true,
         headers: authHeader(),
-      }).then((response) => {
+      })
+      .then((response) => {
         if ((response.status = 200)) {
           this.other_user = response.data;
         }
@@ -173,25 +174,25 @@ export default defineComponent({
     },
 
      getmsgsofusers() {
-      return axios({
+       axios({
         method: "get",
         url: "/msg/count",
         withCredentials: true,
       })
-        .then((response) => {
-          this.userlist = response.data;
-        })
-        .catch((error) => {console.log(error)});
+      .then((response) => {
+        this.userlist = response.data;
+      })
+      .catch((error) => {console.log(error)});
     },
      getcountofusers() {
-      return axios({
+       axios({
         method: "get",
         url: "/msg/msgs/all",
         withCredentials: true,
       })
-        .then((response) => {
-          this.other_user_count = response.data.get_count;
-        })
+      .then((response) => {
+        this.other_user_count = response.data.get_count;
+      })
      .catch((error) => {
        console.log(error)
      });
@@ -202,7 +203,7 @@ export default defineComponent({
       body: string;
       item_uuid: string;
     }) {
-      return axios({
+       axios({
         method: "post",
         url: "/msg/create",
         data: payLoad,

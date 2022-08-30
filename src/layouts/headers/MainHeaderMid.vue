@@ -45,7 +45,12 @@
             Shopping Cart
           </div>
           <div class="row-span-1 col-span-9 text-[14px] text-gray-700">
+            <div v-if="user" class="flex">
             {{ shopping_cart_count }} Items
+            </div>
+              <div v-else>
+                0 Items
+              </div>
           </div>
         </div>
       </router-link>
@@ -58,6 +63,7 @@ import { defineComponent } from "vue";
 import { ShoppingBagIcon } from "@heroicons/vue/solid";
 import axios from "axios";
 import authHeader from "../../services/auth.header";
+import {mapGetters} from "vuex";
 
 
 export default defineComponent({
@@ -66,6 +72,7 @@ export default defineComponent({
   data() {
     return {
       shopping_cart_count: 0,
+      user: null,
       searchForm: {
         searchInput: "",
       },
@@ -73,13 +80,17 @@ export default defineComponent({
   },
 
   mounted() {
-    this.get_shopping_cart_count();
-       console.log("sad")
-        console.log(authHeader())
+    console.log("here")
+   if (this.user !== null){
+     console.log(this.user)
+     this.get_shopping_cart_count();
+   }
+
+
   },
   methods: {
     //  change url in dropdown
-    gotourl(nameofurl) {
+    gotourl(nameofurl: string) {
       this.$router.replace({ name: nameofurl })
     },
     mainsearch() {
@@ -98,6 +109,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
+          console.log(response)
         this.shopping_cart_count = response.data.status;
       });
     },

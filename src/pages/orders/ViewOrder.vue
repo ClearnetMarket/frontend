@@ -619,7 +619,7 @@ export default defineComponent({
   methods: {
     //  get vendor info for stats
       getvendorinfo() {
-         return axios({
+          axios({
                method: "get",
                baseURL: "/vendor/vendoriteminfo/" + this.order.vendor_uuid,
                headers: authHeader(),
@@ -635,7 +635,7 @@ export default defineComponent({
     },
     //  get the order from the params
      getuserorder() {
-      return axios({
+       axios({
         method: "get",
         url: "/orders/" + this.order_id,
         withCredentials: true,
@@ -652,7 +652,7 @@ export default defineComponent({
     },
     // get the feedback on vendor
      getorderfeedback() {
-      return axios({
+       axios({
         method: "get",
         url: "/orders/feedback/get/" + this.order_id,
         withCredentials: true,
@@ -725,7 +725,7 @@ export default defineComponent({
       vendorrating: number;
       review: string;
     }) {
-      return axios({
+      axios({
         method: "post",
         url: "/orders/feedback/" + this.order.uuid,
         data: payLoad,
@@ -754,9 +754,9 @@ export default defineComponent({
     },
     // get the tracking info
      getordertracking() {
-      const order_id_route = useRoute();
+       const order_id_route = useRoute();
        this.order_id = order_id_route.params.uuid;
-      return axios({
+       axios({
         method: "get",
         url: "/vendororders/tracking/get/" + this.order_id,
         withCredentials: true,
@@ -770,8 +770,8 @@ export default defineComponent({
       });
     },
     // request to cancel an order
-    delivered(uuid)     {
-      return axios({
+    delivered(uuid: any)     {
+       axios({
         method: "get",
         url: "/mark/delivered/" + uuid,
         withCredentials: true,
@@ -782,8 +782,8 @@ export default defineComponent({
           });
     },
     // request to cancel an order
-    disputeorder(uuid) {
-      return axios({
+    disputeorder(uuid: any) {
+      axios({
         method: "get",
         url: "/mark/disputed/" + uuid,
         withCredentials: true,
@@ -794,8 +794,8 @@ export default defineComponent({
           });
     },
     // request to cancel an order
-    finalize(uuid) {
-      return axios({
+    finalize(uuid: any) {
+      axios({
         method: "get",
         url: "/mark/finalized/" + uuid,
         withCredentials: true,
@@ -806,8 +806,8 @@ export default defineComponent({
           });
     },
     // request to cancel an order
-    requestcancel(uuid) {
-      return axios({
+    requestcancel(uuid: any) {
+      axios({
         method: "get",
         url: "/orders/request/cancel/" + uuid,
         withCredentials: true,

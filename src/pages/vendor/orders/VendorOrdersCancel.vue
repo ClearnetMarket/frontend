@@ -208,7 +208,7 @@ export default defineComponent({
   methods: {
     // gets the user orders
      getuserorders() {
-      return axios({
+       axios({
         method: "get",
         url: "/vendororders/requestcancel",
         withCredentials: true,
@@ -222,8 +222,8 @@ export default defineComponent({
         });
     },
     // rejects the orders
-     rejectorder(uuid) {
-      return axios({
+     rejectorder(uuid: any) {
+      axios({
         method: "post",
         url: "/vendororders/new/reject/" + uuid,
         withCredentials: true,
@@ -243,8 +243,8 @@ export default defineComponent({
         });
     },
     // accepts the orders
-     acceptorder(uuid) {
-      return axios({
+     acceptorder(uuid: any) {
+      axios({
         method: "put",
         url: "/vendororders/new/accept/" + uuid,
         withCredentials: true,
@@ -265,7 +265,7 @@ export default defineComponent({
     },
     // gets the top bars count for orders
      getuserneworderscount() {
-      return axios({
+      axios({
         method: "get",
         url: "/vendororders/count",
         withCredentials: true,
@@ -288,7 +288,7 @@ export default defineComponent({
         });
     },
     // date conversion
-    relativeDate(value) {
+    relativeDate(value: any) {
       let e = new Date(value).valueOf();
       return formatDistance(e, new Date());
     },

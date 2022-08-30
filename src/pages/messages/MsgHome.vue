@@ -108,32 +108,30 @@ export default defineComponent({
       other_user_count: 0,
     };
   },
-  computed: {
-    ...mapGetters(["user"]),
-  },
+
   methods: {
      getcountofusers() {
-      return axios({
+       axios({
         method: "get",
         url: "/msg/count",
         withCredentials: true,
         headers: authHeader(),
       })
-        .then((response) => {
-          this.other_user_count = response.data.get_count;
-        })
+      .then((response) => {
+        this.other_user_count = response.data.get_count;
+      })
      .catch((error) => { console.log(error)});
     },
      getmsgsofusers() {
-      return axios({
+       axios({
         method: "get",
         url: "/msg/msgs/all",
         withCredentials: true,
         headers: authHeader(),
       })
-        .then((response) => {
-          this.userlist = response.data;
-        })
+      .then((response) => {
+        this.userlist = response.data;
+      })
       .catch((error) => {console.log(error)})
     },
   },

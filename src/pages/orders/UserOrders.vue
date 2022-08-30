@@ -435,7 +435,7 @@ export default defineComponent({
      sendFeedbackScore(uuid: string, rating: string) {
        let payLoad = { rating: rating };
 
-      return axios({
+       axios({
         method: "post",
         url: "/orders/feedback/score/" + uuid,
         data: payLoad,
@@ -462,14 +462,14 @@ export default defineComponent({
         });
     },
     // sends the text review feedback
-    sendreview(uuid, i) {
+    sendreview(uuid: any, i: any) {
       let user_review = this.review[i];
       let payLoad = { review: user_review };
       this.sendFeedbackReview(uuid, payLoad);
     },
-     sendFeedbackReview(uuid: string, review) {
+     sendFeedbackReview(uuid: string, review: any) {
      let payLoad = { review: review };
-      return axios({
+       axios({
         method: "post",
         url: "/orders/feedback/review/" + uuid,
         data: payLoad,
@@ -497,7 +497,7 @@ export default defineComponent({
     },
     // gets the user orders
      getuserorders() {
-      return axios({
+       axios({
         method: "get",
         url: "/orders",
         withCredentials: true,
@@ -510,7 +510,7 @@ export default defineComponent({
     },
     // gets how many orders
      getuserorderscount() {
-      return axios({
+       axios({
         method: "get",
         url: "/orders/count",
         withCredentials: true,
@@ -522,8 +522,8 @@ export default defineComponent({
       });
     },
     // mark as delivered
-     delivered(uuid) {
-      return axios({
+     delivered(uuid: any) {
+       axios({
         method: "get",
         url: "/orders/mark/delivered/" + uuid,
         withCredentials: true,
@@ -540,8 +540,8 @@ export default defineComponent({
       });
     },
     // marks as finalized
-     finalize(uuid) {
-      return axios({
+     finalize(uuid: any) {
+       axios({
         method: "get",
         url: "/orders/mark/finalized/" + uuid,
         withCredentials: true,
@@ -558,8 +558,8 @@ export default defineComponent({
       });
     },
     // mark as requested to cancel
-     requestcancel(uuid) {
-      return axios({
+     requestcancel(uuid: any) {
+      axios({
         method: "get",
         url: "/orders/request/cancel/" + uuid,
         withCredentials: true,
@@ -577,8 +577,8 @@ export default defineComponent({
       });
     },
     // mark as disputed
-     disputeorder(uuid) {
-      return axios({
+     disputeorder(uuid: any) {
+      axios({
         method: "get",
         url: "/orders/mark/disputed/" + uuid,
         withCredentials: true,
@@ -596,8 +596,8 @@ export default defineComponent({
       });
     },
     // creates dispute chat (background call)
-     createdisputechat(uuid) {
-      return axios({
+     createdisputechat(uuid: any) {
+       axios({
         method: "post",
         url: "/msg/create/dispute/" + uuid,
         withCredentials: true,

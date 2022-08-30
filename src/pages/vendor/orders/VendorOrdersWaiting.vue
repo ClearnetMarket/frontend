@@ -326,7 +326,7 @@ export default defineComponent({
   },
 
   methods: {
-    openModal(modalId) {
+    openModal(modalId: any) {
       let modal = document.getElementById(modalId);
       modal.classList.remove("hidden");
     },
@@ -337,7 +337,7 @@ export default defineComponent({
     },
     // gets the new user orders
      getuserorders() {
-      return axios({
+      axios({
         method: "get",
         url: "/vendororders/waiting",
         withCredentials: true,
@@ -349,8 +349,8 @@ export default defineComponent({
       });
     },
     //accepted orders
-     acceptorder(uuid) {
-      return axios({
+     acceptorder(uuid: any) {
+       axios({
         method: "put",
         url: "/vendororders/waiting/markasshipped/" + uuid,
         withCredentials: true,
@@ -368,8 +368,8 @@ export default defineComponent({
       });
     },
     // rejects orders
-     rejectorder(uuid) {
-      return axios({
+     rejectorder(uuid: any) {
+       axios({
         method: "delete",
         url: "/vendororders/new/reject/" + uuid,
         withCredentials: true,
@@ -392,7 +392,7 @@ export default defineComponent({
       carrier_name: string;
       tracking_number: string;
     }) {
-      return axios({
+       axios({
         method: "post",
         url: "/vendororders/tracking/add",
         withCredentials: true,
@@ -404,7 +404,7 @@ export default defineComponent({
       });
     },
     // creates the payload for gettrackingdata
-    onSendTracking(uuid) {
+    onSendTracking(uuid: any) {
       const payLoad = {
         order_uuid: uuid,
         carrier_name: this.trackingForm.carrier,
@@ -415,7 +415,7 @@ export default defineComponent({
 
   // gets the user order count
      getuserneworderscount() {
-      return axios({
+       axios({
         method: "get",
         url: "/vendororders/count",
         withCredentials: true,
@@ -436,7 +436,7 @@ export default defineComponent({
       });
     },
     // converts time
-    relativeDate(value) {
+    relativeDate(value: any) {
       let e = new Date(value).valueOf();
       return formatDistance(e, new Date());
     },

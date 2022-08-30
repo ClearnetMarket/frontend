@@ -69,13 +69,11 @@ export default defineComponent({
       xmr_address: '',
     };
   },
-  computed: {
-    ...mapGetters(["user"]),
-  },
+
 
   methods: {
      userstatus() {
-      return axios({
+       axios({
         method: "get",
         url: "/auth/whoami",
         withCredentials: true,
@@ -91,7 +89,7 @@ export default defineComponent({
         });
     },
      getxmraddress() {
-      return axios({
+       axios({
         method: "get",
         url: "/xmr/receive",
         withCredentials: true,

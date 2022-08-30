@@ -98,7 +98,7 @@ export default defineComponent({
 
   methods: {
      getvendorsitemsforsale() {
-      return axios({
+      axios({
         method: "get",
         url: "/vendor/itemsforsale/" + this.vendoruuid,
         withCredentials: true,
@@ -113,7 +113,7 @@ export default defineComponent({
         
         });
     },
-    returncurrencysymbol(currencydigit) {
+    returncurrencysymbol(currencydigit: number) {
       if (currencydigit === 0) {
         return "$";
       } else if (currencydigit === 1) {
@@ -180,7 +180,7 @@ export default defineComponent({
         return "Kč";
       }
     },
-    returncurrency(currencydigit) {
+    returncurrency(currencydigit: number) {
       if (currencydigit === 0) {
         return "USD";
       } else if (currencydigit === 1) {

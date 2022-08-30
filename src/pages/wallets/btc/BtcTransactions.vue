@@ -294,12 +294,10 @@ export default defineComponent({
     };
   },
 
-  computed: {
-    ...mapGetters(["user"]),
-  },
+
   methods: {
      userstatus() {
-      return axios({
+       axios({
         method: "get",
         url: "/auth/whoami",
         withCredentials: true,
@@ -317,7 +315,7 @@ export default defineComponent({
     },
 
      btctransactions() {
-      return axios({
+       axios({
         method: "get",
         url: "/btc/transactions",
         withCredentials: true,
@@ -330,7 +328,7 @@ export default defineComponent({
  
       });
     },
-    relativeDate(value) {
+    relativeDate(value: any) {
       let e = new Date(value).valueOf();
       return formatDistance(e, new Date());
     },

@@ -495,13 +495,11 @@ export default defineComponent({
       },
     };
   },
-  computed: {
-    ...mapGetters(["user"]),
-  },
+
   methods: {
      userstatus() {
       //user Auth
-      return axios({
+       axios({
         method: "get",
         url: "/auth/whoami",
         withCredentials: true,
@@ -539,7 +537,7 @@ export default defineComponent({
       shipping_to_country_four: string;
     }) {
       let path = "/vendorcreateitem/create-item-main/" + this.item_id;
-      return axios({
+       axios({
         method: "POST",
         url: path,
         data: payload,
@@ -564,14 +562,14 @@ export default defineComponent({
         });
     },
 
-    onlyNumber($event) {
+    onlyNumber($event: any) {
       let keyCode = $event.keyCode ? $event.keyCode : $event.which;
       if (keyCode < 48 || keyCode > 57) {
         // 46 is dot
         $event.preventDefault();
       }
     },
-    onlyNumberWithDot($event) {
+    onlyNumberWithDot($event: any) {
       let keyCode = $event.keyCode ? $event.keyCode : $event.which;
       if ((keyCode < 48 || keyCode > 57) && keyCode !== 46) {
         // 46 is dot
@@ -583,7 +581,7 @@ export default defineComponent({
       // Get the item thats being modified
 
       const path = "/item/" + this.item_id;
-      return axios({
+      axios({
         method: "get",
         url: path,
         withCredentials: true,
@@ -601,7 +599,7 @@ export default defineComponent({
     },
      createitemtemporary() {
       // Create an Item.  // Using thi
-      return axios({
+       axios({
         method: "GET",
         url: "/vendorcreateitem/create-item",
         withCredentials: true,
@@ -618,7 +616,7 @@ export default defineComponent({
       // Get Countries
       const path = "/vendorcreateitem/query/country";
 
-      return axios({
+       axios({
         method: "get", //you can set what request you want to be
         url: path,
         withCredentials: true,
@@ -636,7 +634,7 @@ export default defineComponent({
       // Get Categories
       const path = "/vendorcreateitem/query/category";
 
-      return axios({
+      axios({
         method: "get", //you can set what request you want to be
         url: path,
         withCredentials: true,
@@ -649,7 +647,7 @@ export default defineComponent({
      getConditionList() {
       // Get Conditions
       const path = "/vendorcreateitem/query/condition";
-      return axios({
+      axios({
         method: "get",
         url: path,
         withCredentials: true,

@@ -96,9 +96,7 @@ export default defineComponent({
     MainFooter,
    
   },
-  computed: {
-    ...mapGetters(["user"]),
-  },
+
   data() {
     return {
       user: null

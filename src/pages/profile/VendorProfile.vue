@@ -373,12 +373,11 @@ export default defineComponent({
     this.userstatus();
   },
   methods: {
-    relativeDate(value) {
+    relativeDate(value: any) {
       let e = new Date(value).valueOf();
       return formatDistance(e, new Date());
     },
-         userstatus() {
-      return axios({
+         userstatus() {axios({
         method: "get",
         url: "/auth/whoami",
         withCredentials: true,
@@ -394,7 +393,7 @@ export default defineComponent({
            });
     },
      getuser() {
-      return axios({
+       axios({
         method: "get",
         url: "/info/user-info/" + this.user_uuid,
         withCredentials: true,
@@ -407,7 +406,7 @@ export default defineComponent({
       });
     },
      getuserstats() {
-      return axios({
+      axios({
         method: "get",
         url: "/info/user-stats/" + this.user_uuid,
         withCredentials: true,
@@ -419,7 +418,7 @@ export default defineComponent({
       });
     },
      getusercountryandcurrency() {
-      return axios({
+      axios({
         method: "get",
         url: "/info/country-currency",
         withCredentials: true,
@@ -434,7 +433,7 @@ export default defineComponent({
       });
     },
      getreviews() {
-      return axios({
+       axios({
         method: "get",
         url: "/vendor/vendor-feedback/" + this.user_uuid,
         withCredentials: true,
@@ -450,7 +449,7 @@ export default defineComponent({
         .catch(() => {});
     },
      getratings() {
-      return axios({
+       axios({
         method: "get",
         url: "/info/user-feedback-stats/" + this.user_uuid,
         withCredentials: true,
@@ -472,8 +471,8 @@ export default defineComponent({
         })
         .catch(() => {});
     },
-    getitemname(order_uuid) {
-      return axios({
+    getitemname(order_uuid: any) {
+      axios({
         method: "get",
         url: "/item/info/" + order_uuid,
       }).then((response) => {

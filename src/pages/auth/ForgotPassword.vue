@@ -142,9 +142,7 @@ export default defineComponent({
       },
     }
   },
-  computed: {
-    ...mapGetters(["user"]),
-  },
+
   methods: {
     sendWordRequest(payLoad: {
       word0: string;
@@ -154,7 +152,7 @@ export default defineComponent({
       word4: string;
       word5: string;
     }) {
-      axios({
+       axios({
         method: "post",
         url: "/auth/login",
         data: payLoad,

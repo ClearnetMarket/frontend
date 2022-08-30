@@ -420,12 +420,10 @@ export default defineComponent({
       },
     };
   },
-  computed: {
-    ...mapGetters(["user"]),
-  },
+
   methods: {
      userstatus() {
-      return axios({
+       axios({
         method: "get",
         url: "/auth/whoami",
         withCredentials: true,
@@ -442,7 +440,7 @@ export default defineComponent({
       this.item_id = item_id_route.params.id;
       let path = "/item/" + this.item_id;
 
-      return axios({
+       axios({
         method: "get",
         url: path,
         withCredentials: true,
@@ -452,7 +450,7 @@ export default defineComponent({
             this.marketitem = response.data;
           }
         })
-        .catch(() => {});
+
     },
     // main item recreation function
      SendItemCreation(payLoad: {
@@ -483,7 +481,7 @@ export default defineComponent({
     }) {
       let path = "/vendorcreateitem/create-item-main/" + this.item_id;
 
-      return axios({
+       axios({
         method: "post",
         url: path,
         data: payLoad,
@@ -532,7 +530,7 @@ export default defineComponent({
 
       let path = "/vendorcreateitem/get-fields/" + this.item_id;
 
-      return axios({
+       axios({
         method: "get", //you can set what request you want to be
         url: path,
         withCredentials: true,
@@ -589,10 +587,10 @@ export default defineComponent({
           this.CreateItemForm.shippingInfo.destination_country_four_name =
             response.data.item_title;
         })
-        .catch(() => {});
+
     },
     // function to allow only numbers
-    onlyNumber($event) {
+    onlyNumber($event: any) {
       let keyCode = $event.keyCode ? $event.keyCode : $event.which;
       if (keyCode < 48 || keyCode > 57) {
         // 46 is dot
@@ -600,7 +598,7 @@ export default defineComponent({
       }
     },
     // function allows only a dot
-    onlyNumberWithDot($event) {
+    onlyNumberWithDot($event: any) {
       let keyCode = $event.keyCode ? $event.keyCode : $event.which;
       if ((keyCode < 48 || keyCode > 57) && keyCode !== 46) {
         // 46 is dot
@@ -611,7 +609,7 @@ export default defineComponent({
      getCountryList() {
       let path = "/vendorcreateitem/query/country";
 
-      return axios({
+       axios({
         method: "get", //you can set what request you want to be
         url: path,
         withCredentials: true,
@@ -620,13 +618,13 @@ export default defineComponent({
           // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
           this.countryList = response.data;
         })
-        .catch(() => {});
+
     },
     // gets the categories
      getCategoryList() {
       let path = "/vendorcreateitem/query/category";
 
-      return axios({
+       axios({
         method: "get", //you can set what request you want to be
         url: path,
         withCredentials: true,
@@ -634,12 +632,12 @@ export default defineComponent({
         .then((response) => {
           this.categoryList = response.data;
         })
-        .catch(() => {});
+
     },
     // gets list of item conditions
      getConditionList() {
       let path = "/vendorcreateitem/query/condition";
-      return axios({
+       axios({
         method: "get",
         url: path,
         withCredentials: true,
@@ -647,7 +645,7 @@ export default defineComponent({
         .then((response) => {
           this.conditionList = response.data;
         })
-        .catch(() => {});
+
     },
     // payload for form data
     onSubmit() {

@@ -69,13 +69,11 @@ export default defineComponent({
       bch_address: '',
     };
   },
-  computed: {
-    ...mapGetters(["user"]),
-  },
+
 
   methods: {
      userstatus() {
-      return axios({
+       axios({
         method: "get",
         url: "/auth/whoami",
         withCredentials: true,
@@ -90,7 +88,7 @@ export default defineComponent({
         });
     },
      getbchaddress() {
-      return axios({
+       axios({
         method: "get",
         url: "/bch/receive",
         withCredentials: true,

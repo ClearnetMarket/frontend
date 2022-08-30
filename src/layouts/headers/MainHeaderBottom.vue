@@ -107,12 +107,12 @@ export default defineComponent({
 
   methods: {
     //  change url in dropdown
-    gotourl(nameofurl) {
+    gotourl(nameofurl: string) {
       this.$router.replace({ name: nameofurl })
     },
     //  Get prices of current coins
      getxmrprice() {
-      return axios({
+       axios({
         method: "get",
         url: "/xmr/price",
       }).then((response) => {
@@ -123,7 +123,7 @@ export default defineComponent({
       });
     },
      getbchprice() {
-      return axios({
+       axios({
         method: "get",
         url: "/bch/price",
       }).then((response) => {
@@ -133,7 +133,7 @@ export default defineComponent({
       });
     },
      getbtcprice() {
-      return axios({
+       axios({
         method: "get",
         url: "/btc/price",
       }).then((response) => {
@@ -143,9 +143,9 @@ export default defineComponent({
       });
     },
 
-    async getCategoryList() {
+     getCategoryList() {
       let path = "/category/sidebar";
-      return axios
+       axios
         .get(path)
         .then((response) => {
           this.categoriesList = response.data;

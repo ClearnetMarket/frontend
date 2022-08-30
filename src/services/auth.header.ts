@@ -6,7 +6,8 @@ export default function authHeader (): Record<string, string> {
 
         if (user_token && auth_token) {
             return { 'Authorization': 'bearer ' + auth_token };
-        } else {
+        }
+        else {
              return {'Authorization': null};
         }
 }

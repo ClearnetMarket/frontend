@@ -102,7 +102,7 @@ export default defineComponent({
   },
   methods: {
     sendWordRequest(payLoad: { password: string; password_confirm: string }) {
-      axios({
+     axios({
         method: "post",
         url: "/auth/change-password",
         data: payLoad,

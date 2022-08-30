@@ -178,13 +178,10 @@ export default defineComponent({
 
     };
   },
-  computed: {
-    ...mapGetters(["user"]),
 
-  },
   methods: {
      userstatus() {
-      return axios({
+       axios({
         method: "get",
         url: "/auth/whoami",
         withCredentials: true,
@@ -198,7 +195,7 @@ export default defineComponent({
     // Get the item thats being modified
      getItemForSale() {
       const path = "/item/" + this.item_id;
-      return axios({
+      axios({
         method: "get",
         url: path,
         withCredentials: true,
@@ -208,7 +205,7 @@ export default defineComponent({
             this.marketitem = response.data;
           }
         })
-        .catch(() => {});
+
     },
      CreateItemImages() {
       let formData = new FormData();
@@ -239,7 +236,7 @@ export default defineComponent({
       }
 
       let path = "/vendorcreateitem/create-item-images/" + this.item_id;
-      return axios({
+       axios({
         method: "POST",
         url: path,
         data: formData,
@@ -329,17 +326,15 @@ export default defineComponent({
       }
     },
 
-     deleteitemimage(imagename) {
+     deleteitemimage(imagename: any) {
       let path =
         "/vendorcreateitem/delete-image/" + this.item_id + "/" + imagename;
-      return axios({
+       axios({
         method: "delete",
         url: path,
         withCredentials: true,
         headers: authHeader(),
-      }).then(() => {
-
-      });
+      })
     },
   },
 

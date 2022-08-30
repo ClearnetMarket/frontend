@@ -182,13 +182,11 @@ export default defineComponent({
       },
     };
   },
-  computed: {
-    ...mapGetters(["user"]),
-  },
+
 
   methods: {
      userstatus() {
-      return axios({
+       axios({
         method: "get",
         url: "/auth/whoami",
         withCredentials: true,
@@ -208,7 +206,7 @@ export default defineComponent({
       bch_amount: string;
       pin: string;
     }) {
-      return axios({
+       axios({
         method: "post",
         url: "/bch/send",
         data: payLoad,

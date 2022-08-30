@@ -194,19 +194,20 @@ export default defineComponent({
   },
 
   methods: {
-    relativeDate(value) {
+    relativeDate(value: any) {
 
       let e = new Date(value).valueOf();
       return formatDistance(e, new Date());
     },
     // get the user order
     getuserorder() {
-      return axios({
+      axios({
         method: "get",
         url: `/orders/${this.order_id}`,
         withCredentials: true,
         headers: authHeader(),
-      }).then((response) => {
+      })
+      .then((response) => {
         if (response.status == 200) {
           this.order = response.data;
           this.postid = this.order.dispute_post_id;
@@ -216,7 +217,7 @@ export default defineComponent({
     },
     // get the post comments
      getmainpostcomments() {
-      return axios({
+      axios({
         method: "get",
         url: "/msg/main/comment/" + this.postid,
         withCredentials: true,
@@ -232,31 +233,31 @@ export default defineComponent({
     },
     // comments on the post
      sendMessageComment(payLoad: { textbody: string }) {
-      return axios({
+      axios({
         method: "post",
         url: "/msg/create/comment/" + this.postid,
         data: payLoad,
         withCredentials: true,
         headers: authHeader(),
       })
-        .then((response) => {
-          if ((response.status = 200)) {
-            notify({
-              title: "Message Center",
-              text: "Successfully sent message!",
-              type: "success",
-            });
-            this.getmainpostcomments();
-          }
-        })
-    .catch((error) => {
-      console.log(error)
-            notify({
-              title: "Freeport Error",
-              text: "Error posting information.",
-              type: "error",
-            });
+      .then((response) => {
+        if ((response.status = 200)) {
+          notify({
+            title: "Message Center",
+            text: "Successfully sent message!",
+            type: "success",
           });
+          this.getmainpostcomments();
+        }
+      })
+      .catch((error) => {
+        console.log(error)
+              notify({
+                title: "Freeport Error",
+                text: "Error posting information.",
+                type: "error",
+              });
+            });
     },
     sendMessagePayload() {
       const payLoad = {

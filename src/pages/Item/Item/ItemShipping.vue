@@ -108,7 +108,7 @@ export default defineComponent({
   mounted() {},
 
   methods: {
-    returncurrencysymbol(currencydigit) {
+    returncurrencysymbol(currencydigit: number) {
       if (currencydigit === 0) {
         return "$";
       } else if (currencydigit === 1) {

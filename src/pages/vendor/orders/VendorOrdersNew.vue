@@ -269,8 +269,8 @@ export default defineComponent({
 
   methods: {
     // marks the orders as read
-     async deleteordernotice() {
-      await axios({
+      deleteordernotice() {
+       axios({
         method: "delete",
         url: "/vendor/new-orders-count/markasread" ,
         withCredentials: true,
@@ -282,8 +282,8 @@ export default defineComponent({
       });
     },
     // gets the new user orders
-    async getuserneworders() {
-      await axios({
+     getuserneworders() {
+       axios({
         method: "get",
         url: "/vendororders/new",
         withCredentials: true,
@@ -295,9 +295,8 @@ export default defineComponent({
       });
     },
     // accepts the new order
-     acceptorder(uuid) {
-
-      return axios({
+     acceptorder(uuid: any) {
+       axios({
         method: "put",
         url: "/vendororders/new/accept/" + uuid,
         withCredentials: true,
@@ -315,8 +314,8 @@ export default defineComponent({
       });
     },
     // rejects the orders
-     rejectorder(uuid) {
-      return axios({
+     rejectorder(uuid: any) {
+       axios({
         method: "post",
         url: "/vendororders/new/reject/" + uuid,
         withCredentials: true,
@@ -334,7 +333,7 @@ export default defineComponent({
     },
     // gets the count for the top bar
      getuserneworderscount() {
-      return axios({
+       axios({
         method: "get",
         url: "/vendororders/count",
         withCredentials: true,
@@ -354,8 +353,7 @@ export default defineComponent({
         }
       });
     },
-    relativeDate(value) {
-
+    relativeDate(value: any) {
       let e = new Date(value).valueOf();
       return formatDistance(e, new Date());
     },

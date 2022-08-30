@@ -102,9 +102,7 @@ export default defineComponent({
     this.other_user_uuid = user_uuid_route.params.uuid;
     this.getotheruser();
   },
-  computed: {
-    ...mapGetters(["user"]),
-  },
+
   validations() {
     return {
       SendMsgForm: {
@@ -114,12 +112,13 @@ export default defineComponent({
   },
   methods: {
      getotheruser() {
-      return axios({
+       axios({
         method: "get",
         url: "/info/user-info/" + this.other_user_uuid,
         withCredentials: true,
         headers: authHeader(),
-      }).then((response) => {
+      })
+      .then((response) => {
         if ((response.status = 200)) {
           this.other_user = response.data;
         }
@@ -127,52 +126,52 @@ export default defineComponent({
     },
 
      getmsgsofusers() {
-      return axios({
+      axios({
         method: "get",
         url: "/msg/count",
         withCredentials: true,
       })
-        .then((response) => {
-          this.userlist = response.data;
-        })
-        .catch((error) => {
-          console.log(error)
-        });
+      .then((response) => {
+        this.userlist = response.data;
+      })
+      .catch((error) => {
+        console.log(error)
+      });
     },
      getcountofusers() {
-      return axios({
+      axios({
         method: "get",
         url: "/msg/msgs/all",
         withCredentials: true,
       })
-        .then((response) => {
-          this.other_user_count = response.data.get_count;
-        })
-        .catch((error) => {
-          console.log(error)
-        });
+      .then((response) => {
+        this.other_user_count = response.data.get_count;
+      })
+      .catch((error) => {
+        console.log(error)
+      });
     },
      sendMessage(payLoad: {
-      order_uuid: string;
+      order_uuid: any;
       user_two_uuid: string;
       body: string;
     }) {
-      return axios({
+       axios({
         method: "post",
         url: "/msg/create",
         data: payLoad,
       })
-        .then((response) => {
-          if ((response.status = 200)) {
-            notify({
-              title: "Message Center",
-              text: "Successfully sent message!",
-              type: "success",
-            });
-            this.$router.push({
-              name: "MsgHome",
-            });
-          }
+      .then((response) => {
+        if ((response.status = 200)) {
+          notify({
+            title: "Message Center",
+            text: "Successfully sent message!",
+            type: "success",
+          });
+          this.$router.push({
+            name: "MsgHome",
+          });
+        }
         })
         .catch((error) => {
           console.log(error)
@@ -188,7 +187,7 @@ export default defineComponent({
       let payLoad = {
         user_two_uuid: this.other_user.uuid,
         body: this.SendMsgForm.msginfo,
-        order_uuid: null,
+        order_uuid: 'None',
       };
       this.v$.$validate(); // checks all inputs
       if (this.v$.$invalid) {
@@ -197,7 +196,8 @@ export default defineComponent({
           text: "Form Failure",
           type: "error",
         });
-      } else {
+      }
+      else {
         notify({
           title: "Message",
           text: "Form success",

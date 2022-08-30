@@ -18,7 +18,6 @@
 </template>
 
 <script lang="ts">
-import { mapGetters } from "vuex";
 import { defineComponent } from "vue";
 import axios from "axios";
 import authHeader from "../services/auth.header";
@@ -51,33 +50,31 @@ export default defineComponent({
       confirmed: false
     };
   },
-  computed: {
-    ...mapGetters(["user"]),
-  },
+
   mounted() {
     this.userstatus();
     this.userstatusconfirmed();
   },
 
   methods: {
-     userstatus() {
-      return axios({
+    userstatus() {
+       axios({
         method: "get",
         url: "/auth/whoami",
         withCredentials: true,
         headers: authHeader(),
       })
-        .then((response) => {
-          if ((response.status = 200)) {
-            this.current_user = response.data.user
-            this.current_user.confirmed = response.data.user.confirmed
-            this.$store.dispatch("user", response.data.user);
-          }
-        })
-        .catch(() => {this.current_user = null});
+          .then((response) => {
+            if ((response.status = 200)) {
+              this.current_user = response.data.user
+              this.current_user.confirmed = response.data.user.confirmed
+              this.$store.dispatch("user", response.data.user);
+            }
+          })
+          .catch(() => {this.current_user = null});
     },
-     userstatusconfirmed() {
-      return axios({
+    userstatusconfirmed() {
+       axios({
         method: "get",
         url: "/auth/amiconfirmed",
         withCredentials: true,
@@ -90,8 +87,7 @@ export default defineComponent({
             this.confirmed = false;
           }
         }
-      }).catch(() => {
-      });
+      }).catch(() => { });
     },
   },
 });

@@ -2,8 +2,8 @@
   <div class="mt-5 mx-10 flex gap-5">
     <div v-for="item in todayfeatured" :key="item.id">
       <div
-        class=""
-        @click="$router.replace({ name: 'item', params: { id: item.uuid } })"
+
+        @click="$router.replace({ name: 'MarketItem', params: { id: item.uuid } })"
         style="cursor: pointer"
       >
         <!--Card 1-->
@@ -95,8 +95,8 @@ export default defineComponent({
   computed: {},
 
   methods: {
-    async gettodayfeatured() {
-      await axios({
+     gettodayfeatured() {
+       axios({
         method: "get",
         url: "/category/query/index/todayfeatured",
         withCredentials: true,
@@ -108,7 +108,7 @@ export default defineComponent({
         })
         .catch((error) => { console.log(error); });
     },
-    returncurrencysymbol(currencydigit) {
+    returncurrencysymbol(currencydigit: number) {
       if (currencydigit === 0) {
         return "$";
       } else if (currencydigit === 1) {
@@ -175,7 +175,7 @@ export default defineComponent({
         return "Kč";
       }
     },
-    returncurrency(currencydigit) {
+    returncurrency(currencydigit: number) {
       if (currencydigit === 0) {
         return "USD";
       } else if (currencydigit === 1) {

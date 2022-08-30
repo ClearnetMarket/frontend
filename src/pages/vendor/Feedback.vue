@@ -233,7 +233,6 @@ import MainFooter from "../../layouts/footers/FooterMain.vue";
 import authHeader from "../../services/auth.header";
 import StarRating from "../../components/star_rating/Star.vue";
 
-
 /**
  *
  @typedef {Object} review.customer_name
@@ -243,8 +242,6 @@ import StarRating from "../../components/star_rating/Star.vue";
 
  *
  */
-
-
 
 export default defineComponent({
   name: "Feedback",
@@ -257,9 +254,7 @@ export default defineComponent({
     MainHeaderVendor,
     MainFooter,
   },
-  computed: {
-    ...mapGetters(["user"]),
-  },
+
   data() {
     return {
       date: Date.now(),
@@ -290,13 +285,13 @@ export default defineComponent({
 
   methods: {
     // converts the time
-    relativeDate(value) {
+    relativeDate(value: any) {
       let e = new Date(value).valueOf();
       return formatDistance(e, new Date());
     },
     // deletes feeeback notification
      deleteordernotice() {
-      return axios({
+      axios({
         method: "delete",
         url: "/vendor/new-feedback-count/markasread",
         withCredentials: true,
@@ -309,7 +304,7 @@ export default defineComponent({
     },
     // gets the vendor reviews
      getvendorreviews() {
-      return axios({
+      axios({
         method: "get",
         url: "/vendor/vendor-feedback/" + this.user_id,
         withCredentials: true,
@@ -328,7 +323,7 @@ export default defineComponent({
     },
     // gets the overall ratings on sidebar
      getratings() {
-      return axios({
+      axios({
         method: "get",
         url: "/vendor/all-feedback/" + this.user_id,
         withCredentials: true,

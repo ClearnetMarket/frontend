@@ -79,7 +79,7 @@
             </div>
           </div>
 
-          <div v-if="(freeshipping = true)">
+          <div v-if="(freeshipping === true)">
             <div class="grid grid-cols-12 gap-4">
               <div class="font-[12px] col-span-3">Shipping:</div>
 
@@ -239,7 +239,6 @@ export default defineComponent({
     "digitalcurrencyone",
     "digitalcurrencytwo",
     "digitalcurrencythree",
-    "freeshipping",
     "freeshippingdays",
     "shippingtwo",
     "shippingtwodays",
@@ -271,13 +270,11 @@ export default defineComponent({
     const item_id_route = useRoute();
     this.item_id = item_id_route.params.id;
   },
-  computed: {
-    ...mapGetters(["user"]),
-  },
+
   methods: {
     // Add item to cart
     addtocart() {
-      axios({
+       axios({
         method: "post",
         url: "/checkout/add/" + this.item_id,
         headers: authHeader(),
@@ -305,16 +302,17 @@ export default defineComponent({
 
     // Get How many items in shopping cart
      get_shopping_cart_count() {
-      return axios({
+       axios({
         method: "get",
         url: "/info/user-cart-count",
         headers: authHeader(),
-      }).then((response) => {
+      })
+      .then((response) => {
         this.shopping_cart_count = response.data.status;
         this.$emit("UpdateCart", this.shopping_cart_count);
       });
     },
-    returncurrencysymbol(currencydigit) {
+    returncurrencysymbol(currencydigit: number) {
       if (currencydigit === 0) {
         return "$";
       } else if (currencydigit === 1) {
@@ -381,7 +379,7 @@ export default defineComponent({
         return "Kč";
       }
     },
-    returncurrency(currencydigit) {
+    returncurrency(currencydigit: number) {
       if (currencydigit === 0) {
         return "USD";
       } else if (currencydigit === 1) {

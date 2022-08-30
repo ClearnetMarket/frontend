@@ -70,13 +70,11 @@ export default defineComponent({
       btc_address: '',
     };
   },
-  computed: {
-    ...mapGetters(["user"]),
-  },
+
 
   methods: {
      userstatus() {
-      return axios({
+       axios({
         method: "get",
         url: "/auth/whoami",
         withCredentials: true,
@@ -92,7 +90,7 @@ export default defineComponent({
         });
     },
      getbtcaddress() {
-      return axios({
+       axios({
         method: "get",
         url: "/btc/receive",
         withCredentials: true,

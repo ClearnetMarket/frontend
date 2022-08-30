@@ -35,9 +35,6 @@ import { mapGetters } from 'vuex';
 
 export default defineComponent({
   name: 'HeaderPlain',
-  computed: {
-    ...mapGetters(['user']),
-  },
 
   methods: {
     logout () {
