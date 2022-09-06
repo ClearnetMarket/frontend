@@ -91,6 +91,7 @@ export default defineComponent({
   data() {
     return {
       v$: useValidate(),
+      user: null,
       loginForm: {
         username: "",
         password: "",
@@ -119,6 +120,7 @@ export default defineComponent({
 
         .then((response) => {
           if ((response.status = 200)) {
+
             this.$router.push({ name: "home" });
           }
         })
@@ -131,17 +133,17 @@ export default defineComponent({
         data: payLoad,
       })
         .then((response) => {
-          console.log(response);
           if (response.data.user) {
-            localStorage.setItem("auth_user", response.data.user);
+
             localStorage.setItem("auth_token", response.data.token);
+            localStorage.setItem("auth_user", response.data.user);
             this.$store.dispatch("user", response.data.user);
+
             this.$router.push({ name: "home" });
             notify({
               title: "Authorization",
               text: "You have been logged in!",
-              type: "success",
-            });
+              type: "success",            });
           }
         })
         .catch((error) => {

@@ -21,7 +21,7 @@
       </nav>
 
       <div class="text-[20px] pt-5 pb-5 text-center">
-        {{ user.user_name }}'s Feedback
+       My Feedback
       </div>
       <div class="grid grid-cols-12">
         <div class="col-span-4">
@@ -222,7 +222,6 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import axios from "axios";
-import { mapGetters } from "vuex";
 import { formatDistance } from "date-fns";
 import {  useRoute } from "vue-router";
 import MainHeaderTop from "../../layouts/headers/MainHeaderTop.vue";
@@ -244,7 +243,7 @@ import StarRating from "../../components/star_rating/Star.vue";
  */
 
 export default defineComponent({
-  name: "Feedback",
+  name: "vendorfeedback",
 
   components: {
     StarRating,
@@ -276,14 +275,35 @@ export default defineComponent({
       vendor_reviews_percent_ten: 0,
     };
   },
+  created() {
+    this.userstatus();
+  },
   mounted() {
+
     const user_uuid_route = useRoute();
     this.user_id = user_uuid_route.params.uuid;
+
     this.getratings();
     this.deleteordernotice();
   },
 
   methods: {
+    userstatus() {
+      axios({
+        method: "get",
+        url: "/auth/whoami",
+        withCredentials: true,
+        headers: authHeader(),
+      })
+          .then((response) => {
+            if ((response.status = 200)) {
+              this.user = response.data.user;
+            }
+          })
+          .catch(() => {
+            this.$router.push({ name: "login" });
+          });
+    },
     // converts the time
     relativeDate(value: any) {
       let e = new Date(value).valueOf();
@@ -298,7 +318,7 @@ export default defineComponent({
         headers: authHeader(),
       }).then((response) => {
         if (response.status == 200) {
-        console.log('success')
+
         }
       });
     },

@@ -264,7 +264,9 @@ export default defineComponent({
       exact_zipcode: "",
     };
   },
-
+  created() {
+    this.userstatus()
+  },
 
   mounted() {
     const item_id_route = useRoute();
@@ -272,6 +274,22 @@ export default defineComponent({
   },
 
   methods: {
+    userstatus() {
+      axios({
+        method: "get",
+        url: "/auth/whoami",
+        withCredentials: true,
+        headers: authHeader(),
+      })
+          .then((response) => {
+            if ((response.status = 200)) {
+              this.user = response.data.user
+              this.user.confirmed = response.data.user.confirmed
+              this.$store.dispatch("user", response.data.user);
+            }
+          })
+          .catch(() => {this.user = null});
+    },
     // Add item to cart
     addtocart() {
        axios({
@@ -308,6 +326,7 @@ export default defineComponent({
         headers: authHeader(),
       })
       .then((response) => {
+        console.log(response)
         this.shopping_cart_count = response.data.status;
         this.$emit("UpdateCart", this.shopping_cart_count);
       });

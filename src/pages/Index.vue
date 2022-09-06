@@ -2,8 +2,8 @@
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
-  <div v-if="current_user">
-    <div v-if="current_user.confirmed === false">
+  <div v-if="user">
+    <div v-if="user.confirmed === false">
       <Confirmed />
     </div>
   </div>
@@ -46,7 +46,7 @@ export default defineComponent({
     return {
       token: null,
       user: null,
-      current_user: null,
+
       confirmed: false
     };
   },
@@ -66,12 +66,12 @@ export default defineComponent({
       })
           .then((response) => {
             if ((response.status = 200)) {
-              this.current_user = response.data.user
-              this.current_user.confirmed = response.data.user.confirmed
+              this.user = response.data.user
+              this.user.confirmed = response.data.user.confirmed
               this.$store.dispatch("user", response.data.user);
             }
           })
-          .catch(() => {this.current_user = null});
+          .catch(() => {this.user = null});
     },
     userstatusconfirmed() {
        axios({

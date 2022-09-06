@@ -40,7 +40,10 @@
                     Selling From: {{ country }}
                   </div>
                   <div class="col-span-6 text-gray-500">
-                    Total Items Bought: {{ user_stats.total_items_bought }}
+                    <div v-if="user_stats.total_items_bought !== null">
+                      Total Items Bought: {{ user_stats.total_items_bought }}
+                    </div>
+
                   </div>
                 </div>
               </div>
@@ -267,6 +270,14 @@ import MainHeaderBottom from "../../layouts/headers/MainHeaderBottom.vue";
 import MainHeaderVendor from "../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../layouts/footers/FooterMain.vue";
 
+
+
+/**
+ *
+ @typedef {Object} user_stats.total_items_bought
+ *
+ */
+
 export default defineComponent({
   name: "UserProfile",
   components: {
@@ -277,7 +288,11 @@ export default defineComponent({
     MainFooter,
     StarRating,
   },
-
+created(){
+  const user_uuid_route = useRoute();
+  this.user_uuid = user_uuid_route.params.uuid;
+  this.getuserstats();
+},
   data() {
     return {
       page_loaded: false,
@@ -306,12 +321,9 @@ export default defineComponent({
     };
   },
   mounted() {
-    const user_uuid_route = useRoute();
-    this.user_uuid = user_uuid_route.params.uuid;
     this.getratings();
     this.getreviews();
     this.getuser();
-    this.getuserstats();
     this.getusercountryandcurrency();
   },
   methods: {
@@ -333,7 +345,6 @@ export default defineComponent({
           this.user.member_since = response.data.member_since;
           this.user.bio = response.data.bio;
           this.user.admin_role = response.data.admin_role;
-
           this.user.vendor_name = response.data.vendor_name;
           this.user.customer_rating = response.data.customer_rating;
           this.page_loaded = true;
@@ -407,7 +418,7 @@ export default defineComponent({
         })
         .catch(() => {});
     },
-    getitemname(order_uuid: any) {
+    getitemname(order_uuid: string) {
        axios({
         method: "get",
         url: "/item/info/" + order_uuid,

@@ -55,6 +55,18 @@ import Error404 from "../pages/error/Error404.vue";
 
 import categoryhome from "../pages/category/CategoryHome.vue";
 import categoryelectronics from "../pages/category/electronics/ElectronicsHome.vue";
+import categorycomputers from "../pages/category/computers/ComputersHome.vue";
+import categoryapparel from "../pages/category/apparel/ApparelHome.vue";
+import categoryart from "../pages/category/art/ArtHome.vue";
+import categoryautomotive from "../pages/category/automotive/AutomotiveHome.vue";
+import categorybooksandmovies from "../pages/category/booksandmovies/BooksHome.vue";
+import categorydigital from "../pages/category/digital/DigitalHome.vue";
+import categorygiftcards from "../pages/category/giftcards/GiftCardHome.vue";
+import categoryhobbies from "../pages/category/hobbies/HobbiesHome.vue";
+import categoryjewelryandgold from "../pages/category/jewelrygold/JewelryGoldHome.vue";
+import categoryhomeandgarden from "../pages/category/homeandgarden/HomeandGardenHome.vue";
+import categorysmartphones from "../pages/category/smartphones/SmartPhonesHome.vue";
+import categorysportinggoods from "../pages/category/sports/SportsHome.vue";
 
 
 const routes = [
@@ -240,11 +252,7 @@ const routes = [
     name: "categoryhome",
     component:  categoryhome,
   },
-  {
-    path: "/category/electronics",
-    name: "categoryelectronics",
-    component:  categoryelectronics,
-  },
+
 
   {
     path: "/vendor/orders",
@@ -328,6 +336,73 @@ const routes = [
     path: "/search/:searchstring",
     name: "search",
     component:  search,
+  },
+
+
+  {
+    path: "/category/electronics",
+    name: "categoryelectronics",
+    component:  categoryelectronics,
+  },
+  {
+    path: "/category/computers",
+    name: "categorycomputers",
+    component:  categorycomputers,
+  },
+  {
+    path: "/category/apparel",
+    name: "categoryapparel",
+    component:  categoryapparel,
+  },
+  {
+    path: "/category/art",
+    name: "categoryart",
+    component:  categoryart,
+  },
+  {
+    path: "/category/automotive",
+    name: "categoryautomotive",
+    component:  categoryautomotive,
+  },
+  {
+    path: "/category/booksandmovies",
+    name: "categorybooksandmovies",
+    component:  categorybooksandmovies,
+  },
+  {
+    path: "/category/digital",
+    name: "categorydigital",
+    component:  categorydigital,
+  },
+  {
+    path: "/category/giftcards",
+    name: "categorygiftcards",
+    component:  categorygiftcards,
+  },
+  {
+    path: "/category/hobbies",
+    name: "categoryhobbies",
+    component:  categoryhobbies,
+  },
+  {
+    path: "/category/homeandgarden",
+    name: "categoryhomeandgarden",
+    component:  categoryhomeandgarden,
+  },
+  {
+    path: "/category/jewelrygold",
+    name: "categoryjewelrygold",
+    component:  categoryjewelryandgold,
+  },
+  {
+    path: "/category/smartphones",
+    name: "categorysmartphones",
+    component:  categorysmartphones,
+  },
+  {
+    path: "/category/sportinggoods",
+    name: "categorysportinggoods",
+    component:  categorysportinggoods,
   },
   // Error Pages
   {

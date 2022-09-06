@@ -1,14 +1,14 @@
 <template>
   <div class="grid grid-cols-12 gap-4 border border-gray-200 p-4 mb-2">
     <div class="col-span-3">
-      <router-link :to="{ name: 'item', params: { id: item.uuid } }">
+      <router-link :to="{ name: 'MarketItem', params: { id: item.uuid } }">
         <img alt="" class="object-cover h-48 w-96" :src=item.image_one_server />
       </router-link>
     </div>
     <div class="col-span-9">
       <div class="grid grid-cols-12">
         <div class="col-span-12 text-[20px] font-bold">
-          <router-link :to="{ name: 'item', params: { id: item.uuid } }">
+          <router-link :to="{ name: 'MarketItem', params: { id: item.uuid } }">
             {{ item.item_title }}
           </router-link>
         </div>

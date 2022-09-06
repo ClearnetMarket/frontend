@@ -94,8 +94,11 @@ export default defineComponent({
     MainHeaderVendor,
     MainFooter,
   },
-
+created(){
+  this.userstatus();
+},
   mounted() {
+
     this.getcountofusers();
     this.getmsgsofusers();
   },
@@ -110,6 +113,20 @@ export default defineComponent({
   },
 
   methods: {
+    userstatus() {
+      axios({
+        method: "get",
+        url: "/auth/whoami",
+        withCredentials: true,
+        headers: authHeader(),
+      })
+          .then((response) => {
+            if ((response.status = 200)) {
+              this.user = response.data.user
+            }
+          })
+          .catch(() => {this.user = null});
+    },
      getcountofusers() {
        axios({
         method: "get",

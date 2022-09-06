@@ -84,11 +84,13 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { mapGetters } from "vuex";
+import axios from "axios";
+import authHeader from "../../services/auth.header";
 
 export default defineComponent({
   name: "MainHeaderTop",
-  computed: {
-    ...mapGetters(["user"]),
+  mounted() {
+    this.userstatus()
   },
   data() {
     return {
@@ -96,14 +98,28 @@ export default defineComponent({
     };
   },
   methods: {
+    userstatus() {
+      axios({
+        method: "get",
+        url: "/auth/whoami",
+        withCredentials: true,
+        headers: authHeader(),
+      })
+          .then((response) => {
+            if ((response.status = 200)) {
+              this.user = response.data.user
+            }
+          })
+          .catch(() => {this.user = null});
+    },
     logout() {
-      localStorage.removeItem("user_token");
+
       localStorage.removeItem("auth_token");
       localStorage.clear();
       this.$store.dispatch("user", null);
-      this.$router.push(
-          {name: "home" }
-      );
+      this.userstatus()
+      this.$router.push({name: "home" });
+
     },
   },
 });

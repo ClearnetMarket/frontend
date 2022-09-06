@@ -4,8 +4,9 @@
     <MainHeaderTop />
     <MainHeaderMid />
     <MainHeaderBottom />
+    <div v-if="loaded">
     <div class="container max-w-7xl mx-auto px-10 wrapper pb-10">
-      <div v-if="loaded">
+
         <div class="grid grid-cols-12 gap-4">
           <div class="col-span-3">
             <div
@@ -87,7 +88,7 @@
           </div>
 
           <div class="col-span-9">
-            <div
+            <div v-if="itemforsale"
               class="grid grid-cols-12 gap-4 mb-4 border border-1 bg-white rounded-md shadow-md text-gray-700 p-5"
             >
               <div class="col-span-2">
@@ -97,7 +98,7 @@
                 <div class="font-bold text-[18px]">
                   <router-link
                     class="hover:text-blue-500 hover:underline"
-                    :to="{ name: 'item', params: { id: item_uuid } }"
+                    :to="{ name: 'MarketItem', params: { id: item_uuid } }"
                   >
                     {{ itemforsale.item_title }}
                   </router-link>
@@ -201,7 +202,6 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import axios from "axios";
-import { mapGetters} from "vuex";
 import { useRoute } from "vue-router";
 import { formatDistance } from "date-fns";
 import authHeader from "../../services/auth.header";
@@ -241,10 +241,14 @@ export default defineComponent({
       this.getmainpost();
     },
   },
-  mounted() {
+  created(){
+    this.userstatus();
     const post_id_route = useRoute();
     this.postid = post_id_route.params.postid;
     this.getmainpost();
+  },
+  mounted() {
+
   },
   data() {
     return {
@@ -267,6 +271,20 @@ export default defineComponent({
   },
 
   methods: {
+    userstatus() {
+      axios({
+        method: "get",
+        url: "/auth/whoami",
+        withCredentials: true,
+        headers: authHeader(),
+      })
+          .then((response) => {
+            if ((response.status = 200)) {
+              this.user = response.data.user
+            }
+          })
+          .catch(() => {this.user = null});
+    },
       // get the date conversion
     relativeDate(value: any) {
       let e = new Date(value).valueOf();
@@ -274,6 +292,7 @@ export default defineComponent({
     },
     // get the main post of the contect from api
      getmainpost() {
+       this.loaded = false;
        axios({
         method: "get",
         url: "/msg/main/post/" + this.postid,
@@ -281,10 +300,14 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          this.loaded = false;
+
+
           this.mainpost = response.data;
+
           this.item_uuid = response.data.item_uuid;
+
           this.order_uuid = response.data.order_uuid;
+
           this.gettheitem();
           this.getcountofusers();
           this.getmsgsofusers();
@@ -306,6 +329,7 @@ export default defineComponent({
       .then((response) => {
         if ((response.status = 200)) {
           this.itemforsale = response.data;
+
         }
       })
       .catch((error) => {

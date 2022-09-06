@@ -57,7 +57,7 @@
                 <div class="grid grid-cols-12 grid-row-5">
                   <div class="col-span-12 text-center text-[18px] px-1">
                     <router-link
-                      :to="{ name: 'item', params: { id: item.uuid } }"
+                      :to="{ name: 'MarketItem', params: { id: item.uuid } }"
                     >
                       <div
                         class="text-blue-600 hover:text-blue-400 hover:underline"
@@ -86,7 +86,7 @@
               </div>
               <div class="col-span-2">
                 <div class="mb-2">
-                  <div class="" v-if="item.online === 0">
+                  <div  v-if="item.online === 0">
                     <button
                       @click.prevent="putonline(item.uuid)"
                       class="py-2 px-4 shadow-md no-underline rounded-full text-white font-sans text-sm hover:text-white bg-gray-700 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2"
@@ -189,9 +189,7 @@ export default defineComponent({
       accept: ref(false),
     };
   },
-  computed: {
-    ...mapGetters(["user"]),
-  },
+
   methods: {
     gotoitem(itemid: any) {
       this.$router.push({ name: "edititem", params: { id: itemid } });

@@ -202,6 +202,7 @@ export default defineComponent({
   },
 
   methods: {
+
     // gets the count of orders for top bars
      getuserneworderscount() {
       axios({

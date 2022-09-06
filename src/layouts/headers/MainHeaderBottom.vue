@@ -19,7 +19,7 @@
             <option @click="gotourl('categorycomputers')">
               Computers and Parts
             </option>
-            <option @click="gotourl('categoryelectronics')">
+            <option @click="gotourl('categorysmartphones')">
               Smart Phones and Accessories
             </option>name
             <option @click="gotourl('categoryautomotive')">
@@ -29,7 +29,7 @@
               Hobbies and Collectibles
             </option>
             <option
-              @click="gotourl('categoryjewelrygoldcoins')"
+              @click="gotourl('categoryjewelrygold')"
             >
               Jewelry Previous Metals and Coins
             </option>
@@ -39,15 +39,15 @@
             <option @click="gotourl('categoryhomeandgarden' )">
               Home and Garden
             </option>
-            <option @click="gotourl('categoryartsandcrafts')" >
+            <option @click="gotourl('categoryart')" >
               Arts and Crafts
             </option>
             <option
-              @click="gotourl('categorybooksmovies')"
+              @click="gotourl('categorybooksandmovies')"
             >
               Books and Movies
             </option>
-            <option @click="gotourl('categorydigitalitems')">
+            <option @click="gotourl('categorydigital')">
               Digital Items
             </option>
           </select>

@@ -123,7 +123,7 @@
                 class="col-span-5 text-blue-600 hover:underline hover:text-blue-400"
               >
                 <router-link
-                  :to="{ name: 'item', params: { id: order.item_uuid } }"
+                  :to="{ name: 'MarketItem', params: { id: order.item_uuid } }"
                   class="text-blue-600 hover:underline hover:text-blue-400"
                 >
                   {{ order.title_of_item }}
@@ -319,9 +319,11 @@ export default defineComponent({
       },
     };
   },
-
+created(){
+  this.getuserorders();
+},
   mounted() {
-    this.getuserorders();
+
     this.getuserneworderscount();
   },
 

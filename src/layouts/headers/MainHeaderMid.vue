@@ -78,17 +78,32 @@ export default defineComponent({
       },
     };
   },
-
+created() {
+    this.userstatus()
+},
   mounted() {
-    console.log("here")
-   if (this.user !== null){
-     console.log(this.user)
-     this.get_shopping_cart_count();
-   }
 
+
+     this.get_shopping_cart_count();
 
   },
   methods: {
+    userstatus() {
+      axios({
+        method: "get",
+        url: "/auth/whoami",
+        withCredentials: true,
+        headers: authHeader(),
+      })
+          .then((response) => {
+            if ((response.status = 200)) {
+              this.user = response.data.user
+              this.user.confirmed = response.data.user.confirmed
+              this.$store.dispatch("user", response.data.user);
+            }
+          })
+          .catch(() => {this.user = null});
+    },
     //  change url in dropdown
     gotourl(nameofurl: string) {
       this.$router.replace({ name: nameofurl })
@@ -109,7 +124,6 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          console.log(response)
         this.shopping_cart_count = response.data.status;
       });
     },

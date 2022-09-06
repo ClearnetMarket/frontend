@@ -39,7 +39,7 @@
         <router-link :to="{ name: 'categoryhobbies' }">
           <div class="hover:underline">Hobbies and Collectibles</div>
         </router-link>
-        <router-link :to="{ name: 'categoryjewelrygoldcoins' }">
+        <router-link :to="{ name: 'categoryjewelrygold' }">
           <div class="hover:underline">Jewelry Gold and Coins</div>
         </router-link>
         <router-link :to="{ name: 'categoryapparel' }">
@@ -48,16 +48,16 @@
         <router-link :to="{ name: 'categoryhomeandgarden' }">
           <div class="hover:underline">Home and Garden</div>
         </router-link>
-        <router-link :to="{ name: 'categoryartsandcrafts' }">
+        <router-link :to="{ name: 'categoryart' }">
           <div class="hover:underline">Art and Crafts</div>
         </router-link>
         <router-link :to="{ name: 'categorycomputers' }">
           <div class="hover:underline">Computers and Parts</div>
         </router-link>
-        <router-link :to="{ name: 'categorybooksmovies' }">
+        <router-link :to="{ name: 'categorybooksandmovies' }">
           <div class="hover:underline">Books and Movies</div>
         </router-link>
-        <router-link :to="{ name: 'categorydigitalitems' }">
+        <router-link :to="{ name: 'categorydigital' }">
           <div class="hover:underline">Digital Items</div>
         </router-link>
       </div>
@@ -84,7 +84,6 @@ import MainHeaderMid from "../../layouts/headers/MainHeaderMid.vue";
 import MainHeaderBottom from "../../layouts/headers/MainHeaderBottom.vue";
 import MainHeaderVendor from "../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../layouts/footers/FooterMain.vue";
-import {mapGetters} from "vuex";
 
 export default defineComponent({
   name: "categoryhome",
@@ -94,7 +93,6 @@ export default defineComponent({
     MainHeaderBottom,
     MainHeaderVendor,
     MainFooter,
-   
   },
 
   data() {

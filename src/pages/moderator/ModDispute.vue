@@ -293,7 +293,7 @@ export default defineComponent({
         headers: authHeader(),
       }).then((response) => {
         if (response.status == 200) {
-               console.log(response.data.user);
+
           if (response.data.user.user_admin < 2) {
             this.$router.push({ name: "home" });
           }

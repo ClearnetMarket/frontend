@@ -12,7 +12,7 @@
         <router-link :to="{ name: 'categoryhobbies' }">
           <div class="text-blue-700 hover:underline hover:text-blue-500 py-1">Hobbies and Collectibles</div>
         </router-link>
-        <router-link :to="{ name: 'categoryjewelrygoldcoins' }">
+        <router-link :to="{ name: 'categoryjewelrygold' }">
           <div class="text-blue-700 hover:underline hover:text-blue-500 py-1">Jewelry Gold and Coins</div>
         </router-link>
         <router-link :to="{ name: 'categoryapparel' }">
@@ -21,16 +21,16 @@
         <router-link :to="{ name: 'categoryhomeandgarden' }">
           <div class="text-blue-700 hover:underline hover:text-blue-500 py-1">Home and Garden</div>
         </router-link>
-        <router-link :to="{ name: 'categoryartsandcrafts' }">
+        <router-link :to="{ name: 'categoryart' }">
           <div class="text-blue-700 hover:underline hover:text-blue-500 py-1">Art and Crafts</div>
         </router-link>
         <router-link :to="{ name: 'categorycomputers' }">
           <div class="text-blue-700 hover:underline hover:text-blue-500 py-1">Computers and Parts</div>
         </router-link>
-        <router-link :to="{ name: 'categorybooksmovies' }">
+        <router-link :to="{ name: 'categorybooksandmovies' }">
           <div class="text-blue-700 hover:underline hover:text-blue-500 py-1">Books and Movies</div>
         </router-link>
-        <router-link :to="{ name: 'categorydigitalitems' }">
+        <router-link :to="{ name: 'categorydigital' }">
           <div class="text-blue-700 hover:underline hover:text-blue-500 py-1">Digital Items</div>
         </router-link>
 </template>

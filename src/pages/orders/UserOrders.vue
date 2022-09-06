@@ -418,23 +418,37 @@ export default defineComponent({
       orders: [],
       orderscount: 0,
       review: [],
+      user: null,
     };
   },
 
   mounted() {
+    this.userstatus();
     this.getuserorderscount();
     this.getuserorders();
   },
 
   methods: {
+    userstatus() {
+      axios({
+        method: "get",
+        url: "/auth/whoami",
+        withCredentials: true,
+        headers: authHeader(),
+      })
+          .then((response) => {
+            if ((response.status = 200)) {
+              this.user = response.data.user
+            }
+          })
+          .catch(() => {this.user = null});
+    },
     // sends the score
     sendscore(uuid: string, rating: string) {
-
       this.sendFeedbackScore(uuid, rating);
     },
      sendFeedbackScore(uuid: string, rating: string) {
        let payLoad = { rating: rating };
-
        axios({
         method: "post",
         url: "/orders/feedback/score/" + uuid,
@@ -603,7 +617,7 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       }).then(() => {
-        console.log("dispute created")
+
       });
     },
   },

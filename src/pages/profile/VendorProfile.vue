@@ -36,7 +36,7 @@
                 class="col-span-3 text-blue-500 hover:text-blue-300 hover:underline"
               >
                 <router-link
-                  v-if="current_user != null"
+                  v-if="user != null"
                   :to="{
                     name: 'MsgCreateUser',
                     params: { uuid: user.uuid },
@@ -52,7 +52,10 @@
                     Selling From: {{ country }}
                   </div>
                   <div class="col-span-6 text-gray-500">
-                    Total Items Bought: {{ user_stats.total_items_bought }}
+                    <div v-if="user_stats.total_items_bought !== null">
+                      Total Items Bought: {{ user_stats.total_items_bought }}
+                    </div>
+
                   </div>
                 </div>
               </div>
@@ -339,7 +342,6 @@ export default defineComponent({
       date: Date.now(),
       tab: [],
       user: null,
-      current_user: null,
       user_uuid: null,
       user_stats: null,
       orders: [],
@@ -362,13 +364,14 @@ export default defineComponent({
       currency: 0,
     };
   },
+  created(){
+    this.getuserstats();
+  },
   mounted() {
     const user_uuid_route = useRoute();
     this.user_uuid = user_uuid_route.params.uuid;
     this.getratings();
     this.getreviews();
-    this.getuser();
-    this.getuserstats();
     this.getusercountryandcurrency();
     this.userstatus();
   },
@@ -377,7 +380,7 @@ export default defineComponent({
       let e = new Date(value).valueOf();
       return formatDistance(e, new Date());
     },
-         userstatus() {axios({
+     userstatus() {axios({
         method: "get",
         url: "/auth/whoami",
         withCredentials: true,
@@ -385,11 +388,11 @@ export default defineComponent({
       })
         .then((response) => {
           if ((response.status = 200)) {
-            this.current_user = response.data.user;
+            this.user = response.data.user;
           }
         })
          .catch(() => {
-           this.current_user = null
+           this.user = null
            });
     },
      getuser() {
@@ -471,7 +474,7 @@ export default defineComponent({
         })
         .catch(() => {});
     },
-    getitemname(order_uuid: any) {
+    getitemname(order_uuid: string) {
       axios({
         method: "get",
         url: "/item/info/" + order_uuid,

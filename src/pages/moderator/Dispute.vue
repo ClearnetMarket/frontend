@@ -225,7 +225,7 @@ export default defineComponent({
       })
         .then((response) => {
           this.mainpostcomments = response.data;
-          console.log(this.mainpostcomments);
+
         })
         .catch((error) => {
           console.log(error)

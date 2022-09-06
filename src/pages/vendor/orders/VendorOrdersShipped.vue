@@ -119,7 +119,7 @@
             <div class="col-span-1">{{ relativeDate(order.created) }}</div>
             <router-link
               class="col-span-4 text-blue-600 hover:underline hover:text-blue-400"
-              :to="{ name: 'item', params: { id: order.item_uuid } }"
+              :to="{ name: 'MarketItem', params: { id: order.item_uuid } }"
             >
               <div>{{ order.title_of_item }}</div>
             </router-link>
