@@ -8,7 +8,7 @@
     <MainHeaderVendor v-show="user.user_admin === 1" />
   </div>
 
-  <div class="container max-w-7xl mx-auto px-10 wrapper mb-10">
+  <div class="container max-w-7xl mx-auto px-10 wrapper mb-10" v-if="loaded">
     <div class="mt-5 mb-5">
       <nav class="rounded-md w-full">
         <ol class="list-reset flex">
@@ -100,7 +100,6 @@
 import { defineComponent } from "vue";
 import axios from "axios";
 import { ref } from "vue";
-import { mapGetters } from "vuex";
 import { notify } from "@kyvg/vue3-notification";
 import useValidate from "@vuelidate/core";
 import { required } from "@vuelidate/validators";
@@ -130,6 +129,7 @@ export default defineComponent({
       user: null,
       accept: ref(false),
       user_admin: 0,
+      loaded: false
     }
   },
 
@@ -151,6 +151,10 @@ validations() {
 
           if (this.user_admin == 1) {
             this.$router.push({ name: "forsale" });
+            this.loaded = false
+          }
+          else{
+            this.loaded = true
           }
         }
         else {
@@ -180,18 +184,14 @@ validations() {
      onSubmit() {
       const payLoad = {accept: this.accept}
       this.v$.$validate(); 
-      if (this.v$.$invalid) {
+      if (this.v$.$validate) {
         notify({
-          title: "Authorization",
-          text: "Form Failure",
+          title: "Signup Error",
+          text: "You must read And accept agreement",
           type: "error",
         });
       } else {
-        notify({
-          title: "Authorization",
-          text: "Form success",
-          type: "success",
-        });
+      console.log("good")
       this.becomevendor(payLoad);
     }
   },

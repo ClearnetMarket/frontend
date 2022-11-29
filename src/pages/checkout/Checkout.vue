@@ -193,6 +193,7 @@
               </div>
             </div>
             <div class="mt-5 mb-5">
+
               <button
                 v-show="
                   xmrtotalprice <= xmrbalance &&
@@ -223,7 +224,7 @@ import MainHeaderMid from "../../layouts/headers/MainHeaderMid.vue";
 import MainHeaderBottom from "../../layouts/headers/MainHeaderBottom.vue";
 import MainHeaderVendor from "../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../layouts/footers/FooterMain.vue";
-import {mapGetters} from "vuex";
+
 
 /**
  *
@@ -432,7 +433,6 @@ export default defineComponent({
         })
         .catch(() => {
           this.shopping_cart_items_list = null;
-        
         });
     },
      getbchprice() {

@@ -29,7 +29,7 @@
         </nav>
       </div>
     </div>
-
+    <div v-if="order_found">
     <div class="grid grid-cols-1 w-full gap-4">
       <h1 class="col-span-1 font-semibold text-2xl">{{ order.uuid }}</h1>
       <div class="grid grid-cols-12 rounded-md border border-gray-300 mb-5">
@@ -86,7 +86,7 @@
                         <div v-if="order.item_uuid">
                           <router-link
                             :to="{
-                              name: 'item',
+                              name: 'MarketItem',
                               params: { id: order.item_uuid }
                             }"
                           >
@@ -150,7 +150,7 @@
                 <div class="my-2">
                   <router-link
                     :to="{
-                      name: 'vendorordersview',
+                      name: 'ordersview',
                       params: { uuid: order.uuid }
                     }"
                   >
@@ -519,6 +519,7 @@
         </div>
       </div>
     </div>
+    </div>
   </div>
   <MainFooter />
 </template>
@@ -556,7 +557,7 @@ import StarRating from "../../components/star_rating/Star.vue";
  */
 
 export default defineComponent({
-  name: "vendorordersview",
+  name: "ordersview",
 
   components: {
     MainHeaderTop,
@@ -570,9 +571,10 @@ export default defineComponent({
   data() {
     return {
       loaded_feedback: false,
+      order_found: false,
       order: null,
       order_id: null,
-      tracking_number: "",
+      tracking_number: null,
       carrier_name: "",
       review: "",
       rating_vendor: 0,
@@ -611,18 +613,44 @@ export default defineComponent({
   mounted() {
       let order_id_route = useRoute();
       this.order_id = order_id_route.params.uuid;
+
       this.getuserorder();
       this.getordertracking();
       this.getorderfeedback();
+
   },
 
   methods: {
+    //  get the order from the params
+    getuserorder() {
+      axios({
+        method: "get",
+        url: "/orders/" + this.order_id,
+        withCredentials: true,
+        headers: authHeader(),
+      }).then((response) => {
+        if (response.status == 200) {
+
+          this.order = response.data;
+          this.order_found = true;
+          this.getvendorinfo();
+          if (this.order) {
+            this.getvendorinfo();
+          }
+          if (this.order.user_feedback == 1) {
+            this.getorderfeedback();
+          }
+        }
+      });
+    },
     //  get vendor info for stats
       getvendorinfo() {
           axios({
-               method: "get",
-               baseURL: "/vendor/vendoriteminfo/" + this.order.vendor_uuid,
-               headers: authHeader(),
+              method: "get",
+              url: "/vendor/vendor-info/" + "6ad833fd4b214b48beef0944c1931b14",
+              withCredentials: true,
+              headers: authHeader(),
+
          })
         .then((response) => {
           if ((response.status = 200)) {
@@ -633,23 +661,7 @@ export default defineComponent({
           }
         })
     },
-    //  get the order from the params
-     getuserorder() {
-       axios({
-        method: "get",
-        url: "/orders/" + this.order_id,
-        withCredentials: true,
-        headers: authHeader(),
-      }).then((response) => {
-        if (response.status == 200) {
-          this.order = response.data;
-          this.getvendorinfo();
-          if (this.order.user_feedback == 1) {
-            this.getorderfeedback();
-          }
-        }
-      });
-    },
+
     // get the feedback on vendor
      getorderfeedback() {
        axios({
@@ -660,9 +672,11 @@ export default defineComponent({
       }).then((response) => {
         if (response.status == 200) {
           this.review = response.data.review;
+
           this.rating_vendor = response.data.vendor_rating;
           this.rating_item = response.data.item_rating;
           this.loaded_feedback = true;
+
         }
       });
     },
@@ -712,22 +726,57 @@ export default defineComponent({
         this.rating_vendor = 10;
       }
 
-      let payLoad = {
-        itemrating: this.rating_item,
-        vendorrating: this.rating_vendor,
+      let payLoadReview = {
         review: this.review,
       };
-      this.sendFeedback(payLoad);
+      let payLoadScore = {
+        itemrating: this.rating_item,
+        vendorrating: this.rating_vendor,
+      };
+      this.sendFeedbackReview(payLoadReview);
+      this.sendFeedbackScore(payLoadScore);
     },
     // send the feedback rating
-     sendFeedback(payLoad: {
-      itemrating: number;
-      vendorrating: number;
+    sendFeedbackReview(payLoad: {
+
       review: string;
     }) {
       axios({
         method: "post",
-        url: "/orders/feedback/" + this.order.uuid,
+        url: "/orders/feedback/review/" + this.order.uuid,
+        data: payLoad,
+        withCredentials: true,
+        headers: authHeader(),
+      })
+          .then((response) => {
+            if ((response.status = 200)) {
+              notify({
+                title: "Message Center",
+                text: "Successfully sent feedback Review!",
+                type: "success",
+              });
+              this.$router.push({
+                name: "userorders",
+              });
+            }
+          })
+          .catch(() => {
+            notify({
+              title: "Freeport Error",
+              text: "Error posting information.",
+              type: "error",
+            });
+          });
+    },
+    // send the feedback rating
+     sendFeedbackScore(payLoad: {
+      itemrating: number;
+      vendorrating: number;
+
+    }) {
+      axios({
+        method: "post",
+        url: "/orders/feedback/score/" + this.order.uuid,
         data: payLoad,
         withCredentials: true,
         headers: authHeader(),
@@ -736,7 +785,7 @@ export default defineComponent({
           if ((response.status = 200)) {
             notify({
               title: "Message Center",
-              text: "Successfully sent feedback!",
+              text: "Successfully sent feedback Score!",
               type: "success",
             });
             this.$router.push({
@@ -764,6 +813,7 @@ export default defineComponent({
       })
       .then((response) => {
         if (response.status == 200) {
+
           this.tracking_number = response.data.tracking_number;
           this.carrier_name = response.data.carrier_name;
         }
@@ -773,36 +823,42 @@ export default defineComponent({
     delivered(uuid: any)     {
        axios({
         method: "get",
-        url: "/mark/delivered/" + uuid,
+        url: "/orders/mark/delivered/" + uuid,
         withCredentials: true,
         headers: authHeader(),
       })
           .then((response) => {
-            if (response.status == 200) {}
+            if (response.status == 200) {
+              window.location.reload();
+            }
           });
     },
     // request to cancel an order
     disputeorder(uuid: any) {
       axios({
         method: "get",
-        url: "/mark/disputed/" + uuid,
+        url: "/orders/mark/disputed/" + uuid,
         withCredentials: true,
         headers: authHeader(),
       })
           .then((response) => {
-            if (response.status == 200) {}
+            if (response.status == 200) {
+              window.location.reload();
+            }
           });
     },
     // request to cancel an order
     finalize(uuid: any) {
       axios({
         method: "get",
-        url: "/mark/finalized/" + uuid,
+        url: "/orders/mark/finalized/" + uuid,
         withCredentials: true,
         headers: authHeader(),
       })
           .then((response) => {
-            if (response.status == 200) {}
+            if (response.status == 200) {
+              window.location.reload();
+            }
           });
     },
     // request to cancel an order
@@ -814,7 +870,9 @@ export default defineComponent({
         headers: authHeader(),
       })
           .then((response) => {
-            if (response.status == 200) {}
+            if (response.status == 200) {
+              window.location.reload();
+            }
           });
     },
 

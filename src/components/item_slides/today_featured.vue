@@ -2,7 +2,6 @@
   <div class="mt-5 mx-10 flex gap-5">
     <div v-for="item in todayfeatured" :key="item.id">
       <div
-
         @click="$router.replace({ name: 'MarketItem', params: { id: item.uuid } })"
         style="cursor: pointer"
       >
@@ -25,6 +24,7 @@
             </div>
            </div>
             <!--- Item title -->
+
             <div class="text-[16px] h-12 text-blue-600 hover:text-blue-500 hover:underline overflow-hidden p-1">
             {{ item.item_title }}
             </div>
@@ -45,12 +45,12 @@
                 >BTC</span
               >
               <span
-                        v-if="item.digital_currency_2 === true"
+                        v-if="item.digital_currency_3 === true"
                 class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-orange-700 mr-2 mb-2"
                 >XMR</span
               >
               <span
-                        v-if="item.digital_currency_3 === true"
+                        v-if="item.digital_currency_2 === true"
                 class="inline-block bg-gray-200 rounded-full px-2 py-1 text-sm font-semibold text-green-600 mr-2 mb-2"
                 >BCH</span
               >
@@ -104,6 +104,7 @@ export default defineComponent({
         .then((response) => {
           if ((response.status = 200)) {
             this.todayfeatured = response.data;
+
           }
         })
         .catch((error) => { console.log(error); });

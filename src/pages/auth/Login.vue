@@ -169,12 +169,7 @@ export default defineComponent({
           type: "error",
         });
       } else {
-        // if ANY fail validation
-        notify({
-          title: "Authorization",
-          text: "Form success",
-          type: "success",
-        });
+
         this.sendLogin(payLoad);
       }
     },

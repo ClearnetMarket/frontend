@@ -284,7 +284,6 @@ import MainHeaderMid from "../../layouts/headers/MainHeaderMid.vue";
 import MainHeaderBottom from "../../layouts/headers/MainHeaderBottom.vue";
 import MainHeaderVendor from "../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../layouts/footers/FooterMain.vue";
-import {mapGetters} from "vuex";
 
 /**
  *
@@ -348,23 +347,6 @@ export default defineComponent({
          
         });
     },
-/*    // was a bug it would set items to one. not used currently
-     set_amount_to_one() {
-       axios({
-        method: "post",
-        url: "/checkout/setamount/one",
-        headers: authHeader(),
-      })
-        .then((response) => {
-          if (response.status == 200) {
-          }
-        })
-       .catch((error) => {
-         console.log(error)
-       
-        });
-    },*/
-
     // gets the items in the shopping cart
      get_shopping_cart_items() {
        axios({
@@ -418,25 +400,14 @@ export default defineComponent({
             this.order_summary_count = response.data.total_items;
             this.order_summary_shipping_cost = response.data.total_shipping;
             this.order_summary_cost = response.data.total_price_before_shipping;
-            this.order_summary_shipping_and_price_cost =
-              response.data.total_price;
+            this.order_summary_shipping_and_price_cost = response.data.total_price;
           }
         })
         .catch(() => {
           this.shopping_cart_items_saved_list = null;
         });
     },
-/*    // get the item current amount.  Not used currently
-     currentitemamount(item, index) {
-       axios({
-        method: "get",
-        url: "/checkout/currentquantity/" + item.id,
-        headers: authHeader(),
-      }).then((response) => {
-        return response.data.amount;
-      });
-    },*/
-    // changes the shipping option
+
      selectedshipping(event: any, item: any) {
       this.option = event.target.value;
       let payLoad = {
@@ -447,7 +418,8 @@ export default defineComponent({
         url: "/checkout/changeshippingoption/" + item.id,
         headers: authHeader(),
         data: payLoad,
-      }).then(() => {
+      })
+       .then(() => {
         this.get_shopping_cart_order_summary();
       });
     },

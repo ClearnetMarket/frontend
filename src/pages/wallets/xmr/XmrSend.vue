@@ -193,7 +193,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          console.log(response)
+
 
         })
         .catch((error) => {

@@ -1,4 +1,4 @@
-// @ts-nocheck
+
 <template>
   <MainHeaderTop />
   <MainHeaderMid />
@@ -11,7 +11,9 @@
         <div class="text-[12px]">Conversations</div>
         <div class=""></div>
       </div>
+
       <div class="col-span-9">
+        <div v-if="itemforsale">
         <div class="grid grid-cols-12 gap-4 border border-1 p-4 mb-4">
           <div class="col-span-2">
             <img alt="" class="w-full" src="" />
@@ -35,9 +37,11 @@
             </div>
           </div>
         </div>
-
+      </div>
         <div class="text-[18px] mb-3">
+          <div v-if="other_user">
           Contact {{ other_user.display_name }}
+          </div>
         </div>
 
         <form
@@ -101,6 +105,7 @@ export default defineComponent({
     const user_uuid_route = useRoute();
     this.other_user_uuid = user_uuid_route.params.uuid;
     this.item_uuid = user_uuid_route.params.itemuuid;
+
     this.getotheruser();
     this.gettheitem();
   },

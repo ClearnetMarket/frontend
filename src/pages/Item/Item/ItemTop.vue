@@ -131,7 +131,7 @@
                         <div class="">Sold by:</div>
                         <router-link
                           :to="{
-                            name: 'vendorprofile',
+                            name: 'userprofile',
                             params: { uuid: vendoruuid },
                           }"
                         >
@@ -191,7 +191,7 @@
                     >
                       <router-link
                         :to="{
-                          name: 'vendorprofile',
+                          name: 'userprofile',
                           params: { uuid: vendoruuid },
                         }"
                       >

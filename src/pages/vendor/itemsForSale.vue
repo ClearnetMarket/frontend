@@ -8,7 +8,7 @@
     <div v-if="user">
       <MainHeaderVendor v-show="user.user_admin === 1" />
     </div>
-
+a
     <div class="container max-w-7xl mx-auto px-10 wrapper">
       <div class="mt-5">
         <nav class="rounded-md w-full">
@@ -144,7 +144,6 @@
 import { defineComponent } from "vue";
 import axios from "axios";
 import { ref } from "vue";
-import { mapGetters } from "vuex";
 import { notify } from "@kyvg/vue3-notification";
 import authHeader from "../../services/auth.header";
 import MainHeaderTop from "../../layouts/headers/MainHeaderTop.vue";
@@ -185,7 +184,6 @@ export default defineComponent({
       user: [],
       items: [],
       newitemid: null,
-
       accept: ref(false),
     };
   },
@@ -203,6 +201,7 @@ export default defineComponent({
         headers: authHeader(),
       }).then((response) => {
         if (response.status == 200) {
+          this.user = response.data.user
           if (response.data.user.user_admin == 0) {
             this.$router.push({ name: "home" });
           }
@@ -303,7 +302,7 @@ export default defineComponent({
     },
     // put item online
      putonline(itemid: any) {
-      console.log(itemid);
+
        axios({
         method: "get",
         url: "/vendororders/online/" + itemid,

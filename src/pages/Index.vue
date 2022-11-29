@@ -1,4 +1,5 @@
-<template>
+<template >
+  <html class="dark opensans" >
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
@@ -10,11 +11,13 @@
   <div v-if="user">
     <MainHeaderVendor v-show="user.user_admin === 1" />
   </div>
-  <div class="max-w-7xl mx-auto flex mb-0 wrapper">
+  <div class="max-w-7xl mx-auto flex mb-0 wrapper bg-text-white bg-white">
+
     <TodayFeatured />
   </div>
 
   <MainFooter />
+  </html>
 </template>
 
 <script lang="ts">
@@ -46,7 +49,6 @@ export default defineComponent({
     return {
       token: null,
       user: null,
-
       confirmed: false
     };
   },
@@ -94,5 +96,7 @@ export default defineComponent({
 </script>
 
 <style type="ts" scoped>
-
+.opensans {
+  font-family: "Open Sans", sans-serif;
+}
 </style>

@@ -1,18 +1,19 @@
 <template>
-  <div class="bg-zinc-700 py-1 text-white">
+  <div class="bg-gray-300  text-black">
     <div
       class="container flex justify-between max-w-7xl mx-auto text-bold text-center"
     >
       <div class="flex ml-5">
         <div class="pb-2">
           <select
-            class="form-select mt-2 appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-gray-200 bg-clip-padding bg-no-repeat rounded transition ease-in-out"
+            class="form-select mt-2 appearance-none block w-full 
+            px-3 py-1.5 text-base  text-black bg-white bg-clip-padding
+             bg-no-repeat rounded transition ease-in-out"
             aria-label="Default select example"
           >
-            <option selected @click="gotourl('categoryhome' )">
-              All Categories
+            <option selected @click="gotourl('categoryhome')">
+              Categories
             </option>
-
             <option @click="gotourl('categoryelectronics')">
               Electronics
             </option>
@@ -28,23 +29,19 @@
             <option @click="gotourl('categoryhobbies')">
               Hobbies and Collectibles
             </option>
-            <option
-              @click="gotourl('categoryjewelrygold')"
-            >
+            <option @click="gotourl('categoryjewelrygold')">
               Jewelry Previous Metals and Coins
             </option>
-            <option @click="gotourl('categoryapparel' )">
+            <option @click="gotourl('categoryapparel')">
               Apparel
             </option>
-            <option @click="gotourl('categoryhomeandgarden' )">
+            <option @click="gotourl('categoryhomeandgarden')">
               Home and Garden
             </option>
-            <option @click="gotourl('categoryart')" >
+            <option @click="gotourl('categoryart')">
               Arts and Crafts
             </option>
-            <option
-              @click="gotourl('categorybooksandmovies')"
-            >
+            <option @click="gotourl('categorybooksandmovies')">
               Books and Movies
             </option>
             <option @click="gotourl('categorydigital')">
@@ -58,7 +55,7 @@
         <div class="mx-3 pt-3 text-[13px] font-bold">
           <router-link :to="{ name: 'wallet' }" class="px-3">
             <button
-              class="bg-yellow-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline"
+              class="bg-yellow-400 hover:bg-zinc-400 text-black font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline"
             >
               Wallets
             </button>

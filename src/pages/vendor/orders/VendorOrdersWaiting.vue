@@ -149,7 +149,7 @@
                 <button
                   class="bg-green-600 m-1 hover:bg-green-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
                   type="button"
-                  @click.prevent="acceptorder(order.uuid)"
+                  @click.prevent="shiporder(order.uuid)"
                 >
                   Mark as Shipped
                 </button>
@@ -161,14 +161,16 @@
                   Reject
                 </button>
 
-                <!-- Modal toggle -->
-                <button
-                  class="bg-gray-600 m-1 hover:bg-gray-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
-                  type="button"
-                  @click="openModal('modal')"
-                >
-                  Add Shipping Info
-                </button>
+                  <!-- Modal toggle -->
+                  <button
+                      class="bg-gray-600 m-1 hover:bg-gray-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
+                      type="button"
+                      @click="openModal('modal')"
+                  >
+                    Add/Edit Shipping Info
+                  </button>
+
+
 
                 <!-- Main modal -->
                 <div
@@ -248,6 +250,7 @@
                         >
                           <button
                             class="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-700 transition"
+                            @click="closeModal()"
                             @click.prevent="onSendTracking(order.uuid)"
                           >
                             Add Tracking
@@ -313,6 +316,8 @@ export default defineComponent({
       vendor_orders_request_cancel: 0,
       vendor_orders_cancelled: 0,
       vendor_orders_dispute: 0,
+      trackingcarrier: null,
+      trackingnumber: null,
       trackingForm: {
         carrier: "",
         tracking: "",
@@ -321,6 +326,7 @@ export default defineComponent({
   },
 created(){
   this.getuserorders();
+
 },
   mounted() {
 
@@ -351,7 +357,7 @@ created(){
       });
     },
     //accepted orders
-     acceptorder(uuid: any) {
+     shiporder(uuid: any) {
        axios({
         method: "put",
         url: "/vendororders/waiting/markasshipped/" + uuid,
@@ -360,8 +366,8 @@ created(){
       }).then((response) => {
         if (response.status == 200) {
                         notify({
-              title: "Freeport",
-              text: "Order Accepted.",
+              title: "Vendor Order",
+              text: "Order Shipped.",
               type: "success",
             });
           this.getuserorders();
@@ -378,8 +384,8 @@ created(){
         headers: authHeader(),
       }).then((response) => {
         if (response.status == 200) {
-                                notify({
-              title: "Freeport",
+          notify({
+            title: "Vendor Order",
               text: "Order Rejected",
               type: "error",
             });
@@ -388,6 +394,8 @@ created(){
         }
       });
     },
+
+
     // send the tracking info on a popup modal
      sendtrackinginfo(payLoad: {
       order_uuid: string;
@@ -401,7 +409,14 @@ created(){
         headers: authHeader(),
         data: payLoad,
       }).then((response) => {
+        console.log(response.status)
+         console.log(response)
         if (response.status == 200) {
+          notify({
+            title: "Freeport",
+            text: "Tracking Added",
+            type: "success",
+          });
         }
       });
     },
@@ -437,6 +452,7 @@ created(){
         }
       });
     },
+
     // converts time
     relativeDate(value: any) {
       let e = new Date(value).valueOf();

@@ -81,7 +81,7 @@
           <button
             class="bg-yellow-500 rounded-md font-semibold hover:bg-yellow-600 py-3 text-sm text-black uppercase w-full"
           >
-            Add Address
+             Add / Change Address
           </button>
         </div>
       </div>
@@ -98,7 +98,7 @@
 <script lang="ts">
 import axios from "axios";
 import { defineComponent } from "vue";
-import { mapGetters } from "vuex";
+
 import MainHeaderTop from "../../../layouts/headers/MainHeaderTop.vue";
 import MainHeaderMid from "../../../layouts/headers/MainHeaderMid.vue";
 import MainHeaderBottom from "../../../layouts/headers/MainHeaderBottom.vue";
@@ -132,10 +132,28 @@ export default defineComponent({
 
 
   mounted() {
-    this.getcurrentshipping();
+    this.userstatus();
+
   },
 
   methods: {
+    userstatus() {
+      axios({
+        method: "get",
+        url: "/auth/whoami",
+        withCredentials: true,
+        headers: authHeader(),
+      })
+          .then((response) => {
+            if ((response.status = 200)) {
+              this.user = response.data.user
+
+              this.getcurrentshipping();
+            }
+          })
+          .catch(() => {this.user = null});
+    },
+
      addusershipping(payLoad: {
       city: string;
       stateorprovence: string;
@@ -162,19 +180,18 @@ export default defineComponent({
      getcurrentshipping() {
        axios({
         method: "get",
-        url: "/vendor/get/defaultaddress",
+        url: "/vendor/get/defaultaddress/" + this.user.user_id,
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
         if ((response.status = 200)) {
+          console.log(response.data)
           this.ChangeAddressForm.city = response.data.city;
-          this.ChangeAddressForm.stateorprovence =
-            response.data.state_or_provence;
-          this.ChangeAddressForm.zip = response.data.zip;
+          this.ChangeAddressForm.stateorprovence =  response.data.stateorprovence;
+          this.ChangeAddressForm.zip = response.data.zipcode;
 
         }
       })
-
     },
 
      onSubmit() {
@@ -183,7 +200,6 @@ export default defineComponent({
         stateorprovence: this.ChangeAddressForm.stateorprovence,
         zip: this.ChangeAddressForm.zip,
       };
-
        this.addusershipping(payLoad);
     },
   },

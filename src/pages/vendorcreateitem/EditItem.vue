@@ -359,7 +359,6 @@ export default defineComponent({
   created() {
     this.userstatus();
     this.getItemForSale();
-
     this.getCategoryList(); // Query Categories
     this.getConditionList(); // Query Conditionlist
     this.getCountryList(); // Query Countries

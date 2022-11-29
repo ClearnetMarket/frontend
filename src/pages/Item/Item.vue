@@ -104,10 +104,14 @@ import ItemUserReviews from "./Item/ItemUserReviews.vue";
 import ItemTop from "./Item/ItemTop.vue";
 import ItemShipping from "./Item/ItemShipping.vue";
 import ItemSimiliarItems from "./Item/ItemSimiliarItems.vue";
-import {mapGetters} from "vuex";
 
 
+/**
+ *
+ @typedef {Object} user.user_admin
 
+ *
+ */
 
 
 export default defineComponent({
@@ -175,16 +179,32 @@ export default defineComponent({
       exactcity: "",
       exactstateorprovence: "",
       exactzipcode: "",
+      user: null,
     };
   },
-  computed: {
-    ...mapGetters(["user"]),
-  },
+
   mounted() {
+    this.userstatus();
     this.getitem();
   },
 
   methods: {
+    userstatus() {
+      axios({
+        method: "get",
+        url: "/auth/whoami",
+        withCredentials: true,
+        headers: authHeader(),
+      })
+          .then((response) => {
+            if ((response.status = 200)) {
+              this.user = response.data.user
+
+            }
+          })
+          .catch(() => {this.user = null});
+
+    },
      getitem() {
       let item_id_route = useRoute();
       this.item_id = item_id_route.params.id;
@@ -332,7 +352,7 @@ export default defineComponent({
      getvendorinfo() {
        axios({
         method: "get",
-        url: "/vendor/vendoriteminfo/" + this.item.vendor_uuid,
+        url: "/vendor/vendor-info/" + this.item.vendor_uuid,
         withCredentials: true,
       })
       .then((response) => {

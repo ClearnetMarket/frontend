@@ -24,8 +24,8 @@ import login from "../pages/auth/Login.vue";
 import register from "../pages/auth/Register.vue";
 import forgotpassword from "../pages/auth/ForgotPassword.vue";
 import userprofile from "../pages/profile/UserProfile.vue";
-import vendorprofile from "../pages/profile/VendorProfile.vue";
 import userorders from "../pages/orders/UserOrders.vue";
+import ordersview from "../pages/orders/ViewOrder.vue";
 import vendorordersview from "../pages/orders/ViewOrder.vue";
 import account from "../pages/auth/account/AccountHome.vue";
 import defaultaddress from "../pages/auth/account/DefaultAddress.vue";
@@ -37,9 +37,11 @@ import vendororders from "../pages/vendor/orders/VendorOrders.vue";
 import vendorordersnew from "../pages/vendor/orders/VendorOrdersNew.vue";
 import vendororderswaiting from "../pages/vendor/orders/VendorOrdersWaiting.vue";
 import vendorordersshipped from "../pages/vendor/orders/VendorOrdersShipped.vue";
+import vendorordersdelivered from "../pages/vendor/orders/VendorOrdersDelivered.vue";
 import vendorordersfinalized from "../pages/vendor/orders/VendorOrdersFinalized.vue";
 import vendororderscancel from "../pages/vendor/orders/VendorOrdersCancel.vue";
 import vendorordersdispute from "../pages/vendor/orders/VendorOrdersDispute.vue";
+import vendorordersfeedback from "../pages/vendor/orders/VendorOrdersFeedback.vue";
 import MsgHome from "../pages/messages/MsgHome.vue";
 import MsgCreate from "../pages/messages/MsgCreate.vue";
 import MsgCreateOrder from "../pages/messages/MsgCreateOrder.vue";
@@ -48,6 +50,7 @@ import MsgCreateItem from "../pages/messages/MsgCreateItem.vue";
 import MsgView from "../pages/messages/MsgView.vue";
 import Dispute from "../pages/moderator/Dispute.vue";
 import ModDispute from "../pages/moderator/ModDispute.vue";
+import ModHome from "../pages/moderator/ModHome.vue";
 import search from "../pages/search/SearchHome.vue";
 import Error404 from "../pages/error/Error404.vue";
 import categoryhome from "../pages/category/CategoryHome.vue";
@@ -64,7 +67,19 @@ import categoryjewelryandgold from "../pages/category/jewelrygold/JewelryGoldHom
 import categoryhomeandgarden from "../pages/category/homeandgarden/HomeandGardenHome.vue";
 import categorysmartphones from "../pages/category/smartphones/SmartPhonesHome.vue";
 import categorysportinggoods from "../pages/category/sports/SportsHome.vue";
+
+
 const routes = [
+    {
+        path: "/user/orders/:uuid",
+        name: "ordersview",
+        component: ordersview,
+    },
+    {
+        path: "/user/orders",
+        name: "userorders",
+        component: userorders,
+    },
     {
         path: "/",
         name: "home",
@@ -194,19 +209,14 @@ const routes = [
         component: userprofile,
     },
     {
-        path: "/vendor/:uuid",
-        name: "vendorprofile",
-        component: vendorprofile,
-    },
-    {
-        path: "/user/orders",
-        name: "userorders",
-        component: userorders,
-    },
-    {
-        path: "/user/orders/:uuid",
+        path: "/vendor/orders/:uuid",
         name: "vendorordersview",
         component: vendorordersview,
+    },
+    {
+        path: "/vendor/orders/feedback/:uuid",
+        name: "vendorordersfeedback",
+        component: vendorordersfeedback,
     },
     {
         path: "/account",
@@ -258,6 +268,11 @@ const routes = [
         path: "/vendor/orders/waiting",
         name: "vendororderswaiting",
         component: vendororderswaiting,
+    },
+    {
+        path: "/vendor/orders/delivered",
+        name: "vendorordersdelivered",
+        component: vendorordersdelivered,
     },
     {
         path: "/vendor/orders/shipped",
@@ -319,6 +334,11 @@ const routes = [
         path: "/mod/dispute/:uuid",
         name: "ModDispute",
         component: ModDispute,
+    },
+    {
+        path: "/mod/home",
+        name: "ModHome",
+        component: ModHome,
     },
     {
         path: "/search/:searchstring",

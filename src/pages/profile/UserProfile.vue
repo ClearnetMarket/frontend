@@ -232,7 +232,7 @@
                     <router-link
                       :to="{ name: 'item', params: { id: review.item_uuid } }"
                     >
-                      {{ getitemname(review.item_uuid) }}
+                      {{ review.item_title }}
                     </router-link>
                   </div>
                   <div
@@ -302,7 +302,7 @@ created(){
       user: null,
       user_stats: null,
       item_title: null,
-      userreviews: [],
+      userreviews: null,
       currencydefault: null,
       countrydefault: null,
       user_reviews_total: 0,
@@ -418,17 +418,7 @@ created(){
         })
         .catch(() => {});
     },
-    getitemname(order_uuid: string) {
-       axios({
-        method: "get",
-        url: "/item/info/" + order_uuid,
-      }).then((response) => {
-        if ((response.status = 200)) {
-          this.item_title = response.data.item_title;
-          return this.item_title;
-        }
-      });
-    },
+
   },
 });
 </script>

@@ -382,7 +382,7 @@ export default defineComponent({
         data: payLoad,
       })
           .then(() => {
-        console.log("finished")
+
       });
     },*/
 

@@ -23,7 +23,7 @@
           </div>
           <div class="col-span-2">
             <button
-              class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              class="bg-blue-600 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="submit"
             >
               Search
@@ -63,8 +63,6 @@ import { defineComponent } from "vue";
 import { ShoppingBagIcon } from "@heroicons/vue/solid";
 import axios from "axios";
 import authHeader from "../../services/auth.header";
-import {mapGetters} from "vuex";
-
 
 export default defineComponent({
   name: "MainHeaderMid",
@@ -82,10 +80,7 @@ created() {
     this.userstatus()
 },
   mounted() {
-
-
      this.get_shopping_cart_count();
-
   },
   methods: {
     userstatus() {
@@ -109,10 +104,18 @@ created() {
       this.$router.replace({ name: nameofurl })
     },
     mainsearch() {
-      this.$router.push({
-        name: "search",
-        params: { searchstring: this.searchForm.searchInput },
-      });
+
+      if (this.searchForm.searchInput !== ''){
+          this.$router.push({
+          name: "search",
+          params: { searchstring: this.searchForm.searchInput },
+        });
+      }
+      else{
+
+      }
+
+
     },
     // Get How many items in shopping cart
     get_shopping_cart_count()  {
