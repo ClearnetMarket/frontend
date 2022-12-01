@@ -41,7 +41,7 @@
       <div class="col-span-12 mb-5 text-[20px]">
         All Items
       </div>
-      <ArtNewest />
+   
     </div>
   </div>
   <MainFooter />
@@ -54,7 +54,7 @@ import MainHeaderMid from "../../../layouts/headers/MainHeaderMid.vue";
 import MainHeaderBottom from "../../../layouts/headers/MainHeaderBottom.vue";
 import MainHeaderVendor from "../../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../../layouts/footers/FooterMain.vue";
-import ArtNewest from "./items/Newest.vue";
+
 
 export default defineComponent({
   name: "categoryart",
@@ -64,7 +64,7 @@ export default defineComponent({
     MainHeaderBottom,
     MainHeaderVendor,
     MainFooter,
-    ArtNewest
+  
   },
 
   data() {
