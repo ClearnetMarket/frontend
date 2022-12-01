@@ -1,13 +1,11 @@
 FROM node:latest
 
-RUN mkdir -p /app
+WORKDIR /usr/app
 
-WORKDIR /app
+COPY package.json .
 
-COPY package*.json ./
+RUN npm install
 
-ENV PATH /app/node_modules/.bin:$PATH
+RUN mkdir node_modules/.cache && chmod -R 777 node_modules/.cache
 
-RUN npm install -g
-
-COPY . /app
+COPY . .
