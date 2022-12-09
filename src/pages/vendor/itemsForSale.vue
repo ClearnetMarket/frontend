@@ -162,6 +162,9 @@ import MainFooter from "../../layouts/footers/FooterMain.vue";
  @typedef {Object} t.fee
  @typedef {Object} t.commentxmr
  @typedef {Object} t.txid
+ @typedef {Object} user.user_admin
+ @typedef {Object} user_admin
+
  *
  */
 
@@ -181,7 +184,7 @@ export default defineComponent({
   },
   data() {
     return {
-      user: [],
+      user: null,
       items: [],
       newitemid: null,
       accept: ref(false),

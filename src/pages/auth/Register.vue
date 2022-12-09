@@ -22,7 +22,7 @@
             id="username"
             type="text"
             placeholder="Login Username"
-            v-model.trim="registerForm.username"
+           
           />
           <span
             v-if="v$.registerForm.username.$error"
@@ -89,7 +89,7 @@
             type="password"
             autocomplete="off"
             placeholder="Password"
-            v-model.trim="registerForm.password"
+           
           />
           <span
             v-if="v$.registerForm.password.$error"
@@ -111,7 +111,7 @@
             type="password"
             autocomplete="off"
             placeholder="Confirm Password"
-            v-model.trim="registerForm.password_confirm"
+            
           />
           <span
             v-if="v$.registerForm.password_confirm.$error"

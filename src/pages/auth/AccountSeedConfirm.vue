@@ -34,7 +34,7 @@
             type="text"
             autocomplete="off"
             placeholder="Word 1"
-            v-model.trim="wordForm.word0"
+
           />
           <span
             v-if="v$.wordForm.word0.$error"
@@ -48,7 +48,7 @@
             type="text"
             autocomplete="off"
             placeholder="Word 2"
-            v-model.trim="wordForm.word1"
+           
           />
           <span
             v-if="v$.wordForm.word1.$error"
@@ -62,7 +62,7 @@
             type="text"
             autocomplete="off"
             placeholder="Word 3"
-            v-model.trim="wordForm.word2"
+           
           />
           <span
             v-if="v$.wordForm.word2.$error"
@@ -76,7 +76,7 @@
             type="text"
             autocomplete="off"
             placeholder="Word 4"
-            v-model.trim="wordForm.word3"
+          
           />
           <span
             v-if="v$.wordForm.word3.$error"
@@ -90,7 +90,7 @@
             type="text"
             autocomplete="off"
             placeholder="Word 5"
-            v-model.trim="wordForm.word4"
+          
           />
           <span
             v-if="v$.wordForm.word5.$error"
@@ -105,7 +105,7 @@
             type="text"
             autocomplete="off"
             placeholder="Word 6"
-            v-model.trim="wordForm.word5"
+           
           />
           <span
             v-if="v$.wordForm.word5.$error"

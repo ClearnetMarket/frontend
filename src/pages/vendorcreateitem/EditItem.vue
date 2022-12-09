@@ -171,7 +171,7 @@
               >
               <input
                   type="checkbox"
-                  checked="checked"
+                
                   id="digital_currency_1"
                   v-model="CreateItemForm.pricingInfo.digital_currency_1"
               />
@@ -182,7 +182,7 @@
               >
               <input
                   type="checkbox"
-                  checked="checked"
+                 
                   id="digital_currency_2"
                   v-model="CreateItemForm.pricingInfo.digital_currency_2"
               />
@@ -193,7 +193,7 @@
               >
               <input
                   type="checkbox"
-                  checked="checked"
+                 
                   id="digital_currency_3"
                   v-model="CreateItemForm.pricingInfo.digital_currency_3"
               />
@@ -230,7 +230,7 @@
               <div class="flex-1">
                 <input
                     type="checkbox"
-                    checked="checked"
+               
                     v-model="CreateItemForm.shippingInfo.free_shipping"
                 />
               </div>
@@ -254,7 +254,7 @@
               <div class="flex-1">
                 <input
                     type="checkbox"
-                    checked="checked"
+                 
                     v-model="CreateItemForm.shippingInfo.shipping_2"
                 />
               </div>
@@ -288,7 +288,7 @@
               <div class="flex-1">
                 <input
                     type="checkbox"
-                    checked="checked"
+                  
                     v-model="CreateItemForm.shippingInfo.shipping_3"
                 />
               </div>
