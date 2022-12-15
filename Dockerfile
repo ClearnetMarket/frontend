@@ -1,13 +1,13 @@
-FROM node:18.0.0
+FROM node:latest
+
+RUN mkdir -p /app
 
 WORKDIR /app
 
-COPY package.json .
+COPY package*.json ./
+
+ENV PATH /app/node_modules/.bin:$PATH
 
 RUN npm install
 
-RUN mkdir node_modules/.cache && chmod -R 777 node_modules/.cache
-
-COPY . .
-
-EXPOSE 5173
+COPY . /app

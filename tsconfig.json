@@ -13,10 +13,12 @@
     "strictNullChecks": false,
     "lib": ["dom", "ESNext"],
     "typeRoots": [
-        "./node_modules/@types",
-        "./src/types/",
+      "./node_modules/@types",
+      "./src/types/",
     ]
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "references": [{
+    "path": "./tsconfig.node.json"
+  }]
 }
