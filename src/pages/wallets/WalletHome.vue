@@ -1,5 +1,6 @@
 
 <template>
+
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
@@ -8,7 +9,7 @@
     <MainHeaderVendor v-show="user.user_admin === 1" />
   </div>
   <!-- Top Stuff-->
-  <div class="container h-screen max-w-7xl mx-auto px-10">
+  <div class="container  max-w-7xl mx-auto px-10">
     <!-- Container-->
     <div class="mt-5 mb-5">
       <nav class="rounded-md w-full">
@@ -24,159 +25,156 @@
         </ol>
       </nav>
     </div>
+    <div class="sm:col-span-4 md:col-span-3 bg-white rounded-md p-5">
+      <div class="text-[18px] mb-10 text-left">Account Balances</div>
+      <div class="overflow-x-auto relative">
+        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+          <thead class="text-xs text-gray-700 uppercase bg-blue-100 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+              <th scope="col" class="py-3 px-6">
+                Assets
+              </th>
+              <th scope="col" class="py-3 px-6">
+                Market Price
+              </th>
+              <th scope="col" class="py-3 px-6">
+                Amount
+              </th>
+              <th scope="col" class="py-3 px-6">
+                Actions
+              </th>
+            </tr>
+          </thead>
+          <tbody class=" font-large font-bold">
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+              <th scope="row" class="py-4 px-6 text-gray-900 whitespace-nowrap dark:text-white">
+                <div class="flex gap-3">
+                  <img class="object-contain" src="../../assets/coin/btc/btc_small.png" alt="No Image Found .." />
+                  Bitcoin
+                </div>
+              </th>
+              <td class="py-4 px-6">
+                ${{ btcprice }}
+              </td>
+              <td class="py-4 px-6">
+                {{ btcbalance }}
+              </td>
+              <td class="py-4 px-6">
+                <div class="flex-1 ">
+                  <router-link :to="{ name: 'btcwalletsend' }" class="px-3">
+                    <button
+                      class="bg-gray-700 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline">
+                      Withdraw
+                    </button>
+                  </router-link>
 
-    <div class="grid grid-cols-4 mt-14">
-      <div class="sm:col-span-4 md:col-span-1">
-        <div class="text-[20px] text-gray-700 mb-10">Account Balances</div>
-        <div class="flex">
-          <div class="text-[14px] text-gray-700">{{ wallettotal }}</div>
-          <div class="text-[14px] text-gray-700 pl-3">{{ usercurrency }}</div>
-        </div>
 
-        <div class="text-[20px] text-orange-400 mt-7">Bitcoin</div>
-        <div class="text-[14px] text-gray-700">
-          <div v-if="btcbalance === 0.0">0.00000000</div>
-          <div v-else>{{ btcbalance }}</div>
-        </div>
-        <div class="text-[20px] text-green-600 mt-7">Bitcoin Cash</div>
-        <div class="text-[14px] text-gray-700">
-          <div v-if="bchbalance === 0.0">0.00000000</div>
-          <div v-else>{{ bchbalance }}</div>
-        </div>
-        <div class="text-[20px] text-orange-600 mt-7">Monero</div>
-        <div class="text-[14px] text-gray-700">
-          <div v-if="xmrbalance === 0.0">0.00000000</div>
-          <div v-else>{{ xmrbalance }}</div>
-        </div>
-      </div>
-      <div
-        class="sm:col-span-4 md:col-span-3 border border-1 bg-gray-100 rounded-md p-5"
-      >
-        <div class="text-[20px] mb-10 text-center">Coins</div>
-        <div class="flex mb-8">
-          <div class="flex-1">
-            <div>Bitcoin</div>
-            <button
-              style="cursor: default"
-              class="bg-orange-400 text-white font-bold py-1 px-8 rounded"
-            >
-             ${{ btcprice }}
-            </button>
-          </div>
-          <div class="flex-1 pt-6">
-            <router-link :to="{ name: 'btcwalletsend' }" class="px-3">
-              <button
-                class="bg-gray-700 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline"
-              >
-                Send
-              </button>
-            </router-link>
-          </div>
-          <div class="flex-1 pt-6">
-            <router-link :to="{ name: 'btcwalletrecieve' }" class="px-3">
-              <button
-                class="bg-gray-700 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline"
-              >
-                Recieve
-              </button>
-            </router-link>
-          </div>
-          <div class="flex-1 pt-6">
-            <router-link :to="{ name: 'btcwallet' }" class="px-3">
-              <button
-                class="bg-gray-700 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline"
-              >
-                Transactions
-              </button>
-            </router-link>
-          </div>
-        </div>
+                  <router-link :to="{ name: 'btcwalletrecieve' }" class="px-3">
+                    <button
+                      class="bg-gray-700 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline">
+                      Deposit
+                    </button>
+                  </router-link>
 
-        <div class="flex mb-8">
-          <div class="flex-1">
-            <div class="">Bitcoin Cash</div>
-            <button
-              style="cursor: default"
-              class="bg-green-600 text-white font-bold py-1 px-8 rounded focus:outline-none focus:shadow-outline"
-              type="button"
-            >
-              ${{ bchprice }}
-            </button>
-          </div>
-          <div class="flex-1 pt-6">
-            <router-link :to="{ name: 'bchwalletsend' }" class="px-3">
-              <button
-                class="bg-gray-700 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline"
-              >
-                Send
-              </button>
-            </router-link>
-          </div>
-          <div class="flex-1 pt-6">
-            <router-link :to="{ name: 'bchwalletrecieve' }" class="px-3">
-              <button
-                class="bg-gray-700 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline"
-              >
-                Recieve
-              </button>
-            </router-link>
-          </div>
-          <div class="flex-1 pt-6">
-            <router-link :to="{ name: 'bchwallet' }" class="px-3">
-              <button
-                class="bg-gray-700 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline"
-              >
-                Transactions
-              </button>
-            </router-link>
-          </div>
-        </div>
 
-        <div class="flex mb-8">
-          <div class="flex-1">
-            <div class="">Monero</div>
-            <button
-              style="cursor: default"
-              class="bg-orange-600 text-white font-bold py-1 px-8 rounded focus:outline-none focus:shadow-outline"
-              type="button"
-            >
-              ${{ xmrprice }}
-            </button>
-          </div>
-          <div class="flex-1 pt-6">
-            <router-link :to="{ name: 'xmrwalletsend' }" class="px-3">
-              <button
-                class="bg-gray-700 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline"
-              >
-                Send
-              </button>
-            </router-link>
-          </div>
-          <div class="flex-1 pt-6">
-            <router-link :to="{ name: 'xmrwalletrecieve' }" class="px-3">
-              <button
-                class="bg-gray-700 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline"
-              >
-                Recieve
-              </button>
-            </router-link>
-          </div>
-          <div class="flex-1 pt-6">
-            <router-link :to="{ name: 'xmrwallet' }" class="px-3">
-              <button
-                class="bg-gray-700 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline"
-              >
-                Transactions
-              </button>
-            </router-link>
-          </div>
-        </div>
+                  <router-link :to="{ name: 'btcwallet' }" class="px-3">
+                    <button
+                      class="bg-gray-700 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline">
+                      Transactions
+                    </button>
+                  </router-link>
+                </div>
+              </td>
+            </tr>
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+              <th scope="row" class="py-4 px-6  text-gray-900 whitespace-nowrap dark:text-white">
+                  <div class="flex gap-3">
+                    <img class="object-contain" src="../../assets/coin/bch/bch_small.png" alt="No Image Found .." />
+                      Bitcoin Cash
+                  </div>
+              </th>
+              <td class="py-4 px-6">
+                ${{ bchprice }}
+              </td>
+              <td class="py-4 px-6">
+              {{ bchbalance }}
+              </td>
+              <td class="py-4 px-6">
+                <div class="flex-1 ">
+                  <router-link :to="{ name: 'bchwalletsend' }" class="px-3">
+                    <button
+                      class="bg-gray-700 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline">
+                      Withdraw
+                    </button>
+                  </router-link>
+
+
+                  <router-link :to="{ name: 'bchwalletrecieve' }" class="px-3">
+                    <button
+                      class="bg-gray-700 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline">
+                      Deposit
+                    </button>
+                  </router-link>
+
+
+                  <router-link :to="{ name: 'btcwallet' }" class="px-3">
+                    <button
+                      class="bg-gray-700 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline">
+                      Transactions
+                    </button>
+                  </router-link>
+                </div>
+              </td>
+            </tr>
+            <tr class="bg-white dark:bg-gray-800">
+              <th scope="row" class="py-4 px-6  text-gray-900 whitespace-nowrap dark:text-white">
+                <div class="flex gap-3">
+                <img class="object-contain" src="../../assets/coin/xmr/xmr_small.png" alt="No Image Found .." />   Monero
+                </div>
+              </th>
+              <td class="py-4 px-6">
+                ${{ xmrprice }}
+              </td>
+              <td class="py-4 px-6">
+                {{ xmrbalance }}
+              </td>
+              <td class="py-4 px-6">
+                <div class="flex-1 ">
+                  <router-link :to="{ name: 'xmrwalletsend' }" class="px-3">
+                    <button
+                      class="bg-gray-700 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline">
+                      Withdraw
+                    </button>
+                  </router-link>
+
+
+                  <router-link :to="{ name: 'xmrwalletrecieve' }" class="px-3">
+                    <button
+                      class="bg-gray-700 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline">
+                      Deposit
+                    </button>
+                  </router-link>
+
+
+                  <router-link :to="{ name: 'xmrwallet' }" class="px-3">
+                    <button
+                      class="bg-gray-700 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline">
+                      Transactions
+                    </button>
+                  </router-link>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
-    <!-- END Top Stuff-->
   </div>
+
   <!-- END container-->
   <MainFooter />
+
+
 </template>
 <script lang="ts">
 import { defineComponent } from "vue";
@@ -198,7 +196,7 @@ export default defineComponent({
     MainFooter,
   },
 
-  data() {
+  data () {
     return {
       user: null,
       usercurrency: null,
@@ -211,7 +209,7 @@ export default defineComponent({
       wallettotal: 0,
     };
   },
-  mounted() {
+  mounted () {
     this.userstatus();
     this.getbtcprice();
     this.getbchprice();
@@ -222,8 +220,8 @@ export default defineComponent({
     this.getbtcbalance();
   },
   methods: {
-     userstatus() {
-       axios({
+    userstatus () {
+      axios({
         method: "get",
         url: "/auth/whoami",
         withCredentials: true,
@@ -238,76 +236,77 @@ export default defineComponent({
         })
         .catch(() => {
           this.$router.push({ name: "login" });
+
         });
     },
 
-     userinfo() {
-       axios({
+    userinfo () {
+      axios({
         method: "get",
         url: "/info/country-currency",
         withCredentials: true,
         headers: authHeader(),
       })
-     .then((response) => {
-        if ((response.status = 200)) {
-          this.usercurrency = response.data.currency;
-        }
-      });
+        .then((response) => {
+          if ((response.status = 200)) {
+            this.usercurrency = response.data.currency;
+          }
+        });
     },
 
-     getwallettotals() {
-       axios({
+    getwallettotals () {
+      axios({
         method: "get",
         url: "/price/wallets/total/" + this.user.currency,
         withCredentials: true,
         headers: authHeader(),
       })
-       .then((response) => {
-        if (response.data) {
-          this.wallettotal = response.data.coin;
-        }
-      });
+        .then((response) => {
+          if (response.data) {
+            this.wallettotal = response.data.coin;
+          }
+        });
     },
 
-     getxmrprice() {
-       axios({
+    getxmrprice () {
+      axios({
         method: "get",
         url: "/xmr/price",
       })
-     .then((response) => {
-        if (response.data) {
-          this.xmrprice = response.data.price_xmr_usd;
-        }
-      });
+        .then((response) => {
+          if (response.data) {
+            this.xmrprice = response.data.price_xmr_usd;
+          }
+        });
     },
 
-     getbchprice() {
-       axios({
+    getbchprice () {
+      axios({
         method: "get",
         url: "/bch/price",
       })
-       .then((response) => {
-        if (response.data) {
-          this.bchprice = response.data.bch_price_usd;
-        }
-      });
+        .then((response) => {
+          if (response.data) {
+            this.bchprice = response.data.bch_price_usd;
+          }
+        });
     },
 
-     getbtcprice() {
-       axios({
+    getbtcprice () {
+      axios({
         method: "get",
         url: "/btc/price",
       })
-     .then((response) => {
-        if (response.data) {
-          this.btcprice = response.data.btc_price_usd;
-        }
-      });
+        .then((response) => {
+          if (response.data) {
+            this.btcprice = response.data.btc_price_usd;
+          }
+        });
     },
 
     //  Get balances for dropdowns
-     getxmrbalance() {
-       axios({
+    getxmrbalance () {
+      axios({
         method: "get",
         url: "/xmr/balance",
         headers: authHeader(),
@@ -318,33 +317,35 @@ export default defineComponent({
       });
     },
 
-     getbchbalance() {
-       axios({
+    getbchbalance () {
+      axios({
         method: "get",
         url: "/bch/balance",
         headers: authHeader(),
       })
-     .then((response) => {
-        if (response.data) {
-          this.bchbalance = response.data.bch_balance;
-        }
-      });
+        .then((response) => {
+          if (response.data) {
+            this.bchbalance = response.data.bch_balance;
+          }
+        });
     },
 
-     getbtcbalance() {
-       axios({
+    getbtcbalance () {
+      axios({
         method: "get",
         url: "/btc/balance",
         headers: authHeader(),
       })
-     .then((response) => {
-        if (response.data) {
-          this.btcbalance = response.data.btc_balance;
-        }
-      });
+        .then((response) => {
+          if (response.data) {
+            this.btcbalance = response.data.btc_balance;
+          }
+        });
     },
   },
 });
 </script>
 
-<style type="ts" scoped></style>
+<style type="ts" scoped>
+
+</style>

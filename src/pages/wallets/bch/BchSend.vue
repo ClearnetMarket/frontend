@@ -4,8 +4,8 @@
   <MainHeaderMid />
   <MainHeaderBottom />
 
-  <div class="max-w-7xl mx-auto flex mb-0 wrapper">
-    <!-- Container-->
+  <div class="container  max-w-7xl mx-auto px-10 pb-60 bg-gray-100"><!-- Container-->
+  
     <div class="mt-5 mb-5">
       <nav class="rounded-md w-full">
         <ol class="list-reset flex">
@@ -17,7 +17,7 @@
           <li>
             <span class="text-gray-500 mx-2">/</span>
           </li>
-
+  
           <li>
             <router-link :to="{ name: 'wallet' }">
               <a class="text-blue-600 hover:text-blue-700">Wallet Home</a>
@@ -29,9 +29,10 @@
         </ol>
       </nav>
     </div>
+    <div class="flex text-[22px] ">Send Bitcoin Cash</div>
+    <div class="flex gap-4">
 
-    <div class="flex mx-10 text-[22px]">Send Bitcoin Cash</div>
-    <div class="flex flex-row mx-10 justify-center mt-20">
+    <div class="flex-1 bg-white rounded-md justify-center mt-20 p-5">
       <form method="post" @submit="onSubmit">
         <div class="mb-4">
           <label
@@ -128,15 +129,24 @@
           </button>
         </div>
       </form>
-    </div>
-  </div>
+      </div>
+      <div class=" flex-1 f mt-20 w-full">
+        <div class="font-semibold">Bitcoin Cash Balances (BCH)</div>
+        <div class="flex justify-between   border-b-gray-700 border-b-2">
+          <div class="grow-0">Total </div>
+          <div class="grow"> </div>
+          <div class="grow-0"> {{ bchbalance }}</div>
+        </div>
+      
+      </div>
+      </div>
+      </div>
   <MainFooter />
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 import axios from "axios";
-import { mapGetters } from "vuex";
 import { notify } from "@kyvg/vue3-notification";
 import useValidate from "@vuelidate/core";
 import { required, minLength } from "@vuelidate/validators";
@@ -160,16 +170,18 @@ export default defineComponent({
 
   mounted() {
     this.userstatus();
+    this.getbchbalance();
   },
   data() {
     return {
       v$: useValidate(),
-
+      bchbalance: 0,
       wallet: {
         bch_address: "",
         bch_decscription: "",
         bch_amount: "",
         pin: "",
+        
       },
     };
   },
@@ -199,6 +211,18 @@ export default defineComponent({
         .catch(() => {
           this.$router.push("/login");
         });
+    },
+    getbchbalance () {
+      axios({
+        method: "get",
+        url: "/bch/balance",
+        headers: authHeader(),
+      }).then((response) => {
+        if (response.data) {
+          this.bchbalance = response.data.bch_balance;
+          console.log(response.data)
+        }
+      });
     },
      SendCoin(payLoad: {
       bch_address: string;

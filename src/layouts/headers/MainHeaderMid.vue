@@ -1,11 +1,11 @@
 <template>
   <div class="max-w-7xl mx-auto grid sm:grid-cols-12 md:grid-cols-12 mb-0">
     <div
-      class="grid sm:col-span-12 md:col-span-3 grid-rows-2 text-center pt-5 m-0 text-gray-800 hover:text-gray-600"
+      class="grid sm:col-span-12 md:col-span-3 grid-rows-2 text-center pt-5 m-0 text-gray-800 hover:text-gray-600 "
       @click="gotourl('home')"
       style="cursor: pointer"
     >
-      <div class="row-span-1 text-[22px] text-blue-600 font-semibold ">Freeport.cash</div>
+      <div class="row-span-1 text-[22px] text-blue-600 font-semibold ">Freeport</div>
       <div class="row-span-1 text-[14px] font-semibold text-gray-700">Privacy Sold Here</div>
     </div>
     <div class="sm:col-span-4 md:col-span-6 pt-5">
@@ -18,12 +18,12 @@
               id="search"
               type="text"
               autocomplete="off"
-              placeholder="Search for items..."
+              placeholder="Search freeport..."
             />
           </div>
           <div class="col-span-2">
             <button
-              class="bg-blue-600 hover:bg-blue-900 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              class="bg-blue-600 hover:bg-zinc-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="submit"
             >
               Search
@@ -32,10 +32,10 @@
       </form>
     </div>
     <div
-      class="sm:col-span-4 sm:col-start-8 md:col-span-3 md:col-start-11 pt-5"
+      class="sm:col-span-4 sm:col-start-8 md:col-span-3 md:col-start-11 pt-5 pr-5"
     >
       <router-link :to="{ name: 'cart' }">
-        <div class="grid grid-cols-12 grid-rows-2">
+        <div class="grid grid-cols-12 grid-rows-2 p-1 hover:border-blue-600 border-transparent border-2 rounded">
           <div class="row-span-2 col-span-3 pt-1">
             <ShoppingBagIcon class="text-white bg-blue-600 w-7 h-7" />
           </div>

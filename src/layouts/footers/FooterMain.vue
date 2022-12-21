@@ -1,10 +1,10 @@
 <template>
-  <div class="bg-neutral-800 h-96 pt-20 pb-12 inset-x-0 bottom-0 footerclass">
-    <div class="mx-32">
+  <div class="bg-zinc-800 h-48pb-12 inset-x-0 bottom-0 footerclass ">
+    <div class="mx-32 my-5">
       <div class="flex flex-row w-full">
         <div class="basis-1/4">
           <div v-if="user">
-            <div class="text-[20px] mt-5 mb-5 text-yellow-600">Navigation</div>
+            <div class="text-[20px] mt-5 mb-5 text-white">Navigation</div>
             <router-link :to="{ name: 'account' }">
               <div class="text-[16px] py-1 text-white hover:text-gray-400">
                 Account Home
@@ -17,7 +17,7 @@
               </div>
             </router-link>
           </div>
-          <div v-else class="text-yellow-600 text-[20px]">
+          <div v-else class="text-white text-[20px]">
             <div class="">No hidden fees</div>
             <div class="">No credit cards</div>
             <div class="">No paypal</div>
@@ -26,7 +26,7 @@
 
         <div class="basis-1/4">
           <div v-if="user">
-            <div class="text-[20px] mt-5 mb-5 text-yellow-600">Wallets</div>
+            <div class="text-[20px] mt-5 mb-5 text-white">Wallets</div>
             <router-link :to="{ name: 'forgotpassword' }">
               <div class="text-[16px] py-1 text-white hover:text-gray-400">
                 Wallet Home
@@ -50,7 +50,7 @@
           </div>
         </div>
         <div class="basis-1/2">
-          <div class="text-[38px] mt-5 mb-5 text-yellow-600">
+          <div class="text-[38px] mt-5 mb-5 text-white">
             Privacy sold here
           </div>
         </div>
@@ -61,8 +61,6 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { mapGetters } from "vuex";
-
 
 export default defineComponent({
   name: "MainFooter",
@@ -75,19 +73,13 @@ export default defineComponent({
       user: null,
     };
   },
-  methods: {
-
-
-  },
+  methods: {},
 });
 </script>
 <style>
 .footerclass {
-  position: relative;
-  right: 0;
+position: fixed;
   bottom: 0;
-  left: 0;
-  padding: 1rem;
-  text-align: center;
+ 
 }
 </style>

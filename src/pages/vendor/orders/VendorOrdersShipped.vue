@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-gray-300">
+ 
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
@@ -160,7 +160,7 @@
       </div>
     </div>
   </div>
-  </div>
+
   <MainFooter />
 </template>
 

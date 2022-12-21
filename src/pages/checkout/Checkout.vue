@@ -173,7 +173,7 @@
                 <span class="font-semibold text-sm uppercase"
                   >Bitcoin Cash</span
                 >
-                <div class="text-[14px]">Items: {{ bchsumofitem }}</div>
+                <div class="text-[14px]" >Items: {{ bchsumofitem }}</div>
                 <div class="text-[14px]">Price: {{ bchprice }}</div>
                 <div class="text-[14px]">
                   Shipping Price: {{ bchshippingprice }}
@@ -183,7 +183,7 @@
             </div>
             <div v-if="xmrtotalprice > 0">
               <div class="col-span-1">
-                <span class="font-semibold text-sm uppercase">Monero</span>
+                <span class="font-semibold text-sm uppercase bg-red-200">Monero</span>
                 <div class="text-[14px]">Items: {{ xmrsumofitem }}</div>
                 <div class="text-[14px]">Price: {{ xmrprice }}</div>
                 <div class="text-[14px]">
@@ -201,7 +201,7 @@
                   btctotalprice <= btcbalance
                 "
                 @click="checkoutorder()"
-                class="bg-yellow-500 rounded-md font-semibold hover:bg-yellow-600 py-3 text-sm text-white uppercase w-full"
+                class="bg-yellow-500 bg-r rounded-md font-semibold hover:bg-yellow-600 py-3 text-sm text-white uppercase w-full"
               >
                 Place Order
               </button>
@@ -311,10 +311,11 @@ export default defineComponent({
               type: "success",
             });
             this.$router.push({ name: "userorders" });
+
           }
         })
         .catch((error) => {
-          console.log(error)
+        
         });
     },
      updateprices() {
@@ -329,7 +330,7 @@ export default defineComponent({
           }
         })
         .catch((error) => {
-          console.log(error)
+     
         });
     },
      get_shopping_cart_items() {

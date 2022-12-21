@@ -1,23 +1,27 @@
 <template >
-  <html class="dark opensans" >
+
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
   <div v-if="user">
+
     <div v-if="user.confirmed === false">
       <Confirmed />
     </div>
   </div>
+
+
   <div v-if="user">
     <MainHeaderVendor v-show="user.user_admin === 1" />
   </div>
-  <div class="max-w-7xl mx-auto flex mb-0 wrapper bg-text-white bg-white">
 
+  <div class="max-w-7xl mx-auto flex mb-0  bg-text-white">
     <TodayFeatured />
   </div>
 
   <MainFooter />
-  </html>
+
+
 </template>
 
 <script lang="ts">
@@ -45,7 +49,7 @@ export default defineComponent({
     Confirmed,
   },
 
-  data() {
+  data () {
     return {
       token: null,
       user: null,
@@ -53,30 +57,31 @@ export default defineComponent({
     };
   },
 
-  mounted() {
+  mounted () {
     this.userstatus();
     this.userstatusconfirmed();
+
   },
 
   methods: {
-    userstatus() {
-       axios({
+    userstatus () {
+      axios({
         method: "get",
         url: "/auth/whoami",
         withCredentials: true,
         headers: authHeader(),
       })
-          .then((response) => {
-            if ((response.status = 200)) {
-              this.user = response.data.user
-              this.user.confirmed = response.data.user.confirmed
-              this.$store.dispatch("user", response.data.user);
-            }
-          })
-          .catch(() => {this.user = null});
+        .then((response) => {
+          if ((response.status = 200)) {
+            this.user = response.data.user
+            this.user.confirmed = response.data.user.confirmed
+            this.$store.dispatch("user", response.data.user);
+          }
+        })
+        .catch(() => { this.user = null });
     },
-    userstatusconfirmed() {
-       axios({
+    userstatusconfirmed () {
+      axios({
         method: "get",
         url: "/auth/amiconfirmed",
         withCredentials: true,
@@ -85,6 +90,7 @@ export default defineComponent({
         if (response.status == 200) {
           if (response.data.confirmed == true) {
             this.confirmed = true;
+
           } else if (response.data.confirmed == false) {
             this.confirmed = false;
           }

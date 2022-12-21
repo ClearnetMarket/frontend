@@ -120,6 +120,21 @@
           </div>
         </div>
       </router-link>
+
+        <div
+            class="border border-1 rounded-md p-5 hover:bg-gray-100"
+            style="cursor: pointer"
+            @click.prevent="logout()"
+        >
+          <div class="grid grid-cols-4 grid-rows-2">
+            <div class="col-span-1 row-span-2">Icon</div>
+            <div class="col-span-3 row-span-1 text-[20px]">Logout</div>
+            <div class="col-span-3 row-span-1 text-[14px] text-gray-600">
+             Logout of Account
+            </div>
+          </div>
+        </div>
+
     </div>
   </div>
   </div>
@@ -168,6 +183,13 @@ export default defineComponent({
   },
 
   methods: {
+    logout () {
+      localStorage.removeItem('user_token');
+      localStorage.removeItem('auth_token');
+      localStorage.clear();
+      this.$store.dispatch('user', null);
+      this.$router.push('/')
+    },
      userstatus() {
        axios({
         method: "get",

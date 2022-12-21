@@ -184,7 +184,9 @@ validations() {
      onSubmit() {
       const payLoad = {accept: this.accept}
       this.v$.$validate(); 
-      if (this.v$.$validate) {
+       console.log(this.v$.$error)
+      if (this.v$.$error) {
+       
         notify({
           title: "Signup Error",
           text: "You must read And accept agreement",

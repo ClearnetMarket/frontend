@@ -4,8 +4,7 @@
   <MainHeaderMid />
   <MainHeaderBottom />
 
-  <div class="container h-screen max-w-7xl mx-auto px-10">
-    <!-- Container-->
+  <div class="container  max-w-7xl mx-auto px-10 pb-60 bg-gray-100"><!-- Container-->
     <div class="mt-5 mb-5">
       <nav class="rounded-md w-full">
         <ol class="list-reset flex">
@@ -30,15 +29,19 @@
       </nav>
     </div>
 
-    <div class="flex mx-10 text-[22px]">Deposit Monero</div>
-    <div class="flex flex-row mx-10 justify-center mt-20">
-    Address: {{xmr_address}}
-    
-     <img class="w-48 h-48" src="" alt="" />
+    <div class="flex gap-4">
+      <div class="flex text-[22px] ">Deposit Monero</div>
+      <div class=" mx-10 justify-center mt-20 text-[20px]">
+        Address:
+      </div>
+      <div class=" mx-10 justify-center mt-20 text-[20px]">
+        {{ xmr_address }}
+      </div>
     </div>
   </div>
   <MainFooter />
 </template>
+
 
 <script lang="ts">
 import { defineComponent } from "vue";

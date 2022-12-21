@@ -10,7 +10,7 @@
               <div class="block bg-cover bg-center">
                 <div class="flex flex-col">
                   <div class="font-bold text-center">Main Image</div>
-                  <img alt="" class="w-48 h-48" src="https://picsum.photos/50/50" />
+                  <img :alt="marketitem.image_one_server" class="w-48 h-48 overflow-hidden" :src="marketitem.image_one_url" />
                   <button
                       class="bg-red-600 mt-5 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                       type="submit"

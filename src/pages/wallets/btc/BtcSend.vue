@@ -4,8 +4,8 @@
   <MainHeaderMid />
   <MainHeaderBottom />
 
-  <div class="max-w-7xl mx-auto flex mb-0 wrapper">
-    <!-- Container-->
+  <div class="container  max-w-7xl mx-auto px-10 pb-60 bg-gray-100"><!-- Container-->
+   
     <div class="mt-5 mb-5">
       <nav class="rounded-md w-full">
         <ol class="list-reset flex">
@@ -29,105 +29,74 @@
         </ol>
       </nav>
     </div>
+    <div class="flex text-[22px] ">Send Bitcoin</div>
+    <div class="flex gap-4">
 
-    <div class="flex mx-10 text-[22px]">Send Bitcoin</div>
-    <div class="flex flex-row mx-10 justify-center mt-20">
-      <form method="post" @submit="onSubmit">
-        <div class="mb-4">
-          <label
-            class="block text-gray-700 text-sm font-bold mb-2"
-            for="username"
-            >Address</label
-          >
-          <label class="block text-gray-700 mb-2 text-[11px]" for="username"
-            >Address of the wallet you are sending coin too.</label
-          >
-          <input
-            v-model="wallet.btc_address"
-            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="username"
-            type="text"
-            placeholder="Address"
-          />
-          <span
-            v-if="v$.wallet.btc_address.$error"
-            class="text-red-600 text-center"
-          >
-            {{ v$.wallet.btc_address.$errors[0].$message }}
-          </span>
-        </div>
-        <div class="mb-4">
-          <label
-            class="block text-gray-700 text-sm font-bold mb-2"
-            for="username"
-            >Transaction Description</label
-          >
-          <label class="block text-gray-700 mb-2 text-[11px]" for="username"
-            >This is the name other users will see you as. It would be the name
-            of your store.</label
-          >
-          <input
-            v-model="wallet.btc_decscription"
-            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="username"
-            type="text"
-            placeholder="Description"
-          />
-        </div>
 
-        <div class="mb-4">
-          <label
-            class="block text-gray-700 text-sm font-bold mb-2"
-            for="password"
-            >Amount</label
-          >
-
-          <div class="flex flex-row">
-            <input
-              v-model="wallet.btc_amount"
-              class="basis-1/3 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="amount"
-              type="text"
-              autocomplete="off"
-              placeholder="Amount"
-            />
-            <span
-              v-if="v$.wallet.btc_amount.$error"
-              class="text-red-600 text-center"
-            >
-              {{ v$.wallet.btc_amount.$errors[0].$message }}
+      <div class="flex-1 bg-white rounded-md justify-center mt-20 p-5">
+        <form method="post" @submit="onSubmit">
+          <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="username">Address</label>
+            <label class="block text-gray-700 mb-2 text-[11px]" for="username">Address of the wallet you are sending
+              coin too.</label>
+            <input v-model="wallet.btc_address"
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="username" type="text" placeholder="Address" />
+            <span v-if="v$.wallet.btc_address.$error" class="text-red-600 text-center">
+              {{ v$.wallet.btc_address.$errors[0].$message }}
             </span>
           </div>
-        </div>
-        <div class="mb-4">
-          <label
-            class="block text-gray-700 text-sm font-bold mb-2"
-            for="password_confirm"
-            >Wallet Pin</label
-          >
-          <div class="flex flex-row">
-            <input
-              v-model="wallet.pin"
-              class="basis-1/3 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="pin"
-              type="password"
-              autocomplete="off"
-              placeholder="Pin"
-            />
-            <span v-if="v$.wallet.pin.$error" class="text-red-600 text-center">
-              {{ v$.wallet.pin.$errors[0].$message }}
-            </span>
+          <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="username">Transaction Description</label>
+            <label class="block text-gray-700 mb-2 text-[11px]" for="username">This is the name other users will see you
+              as. It would be the name
+              of your store.</label>
+            <input v-model="wallet.btc_decscription"
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="username" type="text" placeholder="Description" />
           </div>
+
+          <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="password">Amount</label>
+
+            <div class="flex flex-row">
+              <input v-model="wallet.btc_amount"
+                class="basis-1/3 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="amount" type="text" autocomplete="off" placeholder="Amount" />
+              <span v-if="v$.wallet.btc_amount.$error" class="text-red-600 text-center">
+                {{ v$.wallet.btc_amount.$errors[0].$message }}
+              </span>
+            </div>
+          </div>
+          <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="password_confirm">Wallet Pin</label>
+            <div class="flex flex-row">
+              <input v-model="wallet.pin"
+                class="basis-1/3 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="pin" type="password" autocomplete="off" placeholder="Pin" />
+              <span v-if="v$.wallet.pin.$error" class="text-red-600 text-center">
+                {{ v$.wallet.pin.$errors[0].$message }}
+              </span>
+            </div>
+          </div>
+          <div class="flex items-center justify-center mb-6">
+            <button
+              class="bg-blue-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              type="submit">
+              Send Coin
+            </button>
+          </div>
+        </form>
+      </div>
+      <div class=" flex-1 f mt-20 w-full">
+        <div class="font-semibold">Bitcoin Balances (BTC)</div>
+        <div class="flex justify-between   border-b-gray-700 border-b-2">
+          <div class="grow-0">Total </div>
+          <div class="grow"> </div>
+          <div class="grow-0"> {{ btcbalance }}</div>
         </div>
-        <div class="flex items-center justify-center mb-6">
-          <button
-            class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            type="submit"
-          >
-            Send Coin
-          </button>
-        </div>
-      </form>
+
+      </div>
     </div>
   </div>
   <MainFooter />
@@ -156,24 +125,23 @@ export default defineComponent({
     MainHeaderVendor,
     MainFooter,
   },
-  mounted() {
+  mounted () {
     this.userstatus();
     this.getbtcbalance();
   },
-  data() {
+  data () {
     return {
       v$: useValidate(),
       btcbalance: 0,
       wallet: {
         btc_address: null,
-
         btc_decscription: "",
         btc_amount: 0,
         pin: "",
       },
     };
   },
-  validations() {
+  validations () {
     return {
       wallet: {
         btc_address: { required, minLength: minLength(25) },
@@ -185,8 +153,8 @@ export default defineComponent({
 
 
   methods: {
-     userstatus() {
-       axios({
+    userstatus () {
+      axios({
         method: "get",
         url: "/auth/whoami",
         withCredentials: true,
@@ -201,8 +169,8 @@ export default defineComponent({
           this.$router.push("/login");
         });
     },
-     getbtcbalance() {
-       axios({
+    getbtcbalance () {
+      axios({
         method: "get",
         url: "/btc/balance",
         headers: authHeader(),
@@ -212,8 +180,8 @@ export default defineComponent({
         }
       });
     },
-     SendCoin(payLoad: any) {
-       axios({
+    SendCoin (payLoad: any) {
+      axios({
         method: "post",
         url: "/btc/send",
         data: payLoad,
@@ -244,7 +212,7 @@ export default defineComponent({
           });
         });
     },
-     onSubmit() {
+    onSubmit () {
       const payLoad = {
         btc_address: this.wallet.btc_address,
         btc_decscription: this.wallet.btc_decscription,
@@ -264,11 +232,13 @@ export default defineComponent({
           text: "Success Sending Coin. It will be sent shortly.",
           type: "success",
         });
-         this.SendCoin(payLoad);
+        this.SendCoin(payLoad);
       }
     },
   },
 });
 </script>
 
-<style type="ts" scoped></style>
+<style type="ts" scoped>
+
+</style>

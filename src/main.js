@@ -10,7 +10,6 @@ import Notifications from '@kyvg/vue3-notification';
 
 const baseURL = 'http://localhost:5000';
 
-
 Axios.defaults.baseURL = baseURL;
 
 const app = createApp(App)

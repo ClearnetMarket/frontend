@@ -4,34 +4,36 @@
   <MainHeaderMid />
   <MainHeaderBottom />
 
-  <div class="container h-screen max-w-7xl mx-auto px-10">
-    <!-- Container-->
-    <div class="mt-5 mb-5">
-      <nav class="rounded-md w-full">
-        <ol class="list-reset flex">
-          <li>
-            <router-link :to="{ name: 'home' }">
-              <a class="text-blue-600 hover:text-blue-700">Home</a>
-            </router-link>
-          </li>
-          <li>
-            <span class="text-gray-500 mx-2">/</span>
-          </li>
+<div class="container  max-w-7xl mx-auto px-10 pb-60 bg-gray-100"><!-- Container-->
 
-          <li>
-            <router-link :to="{ name: 'wallet' }">
-              <a class="text-blue-600 hover:text-blue-700">Wallet Home</a>
-            </router-link>
-          </li>
-          <li>
-            <span class="text-gray-500 mx-2">/</span>
-          </li>
-        </ol>
-      </nav>
-    </div>
+  <div class="mt-5 mb-5">
+    <nav class="rounded-md w-full">
+      <ol class="list-reset flex">
+        <li>
+          <router-link :to="{ name: 'home' }">
+            <a class="text-blue-600 hover:text-blue-700">Home</a>
+          </router-link>
+        </li>
+        <li>
+          <span class="text-gray-500 mx-2">/</span>
+        </li>
 
-    <div class="flex mx-10 text-[22px]">Send Monero</div>
-    <div class="flex flex-row mx-10 justify-center mt-20">
+        <li>
+          <router-link :to="{ name: 'wallet' }">
+            <a class="text-blue-600 hover:text-blue-700">Wallet Home</a>
+          </router-link>
+        </li>
+        <li>
+          <span class="text-gray-500 mx-2">/</span>
+        </li>
+      </ol>
+    </nav>
+  </div>
+  <div class="flex text-[22px] ">Send Monero</div>
+  <div class="flex gap-4">
+
+
+    <div class="flex-1 bg-white rounded-md justify-center mt-20 p-5">
       <form method="post" @submit="onSubmit">
         <div class="mb-4">
           <label
@@ -128,8 +130,18 @@
           </button>
         </div>
       </form>
-    </div>
-  </div>
+      </div>
+      <div class=" flex-1 f mt-20 w-full">
+        <div class="font-semibold">Monero Balances (XMR)</div>
+        <div class="flex justify-between   border-b-gray-700 border-b-2">
+          <div class="grow-0">Total </div>
+          <div class="grow"> </div>
+          <div class="grow-0"> {{ xmrbalance }}</div>
+        </div>
+      
+      </div>
+      </div>
+      </div>
   <MainFooter />
 </template>
 
@@ -161,10 +173,12 @@ export default defineComponent({
 
   mounted() {
     this.userstatus();
+    this.getxmrbalance();
   },
   data() {
     return {
       v$: useValidate(),
+      xmrbalance: 0,
       wallet: {
         xmr_address: "",
         xmr_description: "",
@@ -237,6 +251,17 @@ export default defineComponent({
             type: "error",
           });
         });
+    },
+    getxmrbalance () {
+      axios({
+        method: "get",
+        url: "/xmr/balance",
+        headers: authHeader(),
+      }).then((response) => {
+        if (response.data) {
+          this.xmrbalance = response.data.xmr_balance;
+        }
+      });
     },
      onSubmit() {
       const payLoad = {

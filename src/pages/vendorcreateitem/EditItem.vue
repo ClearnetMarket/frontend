@@ -31,7 +31,7 @@
         </nav>
       </div>
       <div class="grid grid-cols-1 rounded-md p-6 max-w-3xl mx-auto">
-        <div class="text-[24px]">Edit item {{ item_id }}</div>
+        <div class="text-[24px]">Item {{ item_id }}</div>
 
 
         <form
@@ -319,7 +319,7 @@
                 class="bg-gray-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                 type="submit"
             >
-              Edit Item
+              Submit
             </button>
           </div>
         </form>

@@ -1,6 +1,6 @@
 
 <template>
-  <div class="bg-gray-300">
+  <div class="">
     <MainHeaderTop />
     <MainHeaderMid />
     <MainHeaderBottom />
@@ -37,7 +37,8 @@ a
         <div class="flex justify-end">
           <button
             v-on:click="createanitem()"
-            class="py-2 px-4 shadow-md no-underline rounded-full text-white font-sans text-sm hover:text-white bg-green-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2"
+            class="py-2 px-4 shadow-md no-underline rounded-full text-white font-sans text-sm
+             hover:text-white bg-green-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2"
           >
             Create Item
           </button>
@@ -49,8 +50,8 @@ a
             >
               <div class="col-span-2">
                 <img
-                  src="https://picsum.photos/100/100"
-                  alt="{{item.item_title}}"
+                 :alt="item.image_one_server" class="w-48 h-48 overflow-hidden" :src="item.image_one_url"
+                 
                 />
               </div>
               <div class="col-span-8">
@@ -242,7 +243,7 @@ export default defineComponent({
         }
       })
      .catch((error) => {
-               console.log(error)
+              
             notify({
               title: "Freeport Error",
               text: "Error posting information.",
@@ -269,7 +270,7 @@ export default defineComponent({
         }
       })
      .catch((error) => {
-       console.log(error)
+      
         notify({
           title: "Freeport Error",
           text: "Error posting information.",
@@ -295,7 +296,7 @@ export default defineComponent({
         }
       })
      .catch((error) => {
-       console.log(error)
+     
     notify({
       title: "Freeport Error",
       text: "Error posting information.",
@@ -305,7 +306,6 @@ export default defineComponent({
     },
     // put item online
      putonline(itemid: any) {
-
        axios({
         method: "get",
         url: "/vendororders/online/" + itemid,
@@ -313,13 +313,23 @@ export default defineComponent({
         headers: authHeader(),
       }).then((response) => {
         if ((response.status = 200)) {
+         
           this.getvendoritems();
-          notify({
-            title: "Message Center",
-            text: "Item is online",
-            type: "success",
-          });
-        }
+          if(response.data.status == "success"){
+              notify({
+                title: "Item Online",
+                text: "Item is online",
+                type: "success",
+              });
+          }else{
+            notify({
+              title: "Item Online",
+              text: response.data.status,
+              type: "error",
+            });
+          }
+         
+        } 
       });
     },
     // put item offline

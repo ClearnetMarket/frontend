@@ -1,6 +1,6 @@
 
 <template>
-  <div class="bg-gray-300">
+
     <MainHeaderTop />
     <MainHeaderMid />
     <MainHeaderBottom />
@@ -70,7 +70,7 @@
         </div>
       </div>
     </div>
-  </div>
+
   <MainFooter />
 </template>
 
@@ -137,7 +137,9 @@ created(){
       .then((response) => {
         this.other_user_count = response.data.get_count;
       })
-     .catch((error) => { console.log(error)});
+     .catch((error) => {
+       console.log(error)
+      });
     },
      getmsgsofusers() {
        axios({
@@ -149,7 +151,9 @@ created(){
       .then((response) => {
         this.userlist = response.data;
       })
-      .catch((error) => {console.log(error)})
+      .catch((error) => {
+        console.log(error)
+      })
     },
   },
 });

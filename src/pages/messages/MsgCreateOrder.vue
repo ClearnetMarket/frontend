@@ -182,7 +182,9 @@ export default defineComponent({
       .then((response) => {
         this.userlist = response.data;
       })
-      .catch((error) => {console.log(error)});
+      .catch((error) => {
+        console.log(error)
+      });
     },
      getcountofusers() {
        axios({

@@ -11,10 +11,10 @@
     <div class="mx-auto flex mb-5 px-10">
       <div class="mb-10 mt-5">
         <nav class="rounded-md">
-          <ol class="list-reset flex">
+          <ol class="list-reset flex bg-red">
             <li>
               <router-link :to="{ name: 'home' }">
-                <a class="text-blue-600 hover:text-blue-700">Home</a>
+                <a class="text-blue-600 hover:text-blue-700 ">Home</a>
               </router-link>
             </li>
             <li>
@@ -260,7 +260,7 @@ export default defineComponent({
           }
         })
         .catch((error) => {
-          console.log(error)
+       
         });
     },
      seeifuserhasdefaultaddress() {
@@ -278,7 +278,7 @@ export default defineComponent({
           }
         })
         .catch((error) => {
-          console.log(error)
+      
         });
     },
     UpdateCart() {
@@ -316,7 +316,7 @@ export default defineComponent({
         }
       })
       .catch((error) => {
-        console.log(error)
+   
       });
     },
      getpricebch() {
@@ -331,7 +331,7 @@ export default defineComponent({
         }
       })
       .catch((error) => {
-        console.log(error)
+      
       });
     },
      getpricexmr() {
@@ -346,7 +346,7 @@ export default defineComponent({
         }
       })
       .catch((error) => {
-        console.log(error)
+     
       });
     },
      getvendorinfo() {
@@ -364,7 +364,7 @@ export default defineComponent({
         }
       })
       .catch((error) => {
-        console.log(error)
+    
       });
     },
 
@@ -383,7 +383,7 @@ export default defineComponent({
         }
       })
        .catch((error) => {
-         console.log(error)
+      
       });
     },
      add_view() {

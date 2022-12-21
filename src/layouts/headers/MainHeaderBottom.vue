@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-gray-300  text-black">
+  <div class="bg-zinc-700  text-white mb-0">
     <div
       class="container flex justify-between max-w-7xl mx-auto text-bold text-center"
     >
@@ -55,7 +55,7 @@
         <div class="mx-3 pt-3 text-[13px] font-bold">
           <router-link :to="{ name: 'wallet' }" class="px-3">
             <button
-              class="bg-yellow-400 hover:bg-zinc-400 text-black font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline"
+              class="bg-blue-300 hover:bg-zinc-400 text-black font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline"
             >
               Wallets
             </button>

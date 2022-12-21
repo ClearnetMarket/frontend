@@ -343,7 +343,7 @@ export default defineComponent({
           }
         })
         .catch((error) => {
-          console.log(error)
+        
          
         });
     },
@@ -526,6 +526,7 @@ export default defineComponent({
             this.get_shopping_cart_items();
             this.get_shopping_cart_items_saved_for_later();
             this.get_shopping_cart_order_summary();
+
           }
         })
         .catch(() => {

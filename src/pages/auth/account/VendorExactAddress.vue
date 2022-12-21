@@ -185,7 +185,7 @@ export default defineComponent({
         headers: authHeader(),
       }).then((response) => {
         if ((response.status = 200)) {
-          console.log(response.data)
+        
           this.ChangeAddressForm.city = response.data.city;
           this.ChangeAddressForm.stateorprovence =  response.data.stateorprovence;
           this.ChangeAddressForm.zip = response.data.zipcode;
