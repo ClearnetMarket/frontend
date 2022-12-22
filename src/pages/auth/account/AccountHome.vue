@@ -35,11 +35,11 @@
 
       <router-link :to="{ name: 'userorders' }">
         <div
-          class="col-span-1 border border-1 rounded-md p-5 hover:bg-gray-100"
+          class="col-span-1 border border-1 rounded-md p-5 hover:bg-gray-300"
           style="cursor: pointer"
         >
           <div class="grid grid-cols-4 grid-rows-2">
-            <div class="col-span-1 row-span-2">Icon</div>
+            <div class="col-span-1 row-span-2"></div>
             <div class="col-span-3 row-span-1 text-[20px]">Orders</div>
             <div class="col-span-3 row-span-1 text-[14px] text-gray-600">
               View your orders
@@ -49,11 +49,11 @@
       </router-link>
       <router-link :to="{ name: 'changepassword' }">
         <div
-          class="col-span-1 border border-1 rounded-md p-5 hover:bg-gray-100"
+          class="col-span-1 border border-1 rounded-md p-5 hover:bg-gray-300"
           style="cursor: pointer"
         >
           <div class="grid grid-cols-4 grid-rows-2">
-            <div class="col-span-1 row-span-2">Icon</div>
+            <div class="col-span-1 row-span-2"></div>
             <div class="col-span-3 row-span-1 text-[20px]">
               Account Password
             </div>
@@ -65,11 +65,11 @@
       </router-link>
       <router-link :to="{ name: 'changepin' }">
         <div
-          class="border border-1 rounded-md p-5 hover:bg-gray-100"
+          class="border border-1 rounded-md p-5 hover:bg-gray-300"
           style="cursor: pointer"
         >
           <div class="grid grid-cols-4 grid-rows-2">
-            <div class="col-span-1 row-span-2">Icon</div>
+            <div class="col-span-1 row-span-2"></div>
             <div class="col-span-3 row-span-1 text-[20px]">Account Pin</div>
             <div class="col-span-3 row-span-1 text-[14px] text-gray-600">
               Change Wallet Pin
@@ -80,11 +80,11 @@
 
            <router-link :to="{name: 'userprofile', params: {uuid: user.user_id }}">
         <div
-          class="border border-1 rounded-md p-5 hover:bg-gray-100"
+          class="border border-1 rounded-md p-5 hover:bg-gray-300"
           style="cursor: pointer"
         >
           <div class="grid grid-cols-4 grid-rows-2">
-            <div class="col-span-1 row-span-2">Icon</div>
+            <div class="col-span-1 row-span-2"></div>
             <div class="col-span-3 row-span-1 text-[20px]">Profile</div>
             <div class="col-span-3 row-span-1 text-[14px] text-gray-600">
               Change Profile Info
@@ -94,11 +94,11 @@
       </router-link>
       <router-link :to="{ name: 'MsgHome' }">
         <div
-          class="border border-1 rounded-md p-5 hover:bg-gray-100"
+          class="border border-1 rounded-md p-5 hover:bg-gray-300"
           style="cursor: pointer"
         >
           <div class="grid grid-cols-4 grid-rows-2">
-            <div class="col-span-1 row-span-2">Icon</div>
+            <div class="col-span-1 row-span-2"></div>
             <div class="col-span-3 row-span-1 text-[20px]">Messages</div>
             <div class="col-span-3 row-span-1 text-[14px] text-gray-600">
               View Messages
@@ -108,11 +108,11 @@
       </router-link>
       <router-link :to="{ name: 'defaultaddress' }">
         <div
-          class="border border-1 rounded-md p-5 hover:bg-gray-100"
+          class="border border-1 rounded-md p-5 hover:bg-gray-300"
           style="cursor: pointer"
         >
           <div class="grid grid-cols-4 grid-rows-2">
-            <div class="col-span-1 row-span-2">Icon</div>
+            <div class="col-span-1 row-span-2"></div>
             <div class="col-span-3 row-span-1 text-[20px]">Shipping Address</div>
             <div class="col-span-3 row-span-1 text-[14px] text-gray-600">
               Default Shipping Address
@@ -122,12 +122,12 @@
       </router-link>
 
         <div
-            class="border border-1 rounded-md p-5 hover:bg-gray-100"
+            class="border border-1 rounded-md p-5 hover:bg-gray-300"
             style="cursor: pointer"
             @click.prevent="logout()"
         >
           <div class="grid grid-cols-4 grid-rows-2">
-            <div class="col-span-1 row-span-2">Icon</div>
+            <div class="col-span-1 row-span-2"></div>
             <div class="col-span-3 row-span-1 text-[20px]">Logout</div>
             <div class="col-span-3 row-span-1 text-[14px] text-gray-600">
              Logout of Account
@@ -150,7 +150,6 @@ import MainHeaderBottom from "../../../layouts/headers/MainHeaderBottom.vue";
 import MainHeaderVendor from "../../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../../layouts/footers/FooterMain.vue";
 import authHeader from "../../../services/auth.header";
-
 
 /**
  *

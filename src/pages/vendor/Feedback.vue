@@ -6,19 +6,22 @@
     <MainHeaderBottom />
     <MainHeaderVendor />
     <!-- Top Stuff-->
-    <div class="container max-w-7xl mx-auto px-10 wrapper pb-40">
-      <nav class="rounded-md w-full">
-        <ol class="list-reset flex">
-          <li>
-            <router-link :to="{ name: 'home' }">
-              <a class="text-blue-600 hover:text-blue-700">Home</a>
-            </router-link>
-          </li>
-          <li>
-            <span class="text-gray-500 mx-2">/</span>
-          </li>
-        </ol>
-      </nav>
+<div class="max-w-4xl mx-auto wrapper px-10">
+  <div class="mt-5 mb-5">
+    <nav class="rounded-md w-full">
+      <ol class="list-reset flex">
+        <li>
+          <router-link :to="{ name: 'home' }">
+            <a class="text-blue-600 hover:text-blue-700">Home</a>
+          </router-link>
+        </li>
+        <li>
+          <span class="text-gray-500 mx-2">/</span>
+        </li>
+      </ol>
+    </nav>
+  </div>
+
 
       <div class="text-[20px] pt-5 pb-5 text-center">
        My Feedback

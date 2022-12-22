@@ -8,7 +8,7 @@
     <div v-if="user">
       <MainHeaderVendor v-show="user.user_admin === 1" />
     </div>
-a
+  
     <div class="container max-w-7xl mx-auto px-10 wrapper">
       <div class="mt-5">
         <nav class="rounded-md w-full">
@@ -28,105 +28,129 @@ a
       <div class="grid grid-cols-1 rounded-md">
         <div class="text-[24px] text-center">Items for Sale</div>
         <div class="">
-          <router-link :to="{ name: 'vendoraddress' }">
-            <div class="text-blue-600 hover:text-blue-400 hover:underline">
-              My Address
-            </div>
-          </router-link>
+
         </div>
         <div class="flex justify-end">
-          <button
-            v-on:click="createanitem()"
-            class="py-2 px-4 shadow-md no-underline rounded-full text-white font-sans text-sm
-             hover:text-white bg-green-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2"
-          >
+          <button v-on:click="createanitem()"
+            class="bg-blue-600 hover:bg-zinc-700 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mr-2">
             Create Item
           </button>
         </div>
-        <div class="mt-10 grid grid-cols-12 pb-20">
-          <div v-for="item in items" class="col-span-12 bg-white">
-            <div
-              class="grid grid-cols-12 shadow-md border-2 border-gray-200 rounded-md p-5"
-            >
-              <div class="col-span-2">
-                <img
-                 :alt="item.image_one_server" class="w-48 h-48 overflow-hidden" :src="item.image_one_url"
-                 
-                />
+
+        <div class="mt-10 grid grid-cols-12 pb-20 gap-4">
+          <div class="col-span-3 bg-white rounded-md">
+            <ul class="space-y-4 list-disc list-inside text-gray-500 dark:text-gray-400">
+              <li>
+                <router-link :to="{ name: 'vendoraddress' }">
+                  My Address
+                </router-link>
+              </li>
+                <div v-if="loaded_user">
+                  <li>
+                  <router-link :to="{ name: 'userprofile', params: { uuid: user.user_id } }">
+                  My Profile
+                </router-link>
+                    </li>
               </div>
+            </ul>
+          </div>
+          <div v-for="item in items"
+           class="col-span-9 bg-white">
+            <div class="grid grid-cols-12 grid-row-5">
+             
+              <div class="col-span-9 p-2">
+                <div class="w-full font-bold">Item uuid</div>
+                <div class="w-full">{{item.uuid}}</div>
+              </div>
+             
+            </div>
+            <div class="grid grid-cols-12  rounded-md p-2">
+              
+              <div class="col-span-2">
+                <img :alt="item.image_one_server" class="w-48 h-48 overflow-hidden" :src="item.image_one_url" />
+              </div>
+
               <div class="col-span-8">
+              
                 <div class="grid grid-cols-12 grid-row-5">
                   <div class="col-span-12 text-center text-[18px] px-1">
-                    <router-link
-                      :to="{ name: 'MarketItem', params: { id: item.uuid } }"
-                    >
-                      <div
-                        class="text-blue-600 hover:text-blue-400 hover:underline"
-                      >
+                    <router-link :to="{ name: 'MarketItem', params: { id: item.uuid } }">
+                      <div class="text-blue-600 hover:text-blue-400 hover:underline">
                         {{ item.item_title }}
                       </div>
                     </router-link>
                   </div>
-                  <div class="flex col-span-12 text-[14px] p-1">
+               
+                  <div class="flex gap-4 col-span-12 text-[14px] p-1">
+                    <div class="">
                     Online Status:
-                    <div v-if="item.online === 0" class="text-red-500">
-                      offline
                     </div>
-                    <div v-else class="text-green-500">online</div>
+                    <div v-if="item.online === 0" 
+                      class="text-red-500">
+                        <div class="">
+                      offline
+                      </div>
+                    </div>
+                    <div v-else 
+                    class="text-green-500">
+                    online
                   </div>
-                  <div class="col-span-12 text-[14px] p-1">
-                    Total Sold: {{ item.total_sold }}
                   </div>
-                  <div class="col-span-12 text-[14px] p-1">
-                    Total Views: {{ item.view_count }}
+                  <div class="col-span-12 text-[14px] p-1 flex gap-4">
+                    <div class="">Total Sold:</div>
+                    <div class="">{{ item.total_sold }}</div>
+                    
                   </div>
-                  <div class="col-span-12 text-[14px] p-1">
-                    Item Quantity: {{ item.item_count }}
+                  <div class="col-span-12 text-[14px] p-1 flex gap-4">
+                    <div class="">Total Views:</div>
+                    <div class="">{{ item.view_count }}</div> 
                   </div>
-                </div>
+                  <div class="col-span-12 text-[14px] p-1 flex gap-4">
+                    <div class="">Item Quantity:</div> 
+                    <div class="">{{ item.item_count }}</div>
+                    
+                  </div>
+                  <div class="col-span-12 text-[14px] p-1 flex gap-4">
+                    <div class="">Item Price:</div>
+                    <div class="">{{ item.price }}{{ returncurrencysymbol(item.currency) }}</div>
+                  </div>
+            
               </div>
+              </div>
+
               <div class="col-span-2">
+
                 <div class="mb-2">
-                  <div  v-if="item.online === 0">
-                    <button
-                      @click.prevent="putonline(item.uuid)"
-                      class="py-2 px-4 shadow-md no-underline rounded-full text-white font-sans text-sm hover:text-white bg-gray-700 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2"
-                    >
+                  <div v-if="item.online === 0">
+                    <button @click.prevent="putonline(item.uuid)"
+                      class="bg-zinc-600 hover:bg-zinc-700 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mr-2 w-full">
                       Turn On
                     </button>
                   </div>
                   <div v-else>
-                    <button
-                      @click.prevent="putoffline(item.uuid)"
-                      class="py-2 px-4 shadow-md no-underline rounded-full text-white font-sans text-sm hover:text-white bg-gray-700 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2"
-                    >
+                    <button @click.prevent="putoffline(item.uuid)"
+                      class="bg-zinc-600 hover:bg-zinc-700 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mr-2 w-full">
                       Turn Off
                     </button>
                   </div>
                 </div>
 
                 <div class="mb-2">
-                  <button
-                    v-on:click="gotoitem(item.uuid)"
-                    class="py-2 px-4 shadow-md no-underline rounded-full text-white font-sans text-sm hover:text-white bg-gray-700 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2"
-                  >
+                  <button v-on:click="gotoitem(item.uuid)"
+                    class="bg-zinc-600 hover:bg-zinc-700 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mr-2 w-full">
                     Edit
                   </button>
                 </div>
                 <div class="mb-2">
-                  <button
-                    @click.prevent="cloneitem(item.uuid)"
-                    class="py-2 px-4 shadow-md no-underline rounded-full text-white font-sans text-sm hover:text-white bg-gray-700 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2"
-                  >
+                  <button @click.prevent="cloneitem(item.uuid)"
+                 class="bg-zinc-600 hover:bg-zinc-700 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mr-2 w-full">
                     Clone
                   </button>
                 </div>
 
                 <div class="mb-2">
-                  <button
-                    @click.prevent="deleteitem(item.uuid)"
-                    class="py-2 px-4 shadow-md no-underline rounded-full text-white font-sans text-sm hover:text-white bg-red-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2"
-                  >
+                  <button @click.prevent="deleteitem(item.uuid)"
+                     class="bg-red-600 hover:bg-zinc-700 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mr-2 w-full">
                     Delete
                   </button>
                 </div>
@@ -179,13 +203,14 @@ export default defineComponent({
     MainFooter,
   },
 
-  mounted() {
+  mounted () {
     this.userstatus();
     this.getvendoritems();
   },
-  data() {
+  data () {
     return {
       user: null,
+      loaded_user:false,
       items: [],
       newitemid: null,
       accept: ref(false),
@@ -193,28 +218,32 @@ export default defineComponent({
   },
 
   methods: {
-    gotoitem(itemid: any) {
+ 
+    gotoitem (itemid: any) {
       this.$router.push({ name: "edititem", params: { id: itemid } });
     },
 
-     userstatus() {
-       axios({
+    userstatus () {
+      axios({
         method: "get",
         url: "/auth/whoami",
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
+      
         if (response.status == 200) {
           this.user = response.data.user
+     
           if (response.data.user.user_admin == 0) {
             this.$router.push({ name: "home" });
           }
+          this.loaded_user = true;
         }
       });
     },
     // gets the vendor items
-     getvendoritems() {
-       axios({
+    getvendoritems () {
+      axios({
         method: "get",
         url: "/vendorcreate/itemsforsale",
         withCredentials: true,
@@ -226,61 +255,61 @@ export default defineComponent({
       });
     },
     // creates an item
-     createanitem() {
-       axios({
+    createanitem () {
+      axios({
         method: "post",
         url: "/vendorcreateitem/create-item",
         withCredentials: true,
         headers: authHeader(),
       })
-     .then((response) => {
-        if ((response.status = 200)) {
-          this.newitemid = response.data.item_id;
-          this.$router.push({
-            name: "edititem",
-            params: { id: this.newitemid },
-          });
-        }
-      })
-     .catch((error) => {
-              
-            notify({
-              title: "Freeport Error",
-              text: "Error posting information.",
-              type: "error",
+        .then((response) => {
+          if ((response.status = 200)) {
+            this.newitemid = response.data.item_id;
+            this.$router.push({
+              name: "edititem",
+              params: { id: this.newitemid },
             });
+          }
+        })
+        .catch((error) => {
+
+          notify({
+            title: "Freeport Error",
+            text: "Error posting information.",
+            type: "error",
           });
+        });
     },
     // clones an item
-     cloneitem(itemid: any) {
-       axios({
+    cloneitem (itemid: any) {
+      axios({
         method: "get",
         url: "/vendorcreate/clone-item/" + itemid,
         withCredentials: true,
         headers: authHeader(),
       })
-     .then((response) => {
-        if ((response.status = 200)) {
-          this.getvendoritems();
+        .then((response) => {
+          if ((response.status = 200)) {
+            this.getvendoritems();
+            notify({
+              title: "Message Center",
+              text: "Item has been cloned",
+              type: "success",
+            });
+          }
+        })
+        .catch((error) => {
+
           notify({
-            title: "Message Center",
-            text: "Item has been cloned",
-            type: "success",
+            title: "Freeport Error",
+            text: "Error posting information.",
+            type: "error",
           });
-        }
-      })
-     .catch((error) => {
-      
-        notify({
-          title: "Freeport Error",
-          text: "Error posting information.",
-          type: "error",
         });
-  });
     },
     // deletes an item
-     deleteitem(itemid: any) {
-       axios({
+    deleteitem (itemid: any) {
+      axios({
         method: "delete",
         url: "/vendorcreate/delete-item/" + itemid,
         withCredentials: true,
@@ -295,46 +324,46 @@ export default defineComponent({
           });
         }
       })
-     .catch((error) => {
-     
-    notify({
-      title: "Freeport Error",
-      text: "Error posting information.",
-      type: "error",
-    });
-  });
+        .catch((error) => {
+
+          notify({
+            title: "Freeport Error",
+            text: "Error posting information.",
+            type: "error",
+          });
+        });
     },
     // put item online
-     putonline(itemid: any) {
-       axios({
+    putonline (itemid: any) {
+      axios({
         method: "get",
         url: "/vendororders/online/" + itemid,
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
         if ((response.status = 200)) {
-         
+
           this.getvendoritems();
-          if(response.data.status == "success"){
-              notify({
-                title: "Item Online",
-                text: "Item is online",
-                type: "success",
-              });
-          }else{
+          if (response.data.status == "success") {
+            notify({
+              title: "Item Online",
+              text: "Item is online",
+              type: "success",
+            });
+          } else {
             notify({
               title: "Item Online",
               text: response.data.status,
               type: "error",
             });
           }
-         
-        } 
+
+        }
       });
     },
     // put item offline
-     putoffline(itemid: any) {
-       axios({
+    putoffline (itemid: any) {
+      axios({
         method: "get",
         url: "/vendororders/offline/" + itemid,
         withCredentials: true,
@@ -350,6 +379,141 @@ export default defineComponent({
         }
       });
     },
+    returncurrencysymbol (currencydigit: number) {
+      if (currencydigit === 0) {
+        return "$";
+      } else if (currencydigit === 1) {
+        return "₱";
+      } else if (currencydigit === 2) {
+        return "CHF";
+      } else if (currencydigit === 3) {
+        return "SAD";
+      } else if (currencydigit === 4) {
+        return "B/.";
+      } else if (currencydigit === 5) {
+        return "₽";
+      } else if (currencydigit === 6) {
+        return "kr";
+      } else if (currencydigit === 7) {
+        return "kr";
+      } else if (currencydigit === 8) {
+        return "kr";
+      } else if (currencydigit === 9) {
+        return "₪";
+      } else if (currencydigit === 10) {
+        return "kr";
+      } else if (currencydigit === 11) {
+        return "฿";
+      } else if (currencydigit === 12) {
+        return "R$";
+      } else if (currencydigit === 13) {
+        return "₹";
+      } else if (currencydigit === 14) {
+        return "R";
+      } else if (currencydigit === 14) {
+        return "$";
+      } else if (currencydigit === 16) {
+        return "¥";
+      } else if (currencydigit === 17) {
+        return "Ft";
+      } else if (currencydigit === 18) {
+        return "$";
+      } else if (currencydigit === 19) {
+        return "¥";
+      } else if (currencydigit === 20) {
+        return "$";
+      } else if (currencydigit === 21) {
+        return "zł";
+      } else if (currencydigit === 22) {
+        return "£";
+      } else if (currencydigit === 23) {
+        return "₺";
+      } else if (currencydigit === 24) {
+        return "₩";
+      } else if (currencydigit === 25) {
+        return "Rp";
+      } else if (currencydigit === 26) {
+        return "$";
+      } else if (currencydigit === 27) {
+        return "RM";
+      } else if (currencydigit === 28) {
+        return "лв";
+      } else if (currencydigit === 29) {
+        return "€";
+      } else if (currencydigit === 31) {
+        return "kn";
+      } else if (currencydigit === 30) {
+        return "Kč";
+      }
+    },
+    returncurrency (currencydigit: number) {
+      if (currencydigit === 0) {
+        return "USD";
+      } else if (currencydigit === 1) {
+        return "PHP";
+      } else if (currencydigit === 2) {
+        return "CHF";
+      } else if (currencydigit === 3) {
+        return "SAD";
+      } else if (currencydigit === 4) {
+        return "SGD";
+      } else if (currencydigit === 5) {
+        return "RUB";
+      } else if (currencydigit === 6) {
+        return "DKK";
+      } else if (currencydigit === 7) {
+        return "RON";
+      } else if (currencydigit === 8) {
+        return "NOK";
+      } else if (currencydigit === 9) {
+        return "ILS";
+      } else if (currencydigit === 10) {
+        return "SEK";
+      } else if (currencydigit === 11) {
+        return "THB";
+      } else if (currencydigit === 12) {
+        return "BRL";
+      } else if (currencydigit === 13) {
+        return "INR";
+      } else if (currencydigit === 14) {
+        return "ZAR";
+      } else if (currencydigit === 14) {
+        return "HKD";
+      } else if (currencydigit === 16) {
+        return "JPY";
+      } else if (currencydigit === 17) {
+        return "HUF";
+      } else if (currencydigit === 18) {
+        return "MXN";
+      } else if (currencydigit === 19) {
+        return "CNY";
+      } else if (currencydigit === 20) {
+        return "AUD";
+      } else if (currencydigit === 21) {
+        return "PLN";
+      } else if (currencydigit === 22) {
+        return "GBP";
+      } else if (currencydigit === 23) {
+        return "TRY";
+      } else if (currencydigit === 24) {
+        return "KRW";
+      } else if (currencydigit === 25) {
+        return "IDR";
+      } else if (currencydigit === 26) {
+        return "NZD";
+      } else if (currencydigit === 27) {
+        return "MYR";
+      } else if (currencydigit === 28) {
+        return "BGN";
+      } else if (currencydigit === 29) {
+        return "EUR";
+      } else if (currencydigit === 31) {
+        return "HRK";
+      } else if (currencydigit === 30) {
+        return "CZK";
+      }
+    },
+
   },
 });
 </script>
