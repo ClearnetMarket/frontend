@@ -59,7 +59,7 @@
             {{ word6 }}
           </div>
         </div>
-        <div class="flex justify-center my-10">
+        <div class="flex justify-center my-10 gap-5">
           <router-link :to="{ name: 'accountseedconfirm' }">
             <button
               class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-blue-300 focus:outline-none focus:shadow-outline"
@@ -68,6 +68,14 @@
               Confirm Account
             </button>
           </router-link>
+          <div class="pt-3">OR</div>
+                    <router-link :to="{ name: 'home' }">
+                      <button
+                        class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-blue-300 focus:outline-none focus:shadow-outline"
+                        type="submit">
+                        Proceed to Freeport
+                      </button>
+                    </router-link>
         </div>
       </div>
     </div>
@@ -106,12 +114,12 @@ export default defineComponent({
 
   methods: {
      userstatus() {
-     axios({
-        method: "get",
-        url: "/auth/whoami",
-        withCredentials: true,
-        headers: authHeader(),
-      })
+      axios({
+          method: "get",
+          url: "/auth/whoami",
+          withCredentials: true,
+          headers: authHeader(),
+        })
         .then((response) => {
           if ((response.status = 200)) {
             this.$store.dispatch("user", response.data.user);
@@ -120,19 +128,19 @@ export default defineComponent({
         .catch(() => {});
     },
 
-     userstatusconfirmed() {
-    axios({
-        method: "get",
-        url: "/auth/amiconfirmed",
-        withCredentials: true,
-        headers: authHeader(),
-      }).then((response) => {
-        if (response.status == 200) {
-          if (response.data.confirmed == true) {
-            this.$router.push({ name: "home" });
+    userstatusconfirmed() {
+      axios({
+          method: "get",
+          url: "/auth/amiconfirmed",
+          withCredentials: true,
+          headers: authHeader(),
+        }).then((response) => {
+          if (response.status == 200) {
+            if (response.data.confirmed == true) {
+              this.$router.push({ name: "home" });
+            }
           }
-        }
-      });
+        });
     },
     sendwordrequest() {
        axios({
@@ -140,7 +148,7 @@ export default defineComponent({
         url: "/auth/account-seed",
         withCredentials: true,
         headers: authHeader(),
-      })
+        })
         .then((response) => {
           if (response.status == 200) {
             this.word1 = response.data.word1;

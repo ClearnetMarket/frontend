@@ -1,6 +1,7 @@
 <template>
-  <div v-if="user.confirmed === false">
-    {{ user }}
+  <div v-if="loaded === true">  
+  <div v-if="user.confirmed === 0">
+ 
     <div class="bg-yellow-400 py-1 text-gray-800 font-bold">
       <div class="container flex flex-col max-w-7xl mx-auto text-bold text-center justify-center align-center">
         <div class="">
@@ -16,11 +17,11 @@
       </div>
     </div>
   </div>
+</div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-
 import authHeader from "../../services/auth.header";
 import axios from "axios";
 export default defineComponent({
@@ -28,14 +29,15 @@ export default defineComponent({
 
   data () {
     return {
+      loaded: false,
       user: null,
       btcprice: null,
       xmrprice: null,
       bchprice: null,
-      confirmed: false
+      confirmed: 0
     };
   },
-  mounted () {
+  created () {
     this.userstatus();
     this.userstatusconfirmed();
 
@@ -53,6 +55,7 @@ export default defineComponent({
             this.user = response.data.user
             this.user.confirmed = response.data.user.confirmed
             this.$store.dispatch("user", response.data.user);
+            this.loaded = true;
           }
         })
         .catch(() => { this.user = null });

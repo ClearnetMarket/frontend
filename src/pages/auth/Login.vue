@@ -2,7 +2,7 @@
 <template>
   <HeaderPlain />
   <div class="max-w-7xl mx-auto">
-    <div class="mx-auto max-w-lg flex items-center justify-center mb-10 mt-36">
+    <div class="mx-auto max-w-lg flex items-center justify-center mb-10 mt-4">
       <form
         class="rounded-md px-8 pt-6 pb-8 mb-4 w-full bg-white"
         @submit.prevent="onSubmit"

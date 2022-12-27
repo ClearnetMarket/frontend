@@ -4,7 +4,7 @@
   <MainHeaderMid />
   <MainHeaderBottom />
 
-<div class="container  max-w-7xl mx-auto px-10 pb-60 bg-gray-100"><!-- Container-->
+<div class="container  max-w-7xl mx-auto px-10 pb-60 bg-gray-100">
 
   <div class="mt-5 mb-5">
     <nav class="rounded-md w-full">
@@ -101,26 +101,7 @@
             </span>
           </div>
         </div>
-        <div class="mb-4">
-          <label
-            class="block text-gray-700 text-sm font-bold mb-2"
-            for="password_confirm"
-            >Wallet Pin</label
-          >
-          <div class="flex flex-row">
-            <input
-              v-model="wallet.pin"
-              class="basis-1/3 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="pin"
-              type="password"
-              autocomplete="off"
-              placeholder="Pin"
-            />
-            <span v-if="v$.wallet.pin.$error" class="text-red-600 text-center">
-              {{ v$.wallet.pin.$errors[0].$message }}
-            </span>
-          </div>
-        </div>
+        
         <div class="flex items-center justify-center mb-6">
           <button
             class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
@@ -148,7 +129,6 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import axios from "axios";
-import { mapGetters } from "vuex";
 import { notify } from "@kyvg/vue3-notification";
 import useValidate from "@vuelidate/core";
 import { required, minLength } from "@vuelidate/validators";
@@ -183,7 +163,7 @@ export default defineComponent({
         xmr_address: "",
         xmr_description: "",
         xmr_amount: "",
-        pin: "",
+      
       },
     };
   },
@@ -192,7 +172,7 @@ export default defineComponent({
       wallet: {
         xmr_address: { required, minLength: minLength(25) },
         xmr_amount: { required, minLength: minLength(1) },
-        pin: { required, minLength: minLength(4) },
+       
       },
     };
   },
@@ -207,11 +187,10 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-
+      
 
         })
         .catch((error) => {
-          console.log(error)
           this.$router.push("/login")
         });
     },
@@ -219,7 +198,7 @@ export default defineComponent({
        xmr_address: string;
        xmr_desccription: string;
        xmr_amount: string;
-       pin: string;
+  
     }) {
       axios({
         method: "post",
@@ -268,7 +247,7 @@ export default defineComponent({
         xmr_address: this.wallet.xmr_address,
         xmr_desccription: this.wallet.xmr_description,
         xmr_amount: this.wallet.xmr_amount,
-        pin: this.wallet.pin,
+      
       }
       this.v$.$validate(); // checks all inputs
       if (this.v$.$invalid) {

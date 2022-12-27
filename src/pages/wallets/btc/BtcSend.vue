@@ -68,17 +68,7 @@
               </span>
             </div>
           </div>
-          <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="password_confirm">Wallet Pin</label>
-            <div class="flex flex-row">
-              <input v-model="wallet.pin"
-                class="basis-1/3 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="pin" type="password" autocomplete="off" placeholder="Pin" />
-              <span v-if="v$.wallet.pin.$error" class="text-red-600 text-center">
-                {{ v$.wallet.pin.$errors[0].$message }}
-              </span>
-            </div>
-          </div>
+         
           <div class="flex items-center justify-center mb-6">
             <button
               class="bg-blue-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
@@ -137,7 +127,7 @@ export default defineComponent({
         btc_address: null,
         btc_decscription: "",
         btc_amount: 0,
-        pin: "",
+      
       },
     };
   },
@@ -146,7 +136,7 @@ export default defineComponent({
       wallet: {
         btc_address: { required, minLength: minLength(25) },
         btc_amount: { required, minLength: minLength(1) },
-        pin: { required, minLength: minLength(4) },
+      
       },
     };
   },
@@ -165,7 +155,7 @@ export default defineComponent({
           }
         })
         .catch((error) => {
-          console.log(error)
+       
           this.$router.push("/login");
         });
     },
@@ -204,7 +194,7 @@ export default defineComponent({
           }
         })
         .catch((error) => {
-          console.log(error)
+         
           notify({
             title: "Freeport Error",
             text: "Error With Sending Money",
@@ -217,7 +207,7 @@ export default defineComponent({
         btc_address: this.wallet.btc_address,
         btc_decscription: this.wallet.btc_decscription,
         btc_amount: this.wallet.btc_amount,
-        pin: this.wallet.pin,
+       
       };
       this.v$.$validate(); // checks all inputs
       if (this.v$.$invalid) {

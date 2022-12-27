@@ -100,26 +100,7 @@
             </span>
           </div>
         </div>
-        <div class="mb-4">
-          <label
-            class="block text-gray-700 text-sm font-bold mb-2"
-            for="password_confirm"
-            >Wallet Pin</label
-          >
-          <div class="flex flex-row">
-            <input
-              v-model="wallet.pin"
-              class="basis-1/3 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="pin"
-              type="password"
-              autocomplete="off"
-              placeholder="Pin"
-            />
-            <span v-if="v$.wallet.pin.$error" class="text-red-600 text-center">
-              {{ v$.wallet.pin.$errors[0].$message }}
-            </span>
-          </div>
-        </div>
+       
         <div class="flex items-center justify-center mb-6">
           <button
             class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
@@ -180,7 +161,7 @@ export default defineComponent({
         bch_address: "",
         bch_decscription: "",
         bch_amount: "",
-        pin: "",
+     
         
       },
     };
@@ -190,7 +171,7 @@ export default defineComponent({
       wallet: {
         bch_address: { required, minLength: minLength(25) },
         bch_amount: { required, minLength: minLength(1) },
-        pin: { required, minLength: minLength(4) },
+      
       },
     };
   },
@@ -220,7 +201,7 @@ export default defineComponent({
       }).then((response) => {
         if (response.data) {
           this.bchbalance = response.data.bch_balance;
-          console.log(response.data)
+        
         }
       });
     },
@@ -228,7 +209,7 @@ export default defineComponent({
       bch_address: string;
       bch_decscription: string;
       bch_amount: string;
-      pin: string;
+    
     }) {
        axios({
         method: "post",
@@ -265,7 +246,7 @@ export default defineComponent({
         bch_address: this.wallet.bch_address,
         bch_decscription: this.wallet.bch_decscription,
         bch_amount: this.wallet.bch_amount,
-        pin: this.wallet.pin,
+    
       };
       this.v$.$validate();
       if (this.v$.$invalid) {

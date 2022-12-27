@@ -35,7 +35,7 @@
         <div v-if="shopping_cart_items_list">
          
           <div v-for="(item, index) in shopping_cart_items_list" :key="index">
-            <div v-if="item.uuid">
+            <div v-if="item">
             <div class="hover:bg-gray-100">
               <div class="grid grid-cols-12 px-1 py-1">
                 <!-- product -->
@@ -142,7 +142,7 @@
                   </div>
                 </div>
                 <div class="col-span-2 text-right">
-                  <span class="font-semibold">${{ item.price_of_item }}</span>
+                  <span class="font-semibold">{{ item.price_of_item }}{{ returncurrencysymbol(item.currency) }}</span>
                 </div>
               </div>
             </div>
@@ -209,7 +209,8 @@
                   </div>
                 </div>
                 <div class="col-span-2 text-right">
-                  <span class="font-semibold">${{ item.price_of_item }}</span>
+                  <span class="font-semibold">
+                    {{ item.price_of_item }}{{ returncurrencysymbol(item.currency) }}</span>
                 </div>
               </div>
             </div>
@@ -245,7 +246,7 @@
             <div class="col-span-12">
               <div v-if="order_summary_shipping_cost === 0">
                 <div v-if="order_summary_count > 0">
-                  <div class="text-orange-500">Free Shipping</div>
+                  <div class="text-blue-600 font-bold">Free Shipping</div>
                 </div>
               </div>
               <div v-else>
@@ -259,7 +260,7 @@
             <div class="border-t mt-8">
               <div class="font-semibold py-6 text-sm uppercase">
                 <span
-                  >Total cost {{ order_summary_shipping_and_price_cost }}</span
+                  >Total cost {{ order_summary_shipping_and_price_cost }} </span
                 >
               </div>
               <router-link :to="{ name: 'checkout' }">
@@ -549,6 +550,74 @@ export default defineComponent({
           });
         });
     },
+
+  returncurrencysymbol (currencydigit: number) {
+    if (currencydigit === 0) {
+      return "$";
+    } else if (currencydigit === 1) {
+      return "₱";
+    } else if (currencydigit === 2) {
+      return "CHF";
+    } else if (currencydigit === 3) {
+      return "SAD";
+    } else if (currencydigit === 4) {
+      return "B/.";
+    } else if (currencydigit === 5) {
+      return "₽";
+    } else if (currencydigit === 6) {
+      return "kr";
+    } else if (currencydigit === 7) {
+      return "kr";
+    } else if (currencydigit === 8) {
+      return "kr";
+    } else if (currencydigit === 9) {
+      return "₪";
+    } else if (currencydigit === 10) {
+      return "kr";
+    } else if (currencydigit === 11) {
+      return "฿";
+    } else if (currencydigit === 12) {
+      return "R$";
+    } else if (currencydigit === 13) {
+      return "₹";
+    } else if (currencydigit === 14) {
+      return "R";
+    } else if (currencydigit === 14) {
+      return "$";
+    } else if (currencydigit === 16) {
+      return "¥";
+    } else if (currencydigit === 17) {
+      return "Ft";
+    } else if (currencydigit === 18) {
+      return "$";
+    } else if (currencydigit === 19) {
+      return "¥";
+    } else if (currencydigit === 20) {
+      return "$";
+    } else if (currencydigit === 21) {
+      return "zł";
+    } else if (currencydigit === 22) {
+      return "£";
+    } else if (currencydigit === 23) {
+      return "₺";
+    } else if (currencydigit === 24) {
+      return "₩";
+    } else if (currencydigit === 25) {
+      return "Rp";
+    } else if (currencydigit === 26) {
+      return "$";
+    } else if (currencydigit === 27) {
+      return "RM";
+    } else if (currencydigit === 28) {
+      return "лв";
+    } else if (currencydigit === 29) {
+      return "€";
+    } else if (currencydigit === 31) {
+      return "kn";
+    } else if (currencydigit === 30) {
+      return "Kč";
+    }
   },
+},
 });
 </script>

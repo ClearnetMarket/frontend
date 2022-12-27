@@ -4,7 +4,7 @@
   <div class="container max-w-7xl mx-auto bg-gray-100">
     <div class="mx-auto max-w-lg flex items-center justify-centermt-36">
       <form
-        class="bg-white rounded-md  px-8 pt-6 pb-8 mb-4 w-full"
+        class="bg-white rounded-md  px-8 pt-6 pb-8 mb-4 mt-4 w-full"
         method="POST"
         @submit.prevent="onSubmit"
       >
@@ -120,32 +120,7 @@
             {{ v$.registerForm.password_confirm.$errors[0].$message }}
           </span>
         </div>
-        <div class="flex">
-          <div class="mb-4 w-1/3">
-            <label
-              class="block text-gray-700 text-sm font-bold mb-2"
-              for="password_confirm"
-              >4 Digit Wallet Pin</label
-            >
-            <label class="block text-gray-700 mb-2 text-[11px]" for="username"
-              >Security for wallet withdrawls</label
-            >
-            <input
-              v-model="registerForm.pin"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="pin"
-              type="password"
-              autocomplete="off"
-              placeholder="Pin"
-            />
-            <span
-              v-if="v$.registerForm.pin.$error"
-              class="text-red-600 text-center"
-            >
-              {{ v$.registerForm.pin.$errors[0].$message }}
-            </span>
-          </div>
-        </div>
+        
         <div class="mb-4">
           <label
             class="block text-gray-700 text-sm font-bold mb-2"
@@ -250,7 +225,6 @@ export default defineComponent({
         username: "",
         display_username: "",
         email: "",
-        pin: "",
         password: "",
         password_confirm: "",
         currency: "",
@@ -269,8 +243,6 @@ export default defineComponent({
         username: { required, minLength: minLength(6) },
         display_username: { required, minLength: minLength(6) },
         email: { email, required },
-        pin: { required, minLength: minLength(4) },
-
         password_confirm: {
           required,
           minLength: minLength(6),
@@ -286,7 +258,6 @@ export default defineComponent({
     onSubmit() {
       const payLoad = {
         username: this.registerForm.username,
-        pin: this.registerForm.pin,
         display_username: this.registerForm.display_username,
         password: this.registerForm.password,
         email: this.registerForm.email,
@@ -309,7 +280,6 @@ export default defineComponent({
       username: string;
       password: string;
       email: string;
-      pin: string;
       country: string;
       currency: string;
     }) {
@@ -334,7 +304,7 @@ export default defineComponent({
           }
         })
         .catch((response) => {
-          console.log(response.data)
+       
           notify({
             title: "Authorization",
             text: "Failed to Register.",
