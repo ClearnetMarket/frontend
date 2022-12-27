@@ -5,9 +5,9 @@
   <MainHeaderBottom />
   <div v-if="user">
 
-    <div v-if="user.confirmed === false">
+   
       <Confirmed />
-    </div>
+
   </div>
 
 
@@ -46,20 +46,21 @@ export default defineComponent({
     MainHeaderVendor,
     TodayFeatured,
     MainFooter,
-    Confirmed,
+    Confirmed
+
   },
 
   data () {
     return {
       token: null,
       user: null,
-      confirmed: false
+   
     };
   },
 
   mounted () {
     this.userstatus();
-    this.userstatusconfirmed();
+
 
   },
 
@@ -80,23 +81,7 @@ export default defineComponent({
         })
         .catch(() => { this.user = null });
     },
-    userstatusconfirmed () {
-      axios({
-        method: "get",
-        url: "/auth/amiconfirmed",
-        withCredentials: true,
-        headers: authHeader(),
-      }).then((response) => {
-        if (response.status == 200) {
-          if (response.data.confirmed == true) {
-            this.confirmed = true;
-
-          } else if (response.data.confirmed == false) {
-            this.confirmed = false;
-          }
-        }
-      }).catch(() => { });
-    },
+  
   },
 });
 </script>

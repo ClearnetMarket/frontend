@@ -48,7 +48,7 @@
       <!--#3 = Deposit -->
       <!--#4 = send coin to escrow -->
       <!--#5 = send coin to user -->
-      <!--#6 = clearnet_webapp profit -->
+      <!--#6 = Freeport profit -->
       <!--#7 = sent coin to holdings -->
       <!--#8 = sent coin from holdings -->
       <!--#9 = vendor rejected order -->
@@ -162,7 +162,7 @@
           <div class="col-span-2 row-span-1 text-green-600">{{ t.amount }}</div>
           <div class="col-span-2 row-span-1 ">{{ t.balance }}</div>
         </div>
-        <!--#6 = clearnet_webapp profit -->
+        <!--#6 = Freeport profit -->
         <div
           v-if="t.category === 6"
           class="grid grid-cols-12 grid-rows-2 border-b rounded-md m-1 p-1"

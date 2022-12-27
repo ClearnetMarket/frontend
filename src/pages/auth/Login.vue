@@ -4,7 +4,7 @@
   <div class="max-w-7xl mx-auto">
     <div class="mx-auto max-w-lg flex items-center justify-center mb-10 mt-36">
       <form
-        class="bg-gray-100 shadow-md border-2 border-gray-300 rounded-md px-8 pt-6 pb-8 mb-4 w-full"
+        class="rounded-md px-8 pt-6 pb-8 mb-4 w-full bg-white"
         @submit.prevent="onSubmit"
       >
         <div class="mb-4 text-center text-[28px] text-zinc-600">Login</div>
@@ -49,7 +49,7 @@
 
         <div class="flex items-center justify-center mb-6">
           <button
-            class="bg-yellow-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            class="bg-blue-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             type="submit"
           >
             Sign In

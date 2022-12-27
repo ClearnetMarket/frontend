@@ -1,17 +1,19 @@
 <template>
-  <div class="bg-yellow-400 py-1 text-gray-800 font-bold">
-    <div
-      class="container flex flex-col max-w-7xl mx-auto text-bold text-center justify-center align-center"
-    >
-      <div class="">
-        You are currently unconfirmed. If you forget your password, pin, or
-        account gets stolen your crypto is gone!
-      </div>
-    
+  <div v-if="user.confirmed === false">
+    {{ user }}
+    <div class="bg-yellow-400 py-1 text-gray-800 font-bold">
+      <div class="container flex flex-col max-w-7xl mx-auto text-bold text-center justify-center align-center">
+        <div class="">
+          You are currently unconfirmed. If you forget your password, pin, or
+          account gets stolen your crypto is gone!
+        </div>
+
         <div class=" text-blue-700 hover:text-blue-600">
           <router-link :to="{ name: 'accountseed' }">Confirm Account
-           </router-link></div>
-     
+          </router-link>
+        </div>
+
+      </div>
     </div>
   </div>
 </template>
@@ -19,19 +21,59 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 
+import authHeader from "../../services/auth.header";
+import axios from "axios";
 export default defineComponent({
   name: "Confirmed",
 
-  data() {
+  data () {
     return {
+      user: null,
       btcprice: null,
       xmrprice: null,
       bchprice: null,
-
-      categoriesList: {},
+      confirmed: false
     };
   },
+  mounted () {
+    this.userstatus();
+    this.userstatusconfirmed();
 
-  methods: {},
+  },
+  methods: {
+    userstatus () {
+      axios({
+        method: "get",
+        url: "/auth/whoami",
+        withCredentials: true,
+        headers: authHeader(),
+      })
+        .then((response) => {
+          if ((response.status = 200)) {
+            this.user = response.data.user
+            this.user.confirmed = response.data.user.confirmed
+            this.$store.dispatch("user", response.data.user);
+          }
+        })
+        .catch(() => { this.user = null });
+    },
+    userstatusconfirmed () {
+      axios({
+        method: "get",
+        url: "/auth/amiconfirmed",
+        withCredentials: true,
+        headers: authHeader(),
+      }).then((response) => {
+        if (response.status == 200) {
+          if (response.data.confirmed == true) {
+            this.confirmed = true;
+
+          } else if (response.data.confirmed == false) {
+            this.confirmed = false;
+          }
+        }
+      }).catch(() => { });
+    },
+  },
 });
 </script>

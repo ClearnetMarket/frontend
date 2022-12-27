@@ -25,118 +25,96 @@
       </nav>
     </div>
     <div v-if="loaded_user">
-    <div class="flex ">
-      <div class="text-[24px]">My Account</div>
-    </div>
+      <div class="flex ">
+        <div class="text-[24px]">My Account</div>
+      </div>
 
-    <!-- END Top Stuff-->
+      <!-- END Top Stuff-->
 
-    <div class="grid sm:grid-cols-1 md:grid-cols-3 gap-5 my-3 pb-40">
+      <div class="grid sm:grid-cols-1 md:grid-cols-3 gap-5 my-3 pb-40">
 
-      <router-link :to="{ name: 'userorders' }">
-        <div
-          class="col-span-1 border border-1 rounded-md p-5 hover:bg-gray-300"
-          style="cursor: pointer"
-        >
-          <div class="grid grid-cols-4 grid-rows-2">
-            <div class="col-span-1 row-span-2"></div>
-            <div class="col-span-3 row-span-1 text-[20px]">Orders</div>
-            <div class="col-span-3 row-span-1 text-[14px] text-gray-600">
-              View your orders
+        <router-link :to="{ name: 'userorders' }">
+          <div class="col-span-1 border border-1 rounded-md p-5 hover:bg-gray-300" style="cursor: pointer">
+            <div class="grid grid-cols-4 grid-rows-2">
+              <div class="col-span-1 row-span-2"></div>
+              <div class="col-span-3 row-span-1 text-[20px]">Orders</div>
+              <div class="col-span-3 row-span-1 text-[14px] text-gray-600">
+                View your orders
+              </div>
             </div>
           </div>
-        </div>
-      </router-link>
-      <router-link :to="{ name: 'changepassword' }">
-        <div
-          class="col-span-1 border border-1 rounded-md p-5 hover:bg-gray-300"
-          style="cursor: pointer"
-        >
-          <div class="grid grid-cols-4 grid-rows-2">
-            <div class="col-span-1 row-span-2"></div>
-            <div class="col-span-3 row-span-1 text-[20px]">
-              Account Password
-            </div>
-            <div class="col-span-3 row-span-1 text-[14px] text-gray-600">
-              Change Account Password
+        </router-link>
+        <router-link :to="{ name: 'changepassword' }">
+          <div class="col-span-1 border border-1 rounded-md p-5 hover:bg-gray-300" style="cursor: pointer">
+            <div class="grid grid-cols-4 grid-rows-2">
+              <div class="col-span-1 row-span-2"></div>
+              <div class="col-span-3 row-span-1 text-[20px]">
+                Account Password
+              </div>
+              <div class="col-span-3 row-span-1 text-[14px] text-gray-600">
+                Change Account Password
+              </div>
             </div>
           </div>
-        </div>
-      </router-link>
-      <router-link :to="{ name: 'changepin' }">
-        <div
-          class="border border-1 rounded-md p-5 hover:bg-gray-300"
-          style="cursor: pointer"
-        >
-          <div class="grid grid-cols-4 grid-rows-2">
-            <div class="col-span-1 row-span-2"></div>
-            <div class="col-span-3 row-span-1 text-[20px]">Account Pin</div>
-            <div class="col-span-3 row-span-1 text-[14px] text-gray-600">
-              Change Wallet Pin
+        </router-link>
+        <router-link :to="{ name: 'changepin' }">
+          <div class="border border-1 rounded-md p-5 hover:bg-gray-300" style="cursor: pointer">
+            <div class="grid grid-cols-4 grid-rows-2">
+              <div class="col-span-1 row-span-2"></div>
+              <div class="col-span-3 row-span-1 text-[20px]">Account Pin</div>
+              <div class="col-span-3 row-span-1 text-[14px] text-gray-600">
+                Change Wallet Pin
+              </div>
             </div>
           </div>
-        </div>
-      </router-link>
+        </router-link>
 
-           <router-link :to="{name: 'userprofile', params: {uuid: user.user_id }}">
-        <div
-          class="border border-1 rounded-md p-5 hover:bg-gray-300"
-          style="cursor: pointer"
-        >
-          <div class="grid grid-cols-4 grid-rows-2">
-            <div class="col-span-1 row-span-2"></div>
-            <div class="col-span-3 row-span-1 text-[20px]">Profile</div>
-            <div class="col-span-3 row-span-1 text-[14px] text-gray-600">
-              Change Profile Info
+        <router-link :to="{ name: 'userprofile', params: { uuid: user.user_id } }">
+          <div class="border border-1 rounded-md p-5 hover:bg-gray-300" style="cursor: pointer">
+            <div class="grid grid-cols-4 grid-rows-2">
+              <div class="col-span-1 row-span-2"></div>
+              <div class="col-span-3 row-span-1 text-[20px]">Profile</div>
+              <div class="col-span-3 row-span-1 text-[14px] text-gray-600">
+                Change Profile Info
+              </div>
             </div>
           </div>
-        </div>
-      </router-link>
-      <router-link :to="{ name: 'MsgHome' }">
-        <div
-          class="border border-1 rounded-md p-5 hover:bg-gray-300"
-          style="cursor: pointer"
-        >
-          <div class="grid grid-cols-4 grid-rows-2">
-            <div class="col-span-1 row-span-2"></div>
-            <div class="col-span-3 row-span-1 text-[20px]">Messages</div>
-            <div class="col-span-3 row-span-1 text-[14px] text-gray-600">
-              View Messages
+        </router-link>
+        <router-link :to="{ name: 'MsgHome' }">
+          <div class="border border-1 rounded-md p-5 hover:bg-gray-300" style="cursor: pointer">
+            <div class="grid grid-cols-4 grid-rows-2">
+              <div class="col-span-1 row-span-2"></div>
+              <div class="col-span-3 row-span-1 text-[20px]">Messages</div>
+              <div class="col-span-3 row-span-1 text-[14px] text-gray-600">
+                View Messages
+              </div>
             </div>
           </div>
-        </div>
-      </router-link>
-      <router-link :to="{ name: 'defaultaddress' }">
-        <div
-          class="border border-1 rounded-md p-5 hover:bg-gray-300"
-          style="cursor: pointer"
-        >
-          <div class="grid grid-cols-4 grid-rows-2">
-            <div class="col-span-1 row-span-2"></div>
-            <div class="col-span-3 row-span-1 text-[20px]">Shipping Address</div>
-            <div class="col-span-3 row-span-1 text-[14px] text-gray-600">
-              Default Shipping Address
+        </router-link>
+        <router-link :to="{ name: 'defaultaddress' }">
+          <div class="border border-1 rounded-md p-5 hover:bg-gray-300" style="cursor: pointer">
+            <div class="grid grid-cols-4 grid-rows-2">
+              <div class="col-span-1 row-span-2"></div>
+              <div class="col-span-3 row-span-1 text-[20px]">Shipping Address</div>
+              <div class="col-span-3 row-span-1 text-[14px] text-gray-600">
+                Default Shipping Address
+              </div>
             </div>
           </div>
-        </div>
-      </router-link>
+        </router-link>
 
-        <div
-            class="border border-1 rounded-md p-5 hover:bg-gray-300"
-            style="cursor: pointer"
-            @click.prevent="logout()"
-        >
+        <div class="border border-1 rounded-md p-5 hover:bg-gray-300" style="cursor: pointer" @click.prevent="logout()">
           <div class="grid grid-cols-4 grid-rows-2">
             <div class="col-span-1 row-span-2"></div>
             <div class="col-span-3 row-span-1 text-[20px]">Logout</div>
             <div class="col-span-3 row-span-1 text-[14px] text-gray-600">
-             Logout of Account
+              Logout of Account
             </div>
           </div>
         </div>
 
+      </div>
     </div>
-  </div>
   </div>
   <!-- END container-->
   <MainFooter />
@@ -169,7 +147,7 @@ export default defineComponent({
     MainFooter,
   },
 
-  data() {
+  data () {
     return {
       loaded_user: false,
       user: null,
@@ -189,36 +167,38 @@ export default defineComponent({
       this.$store.dispatch('user', null);
       this.$router.push('/')
     },
-     userstatus() {
-       axios({
+    userstatus () {
+      axios({
         method: "get",
         url: "/auth/whoami",
         withCredentials: true,
         headers: authHeader(),
       })
-     .then((response) => {
-        if ((response.status = 200)) {
-          this.user = response.data.user;
-          this.user_id = response.data.user.user_id;
-          this.loaded_user = true;
-  
-        }
-      });
+        .then((response) => {
+          if ((response.status = 200)) {
+            this.user = response.data.user;
+            this.user_id = response.data.user.user_id;
+            this.loaded_user = true;
+
+          }
+        });
     },
-     userprofile() {
-       axios({
+    userprofile () {
+      axios({
         method: "get",
         url: "/profile/profile_home",
         withCredentials: true,
         headers: authHeader(),
       })
-     .then((response) => {
-        if ((response.status = 200)) {
-        }
-      });
+        .then((response) => {
+          if ((response.status = 200)) {
+          }
+        });
     },
   },
 });
 </script>
 
-<style type="ts" scoped></style>
+<style type="ts" scoped>
+
+</style>

@@ -1,154 +1,122 @@
 <template>
   <div v-if="marketitem">
 
-      <div class="text-[18px] mt-5 mb-5">Images</div>
+    <div class="text-[18px] mt-5 mb-5">Images</div>
 
-      <div class="rounded-md border border-1 bg-gray-200">
-        <div class="grid sm:grid-cols-1 md:grid-cols-2 pb-20 gap-5 p-3">
-          <div class="flex justify-center">
-            <div v-if="visibledelete1 "  >
-              <div class="block bg-cover bg-center">
-                <div class="flex flex-col">
-                  <div class="font-bold text-center">Main Image</div>
-                  <img :alt="marketitem.image_one_server" class="w-48 h-48 overflow-hidden" :src="marketitem.image_one_url" />
-                  <button
-                      class="bg-red-600 mt-5 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                      type="submit"
-                      @click="deleteitemimage1(marketitem.image_one_server)"
-                  >
-                    Delete Image
-                  </button>
-                </div>
+    <div class="rounded-md border border-1 ">
+      <div class="grid sm:grid-cols-1 md:grid-cols-2  gap-5 ">
+        <div class="flex justify-center">
+          <div v-if="visibledelete1">
+            <div class="block bg-cover bg-center">
+              <div class="flex flex-col">
+                <div class="font-bold text-center">Main Image</div>
+                <img :alt="marketitem.image_one_server" class="w-48 h-48 overflow-hidden"
+                  :src="marketitem.image_one_url" />
+                <button
+                  class="bg-red-600 mt-5 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                  type="submit" @click="deleteitemimage1(marketitem.image_one_server)">
+                  Delete Image
+                </button>
               </div>
-            </div>
-            <div v-if="visibleform1  ">
-              <form
-                  class="rounded-md px-8 pt-6 pb-8 mb-4 w-full"
-                  enctype="multipart/form-data"
-                  method="POST"
-                  @submit.prevent="CreateItemImages"
-              >
-              <div
-                  class="h-44 block bg-cover bg-center"
-                  v-bind:style="{ 'background-image': `url(${previewImage1})` }"
-                  @click="selectImage1"
-              ></div>
-              <input class="" ref="fileInput1" type="file" @input="pickFile1"  accept=".jpg,.jpeg,.png"/>
-                <input type="hidden" ref="clicktoshow" />
-              </form>
             </div>
           </div>
+          <div v-if="visibleform1">
 
-          <div class="flex justify-center">
-            <div v-if="visibledelete2 "  >
-              <div class="block bg-cover bg-center">
-                <div class="flex flex-col">
-                  <div class="font-bold text-center">Image Two</div>
-                  <img alt="" class="w-48 h-48" src="https://picsum.photos/50/50" />
-                  <button
-                      class="bg-red-600 mt-5 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                      type="submit"
-                      @click="deleteitemimage2(marketitem.image_two_server)"
-                  >
-                    Delete Image
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div v-if="visibleform2  ">
-              <form
-                  class="rounded-md px-8 pt-6 pb-8 mb-4 w-full"
-                  enctype="multipart/form-data"
-                  method="POST"
-                  @submit.prevent="CreateItemImages"
-              >
-              <div
-                  class="h-44 block bg-cover bg-center"
-                  v-bind:style="{ 'background-image': `url(${previewImage2})` }"
-                  @click="selectImage2"
-              ></div>
-              <input class="" ref="fileInput2" type="file" @input="pickFile2"  accept=".jpg,.jpeg,.png"/>
-                <input type="hidden" ref="clicktoshow2" />
-              </form>
-            </div>
-          </div>
-
-          <div class="flex justify-center">
-            <div v-if="visibledelete3 "  >
-              <div class="block bg-cover bg-center">
-                <div class="flex flex-col">
-                  <div class="font-bold text-center">Image Three</div>
-                  <img alt="" class="w-48 h-48" src="https://picsum.photos/50/50" />
-                </div>
-                <div class="flex flex-col">
-                  <button
-                      class="bg-red-600 mt-5 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                      type="submit"
-                      @click="deleteitemimage3(marketitem.image_three_server)"
-                  >
-                    Delete Image
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div v-if="visibleform3  ">
-              <form
-                  class="rounded-md px-8 pt-6 pb-8 mb-4 w-full"
-                  enctype="multipart/form-data"
-                  method="POST"
-                  @submit.prevent="CreateItemImages"
-              >
-              <div
-                  class="h-44 block bg-cover bg-center"
-                  v-bind:style="{ 'background-image': `url(${previewImage3})` }"
-                  @click="selectImage3"
-              ></div>
-              <input class="" ref="fileInput3" type="file" @input="pickFile3"  accept=".jpg,.jpeg,.png"/>
-                <input type="hidden" ref="clicktoshow3" />
-              </form>
-            </div>
-          </div>
-
-          <div class="flex justify-center">
-            <div v-if="visibledelete4 "  >
-              <div class="block bg-cover bg-center">
-                <div class="flex flex-col">
-                  <div class="font-bold text-center">Image Four</div>
-                  <img alt="" class="w-48 h-48" src="https://picsum.photos/50/50" />
-                </div>
-                <div class="flex flex-col">
-                  <button
-                      class="bg-red-600 mt-5 hover:bg-zinc-400 text-white font-bold py-2 px-4
-                      rounded focus:outline-none focus:shadow-outline"
-                      type="submit"
-                      @click="deleteitemimage4(marketitem.image_four_server)"
-                  >
-                    Delete Image
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div v-if="visibleform4  ">
-              <form
-                  class="rounded-md px-8 pt-6 pb-8 mb-4 w-full"
-                  enctype="multipart/form-data"
-                  method="POST"
-                  @submit.prevent="CreateItemImages"
-                 >
-
-              <div
-                  class="h-44 block bg-cover bg-center"
-                  v-bind:style="{ 'background-image': `url(${previewImage4})` }"
-                  @click="selectImage4"
-              ></div>
-              <input class="" ref="fileInput4" type="file" @input="pickFile4"  accept=".jpg,.jpeg,.png"/>
-                <input type="hidden" ref="clicktoshow4" />
-              </form>
-            </div>
+            <form class="rounded-md px-8 pt-6 pb-8 mb-4 w-full" enctype="multipart/form-data" method="POST"
+              @submit.prevent="CreateItemImages">
+              <div class="font-bold text-center">Main Image</div>
+              <div class="h-44 block bg-cover bg-center" v-bind:style="{ 'background-image': `url(${previewImage1})` }"
+                @click="selectImage1"></div>
+              <input class="" ref="fileInput1" type="file" @input="pickFile1" accept=".jpg,.jpeg,.png" />
+              <input type="hidden" ref="clicktoshow" />
+            </form>
           </div>
         </div>
 
+        <div class="flex justify-center">
+          <div v-if="visibledelete2">
+            <div class="block bg-cover bg-center">
+              <div class="flex flex-col">
+                <div class="font-bold text-center">Image Two</div>
+                <img alt="" class="w-48 h-48" src="https://picsum.photos/50/50" />
+                <button
+                  class="bg-red-600 mt-5 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                  type="submit" @click="deleteitemimage2(marketitem.image_two_server)">
+                  Delete Image
+                </button>
+              </div>
+            </div>
+          </div>
+          <div v-if="visibleform2">
+            <form class="rounded-md px-8 pt-6 pb-8 mb-4 w-full" enctype="multipart/form-data" method="POST"
+              @submit.prevent="CreateItemImages">
+              <div class="font-bold text-center">Image Two</div>
+              <div class="h-44 block bg-cover bg-center" v-bind:style="{ 'background-image': `url(${previewImage2})` }"
+                @click="selectImage2"></div>
+              <input class="" ref="fileInput2" type="file" @input="pickFile2" accept=".jpg,.jpeg,.png" />
+              <input type="hidden" ref="clicktoshow2" />
+            </form>
+          </div>
+        </div>
+
+        <div class="flex justify-center">
+          <div v-if="visibledelete3">
+            <div class="block bg-cover bg-center">
+              <div class="flex flex-col">
+                <div class="font-bold text-center">Image Three</div>
+                <img alt="" class="w-48 h-48" src="https://picsum.photos/50/50" />
+              </div>
+              <div class="flex flex-col">
+                <button
+                  class="bg-red-600 mt-5 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                  type="submit" @click="deleteitemimage3(marketitem.image_three_server)">
+                  Delete Image
+                </button>
+              </div>
+            </div>
+          </div>
+          <div v-if="visibleform3">
+            <form class="rounded-md px-8 pt-6 pb-8 mb-4 w-full" enctype="multipart/form-data" method="POST"
+              @submit.prevent="CreateItemImages">
+              <div class="font-bold text-center">Image Three</div>
+              <div class="h-44 block bg-cover bg-center" v-bind:style="{ 'background-image': `url(${previewImage3})` }"
+                @click="selectImage3"></div>
+              <input class="" ref="fileInput3" type="file" @input="pickFile3" accept=".jpg,.jpeg,.png" />
+              <input type="hidden" ref="clicktoshow3" />
+            </form>
+          </div>
+        </div>
+
+        <div class="flex justify-center">
+          <div v-if="visibledelete4">
+            <div class="block bg-cover bg-center">
+              <div class="flex flex-col">
+                <div class="font-bold text-center">Image Four</div>
+                <img alt="" class="w-48 h-48" src="https://picsum.photos/50/50" />
+              </div>
+              <div class="flex flex-col">
+                <button class="bg-red-600 mt-5 hover:bg-zinc-400 text-white font-bold py-2 px-4
+                      rounded focus:outline-none focus:shadow-outline" type="submit"
+                  @click="deleteitemimage4(marketitem.image_four_server)">
+                  Delete Image
+                </button>
+              </div>
+            </div>
+          </div>
+          <div v-if="visibleform4">
+            <form class="rounded-md px-8 pt-6 pb-8 mb-4 w-full" enctype="multipart/form-data" method="POST"
+              @submit.prevent="CreateItemImages">
+              <div class="font-bold text-center">Image Four</div>
+              <div class="h-44 block bg-cover bg-center" v-bind:style="{ 'background-image': `url(${previewImage4})` }"
+                @click="selectImage4"></div>
+              <input class="" ref="fileInput4" type="file" @input="pickFile4" accept=".jpg,.jpeg,.png" />
+              <input type="hidden" ref="clicktoshow4" />
+            </form>
+          </div>
+        </div>
       </div>
+
+    </div>
 
   </div>
 </template>
@@ -157,7 +125,7 @@
 import { defineComponent } from "vue";
 import axios from "axios";
 import authHeader from "../../../services/auth.header";
-import {notify} from "@kyvg/vue3-notification";
+import { notify } from "@kyvg/vue3-notification";
 
 /**
  *
@@ -171,17 +139,17 @@ import {notify} from "@kyvg/vue3-notification";
 export default defineComponent({
   name: "UploadImages",
   props: {
-    item_id: String ,
+    item_id: String,
 
   },
-  created() {
+  created () {
 
     this.getItemForSale();
 
 
   },
 
-  data() {
+  data () {
     return {
       previewimageone: null,
       previewImage1: null,
@@ -209,7 +177,7 @@ export default defineComponent({
   methods: {
 
     // Get the item thats being modified
-    getItemForSale() {
+    getItemForSale () {
 
       let path = "/item/" + this.item_id;
       axios({
@@ -217,65 +185,65 @@ export default defineComponent({
         url: path,
         withCredentials: true,
       })
-          .then((response) => {
-            if (response.status === 200) {
-              this.marketitem = response.data;
+        .then((response) => {
+          if (response.status === 200) {
+            this.marketitem = response.data;
 
-              this.image_1_in_db = this.marketitem.image_one_server == null;
+            this.image_1_in_db = this.marketitem.image_one_server == null;
 
-              if (this.image_1_in_db == false){
-                this.visibledelete1 = true
-                this.visibleform1 = false
-              }
-              else{
-                this.visibledelete1 = false
-                this.visibleform1 = true
-              }
-
-
-
-              this.image_2_in_db = this.marketitem.image_two_server == null;
-
-              if (this.image_2_in_db == false){
-                this.visibledelete2 = true
-                this.visibleform2 = false
-              }
-              else{
-                this.visibledelete2 = false
-                this.visibleform2 = true
-              }
-
-
-              this.image_3_in_db = this.marketitem.image_three_server == null;
-              if (this.image_3_in_db == false){
-                this.visibledelete3 = true
-                this.visibleform3 = false
-              }
-              else{
-                this.visibledelete3 = false
-                this.visibleform3 = true
-              }
-
-
-                this.image_4_in_db = this.marketitem.image_four_server == null;
-                if (this.image_4_in_db == false){
-                  this.visibledelete4 = true
-                  this.visibleform4 = false
-                 }
-               else{
-                   this.visibledelete4 = false
-                  this.visibleform4 = true
-                 }
+            if (this.image_1_in_db == false) {
+              this.visibledelete1 = true
+              this.visibleform1 = false
             }
-          })
+            else {
+              this.visibledelete1 = false
+              this.visibleform1 = true
+            }
+
+
+
+            this.image_2_in_db = this.marketitem.image_two_server == null;
+
+            if (this.image_2_in_db == false) {
+              this.visibledelete2 = true
+              this.visibleform2 = false
+            }
+            else {
+              this.visibledelete2 = false
+              this.visibleform2 = true
+            }
+
+
+            this.image_3_in_db = this.marketitem.image_three_server == null;
+            if (this.image_3_in_db == false) {
+              this.visibledelete3 = true
+              this.visibleform3 = false
+            }
+            else {
+              this.visibledelete3 = false
+              this.visibleform3 = true
+            }
+
+
+            this.image_4_in_db = this.marketitem.image_four_server == null;
+            if (this.image_4_in_db == false) {
+              this.visibledelete4 = true
+              this.visibleform4 = false
+            }
+            else {
+              this.visibledelete4 = false
+              this.visibleform4 = true
+            }
+          }
+        })
     },
-    CreateItemImages() {
+    CreateItemImages () {
 
       let formData = new FormData();
 
-      if (this.$refs.fileInput1 !== null){
+      if (this.$refs.fileInput1 !== null) {
         const fileInput1 = this.$refs.fileInput1 as HTMLInputElement
-        if (fileInput1?.files && fileInput1.files[0]){
+        if (fileInput1?.files && fileInput1.files[0]) {
           formData.append('image_main', fileInput1.files[0])
           this.visibledelete1 = true;
           this.visibleform1 = false;
@@ -283,9 +251,9 @@ export default defineComponent({
         }
 
       }
-      if (this.$refs.fileInput2 !== null){
+      if (this.$refs.fileInput2 !== null) {
         const fileInput2 = this.$refs.fileInput2 as HTMLInputElement
-        if (fileInput2?.files && fileInput2.files[0]){
+        if (fileInput2?.files && fileInput2.files[0]) {
           formData.append('image_two', fileInput2.files[0])
           this.visibledelete2 = true;
           this.visibleform2 = false;
@@ -293,18 +261,18 @@ export default defineComponent({
         }
 
       }
-      if (this.$refs.fileInput3 !== null){
+      if (this.$refs.fileInput3 !== null) {
         const fileInput3 = this.$refs.fileInput3 as HTMLInputElement
-        if (fileInput3?.files && fileInput3.files[0]){
+        if (fileInput3?.files && fileInput3.files[0]) {
           formData.append('image_three', fileInput3.files[0])
           this.visibledelete3 = true;
           this.visibleform3 = false;
         }
 
       }
-      if (this.$refs.fileInput4 !== null){
+      if (this.$refs.fileInput4 !== null) {
         const fileInput4 = this.$refs.fileInput4 as HTMLInputElement
-        if (fileInput4?.files && fileInput4.files[0]){
+        if (fileInput4?.files && fileInput4.files[0]) {
           formData.append('image_four', fileInput4.files[0])
           this.visibledelete4 = true;
           this.visibleform4 = false;
@@ -321,42 +289,42 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       })
-          .then((response) => {
+        .then((response) => {
 
 
-            if (response.data.status == "success") {
-              // if any images uploaded success
-              notify({
-                title: "Upload",
-                text: "Success",
-                type: "success",
-              });
-            }
-          })
-          .catch((error) => {
-            if (error.response) {
+          if (response.data.status == "success") {
+            // if any images uploaded success
+            notify({
+              title: "Upload",
+              text: "Success",
+              type: "success",
+            });
+          }
+        })
+        .catch((error) => {
+          if (error.response) {
 
-            }
-          });
+          }
+        });
     },
 
-    selectImage1() {
-      let clickit1 =  this.$refs.fileInput1 as HTMLInputElement;
+    selectImage1 () {
+      let clickit1 = this.$refs.fileInput1 as HTMLInputElement;
       clickit1.click();
     },
-    selectImage2() {
-      let clickit2 =  this.$refs.fileInput2 as HTMLInputElement;
+    selectImage2 () {
+      let clickit2 = this.$refs.fileInput2 as HTMLInputElement;
       clickit2.click();
     },
-    selectImage3() {
-      let clickit3 =  this.$refs.fileInput3 as HTMLInputElement;
+    selectImage3 () {
+      let clickit3 = this.$refs.fileInput3 as HTMLInputElement;
       clickit3.click();
     },
-    selectImage4() {
-      let clickit4 =  this.$refs.fileInput4 as HTMLInputElement;
+    selectImage4 () {
+      let clickit4 = this.$refs.fileInput4 as HTMLInputElement;
       clickit4.click();
     },
-    pickFile1() {
+    pickFile1 () {
       let input = this.$refs.fileInput1 as HTMLInputElement;
       let file = input.files;
 
@@ -372,7 +340,7 @@ export default defineComponent({
         this.CreateItemImages()
       }
     },
-    pickFile2() {
+    pickFile2 () {
       let input = this.$refs.fileInput2 as HTMLInputElement;
       let file = input.files;
 
@@ -388,7 +356,7 @@ export default defineComponent({
         this.CreateItemImages()
       }
     },
-    pickFile3() {
+    pickFile3 () {
       let input = this.$refs.fileInput3 as HTMLInputElement;
       let file = input.files;
 
@@ -404,7 +372,7 @@ export default defineComponent({
         this.CreateItemImages()
       }
     },
-    pickFile4() {
+    pickFile4 () {
       let input = this.$refs.fileInput4 as HTMLInputElement;
       let file = input.files;
 
@@ -422,7 +390,7 @@ export default defineComponent({
       }
     },
 
-    deleteitemimage1(imagename: any) {
+    deleteitemimage1 (imagename: any) {
       let path = "/vendorcreateitem/delete-image/" + this.item_id + "/" + imagename;
       axios({
         method: "delete",
@@ -430,32 +398,32 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       })
-          .then((response) => {
+        .then((response) => {
 
 
-            if (response.status == 200) {
-              // if any images uploaded success
-              notify({
-                title: "Image Deletion",
-                text: "Success",
-                type: "success",
-              });
-              this.visibledelete1 = false;
-              this.marketitem.image_one_server = null;
-              this.visibleform1 = true;
+          if (response.status == 200) {
+            // if any images uploaded success
+            notify({
+              title: "Image Deletion",
+              text: "Success",
+              type: "success",
+            });
+            this.visibledelete1 = false;
+            this.marketitem.image_one_server = null;
+            this.visibleform1 = true;
 
-            }
-          })
-          .catch((error) => {
-            if (error.response) {
+          }
+        })
+        .catch((error) => {
+          if (error.response) {
 
 
-            }
-          }).finally()
-      ;
+          }
+        }).finally()
+        ;
     },
 
-    deleteitemimage2(imagename: any) {
+    deleteitemimage2 (imagename: any) {
       let path = "/vendorcreateitem/delete-image/" + this.item_id + "/" + imagename;
       axios({
         method: "delete",
@@ -463,32 +431,32 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       })
-          .then((response) => {
+        .then((response) => {
 
 
-            if (response.status == 200) {
-              // if any images uploaded success
-              notify({
-                title: "Image Deletion",
-                text: "Success",
-                type: "success",
-              });
-              this.visibledelete2 = false;
-              this.marketitem.image_two_server = null;
-              this.visibleform2 = true;
+          if (response.status == 200) {
+            // if any images uploaded success
+            notify({
+              title: "Image Deletion",
+              text: "Success",
+              type: "success",
+            });
+            this.visibledelete2 = false;
+            this.marketitem.image_two_server = null;
+            this.visibleform2 = true;
 
-            }
-          })
-          .catch((error) => {
-            if (error.response) {
+          }
+        })
+        .catch((error) => {
+          if (error.response) {
 
 
-            }
-          }).finally()
-      ;
+          }
+        }).finally()
+        ;
     },
 
-    deleteitemimage3(imagename: any) {
+    deleteitemimage3 (imagename: any) {
       let path = "/vendorcreateitem/delete-image/" + this.item_id + "/" + imagename;
       axios({
         method: "delete",
@@ -496,31 +464,31 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       })
-          .then((response) => {
+        .then((response) => {
 
 
-            if (response.status == 200) {
-              // if any images uploaded success
-              notify({
-                title: "Image Deletion",
-                text: "Success",
-                type: "success",
-              });
-              this.visibledelete3 = false;
-              this.marketitem.image_three_server = null;
-              this.visibleform3 = true;
-            }
-          })
-          .catch((error) => {
-            if (error.response) {
+          if (response.status == 200) {
+            // if any images uploaded success
+            notify({
+              title: "Image Deletion",
+              text: "Success",
+              type: "success",
+            });
+            this.visibledelete3 = false;
+            this.marketitem.image_three_server = null;
+            this.visibleform3 = true;
+          }
+        })
+        .catch((error) => {
+          if (error.response) {
 
 
-            }
-          }).finally()
-      ;
+          }
+        }).finally()
+        ;
     },
 
-    deleteitemimage4(imagename: any) {
+    deleteitemimage4 (imagename: any) {
       let path = "/vendorcreateitem/delete-image/" + this.item_id + "/" + imagename;
       axios({
         method: "delete",
@@ -528,29 +496,29 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       })
-          .then((response) => {
+        .then((response) => {
 
 
-            if (response.status == 200) {
-              // if any images uploaded success
-              notify({
-                title: "Image Deletion",
-                text: "Success",
-                type: "success",
-              });
-              this.visibledelete4 = false;
-              this.marketitem.image_four_server = null;
-              this.visibleform4 = true;
+          if (response.status == 200) {
+            // if any images uploaded success
+            notify({
+              title: "Image Deletion",
+              text: "Success",
+              type: "success",
+            });
+            this.visibledelete4 = false;
+            this.marketitem.image_four_server = null;
+            this.visibleform4 = true;
 
-            }
-          })
-          .catch((error) => {
-            if (error.response) {
+          }
+        })
+        .catch((error) => {
+          if (error.response) {
 
 
-            }
-          }).finally()
-      ;
+          }
+        }).finally()
+        ;
     },
   },
 
@@ -560,6 +528,7 @@ export default defineComponent({
 .show {
   visibility: visible
 }
+
 .hide {
   visibility: hidden
 }

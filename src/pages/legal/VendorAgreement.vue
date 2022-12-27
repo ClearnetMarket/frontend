@@ -11,7 +11,7 @@
   <div class="container  max-w-7xl mx-auto px-10 bg-gray-200 mt-2 ">
     <div class="mt-5 mb-5">
       <nav class="rounded-md w-full  ">
-        <ol class="list-reset flex flex ">
+        <ol class="list-reset flex  ">
           <li>
             <router-link :to="{ name: 'home' }">
               <a class="text-blue-600 hover:text-blue-700 bg-red-200 ">Home</a>

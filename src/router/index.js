@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import home from "../pages/Index.vue";
 import sell from "../pages/vendor/Sell.vue";
-import vendoragreement from "../pages/legal/VendorAgreement.vue";
 import forsale from "../pages/vendor/itemsForSale.vue";
 import vendoraddress from "../pages/auth/account/VendorExactAddress.vue";
 import vendorfeedback from "../pages/vendor/Feedback.vue";
@@ -67,9 +66,34 @@ import categoryjewelryandgold from "../pages/category/jewelrygold/JewelryGoldHom
 import categoryhomeandgarden from "../pages/category/homeandgarden/HomeandGardenHome.vue";
 import categorysmartphones from "../pages/category/smartphones/SmartPhonesHome.vue";
 import categorysportinggoods from "../pages/category/sports/SportsHome.vue";
-
+import legal from "../pages/commonpage/legal.vue";
+import vendoragreement from "../pages/legal/VendorAgreement.vue";
+import policies from "../pages/commonpage/policies.vue";
+import contact from "../pages/commonpage/contact.vue";
 
 const routes = [
+
+            // Footer
+    {
+        path: "/vendoragreement",
+        name: "vendoragreement",
+        component: vendoragreement,
+    },
+    {
+        path: "/contact",
+        name: "contact",
+        component: contact,
+    },
+    {
+        path: "/policies",
+        name: "policies",
+        component: policies,
+    },
+            {
+        path: "/legal",
+        name: "legal",
+        component: legal,
+    },
     {
         path: "/user/orders/:uuid",
         name: "ordersview",
@@ -90,10 +114,10 @@ const routes = [
         name: "sell",
         component: sell,
     },
-    {
-        path: "/vendoragreement",
-        name: "vendoragreement",
-        component: vendoragreement,
+        {
+        path: "/cart",
+        name: "cart",
+        component: cart,
     },
     {
         path: "/vendor/itemsforsale",
@@ -175,17 +199,15 @@ const routes = [
         name: "xmrwalletrecieve",
         component: xmrwalletrecieve,
     },
+
     // checkout
-    {
-        path: "/cart",
-        name: "cart",
-        component: cart,
-    },
+
     {
         path: "/checkout",
         name: "checkout",
         component: checkout,
     },
+
     // Plain Stuff
     {
         path: "/auth/login",

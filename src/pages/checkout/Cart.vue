@@ -33,7 +33,9 @@
         </div>
 
         <div v-if="shopping_cart_items_list">
+         
           <div v-for="(item, index) in shopping_cart_items_list" :key="index">
+            <div v-if="item.uuid">
             <div class="hover:bg-gray-100">
               <div class="grid grid-cols-12 px-1 py-1">
                 <!-- product -->
@@ -52,6 +54,7 @@
                     </div>
                     <div class="col-span-12 font-bold text-[18px] py-1">
                       <span class="text-blue-600 hover:text-blue-300 text-xs">
+                        <div v-if="item.vendor_uuid">
                         <router-link
                           :to="{
                             name: 'userprofile',
@@ -60,6 +63,7 @@
                         >
                           Sold by: {{ item.vendor_user_name }}
                         </router-link>
+                        </div>
                       </span>
                     </div>
                     <div class="col-span-12 font-bold text-[18px] py-1">
@@ -142,6 +146,7 @@
                 </div>
               </div>
             </div>
+          </div>
           </div>
         </div>
         <div v-else>
@@ -357,7 +362,14 @@ export default defineComponent({
         .then((response) => {
           this.cart_status = response.status;
           if (this.cart_status == 200) {
-            this.shopping_cart_items_list = response.data;
+            if (response.data.status == 'error')
+            {
+              this.shopping_cart_items_list = null;
+            }
+            else{
+              this.shopping_cart_items_list = response.data;
+            }
+            
           } else {
             this.shopping_cart_items_list = null;
           }

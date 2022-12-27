@@ -104,7 +104,7 @@ import ItemUserReviews from "./Item/ItemUserReviews.vue";
 import ItemTop from "./Item/ItemTop.vue";
 import ItemShipping from "./Item/ItemShipping.vue";
 import ItemSimiliarItems from "./Item/ItemSimiliarItems.vue";
-
+import { notify } from "@kyvg/vue3-notification";
 
 /**
  *
@@ -215,6 +215,7 @@ export default defineComponent({
       })
         .then((response) => {
           if ((response.status = 200)) {
+      
             this.item = response.data;
             this.title = response.data.item_title;
             this.itemcount = response.data.item_count;
@@ -260,7 +261,13 @@ export default defineComponent({
           }
         })
         .catch((error) => {
-       
+
+          this.$router.push({ name: "home" });
+          notify({
+            title: "Error",
+            text: "Item has been deleted or doesnt exist",
+            type: "error",
+          });
         });
     },
      seeifuserhasdefaultaddress() {

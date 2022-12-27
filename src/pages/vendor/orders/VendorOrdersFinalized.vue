@@ -128,24 +128,37 @@
         <div v-for="(order, i) in orders" :key="i" class="pb-5">
           <div v-if="order.uuid">
 
-            <div class="rounded border border-1 border-gray-300 bg-gray-100 p-5">
-              <div class="grid col-span-12 text-[18px ">
+            <div class="rounded-md bg-white p-5">
+              <div class="grid col-span-12 text-[16px] ">
                 <router-link
-                    class="text-blue-600 hover:underline hover:text-blue-400"
+                    class="text-blue-600 hover:underline hover:text-blue-400 px-2 pb-3"
                     :to="{ name: 'MarketItem', params: { id: order.item_uuid } }"
                 >
                   <div>{{ order.title_of_item }}</div>
                 </router-link>
               </div>
-              <div class="grid grid-cols-12 gap-4 bg-red-200">
-                <div class="col-span-8 bg-blue-200">
-                  <div class="col-span-12">{{ order.uuid }}</div>
-                  <div class="col-span-1">{{ relativeDate(order.created) }}</div>
-
-                  <div class="col-span-2">{{ order.customer_user_name }}</div>
+              <div class="grid grid-cols-12 gap-4 text-[14px]">
+                <div class="col-span-9 ">
+                  <div class="col-span-12 flex">
+                    <div class="font-bold px-2">Order UUID:</div>
+                    <div class="px-2">{{ order.uuid }}</div> 
+                  </div>
+                  <div class="col-span-1 flex">
+                    <div class="font-bold px-2">
+                      Ordered:
+                    </div>
+                    <div class="px-2">{{ relativeDate(order.created) }}</div>
+                  </div>
+                  <div class="col-span-2 flex">
+                    <div class="font-bold px-2">Customer: </div>
+                    <div class="px-2">{{ order.customer_user_name }}</div>
+                    
+                  </div>
                   <div class="col-span-4">
+                    <div class="font-bold px-2">Payment Info: </div>
+                    
                     <div
-                        class="flex justify-between"
+                        class=""
                         v-if="order.digital_currency === 1"
                     >
                       <div v-if="order.shipping_price_btc === 0">Free Shipping</div>
@@ -154,7 +167,7 @@
                       <div class="">{{ order.price_total_btc }} BTC</div>
                     </div>
                     <div
-                        class="flex justify-between"
+                        class=""
                         v-if="order.digital_currency === 2"
                     >
                       <div v-if="order.shipping_price_bch === 0">Free Shipping</div>
@@ -163,7 +176,7 @@
                       <div class="">{{ order.price_total_bch }} BCH</div>
                     </div>
                     <div
-                        class="flex justify-between"
+                        class=""
                         v-if="order.digital_currency === 3"
                     >
                       <div class="">
@@ -177,13 +190,13 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-span-4 bg-blue-300">
-                  <div class="mx-3 pt-3 text-[13px] font-bold">
+                <div class="col-span-3 ">
+                  <div class="mx-3 pt-3 text-[14px] font-bold ">
                     <router-link :to="{ name: 'vendorordersfeedback',params: { uuid: order.uuid },  }" class="px-3">
                       <button
-                          class="bg-yellow-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline"
+                          class="bg-blue-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline"
                       >
-                        Wallets
+                        View Order
                       </button>
                     </router-link>
                   </div>
@@ -201,7 +214,6 @@
 <script lang="ts">
 import {defineComponent} from "vue";
 import axios from "axios";
-import {notify} from "@kyvg/vue3-notification";
 import {formatDistance} from "date-fns";
 import authHeader from "../../../services/auth.header";
 import MainHeaderTop from "../../../layouts/headers/MainHeaderTop.vue";

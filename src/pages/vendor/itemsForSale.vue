@@ -9,7 +9,7 @@
       <MainHeaderVendor v-show="user.user_admin === 1" />
     </div>
   
-    <div class="container max-w-7xl mx-auto px-10 wrapper">
+    <div class="container max-w-7xl mx-auto px-10 wrapper pb-72 bg-gray-100">
       <div class="mt-5">
         <nav class="rounded-md w-full">
           <ol class="list-reset flex">
@@ -38,25 +38,10 @@
         </div>
 
         <div class="mt-10 grid grid-cols-12 pb-20 gap-4">
-          <div class="col-span-3 bg-white rounded-md">
-            <ul class="space-y-4 list-disc list-inside text-gray-500 dark:text-gray-400">
-              <li>
-                <router-link :to="{ name: 'vendoraddress' }">
-                  My Address
-                </router-link>
-              </li>
-                <div v-if="loaded_user">
-                  <li>
-                  <router-link :to="{ name: 'userprofile', params: { uuid: user.user_id } }">
-                  My Profile
-                </router-link>
-                    </li>
-              </div>
-            </ul>
-          </div>
-          <div v-for="item in items"
-           class="col-span-9 bg-white">
-            <div class="grid grid-cols-12 grid-row-5">
+
+          <div v-for="item in items" class="col-span-10 col-start-2 p-5">
+            <div class="bg-white rounded-md ">
+            <div class="grid grid-cols-12 grid-row-5 ">
              
               <div class="col-span-9 p-2">
                 <div class="w-full font-bold">Item uuid</div>
@@ -64,7 +49,7 @@
               </div>
              
             </div>
-            <div class="grid grid-cols-12  rounded-md p-2">
+            <div class="grid grid-cols-12   rounded-md p-2">
               
               <div class="col-span-2">
                 <img :alt="item.image_one_server" class="w-48 h-48 overflow-hidden" :src="item.image_one_url" />
@@ -156,6 +141,7 @@
                 </div>
               </div>
             </div>
+          </div>
           </div>
         </div>
       </div>
@@ -352,7 +338,7 @@ export default defineComponent({
             });
           } else {
             notify({
-              title: "Item Online",
+              title: "Failure",
               text: response.data.status,
               type: "error",
             });

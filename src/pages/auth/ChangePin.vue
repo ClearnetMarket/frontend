@@ -20,7 +20,7 @@
     </div>
     <div class="mx-auto max-w-lg flex items-center justify-center mb-10 mt-12">
       <form
-        class="bg-gray-100 shadow-md border-2 border-gray-300 rounded-md px-8 pt-6 pb-8 mb-4 w-full"
+        class="bg-white rounded-md px-8 pt-6 pb-8 mb-4 w-full"
         @submit.prevent="onSubmit"
       >
         <div class="mb-4 text-center text-[28px] text-zinc-600">Change Pin</div>

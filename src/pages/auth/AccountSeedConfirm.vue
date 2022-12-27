@@ -233,11 +233,7 @@ export default defineComponent({
           type: "error",
         });
       } else {
-        notify({
-          title: "Authorization",
-          text: "Form success",
-          type: "success",
-        });
+      
         this.sendWordRequest(payLoad);
       }
     },
