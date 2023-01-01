@@ -100,8 +100,8 @@
                 id="count" type="number" min="0" placeholder="How many your are selling ..." @keypress="onlyNumber" />
               <span v-if="v$.CreateItemForm.pricingInfo.item_count.$error" class="text-red-600 text-center">
                 {{
-                    v$.CreateItemForm.pricingInfo.item_count.$errors[0].$message
-                }}
+    v$.CreateItemForm.pricingInfo.item_count.$errors[0].$message
+}}
               </span>
             </div>
           </div>
@@ -129,12 +129,22 @@
           </div>
 
           <div class="text-[18px] mt-5 mb-5">Shipping</div>
+          <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2">International Shipping</label>
+            <div class="flex gap-5">
+              <div class="flex-1">
+                <input type="checkbox" v-model="CreateItemForm.shippingInfo.international" />
+              </div>
 
+            </div>
+          </div>
           <div class="mb-4 flex text-center">
             <div class="flex-1">Option</div>
             <div class="flex-1">Shipping Price</div>
             <div class="flex-1">Estimated Days</div>
           </div>
+
+
 
           <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2">Free Shipping</label>
@@ -267,7 +277,7 @@ export default defineComponent({
           price: "",
         },
         shippingInfo: {
-          worldwide_shipping: "",
+          international: false,
           shipping_info_0: "",
           free_shipping: false,
           free_shipping_days: "",
@@ -277,18 +287,8 @@ export default defineComponent({
           shipping_3: false,
           shipping_3_days: "",
           shipping_3_price: "",
-          shipping_to_country_one: "",
-          destination_country_one: "",
-          destination_country_one_name: "",
-          shipping_to_country_two: "",
-          destination_country_two: "",
-          destination_country_two_name: "",
-          shipping_to_country_three: "",
-          destination_country_three_name: "",
-          destination_country_three: "",
-          shipping_to_country_four: "",
-          destination_country_four: "",
-          destination_country_four_name: "",
+
+
         },
       },
     };
@@ -365,10 +365,8 @@ export default defineComponent({
       shipping_3: boolean;
       shipping_3_days: string;
       shipping_3_price: string;
-      shipping_to_country_one: string;
-      shipping_to_country_two: string;
-      shipping_to_country_three: string;
-      shipping_to_country_four: string;
+      international: boolean;
+
     }) {
       let path = "/vendorcreateitem/create-item-main/" + this.item_id;
 
@@ -463,20 +461,9 @@ export default defineComponent({
             response.data.shipping_price_3;
           this.CreateItemForm.shippingInfo.shipping_3_days =
             response.data.shipping_day_3;
-          this.CreateItemForm.shippingInfo.destination_country_one =
-            response.data.item_title;
-          this.CreateItemForm.shippingInfo.destination_country_two =
-            response.data.item_title;
-          this.CreateItemForm.shippingInfo.destination_country_two_name =
-            response.data.item_title;
-          this.CreateItemForm.shippingInfo.destination_country_three =
-            response.data.item_title;
-          this.CreateItemForm.shippingInfo.destination_country_three_name =
-            response.data.item_title;
-          this.CreateItemForm.shippingInfo.destination_country_four =
-            response.data.item_title;
-          this.CreateItemForm.shippingInfo.destination_country_four_name =
-            response.data.item_title;
+          this.CreateItemForm.shippingInfo.international =
+            response.data.international;
+
         })
 
     },
@@ -561,14 +548,8 @@ export default defineComponent({
         shipping_info_0: this.CreateItemForm.shippingInfo.shipping_info_0,
         shipping_3_days: this.CreateItemForm.shippingInfo.shipping_3_days,
         shipping_3_price: this.CreateItemForm.shippingInfo.shipping_3_price,
-        shipping_to_country_one:
-          this.CreateItemForm.shippingInfo.shipping_to_country_one,
-        shipping_to_country_two:
-          this.CreateItemForm.shippingInfo.shipping_to_country_two,
-        shipping_to_country_three:
-          this.CreateItemForm.shippingInfo.shipping_to_country_three,
-        shipping_to_country_four:
-          this.CreateItemForm.shippingInfo.shipping_to_country_four,
+        international: this.CreateItemForm.shippingInfo.international,
+
       };
       this.v$.$validate(); // checks all inputs
 

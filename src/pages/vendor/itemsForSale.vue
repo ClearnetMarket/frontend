@@ -219,7 +219,7 @@ export default defineComponent({
       
         if (response.status == 200) {
           this.user = response.data.user
-     
+          console.log(this.user)
           if (response.data.user.user_admin == 0) {
             this.$router.push({ name: "home" });
           }

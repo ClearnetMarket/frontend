@@ -35,7 +35,7 @@
         <div v-if="shopping_cart_items_list">
          
           <div v-for="(item, index) in shopping_cart_items_list" :key="index">
-            <div v-if="item">
+            <div v-if="item.title_of_item">
             <div class="hover:bg-gray-100">
               <div class="grid grid-cols-12 px-1 py-1">
                 <!-- product -->

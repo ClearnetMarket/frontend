@@ -1,8 +1,9 @@
 <template>
     <!--Card 1 Type-->
-    <div @click="$router.replace({ name: 'MarketItem', params: { id: item.uuid } })" style="cursor: pointer">
+    
+    <div @click="$router.replace({ name: 'MarketItem', params: { id: item.uuid } })" style="cursor: pointer" class="">
       
-        <div class="rounded overflow-hidden border border-gray-200  text-center   shadow-md  w-42 h-42">
+        <div class=" rounded overflow-hidden border border-gray-200 text-center shadow-md w-42 h-42">
             <div class="flex justify-center w-full">
                 <div class=" w-48 h-48" v-if="item.image_one_url">
                     <img class="object-contain" :src="item.image_one_url" alt="No Image Found" />
@@ -32,8 +33,8 @@
             </div>
     
         </div>
-    
-    </div>
+        </div>
+   
 </template>
 
 <script lang="ts">

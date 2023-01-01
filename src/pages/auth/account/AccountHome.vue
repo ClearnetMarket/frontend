@@ -8,7 +8,7 @@
     <MainHeaderVendor v-show="user.user_admin === 1" />
   </div>
 
-  <div class="container max-w-7xl mx-auto px-10 wrapper">
+  <div class="container max-w-7xl mx-auto px-10 wrapper bg-gray-100">
     <!-- Container-->
     <div class="mt-5 mb-5">
       <nav class="rounded-md w-full">
@@ -34,7 +34,7 @@
       <div class="grid sm:grid-cols-1 md:grid-cols-3 gap-5 my-3 pb-40">
 
         <router-link :to="{ name: 'userorders' }">
-          <div class="col-span-1 border border-1 rounded-md p-5 hover:bg-gray-300" style="cursor: pointer">
+          <div class="col-span-1 border border-1 rounded-md p-5 bg-white hover:bg-gray-300" style="cursor: pointer">
             <div class="grid grid-cols-4 grid-rows-2">
               <div class="col-span-1 row-span-2"></div>
               <div class="col-span-3 row-span-1 text-[20px]">Orders</div>
@@ -45,7 +45,7 @@
           </div>
         </router-link>
         <router-link :to="{ name: 'changepassword' }">
-          <div class="col-span-1 border border-1 rounded-md p-5 hover:bg-gray-300" style="cursor: pointer">
+          <div class="col-span-1 border border-1 rounded-md p-5 bg-white hover:bg-gray-300" style="cursor: pointer">
             <div class="grid grid-cols-4 grid-rows-2">
               <div class="col-span-1 row-span-2"></div>
               <div class="col-span-3 row-span-1 text-[20px]">
@@ -58,7 +58,7 @@
           </div>
         </router-link>
         <router-link :to="{ name: 'changepin' }">
-          <div class="border border-1 rounded-md p-5 hover:bg-gray-300" style="cursor: pointer">
+          <div class="border border-1 rounded-md p-5 bg-white hover:bg-gray-300" style="cursor: pointer">
             <div class="grid grid-cols-4 grid-rows-2">
               <div class="col-span-1 row-span-2"></div>
               <div class="col-span-3 row-span-1 text-[20px]">Account Pin</div>
@@ -70,7 +70,7 @@
         </router-link>
 
         <router-link :to="{ name: 'userprofile', params: { uuid: user.user_id } }">
-          <div class="border border-1 rounded-md p-5 hover:bg-gray-300" style="cursor: pointer">
+          <div class="border border-1 rounded-md p-5 bg-white hover:bg-gray-300" style="cursor: pointer">
             <div class="grid grid-cols-4 grid-rows-2">
               <div class="col-span-1 row-span-2"></div>
               <div class="col-span-3 row-span-1 text-[20px]">Profile</div>
@@ -81,7 +81,7 @@
           </div>
         </router-link>
         <router-link :to="{ name: 'MsgHome' }">
-          <div class="border border-1 rounded-md p-5 hover:bg-gray-300" style="cursor: pointer">
+          <div class="border border-1 rounded-md p-5 bg-white hover:bg-gray-300" style="cursor: pointer">
             <div class="grid grid-cols-4 grid-rows-2">
               <div class="col-span-1 row-span-2"></div>
               <div class="col-span-3 row-span-1 text-[20px]">Messages</div>
@@ -92,7 +92,7 @@
           </div>
         </router-link>
         <router-link :to="{ name: 'defaultaddress' }">
-          <div class="border border-1 rounded-md p-5 hover:bg-gray-300" style="cursor: pointer">
+          <div class="border border-1 rounded-md p-5 bg-white hover:bg-gray-300" style="cursor: pointer">
             <div class="grid grid-cols-4 grid-rows-2">
               <div class="col-span-1 row-span-2"></div>
               <div class="col-span-3 row-span-1 text-[20px]">Shipping Address</div>
@@ -103,7 +103,7 @@
           </div>
         </router-link>
 
-        <div class="border border-1 rounded-md p-5 hover:bg-gray-300" style="cursor: pointer" @click.prevent="logout()">
+        <div class="border border-1 rounded-md p-5 bg-white hover:bg-gray-300" style="cursor: pointer" @click.prevent="logout()">
           <div class="grid grid-cols-4 grid-rows-2">
             <div class="col-span-1 row-span-2"></div>
             <div class="col-span-3 row-span-1 text-[20px]">Logout</div>

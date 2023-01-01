@@ -7,7 +7,7 @@
   <div v-if="user">
     <MainHeaderVendor v-show="user.user_admin === 1" />
   </div>
-  <div class="container max-w-7xl mx-auto">
+    <div class="container max-w-7xl mx-auto px-10 wrapper pb-72 bg-gray-100">
     <div class="mx-auto flex mb-5 px-10">
       <div class="mb-10 mt-5">
         <nav class="rounded-md">
@@ -24,7 +24,7 @@
         </nav>
       </div>
     </div>
-  </div>
+
 
   <ItemTop
     @UpdateCart="UpdateCart"
@@ -84,7 +84,7 @@
       v-bind:vendoruuid="vendoruuid"
     />
   </div>
-
+  </div>
   <MainFooter />
 </template>
 
@@ -202,7 +202,7 @@ export default defineComponent({
 
             }
           })
-          .catch(() => {this.user = null});
+          .catch(() => {this.user = 'null'});
 
     },
      getitem() {

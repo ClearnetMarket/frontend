@@ -1,17 +1,15 @@
 <template>
 
-  <div class="flex flex-col  px-5">
-
-  <div class="text-[24px] w-full ">Today Featured</div>
-
-
-    <div class="mt-5 mx-10 gap-5">
+  <div class=" flex flex-nowrap flex-col p-5 mb-10 mt-10 ">
+  
+    <div class=" text-[24px] ">Today Featured</div>
+    <div class="mt-5 mx-10 gap-5 flex">
       <div v-for="item in todayfeatured" :key="item.id">
-        <generic_item v-bind:item="item" />
+        <generic_item v-bind:item="item" class="flex-shrink" />
       </div>
     </div>
-    
-</div>
+  </div>
+
 
   
 </template>
@@ -71,3 +69,9 @@ export default defineComponent({
   },
 });
 </script>
+<style>
+.break {
+  flex-basis: 100%;
+  height: 0;
+}
+</style>

@@ -1,6 +1,6 @@
 
 <template>
-  <div class="max-w-7xl mx-auto px-10 pb-36 mt-20">
+  <div class="max-w-7xl mx-auto px-10 pb-36 mt-10 bg-white rounded-md">
     <div class="grid grid-cols-1 text-[20px] font-semibold text-gray-600 pb-4">
       Reviews
     </div>

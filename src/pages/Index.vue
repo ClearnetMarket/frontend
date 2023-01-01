@@ -15,7 +15,7 @@
     <MainHeaderVendor v-show="user.user_admin === 1" />
   </div>
 
-  <div class="max-w-7xl mx-auto flex mb-0  bg-text-white">
+  <div class="container max-w-7xl mx-auto  mb-0  bg-text-white ">
     <TodayFeatured />
   </div>
 

@@ -127,7 +127,14 @@ created() {
         headers: authHeader(),
       })
         .then((response) => {
+         
+          if ((response.status = 200)) {
         this.shopping_cart_count = response.data.status;
+          }
+          else{
+          
+            this.shopping_cart_count = 0
+          }
       });
     },
   },

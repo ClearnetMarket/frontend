@@ -8,7 +8,7 @@
     <MainHeaderVendor v-show="user.user_admin === 1" />
   </div>
   <!-- Top Stuff-->
-  <div class="container h-screen max-w-7xl mx-auto px-10">
+  <div class="container h-screen max-w-7xl mx-auto mb-40 px-10 bg-gray-100">
     <!-- Container-->
     <div class="mt-5 mb-5">
       <nav class="rounded-md w-full">
@@ -34,7 +34,7 @@
     </div>
 
     <form
-      class="shadow-md border-2 rounded-md px-8 pt-6 pb-8 mb-4 w-full mx-auto max-w-2xl"
+      class="bg-white  rounded-md px-8 pt-6 pb-8 mb-4 w-full mx-auto max-w-2xl"
       @submit.prevent="onSubmit"
     >
       <div class="grid grid-cols-12 gap-4">

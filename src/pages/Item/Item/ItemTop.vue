@@ -25,19 +25,14 @@
 
         <div class="flex pt-4 mb-1 justify-between">
           <div v-if="digitalcurrencyone === true">
-            <span class="text-sm font-semibold text-orange-500 mr-2 mb-2"
-              >Bitcoin</span
-            >
+            <span class="text-sm font-semibold text-orange-500 mr-2 mb-2">Bitcoin</span>
           </div>
           <div v-if="digitalcurrencythree === true">
             <span class="text-sm font-semibold text-orange-700 mr-2 mb-2">
-              Monero</span
-            >
+              Monero</span>
           </div>
           <div v-if="digitalcurrencytwo === true">
-            <span class="text-sm font-semibold text-green-600 mr-2 mb-2"
-              >Bitcoin Cash</span
-            >
+            <span class="text-sm font-semibold text-green-600 mr-2 mb-2">Bitcoin Cash</span>
           </div>
         </div>
         <div class="text-[24px] font-weight-bold text-gray-700 text-center">
@@ -93,18 +88,30 @@
       </div>
       <div class="col-span-1 px-5">
         <div class="flex justify-center mb-5">
-          <button
-            class="bg-yellow-500 hover:bg-zinc-400 hover:text-white rounded-lg text-black font-semibold py-2 px-10 focus:outline-none focus:shadow-outline content-center justify-center"
-            type="submit"
-            @click="addtocart()"
-          >
-            Add to Cart
-          </button>
+          <div v-if="user">
+            <div v-if="vendoruuid != user.user_id">
+              <button
+                class="bg-yellow-500 hover:bg-zinc-400 hover:text-white rounded-lg text-black font-semibold py-2 px-10 focus:outline-none focus:shadow-outline content-center justify-center"
+                type="submit" @click="addtocart()">
+                Add to Cart
+              </button>
+
+            </div>
+            <div v-else>
+              <div class="font-bold text-blie">
+                This is your item
+              </div>
+            </div>
+          </div>
+          <div v-else>
+            <button
+              class="bg-yellow-500 hover:bg-zinc-400 hover:text-white rounded-lg text-black font-semibold py-2 px-10 focus:outline-none focus:shadow-outline content-center justify-center"
+              type="submit">
+              Add to Cart
+            </button>
+          </div>
         </div>
-        <div
-          class="text-center mb-2 text-yellow-600 font-bold"
-          v-if="freeshipping === true"
-        >
+        <div class="text-center mb-2 text-yellow-600 font-bold" v-if="freeshipping === true">
           Free Shipping
         </div>
         <div class="flex flex-col">
@@ -129,15 +136,11 @@
                     <div v-if="vendoruuid">
                       <div class="flex">
                         <div class="">Sold by:</div>
-                        <router-link
-                          :to="{
-                            name: 'userprofile',
-                            params: { uuid: vendoruuid },
-                          }"
-                        >
-                          <div
-                            class="text-blue-500 hover:text-blue-300 hover:underline pl-3"
-                          >
+                        <router-link :to="{
+  name: 'userprofile',
+  params: { uuid: vendoruuid },
+}">
+                          <div class="text-blue-500 hover:text-blue-300 hover:underline pl-3">
                             {{ vendorname }} ({{ vendortotalsales }})
                           </div>
                         </router-link>
@@ -147,23 +150,14 @@
                   <div v-if="vendortotalsales > 0">
                     <div class="text-[12px] flex">
                       ({{ vendorrating }} Feedback rating
-                      <svg
-                        aria-hidden="true"
-                        focusable="false"
-                        data-prefix="fas"
-                        data-icon="star"
-                        class="w-4 text-yellow-500 mr-1"
-                        role="img"
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 576 512"
-                      >
-                        <path
-                          fill="currentColor"
-                          d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 
+                      <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="star"
+                        class="w-4 text-yellow-500 mr-1" role="img" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 576 512">
+                        <path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 
                             103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5
-                            105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z"
-                        ></path></svg
-                      >)
+                            105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z">
+                        </path>
+                      </svg>)
                     </div>
                   </div>
                   <div v-else>
@@ -171,30 +165,21 @@
                   </div>
 
                   <div v-if="vendoruuid">
-                    <div
-                      class="mb-2 text-[14px] text-blue-500 hover:text-blue-300 hover:underline pl-3 text-center"
-                    >
-                      <router-link
-                      v-if="user"
-                        :to="{
-                          name: 'MsgCreateItem',
-                          params: { uuid: vendoruuid, itemuuid: uuid },
-                        }"
-                      >
+                    <div class="mb-2 text-[14px] text-blue-500 hover:text-blue-300 hover:underline pl-3 text-center">
+                      <router-link v-if="user" :to="{
+  name: 'MsgCreateItem',
+  params: { uuid: vendoruuid, itemuuid: uuid },
+}">
                         Contact Seller
                       </router-link>
                     </div>
                   </div>
                   <div v-if="vendoruuid">
-                    <div
-                      class="text-[14px] text-blue-500 hover:text-blue-300 hover:underline pl-3 text-center"
-                    >
-                      <router-link
-                        :to="{
-                          name: 'userprofile',
-                          params: { uuid: vendoruuid },
-                        }"
-                      >
+                    <div class="text-[14px] text-blue-500 hover:text-blue-300 hover:underline pl-3 text-center">
+                      <router-link :to="{
+  name: 'userprofile',
+  params: { uuid: vendoruuid },
+}">
                         View Vendor Store
                       </router-link>
                     </div>
@@ -215,7 +200,7 @@ import axios from "axios";
 import { notify } from "@kyvg/vue3-notification";
 import { useRoute } from "vue-router";
 import authHeader from "../../../services/auth.header";
-import {mapGetters} from "vuex";
+import { mapGetters } from "vuex";
 
 export default defineComponent({
   name: "ItemTop",
@@ -253,7 +238,7 @@ export default defineComponent({
     "pricexmr",
   ],
 
-  data() {
+  data () {
     return {
       user: null,
       item_id: null,
@@ -264,35 +249,35 @@ export default defineComponent({
       exact_zipcode: "",
     };
   },
-  created() {
-    this.userstatus()
+  created () {
+    this.userstatus();
   },
 
-  mounted() {
+  mounted () {
     const item_id_route = useRoute();
     this.item_id = item_id_route.params.id;
   },
 
   methods: {
-    userstatus() {
+    userstatus () {
       axios({
         method: "get",
         url: "/auth/whoami",
         withCredentials: true,
         headers: authHeader(),
       })
-          .then((response) => {
-            if ((response.status = 200)) {
-              this.user = response.data.user
-              this.user.confirmed = response.data.user.confirmed
-              this.$store.dispatch("user", response.data.user);
-            }
-          })
-          .catch(() => {this.user = null});
+        .then((response) => {
+          if ((response.status = 200)) {
+            this.user = response.data.user
+            this.user.confirmed = response.data.user.confirmed
+            this.$store.dispatch("user", response.data.user);
+          }
+        })
+        .catch(() => { this.user = null });
     },
     // Add item to cart
-    addtocart() {
-       axios({
+    addtocart () {
+      axios({
         method: "post",
         url: "/checkout/add/" + this.item_id,
         headers: authHeader(),
@@ -319,19 +304,19 @@ export default defineComponent({
     },
 
     // Get How many items in shopping cart
-     get_shopping_cart_count() {
-       axios({
+    get_shopping_cart_count () {
+      axios({
         method: "get",
         url: "/info/user-cart-count",
         headers: authHeader(),
       })
-      .then((response) => {
-        console.log(response)
-        this.shopping_cart_count = response.data.status;
-        this.$emit("UpdateCart", this.shopping_cart_count);
-      });
+        .then((response) => {
+          console.log(response)
+          this.shopping_cart_count = response.data.status;
+          this.$emit("UpdateCart", this.shopping_cart_count);
+        });
     },
-    returncurrencysymbol(currencydigit: number) {
+    returncurrencysymbol (currencydigit: number) {
       if (currencydigit === 0) {
         return "$";
       } else if (currencydigit === 1) {
@@ -398,7 +383,7 @@ export default defineComponent({
         return "Kč";
       }
     },
-    returncurrency(currencydigit: number) {
+    returncurrency (currencydigit: number) {
       if (currencydigit === 0) {
         return "USD";
       } else if (currencydigit === 1) {
@@ -468,4 +453,6 @@ export default defineComponent({
   },
 });
 </script>
-<style></style>
+<style>
+
+</style>

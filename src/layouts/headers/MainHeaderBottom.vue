@@ -82,6 +82,8 @@
 import { defineComponent } from "vue";
 import axios from "axios";
 import { MenuIcon } from "@heroicons/vue/solid";
+import authHeader from "../../services/auth.header";
+
 
 export default defineComponent({
   name: "MainHeaderBottom",
@@ -96,9 +98,8 @@ export default defineComponent({
   },
 
   mounted() {
-    this.getbtcprice();
-    this.getbchprice();
-    this.getxmrprice();
+    this.userstatus();
+  
     this.getCategoryList();
   },
 
@@ -107,15 +108,40 @@ export default defineComponent({
     gotourl(nameofurl: string) {
       this.$router.replace({ name: nameofurl })
     },
+    userstatus () {
+      axios({
+        method: "get",
+        url: "/auth/whoami",
+        withCredentials: true,
+        headers: authHeader(),
+      }).then((response) => {
+        if ((response.status = 200)) {
+          this.getbtcprice_anon();
+          this.getbchprice_anon();
+          this.getxmrprice_anon();
+        }     
+        else {
+          
+          this.getbtcprice_anon();
+          this.getbchprice_anon();
+          this.getxmrprice_anon();
+         }
+      }).catch((error) => {
+       
+        this.getbtcprice_anon();
+        this.getbchprice_anon();
+        this.getxmrprice_anon();
+     });
+    },
     //  Get prices of current coins
      getxmrprice() {
        axios({
         method: "get",
         url: "/xmr/price",
+        headers: authHeader(),
       }).then((response) => {
         if (response.data) {
-          this.xmrprice = response.data.price_xmr_usd;
-
+          this.xmrprice = response.data.price_xmr;
         }
       });
     },
@@ -123,9 +149,11 @@ export default defineComponent({
        axios({
         method: "get",
         url: "/bch/price",
+        headers: authHeader(),
       }).then((response) => {
         if (response.data) {
-          this.bchprice = response.data.bch_price_usd;
+          this.bchprice = response.data.bch_price;
+       
         }
       });
     },
@@ -133,9 +161,43 @@ export default defineComponent({
        axios({
         method: "get",
         url: "/btc/price",
+        headers: authHeader(),
       }).then((response) => {
         if (response.data) {
-          this.btcprice = response.data.btc_price_usd;
+          this.btcprice = response.data.btc_price;
+        }
+      });
+    },
+    //  Get prices of current coins
+    getxmrprice_anon () {
+      axios({
+        method: "get",
+        url: "/xmr/price/usd",
+      }).then((response) => {
+        if (response.data) {
+          this.xmrprice = response.data.price_xmr;
+       
+
+        }
+      });
+    },
+    getbchprice_anon () {
+      axios({
+        method: "get",
+        url: "/bch/price/usd",
+      }).then((response) => {
+        if (response.data) {
+          this.bchprice = response.data.bch_price;
+        }
+      });
+    },
+    getbtcprice_anon () {
+      axios({
+        method: "get",
+        url: "/btc/price/usd",
+      }).then((response) => {
+        if (response.data) {
+          this.btcprice = response.data.btc_price;
         }
       });
     },
