@@ -1,5 +1,6 @@
 
 <template>
+    <div class="h-screen">
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
@@ -31,6 +32,7 @@
          <Searchitems :item='f' :selected-index='index' />
          </div>
     </div>
+  </div>
   </div>
   </div>
   <MainFooter />

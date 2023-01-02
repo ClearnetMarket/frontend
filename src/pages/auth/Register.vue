@@ -1,5 +1,6 @@
 
 <template>
+    <div class="h-screen">
   <HeaderPlain />
   <div class="container max-w-7xl mx-auto bg-gray-100">
     <div class="mx-auto max-w-lg flex items-center justify-centermt-36">
@@ -202,6 +203,7 @@
       </form>
     </div>
   </div>
+</div>
 </template>
 
 <script lang="ts">

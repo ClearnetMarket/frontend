@@ -1,9 +1,9 @@
 
 <template>
-  <div class="max-w-7xl mx-auto px-10 border-b mb-10">
-    <div class="grid sm:grid-cols-1 md:grid-cols-3 mt-5 gap-5">
+  <div class="max-w-7xl mx-auto px-10 mb-10 border-b-2  border-zinc-400">
+    <div class="grid sm:grid-cols-1 md:grid-cols-3 mt-5 gap-5 pb-10 ">
       <div class="col-span-1">Images</div>
-      <div class="col-span-1 px-5">
+      <div class="col-span-1 px-5 bg-white rounded-md">
         <div class="text-[20px] mb-1 font-bold">{{ title }}</div>
         <div class="border border-gray-400 mb-5"></div>
         <div class="flex gap-4">
@@ -86,7 +86,7 @@
           </div>
         </div>
       </div>
-      <div class="col-span-1 px-5">
+      <div class="col-span-1 px-5 bg-white rounded-md">
         <div class="flex justify-center mb-5">
           <div v-if="user">
             <div v-if="vendoruuid != user.user_id">

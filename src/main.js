@@ -7,8 +7,7 @@ import store from './store';
 import Axios from 'axios';
 import Notifications from '@kyvg/vue3-notification';
 
-
-const baseURL = 'http://localhost:5000';
+const baseURL = 'https://api.freeport.cash';
 
 Axios.defaults.baseURL = baseURL;
 

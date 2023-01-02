@@ -2,7 +2,7 @@
 </script>
 
 <template>
-    <html class="opensans bg-gray-100 h-screen">
+    <html class="opensans bg-gray-100">
 
   <router-view/>
 <notifications position="bottom left" />

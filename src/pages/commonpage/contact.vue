@@ -1,38 +1,39 @@
 
 <template>
-    <MainHeaderTop />
-    <MainHeaderMid />
-    <MainHeaderBottom />
+    <div class="h-screen">
+        <MainHeaderTop />
+        <MainHeaderMid />
+        <MainHeaderBottom />
 
-    <div v-if="user">
-        <MainHeaderVendor v-show="user.user_admin === 1" />
-    </div>
-
-    <div class="container  max-w-7xl mx-auto px-10 mt-2 ">
-        <div class="mt-5 mb-5">
-            <nav class="rounded-md w-full  ">
-                <ol class="list-reset flex  ">
-                    <li>
-                        <router-link :to="{ name: 'home' }">
-                            <a class="text-blue-600 hover:text-blue-700  ">Home</a>
-                        </router-link>
-                    </li>
-                    <li>
-                        <span class="text-gray-500 mx-2 mb-2 mt-2 bg-">/</span>
-                    </li>
-                </ol>
-            </nav>
+        <div v-if="user">
+            <MainHeaderVendor v-show="user.user_admin === 1" />
         </div>
-        <div class="bg-white rounded-md p-5 mb-5">
-            <div class=" text-[18px] font-bold  rounded-md">Contact us</div>
-            <div class="pb-5">
-                Our Email is admin@freeport.com
+
+        <div class="container  max-w-7xl mx-auto px-10 mt-2 ">
+            <div class="mt-5 mb-5">
+                <nav class="rounded-md w-full  ">
+                    <ol class="list-reset flex  ">
+                        <li>
+                            <router-link :to="{ name: 'home' }">
+                                <a class="text-blue-600 hover:text-blue-700  ">Home</a>
+                            </router-link>
+                        </li>
+                        <li>
+                            <span class="text-gray-500 mx-2 mb-2 mt-2 bg-">/</span>
+                        </li>
+                    </ol>
+                </nav>
             </div>
-            <div class="">If you have an issue on the site please Open a Ticket.</div>
+            <div class="bg-white rounded-md p-5 mb-5">
+                <div class=" text-[18px] font-bold  rounded-md">Contact us</div>
+                <div class="pb-5">
+                    Our Email is admin@freeport.com
+                </div>
+                <div class="">If you have an issue on the site please Open a Ticket.</div>
+            </div>
         </div>
+
     </div>
-
-
     <MainFooter />
 </template>
 

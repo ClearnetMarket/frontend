@@ -7,6 +7,7 @@
   <div v-if="user">
     <MainHeaderVendor v-show="user.user_admin === 1" />
   </div>
+  <div class="h-screen">
   <!-- Top Stuff-->
   <div class="container h-screen max-w-7xl mx-auto mb-40 px-10 bg-gray-100">
     <!-- Container-->
@@ -169,6 +170,7 @@
     </form>
     <!-- END Top Stuff-->
     <div class="grid sm:grid-cols-1 md:grid-cols-3 gap-5 my-3"></div>
+  </div>
   </div>
   <!-- END container-->
   <MainFooter />

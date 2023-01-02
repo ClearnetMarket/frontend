@@ -6,10 +6,10 @@
         <div class=" rounded overflow-hidden border border-gray-200 text-center shadow-md w-42 h-42">
             <div class="flex justify-center w-full">
                 <div class=" w-48 h-48" v-if="item.image_one_url">
-                    <img class="object-contain" :src="item.image_one_url" alt="No Image Found" />
+                    <img class="object-contain" :src="item.image_one_url" />
                 </div>
                 <div v-else class="">
-                    <img class="object-contain" src="../../assets/noimage.jpg" alt="No Image Found .." />
+                    <img class=" object-cover w-48 h-48" src="../../assets/noimage.jpg" alt="" />
                 </div>
             </div>
     
@@ -27,9 +27,9 @@
                 <span v-if="item.digital_currency_1 === true"
                     class="inline-block   px-3 py-1 text-sm font-semibold text-orange-500 mr-2 mb-2">BTC</span>
                 <span v-if="item.digital_currency_3 === true"
-                    class="inline-block bg-gray-200  px-3 py-1 text-sm font-semibold text-orange-700 mr-2 mb-2">XMR</span>
+                    class="inline-block   px-3 py-1 text-sm font-semibold text-orange-700 mr-2 mb-2">XMR</span>
                 <span v-if="item.digital_currency_2 === true"
-                    class="inline-block bg-gray-200  px-2 py-1 text-sm font-semibold text-green-600 mr-2 mb-2">BCH</span>
+                    class="inline-block  px-2 py-1 text-sm font-semibold text-green-600 mr-2 mb-2">BCH</span>
             </div>
     
         </div>

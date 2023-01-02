@@ -64,7 +64,7 @@ export default defineComponent({
 </script>
 <style>
 .footerclass {
-  position: fixed;
+
   bottom: 0;
 
 }

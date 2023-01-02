@@ -34,7 +34,7 @@ export default defineComponent({
       btcprice: null,
       xmrprice: null,
       bchprice: null,
-      confirmed: 0
+      confirmed: false,
     };
   },
   created () {

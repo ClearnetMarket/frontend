@@ -1,5 +1,6 @@
 
 <template>
+    <div class="h-screen">
   <HeaderPlain />
 
   <div class="container max-w-7xl mx-auto px-10">
@@ -125,6 +126,7 @@
       </form>
     </div>
   </div>
+</div>
 </template>
 
 <script lang="ts">

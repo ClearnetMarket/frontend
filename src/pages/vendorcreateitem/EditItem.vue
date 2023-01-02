@@ -1,4 +1,5 @@
 <template>
+    <div class="h-screen">
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
@@ -205,11 +206,11 @@
           </div>
         </form>
 
-
+      </div>
       </div>
     </div>
   </div>
-  <MainFooter />
+
 </template>
 
 <script lang="ts">

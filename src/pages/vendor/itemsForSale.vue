@@ -1,6 +1,6 @@
 
 <template>
-  <div class="">
+
     <MainHeaderTop />
     <MainHeaderMid />
     <MainHeaderBottom />
@@ -146,7 +146,7 @@
         </div>
       </div>
     </div>
-  </div>
+
 
   <MainFooter />
 </template>

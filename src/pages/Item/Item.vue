@@ -1,5 +1,6 @@
 
 <template>
+   
   <MainHeaderTop />
   <MainHeaderMid :key="shoppingcartcount" />
   <MainHeaderBottom />
@@ -7,6 +8,7 @@
   <div v-if="user">
     <MainHeaderVendor v-show="user.user_admin === 1" />
   </div>
+
     <div class="container max-w-7xl mx-auto px-10 wrapper pb-72 bg-gray-100">
     <div class="mx-auto flex mb-5 px-10">
       <div class="mb-10 mt-5">
@@ -85,6 +87,7 @@
     />
   </div>
   </div>
+
   <MainFooter />
 </template>
 

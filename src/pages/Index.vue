@@ -1,15 +1,11 @@
 <template >
-
+<div class="h-screen">
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
   <div v-if="user">
-
-   
       <Confirmed />
-
   </div>
-
 
   <div v-if="user">
     <MainHeaderVendor v-show="user.user_admin === 1" />
@@ -18,9 +14,8 @@
   <div class="container max-w-7xl mx-auto  mb-0  bg-text-white ">
     <TodayFeatured />
   </div>
-
+</div>
   <MainFooter />
-
 
 </template>
 

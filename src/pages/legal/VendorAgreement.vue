@@ -1,5 +1,6 @@
 
 <template>
+    <div class="h-screen">
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
@@ -23,7 +24,7 @@
         </ol>
       </nav>
     </div>
-    
+  </div>
   </div>
   <MainFooter />
 </template>

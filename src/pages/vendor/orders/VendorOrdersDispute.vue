@@ -1,5 +1,5 @@
 <template>
-
+  <div class="h-screen">
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
@@ -62,7 +62,7 @@
       <div v-else>You Currently have no disputes :)</div>
     </div>
   </div>
-
+  </div>
   <MainFooter />
 </template>
 

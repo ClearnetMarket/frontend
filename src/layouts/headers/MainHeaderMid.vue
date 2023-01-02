@@ -76,10 +76,11 @@ export default defineComponent({
       },
     };
   },
-created() {
-    this.userstatus()
-},
+  created() {
+  
+  },
   mounted() {
+    this.userstatus()
      this.get_shopping_cart_count();
   },
   methods: {
