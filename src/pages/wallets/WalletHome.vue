@@ -1,6 +1,6 @@
 
 <template>
-  <div class="h-screen">
+ 
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
@@ -9,7 +9,7 @@
     <MainHeaderVendor v-show="user.user_admin === 1" />
   </div>
   <!-- Top Stuff-->
-  <div class="container  max-w-7xl mx-auto px-10">
+  <div class="container max-w-7xl mx-auto px-10">
     <!-- Container-->
     <div class="mt-5 mb-5">
       <nav class="rounded-md w-full">
@@ -170,7 +170,7 @@
       </div>
     </div>
   </div>
-</div>
+
   <!-- END container-->
   <MainFooter />
 
@@ -211,6 +211,7 @@ export default defineComponent({
   },
   mounted () {
     this.userstatus();
+
     this.getbtcprice();
     this.getbchprice();
     this.getxmrprice();
@@ -272,10 +273,12 @@ export default defineComponent({
       axios({
         method: "get",
         url: "/xmr/price",
+        withCredentials: true,
+        headers: authHeader(),
       })
         .then((response) => {
           if (response.data) {
-            this.xmrprice = response.data.price_xmr_usd;
+            this.xmrprice = response.data.price_xmr;
           }
         });
     },
@@ -284,10 +287,12 @@ export default defineComponent({
       axios({
         method: "get",
         url: "/bch/price",
+        withCredentials: true,
+        headers: authHeader(),
       })
         .then((response) => {
           if (response.data) {
-            this.bchprice = response.data.bch_price_usd;
+            this.bchprice = response.data.bch_price;
           }
         });
     },
@@ -296,10 +301,12 @@ export default defineComponent({
       axios({
         method: "get",
         url: "/btc/price",
+        withCredentials: true,
+        headers: authHeader(),
       })
         .then((response) => {
           if (response.data) {
-            this.btcprice = response.data.btc_price_usd;
+            this.btcprice = response.data.btc_price;
           }
         });
     },
@@ -309,6 +316,7 @@ export default defineComponent({
       axios({
         method: "get",
         url: "/xmr/balance",
+        withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
         if (response.data) {

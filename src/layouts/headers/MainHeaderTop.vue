@@ -5,7 +5,9 @@
         <div class="invisible lg:visible col-span-1">
           <div class="flex flex-wrap  ml-5 text-white font-bold">
             <div class="px-3">English</div>
-            <div class="px-3">USD</div>
+            <div v-if="loaded === true">
+            <div class="px-3">{{ returncurrency (user.currency) }}</div>
+            </div>
           </div>
         </div>
         <div class="col-span-1">
@@ -82,6 +84,7 @@ export default defineComponent({
   data () {
     return {
       user: null,
+      loaded: false,
     };
   },
   methods: {
@@ -96,6 +99,7 @@ export default defineComponent({
           if ((response.status = 200)) {
 
             this.user = response.data.user;
+            this.loaded = true;
           }
         })
         .catch(() => {
@@ -108,6 +112,73 @@ export default defineComponent({
       this.$store.dispatch("user", null);
       this.userstatus();
       this.$router.push({ name: "home" });
+    },
+    returncurrency (currencydigit: number) {
+      if (currencydigit === 0) {
+        return "USD";
+      } else if (currencydigit === 1) {
+        return "PHP";
+      } else if (currencydigit === 2) {
+        return "CHF";
+      } else if (currencydigit === 3) {
+        return "SAD";
+      } else if (currencydigit === 4) {
+        return "SGD";
+      } else if (currencydigit === 5) {
+        return "RUB";
+      } else if (currencydigit === 6) {
+        return "DKK";
+      } else if (currencydigit === 7) {
+        return "RON";
+      } else if (currencydigit === 8) {
+        return "NOK";
+      } else if (currencydigit === 9) {
+        return "ILS";
+      } else if (currencydigit === 10) {
+        return "SEK";
+      } else if (currencydigit === 11) {
+        return "THB";
+      } else if (currencydigit === 12) {
+        return "BRL";
+      } else if (currencydigit === 13) {
+        return "INR";
+      } else if (currencydigit === 14) {
+        return "ZAR";
+      } else if (currencydigit === 14) {
+        return "HKD";
+      } else if (currencydigit === 16) {
+        return "JPY";
+      } else if (currencydigit === 17) {
+        return "HUF";
+      } else if (currencydigit === 18) {
+        return "MXN";
+      } else if (currencydigit === 19) {
+        return "CNY";
+      } else if (currencydigit === 20) {
+        return "AUD";
+      } else if (currencydigit === 21) {
+        return "PLN";
+      } else if (currencydigit === 22) {
+        return "GBP";
+      } else if (currencydigit === 23) {
+        return "TRY";
+      } else if (currencydigit === 24) {
+        return "KRW";
+      } else if (currencydigit === 25) {
+        return "IDR";
+      } else if (currencydigit === 26) {
+        return "NZD";
+      } else if (currencydigit === 27) {
+        return "MYR";
+      } else if (currencydigit === 28) {
+        return "BGN";
+      } else if (currencydigit === 29) {
+        return "EUR";
+      } else if (currencydigit === 31) {
+        return "HRK";
+      } else if (currencydigit === 30) {
+        return "CZK";
+      }
     },
   },
 });

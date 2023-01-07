@@ -8,17 +8,20 @@
       <div class="grid grid-cols-12 gap-4 mb-5">
         <div class="sm:col-span-12 md:col-span-6">
           <div class="grid grid-cols-12 gap-4">
-            <div class="col-span-3">Shipping From:</div>
-            <div class="col-span-9">{{ origincountry }}</div>
+            <div class="col-span-3 font-bold">Shipping From:</div>
+            <div class="col-span-9 ">{{ origin_country_name }}</div>
           </div>
-          <div class="grid grid-cols-12 gap-4">
-            <div class="col-span-3">Shipping To:</div>
-            <div class="col-span-9">
-              {{ destinationcountryone }}
-              {{ destinationcountrytwo }}
-              {{ destinationcountrythree }}
-              {{ destinationcountryfour }}
+          <div class="grid grid-cols-12 gap-4 ">
+            <div class="col-span-12 font-bold">
+              <div v-if="international === true">
+                Ships Internationally
+              </div>
+              <div v-else>
+                Domestic Shipping
+              </div>
             </div>
+
+
           </div>
         </div>
       </div>
@@ -26,53 +29,45 @@
         <div class="sm:col-span-12 md:col-span-12">Shipping Options:</div>
         <div class="sm:col-span-12 md:col-span-12">
           <div class="flex gap-4">
-          <div v-if="shippingfree === true">
-            <div
-              class="border border-1 rounded-md p-5 hover:bg-gray-100"
-      
-            >
-              <div class="grid grid-cols-4 grid-rows-2">
-           
-                <div class="col-span-3 row-span-1 text-[20px]">
-                  FREE SHIPPING
-                </div>
-                <div class="col-span-3 row-span-1 text-[14px] text-gray-600">
-                  Estimated in {{ shippingdayfree }} days
+            <div v-if="shippingfree === true">
+              <div class="border border-1 rounded-md p-5 ">
+                <div class="grid grid-cols-4 grid-rows-2">
+
+                  <div class="col-span-3 row-span-1 text-[20px]">
+                    FREE SHIPPING
+                  </div>
+                  <div class="col-span-3 row-span-1 text-[14px] text-gray-600">
+                    Estimated in {{ shippingdayfree }} days
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div v-if="shippingtwo === true">
-            <div
-              class="border border-1 rounded-md p-5 hover:bg-gray-100"
-            
-            >
-              <div class="grid grid-cols-4 grid-rows-2">
-              
-                <div class="col-span-3 row-span-1 text-[20px]">
-                 {{shippingpricetwo}} {{ returncurrencysymbol(currency) }}
-                </div>
-                <div class="col-span-3 row-span-1 text-[14px] text-gray-600">
-                  Estimated in {{ shippingdayfree }} days
+            <div v-if="shippingtwo === true">
+              <div class="border border-1 rounded-md p-5 ">
+                <div class="grid grid-cols-4 grid-rows-2">
+
+                  <div class="col-span-3 row-span-1 text-[20px]">
+                    {{ shippingpricetwo }} {{ returncurrencysymbol (currency) }}
+                  </div>
+                  <div class="col-span-3 row-span-1 text-[14px] ">
+                    Estimated in {{ shippingdayfree }} days
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div v-if="shippingthree === true">
-           <div
-              class="border border-1 rounded-md p-5 hover:bg-gray-100"
-            >
-              <div class="grid grid-cols-4 grid-rows-2">
-               
-                <div class="col-span-3 row-span-1 text-[20px]">
-                  {{shippingpricethree}} {{ returncurrencysymbol(currency) }}
-                </div>
-                <div class="col-span-3 row-span-1 text-[14px] text-gray-600">
-                  Estimated in {{ shippingdayfree }} days
+            <div v-if="shippingthree === true">
+              <div class="border border-1 rounded-md p-5 ">
+                <div class="grid grid-cols-4 grid-rows-2">
+
+                  <div class="col-span-3 row-span-1 text-[20px]">
+                    {{ shippingpricethree }} {{ returncurrencysymbol (currency) }}
+                  </div>
+                  <div class="col-span-3 row-span-1 text-[14px] ">
+                    Estimated in {{ shippingdayfree }} days
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
           </div>
         </div>
       </div>
@@ -86,11 +81,8 @@ import { defineComponent } from "vue";
 export default defineComponent({
   name: "ItemShipping",
   props: [
-    "origincountry",
-    "destinationcountryone",
-    "destinationcountrytwo",
-    "destinationcountrythree",
-    "destinationcountryfour",
+    "origin_country_name",
+    "international",
     "shippingfree",
     "shippingtwo",
     "shippingthree",
@@ -101,14 +93,14 @@ export default defineComponent({
     "shippingdaythree",
     "currency",
   ],
-  data() {
+  data () {
     return {};
   },
 
-  mounted() {},
+  mounted () { },
 
   methods: {
-    returncurrencysymbol(currencydigit: number) {
+    returncurrencysymbol (currencydigit: number) {
       if (currencydigit === 0) {
         return "$";
       } else if (currencydigit === 1) {

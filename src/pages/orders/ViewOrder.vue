@@ -1,6 +1,6 @@
 
 <template>
-    <div class="h-screen">
+
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
@@ -316,7 +316,7 @@
             <div
               class="grid grid-cols-12 rounded-md border border-gray-300 mb-5 p-5"
             >
-              <div class="col-span-12 text-[20px] mb-5">Leave Feedback</div>
+              <div class="col-span-12 text-[14px] mb-5">Leave Feedback</div>
               <div class="col-span-6">
                 <div class="col-span-12">Item Rating</div>
                 <div class="col-span-12 mb-5">
@@ -522,7 +522,7 @@
     </div>
     </div>
   </div>
-</div>
+
   <MainFooter />
 </template>
 

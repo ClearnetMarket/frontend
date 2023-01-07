@@ -1,6 +1,6 @@
 
 <template>
-    <div class="h-screen">
+<div class="h-screen">
   <HeaderPlain />
   <div class="container max-w-7xl mx-auto px-10">
     <div class="mt-5 mb-5">

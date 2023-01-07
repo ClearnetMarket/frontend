@@ -1,6 +1,6 @@
 
 <template>
-    <div class="h-screen">
+ 
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
@@ -27,7 +27,7 @@
     <div class="grid grid-cols-12 gap-4">
       <div class="col-span-9 px-10 py-10">
         <div class="grid grid-cols-4 border-b pb-8">
-          <h1 class="col-span-1 font-semibold text-2xl">Shopping Cart</h1>
+          <h1 class="col-span-2 font-semibold text-2xl">Shopping Cart</h1>
           <h2 class="col-span-1 col-start-4 font-semibold text-2xl">
             {{ order_summary_count }} Items
           </h2>
@@ -37,14 +37,14 @@
          
           <div v-for="(item, index) in shopping_cart_items_list" :key="index">
             <div v-if="item.title_of_item">
-            <div class="hover:bg-gray-100">
+            <div class="bg-white hover:bg-blue-300 p-5">
               <div class="grid grid-cols-12 px-1 py-1">
                 <!-- product -->
 
                 <div class="col-span-3">
                   <img
                     class="h-24"
-                    src="https://drive.google.com/uc?id=18KkAVkGFvaGNqPy2DIvTqmUH_nk39o3z"
+                    :src="item.image_of_item"
                     alt=""
                   />
                 </div>
@@ -151,7 +151,7 @@
           </div>
         </div>
         <div v-else>
-          <div class="hover:bg-gray-100">
+          <div class="hover:bg-blue-300">
             <div class="grid grid-cols-1 px-1 py-1">
               <div class="text-[20px] text-center">
                 No Items in your shopping cart!
@@ -165,14 +165,13 @@
 
         <div v-if="shopping_cart_items_saved_list">
           <div v-for="item in shopping_cart_items_saved_list">
-            <div class="hover:bg-gray-100">
+            <div class="hover:bg-blue-300 bg-white">
               <div class="grid grid-cols-12 px-1 py-1">
                 <!-- product -->
-
                 <div class="col-span-3">
                   <img
                     class="h-24"
-                    src="https://drive.google.com/uc?id=18KkAVkGFvaGNqPy2DIvTqmUH_nk39o3z"
+                      :src="item.image_of_item"
                     alt=""
                   />
                 </div>
@@ -226,7 +225,7 @@
         </div>
       </div>
 
-      <div class="col-span-3 px-8 py-10 border border-gray-300">
+      <div class="col-span-3 px-8 py-10 rounded-md  bg-white">
         <div class="grid grid-cols-1">
           <div class="col-span-1">
             <h1 class="font-semibold text-2xl border-b pb-8">Order Summary</h1>
@@ -272,13 +271,17 @@
                   Checkout
                 </button>
               </router-link>
+
+              <div class="text-black bg-blue-300 mt-5 mb-5 text-center font-bold">
+                Crypto Prices will be calculatd on next page
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+
   <MainFooter />
 </template>
 

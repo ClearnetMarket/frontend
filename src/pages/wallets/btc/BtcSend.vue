@@ -1,6 +1,6 @@
 
 <template>
-    <div class="h-screen">
+   
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
@@ -90,7 +90,7 @@
       </div>
     </div>
   </div>
-</div>
+
   <MainFooter />
 </template>
 
@@ -98,7 +98,6 @@
 import { defineComponent } from "vue";
 import axios from "axios";
 import { notify } from "@kyvg/vue3-notification";
-import { mapGetters } from "vuex";
 import MainHeaderTop from "../../../layouts/headers/MainHeaderTop.vue";
 import MainHeaderMid from "../../../layouts/headers/MainHeaderMid.vue";
 import MainHeaderBottom from "../../../layouts/headers/MainHeaderBottom.vue";

@@ -61,15 +61,15 @@
             </button>
           </router-link>
         </div>
-        <div class="mx-3 pt-2 text-[13px] font-bold">
+        <div class="mx-3 pt-2 text-[14px] font-bold">
           <div class="text-white">Bitcoin</div>
           <div class="pl-1">{{ btcprice }} USD</div>
         </div>
-        <div class="mx-3 pt-2 text-[13px] font-bold">
+        <div class="mx-3 pt-2 text-[14px] font-bold">
           <div class="text-white">Bitcoin Cash</div>
           <div class="pl-1">{{ bchprice }} USD</div>
         </div>
-        <div class="mx-3 pt-2 text-[13px] font-bold">
+        <div class="mx-3 pt-2 text-[14px] font-bold">
           <div class="text-white">Monero</div>
           <div class="pl-1 font-bold">{{ xmrprice }} USD</div>
         </div>

@@ -1,6 +1,6 @@
 
 <template>
-    <div class="h-screen">
+ 
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
@@ -93,7 +93,7 @@
       </form>
     </div>
   </div>
-</div>
+
   <MainFooter />
 </template>
 
@@ -185,7 +185,7 @@ validations() {
      onSubmit() {
       const payLoad = {accept: this.accept}
       this.v$.$validate(); 
-       console.log(this.v$.$error)
+
       if (this.v$.$error) {
        
         notify({

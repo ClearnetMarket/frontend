@@ -1,6 +1,6 @@
 
 <template>
-    <div class="h-screen">
+  
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
@@ -34,10 +34,16 @@
         </nav>
       </div>
     </div>
-    <div class="text-center text-[28px]">Checkout</div>
+    <div v-if="shopping_cart_items_list_count == 1">
+    <div class="text-center text-[28px] mb-10">Checkout ({{shopping_cart_items_list_count}} item)</div>
+  
+    </div>
+    <div v-else>
+      <div class="text-center text-[28px] mb-10">Checkout ({{shopping_cart_items_list_count}} items)</div>
+    </div>
     <div class="grid grid-cols-12 w-full gap-4">
-      <div class="col-span-9 grid-rows-3 px-10 py-10">
-        <div class="grid grid-cols-12 border-b border-gray-300 pb-4">
+      <div class="col-span-8 grid-rows-3 px-10 py-10 bg-white rounded-md p-5">
+        <div class="grid grid-cols-12 border-b border-gray-300 pb-4 mb-10">
           <div class="col-span-1 font-bold">1</div>
           <div class="col-span-3 font-bold text-">Shipping Options</div>
           <div class="col-span-6">
@@ -59,21 +65,21 @@
           </div>
         </div>
 
-        <div class="grid grid-cols-12 pb-4 pt-4">
+        <div class="grid grid-cols-12 pb-4 pt-4 border-b border-gray-300 mb-10">
           <div class="col-span-1 font-bold">2</div>
           <div class="col-span-3 font-bold">Payment Method</div>
           <div class="col-span-6">
             <div class="grid grid-cols-1">
               <div class="text-[12px]">
-                <div v-if="btcbalance === 0">BTC Balance: 0.00000000</div>
+                <div v-if="btcbalance == 0">BTC Balance: 0.00000000</div>
                 <div v-else>BTC Balance: {{ btcbalance }}</div>
               </div>
               <div class="text-[12px]">
-                <div v-if="bchbalance === 0">BCH Balance: 0.00000000</div>
+                <div v-if="bchbalance == 0">BCH Balance: 0.00000000</div>
                 <div v-else>BCH Balance: {{ bchbalance }}</div>
               </div>
               <div class="text-[12px]">
-                <div v-if="xmrbalance === 0">XMR Balance: 0.000000000000</div>
+                <div v-if="xmrbalance == 0">XMR Balance: 0.000000000000</div>
                 <div v-else>XMR Balance: {{ xmrbalance }}</div>
               </div>
             </div>
@@ -82,14 +88,15 @@
         </div>
 
         <div class="grid grid-cols-12 pb-4">
-          <div class="col-span-1 font-bold"></div>
-          <div class="col-span-11 text-">
+          <div class="col-span-1 font-bold">3</div>
+          <div class="col-span-6 font-bold">Review Items and Shipping</div>
+          <div class="col-span-11 mt-5">
             <div v-for="item in shopping_cart_items_list">
               <div class="grid grid-cols-12 gap-4 border border-gray-300 p-4">
                 <div class="col-span-2">
                   <img
                     class="h-24"
-                    src="https://drive.google.com/uc?id=18KkAVkGFvaGNqPy2DIvTqmUH_nk39o3z"
+                    :src="item.image_of_item"
                     alt=""
                   />
                 </div>
@@ -152,8 +159,8 @@
         </div>
       </div>
 
-      <div class="col-span-3 px-10 py-10">
-        <div class="grid grid-cols-1">
+      <div class="col-span-4 px-10 py-10 ">
+        <div class="grid grid-cols-1 bg-white rounded-md p-5">
           <div class="col-span-1">
             <h1 class="font-semibold text-2xl border-b pb-8">Order Summary</h1>
           </div>
@@ -212,7 +219,7 @@
       </div>
     </div>
   </div>
-</div>
+
   <MainFooter />
 </template>
 
@@ -253,6 +260,7 @@ export default defineComponent({
     return {
       user: null,
       shopping_cart_items_list: [],
+      shopping_cart_items_list_count: 0,
       xmrbalance: 0,
       bchbalance: 0,
       btcbalance: 0,
@@ -288,6 +296,7 @@ export default defineComponent({
     this.getbchprice();
     this.getbtcprice();
     this.get_shopping_cart_items();
+    this.get_shopping_cart_items_count();
     this.updateprices();
     this.get_shopping_cart_order_summary();
     this.getcurrentshipping();
@@ -357,7 +366,26 @@ export default defineComponent({
           this.shopping_cart_items_list = null;
         });
     },
-
+    get_shopping_cart_items_count () {
+      axios({
+        method: "get",
+        url: "/checkout/data/incart/count",
+        headers: authHeader(),
+        withCredentials: true,
+      })
+        .then((response) => {
+          this.cart_status = response.status;
+          if (this.cart_status == 200) {
+            this.shopping_cart_items_list_count = response.data.cart_count;
+          }
+          else {
+            this.shopping_cart_items_list_count = null;
+          }
+        })
+        .catch(() => {
+          this.shopping_cart_items_list_count = null;
+        });
+    },
      checkoutpaymenttype(event: any, item: any) {
       this.selectedpayment = event.target.value;
       let payLoad = {

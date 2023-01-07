@@ -28,6 +28,9 @@ import generic_item from "../item/generic_item.vue";
  @typedef {Object} item.currency
  @typedef {Object} item.price
  @typedef {Object} item.origin_country_name
+ @typedef {Object} item.digitalcurrencyone
+  @typedef {Object} item.digitalcurrencytwo
+   @typedef {Object} item.digitalcurrencythree
  *
  */
 

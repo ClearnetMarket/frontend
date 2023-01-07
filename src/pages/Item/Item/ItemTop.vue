@@ -1,9 +1,33 @@
 
 <template>
   <div class="max-w-7xl mx-auto px-10 mb-10 border-b-2  border-zinc-400">
-    <div class="grid sm:grid-cols-1 md:grid-cols-3 mt-5 gap-5 pb-10 ">
-      <div class="col-span-1">Images</div>
-      <div class="col-span-1 px-5 bg-white rounded-md">
+
+    <div class="grid sm:grid-cols-1 md:grid-cols-12 mt-5 gap-5 pb-10  ">
+      <div class="col-span-5"><!-- start column one -->
+
+
+          <div class="grid grid-cols-12 gap-4 px-1 ">
+            <div class="col-span-12 text-center flex items-center justify-center">
+              <img  class="h-96" :src="image_one_500" alt=""/>
+            </div>
+            <div class="col-span-12  gap-3 w-full flex">
+              <div class=" ">
+              <img  class="object-fit" :src="image_two_250" alt="" />
+              </div>
+              <div class=" ">
+                <img class="object-fit" :src="image_three_250" alt="" />
+              </div>
+              <div class="">
+                <img class="object-fit" :src="image_four_250" alt="" />
+              </div>
+             
+              </div>
+          </div>
+
+          
+      </div><!-- end column one -->
+
+      <div class="col-span-4 px-5 bg-white rounded-md"><!-- start column two -->
         <div class="text-[20px] mb-1 font-bold">{{ title }}</div>
         <div class="border border-gray-400 mb-5"></div>
         <div class="flex gap-4">
@@ -70,7 +94,7 @@
             <div class="col-span-3">Located:</div>
             <div class="col-span-9">
               {{ exactcity }} {{ exactstateorprovence }} {{ exactzipcode }}
-              {{ origincountry }}
+              {{ origin_country_name }}
             </div>
           </div>
 
@@ -85,8 +109,11 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="col-span-1 px-5 bg-white rounded-md">
+      </div><!-- end column two -->
+
+
+
+      <div class="col-span-3 px-5 bg-white rounded-md"><!-- start column three -->
         <div class="flex justify-center mb-5">
           <div v-if="user">
             <div v-if="vendoruuid != user.user_id">
@@ -95,7 +122,6 @@
                 type="submit" @click="addtocart()">
                 Add to Cart
               </button>
-
             </div>
             <div v-else>
               <div class="font-bold text-blie">
@@ -137,9 +163,9 @@
                       <div class="flex">
                         <div class="">Sold by:</div>
                         <router-link :to="{
-  name: 'userprofile',
-  params: { uuid: vendoruuid },
-}">
+                          name: 'userprofile',
+                          params: { uuid: vendoruuid },
+                        }">
                           <div class="text-blue-500 hover:text-blue-300 hover:underline pl-3">
                             {{ vendorname }} ({{ vendortotalsales }})
                           </div>
@@ -148,8 +174,8 @@
                     </div>
                   </div>
                   <div v-if="vendortotalsales > 0">
-                    <div class="text-[12px] flex">
-                      ({{ vendorrating }} Feedback rating
+                    <div class="text-[14px] flex">
+                      ({{ vendorrating }}/10 Feedback rating
                       <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="star"
                         class="w-4 text-yellow-500 mr-1" role="img" xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 576 512">
@@ -165,11 +191,11 @@
                   </div>
 
                   <div v-if="vendoruuid">
-                    <div class="mb-2 text-[14px] text-blue-500 hover:text-blue-300 hover:underline pl-3 text-center">
+                    <div class="mb-5 mt-5 text-[14px] text-blue-500 hover:text-blue-300 hover:underline pl-3 text-center">
                       <router-link v-if="user" :to="{
-  name: 'MsgCreateItem',
-  params: { uuid: vendoruuid, itemuuid: uuid },
-}">
+                        name: 'MsgCreateItem',
+                        params: { uuid: vendoruuid, itemuuid: uuid },
+                      }">
                         Contact Seller
                       </router-link>
                     </div>
@@ -177,9 +203,9 @@
                   <div v-if="vendoruuid">
                     <div class="text-[14px] text-blue-500 hover:text-blue-300 hover:underline pl-3 text-center">
                       <router-link :to="{
-  name: 'userprofile',
-  params: { uuid: vendoruuid },
-}">
+                        name: 'userprofile',
+                        params: { uuid: vendoruuid },
+                      }">
                         View Vendor Store
                       </router-link>
                     </div>
@@ -189,7 +215,10 @@
             </div>
           </div>
         </div>
-      </div>
+      </div><!-- end column three -->
+
+
+
     </div>
   </div>
 </template>
@@ -200,7 +229,7 @@ import axios from "axios";
 import { notify } from "@kyvg/vue3-notification";
 import { useRoute } from "vue-router";
 import authHeader from "../../../services/auth.header";
-import { mapGetters } from "vuex";
+
 
 export default defineComponent({
   name: "ItemTop",
@@ -208,7 +237,7 @@ export default defineComponent({
     "uuid",
     "condition",
     "itemcount",
-    "origincountry",
+    "origin_country_name",
     "totalsold",
     "title",
     "currency",
@@ -217,10 +246,14 @@ export default defineComponent({
     "vendorrating",
     "vendoruuid",
     "freeshipping",
-    "imageoneserver",
-    "imagetwoserver",
-    "imagethreeserver",
-    "imagefourserver",
+    "image_one_250",
+    "image_two_250",
+    "image_three_250",
+    "image_four_250",
+    "image_one_500",
+    "image_two_500",
+    "image_three_500",
+    "image_four_500",
     "digitalcurrencyone",
     "digitalcurrencytwo",
     "digitalcurrencythree",
@@ -280,9 +313,11 @@ export default defineComponent({
       axios({
         method: "post",
         url: "/checkout/add/" + this.item_id,
+        withCredentials: true,
         headers: authHeader(),
       })
         .then((response) => {
+         
           if ((response.status = 200)) {
             notify({
               title: "Shoppinng cart message",
@@ -311,7 +346,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          console.log(response)
+   
           this.shopping_cart_count = response.data.status;
           this.$emit("UpdateCart", this.shopping_cart_count);
         });

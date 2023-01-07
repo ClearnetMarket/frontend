@@ -9,7 +9,7 @@
       <MainHeaderVendor v-show="user.user_admin === 1" />
     </div>
   
-    <div class="container max-w-7xl mx-auto px-10 wrapper pb-72 bg-gray-100">
+    <div class="container max-w-4xl mx-auto px-10 wrapper pb-72 bg-gray-100">
       <div class="mt-5">
         <nav class="rounded-md w-full">
           <ol class="list-reset flex">
@@ -39,7 +39,7 @@
 
         <div class="mt-10 grid grid-cols-12 pb-20 gap-4">
 
-          <div v-for="item in items" class="col-span-10 col-start-2 p-5">
+          <div v-for="item in items" class="col-span-12  p-5">
             <div class="bg-white rounded-md ">
             <div class="grid grid-cols-12 grid-row-5 ">
              
@@ -50,12 +50,13 @@
              
             </div>
             <div class="grid grid-cols-12   rounded-md p-2">
-              
+            
               <div class="col-span-2">
-                <img :alt="item.image_one_server" class="w-48 h-48 overflow-hidden" :src="item.image_one_url" />
+                  <div @click="$router.replace({ name: 'MarketItem', params: { id: item.uuid } })" style="cursor: pointer" class="">
+                <img alt="../../assets/noimage.jpg" class=" " :src="item.image_one_url_250" />
               </div>
-
-              <div class="col-span-8">
+            </div>
+              <div class="col-span-8 px-3">
               
                 <div class="grid grid-cols-12 grid-row-5">
                   <div class="col-span-12 text-center text-[18px] px-1">
@@ -67,7 +68,7 @@
                   </div>
                
                   <div class="flex gap-4 col-span-12 text-[14px] p-1">
-                    <div class="">
+                    <div class="font-bold">
                     Online Status:
                     </div>
                     <div v-if="item.online === 0" 
@@ -78,32 +79,35 @@
                     </div>
                     <div v-else 
                     class="text-green-500">
+                    <div class="">
+                      
                     online
+                    </div>
                   </div>
                   </div>
                   <div class="col-span-12 text-[14px] p-1 flex gap-4">
-                    <div class="">Total Sold:</div>
+                    <div class="font-bold">Total Sold:</div>
                     <div class="">{{ item.total_sold }}</div>
                     
                   </div>
                   <div class="col-span-12 text-[14px] p-1 flex gap-4">
-                    <div class="">Total Views:</div>
+                    <div class="font-bold">Total Views:</div>
                     <div class="">{{ item.view_count }}</div> 
                   </div>
                   <div class="col-span-12 text-[14px] p-1 flex gap-4">
-                    <div class="">Item Quantity:</div> 
+                    <div class="font-bold">Item Quantity:</div> 
                     <div class="">{{ item.item_count }}</div>
                     
                   </div>
                   <div class="col-span-12 text-[14px] p-1 flex gap-4">
-                    <div class="">Item Price:</div>
+                    <div class="font-bold">Item Price:</div>
                     <div class="">{{ item.price }}{{ returncurrencysymbol(item.currency) }}</div>
                   </div>
             
               </div>
               </div>
 
-              <div class="col-span-2">
+              <div class="col-span-2 px-3">
 
                 <div class="mb-2">
                   <div v-if="item.online === 0">
@@ -219,7 +223,7 @@ export default defineComponent({
       
         if (response.status == 200) {
           this.user = response.data.user
-          console.log(this.user)
+        
           if (response.data.user.user_admin == 0) {
             this.$router.push({ name: "home" });
           }

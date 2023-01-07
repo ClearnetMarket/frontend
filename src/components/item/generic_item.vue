@@ -1,29 +1,26 @@
 <template>
     <!--Card 1 Type-->
-    
+
     <div @click="$router.replace({ name: 'MarketItem', params: { id: item.uuid } })" style="cursor: pointer" class="">
-      
+
         <div class=" rounded overflow-hidden border border-gray-200 text-center shadow-md w-42 h-42">
             <div class="flex justify-center w-full">
-                <div class=" w-48 h-48" v-if="item.image_one_url">
-                    <img class="object-contain" :src="item.image_one_url" />
+                <div class="w-48 h-48 px-2" v-if="item.image_one_url_250">
+                    <img class="object-contain" :src="item.image_one_url_250" />
                 </div>
                 <div v-else class="">
                     <img class=" object-cover w-48 h-48" src="../../assets/noimage.jpg" alt="" />
                 </div>
             </div>
-    
+
             <!--- Price and Currency -->
-            <div class=" text-[18px] font-bold h-4">
-                {{ item.price }} {{ returncurrencysymbol(item.currency) }}
+            <div class="flex justify-center text-[18px] font-bold h-4">
+                {{ item.price }} {{ returncurrencysymbol (item.currency) }}
             </div>
-            <!--- Location -->
-            <div class="text-[11px] h-6  overflow-hidden p-2 text-gray-500">
-                {{ item.origin_country_name }}
-            </div>
+
             <!--- Currency accepted bubbles -->
             <div class="flex justify-center pt-2">
-    
+
                 <span v-if="item.digital_currency_1 === true"
                     class="inline-block   px-3 py-1 text-sm font-semibold text-orange-500 mr-2 mb-2">BTC</span>
                 <span v-if="item.digital_currency_3 === true"
@@ -31,28 +28,79 @@
                 <span v-if="item.digital_currency_2 === true"
                     class="inline-block  px-2 py-1 text-sm font-semibold text-green-600 mr-2 mb-2">BCH</span>
             </div>
-    
         </div>
-        </div>
-   
+    </div>
+
 </template>
 
 <script lang="ts">
 
 import { defineComponent } from "vue";
+import axios from "axios";
 
 export default defineComponent({
     name: "generic_item",
     props: [
         "item",
-        
+
     ],
     data () {
-        return {};
+        return {
+            coin: [],
+
+        };
     },
-    mounted () {},
+    mounted () { },
     computed: {},
     methods: {
+        getpricebtc (currency: number, price: number) {
+            axios({
+                method: "get",
+                url: "/price/btcprice/" + currency + "/" + price,
+                withCredentials: true,
+            })
+                .then((response) => {
+                    if ((response.status = 200)) {
+
+                        return response.data.coin;
+                    }
+                })
+                .catch((error) => {
+
+                });
+        },
+        getpricebch (currency: number, price: number) {
+            axios({
+                method: "get",
+                url: "/price/bchprice/" + currency + "/" + price,
+                withCredentials: true,
+            })
+                .then((response) => {
+                    if ((response.status = 200)) {
+                        return response.data.coin;
+                    }
+                })
+                .catch((error) => {
+
+                });
+
+        },
+        getpricexmr (currency: number, price: number) {
+            axios({
+                method: "get",
+                url: "/price/xmrprice/" + currency + "/" + price,
+                withCredentials: true,
+            })
+                .then((response) => {
+                    if ((response.status = 200)) {
+                        let x = response.data.coin;
+                        return x
+                    }
+                })
+                .catch((error) => {
+
+                });
+        },
         returncurrencysymbol (currencydigit: number) {
             if (currencydigit === 0) {
                 return "$";

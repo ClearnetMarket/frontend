@@ -1,4 +1,5 @@
 <template>
+  
   <div v-if="marketitem">
 
     <div class="text-[18px] mt-5 mb-5">Images</div>
@@ -10,8 +11,7 @@
             <div class="block bg-cover bg-center">
               <div class="flex flex-col">
                 <div class="font-bold text-center">Main Image</div>
-                <img :alt="marketitem.image_one_server" class="w-48 h-48 overflow-hidden"
-                  :src="marketitem.image_one_url" />
+                <img :alt="marketitem.image_one_server" class="w-48 h-48 overflow-hidden" :src="marketitem.image_one_url_250" />
                 <button
                   class="bg-red-600 mt-5 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                   type="submit" @click="deleteitemimage1(marketitem.image_one_server)">
@@ -38,7 +38,7 @@
             <div class="block bg-cover bg-center">
               <div class="flex flex-col">
                 <div class="font-bold text-center">Image Two</div>
-                <img alt="" class="w-48 h-48" src="https://picsum.photos/50/50" />
+                <img alt="" class="w-48 h-48" :src="marketitem.image_two_url_250" />
                 <button
                   class="bg-red-600 mt-5 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                   type="submit" @click="deleteitemimage2(marketitem.image_two_server)">
@@ -64,7 +64,7 @@
             <div class="block bg-cover bg-center">
               <div class="flex flex-col">
                 <div class="font-bold text-center">Image Three</div>
-                <img alt="" class="w-48 h-48" src="https://picsum.photos/50/50" />
+                <img alt="" class="w-48 h-48" :src="marketitem.image_three_url_250" />
               </div>
               <div class="flex flex-col">
                 <button
@@ -92,7 +92,7 @@
             <div class="block bg-cover bg-center">
               <div class="flex flex-col">
                 <div class="font-bold text-center">Image Four</div>
-                <img alt="" class="w-48 h-48" src="https://picsum.photos/50/50" />
+                <img alt="" class="w-48 h-48" :src="marketitem.image_four_url_250" />
               </div>
               <div class="flex flex-col">
                 <button class="bg-red-600 mt-5 hover:bg-zinc-400 text-white font-bold py-2 px-4
@@ -200,8 +200,6 @@ export default defineComponent({
               this.visibleform1 = true
             }
 
-
-
             this.image_2_in_db = this.marketitem.image_two_server == null;
 
             if (this.image_2_in_db == false) {
@@ -213,7 +211,6 @@ export default defineComponent({
               this.visibleform2 = true
             }
 
-
             this.image_3_in_db = this.marketitem.image_three_server == null;
             if (this.image_3_in_db == false) {
               this.visibledelete3 = true
@@ -223,7 +220,6 @@ export default defineComponent({
               this.visibledelete3 = false
               this.visibleform3 = true
             }
-
 
             this.image_4_in_db = this.marketitem.image_four_server == null;
             if (this.image_4_in_db == false) {
@@ -247,9 +243,7 @@ export default defineComponent({
           formData.append('image_main', fileInput1.files[0])
           this.visibledelete1 = true;
           this.visibleform1 = false;
-
         }
-
       }
       if (this.$refs.fileInput2 !== null) {
         const fileInput2 = this.$refs.fileInput2 as HTMLInputElement
@@ -257,9 +251,7 @@ export default defineComponent({
           formData.append('image_two', fileInput2.files[0])
           this.visibledelete2 = true;
           this.visibleform2 = false;
-
         }
-
       }
       if (this.$refs.fileInput3 !== null) {
         const fileInput3 = this.$refs.fileInput3 as HTMLInputElement
@@ -276,9 +268,7 @@ export default defineComponent({
           formData.append('image_four', fileInput4.files[0])
           this.visibledelete4 = true;
           this.visibleform4 = false;
-
         }
-
       }
 
       let path = "/vendorcreateitem/create-item-images/" + this.item_id;
@@ -290,8 +280,6 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-
-
           if (response.data.status == "success") {
             // if any images uploaded success
             notify({
@@ -400,7 +388,6 @@ export default defineComponent({
       })
         .then((response) => {
 
-
           if (response.status == 200) {
             // if any images uploaded success
             notify({
@@ -411,14 +398,10 @@ export default defineComponent({
             this.visibledelete1 = false;
             this.marketitem.image_one_server = null;
             this.visibleform1 = true;
-
           }
         })
         .catch((error) => {
-          if (error.response) {
-
-
-          }
+          if (error.response) {}
         }).finally()
         ;
     },
@@ -448,10 +431,7 @@ export default defineComponent({
           }
         })
         .catch((error) => {
-          if (error.response) {
-
-
-          }
+          if (error.response) {}
         }).finally()
         ;
     },
@@ -513,10 +493,7 @@ export default defineComponent({
           }
         })
         .catch((error) => {
-          if (error.response) {
-
-
-          }
+          if (error.response) {}
         }).finally()
         ;
     },

@@ -1,6 +1,6 @@
 
 <template>
-   
+
   <MainHeaderTop />
   <MainHeaderMid :key="shoppingcartcount" />
   <MainHeaderBottom />
@@ -9,9 +9,9 @@
     <MainHeaderVendor v-show="user.user_admin === 1" />
   </div>
 
-    <div class="container max-w-7xl mx-auto px-10 wrapper pb-72 bg-gray-100">
-    <div class="mx-auto flex mb-5 px-10">
-      <div class="mb-10 mt-5">
+  <div class="container max-w-7xl mx-auto px-5 wrapper pb-72 bg-gray-100">
+    <div class="mx-auto flex mb-1 px-10">
+      <div class="mt-1">
         <nav class="rounded-md">
           <ol class="list-reset flex bg-red">
             <li>
@@ -28,64 +28,30 @@
     </div>
 
 
-  <ItemTop
-    @UpdateCart="UpdateCart"
-    v-bind:uuid="item_id"
-    v-bind:condition="condition"
-    v-bind:digitalcurrencyone="digitalcurrencyone"
-    v-bind:digitalcurrencytwo="digitalcurrencytwo"
-    v-bind:digitalcurrencythree="digitalcurrencythree"
-    v-bind:title="title"
-    v-bind:price="price"
-    v-bind:pricebtc="pricebtc"
-    v-bind:pricebch="pricebch"
-    v-bind:pricexmr="pricexmr"
-    v-bind:itemcount="itemcount"
-    v-bind:origincountry="origincountry"
-    v-bind:freeshipping="freeshipping"
-    v-bind:freeshippingdays="freeshippingdays"
-    v-bind:shippingtwo="shippingtwo"
-    v-bind:shippingtwodays="shippingdaytwo"
-    v-bind:shippingthree="shippingthree"
-    v-bind:shippingthreedays="shippingdaythree"
-    v-bind:totalsold="totalsold"
-    v-bind:currency="currency"
-    v-bind:vendorname="vendorname"
-    v-bind:vendoruuid="vendoruuid"
-    v-bind:vendortotalsales="vendortotalsales"
-    v-bind:vendorrating="vendorrating"
-    v-bind:imageoneserver="imageoneserver"
-    v-bind:imagetwoserver="imagetwoserver"
-    v-bind:imagethreeserver="imagethreeserver"
-    v-bind:imagefourserver="imagefourserver"
-    v-bind:exactcity="exactcity"
-    v-bind:exactstateorprovence="exactstateorprovence"
-    v-bind:exactzipcode="exactzipcode"
-  />
-  <ItemDescription v-bind:description="description" />
+    <ItemTop @UpdateCart="UpdateCart" v-bind:uuid="item_id" v-bind:condition="condition"
+      v-bind:digitalcurrencyone="digitalcurrencyone" v-bind:digitalcurrencytwo="digitalcurrencytwo"
+      v-bind:digitalcurrencythree="digitalcurrencythree" v-bind:title="title" v-bind:price="price"
+      v-bind:pricebtc="pricebtc" v-bind:pricebch="pricebch" v-bind:pricexmr="pricexmr" v-bind:itemcount="itemcount"
+      v-bind:origin_country_name="origin_country_name" v-bind:freeshipping="freeshipping"
+      v-bind:freeshippingdays="freeshippingdays" v-bind:shippingtwo="shippingtwo"
+      v-bind:shippingtwodays="shippingdaytwo" v-bind:shippingthree="shippingthree"
+      v-bind:shippingthreedays="shippingdaythree" v-bind:totalsold="totalsold" v-bind:currency="currency"
+      v-bind:vendorname="vendorname" v-bind:vendoruuid="vendoruuid" v-bind:vendortotalsales="vendortotalsales"
+      v-bind:vendorrating="vendorrating" v-bind:image_one_250="image_one_250" v-bind:image_two_250="image_two_250"
+      v-bind:image_three_250="image_three_250" v-bind:image_four_250="image_four_250"
+      v-bind:image_one_500="image_one_500" v-bind:image_two_500="image_two_500" v-bind:image_three_500="image_three_500"
+      v-bind:image_four_500="image_four_500" v-bind:exactcity="exactcity"
+      v-bind:exactstateorprovence="exactstateorprovence" v-bind:exactzipcode="exactzipcode" />
+    <ItemDescription v-bind:description="description" />
 
-  <ItemShipping
-    v-bind:origincountry="origincountry"
-    v-bind:destinationcountryone="destinationcountryone"
-    v-bind:destinationcountrytwo="destinationcountrytwo"
-    v-bind:destinationcountrythree="destinationcountrythree"
-    v-bind:destinationcountryfour="destinationcountryfour"
-    v-bind:shippingfree="shippingfree"
-    v-bind:shippingtwo="shippingtwo"
-    v-bind:shippingthree="shippingthree"
-    v-bind:shippingpricetwo="shippingpricetwo"
-    v-bind:shippingdayfree="shippingdayfree"
-    v-bind:shippingdaytwo="shippingdaytwo"
-    v-bind:shippingpricethree="shippingpricethree"
-    v-bind:shippingdaythree="shippingdaythree"
-    v-bind:currency="currency"
-  />
-  <div v-if="loaded_feedback">
-    <ItemUserReviews
-      v-bind:vendorreviews="vendorreviews"
-      v-bind:vendoruuid="vendoruuid"
-    />
-  </div>
+    <ItemShipping v-bind:origin_country_name="origin_country_name" v-bind:international="international"
+      v-bind:shippingfree="shippingfree" v-bind:shippingtwo="shippingtwo" v-bind:shippingthree="shippingthree"
+      v-bind:shippingpricetwo="shippingpricetwo" v-bind:shippingdayfree="shippingdayfree"
+      v-bind:shippingdaytwo="shippingdaytwo" v-bind:shippingpricethree="shippingpricethree"
+      v-bind:shippingdaythree="shippingdaythree" v-bind:currency="currency" />
+    <div v-if="loaded_feedback">
+      <ItemUserReviews v-bind:vendorreviews="vendorreviews" v-bind:vendoruuid="vendoruuid" />
+    </div>
   </div>
 
   <MainFooter />
@@ -102,7 +68,6 @@ import MainHeaderBottom from "../../layouts/headers/MainHeaderBottom.vue";
 import MainHeaderVendor from "../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../layouts/footers/FooterMain.vue";
 import ItemDescription from "./Item/ItemDescription.vue";
-import ItemImages from "./Item/ItemImages.vue";
 import ItemUserReviews from "./Item/ItemUserReviews.vue";
 import ItemTop from "./Item/ItemTop.vue";
 import ItemShipping from "./Item/ItemShipping.vue";
@@ -127,14 +92,13 @@ export default defineComponent({
     MainHeaderVendor,
     MainFooter,
     ItemDescription,
-    ItemImages,
     ItemUserReviews,
     ItemTop,
     ItemShipping,
     ItemSimiliarItems,
   },
 
-  data() {
+  data () {
     return {
       item_id: null,
       item: null,
@@ -148,26 +112,31 @@ export default defineComponent({
       pricebch: "",
       pricexmr: "",
       digitalcurrencyone: false,
-      digitalcurrencytwo: true,
+      digitalcurrencytwo: false,
       digitalcurrencythree: false,
       itemcount: "",
       freeshipping: false,
       freeshippingdays: 0,
       totalsold: 0,
-      origincountry: "",
+      origin_country_name: "",
       vendorname: "",
       vendoruuid: "",
       vendortotalsales: 0,
       vendorrating: "",
-      imageoneserver: "",
-      imagetwoserver: "",
-      imagethreeserver: "",
-      imagefourserver: "",
+
+      image_one_250: "",
+      image_two_250: "",
+      image_three_250: "",
+      image_four_250: "",
+
+      image_one_500: "",
+      image_two_500: "",
+      image_three_500: "",
+      image_four_500: "",
+
       description: "",
-      destinationcountryone: "",
-      destinationcountrytwo: "",
-      destinationcountrythree: "",
-      destinationcountryfour: "",
+      international: false,
+
       shippingfree: false,
       shippingtwo: false,
       shippingthree: false,
@@ -186,62 +155,65 @@ export default defineComponent({
     };
   },
 
-  mounted() {
+  mounted () {
     this.userstatus();
     this.getitem();
   },
 
   methods: {
-    userstatus() {
+    userstatus () {
       axios({
         method: "get",
         url: "/auth/whoami",
         withCredentials: true,
         headers: authHeader(),
       })
-          .then((response) => {
-            if ((response.status = 200)) {
-              this.user = response.data.user
+        .then((response) => {
+          if ((response.status = 200)) {
+            this.user = response.data.user
 
-            }
-          })
-          .catch(() => {this.user = 'null'});
+          }
+        })
+        .catch(() => { this.user = 'null' });
 
     },
-     getitem() {
+    getitem () {
       let item_id_route = useRoute();
       this.item_id = item_id_route.params.id;
-       axios({
+      axios({
         method: "get",
         url: "/item/" + this.item_id,
         withCredentials: true,
       })
         .then((response) => {
           if ((response.status = 200)) {
-      
+
             this.item = response.data;
             this.title = response.data.item_title;
             this.itemcount = response.data.item_count;
+            this.totalsold = response.data.total_sold;
+            this.description = response.data.item_description;
+            this.vendorname = response.data.vendor_display_name;
+
             this.digitalcurrencyone = response.data.digital_currency_1;
             this.digitalcurrencytwo = response.data.digital_currency_2;
             this.digitalcurrencythree = response.data.digital_currency_3;
-            this.imageoneserver = response.data.image_one_server;
-            this.imagetwoserver = response.data.image_two_server;
-            this.imagethreeserver = response.data.image_three_server;
-            this.imagefourserver = response.data.image_four_server;
-            this.totalsold = response.data.total_sold;
+
+            this.image_one_250 = response.data.image_one_url_250;
+            this.image_two_250 = response.data.image_two_url_250;
+            this.image_three_250 = response.data.image_three_url_250;
+            this.image_four_250 = response.data.image_four_url_250;
+
+            this.image_one_500 = response.data.image_one_url_500;
+            this.image_two_500 = response.data.image_two_url_500;
+            this.image_three_500 = response.data.image_three_url_500;
+            this.image_four_500 = response.data.image_four_url_500;
+
+            this.origin_country_name = response.data.origin_country_name;
+            this.international = response.data.international;
+
             this.freeshipping = response.data.shipping_free;
             this.freeshippingdays = response.data.shipping_day_0;
-            this.description = response.data.item_description;
-            this.origincountry = response.data.origin_country_name;
-            this.destinationcountryone =
-              response.data.destination_country_one_name;
-            this.destinationcountrytwo =
-              response.data.destination_country_two_name;
-            this.destinationcountrythree =
-              response.data.destination_country_three_name;
-            this.destinationcountryfour =
-              response.data.destination_country_four_name;
             this.shippingfree = response.data.shipping_free;
             this.shippingtwo = response.data.shipping_two;
             this.shippingthree = response.data.shipping_three;
@@ -250,7 +222,8 @@ export default defineComponent({
             this.shippingdaytwo = response.data.shipping_day_2;
             this.shippingpricethree = response.data.shipping_price_3;
             this.shippingdaythree = response.data.shipping_day_3;
-            this.vendorname = response.data.vendor_display_name;
+
+    
 
             this.getitemcondition();
             this.getvendorinfo();
@@ -273,8 +246,8 @@ export default defineComponent({
           });
         });
     },
-     seeifuserhasdefaultaddress() {
-       axios({
+    seeifuserhasdefaultaddress () {
+      axios({
         method: "get",
         url: "/vendor/get/defaultaddress/" + this.item.vendor_uuid,
         withCredentials: true,
@@ -288,14 +261,14 @@ export default defineComponent({
           }
         })
         .catch((error) => {
-      
+
         });
     },
-    UpdateCart() {
+    UpdateCart () {
       this.shoppingcartcount += 1;
     },
 
-     getitemcondition() {
+    getitemcondition () {
       if (this.item.item_condition === 1) {
         this.condition = "New";
       } else if (this.item.item_condition === 2) {
@@ -310,104 +283,104 @@ export default defineComponent({
         this.condition = "Not Specified";
       }
     },
-    getitemprice() {
+    getitemprice () {
       this.price = this.item.price;
       this.currency = this.item.currency;
     },
-     getpricebtc() {
-       axios({
+    getpricebtc () {
+      axios({
         method: "get",
         url: "/price/btcprice/" + this.item.currency + "/" + this.item.price,
         withCredentials: true,
       })
-      .then((response) => {
-        if ((response.status = 200)) {
-          this.pricebtc = response.data.coin;
-        }
-      })
-      .catch((error) => {
-   
-      });
+        .then((response) => {
+          if ((response.status = 200)) {
+            this.pricebtc = response.data.coin;
+          }
+        })
+        .catch((error) => {
+
+        });
     },
-     getpricebch() {
-       axios({
+    getpricebch () {
+      axios({
         method: "get",
         url: "/price/bchprice/" + this.item.currency + "/" + this.item.price,
         withCredentials: true,
       })
-      .then((response) => {
-        if ((response.status = 200)) {
-          this.pricebch = response.data.coin;
-        }
-      })
-      .catch((error) => {
-      
-      });
+        .then((response) => {
+          if ((response.status = 200)) {
+            this.pricebch = response.data.coin;
+          }
+        })
+        .catch((error) => {
+
+        });
     },
-     getpricexmr() {
-       axios({
+    getpricexmr () {
+      axios({
         method: "get",
         url: "/price/xmrprice/" + this.item.currency + "/" + this.item.price,
         withCredentials: true,
       })
-      .then((response) => {
-        if ((response.status = 200)) {
-          this.pricexmr = response.data.coin;
-        }
-      })
-      .catch((error) => {
-     
-      });
+        .then((response) => {
+          if ((response.status = 200)) {
+            this.pricexmr = response.data.coin;
+          }
+        })
+        .catch((error) => {
+
+        });
     },
-     getvendorinfo() {
-       axios({
+    getvendorinfo () {
+      axios({
         method: "get",
         url: "/vendor/vendor-info/" + this.item.vendor_uuid,
         withCredentials: true,
       })
-      .then((response) => {
-        if ((response.status = 200)) {
-          this.vendoruuid = response.data.vendoruuid;
-          this.vendorrating = response.data.vendorrating;
-          this.vendortotalsales = response.data.vendortotalsales;
-          this.loaded_feedback = true;
-        }
-      })
-      .catch((error) => {
-    
-      });
+        .then((response) => {
+          if ((response.status = 200)) {
+            this.vendoruuid = response.data.vendoruuid;
+            this.vendorrating = response.data.vendorrating;
+            this.vendortotalsales = response.data.vendortotalsales;
+            this.loaded_feedback = true;
+          }
+        })
+        .catch((error) => {
+
+        });
     },
 
-     getvendorreviews() {
-       axios({
+    getvendorreviews () {
+      axios({
         method: "get",
         url: "/vendor/vendor-feedback/" + this.item.vendor_uuid,
         withCredentials: true,
       })
-      .then((response) => {
-        if ((response.status = 200)) {
-          this.vendorreviews = response.data;
-          if (this.vendorreviews == undefined) {
-            this.vendorreviews = null;
+        .then((response) => {
+          if ((response.status = 200)) {
+            this.vendorreviews = response.data;
+            if (this.vendorreviews == undefined) {
+              this.vendorreviews = null;
+            }
           }
-        }
-      })
-       .catch((error) => {
-      
-      });
+        })
+        .catch((error) => {
+
+        });
     },
-     add_view() {
-       axios({
+    add_view () {
+      axios({
         method: "get",
         url: "/item/count/" + this.item.uuid,
         withCredentials: true,
         headers: authHeader(),
       })
-      .then(() => {
+        .then(() => {
 
-      });
+        });
     },
-    returncurrencysymbol(currencydigit: number) {
+    returncurrencysymbol (currencydigit: number) {
       if (currencydigit === 0) {
         return "$";
       } else if (currencydigit === 1) {
@@ -474,7 +447,7 @@ export default defineComponent({
         return "Kč";
       }
     },
-    returncurrency(currencydigit: any) {
+    returncurrency (currencydigit: any) {
       if (currencydigit === 0) {
         return "USD";
       } else if (currencydigit === 1) {
@@ -545,4 +518,6 @@ export default defineComponent({
 });
 </script>
 
-<style type="ts" scoped></style>
+<style type="ts" scoped>
+
+</style>

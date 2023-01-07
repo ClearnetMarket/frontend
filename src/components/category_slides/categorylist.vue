@@ -1,4 +1,5 @@
 <template>
+  <div class="bg-white rounded-md px-5">
  <div class="text-[20px] font-bold">All Categories</div>
         <router-link :to="{ name: 'categoryelectronics' }">
           <div class=" text-blue-700 hover:underline hover:text-blue-500 py-1">Electronics</div>
@@ -33,6 +34,7 @@
         <router-link :to="{ name: 'categorydigital' }">
           <div class="text-blue-700 hover:underline hover:text-blue-500 py-1">Digital Items</div>
         </router-link>
+        </div>
 </template>
 
 <script lang="ts">

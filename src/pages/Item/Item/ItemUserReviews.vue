@@ -187,7 +187,7 @@
         </div>
 
         <div v-else class="text-[17px] font-semibold">
-          No Customer reviews for the vendor yet!
+          No reviews for the vendor yet!
         </div>
       </div>
     </div>

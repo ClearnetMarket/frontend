@@ -1,5 +1,5 @@
 <template>
-    <div class="h-screen">
+
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
@@ -39,7 +39,8 @@
           <p v-for="error of v$.$errors" :key="error.$uid">
             {{ error.$message }}
           </p>
-          <div class="text-[18px] mt-5 mb-5">General Info</div>
+          <div class="border-b pb-10 ">
+          <div class="text-[20px] mt-5 mb-5 font-bold">General Info</div>
           <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2">Item Title</label>
             <input v-model="CreateItemForm.basicInfo.item_title"
@@ -80,7 +81,9 @@
               </span>
             </div>
           </div>
-          <div class="text-[18px] mt-5 mb-5">Pricing</div>
+        </div>
+          <div class="border-b pb-10 ">
+          <div class="text-[20px] mt-5 mb-5 font-bold">Pricing</div>
           <div class="flex gap-5">
             <div class="mb-4 flex-1">
               <label class="block text-gray-700 text-sm font-bold mb-2">Item Price</label>
@@ -100,9 +103,7 @@
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="count" type="number" min="0" placeholder="How many your are selling ..." @keypress="onlyNumber" />
               <span v-if="v$.CreateItemForm.pricingInfo.item_count.$error" class="text-red-600 text-center">
-                {{
-    v$.CreateItemForm.pricingInfo.item_count.$errors[0].$message
-}}
+                {{v$.CreateItemForm.pricingInfo.item_count.$errors[0].$message}}
               </span>
             </div>
           </div>
@@ -120,7 +121,9 @@
               <input type="checkbox" id="digital_currency_3" v-model="CreateItemForm.pricingInfo.digital_currency_3" />
             </div>
           </div>
-          <div class="text-[18px] mt-5 mb-5">Description</div>
+            </div>
+          <div class="border-b pb-10">
+          <div class="text-[20px] mt-5 mb-5 font-bold ">Description</div>
           <div class="mb-4 flex-1">
             <textarea v-model="CreateItemForm.basicInfo.item_description" id="item_description"
               class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
@@ -128,9 +131,12 @@
               {{ v$.CreateItemForm.basicInfo.item_description.$errors[0].$message }}
             </span>
           </div>
-
-          <div class="text-[18px] mt-5 mb-5">Shipping</div>
-          <div class="mb-4">
+          </div>
+          
+          
+<div class="border-b pb-10">
+          <div class="text-[20px] mt-5 mb-5 font-bold ">Shipping</div>
+          <div class="mb-4 ">
             <label class="block text-gray-700 text-sm font-bold mb-2">International Shipping</label>
             <div class="flex gap-5">
               <div class="flex-1">
@@ -144,8 +150,6 @@
             <div class="flex-1">Shipping Price</div>
             <div class="flex-1">Estimated Days</div>
           </div>
-
-
 
           <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2">Free Shipping</label>
@@ -197,9 +201,10 @@
               </div>
             </div>
           </div>
+          </div>
           <div class="flex justify-center mt-20">
             <button
-              class="bg-gray-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              class="bg-blue-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="submit">
               Submit
             </button>
@@ -209,7 +214,7 @@
       </div>
       </div>
     </div>
-  </div>
+
 
 </template>
 

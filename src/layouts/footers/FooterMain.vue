@@ -1,5 +1,6 @@
 <template>
-  <div class="bg-zinc-800 h-52 inset-x-0 bottom-0 footerclass ">
+  <div class="mt-72"></div>
+  <div class="bg-zinc-800 h-52 mt-50 inset-x-0 bottom-0 footerclass ">
     <div class="mx-32 my-5">
       <div class="flex flex-row w-full">
 
@@ -13,7 +14,7 @@
               Freeport Policies
             </div>
           </router-link>
-         
+
           <router-link :to="{ name: 'contact' }">
             <div class="text-[16px] py-1 text-white hover:text-gray-400">
               Contact
@@ -22,25 +23,25 @@
 
         </div>
         <div class="basis-1/4">
-     
+
 
         </div>
         <div class="basis-1/2">
           <div class="text-[38px]  mb-5 text-white">
             Privacy Sold Here
           </div>
-        
+
 
         </div>
       </div>
     </div>
     <div class="flex text-white justify-center">Freeport.cash 2022</div>
-<div class="flex text-white justify-center">
-    <router-link :to="{ name: 'legal' }">
-      <div class="text-[16px] text-white hover:text-gray-400">
-        Legal
-      </div>
-    </router-link>
+    <div class="flex text-white justify-center">
+      <router-link :to="{ name: 'legal' }">
+        <div class="text-[16px] text-white hover:text-gray-400">
+          Legal
+        </div>
+      </router-link>
     </div>
   </div>
 </template>
