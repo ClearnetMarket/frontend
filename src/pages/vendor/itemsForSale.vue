@@ -49,7 +49,7 @@
               </div>
              
             </div>
-            <div class="grid grid-cols-12   rounded-md p-2">
+            <div class="grid grid-cols-12 rounded-md p-2">
             
               <div class="col-span-2">
                   <div @click="$router.replace({ name: 'MarketItem', params: { id: item.uuid } })" style="cursor: pointer" class="">
@@ -336,13 +336,13 @@ export default defineComponent({
           this.getvendoritems();
           if (response.data.status == "success") {
             notify({
-              title: "Item Online",
+              title: "Item:  " + itemid,
               text: "Item is online",
               type: "success",
             });
           } else {
             notify({
-              title: "Failure",
+              title: "Item:  " + itemid,
               text: response.data.status,
               type: "error",
             });

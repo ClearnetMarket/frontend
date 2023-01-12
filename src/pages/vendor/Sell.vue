@@ -69,7 +69,7 @@
             <div class="flex text-gray-700 text-sm font-bold">
               I accept the terms of becoming a vendor
             </div>
-            <router-link :to="{ name: 'home' }">
+            <router-link :to="{ name: 'policies' }">
               <div class="text-blue-600 hover:text-blue-500 text-sm font-bold">
                 Vendor Agreement
               </div>

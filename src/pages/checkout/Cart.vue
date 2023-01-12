@@ -1,6 +1,6 @@
 
 <template>
- 
+  <div v-if="loaded===true">
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
@@ -240,7 +240,7 @@
           <div>
             <div class="col-span-12">
               <label class="font-medium inline-block mb-3 text-sm uppercase"
-                >Item Cost: {{ order_summary_cost }}</label
+                >Item Cost: {{ order_summary_cost }} {{ returncurrencysymbol(user.currency) }}</label
               >
             </div>
             <div class="col-span-12">
@@ -260,8 +260,7 @@
             <div class="border-t mt-8">
               <div class="font-semibold py-6 text-sm uppercase">
                 <span
-                  >Total cost {{ order_summary_shipping_and_price_cost }} </span
-                >
+                  >Total cost {{ order_summary_shipping_and_price_cost }} {{ returncurrencysymbol(user.currency) }}</span>
               </div>
               <router-link :to="{ name: 'checkout' }">
                 <button
@@ -281,7 +280,7 @@
       </div>
     </div>
   </div>
-
+  </div>
   <MainFooter />
 </template>
 
@@ -321,6 +320,7 @@ export default defineComponent({
 
   data() {
     return {
+      loaded:false,
       user: null,
       quantity: 0,
       cart_status: null,
@@ -335,6 +335,7 @@ export default defineComponent({
     };
   },
   mounted() {
+    this.userstatus();
     this.get_updated_prices_and_quantity();
     this.get_shopping_cart_items();
     this.get_shopping_cart_items_saved_for_later();
@@ -342,6 +343,23 @@ export default defineComponent({
   },
 
   methods: {
+    userstatus () {
+      axios({
+        method: "get",
+        url: "/auth/whoami",
+        withCredentials: true,
+        headers: authHeader(),
+      })
+        .then((response) => {
+          if ((response.status = 200)) {
+            this.user = response.data.user;
+          }
+        })
+        .catch(() => {
+          this.$router.push({ name: "login" });
+
+        });
+    },
     // gets the item to update price and quanity for cart
      get_updated_prices_and_quantity() {
        axios({
@@ -420,6 +438,7 @@ export default defineComponent({
             this.order_summary_cost = response.data.total_price_before_shipping;
             this.order_summary_shipping_and_price_cost = response.data.total_price;
           }
+          this.loaded = true;
         })
         .catch(() => {
           this.shopping_cart_items_saved_list = null;
@@ -483,9 +502,9 @@ export default defineComponent({
         .then((response) => {
           if ((response.status = 200)) {
             notify({
-              title: "Freeport Error",
+              title: "Success",
               text: "Item deleted from shopping cart.",
-              type: "error",
+              type: "success",
             });
             this.get_shopping_cart_items();
             this.get_shopping_cart_items_saved_for_later();

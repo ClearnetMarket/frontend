@@ -1,30 +1,30 @@
 
 <template>
+
+
   <div class="max-w-7xl mx-auto px-10 mb-10 border-b-2  border-zinc-400">
 
     <div class="grid sm:grid-cols-1 md:grid-cols-12 mt-5 gap-5 pb-10  ">
       <div class="col-span-5"><!-- start column one -->
-
-
           <div class="grid grid-cols-12 gap-4 px-1 ">
             <div class="col-span-12 text-center flex items-center justify-center">
-              <img  class="h-96" :src="image_one_500" alt=""/>
+              <img class="h-96" :src="image_one_500" alt=""/>
             </div>
             <div class="col-span-12  gap-3 w-full flex">
               <div class=" ">
-              <img  class="object-fit" :src="image_two_250" alt="" />
+              <img  class="object-fit" :src="image_two_250" alt=""  @click="switchImageSecond"
+              />
               </div>
               <div class=" ">
-                <img class="object-fit" :src="image_three_250" alt="" />
+                <img class="object-fit" :src="image_three_250" alt="" @click="switchImageThird"
+               />
               </div>
               <div class="">
-                <img class="object-fit" :src="image_four_250" alt="" />
+                <img class="object-fit" :src="image_four_250" alt="" @click="switchImageFourth"
+               />
               </div>
-             
               </div>
           </div>
-
-          
       </div><!-- end column one -->
 
       <div class="col-span-4 px-5 bg-white rounded-md"><!-- start column two -->
@@ -46,7 +46,14 @@
             {{ itemcount }}
           </div>
         </div>
-
+        <div class="flex gap-4">
+          <div class="text-[16px] font-weight-bold text-gray-700">
+            Category:
+          </div>
+          <div class="text-[16px] text-gray-700">
+            {{ category_name }}
+          </div>
+        </div>
         <div class="flex pt-4 mb-1 justify-between">
           <div v-if="digitalcurrencyone === true">
             <span class="text-sm font-semibold text-orange-500 mr-2 mb-2">Bitcoin</span>
@@ -59,13 +66,13 @@
             <span class="text-sm font-semibold text-green-600 mr-2 mb-2">Bitcoin Cash</span>
           </div>
         </div>
-        <div class="text-[24px] font-weight-bold text-gray-700 text-center">
+        <div class="text-[24px] font-bold text-gray-700 text-center">
           {{ price }} {{ returncurrencysymbol(currency) }}
         </div>
 
         <div class="mb-2 text-[14px]">
           <div v-if="digitalcurrencyone === true">
-            <div class="flex">
+            <div class="flex font-bold text-[19px]">
               <div class="text-orange-500 pr-5">BTC:</div>
               <div class="font-weight-bold text-gray-700">
                 {{ pricebtc }}
@@ -73,7 +80,7 @@
             </div>
           </div>
           <div v-if="digitalcurrencytwo === true">
-            <div class="flex">
+            <div class="flex font-bold text-[19px]">
               <div class="text-green-600 pr-5">BCH:</div>
               <div class="] font-weight-bold text-gray-700">
                 {{ pricebch }}
@@ -81,7 +88,7 @@
             </div>
           </div>
           <div v-if="digitalcurrencythree === true">
-            <div class="flex">
+            <div class="flex font-bold text-[19px]">
               <div class="text-orange-700 pr-5">XMR:</div>
               <div class="font-weight-bold text-gray-700">
                 {{ pricexmr }}
@@ -114,7 +121,7 @@
 
 
       <div class="col-span-3 px-5 bg-white rounded-md"><!-- start column three -->
-        <div class="flex justify-center mb-5">
+        <div class="flex justify-center mb-5 mt-5">
           <div v-if="user">
             <div v-if="vendoruuid != user.user_id">
               <button
@@ -234,45 +241,13 @@ import authHeader from "../../../services/auth.header";
 export default defineComponent({
   name: "ItemTop",
   props: [
-    "uuid",
-    "condition",
-    "itemcount",
-    "origin_country_name",
-    "totalsold",
-    "title",
-    "currency",
-    "vendorname",
-    "vendortotalsales",
-    "vendorrating",
-    "vendoruuid",
-    "freeshipping",
-    "image_one_250",
-    "image_two_250",
-    "image_three_250",
-    "image_four_250",
-    "image_one_500",
-    "image_two_500",
-    "image_three_500",
-    "image_four_500",
-    "digitalcurrencyone",
-    "digitalcurrencytwo",
-    "digitalcurrencythree",
-    "freeshippingdays",
-    "shippingtwo",
-    "shippingtwodays",
-    "shippingthree",
-    "shippingthreedays",
-    "exactcity",
-    "exactstateorprovence",
-    "exactzipcode",
-    "price",
-    "pricebtc",
-    "pricebch",
-    "pricexmr",
+
   ],
 
   data () {
     return {
+      loaded_site: false,
+      uuid: null,
       user: null,
       item_id: null,
       shopping_cart_count: "",
@@ -280,10 +255,48 @@ export default defineComponent({
       exact_city: "",
       exact_stateorprovence: "",
       exact_zipcode: "",
+      item: null,
+      shoppingcartcount: 0,
+      loaded_feedback: false,
+      title: "",
+      condition: "",
+      price: "",
+      currency: 0,
+      pricebtc: "",
+      pricebch: "",
+      pricexmr: "",
+      digitalcurrencyone: false,
+      digitalcurrencytwo: false,
+      digitalcurrencythree: false,
+      itemcount: "",
+      freeshipping: false,
+      freeshippingdays: 0,
+      totalsold: 0,
+      origin_country_name: "",
+      vendorname: "",
+      vendoruuid: "",
+      vendortotalsales: 0,
+      vendorrating: "",
+      category_name: "",
+      international: false,
+      current_main_image: 0,
+      image_one_250: null,
+      image_two_250: null,
+      image_three_250: null,
+      image_four_250: null,
+      image_one_500: null,
+      image_two_500: null,
+      image_three_500: null,
+      image_four_500: null,
+      exactcity: "",
+      exactstateorprovence: "",
+      exactzipcode: "",
+
     };
   },
   created () {
     this.userstatus();
+    this.getitem();
   },
 
   mounted () {
@@ -308,6 +321,177 @@ export default defineComponent({
         })
         .catch(() => { this.user = null });
     },
+    getitem () {
+      let item_id_route = useRoute();
+      this.item_id = item_id_route.params.id;
+      axios({
+        method: "get",
+        url: "/item/" + this.item_id,
+        withCredentials: true,
+      })
+        .then((response) => {
+          if ((response.status = 200)) {
+            this.uuid = response.data.uuid;
+            this.item = response.data;
+            this.title = response.data.item_title;
+            this.category_name = response.data.category_name_0;
+            this.itemcount = response.data.item_count;
+            this.totalsold = response.data.total_sold;
+            this.condition = response.data.item_condition;
+            this.vendorname = response.data.vendor_display_name;
+
+            this.digitalcurrencyone = response.data.digital_currency_1;
+            this.digitalcurrencytwo = response.data.digital_currency_2;
+            this.digitalcurrencythree = response.data.digital_currency_3;
+
+            this.origin_country_name = response.data.origin_country_name;
+            this.international = response.data.international;
+
+            this.image_one_250 = response.data.image_one_url_250;
+            this.image_two_250 = response.data.image_two_url_250;
+            this.image_three_250 = response.data.image_three_url_250;
+            this.image_four_250 = response.data.image_four_url_250;
+
+            this.image_one_500 = response.data.image_one_url_500;
+            this.image_two_500 = response.data.image_two_url_500;
+            this.image_three_500 = response.data.image_three_url_500;
+            this.image_four_500 = response.data.image_four_url_500;
+            this.getpricebch();
+            this.getpricebtc();
+            this.getpricexmr();
+            this.getitemprice();
+            this.getvendorinfo();
+            this.getitemcondition();
+            this.seeifuserhasdefaultaddress();
+          }
+        })
+        .catch((error) => {
+
+          this.$router.push({ name: "home" });
+          notify({
+            title: "Error",
+            text: "Item has been deleted or doesnt exist",
+            type: "error",
+          });
+        });
+    },
+    getitemcondition () {
+      if (this.item.item_condition === 1) {
+        this.condition = "New";
+      } else if (this.item.item_condition === 2) {
+        this.condition = "Manufacturer Refurbished";
+      } else if (this.item.item_condition === 3) {
+        this.condition = "Seller Refurbished";
+      } else if (this.item.item_condition === 4) {
+        this.condition = "Used";
+      } else if (this.item.item_condition === 5) {
+        this.condition = "For parts";
+      } else if (this.item.item_condition === 6) {
+        this.condition = "Not Specified";
+      }
+    },
+    seeifuserhasdefaultaddress () {
+      axios({
+        method: "get",
+        url: "/vendor/get/defaultaddress/" + this.item.vendor_uuid,
+        withCredentials: true,
+        headers: authHeader(),
+      })
+        .then((response) => {
+          if ((response.status = 200)) {
+            this.exactcity = response.data.city;
+            this.exactstateorprovence = response.data.stateorprovence;
+            this.exactzipcode = response.data.zipcode;
+          }
+        })
+        .catch((error) => {
+
+        });
+    },
+    getvendorinfo () {
+      axios({
+        method: "get",
+        url: "/vendor/vendor-info/" + this.item.vendor_uuid,
+        withCredentials: true,
+      })
+        .then((response) => {
+          if ((response.status = 200)) {
+            this.vendoruuid = response.data.vendoruuid;
+            this.vendorrating = response.data.vendorrating;
+            this.vendortotalsales = response.data.vendortotalsales;
+            this.loaded_feedback = true;
+          }
+        })
+        .catch((error) => {
+
+        });
+    },
+    getitemprice () {
+      this.price = this.item.price;
+      this.currency = this.item.currency;
+    },
+    getpricebtc () {
+      axios({
+        method: "get",
+        url: "/price/btcprice/" + this.item.currency + "/" + this.item.price,
+        withCredentials: true,
+      })
+        .then((response) => {
+          if ((response.status = 200)) {
+            this.pricebtc = response.data.coin;
+          }
+        })
+        .catch((error) => {
+
+        });
+    },
+    getpricebch () {
+      axios({
+        method: "get",
+        url: "/price/bchprice/" + this.item.currency + "/" + this.item.price,
+        withCredentials: true,
+      })
+        .then((response) => {
+          if ((response.status = 200)) {
+            this.pricebch = response.data.coin;
+          }
+        })
+        .catch((error) => {
+
+        });
+    },
+    getpricexmr () {
+      axios({
+        method: "get",
+        url: "/price/xmrprice/" + this.item.currency + "/" + this.item.price,
+        withCredentials: true,
+      })
+        .then((response) => {
+          if ((response.status = 200)) {
+            this.pricexmr = response.data.coin;
+          }
+        })
+        .catch((error) => {
+
+        });
+    },
+    switchImageSecond (){
+      this.image_one_500 = this.image_two_500;
+      this.image_two_250 = this.image_one_250;
+
+    },  
+
+    switchImageThird () {
+      this.image_one_500 = this.image_three_500;
+      this.image_three_250 = this.image_one_250;
+    },  
+
+    switchImageFourth () {
+      this.image_one_500 = this.image_four_500;
+      this.image_four_250 = this.image_one_250;
+    },      
+
+
     // Add item to cart
     addtocart () {
       axios({

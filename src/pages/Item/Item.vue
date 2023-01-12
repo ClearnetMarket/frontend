@@ -22,29 +22,25 @@
             <li>
               <span class="text-gray-500 mx-2">/</span>
             </li>
+            <li>
+              <router-link :to="{ name: 'categoryhome' }">
+                <a class="text-blue-600 hover:text-blue-700">Categories</a>
+              </router-link>
+            </li>
+            <li>
+              <span class="text-gray-500 mx-2">/</span>
+            </li>
           </ol>
         </nav>
       </div>
     </div>
 
 
-    <ItemTop @UpdateCart="UpdateCart" v-bind:uuid="item_id" v-bind:condition="condition"
-      v-bind:digitalcurrencyone="digitalcurrencyone" v-bind:digitalcurrencytwo="digitalcurrencytwo"
-      v-bind:digitalcurrencythree="digitalcurrencythree" v-bind:title="title" v-bind:price="price"
-      v-bind:pricebtc="pricebtc" v-bind:pricebch="pricebch" v-bind:pricexmr="pricexmr" v-bind:itemcount="itemcount"
-      v-bind:origin_country_name="origin_country_name" v-bind:freeshipping="freeshipping"
-      v-bind:freeshippingdays="freeshippingdays" v-bind:shippingtwo="shippingtwo"
-      v-bind:shippingtwodays="shippingdaytwo" v-bind:shippingthree="shippingthree"
-      v-bind:shippingthreedays="shippingdaythree" v-bind:totalsold="totalsold" v-bind:currency="currency"
-      v-bind:vendorname="vendorname" v-bind:vendoruuid="vendoruuid" v-bind:vendortotalsales="vendortotalsales"
-      v-bind:vendorrating="vendorrating" v-bind:image_one_250="image_one_250" v-bind:image_two_250="image_two_250"
-      v-bind:image_three_250="image_three_250" v-bind:image_four_250="image_four_250"
-      v-bind:image_one_500="image_one_500" v-bind:image_two_500="image_two_500" v-bind:image_three_500="image_three_500"
-      v-bind:image_four_500="image_four_500" v-bind:exactcity="exactcity"
-      v-bind:exactstateorprovence="exactstateorprovence" v-bind:exactzipcode="exactzipcode" />
+    <ItemTop @UpdateCart="UpdateCart"/>
+
     <ItemDescription v-bind:description="description" />
 
-    <ItemShipping v-bind:origin_country_name="origin_country_name" v-bind:international="international"
+    <ItemShipping v-bind:origin_country_name="origin_country_name"
       v-bind:shippingfree="shippingfree" v-bind:shippingtwo="shippingtwo" v-bind:shippingthree="shippingthree"
       v-bind:shippingpricetwo="shippingpricetwo" v-bind:shippingdayfree="shippingdayfree"
       v-bind:shippingdaytwo="shippingdaytwo" v-bind:shippingpricethree="shippingpricethree"
@@ -104,13 +100,8 @@ export default defineComponent({
       item: null,
       shoppingcartcount: 0,
       loaded_feedback: false,
-      title: "",
       condition: "",
-      price: "",
       currency: 0,
-      pricebtc: "",
-      pricebch: "",
-      pricexmr: "",
       digitalcurrencyone: false,
       digitalcurrencytwo: false,
       digitalcurrencythree: false,
@@ -120,23 +111,10 @@ export default defineComponent({
       totalsold: 0,
       origin_country_name: "",
       vendorname: "",
-      vendoruuid: "",
+      vendoruuid: null,
       vendortotalsales: 0,
       vendorrating: "",
-
-      image_one_250: "",
-      image_two_250: "",
-      image_three_250: "",
-      image_four_250: "",
-
-      image_one_500: "",
-      image_two_500: "",
-      image_three_500: "",
-      image_four_500: "",
-
       description: "",
-      international: false,
-
       shippingfree: false,
       shippingtwo: false,
       shippingthree: false,
@@ -145,12 +123,10 @@ export default defineComponent({
       shippingdayfree: 0,
       shippingdaytwo: 0,
       shippingdaythree: 0,
-      vendorreviews: [],
+
       shopping_cart_count: 0,
-      vendor_reviews_total: 0,
-      exactcity: "",
-      exactstateorprovence: "",
-      exactzipcode: "",
+
+      vendorreviews: [],
       user: null,
     };
   },
@@ -189,29 +165,11 @@ export default defineComponent({
           if ((response.status = 200)) {
 
             this.item = response.data;
-            this.title = response.data.item_title;
             this.itemcount = response.data.item_count;
             this.totalsold = response.data.total_sold;
             this.description = response.data.item_description;
-            this.vendorname = response.data.vendor_display_name;
-
-            this.digitalcurrencyone = response.data.digital_currency_1;
-            this.digitalcurrencytwo = response.data.digital_currency_2;
-            this.digitalcurrencythree = response.data.digital_currency_3;
-
-            this.image_one_250 = response.data.image_one_url_250;
-            this.image_two_250 = response.data.image_two_url_250;
-            this.image_three_250 = response.data.image_three_url_250;
-            this.image_four_250 = response.data.image_four_url_250;
-
-            this.image_one_500 = response.data.image_one_url_500;
-            this.image_two_500 = response.data.image_two_url_500;
-            this.image_three_500 = response.data.image_three_url_500;
-            this.image_four_500 = response.data.image_four_url_500;
-
+            this.vendoruuid = response.data.vendor_uuid
             this.origin_country_name = response.data.origin_country_name;
-            this.international = response.data.international;
-
             this.freeshipping = response.data.shipping_free;
             this.freeshippingdays = response.data.shipping_day_0;
             this.shippingfree = response.data.shipping_free;
@@ -223,22 +181,14 @@ export default defineComponent({
             this.shippingpricethree = response.data.shipping_price_3;
             this.shippingdaythree = response.data.shipping_day_3;
 
-    
-
-            this.getitemcondition();
-            this.getvendorinfo();
             this.getvendorreviews();
-            this.getpricebch();
-            this.getpricebtc();
-            this.getpricexmr();
-            this.getitemprice();
             this.add_view();
-            this.seeifuserhasdefaultaddress();
+            this.loaded_feedback = true;
           }
         })
         .catch((error) => {
-
-          this.$router.push({ name: "home" });
+          console.log(error)
+        
           notify({
             title: "Error",
             text: "Item has been deleted or doesnt exist",
@@ -246,112 +196,12 @@ export default defineComponent({
           });
         });
     },
-    seeifuserhasdefaultaddress () {
-      axios({
-        method: "get",
-        url: "/vendor/get/defaultaddress/" + this.item.vendor_uuid,
-        withCredentials: true,
-        headers: authHeader(),
-      })
-        .then((response) => {
-          if ((response.status = 200)) {
-            this.exactcity = response.data.city;
-            this.exactstateorprovence = response.data.stateorprovence;
-            this.exactzipcode = response.data.zipcode;
-          }
-        })
-        .catch((error) => {
-
-        });
-    },
+  
     UpdateCart () {
       this.shoppingcartcount += 1;
     },
-
-    getitemcondition () {
-      if (this.item.item_condition === 1) {
-        this.condition = "New";
-      } else if (this.item.item_condition === 2) {
-        this.condition = "Manufacturer Refurbished";
-      } else if (this.item.item_condition === 3) {
-        this.condition = "Seller Refurbished";
-      } else if (this.item.item_condition === 4) {
-        this.condition = "Used";
-      } else if (this.item.item_condition === 5) {
-        this.condition = "For parts";
-      } else if (this.item.item_condition === 6) {
-        this.condition = "Not Specified";
-      }
-    },
-    getitemprice () {
-      this.price = this.item.price;
-      this.currency = this.item.currency;
-    },
-    getpricebtc () {
-      axios({
-        method: "get",
-        url: "/price/btcprice/" + this.item.currency + "/" + this.item.price,
-        withCredentials: true,
-      })
-        .then((response) => {
-          if ((response.status = 200)) {
-            this.pricebtc = response.data.coin;
-          }
-        })
-        .catch((error) => {
-
-        });
-    },
-    getpricebch () {
-      axios({
-        method: "get",
-        url: "/price/bchprice/" + this.item.currency + "/" + this.item.price,
-        withCredentials: true,
-      })
-        .then((response) => {
-          if ((response.status = 200)) {
-            this.pricebch = response.data.coin;
-          }
-        })
-        .catch((error) => {
-
-        });
-    },
-    getpricexmr () {
-      axios({
-        method: "get",
-        url: "/price/xmrprice/" + this.item.currency + "/" + this.item.price,
-        withCredentials: true,
-      })
-        .then((response) => {
-          if ((response.status = 200)) {
-            this.pricexmr = response.data.coin;
-          }
-        })
-        .catch((error) => {
-
-        });
-    },
-    getvendorinfo () {
-      axios({
-        method: "get",
-        url: "/vendor/vendor-info/" + this.item.vendor_uuid,
-        withCredentials: true,
-      })
-        .then((response) => {
-          if ((response.status = 200)) {
-            this.vendoruuid = response.data.vendoruuid;
-            this.vendorrating = response.data.vendorrating;
-            this.vendortotalsales = response.data.vendortotalsales;
-            this.loaded_feedback = true;
-          }
-        })
-        .catch((error) => {
-
-        });
-    },
-
     getvendorreviews () {
+ 
       axios({
         method: "get",
         url: "/vendor/vendor-feedback/" + this.item.vendor_uuid,
