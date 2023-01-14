@@ -1,94 +1,164 @@
 
 <template>
- 
-    <MainHeaderTop />
-    <MainHeaderMid />
-    <MainHeaderBottom />
-    <MainHeaderVendor />
-    <div class="max-w-4xl mx-auto wrapper px-10">
-      <div class="mt-5 mb-5">
-        <nav class="rounded-md w-full">
-          <ol class="list-reset flex">
-            <li>
-              <router-link :to="{ name: 'home' }">
-                <a class="text-blue-600 hover:text-blue-700">Home</a>
+
+  <MainHeaderTop />
+  <MainHeaderMid />
+  <MainHeaderBottom />
+  <MainHeaderVendor />
+  <div class="max-w-4xl mx-auto wrapper px-10">
+    <div class="mt-5 mb-5">
+      <nav class="rounded-md w-full">
+        <ol class="list-reset flex">
+          <li>
+            <router-link :to="{ name: 'home' }">
+              <a class="text-blue-600 hover:text-blue-700">Home</a>
+            </router-link>
+          </li>
+          <li>
+            <span class="text-gray-500 mx-2">/</span>
+          </li>
+        </ol>
+      </nav>
+    </div>
+
+
+    <div class="grid grid-cols-1 w-full gap-4 mt-5 mb-5 ">
+      <div class="col-span-1 font-semibold text-2xl">Leave Feedback </div>
+
+      <div v-if="uuid && order">
+        <div class="rounded-md bg-white p-5">
+          <div class="grid grid-cols-12 ">
+            <div class="col-span-12 text-[20px]  mb-5">
+              <router-link class="text-blue-600 hover:underline hover:text-blue-400 text-center"
+                :to="{ name: 'MarketItem', params: { id: order.item_uuid } }">
+                <div>{{ order.title_of_item }}</div>
               </router-link>
-            </li>
-            <li>
-              <span class="text-gray-500 mx-2">/</span>
-            </li>
-          </ol>
-        </nav>
-      </div>
+            </div>
+          </div>
+          <div class="grid grid-cols-12 gap-4 text-[14px]">
+            <div class="col-span-3 ">
+              <img class="object-contain" :src="order.image_one" />
+            </div>
+            <div class="col-span-6 ">
+              <div class="col-span-12 flex">
+                <div class="font-bold px-2">Order UUID:</div>
+                <div class="px-2">{{ order.uuid }}</div>
+              </div>
+              <div class="col-span-1 flex">
+                <div class="font-bold px-2">
+                  Ordered:
+                </div>
+                <div class="px-2">{{ relativeDate (order.created) }}</div>
+              </div>
+              <div class="col-span-1 flex">
+                <div class="font-bold px-2">
+                  Quantity:
+                </div>
+                <div class="px-2">{{ order.quantity }}</div>
+              </div>
+              <div class="col-span-2 flex">
+                <div class="font-bold px-2">Customer: </div>
+                <div class="px-2">{{ order.customer_user_name }}</div>
 
+              </div>
+              <div class="col-span-4 flex">
+                <div class="font-bold px-2">Payment Info: </div>
 
-      <div class="grid grid-cols-1 w-full gap-4 mt-5 mb-5 ">
-        <div class="col-span-1 font-semibold text-2xl">Leave Feedback </div>
+                <div class="" v-if="order.digital_currency === 1">
+                  <div v-if="order.shipping_price_btc === 0">Free Shipping</div>
+                  <div v-else>{{ order.shipping_price_btc }}</div>
+                  <div class="">{{ order.price_total_btc }} BTC</div>
+                </div>
+                <div class="" v-if="order.digital_currency === 2">
+                  <div v-if="order.shipping_price_bch === 0">Free Shipping</div>
+                  <div v-else>{{ order.shipping_price_bch }}</div>
 
-        <div v-if="uuid && order">
-          <div class="grid grid-rows-3 grid-flow-col gap-4 bg-white rounded-md">
-            <div class="row-span-3 "><img class="h-24" :src="order.image_one" alt="" /></div>
-            <div class="col-span-2 text-[18px]">{{ order.title_of_item }}</div>
-            <div class="row-span-2 col-span-2 text-[18px]">Customer: {{ order.customer_user_name }}</div>
+                  <div class="">{{ order.price_total_bch }} BCH</div>
+                </div>
+                <div class="" v-if="order.digital_currency === 3">
+                  <div class="">
+                    <div v-if="order.shipping_price_xmr === 0">
+                      Free Shipping
+                    </div>
+                    <div v-else>{{ order.shipping_price_xmr }}</div>
+                  </div>
+
+                  <div class="flex">{{ order.price_total_xmr }} XMR</div>
+                </div>
+              </div>
+            </div>
+            <div class="col-span-3 ">
+              <div class="mx-3 pt-3 text-[14px] font-bold ">
+                <router-link :to="{ name: 'vendorordersfeedback', params: { uuid: order.uuid }, }" class="px-3">
+                  <button
+                    class="bg-blue-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline">
+                    View Order
+                  </button>
+                </router-link>
+              </div>
+            </div>
           </div>
 
         </div>
+
       </div>
+    </div>
 
-      <div v-if="order && uuid">
-      <div class="col-span-12 font-semibold text-2xl">Rate customer:</div>
-        <div class="grid grid-cols-12 mt-5  p-5 bg-white rounded-md">
-        
-          <div class="col-span-12 bg-white rounded-md">
-            <div class="grid grid-cols-12">
+    <div v-if="order && uuid">
+      <div class="col-span-12 font-semibold text-2xl">Rate customer</div>
+      <div class="grid grid-cols-12 mt-5  p-5 bg-white rounded-md">
 
-              <div class="col-span-12">
-                
-                <div class="col-span-12">
-                  <fieldset class="rating" v-if="rated === false">
-                    <input type="radio" id="vendorstar10" name="vendorrating"
-                      @click.prevent="sendscore(order.uuid, '10')" /><label class="full" for="vendorstar10"></label>
-                    <input type="radio" id="vendorstar9" name="vendorrating" value="9"
-                      @click.prevent="sendscore(order.uuid, '9')" /><label class="full" for="vendorstar9"></label>
-                    <input type="radio" id="vendorstar8" name="vendorrating" value="8"
-                      @click.prevent="sendscore(order.uuid, '8')" /><label class="full" for="vendorstar8"></label>
-                    <input type="radio" id="vendorstar7" name="vendorrating" value="7"
-                      @click.prevent="sendscore(order.uuid, '7')" /><label class="full" for="vendorstar7"></label>
-                    <input type="radio" id="vendorstar6" name="vendorrating" value="6"
-                      @click.prevent="sendscore(order.uuid, '6')" /><label class="full" for="vendorstar6"></label>
-                    <input type="radio" id="vendorstar5" name="vendorrating" value="5"
-                      @click.prevent="sendscore(order.uuid, '5')" /><label class="full" for="vendorstar5"></label>
-                    <input type="radio" id="vendorstar4" name="vendorrating" value="4"
-                      @click.prevent="sendscore(order.uuid, '4')" /><label class="full" for="vendorstar4"></label>
-                    <input type="radio" id="vendorstar3" name="vendorrating" value="3"
-                      @click.prevent="sendscore(order.uuid, '3')" /><label class="full" for="vendorstar3"></label>
-                    <input type="radio" id="vendorstar2" name="vendorrating" value="2"
-                      @click.prevent="sendscore(order.uuid, '2')" /><label class="full" for="vendorstar2"></label>
-                    <input type="radio" id="vendorstar1" name="vendorrating" value="1"
-                      @click.prevent="sendscore(order.uuid, '1')" /><label class="full" for="vendorstar1"></label>
-                  </fieldset>
-                  <div v-if="rated === true">
-                    {{ rating_number }} out of 10
-                  </div>
-                </div>
+        <div class="col-span-12 bg-white rounded-md">
+          <div class="grid grid-cols-12">
+            <div class="col-span-12">
+              <fieldset class="rating" v-if="rated === false">
+                <input type="radio" id="vendorstar10" name="vendorrating"
+                  @click.prevent="sendscore(order.uuid, '10')" /><label class="full" for="vendorstar10"></label>
+                <input type="radio" id="vendorstar9" name="vendorrating" value="9"
+                  @click.prevent="sendscore(order.uuid, '9')" /><label class="full" for="vendorstar9"></label>
+                <input type="radio" id="vendorstar8" name="vendorrating" value="8"
+                  @click.prevent="sendscore(order.uuid, '8')" /><label class="full" for="vendorstar8"></label>
+                <input type="radio" id="vendorstar7" name="vendorrating" value="7"
+                  @click.prevent="sendscore(order.uuid, '7')" /><label class="full" for="vendorstar7"></label>
+                <input type="radio" id="vendorstar6" name="vendorrating" value="6"
+                  @click.prevent="sendscore(order.uuid, '6')" /><label class="full" for="vendorstar6"></label>
+                <input type="radio" id="vendorstar5" name="vendorrating" value="5"
+                  @click.prevent="sendscore(order.uuid, '5')" /><label class="full" for="vendorstar5"></label>
+                <input type="radio" id="vendorstar4" name="vendorrating" value="4"
+                  @click.prevent="sendscore(order.uuid, '4')" /><label class="full" for="vendorstar4"></label>
+                <input type="radio" id="vendorstar3" name="vendorrating" value="3"
+                  @click.prevent="sendscore(order.uuid, '3')" /><label class="full" for="vendorstar3"></label>
+                <input type="radio" id="vendorstar2" name="vendorrating" value="2"
+                  @click.prevent="sendscore(order.uuid, '2')" /><label class="full" for="vendorstar2"></label>
+                <input type="radio" id="vendorstar1" name="vendorrating" value="1"
+                  @click.prevent="sendscore(order.uuid, '1')" /><label class="full" for="vendorstar1"></label>
+              </fieldset>
+              <div v-if="rated === true">
+                {{ rating_number }} out of 10
               </div>
-              <div class="col-span-12 mb-1 text-[14px] pt-5">Leave a review:</div>
-              <form class="col-span-12" @submit.prevent="sendreview(order.uuid)">
+            </div>
+          </div>
+          <div class="grid grid-cols-12">
+            <div class="col-span-12 mb-1 text-[14px] pt-5">Leave a review:</div>
+            <form class="col-span-12" @submit.prevent="sendreview(order.uuid)">
+              <div class="col-span-12  ">
                 <textarea v-model="review"
-                  class="shadow appearance-none border border-gray-500 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  class="shadow appearance-none border border-gray-500 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline col-span-12"
                   id="message" type="textfield" placeholder="Customer Review .." />
-
+              </div>
+              <div class="col-span-12  col-start-4">
                 <button
-                  class="bg-yellow-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                  class="bg-yellow-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline  "
                   type="submit">
                   Add Feedback
                 </button>
-              </form>
-            </div>
+              </div>
+            </form>
           </div>
         </div>
       </div>
     </div>
+  </div>
 
 
   <MainFooter />

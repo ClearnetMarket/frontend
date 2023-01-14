@@ -12,6 +12,9 @@
             </div>
             <div class="col-span-12  gap-3 w-full flex">
               <div class=" ">
+                <img class="object-fit" :src="image_one_250" alt="" @click="switchImageOne" />
+              </div>
+              <div class=" ">
               <img  class="object-fit" :src="image_two_250" alt=""  @click="switchImageSecond"
               />
               </div>
@@ -279,7 +282,7 @@ export default defineComponent({
       vendorrating: "",
       category_name: "",
       international: false,
-      current_main_image: 0,
+      current_main_image: null,
       image_one_250: null,
       image_two_250: null,
       image_three_250: null,
@@ -346,16 +349,18 @@ export default defineComponent({
 
             this.origin_country_name = response.data.origin_country_name;
             this.international = response.data.international;
-
+  
             this.image_one_250 = response.data.image_one_url_250;
             this.image_two_250 = response.data.image_two_url_250;
             this.image_three_250 = response.data.image_three_url_250;
             this.image_four_250 = response.data.image_four_url_250;
 
+            this.current_main_image = response.data.image_one_url_500
             this.image_one_500 = response.data.image_one_url_500;
             this.image_two_500 = response.data.image_two_url_500;
             this.image_three_500 = response.data.image_three_url_500;
             this.image_four_500 = response.data.image_four_url_500;
+
             this.getpricebch();
             this.getpricebtc();
             this.getpricexmr();
@@ -475,20 +480,32 @@ export default defineComponent({
 
         });
     },
+    switchImageOne () {
+      this.image_one_500 = this.current_main_image;
+    },  
     switchImageSecond (){
+   
       this.image_one_500 = this.image_two_500;
-      this.image_two_250 = this.image_one_250;
+    
+
 
     },  
 
     switchImageThird () {
+
       this.image_one_500 = this.image_three_500;
-      this.image_three_250 = this.image_one_250;
+     
+
+
+
     },  
 
     switchImageFourth () {
+     
       this.image_one_500 = this.image_four_500;
-      this.image_four_250 = this.image_one_250;
+   
+
+
     },      
 
 

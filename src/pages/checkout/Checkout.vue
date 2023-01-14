@@ -45,8 +45,9 @@
           <div class="grid grid-cols-12 border-b border-gray-300 pb-4 mb-10">
             <div class="col-span-1 font-bold">1</div>
             <div class="col-span-3 font-bold text-">Shipping Options</div>
-            <div class="col-span-6">
+            <div class="col-span-6" v-if="address_name.length > 5">
               <div class="grid grid-cols-1">
+   
                 <div class="">{{ address_name }}</div>
                 <div class="">{{ address }}</div>
                 <div class="">{{ apt }}</div>
@@ -57,8 +58,11 @@
                 </div>
               </div>
             </div>
+            <div v-else class="col-span-6 font-bold text-red-600">
+              Please Enter a shipping address to Checkout
+            </div>
             <div class="col-span-2 text-center text-[12px] text-blue-600 hover:text-blue-400">
-              <router-link :to="{ name: 'defaultaddress' }"> Change </router-link>
+              <router-link :to="{ name: 'defaultaddress' }"> Change/Add </router-link>
             </div>
           </div>
 
@@ -67,15 +71,15 @@
             <div class="col-span-3 font-bold">Payment Method</div>
             <div class="col-span-6">
               <div class="grid grid-cols-1">
-                <div class="text-[12px]">
+                <div class="text-[14px]">
                   <div v-if="btcbalance == 0">BTC Balance: 0.00000000</div>
                   <div v-else>BTC Balance: {{ btcbalance }}</div>
                 </div>
-                <div class="text-[12px]">
+                <div class="text-[14px]">
                   <div v-if="bchbalance == 0">BCH Balance: 0.00000000</div>
                   <div v-else>BCH Balance: {{ bchbalance }}</div>
                 </div>
-                <div class="text-[12px]">
+                <div class="text-[14px]">
                   <div v-if="xmrbalance == 0">XMR Balance: 0.000000000000</div>
                   <div v-else>XMR Balance: {{ xmrbalance }}</div>
                 </div>
@@ -189,13 +193,19 @@
                 <div v-if="xmrtotalprice <= xmrbalance &&
                 bchtotalprice <= bchbalance &&
                 btctotalprice <= btcbalance">
-
                 </div>
                 <div v-else class="text-red-600 text-center font-bold">Not Enough Coin in your wallet</div>
+
+                  <div v-if="address_name.length > 5">
+                  </div>
+                  <div v-else class="text-red-600 text-center font-bold">Need A Shipping Address</div>
+
+
                 <button v-show="
-                  xmrtotalprice <= xmrbalance &&
-                  bchtotalprice <= bchbalance &&
-                  btctotalprice <= btcbalance
+                                xmrtotalprice <= xmrbalance &&
+                                bchtotalprice <= bchbalance &&
+                                btctotalprice <= btcbalance &&
+                                address_name.length > 5
                 " @click="checkoutorder()"
                   class="bg-yellow-500 bg-r rounded-md font-semibold hover:bg-yellow-600 py-3 text-sm text-white uppercase w-full">
                   Place Order

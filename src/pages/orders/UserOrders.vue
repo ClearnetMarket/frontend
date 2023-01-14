@@ -89,9 +89,11 @@
                       <div v-if="order.overall_status === 10">Finalized</div>
                     </div>
                     <div class="col-span-12 text-[14px]">
-                      <div class="grid grid-cols-12 pt-5">
-                        <div class="col-span-2">Image</div>
-                        <div class="col-span-10">
+                      <div class="grid grid-cols-12 pt-5 gap-5">
+                        <div class="col-span-3">
+                          <img class="object-contain" :src="order.image_one" alt="" />
+                        </div>
+                        <div class="col-span-9">
                           <div
                             class="text-blue-600 hover:text-blue-600 hover:underline text-[18px]"
                           >

@@ -27,7 +27,7 @@
             class="flex py-2 px-4 shadow-md no-underline rounded-full text-white font-sans hover:text-white text-sm bg-zinc-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2"
           >
             <span class="px-2">{{ vendor_orders_new }}</span>
-            <span class>New Orders</span>
+            <span class>New </span>
           </button>
         </router-link>
       </div>
@@ -36,7 +36,7 @@
           <button
             class="py-2 px-4 shadow-md no-underline rounded-full text-white font-sans text-sm hover:text-white bg-zinc-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2"
           >
-            New Orders
+            New 
           </button>
         </router-link>
       </div>
@@ -47,7 +47,7 @@
             class="flex py-2 px-4 shadow-md text-sm no-underline rounded-full bg-zinc-600 hover:bg-zinc-400 text-white font-sans hover:text-white focus:outline-none active:shadow-none mr-2"
           >
             <span class="px-2">{{ vendor_orders_accepted }}</span>
-            <span class>Waiting on Shipment</span>
+            <span class>Waiting</span>
           </button>
         </router-link>
       </div>
@@ -128,25 +128,70 @@
       <div v-for="order in orders" :key="order.id">
         <div v-if="order.uuid">
           <div
-            class="grid grid-cols-12 rounded border border-1 border-gray-300 bg-gray-200 p-2"
+            class="grid grid-cols-12 rounded gap-5 p-5 bg-white "
           >
-            <div class="col-span-8">
-              <div class="col-span-1">{{ relativeDate(order.created) }}</div>
-
-              <div
-                class="col-span-5 text-blue-600 hover:underline hover:text-blue-400"
-              >
-                <router-link
-                  :to="{ name: 'MarketItem', params: { id: order.item_uuid } }"
-                  class="text-blue-600 hover:underline hover:text-blue-400"
-                >
-                  {{ order.title_of_item }}
-                </router-link>
-              </div>
-
-              <div class="col-span-2">{{ order.customer_user_name }}</div>
-               <div class="grid grid-cols-12">
-                    <div class="col-span-12">Shipping Destination:</div>
+            <div class="col-span-3 ">
+              <img class="object-contain" :src="order.image_one" alt="" />
+            </div>
+            <div class="col-span-7 ">
+              <div class="grid grid-cols-12">
+            
+                <div class="col-span-12 mb-5">
+                  <router-link class="col-span-12 text-blue-600 hover:underline hover:text-blue-400 text-[18px] "
+                    :to="{ name: 'MarketItem', params: { id: order.item_uuid } }">
+                    {{ order.title_of_item }}
+                  </router-link>
+                </div>
+            
+                <div class="col-span-4">
+                  <div class="font-bold">Order Date</div>
+                  {{ relativeDate (order.created) }}
+                </div>
+                <div class="col-span-4">
+                  <div class="font-bold">Item Quantity:</div>
+                  {{ order.quantity }}
+                </div>
+                <div class="col-span-4">
+                  <div class="font-bold">Customer</div>
+                  <router-link :to="{
+                                name: 'userprofile',
+                                params: { uuid: order.customer_uuid },
+                              }">
+                    <div class="text-blue-700 hover:underline hover:text-blue-500">
+                      {{ order.customer_user_name }}
+                    </div>
+                  </router-link>
+                </div>
+                <div class="col-span-12 font-bold">Coin:</div>
+                <div class="col-span-12 mb-2 text-[16px]">
+                  <div v-if="order.digital_currency === 1">
+                    <span class="text-sm font-semibold text-orange-500">Bitcoin with shipping:</span>
+                    {{ order.price_total_btc }}
+                  </div>
+                  <div v-if="order.digital_currency === 2">
+                    <div class="">
+                      <span class="text-sm font-semibold text-green-600">Bitcoin Cash with shipping:</span>
+                    </div>
+                    <div class="">
+                      {{ order.price_total_bch }}
+                    </div>
+                  </div>
+                  <div v-if="order.digital_currency === 3">
+                    <span class="text-sm font-semibold text-orange-700">Monero with shipping:</span>
+                    {{ order.price_total_xmr }}
+                  </div>
+                </div>
+            
+            
+                <div class="col-span-12 mb-2">
+                  <div class="font-bold">Shipping Description:</div>
+                  {{ order.shipping_description }}
+                </div>
+                <div class="col-span-12">
+                  <div class="grid grid-cols-12">
+                    <div class="col-span-12">
+                      <div class="font-bold">Shipping Destination:</div>
+                    </div>
                     <div class="col-span-12">{{ order.address_name }}</div>
                     <div class="col-span-12">{{ order.address }}</div>
                     <div class="col-span-12">{{ order.apt }}</div>
@@ -157,9 +202,11 @@
                       <div class="px-1">{{ order.country }}</div>
                     </div>
                   </div>
+                </div>
+              </div>
             </div>
-            <div class="col-span-4">
-              <div class="col-span-4">
+            <div class="col-span-2">
+           
                 <button
                   class="bg-green-600 m-1 hover:bg-green-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
                   type="button"
@@ -275,7 +322,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+        
           </div>
         </div>
       </div>

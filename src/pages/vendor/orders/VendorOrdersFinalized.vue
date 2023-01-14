@@ -26,7 +26,7 @@
                 class="flex py-2 px-4 shadow-md no-underline rounded-full text-white font-sans hover:text-white text-sm bg-zinc-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2"
             >
               <span class="px-2">{{ vendor_orders_new }}</span>
-              <span class>New Orders</span>
+              <span class>New</span>
             </button>
           </router-link>
         </div>
@@ -35,7 +35,7 @@
             <button
                 class="py-2 px-4 shadow-md no-underline rounded-full text-white font-sans text-sm hover:text-white bg-zinc-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2"
             >
-              New Orders
+              New 
             </button>
           </router-link>
         </div>
@@ -46,7 +46,7 @@
                 class="flex py-2 px-4 shadow-md text-sm no-underline rounded-full bg-zinc-600 hover:bg-zinc-400 text-white font-sans hover:text-white focus:outline-none active:shadow-none mr-2"
             >
               <span class="px-2">{{ vendor_orders_accepted }}</span>
-              <span class>Waiting on Shipment</span>
+              <span class>Waiting</span>
             </button>
           </router-link>
         </div>
@@ -55,7 +55,7 @@
             <button
                 class="py-2 px-4 shadow-md no-underline rounded-full text-white font-sans text-sm hover:text-white bg-zinc-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2"
             >
-              Waiting on Shipment
+              Waiting
             </button>
           </router-link>
         </div>
@@ -129,13 +129,15 @@
           <div v-if="order.uuid">
 
             <div class="rounded-md bg-white p-5">
-              <div class="grid col-span-12 text-[16px] ">
+              <div class="grid grid-cols-12 ">
+                <div class="col-span-12 text-[20px]  mb-5">
                 <router-link
-                    class="text-blue-600 hover:underline hover:text-blue-400 px-2 pb-3"
+                    class="text-blue-600 hover:underline hover:text-blue-400 text-center"
                     :to="{ name: 'MarketItem', params: { id: order.item_uuid } }"
                 >
                   <div>{{ order.title_of_item }}</div>
                 </router-link>
+                </div>
               </div>
               <div class="grid grid-cols-12 gap-4 text-[14px]">
                 <div class="col-span-3 ">
@@ -152,36 +154,32 @@
                     </div>
                     <div class="px-2">{{ relativeDate(order.created) }}</div>
                   </div>
+                  <div class="col-span-1 flex">
+                    <div class="font-bold px-2">
+                      Quantity:
+                    </div>
+                    <div class="px-2">{{ order.quantity }}</div>
+                  </div>
                   <div class="col-span-2 flex">
                     <div class="font-bold px-2">Customer: </div>
                     <div class="px-2">{{ order.customer_user_name }}</div>
                     
                   </div>
-                  <div class="col-span-4">
+                  <div class="col-span-4 flex">
                     <div class="font-bold px-2">Payment Info: </div>
                     
-                    <div
-                        class=""
-                        v-if="order.digital_currency === 1"
-                    >
+                    <div class="" v-if="order.digital_currency === 1">
                       <div v-if="order.shipping_price_btc === 0">Free Shipping</div>
                       <div v-else>{{ order.shipping_price_btc }}</div>
-
                       <div class="">{{ order.price_total_btc }} BTC</div>
                     </div>
-                    <div
-                        class=""
-                        v-if="order.digital_currency === 2"
-                    >
+                    <div class="" v-if="order.digital_currency === 2">
                       <div v-if="order.shipping_price_bch === 0">Free Shipping</div>
                       <div v-else>{{ order.shipping_price_bch }}</div>
 
                       <div class="">{{ order.price_total_bch }} BCH</div>
                     </div>
-                    <div
-                        class=""
-                        v-if="order.digital_currency === 3"
-                    >
+                    <div class="" v-if="order.digital_currency === 3">
                       <div class="">
                         <div v-if="order.shipping_price_xmr === 0">
                           Free Shipping

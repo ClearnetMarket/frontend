@@ -14,7 +14,7 @@
           <ol class="list-reset flex">
             <li>
               <router-link :to="{ name: 'home' }">
-                <a class="text-blue-600 hover:text-blue-700">Home</a>
+                <a class="text-blue-600 hover:text-blue-700 ">Home</a>
               </router-link>
             </li>
             <li>
@@ -37,7 +37,7 @@
          
           <div v-for="(item, index) in shopping_cart_items_list" :key="index">
             <div v-if="item.title_of_item">
-            <div class="bg-white hover:bg-blue-300 p-5">
+            <div class="bg-white hover:bg-blue-300 p-5 rounded-md">
               <div class="grid grid-cols-12 px-1 py-1">
                 <!-- product -->
 
@@ -49,12 +49,12 @@
                   />
                 </div>
                 <div class="col-span-7">
-                  <div class="grid grid-cols-12">
+                  <div class="grid grid-cols-12 ">
                     <div class="col-span-12 font-bold text-[18px]">
                       {{ item.title_of_item }}
                     </div>
                     <div class="col-span-12 font-bold text-[18px] py-1">
-                      <span class="text-blue-600 hover:text-blue-300 text-xs">
+                      <span class="text-blue-600 hover:text-blue-300 text-xs ">
                         <div v-if="item.vendor_uuid">
                         <router-link
                           :to="{

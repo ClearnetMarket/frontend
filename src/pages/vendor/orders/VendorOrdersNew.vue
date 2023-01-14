@@ -25,13 +25,13 @@
         <button
           class="flex py-2 px-4 shadow-md no-underline rounded-full text-white font-sans hover:text-white text-sm bg-zinc-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2">
           <span class="px-2">{{ vendor_orders_new }}</span>
-          <span class>New Orders</span>
+          <span class>New</span>
         </button>
       </div>
       <div v-else>
         <button
           class="py-2 px-4 shadow-md no-underline rounded-full text-white font-sans text-sm hover:text-white bg-zinc-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2">
-          New Orders
+          New
         </button>
       </div>
 
@@ -40,7 +40,7 @@
           <button
             class="flex py-2 px-4 shadow-md text-sm no-underline rounded-full bg-zinc-600 hover:bg-zinc-400 text-white font-sans hover:text-white focus:outline-none active:shadow-none mr-2">
             <span class="px-2">{{ vendor_orders_accepted }}</span>
-            <span class>Waiting on Shipment</span>
+            <span class>Waiting</span>
           </button>
         </router-link>
       </div>
@@ -112,16 +112,34 @@
       <h1 class="col-span-1 font-semibold text-2xl">New Orders</h1>
       <div v-for="order in orders" :key="order.id">
         <div v-if="order">
-          <div class="grid grid-cols-12 rounded border border-1 border-gray-300 bg-gray-200 p-5">
-            <div class="col-span-10 ">
-              <div class="grid grid-cols-12">
-                <div class="col-span-12">{{ relativeDate(order.created) }}</div>
-                <router-link class="col-span-12 text-blue-600 hover:underline hover:text-blue-400"
-                  :to="{ name: 'MarketItem', params: { id: order.item_uuid } }">
-                  <div>{{ order.title_of_item }}</div>
-                </router-link>
+                  
+          <div class="grid grid-cols-12 gap-5 rounded  bg-white p-5">
 
-                <div class="col-span-12">
+            <div class="col-span-3 ">
+              <img class="object-contain" :src="order.image_one" alt="" />
+            </div>
+            <div class="col-span-7 ">
+              <div class="grid grid-cols-12">
+
+                <div class="col-span-12 mb-5">
+                  <router-link class="col-span-12 text-blue-600 hover:underline hover:text-blue-400 text-[18px] "
+                    :to="{ name: 'MarketItem', params: { id: order.item_uuid } }">
+                    {{ order.title_of_item }}
+                  </router-link>
+                </div>
+                <div class="col-span-12 font-bold ">
+                  Order# {{ order.uuid }}
+                </div>
+                <div class="col-span-4">
+                  <div class="font-bold">Order Date</div>
+                  {{ relativeDate (order.created) }}
+                </div>
+                <div class="col-span-4">
+                  <div class="font-bold">Item Quantity:</div>
+                  {{ order.quantity }}
+                </div>
+                <div class="col-span-4">
+                    <div class="font-bold">Customer</div>
                   <router-link :to="{
                     name: 'userprofile',
                     params: { uuid: order.customer_uuid },
@@ -131,33 +149,35 @@
                     </div>
                   </router-link>
                 </div>
-                <div class="col-span-12">
+                <div class="col-span-12 font-bold">Coin:</div>
+                <div class="col-span-12 mb-2 text-[16px]">
                   <div v-if="order.digital_currency === 1">
-                    <span class="text-sm font-semibold text-orange-500">Bitcoin</span>
-                    {{ order.price_total_btc }} Price Total with shipping
+                    <span class="text-sm font-semibold text-orange-500">Bitcoin with shipping:</span>
+                    {{ order.price_total_btc }}
                   </div>
                   <div v-if="order.digital_currency === 2">
                     <div class="">
-                      <span class="text-sm font-semibold text-green-600">Bitcoin Cash</span>
+                      <span class="text-sm font-semibold text-green-600">Bitcoin Cash with shipping:</span>
                     </div>
                     <div class="">
-                      {{ order.price_total_bch }} Price Total with shipping
+                      {{ order.price_total_bch }} 
                     </div>
                   </div>
                   <div v-if="order.digital_currency === 3">
-                    <span class="text-sm font-semibold text-orange-700">Monero</span>
-                    {{ order.price_total_xmr }} Price Total with shipping
+                    <span class="text-sm font-semibold text-orange-700">Monero with shipping:</span>
+                    {{ order.price_total_xmr }} 
                   </div>
                 </div>
-                <div class="col-span-12">
-                  Item Quantity: {{ order.quantity }}
-                </div>
-                <div class="col-span-12">
-                  Shipping Description: {{ order.shipping_description }}
+
+
+                <div class="col-span-12 mb-2">
+                  <div class="font-bold">Shipping Description:</div>
+                   {{ order.shipping_description }}
                 </div>
                 <div class="col-span-12">
                   <div class="grid grid-cols-12">
-                    <div class="col-span-12">Shipping Destination:</div>
+                    <div class="col-span-12">
+                      <div class="font-bold">Shipping Destination:</div></div>
                     <div class="col-span-12">{{ order.address_name }}</div>
                     <div class="col-span-12">{{ order.address }}</div>
                     <div class="col-span-12">{{ order.apt }}</div>
@@ -290,7 +310,7 @@ export default defineComponent({
       }).then((response) => {
         if (response.status == 200) {
           notify({
-            title: "Freeport",
+            title: "Order #" + uuid,
             text: "Order Accepted",
             type: "success",
           });
@@ -310,7 +330,7 @@ export default defineComponent({
         if (response.status == 200) {
           this.getuserneworders();
           notify({
-            title: "Freeport",
+            title: "Order #" + uuid,
             text: "Order Rejected",
             type: "error",
           });
