@@ -500,29 +500,18 @@ export default defineComponent({
       vendoruuid: null,
       vendortotalsales: 0,
       vendorrating: 0,
-      ItemRating: {
-        itemrating1: 0,
-        itemrating2: 0,
-        itemrating3: 0,
-        itemrating4: 0,
-        itemrating5: 0,
-        itemrating6: 0,
-        itemrating7: 0,
-        itemrating8: 0,
-        itemrating9: 0,
-        itemrating10: 0,
-      },
+     
       VendorRating: {
-        vendorrating1: 0,
-        vendorrating2: 0,
-        vendorrating3: 0,
-        vendorrating4: 0,
-        vendorrating5: 0,
-        vendorrating6: 0,
-        vendorrating7: 0,
-        vendorrating8: 0,
-        vendorrating9: 0,
-        vendorrating10: 0,
+        vendorrating1: '',
+        vendorrating2: '',
+        vendorrating3: '',
+        vendorrating4: '',
+        vendorrating5: '',
+        vendorrating6: '',
+        vendorrating7: '',
+        vendorrating8: '',
+        vendorrating9: '',
+        vendorrating10: '',
       },
 
     };
@@ -604,7 +593,7 @@ export default defineComponent({
           this.review = response.data.review;
 
           this.rating_vendor = response.data.vendor_rating;
-          this.rating_item = response.data.item_rating;
+   
           this.loaded_feedback = true;
 
         }
@@ -612,57 +601,34 @@ export default defineComponent({
     },
     // set variables for ratings
     onSubmitFeedback() {
-      if (this.ItemRating.itemrating1 == 1) {
-        this.rating_item = 1;
-      } else if (this.ItemRating.itemrating2 == 2) {
-        this.rating_item = 2;
-      } else if (this.ItemRating.itemrating3 == 3) {
-        this.rating_item = 3;
-      } else if (this.ItemRating.itemrating4 == 4) {
-        this.rating_item = 4;
-      } else if (this.ItemRating.itemrating5 == 5) {
-        this.rating_item = 5;
-      } else if (this.ItemRating.itemrating5 == 6) {
-        this.rating_item = 6;
-      } else if (this.ItemRating.itemrating5 == 7) {
-        this.rating_item = 7;
-      } else if (this.ItemRating.itemrating5 == 8) {
-        this.rating_item = 8;
-      } else if (this.ItemRating.itemrating5 == 9) {
-        this.rating_item = 9;
-      } else if (this.ItemRating.itemrating5 == 10) {
-        this.rating_item = 10;
-      }
-
-      if (this.VendorRating.vendorrating1 == 1) {
+     
+      if (this.VendorRating.vendorrating1 == '1') {
         this.rating_vendor = 1;
-      } else if (this.VendorRating.vendorrating2 == 2) {
+      } else if (this.VendorRating.vendorrating2 == '2') {
         this.rating_vendor = 2;
-      } else if (this.VendorRating.vendorrating3 == 3) {
+      } else if (this.VendorRating.vendorrating3 == '3') {
         this.rating_vendor = 3;
-      } else if (this.VendorRating.vendorrating4 == 4) {
+      } else if (this.VendorRating.vendorrating4 == '4') {
         this.rating_vendor = 4;
-      } else if (this.VendorRating.vendorrating5 == 5) {
+      } else if (this.VendorRating.vendorrating5 == '5') {
         this.rating_vendor = 5;
-      } else if (this.VendorRating.vendorrating5 == 6) {
+      } else if (this.VendorRating.vendorrating6 == '6') {
         this.rating_vendor = 6;
-      } else if (this.VendorRating.vendorrating5 == 7) {
+      } else if (this.VendorRating.vendorrating7 == '7') {
         this.rating_vendor = 7;
-      } else if (this.VendorRating.vendorrating5 == 8) {
+      } else if (this.VendorRating.vendorrating8 == '8') {
         this.rating_vendor = 8;
-      } else if (this.VendorRating.vendorrating5 == 9) {
+      } else if (this.VendorRating.vendorrating9 == '9') {
         this.rating_vendor = 9;
-      } else if (this.VendorRating.vendorrating5 == 10) {
+      } else if (this.VendorRating.vendorrating10 == '10') {
         this.rating_vendor = 10;
       }
-
-      let payLoadReview = {
-        review: this.review,
-      };
-      let payLoadScore = {
-        itemrating: this.rating_item,
-        vendorrating: this.rating_vendor,
-      };
+      console.log(this.rating_vendor)
+      console.log(this.VendorRating)
+      let payLoadReview = {review: this.review};
+      let payLoadScore = {vendorrating: this.rating_vendor};
+      console.log(payLoadReview)
+      console.log(payLoadScore)
       this.sendFeedbackReview(payLoadReview);
       this.sendFeedbackScore(payLoadScore);
     },
@@ -699,11 +665,7 @@ export default defineComponent({
           });
     },
     // send the feedback rating
-     sendFeedbackScore(payLoad: {
-      itemrating: number;
-      vendorrating: number;
-
-    }) {
+     sendFeedbackScore(payLoad: {vendorrating: number}) {
       axios({
         method: "post",
         url: "/orders/feedback/score/" + this.order.uuid,
