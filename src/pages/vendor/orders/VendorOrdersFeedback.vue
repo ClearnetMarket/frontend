@@ -267,10 +267,11 @@ export default defineComponent({
       })
         .then((response) => {
           if ((response.status = 200)) {
+            if (response.data == "success") {
             // hide rating div
             this.selectedrating = false;
             this.rated = true
-
+            }
 
           }
         })
@@ -285,31 +286,46 @@ export default defineComponent({
     },
     // payload for sending feedback
     sendreview (uuid: any) {
-      let user_review = this.review;
-
-      this.sendFeedbackReview(uuid, user_review);
+      let review = this.review;
+      let payLoad = { review: review };
+      this.sendFeedbackReview(uuid, payLoad);
     },
     // send the feedback
-    sendFeedbackReview (uuid: string, user_review: string) {
+    sendFeedbackReview (uuid: string, payLoad: any) {
+
       axios({
         method: "post",
         url: "/orders/vendor/feedback/review/" + uuid,
-        data: user_review,
+        data: payLoad,
         withCredentials: true,
         headers: authHeader(),
       })
+    
         .then((response) => {
           if (response.status == 200) {
-            notify({
-              title: "Message Center",
-              text: "Successfully sent feedback",
-              type: "success",
-            });
-            this.getuserorder();
+        
+            if (response.data.status == "success"){
+        
+              notify({
+                title: "Message Center",
+                text: "Successfully sent feedback",
+                type: "success",
+              });
+              this.getuserorder();
+            }
+           
+            else{
+            
+              notify({
+                title: "Freeport Error",
+                text: "Error posting information.",
+                type: "error",
+              })
+            }
           }
         })
-        .catch(() => {
-
+        .catch((error) => {
+       
           notify({
             title: "Freeport Error",
             text: "Error posting information.",

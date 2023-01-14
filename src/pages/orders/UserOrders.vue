@@ -276,13 +276,14 @@
                         params: { uuid: order.uuid },
                       }"
                     >
-
+                    </router-link>
+                 
                         <router-link
                             class="text-blue-600 hover:text-blue-500 hover:underline"
                             :to="{
-                      name: 'ordersview',
-                      params: { uuid: order.uuid },
-                    }"
+                                  name: 'ordersview',
+                                  params: { uuid: order.uuid },
+                                }"
                         >
                           <button
                               class="bg-yellow-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
@@ -292,7 +293,7 @@
                           </button>
                         </router-link>
 
-                    </router-link>
+              
                   </div>
                 </div>
               </div>

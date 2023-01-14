@@ -163,8 +163,7 @@ validations() {
         }
       });
     },
-     becomevendor(payLoad: {
-       accept: boolean}) {
+     becomevendor(payLoad: {accept: boolean}) {
        axios({
         method: "post",
         url: "/vendor/becomevendor",

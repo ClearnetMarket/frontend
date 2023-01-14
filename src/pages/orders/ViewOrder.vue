@@ -314,95 +314,11 @@
         <div v-if="order.vendor_feedback === 0">
           <form @submit.prevent="onSubmitFeedback">
             <div
-              class="grid grid-cols-12 rounded-md border border-gray-300 mb-5 p-5"
+              class="grid grid-cols-12 rounded-md border bg-white mb-5 p-5"
             >
               <div class="col-span-12 text-[14px] mb-5">Leave Feedback</div>
-              <div class="col-span-6">
-                <div class="col-span-12">Item Rating</div>
-                <div class="col-span-12 mb-5">
-                  <fieldset class="rating">
-                    <input
-                      type="radio"
-                      id="itemstar10"
-                      name="itemrating"
-                      value="10"
-                      v-model="ItemRating.itemrating10"
-                    />
-                    <label class="full" for="itemstar10"></label>
-                    <input
-                      type="radio"
-                      id="itemstar9"
-                      name="itemrating"
-                      value="9"
-                      v-model="ItemRating.itemrating9"
-                    />
-                    <label class="full" for="itemstar9"></label>
-                    <input
-                      type="radio"
-                      id="itemstar8"
-                      name="itemrating"
-                      value="8"
-                      v-model="ItemRating.itemrating8"
-                    />
-                    <label class="full" for="itemstar8"></label>
-                    <input
-                      type="radio"
-                      id="itemstar7"
-                      name="itemrating"
-                      value="7"
-                      v-model="ItemRating.itemrating7"
-                    />
-                    <label class="full" for="itemstar7"></label>
-                    <input
-                      type="radio"
-                      id="itemstar6"
-                      name="itemrating"
-                      value="6"
-                      v-model="ItemRating.itemrating6"
-                    />
-                    <label class="full" for="itemstar6"></label>
-                    <input
-                      type="radio"
-                      id="itemstar5"
-                      name="itemrating"
-                      value="5"
-                      v-model="ItemRating.itemrating5"
-                    />
-                    <label class="full" for="itemstar5"></label>
-                    <input
-                      type="radio"
-                      id="itemstar4"
-                      name="itemrating"
-                      value="4"
-                      v-model="ItemRating.itemrating4"
-                    />
-                    <label class="full" for="itemstar4"></label>
-                    <input
-                      type="radio"
-                      id="itemstar3"
-                      name="itemrating"
-                      value="3"
-                      v-model="ItemRating.itemrating3"
-                    />
-                    <label class="full" for="itemstar3"></label>
-                    <input
-                      type="radio"
-                      id="itemstar2"
-                      name="itemrating"
-                      value="2"
-                      v-model="ItemRating.itemrating2"
-                    /><label class="full" for="itemstar2"></label>
-                    <input
-                      type="radio"
-                      id="itemstar1"
-                      name="itemrating"
-                      value="1"
-                      v-model="ItemRating.itemrating1"
-                    /><label class="full" for="itemstar1"></label>
-                  </fieldset>
-                </div>
-              </div>
-              <div class="col-span-6">
+
+              <div class="col-span-12">
                 <div class="col-span-12">Vendor Rating</div>
                 <div class="col-span-12 mb-5">
                   <fieldset class="rating1">
@@ -632,6 +548,9 @@ export default defineComponent({
         headers: authHeader(),
       }).then((response) => {
         if (response.status == 200) {
+          if (response.data.status == 'success'){
+            
+          }
 
           this.order = response.data;
           this.order_found = true;
@@ -793,6 +712,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
+       
           if ((response.status = 200)) {
             notify({
               title: "Message Center",
@@ -805,6 +725,7 @@ export default defineComponent({
           }
         })
         .catch(() => {
+      
           notify({
             title: "Freeport Error",
             text: "Error posting information.",
