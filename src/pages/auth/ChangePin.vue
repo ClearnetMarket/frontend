@@ -1,96 +1,66 @@
 
 <template>
-<div class="h-screen">
+
   <HeaderPlain />
-  <div class="container max-w-7xl mx-auto px-10">
-    <div class="mt-5 mb-5">
-      <nav class="rounded-md w-full">
-        <ol class="list-reset flex">
-          <li>
-            <router-link :to="{ name: 'home' }">
-              <a class="text-blue-600 hover:text-blue-700">Home</a>
-            </router-link>
-          </li>
-          <li>
-            <span class="text-gray-500 mx-2">/</span>
-          </li>
-        </ol>
-      </nav>
+  <div class="container max-w-7xl mx-auto px-10 bg-gray-100 h-screen">
+    <div class="mx-auto flex mb-1">
+      <div class="mt-5 mb-5 ">
+        <nav class="rounded-md w-full">
+          <ol class="list-reset flex">
+            <li>
+              <router-link :to="{ name: 'home' }">
+                <a class="text-blue-600 hover:text-blue-700">Home</a>
+              </router-link>
+            </li>
+            <li>
+              <span class="text-gray-500 mx-2">/</span>
+            </li>
+          </ol>
+        </nav>
+      </div>
     </div>
     <div class="mx-auto max-w-lg flex items-center justify-center mb-10 mt-12">
-      <form
-        class="bg-white rounded-md px-8 pt-6 pb-8 mb-4 w-full"
-        @submit.prevent="onSubmit"
-      >
+      <form class="bg-white rounded-md px-8 pt-6 pb-8 mb-4 w-full" @submit.prevent="onSubmit">
         <div class="mb-4 text-center text-[28px] text-zinc-600">Change Pin</div>
         <div class="mb-4">
-          <label class="block text-gray-700 text-sm font-bold mb-2"
-            >Enter current Password</label
-          >
-          <input
-            v-model="ChangePinForm.password"
+          <label class="block text-gray-700 text-sm font-bold mb-2">Enter current Password</label>
+          <input v-model="ChangePinForm.password"
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="password"
-            type="password"
-            placeholder="Password"
-          />
-          <span
-            v-if="v$.ChangePinForm.password.$error"
-            class="text-red-600 text-center"
-          >
+            id="password" type="password" placeholder="Password" />
+          <span v-if="v$.ChangePinForm.password.$error" class="text-red-600 text-center">
             {{ v$.ChangePinForm.password.$errors[0].$message }}
           </span>
         </div>
         <div class="mb-4">
-          <label class="block text-gray-700 text-sm font-bold mb-2"
-            >Enter New Pin</label
-          >
-          <input
-            v-model="ChangePinForm.pin"
+          <label class="block text-gray-700 text-sm font-bold mb-2">Enter New Pin</label>
+          <input v-model="ChangePinForm.pin"
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="password"
-            type="password"
-            placeholder="Password"
-          />
-          <span
-            v-if="v$.ChangePinForm.pin.$error"
-            class="text-red-600 text-center"
-          >
+            id="password" type="password" placeholder="Password" />
+          <span v-if="v$.ChangePinForm.pin.$error" class="text-red-600 text-center">
             {{ v$.ChangePinForm.pin.$errors[0].$message }}
           </span>
         </div>
 
         <div class="mb-6">
-          <label class="block text-gray-700 text-sm font-bold mb-2"
-            >Confirm New Pin</label
-          >
-          <input
-            v-model="ChangePinForm.pin_confirm"
+          <label class="block text-gray-700 text-sm font-bold mb-2">Confirm New Pin</label>
+          <input v-model="ChangePinForm.pin_confirm"
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-            id="passwordtwo"
-            type="password"
-            autocomplete="off"
-            placeholder="Confirm Password"
-          />
-          <span
-            v-if="v$.ChangePinForm.pin_confirm.$error"
-            class="text-red-600 text-center"
-          >
+            id="passwordtwo" type="password" autocomplete="off" placeholder="Confirm Password" />
+          <span v-if="v$.ChangePinForm.pin_confirm.$error" class="text-red-600 text-center">
             {{ v$.ChangePinForm.pin_confirm.$errors[0].$message }}
           </span>
         </div>
         <div class="flex items-center justify-center mb-6">
           <button
             class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            type="submit"
-          >
+            type="submit">
             Sign In
           </button>
         </div>
       </form>
     </div>
   </div>
-</div>
+
 </template>
 
 <script lang="ts">
@@ -107,7 +77,7 @@ export default defineComponent({
     HeaderPlain,
   },
 
-  data() {
+  data () {
     return {
       v$: useValidate(),
       ChangePinForm: {
@@ -117,7 +87,7 @@ export default defineComponent({
       },
     };
   },
-  validations() {
+  validations () {
     return {
       ChangePinForm: {
         pin: { required, minLength: minLength(4) },
@@ -127,8 +97,8 @@ export default defineComponent({
     };
   },
   methods: {
-    sendRequest(payLoad: { pin: string; pin_confirm: string }) {
-    axios({
+    sendRequest (payLoad: { pin: string; pin_confirm: string }) {
+      axios({
         method: "post",
         url: "/auth/change-pin",
         data: payLoad,
@@ -151,7 +121,7 @@ export default defineComponent({
           });
         });
     },
-    onSubmit() {
+    onSubmit () {
       const payLoad = {
         pin: this.ChangePinForm.pin,
         pin_confirm: this.ChangePinForm.pin_confirm,

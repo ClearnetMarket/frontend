@@ -1,8 +1,8 @@
 
 <template>
-      <div class="h-screen">
+  
   <HeaderPlain />
-  <div class="container max-w-7xl mx-auto bg-gray-100">
+  <div class="container max-w-7xl mx-auto bg-gray-100  h-screen">
     <div class="mx-auto max-w-lg flex items-center justify-centermt-36">
       <form
         class="bg-white rounded-md  px-8 pt-6 pb-8 mb-4 mt-4 w-full"
@@ -203,7 +203,7 @@
       </form>
     </div>
   </div>
-</div>
+
 </template>
 
 <script lang="ts">

@@ -45,9 +45,15 @@
           <div class="text-[16px] font-weight-bold text-gray-700">
             Quantity:
           </div>
-          <div class="text-[16px] text-gray-700">
+          <div class="text-[16px] text-gray-700" v-if="itemcount > 0">
+
             {{ itemcount }}
           </div>
+          <div class="text-[16px] text-red-600 font-bold" v-else>
+          
+            Out of Stock!
+          </div>
+
         </div>
         <div class="flex gap-4">
           <div class="text-[16px] font-weight-bold text-gray-700">
@@ -271,7 +277,7 @@ export default defineComponent({
       digitalcurrencyone: false,
       digitalcurrencytwo: false,
       digitalcurrencythree: false,
-      itemcount: "",
+      itemcount: 0,
       freeshipping: false,
       freeshippingdays: 0,
       totalsold: 0,
@@ -409,7 +415,7 @@ export default defineComponent({
             this.exactzipcode = response.data.zipcode;
           }
         })
-        .catch((error) => {
+        .catch(() => {
 
         });
     },
@@ -427,7 +433,7 @@ export default defineComponent({
             this.loaded_feedback = true;
           }
         })
-        .catch((error) => {
+        .catch(() => {
 
         });
     },
@@ -446,7 +452,7 @@ export default defineComponent({
             this.pricebtc = response.data.coin;
           }
         })
-        .catch((error) => {
+        .catch(() => {
 
         });
     },
@@ -461,7 +467,7 @@ export default defineComponent({
             this.pricebch = response.data.coin;
           }
         })
-        .catch((error) => {
+        .catch(() => {
 
         });
     },
@@ -476,7 +482,7 @@ export default defineComponent({
             this.pricexmr = response.data.coin;
           }
         })
-        .catch((error) => {
+        .catch(() => {
 
         });
     },

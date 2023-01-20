@@ -470,8 +470,7 @@ created(){
         headers: authHeader(),
         data: payLoad,
       }).then((response) => {
-        console.log(response.status)
-         console.log(response)
+
         if (response.status == 200) {
           notify({
             title: "Freeport",

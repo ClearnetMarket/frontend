@@ -1,142 +1,145 @@
 
 <template>
- 
-    <MainHeaderTop />
-    <MainHeaderMid />
-    <MainHeaderBottom />
-    <MainHeaderVendor />
-    <!-- Top Stuff-->
-    <div class="max-w-4xl mx-auto wrapper px-10">
-      <div class="mt-5 mb-5">
-        <nav class="rounded-md w-full">
-          <ol class="list-reset flex">
-            <li>
-              <router-link :to="{ name: 'home' }">
-                <a class="text-blue-600 hover:text-blue-700">Home</a>
-              </router-link>
-            </li>
-            <li>
-              <span class="text-gray-500 mx-2">/</span>
-            </li>
-          </ol>
-        </nav>
+
+  <MainHeaderTop />
+  <MainHeaderMid />
+  <MainHeaderBottom />
+  <MainHeaderVendor />
+  <!-- Top Stuff-->
+  <div class="max-w-4xl mx-auto wrapper px-10">
+    <div class="mt-5 mb-5">
+      <nav class="rounded-md w-full">
+        <ol class="list-reset flex">
+          <li>
+            <router-link :to="{ name: 'home' }">
+              <a class="text-blue-600 hover:text-blue-700">Home</a>
+            </router-link>
+          </li>
+          <li>
+            <span class="text-gray-500 mx-2">/</span>
+          </li>
+        </ol>
+      </nav>
+    </div>
+
+
+    <div class="text-[20px] pt-5 pb-5 text-center">
+      My Feedback
+    </div>
+    <div class="grid grid-cols-12 p-5 gap-5">
+      <div class="col-span-4 bg-white rounded-md p-5">
+        <div class="flex">All Vendor Reviews</div>
+
+        <p class="text-sm font-medium text-gray-500 dark:text-gray-400">
+          {{ vendor_reviews_total }} total ratings
+        </p>
+        <div class="flex items-center mt-4">
+          <span class="text-sm font-medium text-blue-600 dark:text-blue-500">10 star</span>
+          <div class="mx-4 w-2/4 h-5 bg-gray-200 rounded dark:bg-gray-700">
+            <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_ten }"></div>
+          </div>
+          <span class="text-sm font-medium text-blue-600 dark:text-blue-500">{{ vendor_reviews_percent_ten }}%</span>
+        </div>
+        <div class="flex items-center mt-4">
+          <span class="text-sm font-medium text-blue-600 dark:text-blue-500 pr-2">9 star</span>
+          <div class="mx-4 w-2/4 h-5 bg-gray-200 rounded dark:bg-gray-700">
+            <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_nine }"></div>
+          </div>
+          <span class="text-sm font-medium text-blue-600 dark:text-blue-500">{{ vendor_reviews_percent_nine }}%</span>
+        </div>
+        <div class="flex items-center mt-4">
+          <span class="text-sm font-medium text-blue-600 dark:text-blue-500 pr-2">8 star</span>
+          <div class="mx-4 w-2/4 h-5 bg-gray-200 rounded dark:bg-gray-700">
+            <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_eight }"></div>
+          </div>
+          <span class="text-sm font-medium text-blue-600 dark:text-blue-500">
+            {{ vendor_reviews_percent_eight }}%</span>
+        </div>
+        <div class="flex items-center mt-4">
+          <span class="text-sm font-medium text-blue-600 dark:text-blue-500 pr-2">7 star</span>
+          <div class="mx-4 w-2/4 h-5 bg-gray-200 rounded dark:bg-gray-700">
+            <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_seven }"></div>
+          </div>
+          <span class="text-sm font-medium text-blue-600 dark:text-blue-500">
+            {{ vendor_reviews_percent_seven }}%</span>
+        </div>
+        <div class="flex items-center mt-4">
+          <span class="text-sm font-medium text-blue-600 dark:text-blue-500 pr-2">6 star</span>
+          <div class="mx-4 w-2/4 h-5 bg-gray-200 rounded dark:bg-gray-700">
+            <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_six }"></div>
+          </div>
+          <span class="text-sm font-medium text-blue-600 dark:text-blue-500 pr-2">{{
+            vendor_reviews_percent_six
+          }}%</span>
+        </div>
+        <div class="flex items-center mt-4">
+          <span class="text-sm font-medium text-blue-600 dark:text-blue-500 pr-2">5 star</span>
+          <div class="mx-4 w-2/4 h-5 bg-gray-200 rounded dark:bg-gray-700">
+            <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_five }"></div>
+          </div>
+          <span class="text-sm font-medium text-blue-600 dark:text-blue-500">{{ vendor_reviews_percent_five }}%</span>
+        </div>
+        <div class="flex items-center mt-4">
+          <span class="text-sm font-medium text-blue-600 dark:text-blue-500 pr-2">4 star</span>
+          <div class="mx-4 w-2/4 h-5 bg-gray-200 rounded dark:bg-gray-700">
+            <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_four }"></div>
+          </div>
+          <span class="text-sm font-medium text-blue-600 dark:text-blue-500">{{ vendor_reviews_percent_four }}%</span>
+        </div>
+        <div class="flex items-center mt-4">
+          <span class="text-sm font-medium text-blue-600 dark:text-blue-500 pr-2">3 star</span>
+          <div class="mx-4 w-2/4 h-5 bg-gray-200 rounded dark:bg-gray-700">
+            <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_three }"></div>
+          </div>
+          <span class="text-sm font-medium text-blue-600 dark:text-blue-500 pr-2">{{
+            vendor_reviews_percent_three
+          }}%</span>
+        </div>
+        <div class="flex items-center mt-4">
+          <span class="text-sm font-medium text-blue-600 dark:text-blue-500 pr-2">2 star</span>
+          <div class="mx-4 w-2/4 h-5 bg-gray-200 rounded dark:bg-gray-700">
+            <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_two }"></div>
+          </div>
+          <span class="text-sm font-medium text-blue-600 dark:text-blue-500">{{ vendor_reviews_percent_two }}%</span>
+        </div>
+        <div class="flex items-center mt-4">
+          <span class="text-sm font-medium text-blue-600 dark:text-blue-500 pr-2">1 star</span>
+          <div class="mx-4 w-2/4 h-5 bg-gray-200 rounded dark:bg-gray-700">
+            <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_one }"></div>
+          </div>
+          <span class="text-sm font-medium text-blue-600 dark:text-blue-500">{{ vendor_reviews_percent_one }}%</span>
+        </div>
       </div>
+      <div class="col-span-8">
+        <div class="" v-if="vendor_reviews_total > 0">
+          <div v-for="review in vendorreviews" :key="review.id">
+            <div class="grid grid-cols-12 bg-white rounded-md p-5">
+              <div class="col-span-12 text-sm font-medium text-gray-500 dark:text-gray-400">
+                {{ review.customer_name }}
+              </div>
+              <div class="col-span-12  text-blue-600 hover:text-blue-600 hover:underline text-[14px]"><router-link :to="{
+                name: 'MarketItem',
+                params: { id: review.item_uuid },
+              }">
+                  {{ review.title_of_item }}
+                </router-link></div>
+              <div class="col-span-12 text-sm font-medium text-gray-500 dark:text-gray-400">
+                Date Purchased: {{ relativeDate (review.timestamp) }}
+              </div>
+              <div class="col-span-12 mb-2">
+                <StarRating v-bind:rating="review.vendor_rating" />
+              </div>
+              <div class="col-span-12 mt-2">{{ review.review_of_vendor }}</div>
 
-
-      <div class="text-[20px] pt-5 pb-5 text-center">
-        My Feedback
-      </div>
-      <div class="grid grid-cols-12 bg-white rounded-md p-5">
-        <div class="col-span-4">
-          <div class="flex">All Vendor Reviews</div>
-
-          <p class="text-sm font-medium text-gray-500 dark:text-gray-400">
-            {{ vendor_reviews_total }} total ratings
-          </p>
-          <div class="flex items-center mt-4">
-            <span class="text-sm font-medium text-blue-600 dark:text-blue-500">10 star</span>
-            <div class="mx-4 w-2/4 h-5 bg-gray-200 rounded dark:bg-gray-700">
-              <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_ten }"></div>
             </div>
-            <span class="text-sm font-medium text-blue-600 dark:text-blue-500">{{ vendor_reviews_percent_ten }}%</span>
-          </div>
-          <div class="flex items-center mt-4">
-            <span class="text-sm font-medium text-blue-600 dark:text-blue-500 pr-2">9 star</span>
-            <div class="mx-4 w-2/4 h-5 bg-gray-200 rounded dark:bg-gray-700">
-              <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_nine }"></div>
-            </div>
-            <span class="text-sm font-medium text-blue-600 dark:text-blue-500">{{ vendor_reviews_percent_nine }}%</span>
-          </div>
-          <div class="flex items-center mt-4">
-            <span class="text-sm font-medium text-blue-600 dark:text-blue-500 pr-2">8 star</span>
-            <div class="mx-4 w-2/4 h-5 bg-gray-200 rounded dark:bg-gray-700">
-              <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_eight }"></div>
-            </div>
-            <span class="text-sm font-medium text-blue-600 dark:text-blue-500">
-              {{ vendor_reviews_percent_eight }}%</span>
-          </div>
-          <div class="flex items-center mt-4">
-            <span class="text-sm font-medium text-blue-600 dark:text-blue-500 pr-2">7 star</span>
-            <div class="mx-4 w-2/4 h-5 bg-gray-200 rounded dark:bg-gray-700">
-              <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_seven }"></div>
-            </div>
-            <span class="text-sm font-medium text-blue-600 dark:text-blue-500">
-              {{ vendor_reviews_percent_seven }}%</span>
-          </div>
-          <div class="flex items-center mt-4">
-            <span class="text-sm font-medium text-blue-600 dark:text-blue-500 pr-2">6 star</span>
-            <div class="mx-4 w-2/4 h-5 bg-gray-200 rounded dark:bg-gray-700">
-              <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_six }"></div>
-            </div>
-            <span class="text-sm font-medium text-blue-600 dark:text-blue-500 pr-2">{{ vendor_reviews_percent_six
-}}%</span>
-          </div>
-          <div class="flex items-center mt-4">
-            <span class="text-sm font-medium text-blue-600 dark:text-blue-500 pr-2">5 star</span>
-            <div class="mx-4 w-2/4 h-5 bg-gray-200 rounded dark:bg-gray-700">
-              <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_five }"></div>
-            </div>
-            <span class="text-sm font-medium text-blue-600 dark:text-blue-500">{{ vendor_reviews_percent_five }}%</span>
-          </div>
-          <div class="flex items-center mt-4">
-            <span class="text-sm font-medium text-blue-600 dark:text-blue-500 pr-2">4 star</span>
-            <div class="mx-4 w-2/4 h-5 bg-gray-200 rounded dark:bg-gray-700">
-              <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_four }"></div>
-            </div>
-            <span class="text-sm font-medium text-blue-600 dark:text-blue-500">{{ vendor_reviews_percent_four }}%</span>
-          </div>
-          <div class="flex items-center mt-4">
-            <span class="text-sm font-medium text-blue-600 dark:text-blue-500 pr-2">3 star</span>
-            <div class="mx-4 w-2/4 h-5 bg-gray-200 rounded dark:bg-gray-700">
-              <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_three }"></div>
-            </div>
-            <span class="text-sm font-medium text-blue-600 dark:text-blue-500 pr-2">{{ vendor_reviews_percent_three
-}}%</span>
-          </div>
-          <div class="flex items-center mt-4">
-            <span class="text-sm font-medium text-blue-600 dark:text-blue-500 pr-2">2 star</span>
-            <div class="mx-4 w-2/4 h-5 bg-gray-200 rounded dark:bg-gray-700">
-              <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_two }"></div>
-            </div>
-            <span class="text-sm font-medium text-blue-600 dark:text-blue-500">{{ vendor_reviews_percent_two }}%</span>
-          </div>
-          <div class="flex items-center mt-4">
-            <span class="text-sm font-medium text-blue-600 dark:text-blue-500 pr-2">1 star</span>
-            <div class="mx-4 w-2/4 h-5 bg-gray-200 rounded dark:bg-gray-700">
-              <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_one }"></div>
-            </div>
-            <span class="text-sm font-medium text-blue-600 dark:text-blue-500">{{ vendor_reviews_percent_one }}%</span>
           </div>
         </div>
-        <div class="col-span-8">
-          <div class="" v-if="vendor_reviews_total > 0">
-            <div v-for="review in vendorreviews" :key="review.id">
-              <div class="grid grid-cols-12">
-                <div class="col-span-12 text-sm font-medium text-gray-500 dark:text-gray-400">
-                  {{ review.customer_name }}
-                </div>
-                <div class="col-span-12 text-sm font-medium text-gray-500 dark:text-gray-400">
-                  Date Purchased: {{ relativeDate(review.timestamp) }}
-                </div>
-                <div class="col-span-12">Item Rating</div>
-                <div class="col-span-12 mb-2">
-                  <StarRating v-bind:rating="review.item_rating" />
-                </div>
-                <div class="col-span-12">Vendor Rating</div>
-                <div class="col-span-12 mb-2">
-                  <StarRating v-bind:rating="review.vendor_rating" />
-                </div>
-
-                <div class="col-span-12 mt-2">{{ review.review }}</div>
-              </div>
-            </div>
-          </div>
-          <div v-else class="text-gray-700 text-[18px] text-center">
-            You have no Feedback yet ...
-          </div>
+        <div v-else class="text-gray-700 text-[18px] text-center">
+          You have no Feedback yet ...
         </div>
       </div>
     </div>
+  </div>
   <MainFooter />
 </template>
 
@@ -184,16 +187,16 @@ export default defineComponent({
       orders: [],
       vendorreviews: [],
       vendor_reviews_total: 0,
-      vendor_reviews_percent_one: 0,
-      vendor_reviews_percent_two: 0,
-      vendor_reviews_percent_three: 0,
-      vendor_reviews_percent_four: 0,
-      vendor_reviews_percent_five: 0,
-      vendor_reviews_percent_six: 0,
-      vendor_reviews_percent_seven: 0,
-      vendor_reviews_percent_eight: 0,
-      vendor_reviews_percent_nine: 0,
-      vendor_reviews_percent_ten: 0,
+      vendor_reviews_percent_one: null,
+      vendor_reviews_percent_two: null,
+      vendor_reviews_percent_three: null,
+      vendor_reviews_percent_four: null,
+      vendor_reviews_percent_five: null,
+      vendor_reviews_percent_six: null,
+      vendor_reviews_percent_seven: null,
+      vendor_reviews_percent_eight: null,
+      vendor_reviews_percent_nine: null,
+      vendor_reviews_percent_ten: null,
     };
   },
   created () {
@@ -206,6 +209,7 @@ export default defineComponent({
 
     this.getratings();
     this.deleteordernotice();
+    this.getvendorreviews();
   },
 
   methods: {
@@ -252,6 +256,7 @@ export default defineComponent({
       })
         .then((response) => {
           if ((response.status = 200)) {
+
             this.vendorreviews = response.data;
             if (this.vendorreviews == undefined) {
               this.vendorreviews = null;

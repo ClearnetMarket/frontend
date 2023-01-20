@@ -396,7 +396,7 @@
                 </div>
               </div>
               <div class="col-span-12 mt-5 mb-1">
-                Leave a review for the item:
+                Leave a review for the vendor:
               </div>
               <div class="col-span-12">
                 <textarea
@@ -518,11 +518,16 @@ export default defineComponent({
   },
 
   mounted() {
+  
       let order_id_route = useRoute();
+    
       this.order_id = order_id_route.params.uuid;
+   
 
       this.getuserorder();
+   
       this.getordertracking();
+   
       this.getorderfeedback();
 
   },
@@ -537,23 +542,20 @@ export default defineComponent({
         headers: authHeader(),
       }).then((response) => {
         if (response.status == 200) {
-          if (response.data.status == 'success'){
-            
-          }
-
-          this.order = response.data;
+          this.order = response.data;    
           this.order_found = true;
           this.getvendorinfo();
+          console.log(this.order)
           if (this.order) {
             this.getvendorinfo();
           }
           if (this.order.user_feedback == 1) {
             this.getorderfeedback();
           }
+    
         }
       })
-        .catch((error) => {
-
+        .catch(() => {
           this.$router.push({ name: "home" });
           notify({
             title: "Error",
@@ -591,9 +593,7 @@ export default defineComponent({
       }).then((response) => {
         if (response.status == 200) {
           this.review = response.data.review;
-
           this.rating_vendor = response.data.vendor_rating;
-   
           this.loaded_feedback = true;
 
         }
@@ -623,18 +623,15 @@ export default defineComponent({
       } else if (this.VendorRating.vendorrating10 == '10') {
         this.rating_vendor = 10;
       }
-      console.log(this.rating_vendor)
-      console.log(this.VendorRating)
+
       let payLoadReview = {review: this.review};
       let payLoadScore = {vendorrating: this.rating_vendor};
-      console.log(payLoadReview)
-      console.log(payLoadScore)
+
       this.sendFeedbackReview(payLoadReview);
       this.sendFeedbackScore(payLoadScore);
     },
     // send the feedback rating
     sendFeedbackReview(payLoad: {
-
       review: string;
     }) {
       axios({

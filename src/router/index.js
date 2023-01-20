@@ -130,7 +130,7 @@ const routes = [
         component: vendoraddress,
     },
     {
-        path: "/vendor/feedback",
+        path: "/vendor/feedback/:uuid",
         name: "vendorfeedback",
         component: vendorfeedback,
     },

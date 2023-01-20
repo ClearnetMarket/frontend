@@ -1181,6 +1181,7 @@ export default defineComponent({
   },
   methods: {
     ratingnumber() {
+     
       if (this.rating == 0) {
         this.final_rating = 0;
       } else if (this.rating > 0 && this.rating < 1) {

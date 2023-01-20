@@ -1,6 +1,6 @@
 
 <template>
-   
+
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
@@ -48,13 +48,10 @@
                 <div class="col-span-2"></div>
                 <div class="col-span-4">
                   Order #
-                  <router-link
-                    class="text-blue-600 hover:text-blue-500 hover:underline"
-                    :to="{
-                      name: 'ordersview',
-                      params: { uuid: order.uuid },
-                    }"
-                  >
+                  <router-link class="text-blue-600 hover:text-blue-500 hover:underline" :to="{
+                    name: 'ordersview',
+                    params: { uuid: order.uuid },
+                  }">
                     {{ order.uuid }}
                   </router-link>
                 </div>
@@ -80,10 +77,7 @@
                         Requested cancel from vendor
                       </div>
                       <div v-if="order.overall_status === 7">Cancelled</div>
-                      <div
-                        class="text-red-600"
-                        v-if="order.overall_status === 8"
-                      >
+                      <div class="text-red-600" v-if="order.overall_status === 8">
                         Disputed
                       </div>
                       <div v-if="order.overall_status === 10">Finalized</div>
@@ -94,15 +88,11 @@
                           <img class="object-contain" :src="order.image_one" alt="" />
                         </div>
                         <div class="col-span-9">
-                          <div
-                            class="text-blue-600 hover:text-blue-600 hover:underline text-[18px]"
-                          >
-                            <router-link
-                              :to="{
-                                name: 'MarketItem',
-                                params: { id: order.item_uuid },
-                              }"
-                            >
+                          <div class="text-blue-600 hover:text-blue-600 hover:underline text-[18px]">
+                            <router-link :to="{
+                              name: 'MarketItem',
+                              params: { id: order.item_uuid },
+                            }">
                               {{ order.title_of_item }}
                             </router-link>
                           </div>
@@ -110,15 +100,11 @@
                             <div v-if="order.vendor_uuid">
                               <div class="flex">
                                 <div class="">Sold by:</div>
-                                <router-link
-                                  :to="{
-                                    name: 'userprofile',
-                                    params: { uuid: order.vendor_uuid },
-                                  }"
-                                >
-                                  <div
-                                    class="text-blue-600 hover:text-blue-500 hover:underline pl-3"
-                                  >
+                                <router-link :to="{
+                                  name: 'userprofile',
+                                  params: { uuid: order.vendor_uuid },
+                                }">
+                                  <div class="text-blue-600 hover:text-blue-500 hover:underline pl-3">
                                     {{ order.vendor_user_name }}
                                   </div>
                                 </router-link>
@@ -131,25 +117,20 @@
                   </div>
                 </div>
                 <div class="col-span-3">
-                  <div
-                    v-if="
-                      order.overall_status === 3 ||
-                      order.overall_status === 2 ||
-                      order.overall_status === 4 ||
-                      order.overall_status === 8
-                    "
-                  >
+                  <div v-if="
+                    order.overall_status === 3 ||
+                    order.overall_status === 2 ||
+                    order.overall_status === 4 ||
+                    order.overall_status === 8
+                  ">
                     <div class="my-2">
-                      <router-link
-                        :to="{
-                          name: 'ordersview',
-                          params: { uuid: order.uuid },
-                        }"
-                      >
+                      <router-link :to="{
+                        name: 'ordersview',
+                        params: { uuid: order.uuid },
+                      }">
                         <button
                           class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
-                          type="button"
-                        >
+                          type="button">
                           Tracking Info
                         </button>
                       </router-link>
@@ -160,9 +141,7 @@
                     <div class="my-2">
                       <button
                         class="bg-red-600 hover:bg-red-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
-                        type="button"
-                        @click="requestcancel(order.uuid)"
-                      >
+                        type="button" @click="requestcancel(order.uuid)">
                         Request Cancel
                       </button>
                     </div>
@@ -172,18 +151,14 @@
                     <div class="my-2">
                       <button
                         class="bg-red-600 hover:bg-red-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
-                        type="button"
-                        @click="requestcancel(order.uuid)"
-                      >
+                        type="button" @click="requestcancel(order.uuid)">
                         Request Cancel
                       </button>
                     </div>
                     <div class="my-2">
                       <button
                         class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
-                        type="button"
-                        @click="finalize(order.uuid)"
-                      >
+                        type="button" @click="finalize(order.uuid)">
                         Finalize Order
                       </button>
                     </div>
@@ -191,9 +166,7 @@
                     <div class="my-2">
                       <button
                         class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
-                        type="button"
-                        @click="disputeorder(order.uuid)"
-                      >
+                        type="button" @click="disputeorder(order.uuid)">
                         Dispute Order
                       </button>
                     </div>
@@ -203,27 +176,21 @@
                     <div class="my-2">
                       <button
                         class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
-                        type="button"
-                        @click="delivered(order.uuid)"
-                      >
+                        type="button" @click="delivered(order.uuid)">
                         Mark as Delivered
                       </button>
                     </div>
                     <div class="my-2">
                       <button
                         class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
-                        type="button"
-                        @click="finalize(order.uuid)"
-                      >
+                        type="button" @click="finalize(order.uuid)">
                         Finalize Order
                       </button>
                     </div>
                     <div class="my-2">
                       <button
                         class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
-                        type="button"
-                        @click="disputeorder(order.uuid)"
-                      >
+                        type="button" @click="disputeorder(order.uuid)">
                         Dispute Order
                       </button>
                     </div>
@@ -233,18 +200,14 @@
                     <div class="my-2">
                       <button
                         class="bg-green-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
-                        type="button"
-                        @click="finalize(order.uuid)"
-                      >
+                        type="button" @click="finalize(order.uuid)">
                         Finalize Order
                       </button>
                     </div>
                     <div class="my-2">
                       <button
                         class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
-                        type="button"
-                        @click="disputeorder(order.uuid)"
-                      >
+                        type="button" @click="disputeorder(order.uuid)">
                         Dispute Order
                       </button>
                     </div>
@@ -253,16 +216,13 @@
                   <div v-if="order.overall_status === 6"></div>
                   <!-- Disputed order -->
                   <div v-if="order.overall_status === 8">
-                    <router-link
-                      :to="{
-                        name: 'Dispute',
-                        params: { uuid: order.uuid },
-                      }"
-                    >
+                    <router-link :to="{
+                      name: 'Dispute',
+                      params: { uuid: order.uuid },
+                    }">
                       <button
                         class="bg-red-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
-                        type="button"
-                      >
+                        type="button">
                         View Dispute
                       </button>
                     </router-link>
@@ -270,37 +230,29 @@
                   <!-- Finalized order -->
                   <div v-if="order.overall_status === 10">
                     <div v-if="order.vendor_feedback === 0">
-                    <router-link
-                        :to="{
+                      <router-link :to="{
                         name: 'Dispute',
                         params: { uuid: order.uuid },
-                      }"
-                    >
-                    </router-link>
-                 
-                        <router-link
-                            class="text-blue-600 hover:text-blue-500 hover:underline"
-                            :to="{
-                                  name: 'ordersview',
-                                  params: { uuid: order.uuid },
-                                }"
-                        >
-                          <button
-                              class="bg-yellow-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
-                              type="button"
-                          >
-                            Leave Feedback
-                          </button>
-                        </router-link>
+                      }">
+                      </router-link>
 
-              
+                      <router-link class="text-blue-600 hover:text-blue-500 hover:underline" :to="{
+                        name: 'ordersview',
+                        params: { uuid: order.uuid },
+                      }">
+                        <button
+                          class="bg-yellow-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
+                          type="button">
+                          Leave Feedback
+                        </button>
+                      </router-link>
+                    </div>
                   </div>
                 </div>
               </div>
-                </div>
             </div>
-        </div>
           </div>
+        </div>
       </div>
       <div v-else class="text-gray-700">
         You have no orders currently. Try buying something..or just HODL :)
@@ -333,7 +285,7 @@ export default defineComponent({
     MainFooter,
   },
 
-  data() {
+  data () {
     return {
       orders: null,
       orderscount: 0,
@@ -341,7 +293,7 @@ export default defineComponent({
       user: null,
     };
   },
-  mounted() {
+  mounted () {
     this.userstatus();
     this.getuserorderscount();
     this.getuserorders();
@@ -349,7 +301,7 @@ export default defineComponent({
 
   methods: {
     // gets the user orders
-    getuserorders() {
+    getuserorders () {
       axios({
         method: "get",
         url: "/orders",
@@ -364,7 +316,7 @@ export default defineComponent({
       });
     },
     // gets how many orders
-    getuserorderscount() {
+    getuserorderscount () {
       axios({
         method: "get",
         url: "/orders/count",
@@ -376,24 +328,24 @@ export default defineComponent({
         }
       });
     },
-    userstatus() {
+    userstatus () {
       axios({
         method: "get",
         url: "/auth/whoami",
         withCredentials: true,
         headers: authHeader(),
       })
-          .then((response) => {
-            if ((response.status = 200)) {
-              this.user = response.data.user
-            }
-          })
-          .catch(() => {this.user = null});
+        .then((response) => {
+          if ((response.status = 200)) {
+            this.user = response.data.user
+          }
+        })
+        .catch(() => { this.user = null });
     },
 
     // mark as delivered
-     delivered(uuid: any) {
-       axios({
+    delivered (uuid: any) {
+      axios({
         method: "get",
         url: "/orders/mark/delivered/" + uuid,
         withCredentials: true,
@@ -410,8 +362,8 @@ export default defineComponent({
       });
     },
     // marks as finalized
-     finalize(uuid: any) {
-       axios({
+    finalize (uuid: any) {
+      axios({
         method: "get",
         url: "/orders/mark/finalized/" + uuid,
         withCredentials: true,
@@ -428,7 +380,7 @@ export default defineComponent({
       });
     },
     // mark as requested to cancel
-     requestcancel(uuid: any) {
+    requestcancel (uuid: any) {
       axios({
         method: "get",
         url: "/orders/request/cancel/" + uuid,
@@ -447,7 +399,7 @@ export default defineComponent({
       });
     },
     // mark as disputed
-     disputeorder(uuid: any) {
+    disputeorder (uuid: any) {
       axios({
         method: "get",
         url: "/orders/mark/disputed/" + uuid,
@@ -466,8 +418,8 @@ export default defineComponent({
       });
     },
     // creates dispute chat (background call)
-     createdisputechat(uuid: any) {
-       axios({
+    createdisputechat (uuid: any) {
+      axios({
         method: "post",
         url: "/msg/create/dispute/" + uuid,
         withCredentials: true,

@@ -87,16 +87,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-span-3 ">
-              <div class="mx-3 pt-3 text-[14px] font-bold ">
-                <router-link :to="{ name: 'vendorordersfeedback', params: { uuid: order.uuid }, }" class="px-3">
-                  <button
-                    class="bg-blue-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline">
-                    View Order
-                  </button>
-                </router-link>
-              </div>
-            </div>
+
           </div>
 
         </div>
@@ -110,41 +101,44 @@
 
         <div class="col-span-12 bg-white rounded-md">
           <div class="grid grid-cols-12">
+            <div class="col-span-12">Customer Rating:</div>
             <div class="col-span-12">
               <fieldset class="rating" v-if="rated === false">
                 <input type="radio" id="vendorstar10" name="vendorrating"
-                  @click.prevent="sendscore(order.uuid, '10')" /><label class="full" for="vendorstar10"></label>
+                  @click.prevent="sendscore(order.uuid, 10)" /><label class="full" for="vendorstar10"></label>
                 <input type="radio" id="vendorstar9" name="vendorrating" value="9"
-                  @click.prevent="sendscore(order.uuid, '9')" /><label class="full" for="vendorstar9"></label>
+                  @click.prevent="sendscore(order.uuid, 9)" /><label class="full" for="vendorstar9"></label>
                 <input type="radio" id="vendorstar8" name="vendorrating" value="8"
-                  @click.prevent="sendscore(order.uuid, '8')" /><label class="full" for="vendorstar8"></label>
+                  @click.prevent="sendscore(order.uuid, 8)" /><label class="full" for="vendorstar8"></label>
                 <input type="radio" id="vendorstar7" name="vendorrating" value="7"
-                  @click.prevent="sendscore(order.uuid, '7')" /><label class="full" for="vendorstar7"></label>
+                  @click.prevent="sendscore(order.uuid, 7)" /><label class="full" for="vendorstar7"></label>
                 <input type="radio" id="vendorstar6" name="vendorrating" value="6"
-                  @click.prevent="sendscore(order.uuid, '6')" /><label class="full" for="vendorstar6"></label>
+                  @click.prevent="sendscore(order.uuid, 6)" /><label class="full" for="vendorstar6"></label>
                 <input type="radio" id="vendorstar5" name="vendorrating" value="5"
-                  @click.prevent="sendscore(order.uuid, '5')" /><label class="full" for="vendorstar5"></label>
+                  @click.prevent="sendscore(order.uuid, 5)" /><label class="full" for="vendorstar5"></label>
                 <input type="radio" id="vendorstar4" name="vendorrating" value="4"
-                  @click.prevent="sendscore(order.uuid, '4')" /><label class="full" for="vendorstar4"></label>
+                  @click.prevent="sendscore(order.uuid, 4)" /><label class="full" for="vendorstar4"></label>
                 <input type="radio" id="vendorstar3" name="vendorrating" value="3"
-                  @click.prevent="sendscore(order.uuid, '3')" /><label class="full" for="vendorstar3"></label>
+                  @click.prevent="sendscore(order.uuid, 3)" /><label class="full" for="vendorstar3"></label>
                 <input type="radio" id="vendorstar2" name="vendorrating" value="2"
-                  @click.prevent="sendscore(order.uuid, '2')" /><label class="full" for="vendorstar2"></label>
+                  @click.prevent="sendscore(order.uuid, 2)" /><label class="full" for="vendorstar2"></label>
                 <input type="radio" id="vendorstar1" name="vendorrating" value="1"
-                  @click.prevent="sendscore(order.uuid, '1')" /><label class="full" for="vendorstar1"></label>
+                  @click.prevent="sendscore(order.uuid, 1)" /><label class="full" for="vendorstar1"></label>
               </fieldset>
               <div v-if="rated === true">
-                {{ rating_number }} out of 10
+                {{ rating_number }} out of 10 Feedback Given
               </div>
             </div>
           </div>
+          <div v-if="rated === false">
           <div class="grid grid-cols-12">
             <div class="col-span-12 mb-1 text-[14px] pt-5">Leave a review:</div>
+
             <form class="col-span-12" @submit.prevent="sendreview(order.uuid)">
-              <div class="col-span-12  ">
+              <div class="col-span-12">
                 <textarea v-model="review"
-                  class="shadow appearance-none border border-gray-500 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline col-span-12"
-                  id="message" type="textfield" placeholder="Customer Review .." />
+                  class="shadow appearance-none border border-gray-500 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  id="message" type="textfield" placeholder="Review Rating" />
               </div>
               <div class="col-span-12  col-start-4">
                 <button
@@ -154,10 +148,16 @@
                 </button>
               </div>
             </form>
-          </div>
+              </div>
+</div>
+            <div v-if="rated === true">
+              <div class="col-span-12">{{ review }}</div>
+            </div>
+       
         </div>
       </div>
     </div>
+
   </div>
 
 
@@ -218,7 +218,7 @@ export default defineComponent({
       rated: false,
       review: null,
       uuid: null,
-      rating_number: ""
+      rating_number: 0
     };
   },
 
@@ -227,6 +227,7 @@ export default defineComponent({
     this.uuid = order_uuid_route.params.uuid;
     if (this.uuid) {
       this.getuserorder();
+      this.getFeedback(this.uuid);
     }
 
   },
@@ -234,8 +235,6 @@ export default defineComponent({
   methods: {
     // gets the user orders
     getuserorder () {
-
-
       axios({
         method: "get",
         url: "/orders/" + this.uuid,
@@ -245,13 +244,45 @@ export default defineComponent({
         .then((response) => {
           if (response.status == 200) {
             this.order = response.data;
-
           }
+        });
+    },
+    //see if score already present
+    getFeedback (uuid: any) {
+      axios({
+        method: "get",
+        url: "/orders/feedback/get/vendor/" + uuid,
+        withCredentials: true,
+        headers: authHeader(),
+      })
+        .then((response) => {
+          if ((response.status = 200)) {
+
+            if (response.data.status == "success") {
+              // hide rating div
+              this.rating_number = response.data.customer_rating;
+              this.review = response.data.review;
+              this.rated = true
+            }
+            else {
+              this.rating_number = 0;
+              this.review = "";
+              this.rated = false
+            }
+          }
+        })
+        .catch(() => {
+
+          notify({
+            title: "Freeport Error",
+            text: "Error Getting Review.",
+            type: "error",
+          });
         });
     },
 
     //payload for the score
-    sendscore (uuid: string, rating: string) {
+    sendscore (uuid: string, rating: number) {
       let payLoad = { rating: rating };
       this.sendFeedbackScore(uuid, payLoad);
       this.rating_number = rating
@@ -267,12 +298,12 @@ export default defineComponent({
       })
         .then((response) => {
           if ((response.status = 200)) {
-            if (response.data == "success") {
-            // hide rating div
-            this.selectedrating = false;
-            this.rated = true
-            }
+            if (response.data.status == "success") {
 
+              // hide rating div
+              this.selectedrating = false;
+            
+            }
           }
         })
         .catch(() => {
@@ -300,22 +331,22 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       })
-    
+
         .then((response) => {
           if (response.status == 200) {
-        
-            if (response.data.status == "success"){
-        
+
+            if (response.data.status == "success") {
+
               notify({
                 title: "Message Center",
                 text: "Successfully sent feedback",
                 type: "success",
               });
+              this.rated = true
               this.getuserorder();
+              
             }
-           
-            else{
-            
+            else {
               notify({
                 title: "Freeport Error",
                 text: "Error posting information.",
@@ -325,7 +356,7 @@ export default defineComponent({
           }
         })
         .catch((error) => {
-       
+
           notify({
             title: "Freeport Error",
             text: "Error posting information.",
