@@ -222,7 +222,7 @@
                         name: 'userprofile',
                         params: { uuid: vendoruuid },
                       }">
-                        View Vendor Store
+                        View Vendor Profile
                       </router-link>
                     </div>
                   </div>
