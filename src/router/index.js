@@ -70,10 +70,16 @@ import legal from "../pages/commonpage/legal.vue";
 import vendoragreement from "../pages/legal/VendorAgreement.vue";
 import policies from "../pages/commonpage/policies.vue";
 import contact from "../pages/commonpage/contact.vue";
+import editprofile from "../pages/profile/editprofile/EditProfile.vue";
+
 
 const routes = [
-
-            // Footer
+    {
+        path: "/editprofile",
+        name: "editprofile",
+        component: editprofile,
+    },
+     
     {
         path: "/vendoragreement",
         name: "vendoragreement",

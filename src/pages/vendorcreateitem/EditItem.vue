@@ -40,167 +40,170 @@
             {{ error.$message }}
           </p>
           <div class="border-b pb-10 ">
-          <div class="text-[20px] mt-5 mb-5 font-bold">General Info</div>
-          <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2">Item Title</label>
-            <input v-model="CreateItemForm.basicInfo.item_title"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="item_title" type="text" placeholder="Enter title of your item .." />
-            <span v-if="v$.CreateItemForm.basicInfo.item_title.$error" class="text-red-600 text-center">
-              {{ v$.CreateItemForm.basicInfo.item_title.$errors[0].$message }}
-            </span>
-          </div>
-          <div class="flex gap-5">
-            <div class="flex-1 mb-4">
-              <label class="block text-gray-700 text-sm font-bold mb-2">Category</label>
-              <select
-                class="shadow form-select appearance-none block w-full px-3 py-1.5 text-base font-normal focus:shadow-outline text-gray-500 bg-white bg-clip-padding bg-no-repeat border rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                aria-label="Default select example" id="category" v-model="CreateItemForm.basicInfo.category_id_0">
-                <option class="text-gray-700" v-for="(category, index) in categoryList" :key="index"
-                  :value="category.value">
-                  {{ category.name }}
-                </option>
-              </select>
-              <span v-if="v$.CreateItemForm.basicInfo.category_id_0.$error" class="text-red-600 text-center">
-                {{ v$.CreateItemForm.basicInfo.category_id_0.$errors[0].$message }}
+            <div class="text-[20px] mt-5 mb-5 font-bold">General Info</div>
+            <div class="mb-4">
+              <label class="block text-gray-700 text-sm font-bold mb-2">Item Title</label>
+              <input v-model="CreateItemForm.basicInfo.item_title"
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="item_title" type="text" placeholder="Enter title of your item .." />
+              <span v-if="v$.CreateItemForm.basicInfo.item_title.$error" class="text-red-600 text-center">
+                {{ v$.CreateItemForm.basicInfo.item_title.$errors[0].$message }}
               </span>
+            </div>
+            <div class="flex gap-5">
+              <div class="flex-1 mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2">Category</label>
+                <select
+                  class="shadow form-select appearance-none block w-full px-3 py-1.5 text-base font-normal focus:shadow-outline text-gray-500 bg-white bg-clip-padding bg-no-repeat border rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                  aria-label="Default select example" id="category" v-model="CreateItemForm.basicInfo.category_id_0">
+                  <option class="text-gray-700" v-for="(category, index) in categoryList" :key="index"
+                    :value="category.value">
+                    {{ category.name }}
+                  </option>
+                </select>
+                <span v-if="v$.CreateItemForm.basicInfo.category_id_0.$error" class="text-red-600 text-center">
+                  {{ v$.CreateItemForm.basicInfo.category_id_0.$errors[0].$message }}
+                </span>
 
-            </div>
-            <div class="flex-1 mb-4">
-              <label class="block text-gray-700 text-sm font-bold mb-2">Condition</label>
-              <select
-                class="shadow form-select appearance-none block w-full px-3 py-1.5 text-base font-normal focus:shadow-outline text-gray-500 bg-white bg-clip-padding bg-no-repeat border rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                aria-label="Default select example" id="condition" v-model="CreateItemForm.basicInfo.item_condition">
-                <option class="text-gray-700" v-for="(condition, index) in conditionList" :key="index"
-                  :value="condition.value">
-                  {{ condition.text }}
-                </option>
-              </select>
-              <span v-if="v$.CreateItemForm.basicInfo.item_condition.$error" class="text-red-600 text-center">
-                {{ v$.CreateItemForm.basicInfo.item_condition.$errors[0].$message }}
-              </span>
+              </div>
+              <div class="flex-1 mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2">Condition</label>
+                <select
+                  class="shadow form-select appearance-none block w-full px-3 py-1.5 text-base font-normal focus:shadow-outline text-gray-500 bg-white bg-clip-padding bg-no-repeat border rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                  aria-label="Default select example" id="condition" v-model="CreateItemForm.basicInfo.item_condition">
+                  <option class="text-gray-700" v-for="(condition, index) in conditionList" :key="index"
+                    :value="condition.value">
+                    {{ condition.text }}
+                  </option>
+                </select>
+                <span v-if="v$.CreateItemForm.basicInfo.item_condition.$error" class="text-red-600 text-center">
+                  {{ v$.CreateItemForm.basicInfo.item_condition.$errors[0].$message }}
+                </span>
+              </div>
             </div>
           </div>
-        </div>
           <div class="border-b pb-10 ">
-          <div class="text-[20px] mt-5 mb-5 font-bold">Pricing</div>
-          <div class="flex gap-5">
-            <div class="mb-4 flex-1">
-              <label class="block text-gray-700 text-sm font-bold mb-2">Item Price</label>
-              <label class="block text-gray-700 text-sm mb-2 text-[11px]">Item Price in your local currency per
-                item</label>
-              <input v-model="CreateItemForm.pricingInfo.price"
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="price" placeholder="Price in your currency..." @keypress="onlyNumberWithDot" />
-              <span v-if="v$.CreateItemForm.pricingInfo.price.$error" class="text-red-600 text-center">
-                {{ v$.CreateItemForm.pricingInfo.price.$errors[0].$message }}
-              </span>
+            <div class="text-[20px] mt-5 mb-5 font-bold">Pricing</div>
+            <div class="flex gap-5">
+              <div class="mb-4 flex-1">
+                <label class="block text-gray-700 text-sm font-bold mb-2">Item Price</label>
+                <label class="block text-gray-700 text-sm mb-2 text-[11px]">Item Price in your local currency per
+                  item</label>
+                <input v-model="CreateItemForm.pricingInfo.price"
+                  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  id="price" placeholder="Price in your currency..." @keypress="onlyNumberWithDot" />
+                <span v-if="v$.CreateItemForm.pricingInfo.price.$error" class="text-red-600 text-center">
+                  {{ v$.CreateItemForm.pricingInfo.price.$errors[0].$message }}
+                </span>
+              </div>
+              <div class="mb-4 flex-1">
+                <label class="block text-gray-700 text-sm font-bold mb-2">Item Count</label>
+                <label class="block text-gray-700 text-sm mb-2 text-[11px]">How many you have for sale</label>
+                <input v-model="CreateItemForm.pricingInfo.item_count"
+                  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  id="count" type="number" min="0" placeholder="How many your are selling ..." @keypress="onlyNumber" />
+                <span v-if="v$.CreateItemForm.pricingInfo.item_count.$error" class="text-red-600 text-center">
+                  {{ v$.CreateItemForm.pricingInfo.item_count.$errors[0].$message }}
+                </span>
+              </div>
             </div>
-            <div class="mb-4 flex-1">
-              <label class="block text-gray-700 text-sm font-bold mb-2">Item Count</label>
-              <label class="block text-gray-700 text-sm mb-2 text-[11px]">How many you have for sale</label>
-              <input v-model="CreateItemForm.pricingInfo.item_count"
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="count" type="number" min="0" placeholder="How many your are selling ..." @keypress="onlyNumber" />
-              <span v-if="v$.CreateItemForm.pricingInfo.item_count.$error" class="text-red-600 text-center">
-                {{v$.CreateItemForm.pricingInfo.item_count.$errors[0].$message}}
-              </span>
+            <div class="flex gap-5">
+              <div class="mb-4 flex-1">
+                <label class="block text-gray-700 text-sm font-bold mb-2">Accept Bitcoin</label>
+                <input type="checkbox" id="digital_currency_1"
+                  v-model="CreateItemForm.pricingInfo.digital_currency_1" />
+              </div>
+              <div class="mb-4 flex-1">
+                <label class="block text-gray-700 text-sm font-bold mb-2">Accept Bitcoin Cash</label>
+                <input type="checkbox" id="digital_currency_2"
+                  v-model="CreateItemForm.pricingInfo.digital_currency_2" />
+              </div>
+              <div class="mb-4 flex-1">
+                <label class="block text-gray-700 text-sm font-bold mb-2">Accept Monero</label>
+                <input type="checkbox" id="digital_currency_3"
+                  v-model="CreateItemForm.pricingInfo.digital_currency_3" />
+              </div>
             </div>
           </div>
-          <div class="flex gap-5">
-            <div class="mb-4 flex-1">
-              <label class="block text-gray-700 text-sm font-bold mb-2">Accept Bitcoin</label>
-              <input type="checkbox" id="digital_currency_1" v-model="CreateItemForm.pricingInfo.digital_currency_1" />
-            </div>
-            <div class="mb-4 flex-1">
-              <label class="block text-gray-700 text-sm font-bold mb-2">Accept Bitcoin Cash</label>
-              <input type="checkbox" id="digital_currency_2" v-model="CreateItemForm.pricingInfo.digital_currency_2" />
-            </div>
-            <div class="mb-4 flex-1">
-              <label class="block text-gray-700 text-sm font-bold mb-2">Accept Monero</label>
-              <input type="checkbox" id="digital_currency_3" v-model="CreateItemForm.pricingInfo.digital_currency_3" />
-            </div>
-          </div>
-            </div>
           <div class="border-b pb-10">
-          <div class="text-[20px] mt-5 mb-5 font-bold ">Description</div>
-          <div class="mb-4 flex-1">
-            <textarea v-model="CreateItemForm.basicInfo.item_description" id="item_description"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
-            <span v-if="v$.CreateItemForm.basicInfo.item_description.$error" class="text-red-600 text-center">
-              {{ v$.CreateItemForm.basicInfo.item_description.$errors[0].$message }}
-            </span>
-          </div>
-          </div>
-          
-          
-<div class="border-b pb-10">
-          <div class="text-[20px] mt-5 mb-5 font-bold ">Shipping</div>
-          <div class="mb-4 ">
-            <label class="block text-gray-700 text-sm font-bold mb-2">International Shipping</label>
-            <div class="flex gap-5">
-              <div class="flex-1">
-                <input type="checkbox" v-model="CreateItemForm.shippingInfo.international" />
-              </div>
-
+            <div class="text-[20px] mt-5 mb-5 font-bold ">Description</div>
+            <div class="mb-4 flex-1">
+              <textarea v-model="CreateItemForm.basicInfo.item_description" id="item_description"
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
+              <span v-if="v$.CreateItemForm.basicInfo.item_description.$error" class="text-red-600 text-center">
+                {{ v$.CreateItemForm.basicInfo.item_description.$errors[0].$message }}
+              </span>
             </div>
-          </div>
-          <div class="mb-4 flex text-center">
-            <div class="flex-1">Option</div>
-            <div class="flex-1">Shipping Price</div>
-            <div class="flex-1">Estimated Days</div>
           </div>
 
-          <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2">Free Shipping</label>
-            <div class="flex gap-5">
-              <div class="flex-1">
-                <input type="checkbox" v-model="CreateItemForm.shippingInfo.free_shipping" />
-              </div>
-              <div class="flex-1"></div>
-              <div class="flex-1">
-                <input type="number" placeholder="Estimated Days" min="0"
-                  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  v-model="CreateItemForm.shippingInfo.free_shipping_days" />
-              </div>
-            </div>
-          </div>
-          <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2">Option 1</label>
-            <div class="flex gap-5">
-              <div class="flex-1">
-                <input type="checkbox" v-model="CreateItemForm.shippingInfo.shipping_2" />
-              </div>
-              <div class="flex-1">
-                <input type="number" placeholder="Price" min="0"
-                  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  v-model="CreateItemForm.shippingInfo.shipping_2_price" @keypress="onlyNumberWithDot" />
-              </div>
-              <div class="flex-1">
-                <input type="number" placeholder="Estimated Days" min="0"
-                  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  v-model="CreateItemForm.shippingInfo.shipping_2_days" @keypress="onlyNumber" />
+
+          <div class="border-b pb-10">
+            <div class="text-[20px] mt-5 mb-5 font-bold ">Shipping</div>
+            <div class="mb-4 ">
+              <label class="block text-gray-700 text-sm font-bold mb-2">International Shipping</label>
+              <div class="flex gap-5">
+                <div class="flex-1">
+                  <input type="checkbox" v-model="CreateItemForm.shippingInfo.international" />
+                </div>
+
               </div>
             </div>
-          </div>
-          <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2">Option 2</label>
-            <div class="flex gap-5">
-              <div class="flex-1">
-                <input type="checkbox" v-model="CreateItemForm.shippingInfo.shipping_3" />
-              </div>
-              <div class="flex-1">
-                <input type="number" placeholder="Price" min="0"
-                  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  v-model="CreateItemForm.shippingInfo.shipping_3_price" @keypress="onlyNumberWithDot" />
-              </div>
-              <div class="flex-1">
-                <input type="number" placeholder="Estimated Days" min="0"
-                  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  v-model="CreateItemForm.shippingInfo.shipping_3_days" @keypress="onlyNumber" />
+            <div class="mb-4 flex text-center">
+              <div class="flex-1">Option</div>
+              <div class="flex-1">Shipping Price</div>
+              <div class="flex-1">Estimated Days</div>
+            </div>
+
+            <div class="mb-4">
+              <label class="block text-gray-700 text-sm font-bold mb-2">Free Shipping</label>
+              <div class="flex gap-5">
+                <div class="flex-1">
+                  <input type="checkbox" v-model="CreateItemForm.shippingInfo.free_shipping" />
+                </div>
+                <div class="flex-1"></div>
+                <div class="flex-1">
+                  <input type="number" placeholder="Estimated Days" min="0"
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    v-model="CreateItemForm.shippingInfo.free_shipping_days" />
+                </div>
               </div>
             </div>
-          </div>
+            <div class="mb-4">
+              <label class="block text-gray-700 text-sm font-bold mb-2">Option 1</label>
+              <div class="flex gap-5">
+                <div class="flex-1">
+                  <input type="checkbox" v-model="CreateItemForm.shippingInfo.shipping_2" />
+                </div>
+                <div class="flex-1">
+                  <input type="number" placeholder="Price" min="0"
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    v-model="CreateItemForm.shippingInfo.shipping_2_price" @keypress="onlyNumberWithDot" />
+                </div>
+                <div class="flex-1">
+                  <input type="number" placeholder="Estimated Days" min="0"
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    v-model="CreateItemForm.shippingInfo.shipping_2_days" @keypress="onlyNumber" />
+                </div>
+              </div>
+            </div>
+            <div class="mb-4">
+              <label class="block text-gray-700 text-sm font-bold mb-2">Option 2</label>
+              <div class="flex gap-5">
+                <div class="flex-1">
+                  <input type="checkbox" v-model="CreateItemForm.shippingInfo.shipping_3" />
+                </div>
+                <div class="flex-1">
+                  <input type="number" placeholder="Price" min="0"
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    v-model="CreateItemForm.shippingInfo.shipping_3_price" @keypress="onlyNumberWithDot" />
+                </div>
+                <div class="flex-1">
+                  <input type="number" placeholder="Estimated Days" min="0"
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    v-model="CreateItemForm.shippingInfo.shipping_3_days" @keypress="onlyNumber" />
+                </div>
+              </div>
+            </div>
           </div>
           <div class="flex justify-center mt-20">
             <button
@@ -212,8 +215,8 @@
         </form>
 
       </div>
-      </div>
     </div>
+  </div>
 
 
 </template>

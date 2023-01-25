@@ -225,43 +225,43 @@ export default defineComponent({
             this.image_1_in_db = this.marketitem.image_one_server == null;
 
             if (this.image_1_in_db == false) {
-              this.visibledelete1 = true
-              this.visibleform1 = false
+              this.visibledelete1 = true;
+              this.visibleform1 = false;
             }
             else {
-              this.visibledelete1 = false
-              this.visibleform1 = true
+              this.visibledelete1 = false;
+              this.visibleform1 = true;
             }
 
             this.image_2_in_db = this.marketitem.image_two_server == null;
 
             if (this.image_2_in_db == false) {
-              this.visibledelete2 = true
-              this.visibleform2 = false
+              this.visibledelete2 = true;
+              this.visibleform2 = false;
             }
             else {
-              this.visibledelete2 = false
-              this.visibleform2 = true
+              this.visibledelete2 = false;
+              this.visibleform2 = true;
             }
 
             this.image_3_in_db = this.marketitem.image_three_server == null;
             if (this.image_3_in_db == false) {
-              this.visibledelete3 = true
-              this.visibleform3 = false
+              this.visibledelete3 = true;
+              this.visibleform3 = false;
             }
             else {
-              this.visibledelete3 = false
-              this.visibleform3 = true
+              this.visibledelete3 = false;
+              this.visibleform3 = true;
             }
 
             this.image_4_in_db = this.marketitem.image_four_server == null;
             if (this.image_4_in_db == false) {
-              this.visibledelete4 = true
-              this.visibleform4 = false
+              this.visibledelete4 = true;
+              this.visibleform4 = false;
             }
             else {
-              this.visibledelete4 = false
-              this.visibleform4 = true
+              this.visibledelete4 = false;
+              this.visibleform4 = true;
             }
           }
         })
@@ -444,6 +444,8 @@ export default defineComponent({
             });
             this.visibledelete1 = false;
             this.marketitem.image_one_server = null;
+            this.marketitem.image_one_url_250 = null;
+            this.marketitem.image_one_url_500 = null;
             this.visibleform1 = true;
             this.previewImage1 = null;
           }
@@ -473,6 +475,8 @@ export default defineComponent({
             });
             this.visibledelete2 = false;
             this.marketitem.image_two_server = null;
+            this.marketitem.image_two_url_250 = null;
+            this.marketitem.image_two_url_500 = null;
             this.visibleform2 = true;
             this.previewImage2 = null;
 
@@ -502,6 +506,8 @@ export default defineComponent({
             });
             this.visibledelete3 = false;
             this.marketitem.image_three_server = null;
+            this.marketitem.image_three_url_250 = null;
+            this.marketitem.image_three_url_500 = null;
             this.visibleform3 = true;
             this.previewImage3 = null;
         
@@ -536,6 +542,8 @@ export default defineComponent({
             });
             this.visibledelete4 = false;
             this.marketitem.image_four_server = null;
+            this.marketitem.image_four_url_250 = null;
+            this.marketitem.image_four_url_500 = null;
             this.visibleform4 = true;
             this.previewImage4 = null;
 
@@ -558,6 +566,7 @@ export default defineComponent({
 
           if (response.status == 200) {
             // if any images uploaded success
+            this.marketitem.image_one_server = null;
             this.marketitem.image_one_server = response.data.status;
           }
         })
@@ -578,6 +587,7 @@ export default defineComponent({
 
           if (response.status == 200) {
             // if any images uploaded success
+            this.marketitem.image_two_server = null;
             this.marketitem.image_two_server = response.data.status;
           }
         })
@@ -597,6 +607,7 @@ export default defineComponent({
 
           if (response.status == 200) {
             // if any images uploaded success
+            this.marketitem.image_three_server = null;
             this.marketitem.image_three_server = response.data.status;
           }
         })
@@ -615,6 +626,7 @@ export default defineComponent({
         .then((response) => {
           if (response.status == 200) {
             // if any images uploaded success
+            this.marketitem.image_four_server = null;
             this.marketitem.image_four_server = response.data.status;
           }
         })
@@ -637,6 +649,7 @@ export default defineComponent({
 
           if (response.status == 200) {
             // if any images uploaded success
+            this.marketitem.image_one_url_250 = null;
             this.marketitem.image_one_url_250 = response.data.status;
           }
         })
@@ -657,6 +670,7 @@ export default defineComponent({
 
           if (response.status == 200) {
             // if any images uploaded success
+            this.marketitem.image_two_url_250 = null;
             this.marketitem.image_two_url_250 = response.data.status;
           }
         })
@@ -676,6 +690,7 @@ export default defineComponent({
 
           if (response.status == 200) {
             // if any images uploaded success
+            this.marketitem.image_three_url_250 = null;
             this.marketitem.image_three_url_250 = response.data.status;
           }
         })
@@ -694,6 +709,7 @@ export default defineComponent({
         .then((response) => {
           if (response.status == 200) {
             // if any images uploaded success
+            this.marketitem.image_four_url_250 = null;
             this.marketitem.image_four_url_250 = response.data.status;
           }
         })
