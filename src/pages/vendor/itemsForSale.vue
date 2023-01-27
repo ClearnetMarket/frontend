@@ -1,63 +1,68 @@
 
 <template>
 
-    <MainHeaderTop />
-    <MainHeaderMid />
-    <MainHeaderBottom />
+  <MainHeaderTop />
+  <MainHeaderMid />
+  <MainHeaderBottom />
 
-    <div v-if="user">
-      <MainHeaderVendor v-show="user.user_admin === 1" />
+  <div v-if="user">
+    <MainHeaderVendor v-show="user.user_admin === 1" />
+  </div>
+
+  <div class="container max-w-4xl mx-auto px-10 wrapper pb-72 bg-gray-300">
+    <div class="mt-5">
+      <nav class="rounded-md w-full">
+        <ol class="list-reset flex">
+          <li>
+            <router-link :to="{ name: 'home' }">
+              <a class="text-blue-600 hover:text-blue-700">Home</a>
+            </router-link>
+          </li>
+          <li>
+            <span class="text-gray-500 mx-2">/</span>
+          </li>
+        </ol>
+      </nav>
     </div>
-  
-    <div class="container max-w-4xl mx-auto px-10 wrapper pb-72 bg-gray-100">
-      <div class="mt-5">
-        <nav class="rounded-md w-full">
-          <ol class="list-reset flex">
-            <li>
-              <router-link :to="{ name: 'home' }">
-                <a class="text-blue-600 hover:text-blue-700">Home</a>
-              </router-link>
-            </li>
-            <li>
-              <span class="text-gray-500 mx-2">/</span>
-            </li>
-          </ol>
-        </nav>
+
+    <div class="grid grid-cols-1 rounded-md">
+      <div class="text-[24px] text-center">Items for Sale</div>
+      <div class="">
+
+      </div>
+      <div class="flex justify-end">
+        <button v-on:click="createanitem()"
+          class="bg-blue-600 hover:bg-zinc-700 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mr-2">
+          Create Item
+        </button>
       </div>
 
-      <div class="grid grid-cols-1 rounded-md">
-        <div class="text-[24px] text-center">Items for Sale</div>
-        <div class="">
+      <div class="mt-10 grid grid-cols-12 pb-20 gap-4">
 
-        </div>
-        <div class="flex justify-end">
-          <button v-on:click="createanitem()"
-            class="bg-blue-600 hover:bg-zinc-700 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mr-2">
-            Create Item
-          </button>
-        </div>
-
-        <div class="mt-10 grid grid-cols-12 pb-20 gap-4">
-
-          <div v-for="item in items" class="col-span-12  p-5">
-            <div class="bg-white rounded-md ">
+        <div v-for="item in items" class="col-span-12  p-5">
+          <div class="bg-white rounded-md ">
             <div class="grid grid-cols-12 grid-row-5 ">
-             
+
               <div class="col-span-9 p-2">
                 <div class="w-full font-bold">Item uuid</div>
-                <div class="w-full">{{item.uuid}}</div>
+                <div class="w-full">{{ item.uuid }}</div>
               </div>
-             
+
             </div>
             <div class="grid grid-cols-12 rounded-md p-2">
-            
+
               <div class="col-span-2">
-                  <div @click="$router.replace({ name: 'MarketItem', params: { id: item.uuid } })" style="cursor: pointer" class="">
-                <img alt="../../assets/noimage.jpg" class=" " :src="item.image_one_url_250" />
+                <div @click="$router.replace({ name: 'MarketItem', params: { id: item.uuid } })" style="cursor: pointer" class="">
+                  <div v-if="item.image_one_url_250">
+                  <img alt="" class=" " :src="item.image_one_url_250" />
+                </div>
+                <div v-else>
+                  <img alt="" src="../../assets/noimage.jpg " />
+                </div>  
+                </div>
               </div>
-            </div>
               <div class="col-span-8 px-3">
-              
+
                 <div class="grid grid-cols-12 grid-row-5">
                   <div class="col-span-12 text-center text-[18px] px-1">
                     <router-link :to="{ name: 'MarketItem', params: { id: item.uuid } }">
@@ -66,45 +71,43 @@
                       </div>
                     </router-link>
                   </div>
-               
+
                   <div class="flex gap-4 col-span-12 text-[14px] p-1">
                     <div class="font-bold">
-                    Online Status:
+                      Online Status:
                     </div>
-                    <div v-if="item.online === 0" 
-                      class="text-red-500">
-                        <div class="">
-                      offline
+                    <div v-if="item.online === 0" class="text-red-500">
+                      <div class="">
+                        offline
                       </div>
                     </div>
-                    <div v-else 
-                    class="text-green-500">
-                    <div class="">
-                      
-                    online
+                    <div v-else class="text-green-500">
+                      <div class="">
+
+                        online
+                      </div>
                     </div>
-                  </div>
                   </div>
                   <div class="col-span-12 text-[14px] p-1 flex gap-4">
                     <div class="font-bold">Total Sold:</div>
                     <div class="">{{ item.total_sold }}</div>
-                    
+
                   </div>
                   <div class="col-span-12 text-[14px] p-1 flex gap-4">
                     <div class="font-bold">Total Views:</div>
-                    <div class="">{{ item.view_count }}</div> 
+                    <div class="">{{ item.view_count }}</div>
                   </div>
                   <div class="col-span-12 text-[14px] p-1 flex gap-4">
-                    <div class="font-bold">Item Quantity:</div> 
+                    <div class="font-bold">Item Quantity:</div>
                     <div class="">{{ item.item_count }}</div>
-                    
+
                   </div>
                   <div class="col-span-12 text-[14px] p-1 flex gap-4">
                     <div class="font-bold">Item Price:</div>
-                    <div class="">{{ item.price }}{{ returncurrencysymbol(item.currency) }}</div>
+                    <div class="">{{ item.price }}{{ returncurrencysymbol (item.currency) }}</div>
                   </div>
-            
-              </div>
+
+                </div>
               </div>
 
               <div class="col-span-2 px-3">
@@ -132,24 +135,24 @@
                 </div>
                 <div class="mb-2">
                   <button @click.prevent="cloneitem(item.uuid)"
-                 class="bg-zinc-600 hover:bg-zinc-700 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mr-2 w-full">
+                    class="bg-zinc-600 hover:bg-zinc-700 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mr-2 w-full">
                     Clone
                   </button>
                 </div>
 
                 <div class="mb-2">
                   <button @click.prevent="deleteitem(item.uuid)"
-                     class="bg-red-600 hover:bg-zinc-700 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mr-2 w-full">
+                    class="bg-red-600 hover:bg-zinc-700 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mr-2 w-full">
                     Delete
                   </button>
                 </div>
               </div>
             </div>
           </div>
-          </div>
         </div>
       </div>
     </div>
+  </div>
 
 
   <MainFooter />
@@ -195,12 +198,13 @@ export default defineComponent({
 
   mounted () {
     this.userstatus();
+
     this.getvendoritems();
   },
   data () {
     return {
       user: null,
-      loaded_user:false,
+      loaded_user: false,
       items: [],
       newitemid: null,
       accept: ref(false),
@@ -208,7 +212,7 @@ export default defineComponent({
   },
 
   methods: {
- 
+
     gotoitem (itemid: any) {
       this.$router.push({ name: "edititem", params: { id: itemid } });
     },
@@ -220,10 +224,10 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
-      
+
         if (response.status == 200) {
           this.user = response.data.user
-        
+
           if (response.data.user.user_admin == 0) {
             this.$router.push({ name: "home" });
           }
@@ -244,6 +248,7 @@ export default defineComponent({
         }
       });
     },
+  
     // creates an item
     createanitem () {
       axios({
@@ -360,13 +365,16 @@ export default defineComponent({
         headers: authHeader(),
       }).then((response) => {
         if ((response.status = 200)) {
+          if (response.data.status == "success") {
+            console.log(response.data.status)
           this.getvendoritems();
           notify({
-            title: "Message Center",
+            title: "Item:  " + itemid,
             text: "Item is offline",
             type: "success",
           });
         }
+      }
       });
     },
     returncurrencysymbol (currencydigit: number) {

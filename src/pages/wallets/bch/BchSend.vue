@@ -1,94 +1,94 @@
 
 <template>
 
-    <MainHeaderTop />
-    <MainHeaderMid />
-    <MainHeaderBottom />
+  <MainHeaderTop />
+  <MainHeaderMid />
+  <MainHeaderBottom />
 
-    <div class="container  max-w-7xl mx-auto px-10 pb-60 bg-gray-100"><!-- Container-->
+  <div class="container  max-w-7xl mx-auto px-10 pb-60 bg-gray-300"><!-- Container-->
 
-      <div class="mt-5 mb-5">
-        <nav class="rounded-md w-full">
-          <ol class="list-reset flex">
-            <li>
-              <router-link :to="{ name: 'home' }">
-                <a class="text-blue-600 hover:text-blue-700">Home</a>
-              </router-link>
-            </li>
-            <li>
-              <span class="text-gray-500 mx-2">/</span>
-            </li>
+    <div class="mt-5 mb-5">
+      <nav class="rounded-md w-full">
+        <ol class="list-reset flex">
+          <li>
+            <router-link :to="{ name: 'home' }">
+              <a class="text-blue-600 hover:text-blue-700">Home</a>
+            </router-link>
+          </li>
+          <li>
+            <span class="text-gray-500 mx-2">/</span>
+          </li>
 
-            <li>
-              <router-link :to="{ name: 'wallet' }">
-                <a class="text-blue-600 hover:text-blue-700">Wallet Home</a>
-              </router-link>
-            </li>
-            <li>
-              <span class="text-gray-500 mx-2">/</span>
-            </li>
-          </ol>
-        </nav>
-      </div>
-      <div class="flex text-[22px] ">Send Bitcoin Cash</div>
-      <div class="flex gap-4">
+          <li>
+            <router-link :to="{ name: 'wallet' }">
+              <a class="text-blue-600 hover:text-blue-700">Wallet Home</a>
+            </router-link>
+          </li>
+          <li>
+            <span class="text-gray-500 mx-2">/</span>
+          </li>
+        </ol>
+      </nav>
+    </div>
+    <div class="flex text-[22px] ">Send Bitcoin Cash</div>
+    <div class="flex gap-4">
 
-        <div class="flex-1 bg-white rounded-md justify-center mt-20 p-5">
-          <form method="post" @submit="onSubmit">
-            <div class="mb-4">
-              <label class="block text-gray-700 text-sm font-bold mb-2" for="username">Address</label>
-              <label class="block text-gray-700 mb-2 text-[11px]" for="username">Address of the wallet you are sending
-                coin too.</label>
-              <input v-model="wallet.bch_address"
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="username" type="text" placeholder="Address" />
-              <span v-if="v$.wallet.bch_address.$error" class="text-red-600 text-center">
-                {{ v$.wallet.bch_address.$errors[0].$message }}
-              </span>
-            </div>
-            <div class="mb-4">
-              <label class="block text-gray-700 text-sm font-bold mb-2" for="username">Transaction Description</label>
-              <label class="block text-gray-700 mb-2 text-[11px]" for="username">This is the name other users will see
-                you as. It would be the name
-                of your store.</label>
-              <input v-model="wallet.bch_decscription"
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="username" type="text" placeholder="Description" />
-            </div>
-
-            <div class="mb-4">
-              <label class="block text-gray-700 text-sm font-bold mb-2" for="password">Amount</label>
-
-              <div class="flex flex-row">
-                <input v-model="wallet.bch_amount"
-                  class="basis-1/3 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  id="amount" type="text" autocomplete="off" placeholder="Amount" />
-                <span v-if="v$.wallet.bch_amount.$error" class="text-red-600 text-center">
-                  {{ v$.wallet.bch_amount.$errors[0].$message }}
-                </span>
-              </div>
-            </div>
-
-            <div class="flex items-center justify-center mb-6">
-              <button
-                class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                type="submit">
-                Send Coin
-              </button>
-            </div>
-          </form>
-        </div>
-        <div class=" flex-1 f mt-20 w-full">
-          <div class="font-semibold">Bitcoin Cash Balances (BCH)</div>
-          <div class="flex justify-between   border-b-gray-700 border-b-2">
-            <div class="grow-0">Total </div>
-            <div class="grow"> </div>
-            <div class="grow-0"> {{ bchbalance }}</div>
+      <div class="flex-1 bg-white rounded-md justify-center mt-20 p-5">
+        <form method="post" @submit="onSubmit">
+          <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="username">Address</label>
+            <label class="block text-gray-700 mb-2 text-[11px]" for="username">Address of the wallet you are sending
+              coin too.</label>
+            <input v-model="wallet.bch_address"
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="username" type="text" placeholder="Address" />
+            <span v-if="v$.wallet.bch_address.$error" class="text-red-600 text-center">
+              {{ v$.wallet.bch_address.$errors[0].$message }}
+            </span>
+          </div>
+          <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="username">Transaction Description</label>
+            <label class="block text-gray-700 mb-2 text-[11px]" for="username">This is the name other users will see
+              you as. It would be the name
+              of your store.</label>
+            <input v-model="wallet.bch_decscription"
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              id="username" type="text" placeholder="Description" />
           </div>
 
-        </div>
+          <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="password">Amount</label>
+
+            <div class="flex flex-row">
+              <input v-model="wallet.bch_amount"
+                class="basis-1/3 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="amount" type="text" autocomplete="off" placeholder="Amount" />
+              <span v-if="v$.wallet.bch_amount.$error" class="text-red-600 text-center">
+                {{ v$.wallet.bch_amount.$errors[0].$message }}
+              </span>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-center mb-6">
+            <button
+              class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              type="submit">
+              Send Coin
+            </button>
+          </div>
+        </form>
       </div>
-</div>
+      <div class=" flex-1 f mt-20 w-full">
+        <div class="font-semibold">Bitcoin Cash Balances (BCH)</div>
+        <div class="flex justify-between   border-b-gray-700 border-b-2">
+          <div class="grow-0">Total </div>
+          <div class="grow"> </div>
+          <div class="grow-0"> {{ bchbalance }}</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
   <MainFooter />
 </template>
 

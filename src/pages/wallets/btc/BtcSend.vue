@@ -1,12 +1,12 @@
 
 <template>
-   
+
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
 
-  <div class="container  max-w-7xl mx-auto px-10 pb-60 bg-gray-100"><!-- Container-->
-   
+  <div class="container  max-w-7xl mx-auto px-10 pb-60 bg-gray-300"><!-- Container-->
+
     <div class="mt-5 mb-5">
       <nav class="rounded-md w-full">
         <ol class="list-reset flex">
@@ -69,7 +69,7 @@
               </span>
             </div>
           </div>
-         
+
           <div class="flex items-center justify-center mb-6">
             <button
               class="bg-blue-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
@@ -128,7 +128,7 @@ export default defineComponent({
         btc_address: null,
         btc_decscription: "",
         btc_amount: 0,
-      
+
       },
     };
   },
@@ -137,7 +137,7 @@ export default defineComponent({
       wallet: {
         btc_address: { required, minLength: minLength(25) },
         btc_amount: { required, minLength: minLength(1) },
-      
+
       },
     };
   },
@@ -156,7 +156,7 @@ export default defineComponent({
           }
         })
         .catch((error) => {
-       
+
           this.$router.push("/login");
         });
     },
@@ -195,7 +195,7 @@ export default defineComponent({
           }
         })
         .catch((error) => {
-         
+
           notify({
             title: "Freeport Error",
             text: "Error With Sending Money",
@@ -208,7 +208,7 @@ export default defineComponent({
         btc_address: this.wallet.btc_address,
         btc_decscription: this.wallet.btc_decscription,
         btc_amount: this.wallet.btc_amount,
-       
+
       };
       this.v$.$validate(); // checks all inputs
       if (this.v$.$invalid) {

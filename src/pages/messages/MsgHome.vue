@@ -1,75 +1,68 @@
 
 <template>
 
-    <MainHeaderTop />
-    <MainHeaderMid />
-    <MainHeaderBottom />
+  <MainHeaderTop />
+  <MainHeaderMid />
+  <MainHeaderBottom />
 
-    <div class="container max-w-7xl mx-auto px-10 wrapper pb-10">
-      <nav class="rounded-md w-full">
-        <ol class="list-reset flex">
-          <li>
-            <router-link :to="{ name: 'home' }">
-              <a class="text-blue-600 hover:text-blue-700">Home</a>
-            </router-link>
-          </li>
-          <li>
-            <span class="text-gray-500 mx-2">/</span>
-          </li>
-        </ol>
-      </nav>
+  <div class="container max-w-7xl mx-auto px-10 wrapper pb-10">
+    <nav class="rounded-md w-full">
+      <ol class="list-reset flex">
+        <li>
+          <router-link :to="{ name: 'home' }">
+            <a class="text-blue-600 hover:text-blue-700">Home</a>
+          </router-link>
+        </li>
+        <li>
+          <span class="text-gray-500 mx-2">/</span>
+        </li>
+      </ol>
+    </nav>
 
-      <div class="grid grid-cols-12 pt-5  gap-4">
-        <div class="col-span-3 ">
-          <div
-            class="border border-1 bg-white rounded-md shadow-md text-gray-700 p-5"
-          >
-            <div class="text-[18px] mb-5">Message Center</div>
+    <div class="grid grid-cols-12 pt-5  gap-4">
+      <div class="col-span-3 ">
+        <div class="border border-1 bg-white rounded-md shadow-md text-gray-700 p-5">
+          <div class="text-[18px] mb-5">Message Center</div>
 
-            <div
-              v-for="userobject in userlist"
-              class="py-2 hover:bg-gray-200 hover:rounded-md"
-            >
-              <router-link
-                :to="{
-                  name: 'MsgView',
-                  params: { postid: userobject.post_id }
-                }"
-              >
-                <div v-if="userobject.user_one === user.user_name">
-                  <div class=" ">
-                    {{ userobject.user_two }}
-                  </div>
-                </div>
-                <div v-else>
-                  <div class="">
-                    {{ userobject.user_one }}
-                  </div>
-                </div>
-              </router-link>
-            </div>
-          </div>
-        </div>
-        <div class="col-span-9 border border-1 rounded ">
-        <div class="text-center">Currently only allowing messaging to vendors through items to prevent botting</div>
-          <div v-if="other_user_count > 0">
-            <div class="text-[18px] mb-5">
-              <div v-if="user_one !== user">
-                <div class="">
-                  {{ user_one }}
+          <div v-for="userobject in userlist" class="py-2 hover:bg-gray-300 hover:rounded-md">
+            <router-link :to="{
+              name: 'MsgView',
+              params: { postid: userobject.post_id }
+            }">
+              <div v-if="userobject.user_one === user.user_name">
+                <div class=" ">
+                  {{ userobject.user_two }}
                 </div>
               </div>
               <div v-else>
                 <div class="">
-                  {{ user_two }}
+                  {{ userobject.user_one }}
                 </div>
+              </div>
+            </router-link>
+          </div>
+        </div>
+      </div>
+      <div class="col-span-9 border border-1 rounded ">
+        <div class="text-center">Currently only allowing messaging to vendors through items to prevent botting</div>
+        <div v-if="other_user_count > 0">
+          <div class="text-[18px] mb-5">
+            <div v-if="user_one !== user">
+              <div class="">
+                {{ user_one }}
+              </div>
+            </div>
+            <div v-else>
+              <div class="">
+                {{ user_two }}
               </div>
             </div>
           </div>
-          <div v-else></div>
         </div>
+        <div v-else></div>
       </div>
     </div>
+  </div>
 
   <MainFooter />
 </template>
@@ -94,15 +87,15 @@ export default defineComponent({
     MainHeaderVendor,
     MainFooter,
   },
-created(){
-  this.userstatus();
-},
-  mounted() {
+  created () {
+    this.userstatus();
+  },
+  mounted () {
 
     this.getcountofusers();
     this.getmsgsofusers();
   },
-  data() {
+  data () {
     return {
       userlist: [],
       user: null,
@@ -113,47 +106,47 @@ created(){
   },
 
   methods: {
-    userstatus() {
+    userstatus () {
       axios({
         method: "get",
         url: "/auth/whoami",
         withCredentials: true,
         headers: authHeader(),
       })
-          .then((response) => {
-            if ((response.status = 200)) {
-              this.user = response.data.user
-            }
-          })
-          .catch(() => {this.user = null});
+        .then((response) => {
+          if ((response.status = 200)) {
+            this.user = response.data.user
+          }
+        })
+        .catch(() => { this.user = null });
     },
-     getcountofusers() {
-       axios({
+    getcountofusers () {
+      axios({
         method: "get",
         url: "/msg/count",
         withCredentials: true,
         headers: authHeader(),
       })
-      .then((response) => {
-        this.other_user_count = response.data.get_count;
-      })
-     .catch((error) => {
-       console.log(error)
-      });
+        .then((response) => {
+          this.other_user_count = response.data.get_count;
+        })
+        .catch((error) => {
+          console.log(error)
+        });
     },
-     getmsgsofusers() {
-       axios({
+    getmsgsofusers () {
+      axios({
         method: "get",
         url: "/msg/msgs/all",
         withCredentials: true,
         headers: authHeader(),
       })
-      .then((response) => {
-        this.userlist = response.data;
-      })
-      .catch((error) => {
-        console.log(error)
-      })
+        .then((response) => {
+          this.userlist = response.data;
+        })
+        .catch((error) => {
+          console.log(error)
+        })
     },
   },
 });

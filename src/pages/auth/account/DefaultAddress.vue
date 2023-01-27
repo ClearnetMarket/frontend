@@ -9,7 +9,7 @@
   </div>
 
   <!-- Top Stuff-->
-  <div class="container h-screen max-w-7xl mx-auto mb-40 px-10 bg-gray-100">
+  <div class="container h-screen max-w-7xl mx-auto mb-40 px-10 bg-gray-300">
     <!-- Container-->
     <div class="mt-5 mb-5">
       <nav class="rounded-md w-full">
@@ -34,135 +34,72 @@
       </nav>
     </div>
 
-    <form
-      class="bg-white  rounded-md px-8 pt-6 pb-8 mb-4 w-full mx-auto max-w-2xl"
-      @submit.prevent="onSubmit"
-    >
+    <form class="bg-white  rounded-md px-8 pt-6 pb-8 mb-4 w-full mx-auto max-w-2xl" @submit.prevent="onSubmit">
       <div class="grid grid-cols-12 gap-4">
         <div class="col-span-12 mb-4 text-center text-[28px] text-zinc-600">
           Set a default Address
         </div>
-        <label class="col-span-12 text-gray-700 text-sm font-bold mb-2" for=""
-          >Country</label
-        >
+        <label class="col-span-12 text-gray-700 text-sm font-bold mb-2" for="">Country</label>
         <select
           class="col-span-12 shadow form-select appearance-none block w-full px-3 py-1.5 text-base font-normal focus:shadow-outline border-gray-500 text-gray-700 bg-white bg-clip-padding bg-no-repeat border rounded transition ease-in-out m-0 focus:text-gray-900 focus:bg-white focus:border-blue-600 focus:outline-none"
-          aria-label="Default select example"
-          v-model="ChangeAddressForm.country"
-        >
-          <option
-            class="text-gray-700"
-            v-for="(country, index) in countryList"
-            :key="index"
-            :value="country.value"
-          >
+          aria-label="Default select example" v-model="ChangeAddressForm.country">
+          <option class="text-gray-700" v-for="(country, index) in countryList" :key="index" :value="country.value">
             {{ country.name }}
           </option>
         </select>
         <div class="col-span-12">
-          <label class="block text-gray-700 text-sm font-bold mb-2"
-            >Full Name or Business Name</label
-          >
-          <input
-            v-model="ChangeAddressForm.address_name"
+          <label class="block text-gray-700 text-sm font-bold mb-2">Full Name or Business Name</label>
+          <input v-model="ChangeAddressForm.address_name"
             class="shadow appearance-none border border-gray-500 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="address_name"
-            type="text"
-            placeholder="Enter Full Name"
-          />
+            id="address_name" type="text" placeholder="Enter Full Name" />
         </div>
         <div class="col-span-12">
-          <label class="block text-gray-700 text-sm font-bold mb-2"
-            >Street Address</label
-          >
-          <input
-            v-model="ChangeAddressForm.address"
+          <label class="block text-gray-700 text-sm font-bold mb-2">Street Address</label>
+          <input v-model="ChangeAddressForm.address"
             class="shadow appearance-none border border-gray-500 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="address"
-            type="text"
-            placeholder="Address"
-          />
-                     <span
-              v-if="v$.ChangeAddressForm.address.$error"
-              class="text-red-600 text-center"
-            >
-                     </span>
+            id="address" type="text" placeholder="Address" />
+          <span v-if="v$.ChangeAddressForm.address.$error" class="text-red-600 text-center">
+          </span>
         </div>
         <div class="col-span-12">
-          <input
-            v-model="ChangeAddressForm.apt"
+          <input v-model="ChangeAddressForm.apt"
             class="shadow appearance-none border border-gray-500 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="apt"
-            type="text"
-            placeholder="Apt, suite, unit, building, floor, etc"
-          />
+            id="apt" type="text" placeholder="Apt, suite, unit, building, floor, etc" />
         </div>
         <div class="col-span-4">
           <label class="block text-gray-700 text-sm font-bold mb-2">City</label>
-          <input
-            v-model="ChangeAddressForm.city"
+          <input v-model="ChangeAddressForm.city"
             class="shadow appearance-none border border-gray-500 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="city"
-            type="text"
-            placeholder="City"
-          />
-           <span
-              v-if="v$.ChangeAddressForm.city.$error"
-              class="text-red-600 text-center"
-            >
-        </span>
+            id="city" type="text" placeholder="City" />
+          <span v-if="v$.ChangeAddressForm.city.$error" class="text-red-600 text-center">
+          </span>
         </div>
         <div class="col-span-4">
-          <label class="block text-gray-700 text-sm font-bold mb-2"
-            >State</label
-          >
-          <input
-            v-model="ChangeAddressForm.stateorprovence"
+          <label class="block text-gray-700 text-sm font-bold mb-2">State</label>
+          <input v-model="ChangeAddressForm.stateorprovence"
             class="shadow appearance-none border border-gray-500 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="state"
-            type="text"
-            placeholder="State or Provence"
-          />
-         <span
-              v-if="v$.ChangeAddressForm.stateorprovence.$error"
-              class="text-red-600 text-center"
-            >
-      </span>
+            id="state" type="text" placeholder="State or Provence" />
+          <span v-if="v$.ChangeAddressForm.stateorprovence.$error" class="text-red-600 text-center">
+          </span>
         </div>
         <div class="col-span-4">
-          <label class="block text-gray-700 text-sm font-bold mb-2"
-            >Zip Code</label
-          >
-          <input
-            v-model="ChangeAddressForm.zip"
+          <label class="block text-gray-700 text-sm font-bold mb-2">Zip Code</label>
+          <input v-model="ChangeAddressForm.zip"
             class="shadow appearance-none border border-gray-500 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="zip"
-            type="text"
-            placeholder="Zip"
-          />
-            <span
-              v-if="v$.ChangeAddressForm.zip.$error"
-              class="text-red-600 text-center"
-            >
-        </span>
+            id="zip" type="text" placeholder="Zip" />
+          <span v-if="v$.ChangeAddressForm.zip.$error" class="text-red-600 text-center">
+          </span>
         </div>
         <div class="col-span-12">
-          <label class="block text-gray-700 text-sm font-bold mb-2"
-            >Optional Address</label
-          >
-          <textarea
-            v-model="ChangeAddressForm.message"
+          <label class="block text-gray-700 text-sm font-bold mb-2">Optional Address</label>
+          <textarea v-model="ChangeAddressForm.message"
             class="shadow appearance-none border border-gray-500 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="message"
-            type="textfield"
-            placeholder="Optional instructions"
-          />
+            id="message" type="textfield" placeholder="Optional instructions" />
         </div>
 
         <div class="col-span-4 col-start-5 mt-5 mb-5">
           <button
-            class="bg-yellow-500 rounded-md font-semibold hover:bg-yellow-600 py-3 text-sm text-black uppercase w-full"
-          >
+            class="bg-yellow-500 rounded-md font-semibold hover:bg-yellow-600 py-3 text-sm text-black uppercase w-full">
             Set Default Address
           </button>
         </div>
@@ -171,7 +108,7 @@
     <!-- END Top Stuff-->
     <div class="grid sm:grid-cols-1 md:grid-cols-3 gap-5 my-3"></div>
   </div>
-  
+
   <!-- END container-->
   <MainFooter />
 </template>
@@ -182,7 +119,7 @@ import { defineComponent } from "vue";
 import { notify } from "@kyvg/vue3-notification";
 
 import useValidate from "@vuelidate/core";
-import { required,  minLength } from "@vuelidate/validators";
+import { required, minLength } from "@vuelidate/validators";
 import MainHeaderTop from "../../../layouts/headers/MainHeaderTop.vue";
 import MainHeaderMid from "../../../layouts/headers/MainHeaderMid.vue";
 import MainHeaderBottom from "../../../layouts/headers/MainHeaderBottom.vue";
@@ -207,11 +144,11 @@ export default defineComponent({
     MainFooter,
   },
 
-  data() {
+  data () {
     return {
       countryList: [],
       user: null,
-    v$: useValidate(),
+      v$: useValidate(),
       ChangeAddressForm: {
         countryList: [],
         address_name: "",
@@ -225,7 +162,7 @@ export default defineComponent({
       },
     };
   },
-  validations() {
+  validations () {
     return {
       ChangeAddressForm: {
         address: { required, minLength: minLength(6) },
@@ -237,13 +174,13 @@ export default defineComponent({
   },
 
 
-  mounted() {
+  mounted () {
     this.getCountryList();
     this.getcurrentshipping();
   },
 
   methods: {
-     addusershipping(payLoad: {
+    addusershipping (payLoad: {
       country: string;
       address: string;
       address_name: string;
@@ -253,26 +190,26 @@ export default defineComponent({
       zip: string;
       message: string;
     }) {
-     axios({
+      axios({
         method: "put",
         url: "/info/defaultaddress",
         data: payLoad,
         withCredentials: true,
         headers: authHeader(),
       })
-     .then((response) => {
-        if ((response.status = 200)) {
-              notify({
+        .then((response) => {
+          if ((response.status = 200)) {
+            notify({
               title: "Updated Address",
               text: "Success!",
               type: "success",
             });
-          this.$router.push("/account");
-        }
-      });
+            this.$router.push("/account");
+          }
+        });
     },
-     getcurrentshipping() {
-       axios({
+    getcurrentshipping () {
+      axios({
         method: "get",
         url: "/info/getdefaultaddress",
         withCredentials: true,
@@ -293,9 +230,9 @@ export default defineComponent({
       });
     },
 
-     getCountryList() {
+    getCountryList () {
       const path = "/auth/query/country";
-        axios
+      axios
         .get(path, { withCredentials: true })
         .then((response) => {
           this.countryList = response.data;
@@ -303,7 +240,7 @@ export default defineComponent({
 
     },
 
-     onSubmit() {
+    onSubmit () {
       const payLoad = {
         country: this.ChangeAddressForm.country,
         address: this.ChangeAddressForm.address,
@@ -314,19 +251,19 @@ export default defineComponent({
         zip: this.ChangeAddressForm.zip,
         message: this.ChangeAddressForm.message,
       };
-         if (this.v$.$invalid) {
+      if (this.v$.$invalid) {
         notify({
           title: "Authorization",
           text: "Form Failure",
           type: "error",
         });
-         } else {
+      } else {
         notify({
           title: "Authorization",
           text: "Form success",
           type: "success",
         });
-       this.addusershipping(payLoad);
+        this.addusershipping(payLoad);
       }
     },
   },

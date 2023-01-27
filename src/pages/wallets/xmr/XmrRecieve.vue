@@ -1,11 +1,11 @@
 
 <template>
- 
+
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
 
-  <div class="container  max-w-7xl mx-auto px-10 pb-60 bg-gray-100"><!-- Container-->
+  <div class="container  max-w-7xl mx-auto px-10 pb-60 bg-gray-300"><!-- Container-->
     <div class="mt-5 mb-5">
       <nav class="rounded-md w-full">
         <ol class="list-reset flex">
@@ -65,11 +65,11 @@ export default defineComponent({
     MainHeaderVendor,
     MainFooter,
   },
-  mounted() {
+  mounted () {
     this.userstatus();
     this.getxmraddress();
   },
-  data() {
+  data () {
     return {
       xmr_address: '',
     };
@@ -77,8 +77,8 @@ export default defineComponent({
 
 
   methods: {
-     userstatus() {
-       axios({
+    userstatus () {
+      axios({
         method: "get",
         url: "/auth/whoami",
         withCredentials: true,
@@ -93,8 +93,8 @@ export default defineComponent({
           this.$router.push("/login");
         });
     },
-     getxmraddress() {
-       axios({
+    getxmraddress () {
+      axios({
         method: "get",
         url: "/xmr/receive",
         withCredentials: true,
@@ -102,7 +102,7 @@ export default defineComponent({
       })
         .then((response) => {
           if ((response.status = 200)) {
-              this.xmr_address = response.data.xmr_address
+            this.xmr_address = response.data.xmr_address
           }
         })
         .catch((error) => {

@@ -1,6 +1,6 @@
 
 <template>
-   
+
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
@@ -25,12 +25,9 @@
     <div class="grid grid-cols-12" v-if="loaded">
       <div class="col-span-12 mt-5">
         <div class="grid grid-cols-12 rounded-md border border-gray-300 mb-5">
-          <div class="col-span-12 bg-gray-200 px-5 py-5">
+          <div class="col-span-12 bg-gray-300 px-5 py-5">
             <div class="grid grid-cols-12 text-[12px]">
-              <div
-                class="col-span-12 text-orange-500 text-[18px] mb-5"
-                v-if="order.moderator_uuid"
-              >
+              <div class="col-span-12 text-orange-500 text-[18px] mb-5" v-if="order.moderator_uuid">
                 Moderator: {{ order.moderator_uuid }}
               </div>
               <div class="col-span-12 text-orange-500 text-[18px] mb-5" v-else>
@@ -65,71 +62,55 @@
             </div>
           </div>
         </div>
-        <div class="rounded-md border border-gray-300 bg-gray-200 p-5 mb-5">
+        <div class="rounded-md border border-gray-300 bg-gray-300 p-5 mb-5">
           <div class="flex gap-4 text-[14px] mb-2">
             <button
               class="bg-gray-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              type="submit"
-              @click.prevent="extenddisputetime()"
-            >
+              type="submit" @click.prevent="extenddisputetime()">
               Extend Time before Auto Finalize
             </button>
             <button
               class="bg-purple-900 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              type="submit"
-              @click.prevent="markdisputecancelledstillclosed()"
-            >
+              type="submit" @click.prevent="markdisputecancelledstillclosed()">
               Cancel-Close order
             </button>
 
             <button
               class="bg-pink-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              type="submit"
-              @click.prevent="markdisputecancelledstillopen()"
-            >
+              type="submit" @click.prevent="markdisputecancelledstillopen()">
               Cancel-Open Order
             </button>
           </div>
           <div class="flex gap-4 text-[14px]">
             <button
               class="bg-green-600 hover:bg-zinc-400 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              type="submit"
-              @click.prevent="sendsplit100vendor()"
-            >
+              type="submit" @click.prevent="sendsplit100vendor()">
               100-V 0-C
             </button>
             <button
               class="bg-green-600 hover:bg-zinc-400 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              type="submit"
-              @click.prevent="sendsplit75vendor()"
-            >
+              type="submit" @click.prevent="sendsplit75vendor()">
               75-V 25-C
             </button>
             <button
               class="bg-green-600 hover:bg-zinc-400 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              type="submit"
-              @click.prevent="sendsplit50vendor()"
-            >
+              type="submit" @click.prevent="sendsplit50vendor()">
               50/50
             </button>
             <button
               class="bg-green-600 hover:bg-zinc-400 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              type="submit"
-              @click.prevent="sendsplit25vendor()"
-            >
+              type="submit" @click.prevent="sendsplit25vendor()">
               25-V 75-C
             </button>
             <button
               class="bg-green-600 hover:bg-zinc-400 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              type="submit"
-              @click.prevent="sendsplit0vendor()"
-            >
+              type="submit" @click.prevent="sendsplit0vendor()">
               0-V 100-C
             </button>
           </div>
         </div>
 
-        <div class="rounded-md border border-gray-300 bg-gray-200 p-5">
+        <div class="rounded-md border border-gray-300 bg-gray-300 p-5">
           <div class="grid grid-cols-12">
             <div class="col-span-6">
               <div class="mb-2">
@@ -137,9 +118,7 @@
               </div>
               <div v-for="customer in customerratings" class="mb-1">
                 <div class="border-t-1">
-                  <StarRatingCustomer
-                    v-bind:rating="customer.customer_rating"
-                  />
+                  <StarRatingCustomer v-bind:rating="customer.customer_rating" />
 
                   <div class="">{{ customer.review }}</div>
                 </div>
@@ -156,23 +135,15 @@
               </div>
             </div>
             <div class="col-span-12">
-              <form
-                class="rounded-md pt-6 pb-8 mb-4 w-full"
-                @submit.prevent="sendMessagePayload"
-              >
+              <form class="rounded-md pt-6 pb-8 mb-4 w-full" @submit.prevent="sendMessagePayload">
                 <div class="">
-                  <textarea
-                    v-model="SendMsgForm.msginfo"
-                    id="item_description"
-                    placeholder="Write something .."
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-3"
-                  ></textarea>
+                  <textarea v-model="SendMsgForm.msginfo" id="item_description" placeholder="Write something .."
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-3"></textarea>
                 </div>
                 <div class="flex justify-end">
                   <button
                     class="bg-gray-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                    type="submit"
-                  >
+                    type="submit">
                     Send
                   </button>
                 </div>
@@ -181,23 +152,16 @@
             <div class="col-span-12">
               <div v-if="order.overall_status === 10">
                 <div class="font-bold">Add a post dispute message</div>
-                <form
-                  class="pb-8 mb-4 w-full"
-                  @submit.prevent="sendMessagePayloadDispute"
-                >
+                <form class="pb-8 mb-4 w-full" @submit.prevent="sendMessagePayloadDispute">
                   <div class="">
-                    <textarea
-                      v-model="SendDisputeForm.disputemsginfo"
-                      id="item_description"
+                    <textarea v-model="SendDisputeForm.disputemsginfo" id="item_description"
                       placeholder="Leave a message saying split percent and overall reason for split percent .."
-                      class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-3"
-                    ></textarea>
+                      class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-3"></textarea>
                   </div>
                   <div class="flex justify-end">
                     <button
                       class="bg-gray-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                      type="submit"
-                    >
+                      type="submit">
                       Send
                     </button>
                   </div>
@@ -209,7 +173,7 @@
                 <div v-if="comment.mod_uuid != null">
                   <div class="grid grid-cols-12 p-5 rounded bg-white mb-2">
                     <div class="col-span-12 text-orange-500">
-                      Freeport Mod - {{ relativeDate(comment.timestamp) }} ago
+                      Freeport Mod - {{ relativeDate (comment.timestamp) }} ago
                     </div>
                     <div class="col-span-12 text-gray-800 p-1">
                       {{ comment.body }}
@@ -255,7 +219,7 @@ export default defineComponent({
     StarRatingCustomer,
   },
 
-  data() {
+  data () {
     return {
       mainpostcomments: [],
       order_id: null,
@@ -273,7 +237,7 @@ export default defineComponent({
     };
   },
 
-  mounted() {
+  mounted () {
     this.userstatus();
     const order_id_route = useRoute();
     this.order_id = order_id_route.params.uuid;
@@ -282,13 +246,13 @@ export default defineComponent({
 
   methods: {
     // get date conversion
-    relativeDate(value: any) {
+    relativeDate (value: any) {
       let e = new Date(value).valueOf();
       return formatDistance(e, new Date());
     },
     // gets the user status
-     userstatus() {
-       axios({
+    userstatus () {
+      axios({
         method: "get",
         url: "/auth/whoami",
         withCredentials: true,
@@ -303,8 +267,8 @@ export default defineComponent({
       });
     },
     // get the user order
-     getuserorder() {
-       axios({
+    getuserorder () {
+      axios({
         method: "get",
         url: `/mod/orderinfo/${this.order_id}`,
         withCredentials: true,
@@ -321,7 +285,7 @@ export default defineComponent({
       });
     },
     // get the post comments
-    getmainpostcomments() {
+    getmainpostcomments () {
       axios({
         method: "get",
         url: "/msg/main/comment/orderuuid/" + this.order.uuid,
@@ -336,60 +300,60 @@ export default defineComponent({
         });
     },
     // gets the customer feedback
-    getcustomerfeedback() {
-       axios({
+    getcustomerfeedback () {
+      axios({
         method: "get",
         url: `/mod/customer/ratings/${this.order.customer_uuid}`,
         withCredentials: true,
         headers: authHeader(),
       })
-          .then((response) => {
-        if (response.status == 200) {
-          this.customerratings = response.data;
-        }
-      });
+        .then((response) => {
+          if (response.status == 200) {
+            this.customerratings = response.data;
+          }
+        });
     },
     // gets the vendor feedback
-    getvendorfeedback() {
+    getvendorfeedback () {
       axios({
         method: "get",
         url: `/mod/vendor/ratings/${this.order.vendor_uuid}`,
         withCredentials: true,
         headers: authHeader(),
       })
-          .then((response) => {
-        if (response.status == 200) {
-          this.customerratings = response.data;
-        }
-      });
+        .then((response) => {
+          if (response.status == 200) {
+            this.customerratings = response.data;
+          }
+        });
     },
-/*    // payload for the dispute
-    markdisputePayload() {
-      const payLoad = {
-        percenttovendor: this.loginForm.username,
-        percenttocustomer: this.loginForm.password,
-      };
-      this.markdisputefinished(payLoad);
-    },
-    // Finishes an order Splits percentage to various users
-     markdisputefinished(payLoad: {
-      percenttovendor: string;
-      percenttocustomer: string;
-    }) {
-       axios({
-        method: "get",
-        url: `/mod/dispute/settle/${this.order_id}`,
-        withCredentials: true,
-        headers: authHeader(),
-        data: payLoad,
-      })
-          .then(() => {
-
-      });
-    },*/
+    /*    // payload for the dispute
+        markdisputePayload() {
+          const payLoad = {
+            percenttovendor: this.loginForm.username,
+            percenttocustomer: this.loginForm.password,
+          };
+          this.markdisputefinished(payLoad);
+        },
+        // Finishes an order Splits percentage to various users
+         markdisputefinished(payLoad: {
+          percenttovendor: string;
+          percenttocustomer: string;
+        }) {
+           axios({
+            method: "get",
+            url: `/mod/dispute/settle/${this.order_id}`,
+            withCredentials: true,
+            headers: authHeader(),
+            data: payLoad,
+          })
+              .then(() => {
+    
+          });
+        },*/
 
     //  Brings an order to open status
-     markdisputecancelledstillopen() {
+    markdisputecancelledstillopen () {
       axios({
         method: "get",
         url: `/mod/dispute/canceldispute/open/${this.order_id}`,
@@ -402,7 +366,7 @@ export default defineComponent({
       });
     },
     //  Brings an order to closed status
-     markdisputecancelledstillclosed() {
+    markdisputecancelledstillclosed () {
       axios({
         method: "get",
         url: `/mod/dispute/canceldispute/closed/${this.order_id}`,
@@ -410,25 +374,25 @@ export default defineComponent({
         headers: authHeader(),
 
       })
-          .then(() => {
-       
-      });
+        .then(() => {
+
+        });
     },
     //  Extends the time on an order
-     extenddisputetime() {
-       axios({
+    extenddisputetime () {
+      axios({
         method: "get",
         url: `/mod/dispute/extend/${this.order_id}`,
         withCredentials: true,
         headers: authHeader(),
 
       })
-          .then(() => {
-       
-      });
+        .then(() => {
+
+        });
     },
     // 100 to vendor
-     split100vendor(payLoad: {
+    split100vendor (payLoad: {
       percenttovendor: string;
       percenttocustomer: string;
     }) {
@@ -449,7 +413,7 @@ export default defineComponent({
           }
         });
     },
-    sendsplit100vendor() {
+    sendsplit100vendor () {
       const payLoad = {
         percenttovendor: "100",
         percenttocustomer: "0",
@@ -458,36 +422,7 @@ export default defineComponent({
     },
 
     // 75 to vendor
-     split75vendor(payLoad: {
-      percenttovendor: string;
-      percenttocustomer: string;
-    }) {
-       axios({
-        method: "post",
-        url: `/mod/dispute/settle/${this.order_id}`,
-        data: payLoad,
-        withCredentials: true,
-        headers: authHeader(),
-      })
-        .then((response) => {
-          if ((response.status = 200)) {
-            this.getuserorder();
-          }
-        })
-        .catch((error) => {
-          console.log(error)
-        });
-    },
-    sendsplit75vendor() {
-      const payLoad = {
-        percenttovendor: "75",
-        percenttocustomer: "25",
-      };
-      this.split75vendor(payLoad);
-    },
-
-    // 50 to vendor
-     split50vendor(payLoad: {
+    split75vendor (payLoad: {
       percenttovendor: string;
       percenttocustomer: string;
     }) {
@@ -507,7 +442,36 @@ export default defineComponent({
           console.log(error)
         });
     },
-    sendsplit50vendor() {
+    sendsplit75vendor () {
+      const payLoad = {
+        percenttovendor: "75",
+        percenttocustomer: "25",
+      };
+      this.split75vendor(payLoad);
+    },
+
+    // 50 to vendor
+    split50vendor (payLoad: {
+      percenttovendor: string;
+      percenttocustomer: string;
+    }) {
+      axios({
+        method: "post",
+        url: `/mod/dispute/settle/${this.order_id}`,
+        data: payLoad,
+        withCredentials: true,
+        headers: authHeader(),
+      })
+        .then((response) => {
+          if ((response.status = 200)) {
+            this.getuserorder();
+          }
+        })
+        .catch((error) => {
+          console.log(error)
+        });
+    },
+    sendsplit50vendor () {
       const payLoad = {
         percenttovendor: "50",
         percenttocustomer: "50",
@@ -516,11 +480,11 @@ export default defineComponent({
     },
 
     // 25 to vendor
-     split25vendor(payLoad: {
+    split25vendor (payLoad: {
       percenttovendor: string;
       percenttocustomer: string;
     }) {
-       axios({
+      axios({
         method: "post",
         url: `/mod/dispute/settle/${this.postid}`,
         data: payLoad,
@@ -536,7 +500,7 @@ export default defineComponent({
           console.log(error)
         });
     },
-    sendsplit25vendor() {
+    sendsplit25vendor () {
       const payLoad = {
         percenttovendor: "25",
         percenttocustomer: "75",
@@ -544,11 +508,11 @@ export default defineComponent({
       this.split25vendor(payLoad);
     },
     // 0 to vendor
-     split0vendor(payLoad: {
+    split0vendor (payLoad: {
       percenttovendor: string;
       percenttocustomer: string;
     }) {
-       axios({
+      axios({
         method: "post",
         url: `/mod/dispute/settle/${this.postid}`,
         data: payLoad,
@@ -564,7 +528,7 @@ export default defineComponent({
           console.log(error)
         });
     },
-    sendsplit0vendor() {
+    sendsplit0vendor () {
       const payLoad = {
         percenttovendor: "0",
         percenttocustomer: "100",
@@ -572,8 +536,8 @@ export default defineComponent({
       this.split0vendor(payLoad);
     },
     // comments on the post
-     sendMessagePostDispute(payLoad: { textbody: string }) {
-       axios({
+    sendMessagePostDispute (payLoad: { textbody: string }) {
+      axios({
         method: "post",
         url: "/mod/postdisputemsg/" + this.order.uuid,
         data: payLoad,
@@ -590,15 +554,15 @@ export default defineComponent({
           console.log(error)
         });
     },
-    sendMessagePayloadDispute() {
+    sendMessagePayloadDispute () {
       const payLoad = {
         textbody: this.SendDisputeForm.disputemsginfo,
       };
       this.sendMessagePostDispute(payLoad);
     },
     // comments on the post
-     sendMessageComment(payLoad: { textbody: string }) {
-       axios({
+    sendMessageComment (payLoad: { textbody: string }) {
+      axios({
         method: "post",
         url: "/msg/create/comment/" + this.postid,
         data: payLoad,
@@ -615,7 +579,7 @@ export default defineComponent({
           console.log(error)
         });
     },
-    sendMessagePayload() {
+    sendMessagePayload () {
       const payLoad = {
         textbody: this.SendMsgForm.msginfo,
       };

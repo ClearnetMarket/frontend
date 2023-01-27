@@ -1,11 +1,11 @@
 
 <template>
-  
+
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
 
-  <div class="container  max-w-7xl mx-auto px-10 pb-60 bg-gray-100"><!-- Container-->
+  <div class="container  max-w-7xl mx-auto px-10 pb-60 bg-gray-300"><!-- Container-->
     <div class="mt-5 mb-5">
       <nav class="rounded-md w-full">
         <ol class="list-reset flex">
@@ -64,11 +64,11 @@ export default defineComponent({
     MainHeaderVendor,
     MainFooter,
   },
-  mounted() {
+  mounted () {
     // this.userstatus();
     this.getbchaddress();
   },
-  data() {
+  data () {
     return {
       bch_address: '',
     };
@@ -76,8 +76,8 @@ export default defineComponent({
 
 
   methods: {
-     userstatus() {
-       axios({
+    userstatus () {
+      axios({
         method: "get",
         url: "/auth/whoami",
         withCredentials: true,
@@ -88,11 +88,11 @@ export default defineComponent({
           }
         })
         .catch((error) => {
-            console.log(error)
+          console.log(error)
         });
     },
-     getbchaddress() {
-       axios({
+    getbchaddress () {
+      axios({
         method: "get",
         url: "/bch/receive",
         withCredentials: true,
@@ -104,7 +104,7 @@ export default defineComponent({
           }
         })
         .catch((error) => {
-            console.log(error)
+          console.log(error)
         });
     },
   },

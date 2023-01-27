@@ -2,40 +2,26 @@
 <template>
   <div class="mt-5 mx-10 flex gap-5">
     <div v-for="item in itemsforsale" :key="item.id">
-      <div
-        class=""
-        @click="$router.replace({ name: 'item', params: { id: item.uuid } })"
-        style="cursor: pointer"
-      >
+      <div class="" @click="$router.replace({ name: 'item', params: { id: item.uuid } })" style="cursor: pointer">
         <!--Card 1-->
-        <div
-          class="rounded overflow-hidden border border-gray-200 text-center w-64 h-64 bg-white shadow-md"
-        >
+        <div class="rounded overflow-hidden border border-gray-200 text-center w-64 h-64 bg-white shadow-md">
           <div class="flex justify-center w-full">
             <div class="bg-red-200" v-if="item.image_one != null">
-              <img
-                class="object-contain w-24"
-                :src=item.image_one_server
-                alt=""
-              />
+              <img class="object-contain w-24" :src=item.image_one_server alt="" />
             </div>
-            <div v-else >
-              <img
-                class="object-contain w-24"
+            <div v-else>
+              <img class="object-contain w-24"
                 src="https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg"
-                alt="No Image Found .."
-              />
+                alt="No Image Found .." />
             </div>
           </div>
           <!--- Item title -->
-          <div
-            class="text-[16px] h-12 text-blue-600 hover:text-blue-500 hover:underline overflow-hidden p-1"
-          >
+          <div class="text-[16px] h-12 text-blue-600 hover:text-blue-500 hover:underline overflow-hidden p-1">
             {{ item.item_title }}
           </div>
           <!--- Price and Currency -->
           <div class="text-green-600 text-[18px] font-bold h-4">
-            {{ item.price }} {{ returncurrencysymbol(item.currency) }}
+            {{ item.price }} {{ returncurrencysymbol (item.currency) }}
           </div>
           <!--- Location -->
           <div class="text-[11px] h-6 overflow-hidden p-2 text-gray-500">
@@ -43,21 +29,12 @@
           </div>
           <!--- Currency accepted bubbles -->
           <div class="flex justify-center pt-2">
-            <span
-              v-if="item.digital_currency_1 === true"
-              class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-orange-500 mr-2 mb-2"
-              >BTC</span
-            >
-            <span
-              v-if="item.digital_currency_2 === true"
-              class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-orange-700 mr-2 mb-2"
-              >XMR</span
-            >
-            <span
-              v-if="item.digital_currency_3 === true"
-              class="inline-block bg-gray-200 rounded-full px-2 py-1 text-sm font-semibold text-green-600 mr-2 mb-2"
-              >BCH</span
-            >
+            <span v-if="item.digital_currency_1 === true"
+              class="inline-block bg-gray-300 rounded-full px-3 py-1 text-sm font-semibold text-orange-500 mr-2 mb-2">BTC</span>
+            <span v-if="item.digital_currency_2 === true"
+              class="inline-block bg-gray-300 rounded-full px-3 py-1 text-sm font-semibold text-orange-700 mr-2 mb-2">XMR</span>
+            <span v-if="item.digital_currency_3 === true"
+              class="inline-block bg-gray-300 rounded-full px-2 py-1 text-sm font-semibold text-green-600 mr-2 mb-2">BCH</span>
           </div>
         </div>
       </div>
@@ -84,20 +61,20 @@ import axios from "axios";
 export default defineComponent({
   name: "GetVendorItems",
   props: ["vendoruuid"],
-  data() {
+  data () {
     return {
       itemsforsale: [],
       loadedbtcprice: false,
     };
   },
 
-  mounted() {
+  mounted () {
     this.getvendorsitemsforsale();
   },
   computed: {},
 
   methods: {
-     getvendorsitemsforsale() {
+    getvendorsitemsforsale () {
       axios({
         method: "get",
         url: "/vendor/itemsforsale/" + this.vendoruuid,
@@ -110,10 +87,10 @@ export default defineComponent({
         })
         .catch((error) => {
           console.log(error)
-        
+
         });
     },
-    returncurrencysymbol(currencydigit: number) {
+    returncurrencysymbol (currencydigit: number) {
       if (currencydigit === 0) {
         return "$";
       } else if (currencydigit === 1) {
@@ -180,7 +157,7 @@ export default defineComponent({
         return "Kč";
       }
     },
-    returncurrency(currencydigit: number) {
+    returncurrency (currencydigit: number) {
       if (currencydigit === 0) {
         return "USD";
       } else if (currencydigit === 1) {

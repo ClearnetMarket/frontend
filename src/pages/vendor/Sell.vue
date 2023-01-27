@@ -1,6 +1,6 @@
 
 <template>
- 
+
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
@@ -35,7 +35,7 @@
       selling today, and bring crypto ecommerce to your part of the world.
     </div>
     <div class="flex text-center gap-5">
-      <div class="flex-1 bg-gray-100 rounded-md border border-1 p-5">
+      <div class="flex-1 bg-gray-300 rounded-md border border-1 p-5">
         <div class="text-[20px]">No bullshit</div>
         <div class="flex mb-10 text-center">
           Selling without any hidden fees. No signup or annual fee. No paypal or
@@ -43,7 +43,7 @@
         </div>
       </div>
 
-      <div class="flex-1 bg-gray-100 rounded-md border border-1 p-5">
+      <div class="flex-1 bg-gray-300 rounded-md border border-1 p-5">
         <div class="text-[20px]">Privacy</div>
         <div class="flex mb-10 text-center">
           Sell with privacy. We don't store your personal information. We only
@@ -53,7 +53,7 @@
         </div>
       </div>
 
-      <div class="flex-1 bg-gray-100 rounded-md border border-1 p-5">
+      <div class="flex-1 bg-gray-300 rounded-md border border-1 p-5">
         <div class="text-[20px]">No banks</div>
         <div class="flex mb-10 text-center">
           Anyone anywhere can sell. No credit cards, banks, or third party
@@ -85,8 +85,7 @@
         <div class="mt-5">
           <button
             class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            type="submit"
-          >
+            type="submit">
             Become Vendor
           </button>
         </div>
@@ -121,10 +120,10 @@ export default defineComponent({
     MainFooter,
   },
 
-  mounted() {
+  mounted () {
     this.userstatus();
   },
-  data() {
+  data () {
     return {
       v$: useValidate(),
       user: null,
@@ -134,14 +133,14 @@ export default defineComponent({
     }
   },
 
-validations() {
+  validations () {
     return {
-        accept: { required },
+      accept: { required },
     }
   },
   methods: {
-     userstatus() {
-       axios({
+    userstatus () {
+      axios({
         method: "get",
         url: "/auth/whoami",
         withCredentials: true,
@@ -154,7 +153,7 @@ validations() {
             this.$router.push({ name: "forsale" });
             this.loaded = false
           }
-          else{
+          else {
             this.loaded = true
           }
         }
@@ -163,8 +162,8 @@ validations() {
         }
       });
     },
-     becomevendor(payLoad: {accept: boolean}) {
-       axios({
+    becomevendor (payLoad: { accept: boolean }) {
+      axios({
         method: "post",
         url: "/vendor/becomevendor",
         data: payLoad,
@@ -181,24 +180,26 @@ validations() {
         }
       });
     },
-     onSubmit() {
-      const payLoad = {accept: this.accept}
-      this.v$.$validate(); 
+    onSubmit () {
+      const payLoad = { accept: this.accept }
+      this.v$.$validate();
 
       if (this.v$.$error) {
-       
+
         notify({
           title: "Signup Error",
           text: "You must read And accept agreement",
           type: "error",
         });
       } else {
-      console.log("good")
-      this.becomevendor(payLoad);
-    }
-  },
+        console.log("good")
+        this.becomevendor(payLoad);
+      }
+    },
   },
 });
 </script>
 
-<style></style>
+<style>
+
+</style>

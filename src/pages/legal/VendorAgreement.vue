@@ -1,6 +1,6 @@
 
 <template>
-  
+
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
@@ -9,7 +9,7 @@
     <MainHeaderVendor v-show="user.user_admin === 1" />
   </div>
 
-  <div class="container  max-w-7xl mx-auto px-10 bg-gray-200 mt-2 ">
+  <div class="container  max-w-7xl mx-auto px-10 bg-gray-300 mt-2 ">
     <div class="mt-5 mb-5">
       <nav class="rounded-md w-full  ">
         <ol class="list-reset flex  ">
@@ -25,7 +25,7 @@
       </nav>
     </div>
   </div>
- 
+
   <MainFooter />
 </template>
 
@@ -48,18 +48,18 @@ export default defineComponent({
     MainFooter,
   },
 
-  mounted() {
- 
+  mounted () {
+
   },
-  data() {
+  data () {
     return {
-     user: null
+      user: null
     };
   },
 
 
   methods: {
-    
+
   },
 });
 </script>

@@ -2,7 +2,7 @@
 <template>
 
   <HeaderPlain />
-  <div class="container max-w-7xl mx-auto px-10 bg-gray-100 h-screen">
+  <div class="container max-w-7xl mx-auto px-10 bg-gray-300 h-screen">
     <div class="mx-auto flex mb-1">
       <div class="mt-5 mb-5 ">
         <nav class="rounded-md w-full">

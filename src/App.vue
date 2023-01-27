@@ -2,11 +2,12 @@
 </script>
 
 <template>
-    <html class="opensans bg-gray-100">
+  <html class="opensans bg-gray-300">
 
-  <router-view/>
-<notifications position="bottom left" />
-</html>
+  <router-view />
+  <notifications position="bottom left" />
+
+  </html>
 </template>
 
 <style>

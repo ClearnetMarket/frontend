@@ -8,7 +8,7 @@
     <MainHeaderVendor v-show="user.user_admin === 1" />
   </div>
   <div class="">
-    <div class="container max-w-7xl mx-auto px-10 bg-gray-100 pb-72">
+    <div class="container max-w-7xl mx-auto px-10 bg-gray-300 pb-72">
       <div class="mt-5 mb-5">
         <nav class="rounded-md w-full">
           <ol class="list-reset flex">
@@ -391,29 +391,31 @@ export default defineComponent({
             this.$router.push("/vendor/itemsforsale");
             notify({
               title: "Freeport",
-              text: "Item Created successfully",
+              text: "Item Edited Successfully",
               type: "success",
             });
           }
           if (response.data.status == "error") {
-            this.$router.push({ name: "edititem", params: { id: this.item_id } });
+          console.log(response.data)
             notify({
-              title: "Freeport Error",
-              text: "Error creating item",
+              title: "Item Error",
+              text: "Item not Online.  Not all information provided.",
               type: "error",
             });
           }
         })
         .catch((error) => {
           if (error.response) {
-            notify({
-              title: "Freeport Error",
-              text: "Item Created successfully",
-              type: "success",
-            });
+          
             if (error.response.status === 401) {
               this.$store.commit("loginFailure");
-            } else if (error.response.status === 403) {
+              notify({
+                title: "Freeport Error",
+                text: "Error.  Not logged in!",
+                type: "error",
+              });
+            } 
+            else if (error.response.status === 403) {
               notify({
                 title: "Freeport Error",
                 text: "Error.  Not logged in!",
@@ -564,16 +566,12 @@ export default defineComponent({
 
       if (this.v$.$error) {
         notify({
-          title: "Authorization",
+          title: "Freeport",
           text: "Form Failure",
           type: "error",
         });
       } else {
-        notify({
-          title: "Authorization",
-          text: "Form success",
-          type: "success",
-        });
+
         this.SendItemCreation(payLoad);
       }
     },

@@ -1,36 +1,36 @@
 
 <template>
- 
+
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
 
-  <div class="container  max-w-7xl mx-auto px-10 pb-60 bg-gray-100"><!-- Container-->
-  <div class="mt-5 mb-5">
-    <nav class="rounded-md w-full">
-      <ol class="list-reset flex">
-        <li>
-          <router-link :to="{ name: 'home' }">
-            <a class="text-blue-600 hover:text-blue-700">Home</a>
-          </router-link>
-        </li>
-        <li>
-          <span class="text-gray-500 mx-2">/</span>
-        </li>
-  
-        <li>
-          <router-link :to="{ name: 'wallet' }">
-            <a class="text-blue-600 hover:text-blue-700">Wallet Home</a>
-          </router-link>
-        </li>
-        <li>
-          <span class="text-gray-500 mx-2">/</span>
-        </li>
-      </ol>
-    </nav>
-  </div>
- 
-  <div class="flex gap-4">
+  <div class="container  max-w-7xl mx-auto px-10 pb-60 bg-gray-300"><!-- Container-->
+    <div class="mt-5 mb-5">
+      <nav class="rounded-md w-full">
+        <ol class="list-reset flex">
+          <li>
+            <router-link :to="{ name: 'home' }">
+              <a class="text-blue-600 hover:text-blue-700">Home</a>
+            </router-link>
+          </li>
+          <li>
+            <span class="text-gray-500 mx-2">/</span>
+          </li>
+
+          <li>
+            <router-link :to="{ name: 'wallet' }">
+              <a class="text-blue-600 hover:text-blue-700">Wallet Home</a>
+            </router-link>
+          </li>
+          <li>
+            <span class="text-gray-500 mx-2">/</span>
+          </li>
+        </ol>
+      </nav>
+    </div>
+
+    <div class="flex gap-4">
       <div class="flex text-[22px] ">Deposit Bitcoin</div>
       <div class=" mx-10 justify-center mt-20 text-[20px]">
         Address:

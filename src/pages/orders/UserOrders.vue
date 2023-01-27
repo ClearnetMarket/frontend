@@ -27,7 +27,7 @@
       <div class="" v-if="orderscount">
         <div v-for="(order, i) in orders" :key="i" class="pb-5">
           <div class="grid grid-cols-12 rounded-md border border-gray-300 mb-5">
-            <div class="col-span-12 bg-gray-200 px-5 py-5">
+            <div class="col-span-12 bg-gray-300 px-5 py-5">
               <div class="grid grid-cols-12 text-[12px]">
                 <div class="col-span-3">
                   <div class="">Order Placed</div>

@@ -9,7 +9,7 @@
     <MainHeaderVendor v-show="user.user_admin === 1" />
   </div>
 
-  <div class="container max-w-7xl mx-auto px-5 wrapper pb-72 bg-gray-100">
+  <div class="container max-w-7xl mx-auto px-5 wrapper pb-72 bg-gray-300">
     <div class="mx-auto flex mb-1 px-10">
       <div class="mt-1">
         <nav class="rounded-md">
@@ -36,15 +36,15 @@
     </div>
 
 
-    <ItemTop @UpdateCart="UpdateCart"/>
+    <ItemTop @UpdateCart="UpdateCart" />
 
     <ItemDescription v-bind:description="description" />
 
-    <ItemShipping v-bind:origin_country_name="origin_country_name"
-      v-bind:shippingfree="shippingfree" v-bind:shippingtwo="shippingtwo" v-bind:shippingthree="shippingthree"
-      v-bind:shippingpricetwo="shippingpricetwo" v-bind:shippingdayfree="shippingdayfree"
-      v-bind:shippingdaytwo="shippingdaytwo" v-bind:shippingpricethree="shippingpricethree"
-      v-bind:shippingdaythree="shippingdaythree" v-bind:currency="currency" />
+    <ItemShipping v-bind:origin_country_name="origin_country_name" v-bind:shippingfree="shippingfree"
+      v-bind:shippingtwo="shippingtwo" v-bind:shippingthree="shippingthree" v-bind:shippingpricetwo="shippingpricetwo"
+      v-bind:shippingdayfree="shippingdayfree" v-bind:shippingdaytwo="shippingdaytwo"
+      v-bind:shippingpricethree="shippingpricethree" v-bind:shippingdaythree="shippingdaythree"
+      v-bind:currency="currency" />
     <div v-if="loaded_feedback">
       <ItemUserReviews v-bind:vendorreviews="vendorreviews" v-bind:vendoruuid="vendoruuid" />
     </div>
@@ -188,7 +188,7 @@ export default defineComponent({
         })
         .catch((error) => {
           console.log(error)
-        
+
           notify({
             title: "Error",
             text: "Item has been deleted or doesnt exist",
@@ -196,12 +196,12 @@ export default defineComponent({
           });
         });
     },
-  
+
     UpdateCart () {
       this.shoppingcartcount += 1;
     },
     getvendorreviews () {
- 
+
       axios({
         method: "get",
         url: "/vendor/vendor-feedback/" + this.item.vendor_uuid,

@@ -141,7 +141,10 @@
               </div>
               <div class="grid grid-cols-12 gap-4 text-[14px]">
                 <div class="col-span-3 ">
-                      <img class="object-contain" :src="order.image_one" />
+                
+                    <img class="object-contain" alt="" :src="order.image_one" />
+                
+    
                 </div>
                 <div class="col-span-6 ">
                   <div class="col-span-12 flex">

@@ -13,21 +13,21 @@
         </p>
         <div class="flex items-center mt-4">
           <span class="text-sm font-medium text-gray-500">10 star</span>
-          <div class="mx-4 w-2/4 h-5 bg-gray-200 rounded dark:bg-gray-700">
+          <div class="mx-4 w-2/4 h-5 bg-gray-300 rounded dark:bg-gray-700">
             <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_ten }"></div>
           </div>
           <span class="text-sm font-medium text-gray-500 dark:text-gray-400">{{ vendor_reviews_percent_ten }}%</span>
         </div>
         <div class="flex items-center mt-4">
           <span class="text-sm font-medium pr-2 text-gray-500 dark:text-gray-400">9 star</span>
-          <div class="mx-4 w-2/4 h-5 bg-gray-200 rounded dark:bg-gray-700">
+          <div class="mx-4 w-2/4 h-5 bg-gray-300 rounded dark:bg-gray-700">
             <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_nine }"></div>
           </div>
           <span class="text-sm font-medium text-gray-500 dark:text-gray-400">{{ vendor_reviews_percent_nine }}%</span>
         </div>
         <div class="flex items-center mt-4">
           <span class="text-sm font-medium pr-2 text-gray-500 dark:text-gray-400">8 star</span>
-          <div class="mx-4 w-2/4 h-5 bg-gray-200 rounded dark:bg-gray-700">
+          <div class="mx-4 w-2/4 h-5 bg-gray-300 rounded dark:bg-gray-700">
             <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_eight }"></div>
           </div>
           <span class="text-sm font-medium text-gray-500 dark:text-gray-400">
@@ -35,7 +35,7 @@
         </div>
         <div class="flex items-center mt-4">
           <span class="text-sm font-medium pr-2 text-gray-500 dark:text-gray-400">7 star</span>
-          <div class="mx-4 w-2/4 h-5 bg-gray-200 rounded dark:bg-gray-700">
+          <div class="mx-4 w-2/4 h-5 bg-gray-300 rounded dark:bg-gray-700">
             <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_seven }"></div>
           </div>
           <span class="text-sm font-medium text-gray-500 dark:text-gray-400">
@@ -43,7 +43,7 @@
         </div>
         <div class="flex items-center mt-4">
           <span class="text-sm font-medium pr-2 text-gray-500 dark:text-gray-400">6 star</span>
-          <div class="mx-4 w-2/4 h-5 bg-gray-200 rounded dark:bg-gray-700">
+          <div class="mx-4 w-2/4 h-5 bg-gray-300 rounded dark:bg-gray-700">
             <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_six }"></div>
           </div>
           <span class="text-sm font-medium pr-2 text-gray-500 dark:text-gray-400">{{
@@ -52,21 +52,21 @@
         </div>
         <div class="flex items-center mt-4">
           <span class="text-sm font-medium pr-2 text-gray-500 dark:text-gray-400">5 star</span>
-          <div class="mx-4 w-2/4 h-5 bg-gray-200 rounded dark:bg-gray-700">
+          <div class="mx-4 w-2/4 h-5 bg-gray-300 rounded dark:bg-gray-700">
             <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_five }"></div>
           </div>
           <span class="text-sm font-medium text-gray-500 dark:text-gray-400">{{ vendor_reviews_percent_five }}%</span>
         </div>
         <div class="flex items-center mt-4">
           <span class="text-sm font-medium pr-2 text-gray-500 dark:text-gray-400">4 star</span>
-          <div class="mx-4 w-2/4 h-5 bg-gray-200 rounded dark:bg-gray-700">
+          <div class="mx-4 w-2/4 h-5 bg-gray-300 rounded dark:bg-gray-700">
             <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_four }"></div>
           </div>
           <span class="text-sm font-medium text-gray-500 dark:text-gray-400">{{ vendor_reviews_percent_four }}%</span>
         </div>
         <div class="flex items-center mt-4">
           <span class="text-sm font-medium pr-2 text-gray-500 dark:text-gray-400">3 star</span>
-          <div class="mx-4 w-2/4 h-5 bg-gray-200 rounded dark:bg-gray-700">
+          <div class="mx-4 w-2/4 h-5 bg-gray-300 rounded dark:bg-gray-700">
             <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_three }"></div>
           </div>
           <span class="text-sm font-medium pr-2 text-gray-500 dark:text-gray-400">{{
@@ -75,14 +75,14 @@
         </div>
         <div class="flex items-center mt-4">
           <span class="text-sm font-medium pr-2 text-gray-500 dark:text-gray-400">2 star</span>
-          <div class="mx-4 w-2/4 h-5 bg-gray-200 rounded dark:bg-gray-700">
+          <div class="mx-4 w-2/4 h-5 bg-gray-300 rounded dark:bg-gray-700">
             <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_two }"></div>
           </div>
           <span class="text-sm font-medium text-gray-500 dark:text-gray-400">{{ vendor_reviews_percent_two }}%</span>
         </div>
         <div class="flex items-center mt-4">
           <span class="text-sm font-medium pr-2 text-gray-500 dark:text-gray-400">1 star</span>
-          <div class="mx-4 w-2/4 h-5 bg-gray-200 rounded dark:bg-gray-700">
+          <div class="mx-4 w-2/4 h-5 bg-gray-300 rounded dark:bg-gray-700">
             <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_one }"></div>
           </div>
           <span class="text-sm font-medium text-gray-500 dark:text-gray-400">{{ vendor_reviews_percent_one }}%</span>

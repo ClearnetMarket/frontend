@@ -30,15 +30,15 @@
           <div class="flex">
             <div v-if="item.digital_currency_1 === true">
               <span
-                class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-orange-500 mr-2 mb-2">Bitcoin</span>
+                class="inline-block bg-gray-300 rounded-full px-3 py-1 text-sm font-semibold text-orange-500 mr-2 mb-2">Bitcoin</span>
             </div>
             <div v-if="item.digital_currency_2 === true">
               <span
-                class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-orange-700 mr-2 mb-2">Monero</span>
+                class="inline-block bg-gray-300 rounded-full px-3 py-1 text-sm font-semibold text-orange-700 mr-2 mb-2">Monero</span>
             </div>
             <div v-if="item.digital_currency_3 === true">
               <span
-                class="whitespace-nowrap inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-green-600 mr-2 mb-2">Bitcoin
+                class="whitespace-nowrap inline-block bg-gray-300 rounded-full px-3 py-1 text-sm font-semibold text-green-600 mr-2 mb-2">Bitcoin
                 Cash</span>
             </div>
           </div>

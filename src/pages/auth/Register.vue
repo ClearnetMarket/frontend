@@ -1,178 +1,86 @@
 
 <template>
-  
+
   <HeaderPlain />
-  <div class="container max-w-7xl mx-auto bg-gray-100  h-screen">
+  <div class="container max-w-7xl mx-auto bg-gray-300  h-screen">
     <div class="mx-auto max-w-lg flex items-center justify-centermt-36">
-      <form
-        class="bg-white rounded-md  px-8 pt-6 pb-8 mb-4 mt-4 w-full"
-        method="POST"
-        @submit.prevent="onSubmit"
-      >
+      <form class="bg-white rounded-md  px-8 pt-6 pb-8 mb-4 mt-4 w-full" method="POST" @submit.prevent="onSubmit">
         <div class="mb-4 text-center text-[28px] text-zinc-600">Register</div>
 
         <div class="mb-4">
-          <label
-            class="block text-gray-700 text-sm font-bold mb-2"
-            for="username"
-            >Username</label
-          >
-          <input
-            v-model="registerForm.username"
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="username">Username</label>
+          <input v-model="registerForm.username"
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="username"
-            type="text"
-            placeholder="Login Username"
-           
-          />
-          <span
-            v-if="v$.registerForm.username.$error"
-            class="text-red-600 text-center"
-          >
+            id="username" type="text" placeholder="Login Username" />
+          <span v-if="v$.registerForm.username.$error" class="text-red-600 text-center">
             {{ v$.registerForm.username.$errors[0].$message }}
           </span>
         </div>
         <div class="mb-4">
-          <label
-            class="block text-gray-700 text-sm font-bold mb-2"
-            for="username"
-            >Display Username</label
-          >
-          <label class="block text-gray-700 mb-2 text-[11px]" for="username"
-            >This is the name other users will see you as. It would be the name
-            of your store.</label
-          >
-          <input
-            v-model="registerForm.display_username"
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="username">Display Username</label>
+          <label class="block text-gray-700 mb-2 text-[11px]" for="username">This is the name other users will see you
+            as. It would be the name
+            of your store.</label>
+          <input v-model="registerForm.display_username"
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="display_username"
-            type="text"
-            placeholder="Username"
-          />
-          <span
-            v-if="v$.registerForm.display_username.$error"
-            class="text-red-600 text-center"
-          >
+            id="display_username" type="text" placeholder="Username" />
+          <span v-if="v$.registerForm.display_username.$error" class="text-red-600 text-center">
             {{ v$.registerForm.display_username.$errors[0].$message }}
           </span>
         </div>
         <div class="mb-4">
-          <label
-            class="block text-gray-700 text-sm font-bold mb-2"
-            for="username"
-            >Email</label
-          >
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="username">Email</label>
 
-          <input
-            v-model="registerForm.email"
+          <input v-model="registerForm.email"
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="email"
-            type="text"
-            placeholder="Email"
-          />
-          <span
-            v-if="v$.registerForm.email.$error"
-            class="text-red-600 text-center"
-          >
+            id="email" type="text" placeholder="Email" />
+          <span v-if="v$.registerForm.email.$error" class="text-red-600 text-center">
             {{ v$.registerForm.email.$errors[0].$message }}
           </span>
         </div>
         <div class="mb-4">
-          <label
-            class="block text-gray-700 text-sm font-bold mb-2"
-            for="password"
-            >Password</label
-          >
-          <input
-            v-model="registerForm.password"
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="password">Password</label>
+          <input v-model="registerForm.password"
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="password"
-            type="password"
-            autocomplete="off"
-            placeholder="Password"
-           
-          />
-          <span
-            v-if="v$.registerForm.password.$error"
-            class="text-red-600 text-center"
-          >
+            id="password" type="password" autocomplete="off" placeholder="Password" />
+          <span v-if="v$.registerForm.password.$error" class="text-red-600 text-center">
             {{ v$.registerForm.password.$errors[0].$message }}
           </span>
         </div>
         <div class="mb-4">
-          <label
-            class="block text-gray-700 text-sm font-bold mb-2"
-            for="password_confirm"
-            >Confirm Password</label
-          >
-          <input
-            v-model="registerForm.password_confirm"
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="password_confirm">Confirm Password</label>
+          <input v-model="registerForm.password_confirm"
             class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="password"
-            type="password"
-            autocomplete="off"
-            placeholder="Confirm Password"
-            
-          />
-          <span
-            v-if="v$.registerForm.password_confirm.$error"
-            class="text-red-600 text-center"
-          >
+            id="password" type="password" autocomplete="off" placeholder="Confirm Password" />
+          <span v-if="v$.registerForm.password_confirm.$error" class="text-red-600 text-center">
             {{ v$.registerForm.password_confirm.$errors[0].$message }}
           </span>
         </div>
-        
+
         <div class="mb-4">
-          <label
-            class="block text-gray-700 text-sm font-bold mb-2"
-            for="password_confirm"
-            >Country</label
-          >
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="password_confirm">Country</label>
           <select
             class="shadow form-select appearance-none block w-full px-3 py-1.5 text-base font-normal focus:shadow-outline text-gray-500 bg-white bg-clip-padding bg-no-repeat border rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-            aria-label="Default select example"
-            v-model="registerForm.country"
-          >
-            <option
-              class="text-gray-700"
-              v-for="(country, index) in countryList"
-              :key="index"
-              :value="country.value"
-            >
+            aria-label="Default select example" v-model="registerForm.country">
+            <option class="text-gray-700" v-for="(country, index) in countryList" :key="index" :value="country.value">
               {{ country.name }}
             </option>
           </select>
-          <span
-            v-if="v$.registerForm.country.$error"
-            class="text-red-600 text-center"
-          >
+          <span v-if="v$.registerForm.country.$error" class="text-red-600 text-center">
             {{ v$.registerForm.country.$errors[0].$message }}
           </span>
         </div>
 
         <div class="mb-4">
-          <label
-            class="block text-gray-700 text-sm font-bold mb-2"
-            for="password_confirm"
-            >Currency</label
-          >
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="password_confirm">Currency</label>
           <select
             class="shadow form-select appearance-none block w-full px-3 py-1.5 text-base font-normal focus:shadow-outline text-gray-500 bg-white bg-clip-padding bg-no-repeat border rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-            aria-label="Default select example"
-            v-model="registerForm.currency"
-          >
-            <option
-              class="text-gray-700"
-              v-for="(currency, index) in currencyList"
-              :key="index"
-              :value="currency.value"
-            >
+            aria-label="Default select example" v-model="registerForm.currency">
+            <option class="text-gray-700" v-for="(currency, index) in currencyList" :key="index"
+              :value="currency.value">
               {{ currency.text }}
             </option>
-            <span
-              v-if="v$.registerForm.currency.$error"
-              class="text-red-600 text-center"
-            >
+            <span v-if="v$.registerForm.currency.$error" class="text-red-600 text-center">
               {{ v$.registerForm.currency.$errors[0].$message }}
             </span>
           </select>
@@ -181,24 +89,17 @@
         <div class="flex items-center justify-center mb-6">
           <button
             class="bg-blue-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            type="submit"
-          >
+            type="submit">
             Register
           </button>
         </div>
         <div class="flex flex-col justify-center">
-          <router-link
-            :to="{ name: 'forgotpassword' }"
-            class="text-center font-bold text-sm text-blue-500 hover:text-blue-800"
-            >Forgot Password?</router-link
-          >
+          <router-link :to="{ name: 'forgotpassword' }"
+            class="text-center font-bold text-sm text-blue-500 hover:text-blue-800">Forgot Password?</router-link>
         </div>
         <div class="flex flex-col justify-center mt-5">
-          <router-link
-            :to="{ name: 'login' }"
-            class="text-center font-bold text-sm text-blue-500 hover:text-blue-800"
-            >Login Here</router-link
-          >
+          <router-link :to="{ name: 'login' }"
+            class="text-center font-bold text-sm text-blue-500 hover:text-blue-800">Login Here</router-link>
         </div>
       </form>
     </div>
@@ -217,7 +118,7 @@ import HeaderPlain from "../../layouts/headers/HeaderPlain.vue";
 export default defineComponent({
   name: "Register",
   components: { HeaderPlain },
-  data() {
+  data () {
     return {
       v$: useValidate(),
       isAuthenticated: false,
@@ -234,11 +135,11 @@ export default defineComponent({
       },
     };
   },
-  mounted() {
+  mounted () {
     this.getCountryList();
     this.getCurrencyList();
   },
-  validations() {
+  validations () {
     return {
       registerForm: {
         password: { required, minLength: minLength(6) },
@@ -257,7 +158,7 @@ export default defineComponent({
     };
   },
   methods: {
-    onSubmit() {
+    onSubmit () {
       const payLoad = {
         username: this.registerForm.username,
         display_username: this.registerForm.display_username,
@@ -274,10 +175,10 @@ export default defineComponent({
           type: "error",
         });
       } else {
-        this.Register(payLoad);      
+        this.Register(payLoad);
       }
     },
-     Register(payLoad: {
+    Register (payLoad: {
       display_username: string;
       username: string;
       password: string;
@@ -286,7 +187,7 @@ export default defineComponent({
       currency: string;
     }) {
       let path = "/auth/register";
-       axios({
+      axios({
         method: "post",
         url: path,
         data: payLoad,
@@ -306,19 +207,19 @@ export default defineComponent({
           }
         })
         .catch((response) => {
-       
+
           notify({
             title: "Authorization",
             text: "Failed to Register.",
             type: "error",
           });
-         
+
         });
     },
-     getCurrencyList() {
+    getCurrencyList () {
       const path = "/auth/query/currency";
 
-       axios({
+      axios({
         method: "get",
         url: path,
         withCredentials: true,
@@ -330,9 +231,9 @@ export default defineComponent({
 
         });
     },
-     getCountryList() {
+    getCountryList () {
       const path = "/auth/query/country";
-       axios
+      axios
         .get(path, { withCredentials: true })
         .then((response) => {
           this.countryList = response.data;
@@ -349,4 +250,6 @@ export default defineComponent({
 });
 </script>
 
-<style type="ts" scoped></style>
+<style type="ts" scoped>
+
+</style>

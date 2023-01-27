@@ -9,7 +9,7 @@
     </div>
 
     <!-- Top Stuff-->
-    <div class="container h-screen max-w-7xl mx-auto mb-40 px-10 bg-gray-100">
+    <div class="container h-screen max-w-7xl mx-auto mb-40 px-10 bg-gray-300">
         <!-- Container-->
         <div class="mt-5 mb-5">
             <nav class="rounded-md w-full">
@@ -49,12 +49,12 @@
                                 </div>
                             </div>
                             <div v-if="user.profile_image">
-                                    <div class="flex justify-center">
-                                <button class="bg-red-600 mt-5 hover:bg-zinc-400 text-white font-bold py-2 px-4
+                                <div class="flex justify-center">
+                                    <button class="bg-red-600 mt-5 hover:bg-zinc-400 text-white font-bold py-2 px-4
                                          rounded focus:outline-none focus:shadow-outline" type="submit"
-                                    @click="deleteitemimage1(user.profile_image)">
-                                    Delete Image
-                                </button>
+                                        @click="deleteitemimage1(user.profile_image)">
+                                        Delete Image
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -72,15 +72,15 @@
                 </div>
 
             </div>
-            <form class="rounded-md px-8 pt-6 pb-8 mb-4 w-full" enctype="multipart/form-data" @submit.prevent="onSubmit">
+            <form class="rounded-md px-8 pt-6 pb-8 mb-4 w-full" enctype="multipart/form-data"
+                @submit.prevent="onSubmit">
                 <div class="text-[20px] mt-5 mb-5 font-bold ">User Info</div>
                 <div class="">
                     <label class="block text-gray-700 text-sm font-bold mb-2">Bio</label>
                     <div class="flex gap-5">
                         <div class="flex-1">
                             <div class="flex-1">
-                                <textarea v-model="ProfileForm.bio" id="item_description"
-                                    class="shadow appearance-none border rounded w-full py-2 px-3
+                                <textarea v-model="ProfileForm.bio" id="item_description" class="shadow appearance-none border rounded w-full py-2 px-3
                                         text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                                 </textarea>
                             </div>
@@ -169,7 +169,7 @@ export default defineComponent({
                 .then((response) => {
                     if ((response.status = 200)) {
                         this.user = response.data.user;
-                       
+
                         if (this.user.profile_image === null) {
                             this.visibledelete1 = false;
                             this.visibleform1 = true;
@@ -194,7 +194,7 @@ export default defineComponent({
                     this.ProfileForm.bio = response.data.bio;
 
                 }
-               
+
             });
         },
 
@@ -216,7 +216,7 @@ export default defineComponent({
                 });
                 this.adduserprofile(payLoad);
             }
-         
+
         },
 
         adduserprofile (payLoad: {
@@ -288,7 +288,7 @@ export default defineComponent({
                     }
                 })
                 .catch((error) => {
-                    if (error.response) {}
+                    if (error.response) { }
                 });
         },
 
