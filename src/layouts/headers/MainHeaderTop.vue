@@ -1,17 +1,17 @@
 <template>
-  <div class="nav bg-blue-700 py-2 ">
-    <div class="container gap-x-0 max-w-7xl mx-auto text-center">
-      <div class="grid md:grid-cols-1 lg:grid-cols-2">
-        <div class="invisible lg:visible col-span-1">
-          <div class="flex flex-wrap  ml-5 text-white font-bold">
-            <div class="px-3">English</div>
+  <div class="nav bg-blue-700 md:py-2 ">
+    <div class="container gap-x-0 max-w-7xl mx-auto text-center ">
+      <div class="grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-3">
+        <div class="col-span-1 invisible md:visible sm:h-1 ">
+          <div class="flex sm:justify-between lg:justify-start ml-5 text-white font-bold pb-2">
+            <div class="px-3.5">English</div>
             <div v-if="loaded === true">
-            <div class="px-3">{{ returncurrency (user.currency) }}</div>
+            <div class="px-3 ">{{ returncurrency (user.currency) }}</div>
             </div>
           </div>
         </div>
-        <div class="col-span-1">
-          <div class="flex flex-wrap lg:justify-end md:justify-evenly">
+        <div class="col-span-1 lg:col-span-2 ">
+          <div class="flex flex-wrap lg:justify-end md:justify-evenly sm:justify-center">
             <div v-if="user">
               <div v-if="user.user_admin >= 2">
                 <router-link :to="{ name: 'ModHome' }" class="px-3">
@@ -47,9 +47,7 @@
                   {{ user.user_name }}
                 </button>
               </router-link>
-
             </div>
-
             <div v-else class="flex gap-2">
               <router-link :to="{ name: 'login' }">
                 <button

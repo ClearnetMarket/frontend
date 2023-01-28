@@ -1,5 +1,5 @@
 <template >
-<div class="h-screen">
+<div class="h-full">
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
@@ -13,6 +13,9 @@
 
   <div class="container max-w-7xl mx-auto  mb-0  bg-text-white ">
     <TodayFeatured />
+      <TodayFeatured />
+        <TodayFeatured />
+          <TodayFeatured />
   </div>
 </div>
   <MainFooter />
