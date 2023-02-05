@@ -30,11 +30,24 @@
         </ol>
       </nav>
     </div>
-    <div class="flex text-[22px] ">Send Monero</div>
-    <div class="flex gap-4">
-
-
-      <div class="flex-1 bg-white rounded-md justify-center mt-20 p-5">
+    <div class="flex text-[22px] invisible md:visible">Send Monero</div>
+    
+    <div class="flex text-[22px] justify-center visible md:invisible ">Send Monero</div>
+    
+    <div class="grid grid-cols-12 gap-4">
+      <div class="col-span-12 md:col-span-6">
+        <div class=" flex-1 f mt-8 w-full">
+          <div class="font-semibold">Monero Balances (XMR)</div>
+          <div class="flex justify-between   border-b-gray-700 border-b-2">
+            <div class="grow-0">Total </div>
+            <div class="grow"> </div>
+            <div class="grow-0"> {{ xmrbalance }}</div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="col-span-12 md:col-span-6">
+      <div class="flex-1 bg-white rounded-md justify-center mt-8 p-5">
         <form method="post" @submit="onSubmit">
           <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="username">Address</label>
@@ -75,16 +88,9 @@
               class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="submit">
               Send Coin
-            </button>
-          </div>
-        </form>
-      </div>
-      <div class=" flex-1 f mt-20 w-full">
-        <div class="font-semibold">Monero Balances (XMR)</div>
-        <div class="flex justify-between   border-b-gray-700 border-b-2">
-          <div class="grow-0">Total </div>
-          <div class="grow"> </div>
-          <div class="grow-0"> {{ xmrbalance }}</div>
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>

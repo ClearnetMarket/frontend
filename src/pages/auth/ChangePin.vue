@@ -2,9 +2,9 @@
 <template>
 
   <HeaderPlain />
-  <div class="container max-w-7xl mx-auto px-10 bg-gray-300 h-screen">
+  <div class="container max-w-7xl mx-auto  bg-gray-300 h-screen">
     <div class="mx-auto flex mb-1">
-      <div class="mt-5 mb-5 ">
+      <div class="mt-5 mb-5 px-10">
         <nav class="rounded-md w-full">
           <ol class="list-reset flex">
             <li>
@@ -19,7 +19,7 @@
         </nav>
       </div>
     </div>
-    <div class="mx-auto max-w-lg flex items-center justify-center mb-10 mt-12">
+    <div class="mx-auto max-w-lg flex items-center justify-center mb-10 mt-12 px-5">
       <form class="bg-white rounded-md px-8 pt-6 pb-8 mb-4 w-full" @submit.prevent="onSubmit">
         <div class="mb-4 text-center text-[28px] text-zinc-600">Change Pin</div>
         <div class="mb-4">
@@ -54,7 +54,7 @@
           <button
             class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             type="submit">
-            Sign In
+            Update
           </button>
         </div>
       </form>

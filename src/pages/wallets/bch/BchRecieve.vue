@@ -5,8 +5,8 @@
   <MainHeaderMid />
   <MainHeaderBottom />
 
-  <div class="container  max-w-7xl mx-auto px-10 pb-60 bg-gray-300"><!-- Container-->
-    <div class="mt-5 mb-5">
+  <div class="container  max-w-7xl mx-auto pb-60 bg-gray-300"><!-- Container-->
+    <div class="mt-5 mb-5 px-10">
       <nav class="rounded-md w-full">
         <ol class="list-reset flex">
           <li>
@@ -30,16 +30,19 @@
       </nav>
     </div>
 
-    <div class="flex gap-4">
-      <div class="flex text-[22px] ">Deposit Bitcoin Cash</div>
-      <div class=" mx-10 justify-center mt-20 text-[20px]">
-        Address:
-      </div>
-      <div class=" mx-10 justify-center mt-20 text-[20px]">
-        {{ bch_address }}
-      </div>
+    <div class="flex text-[22px] invisible md:visible">Deposit Bitcoin Cash</div>
+
+    <div class="flex text-[22px] justify-center visible md:invisible">Deposit Bitcoin Cash</div>
+    <div class="bg-white rounded-md">
+    <div class="flex justify-center mt-8 text-[20px]">
+      Address:
+    </div>
+    <div class="flex py-10 justify-center mt-8 text-[14px]">
+      {{ bch_address }}
+    </div>
     </div>
   </div>
+
 
   <MainFooter />
 </template>
@@ -47,7 +50,6 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import axios from "axios";
-import { mapGetters } from "vuex";
 import MainHeaderTop from "../../../layouts/headers/MainHeaderTop.vue";
 import MainHeaderMid from "../../../layouts/headers/MainHeaderMid.vue";
 import MainHeaderBottom from "../../../layouts/headers/MainHeaderBottom.vue";

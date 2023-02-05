@@ -7,9 +7,9 @@
     <div v-if="user">
       <MainHeaderVendor v-show="user.user_admin === 1" />
     </div>
-    <div class="max-w-7xl mx-auto px-10 pb-36 wrapper">
-      <div class="grid grid-cols-1 w-full gap-4">
-        <div class="mb-10 mt-5">
+    <div class="max-w-7xl mx-auto pb-36 ">
+      <div class="grid grid-cols-1 w-full gap-4 px-10 mb-5">
+        <div class="mt-5">
           <nav class="rounded-md">
             <ol class="list-reset flex">
               <li>
@@ -25,20 +25,18 @@
         </div>
       </div>
       <div class="grid grid-cols-12 gap-4">
-        <div class="col-span-9 px-10 py-10">
+        <div class="col-span-12 md:col-span-9 px-2">
           <div class="grid grid-cols-4 border-b pb-8">
-            <h1 class="col-span-2 font-semibold text-2xl">Shopping Cart</h1>
-            <h2 class="col-span-1 col-start-4 font-semibold text-2xl">
+            <div class="col-span-3 font-semibold text-2xl">Shopping Cart</div>
+            <div class="col-span-1 col-start-4 font-semibold text-2xl">
               {{ order_summary_count }} Items
-            </h2>
+            </div>
           </div>
-
-        <div v-if="order_summary_count > 0">
-
+          <div v-if="order_summary_count > 0">
             <div v-for="(item, index) in shopping_cart_items_list" :key="index">
               <div v-if="item.title_of_item">
-                <div class="bg-white hover:bg-blue-300 p-5 rounded-md">
-                  <div class="grid grid-cols-12 px-1 py-1">
+                <div class="bg-white hover:bg-blue-300 p-2 rounded-md">
+                  <div class="grid grid-cols-12 px-1 py-1 gap-5">
                     <!-- product -->
 
                     <div class="col-span-3">
@@ -122,10 +120,8 @@
                         </div>
                       </div>
                     </div>
-                    <div class="col-span-2 text-right">
-                      <span class="font-semibold">{{ item.price_of_item }}{{
-                        returncurrencysymbol (item.currency)
-                      }}</span>
+                    <div class="col-span-2 text-right text-[18px] p-5">
+                      <span class="font-semibold">   {{ item.price_of_item }}{{ returncurrencysymbol (item.currency) }}</span>
                     </div>
                   </div>
                 </div>
@@ -194,8 +190,8 @@
             </div>
           </div>
         </div>
-
-        <div class="col-span-3 px-8 py-10 rounded-md  bg-white">
+        
+        <div class="col-span-12 md:col-span-3 px-8  rounded-md  bg-white">
           <div v-if="order_summary_count > 0">
             <div class="grid grid-cols-1">
               <div class="col-span-1">
@@ -234,7 +230,7 @@
                   </div>
                   <router-link :to="{ name: 'checkout' }">
                     <button v-if="order_summary_count > 0"
-                      class="bg-yellow-500 font-semibold hover:bg-yellow-600 py-3 text-sm text-white uppercase w-full">
+                      class="bg-yellow-500 font-semibold hover:bg-yellow-600 py-3 text-sm text-white uppercase w-full rounded-md">
                       Checkout
                     </button>
                   </router-link>
@@ -247,7 +243,7 @@
             </div>
           </div>
           <div v-else>
-            <h1 class="font-semibold text-xl pb-8">No Items found!</h1>
+            <h1 class="font-semibold text-[16px] text-center">Add Items to your cart to checkout</h1>
           </div>
         </div>
       </div>

@@ -9,7 +9,7 @@
     </div>
 
     <!-- Top Stuff-->
-    <div class="container h-screen max-w-7xl mx-auto mb-40 px-10 bg-gray-300">
+    <div class="containermax-w-7xl mx-auto  px-10 bg-gray-300">
         <!-- Container-->
         <div class="mt-5 mb-5">
             <nav class="rounded-md w-full">
@@ -33,14 +33,14 @@
                 </ol>
             </nav>
         </div>
-        <div class="grid grid-cols-1 rounded-md p-6 max-w-3xl mx-auto bg-white">
+        <div class="grid grid-cols-1 rounded-md  max-w-3xl mx-auto bg-white">
             <div class="flex justify-center bg-white">
                 <div v-if="visibledelete1">
                     <div class="block bg-cover bg-center">
                         <div class="flex flex-col">
                             <div class="font-bold text-center">Profile Image</div>
                             <div v-if="user.profileimage_url_250">
-                                <img alt="" class="w-48 h-48" :src="user.profileimage_url_250" />
+                                <img  class="w-48 h-48" :src="user.profileimage_url_250" />
                             </div>
                             <div v-else>
                                 <div class="h-48 w-48 block bg-cover bg-center"
@@ -72,12 +72,12 @@
                 </div>
 
             </div>
-            <form class="rounded-md px-8 pt-6 pb-8 mb-4 w-full" enctype="multipart/form-data"
+            <form class="rounded-md px-2 pt-2 pb-2 mb-4 w-full" enctype="multipart/form-data"
                 @submit.prevent="onSubmit">
                 <div class="text-[20px] mt-5 mb-5 font-bold ">User Info</div>
-                <div class="">
+           
                     <label class="block text-gray-700 text-sm font-bold mb-2">Bio</label>
-                    <div class="flex gap-5">
+                    <div class="flex ">
                         <div class="flex-1">
                             <div class="flex-1">
                                 <textarea v-model="ProfileForm.bio" id="item_description" class="shadow appearance-none border rounded w-full py-2 px-3
@@ -86,7 +86,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+             
                 <div class="flex justify-center mt-20">
                     <button
                         class="bg-blue-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"

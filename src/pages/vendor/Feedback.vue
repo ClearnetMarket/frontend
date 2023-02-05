@@ -6,8 +6,8 @@
   <MainHeaderBottom />
   <MainHeaderVendor />
   <!-- Top Stuff-->
-  <div class="max-w-4xl mx-auto wrapper px-10">
-    <div class="mt-5 mb-5">
+  <div class="max-w-4xl mx-auto wrapper ">
+    <div class="mt-5 mb-5 px-10">
       <nav class="rounded-md w-full">
         <ol class="list-reset flex">
           <li>
@@ -27,7 +27,7 @@
       My Feedback
     </div>
     <div class="grid grid-cols-12 p-5 gap-5">
-      <div class="col-span-4 bg-white rounded-md p-5">
+      <div class="col-span-12 md:col-span-4 bg-white rounded-md p-5">
         <div class="flex">All Vendor Reviews</div>
 
         <p class="text-sm font-medium text-gray-500 dark:text-gray-400">
@@ -110,7 +110,7 @@
           <span class="text-sm font-medium text-blue-600 dark:text-blue-500">{{ vendor_reviews_percent_one }}%</span>
         </div>
       </div>
-      <div class="col-span-8">
+      <div class="col-span-12 md:col-span-8">
         <div class="" v-if="vendor_reviews_total > 0">
           <div v-for="review in vendorreviews" :key="review.id">
             <div class="grid grid-cols-12 bg-white rounded-md p-5">

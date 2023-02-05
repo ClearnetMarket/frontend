@@ -3,7 +3,7 @@
     <div class="container max-w-7xl mx-auto text-bold text-center">
       <div class="grid grid-cols-12">
 
-        <div class="sm:col-span-12 md:col-span-6 lg:col-span-3 invisible md:visible sm:h-1">
+        <div class="col-span-12 md:col-span-6 lg:col-span-3 invisible md:visible h-1">
           <div class="flex ml-5">
             <div class="pb-2">
               <select class="form-select mt-2 appearance-none block w-full 
@@ -50,7 +50,7 @@
           </div>
         </div>
 
-        <div class=" sm:col-span-12 md:col-span-6 lg:col-start-7 lg:col-span-6 ">
+        <div class="col-span-12 md:col-span-6 lg:col-start-7 lg:col-span-6 ">
           <div class="flex mr-5">
             <div class="mx-3 pt-3 text-[13px] font-bold">
               <router-link :to="{ name: 'wallet' }" class="px-3 ">
@@ -116,7 +116,9 @@ export default defineComponent({
   methods: {
     //  change url in dropdown
     gotourl (nameofurl: string) {
+      console.log("hello")
       this.$router.replace({ name: nameofurl })
+      this.$router.push({ name: nameofurl });
     },
     userstatus () {
       axios({

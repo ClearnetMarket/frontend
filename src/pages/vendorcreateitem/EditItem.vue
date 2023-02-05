@@ -8,7 +8,7 @@
     <MainHeaderVendor v-show="user.user_admin === 1" />
   </div>
   <div class="">
-    <div class="container max-w-7xl mx-auto px-10 bg-gray-300 pb-72">
+    <div class="container max-w-7xl mx-auto px-2 bg-gray-300 pb-72">
       <div class="mt-5 mb-5">
         <nav class="rounded-md w-full">
           <ol class="list-reset flex">
@@ -32,9 +32,9 @@
         </nav>
       </div>
       <div class="grid grid-cols-1 rounded-md p-6 max-w-3xl mx-auto bg-white">
-        <div class="text-[18px] text-center">Item# {{ item_id }}</div>
+        <div class="text-[18px] text-center ">Item# {{ item_id }}</div>
 
-        <UploadImages :item_id="item_id" />
+          <UploadImages :item_id="item_id" />
         <form class="rounded-md px-8 pt-6 pb-8 mb-4 w-full" enctype="multipart/form-data" @submit.prevent="onSubmit">
           <p v-for="error of v$.$errors" :key="error.$uid">
             {{ error.$message }}
@@ -145,7 +145,6 @@
                 <div class="flex-1">
                   <input type="checkbox" v-model="CreateItemForm.shippingInfo.international" />
                 </div>
-
               </div>
             </div>
             <div class="mb-4 flex text-center">

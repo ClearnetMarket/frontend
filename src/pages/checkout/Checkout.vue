@@ -9,8 +9,9 @@
     </div>
 
     <div class="max-w-7xl mx-auto wrapper">
+      
       <div class="grid grid-cols-1 w-full gap-4">
-        <div class="mb-10 mt-5 px-5">
+        <div class="mb-5 mt-5 px-5">
           <nav class="rounded-md">
             <ol class="list-reset flex">
               <li>
@@ -21,7 +22,6 @@
               <li>
                 <span class="text-gray-500 mx-2">/</span>
               </li>
-
               <li>
                 <router-link :to="{ name: 'cart' }">
                   <a class="text-blue-600 hover:text-blue-700">Shopping Cart</a>
@@ -34,20 +34,24 @@
           </nav>
         </div>
       </div>
+
+
       <div v-if="shopping_cart_items_list_count == 1">
         <div class="text-center text-[28px] mb-10">Checkout ({{ shopping_cart_items_list_count }} item)</div>
       </div>
       <div v-else>
         <div class="text-center text-[28px] mb-10">Checkout ({{ shopping_cart_items_list_count }} items)</div>
       </div>
-      <div class="grid grid-cols-12 w-full gap-4">
-        <div class="col-span-8 grid-rows-3 px-10 py-10 bg-white rounded-md p-5">
-          <div class="grid grid-cols-12 border-b border-gray-300 pb-4 mb-10">
+
+      <div class="grid grid-cols-12 w-full gap-4 px-2">
+
+
+        <div class="col-span-12 md:col-span-8 grid-rows-3 bg-white rounded-md p-5 mb-5 ">
+          <div class="grid grid-cols-12 border-b border-gray-300 pb-4 ">
             <div class="col-span-1 font-bold">1</div>
-            <div class="col-span-3 font-bold text-">Shipping Options</div>
+            <div class="col-span-3 font-bold text-[20px]">Shipping Options</div>
             <div class="col-span-6" v-if="address_name.length > 5">
               <div class="grid grid-cols-1">
-   
                 <div class="">{{ address_name }}</div>
                 <div class="">{{ address }}</div>
                 <div class="">{{ apt }}</div>
@@ -65,10 +69,9 @@
               <router-link :to="{ name: 'defaultaddress' }"> Change/Add </router-link>
             </div>
           </div>
-
           <div class="grid grid-cols-12 pb-4 pt-4 border-b border-gray-300 mb-10">
             <div class="col-span-1 font-bold">2</div>
-            <div class="col-span-3 font-bold">Payment Method</div>
+            <div class="col-span-3 font-bold text-[20px]">Payment Method</div>
             <div class="col-span-6">
               <div class="grid grid-cols-1">
                 <div class="text-[14px]">
@@ -87,61 +90,61 @@
             </div>
             <div class="col-span-2 text-center text-[12px]"></div>
           </div>
-
           <div class="grid grid-cols-12 pb-4">
             <div class="col-span-1 font-bold">3</div>
-            <div class="col-span-6 font-bold">Review Items and Shipping</div>
+            <div class="col-span-6 font-bold text-[20px]">Review Items and Shipping</div>
             <div class="col-span-11 mt-5">
               <div v-for="item in shopping_cart_items_list">
-                <div class="grid grid-cols-12 gap-4 border border-gray-300 p-4">
-                  <div class="col-span-2">
+                <div class="grid grid-cols-12 gap-4 border-t border-gray-300 pt-5 ">
+                  <div class="col-span-12 flex justify-center md:col-span-2">
                     <img class="h-24" :src="item.image_of_item" alt="" />
                   </div>
-                  <div class="col-span-6">
+                  <div class="col-span-12 md:col-span-6 text-center">
                     <div class="grid grid-cols-1">
                       <div class="col-span-1 font-bold pb-4">
                         {{ item.title_of_item }}
                       </div>
-                      <div class="col-span-1 flex">
+                      <div class="col-span-1 flex gap-5">
                         <div class="font-bold">Item Price:</div>
-                        {{ item.price_of_item }}$
-
+                        <div class="">{{ item.price_of_item }}$</div>
                       </div>
-                      <div class="col-span-1 flex">
+                      <div class="col-span-1 flex gap-5">
                         <div class="font-bold"> Item Count: </div>
-                        {{ item.quantity_of_item }} items
-
+                        <div class="">{{ item.quantity_of_item }} items</div>
                       </div>
-                      <div class="col-span-1 flex">
+                      <div class="col-span-1 flex gap-5">
                         <div class="font-bold">
                           Shipping Selected:
                         </div>
-                        {{ item.selected_shipping_description }}
+                        <div class="">{{ item.selected_shipping_description }}</div>
                       </div>
                     </div>
                   </div>
-                  <div class="col-span-4">
+                  <div class="col-span-12 md:col-span-4 ">
+
                     <div v-if="item.digital_currency_1 === true">
-                      <input v-on:change="checkoutpaymenttype($event, item)" v-model="item.selected_currency"
-                        type="radio" :id="item.id" :name="item.id" value="1"
-                        :checked="item.selected_digital_currency === 1" />
-
-                      <label class="px-5" for="btc">Bitcoin</label><br />
+                      <div class=" flex gap-5 mb-2">
+                        <input v-on:change="checkoutpaymenttype($event, item)" v-model="item.selected_currency"
+                          type="radio" :id="item.id" :name="item.id" value="1"
+                          :checked="item.selected_digital_currency === 1" />
+                        <label class="px-5" for="btc">Bitcoin</label><br />
+                      </div>
                     </div>
-
                     <div v-if="item.digital_currency_2 === true">
-                      <input v-on:change="checkoutpaymenttype($event, item)" v-model="item.selected_currency"
-                        type="radio" :id="item.id" :name="item.id" value="2"
-                        :checked="item.selected_digital_currency === 2" />
-
-                      <label class="px-5" for="bch">Bitcoin Cash</label><br />
+                      <div class=" flex gap-5 mb-2">
+                        <input v-on:change="checkoutpaymenttype($event, item)" v-model="item.selected_currency"
+                          type="radio" :id="item.id" :name="item.id" value="2"
+                          :checked="item.selected_digital_currency === 2" />
+                        <label class="px-5 " for="bch">Bitcoin Cash</label><br />
+                      </div>
                     </div>
-
                     <div v-if="item.digital_currency_3 === true">
-                      <input v-on:change="checkoutpaymenttype($event, item)" v-model="item.selected_currency"
-                        type="radio" :id="item.id" :name="item.id" value="3"
-                        :checked="item.selected_digital_currency === 3" />
-                      <label class="px-5" for="xmr">Monero</label>
+                      <div class=" flex gap-5 mb-2">
+                        <input v-on:change="checkoutpaymenttype($event, item)" v-model="item.selected_currency"
+                          type="radio" :id="item.id" :name="item.id" value="3"
+                          :checked="item.selected_digital_currency === 3" />
+                        <label class="px-5" for="xmr">Monero</label>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -150,7 +153,7 @@
           </div>
         </div>
 
-        <div class="col-span-4 px-10 ">
+        <div class="col-span-12 md:col-span-4 px-10 mb-5">
           <div class="grid grid-cols-1 bg-white rounded-md p-5">
             <div class="col-span-1">
               <h1 class="font-semibold text-2xl border-b pb-8">Order Summary</h1>
@@ -196,16 +199,16 @@
                 </div>
                 <div v-else class="text-red-600 text-center font-bold">Not Enough Coin in your wallet</div>
 
-                  <div v-if="address_name.length > 5">
-                  </div>
-                  <div v-else class="text-red-600 text-center font-bold">Need A Shipping Address</div>
+                <div v-if="address_name.length > 5">
+                </div>
+                <div v-else class="text-red-600 text-center font-bold">Need A Shipping Address</div>
 
 
                 <button v-show="
-                                xmrtotalprice <= xmrbalance &&
-                                bchtotalprice <= bchbalance &&
-                                btctotalprice <= btcbalance &&
-                                address_name.length > 5
+                  xmrtotalprice <= xmrbalance &&
+                  bchtotalprice <= bchbalance &&
+                  btctotalprice <= btcbalance &&
+                  address_name.length > 5
                 " @click="checkoutorder()"
                   class="bg-yellow-500 bg-r rounded-md font-semibold hover:bg-yellow-600 py-3 text-sm text-white uppercase w-full">
                   Place Order

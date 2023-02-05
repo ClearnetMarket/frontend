@@ -5,8 +5,8 @@
   <MainHeaderMid />
   <MainHeaderBottom />
 
-  <div class="max-w-4xl mx-auto wrapper px-10 pb-20">
-    <div class="grid grid-cols-1 w-full gap-4">
+  <div class="max-w-4xl mx-auto wrapper px-2 ">
+    <div class="grid grid-cols-1 w-full ">
       <div class="mb-10 mt-5">
         <nav class="rounded-md">
           <ol class="list-reset flex">
@@ -23,18 +23,19 @@
       </div>
     </div>
     <div class="grid grid-cols-1 w-full gap-4">
-      <h1 class="col-span-1 font-semibold text-2xl">Your Orders</h1>
+      <h1 class="col-span-1 font-semibold text-2xl text-center">Your Orders</h1>
       <div class="" v-if="orderscount">
         <div v-for="(order, i) in orders" :key="i" class="pb-5">
-          <div class="grid grid-cols-12 rounded-md border border-gray-300 mb-5">
-            <div class="col-span-12 bg-gray-300 px-5 py-5">
+          <div class="grid grid-cols-12 rounded-md border border-gray-300 ">
+            <div class="col-span-12 bg-gray-100 px-5 py-5 rounded-t-md">
               <div class="grid grid-cols-12 text-[12px]">
-                <div class="col-span-3">
-                  <div class="">Order Placed</div>
-                  <div class="">{{ order.created }}</div>
+                <div class="col-span-12 md:col-span-4  gap-2 text-[15px]">
+                  <div class="md:text-center">Order Placed</div>
+                  <div class="md:text-center">{{ order.created }}</div>
                 </div>
-                <div class="col-span-3">
-                  <div class="">Total</div>
+                <div class="col-span-12 md:col-span-3  gap-5 text-[15px]">
+                  <div class="md:text-center">Total</div>
+                  <div class="md:text-center ">
                   <div v-if="order.digital_currency === 1">
                     {{ order.price_total_btc }} BTC
                   </div>
@@ -44,24 +45,27 @@
                   <div v-if="order.digital_currency === 3">
                     {{ order.price_total_xmr }} XMR
                   </div>
+                  </div>
                 </div>
-                <div class="col-span-2"></div>
-                <div class="col-span-4">
-                  Order #
+             
+                <div class="col-span-12 md:col-span-4 gap-2 text-[15px]">
+                  <div class="md:text-center">Order #</div>
+                  <div class="md:text-center">
                   <router-link class="text-blue-600 hover:text-blue-500 hover:underline" :to="{
                     name: 'ordersview',
                     params: { uuid: order.uuid },
                   }">
                     {{ order.uuid }}
                   </router-link>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="col-span-12 bg-white px-5 py-5">
-              <div class="grid grid-cols-12">
-                <div class="col-span-9">
+            <div class="col-span-12 bg-white px-5  rounded-b-md">
+              <div class="grid grid-cols-12 ">
+                <div class="col-span-12 md:col-span-9 ">
                   <div class="grid grid-cols-12">
-                    <div class="col-span-12 text-[20px]">
+                    <div class="col-span-12 text-[20px] text-center md:text-left">
                       <div v-if="order.overall_status === 1">
                         Waiting to be accepted
                       </div>
@@ -82,13 +86,13 @@
                       </div>
                       <div v-if="order.overall_status === 10">Finalized</div>
                     </div>
-                    <div class="col-span-12 text-[14px]">
-                      <div class="grid grid-cols-12 pt-5 gap-5">
-                        <div class="col-span-3">
+                    <div class="col-span-12 text-[14px] ">
+                      <div class="grid grid-cols-12 md:pt-5 md:gap-5">
+                        <div class="col-span-12 md:col-span-3 flex justify-center">
                           <img class="object-contain" :src="order.image_one" alt="" />
                         </div>
-                        <div class="col-span-9">
-                          <div class="text-blue-600 hover:text-blue-600 hover:underline text-[18px]">
+                        <div class="col-span-12 md:col-span-9">
+                          <div class="text-blue-600 hover:text-blue-600 hover:underline text-[18px] text-center">
                             <router-link :to="{
                               name: 'MarketItem',
                               params: { id: order.item_uuid },
@@ -98,7 +102,7 @@
                           </div>
                           <div class="">
                             <div v-if="order.vendor_uuid">
-                              <div class="flex">
+                              <div class="flex justify-center md:justify-start">
                                 <div class="">Sold by:</div>
                                 <router-link :to="{
                                   name: 'userprofile',

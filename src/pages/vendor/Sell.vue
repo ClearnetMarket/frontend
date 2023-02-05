@@ -9,7 +9,7 @@
     <MainHeaderVendor v-show="user.user_admin === 1" />
   </div>
 
-  <div class="container max-w-7xl mx-auto px-10 wrapper mb-10" v-if="loaded">
+  <div class="container max-w-7xl mx-auto px-10 wrapper mb-10 overflow-hidden" v-if="loaded">
     <div class="mt-5 mb-5">
       <nav class="rounded-md w-full">
         <ol class="list-reset flex">
@@ -34,8 +34,8 @@
       We can create a better market, built on user reputation and privacy. Start
       selling today, and bring crypto ecommerce to your part of the world.
     </div>
-    <div class="flex text-center gap-5">
-      <div class="flex-1 bg-gray-300 rounded-md border border-1 p-5">
+    <div class="md:flex text-center gap-5">
+      <div class="flex-1 bg-white rounded-md border border-1 p-5">
         <div class="text-[20px]">No bullshit</div>
         <div class="flex mb-10 text-center">
           Selling without any hidden fees. No signup or annual fee. No paypal or
@@ -43,17 +43,17 @@
         </div>
       </div>
 
-      <div class="flex-1 bg-gray-300 rounded-md border border-1 p-5">
+      <div class="flex-1 bg-white rounded-md border border-1 p-5">
         <div class="text-[20px]">Privacy</div>
         <div class="flex mb-10 text-center">
-          Sell with privacy. We don't store your personal information. We only
-          keep emails for account contact. Sell with confidence that your
+          Sell with privacy. We don't store your personal information.
+           Sell with confidence that your
           information is never sold, distributed, or used without your
           knowledge.
         </div>
       </div>
 
-      <div class="flex-1 bg-gray-300 rounded-md border border-1 p-5">
+      <div class="flex-1 bg-white rounded-md border border-1 p-5">
         <div class="text-[20px]">No banks</div>
         <div class="flex mb-10 text-center">
           Anyone anywhere can sell. No credit cards, banks, or third party

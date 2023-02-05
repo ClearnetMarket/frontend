@@ -23,11 +23,11 @@
     </div>
 
     <div class="grid grid-cols-12 gap-4">
-      <div class="col-span-3">
+      <div class="col-span-3 hidden md:flex sm:h-50">
         <CategoryList />
       </div>
-      <div class="col-span-9 ">
-        <div class="flex mb-2">{{searchresultscount}} results for {{searchstring}}</div>
+      <div class="col-span-12 md:col-span-9 ">
+        <div class="flex mb-2 font-bold">{{searchresultscount}} results for {{searchstring}}</div>
          <div v-for="(f, index) in searchresults">
          <Searchitems :item='f' :selected-index='index' />
          </div>

@@ -2,47 +2,51 @@
 <template>
 
 
-  <div class="max-w-7xl mx-auto px-10 mb-10 border-b-2  border-zinc-400">
+  <div class="max-w-7xl mx-auto px-2 mb-10 ">
 
-    <div class="grid sm:grid-cols-1 md:grid-cols-12 mt-5 gap-5 pb-10  ">
-      <div class="col-span-5"><!-- start column one -->
-          <div class="grid grid-cols-12 gap-4 px-1 ">
-            <div class="col-span-12 text-center flex items-center justify-center">
-              <img class="h-96" :src="image_one_500" alt=""/>
-            </div>
-            <div class="col-span-12  gap-3 w-full flex">
-              <div class=" ">
-                <img class="object-fit" :src="image_one_250" alt="" @click="switchImageOne" />
-              </div>
-              <div class=" ">
-              <img  class="object-fit" :src="image_two_250" alt=""  @click="switchImageSecond"
-              />
-              </div>
-              <div class=" ">
-                <img class="object-fit" :src="image_three_250" alt="" @click="switchImageThird"
-               />
-              </div>
-              <div class="">
-                <img class="object-fit" :src="image_four_250" alt="" @click="switchImageFourth"
-               />
-              </div>
-              </div>
+    <div class="grid sm:grid-cols-1 md:grid-cols-12  gap-5 sm:pb-10  ">
+
+      <div class="sm:grid sm:col-span-12 md:invisible sm:visible">
+
+        <div class="col-span-12 text-center md:invisible md:h-0">
+          <div class="text-[20px] font-bold ">{{ title }}</div>
+        </div>
+      </div>
+      <div class="sm:col-span-12 md:col-span-8 lg:col-span-5"><!-- start column one -->
+        <div class="grid grid-cols-12 gap-4 px-1 ">
+          <div class="col-span-12 text-center flex items-center justify-center">
+            <img class="h-96" :src="image_one_500" alt="" />
           </div>
+          <div class="col-span-12  gap-3 w-full flex">
+            <div class=" ">
+              <img class="object-fit" :src="image_one_250" alt="" @click="switchImageOne" />
+            </div>
+            <div class=" ">
+              <img class="object-fit" :src="image_two_250" alt="" @click="switchImageSecond" />
+            </div>
+            <div class=" ">
+              <img class="object-fit" :src="image_three_250" alt="" @click="switchImageThird" />
+            </div>
+            <div class="">
+              <img class="object-fit" :src="image_four_250" alt="" @click="switchImageFourth" />
+            </div>
+          </div>
+        </div>
       </div><!-- end column one -->
 
-      <div class="col-span-4 px-5 bg-white rounded-md"><!-- start column two -->
+      <div class="sm:col-span-6 md:col-span-4 lg:col-span-4 px-5 bg-white rounded-md"><!-- start column two -->
         <div class="text-[20px] mb-1 font-bold">{{ title }}</div>
-        <div class="border border-gray-400 mb-5"></div>
+        <div class="border-b-2 border-gray-600 mb-5"></div>
         <div class="flex gap-4">
-          <div class="text-[16px] font-weight-bold text-gray-700">
+          <div class="text-[16px] font-weight-bold text-gray-700 font-bold">
             Conditon:
           </div>
-          <div class="text-[16px] text-gray-700">
+          <div class="text-[16px] text-gray-700 ">
             {{ condition }}
           </div>
         </div>
         <div class="flex gap-4">
-          <div class="text-[16px] font-weight-bold text-gray-700">
+          <div class="text-[16px] font-weight-bold text-gray-700 font-bold">
             Quantity:
           </div>
           <div class="text-[16px] text-gray-700" v-if="itemcount > 0">
@@ -50,35 +54,21 @@
             {{ itemcount }}
           </div>
           <div class="text-[16px] text-red-600 font-bold" v-else>
-          
             Out of Stock!
           </div>
-
         </div>
         <div class="flex gap-4">
-          <div class="text-[16px] font-weight-bold text-gray-700">
+          <div class="text-[16px] font-weight-bold text-gray-700 font-bold">
             Category:
           </div>
           <div class="text-[16px] text-gray-700">
             {{ category_name }}
           </div>
         </div>
-        <div class="flex pt-4 mb-1 justify-between">
-          <div v-if="digitalcurrencyone === true">
-            <span class="text-sm font-semibold text-orange-500 mr-2 mb-2">Bitcoin</span>
-          </div>
-          <div v-if="digitalcurrencythree === true">
-            <span class="text-sm font-semibold text-orange-700 mr-2 mb-2">
-              Monero</span>
-          </div>
-          <div v-if="digitalcurrencytwo === true">
-            <span class="text-sm font-semibold text-green-600 mr-2 mb-2">Bitcoin Cash</span>
-          </div>
-        </div>
-        <div class="text-[24px] font-bold text-gray-700 text-center">
-          {{ price }} {{ returncurrencysymbol(currency) }}
-        </div>
 
+        <div class="text-[24px] font-bold text-gray-700 text-center">
+          {{ price }} {{ returncurrencysymbol (currency) }}
+        </div>
         <div class="mb-2 text-[14px]">
           <div v-if="digitalcurrencyone === true">
             <div class="flex font-bold text-[19px]">
@@ -105,31 +95,71 @@
             </div>
           </div>
         </div>
-        <div class="mb-2 text-[14px] text-gray-700">
-          <div class="grid grid-cols-12 gap-4">
-            <div class="col-span-3">Located:</div>
-            <div class="col-span-9">
+        <div class="text-[16px] font-weight-bold text-gray-700 font-bold">
+          Located:
+        </div>
+        <div class=" text-[14px] text-gray-700">
+          <div class="grid grid-cols-12 mb-2">
+            <div class="col-span-12 text-[14px] ">{{ origin_country_name }}</div>
+            <div class="col-span-12 text-[14px] ">
               {{ exactcity }} {{ exactstateorprovence }} {{ exactzipcode }}
               {{ origin_country_name }}
             </div>
           </div>
+          <div class="text-[16px] font-weight-bold text-gray-700 font-bold border-b-2 border-gray-600">
+            Shipping:
+          </div>
+          <div v-if="shippingfree === true">
+            <div class="text-[14px] font-weight-bold text-gray-700">
+              Shipping Option 1:
+            </div>
+            <div class="grid grid-cols-4 grid-rows-2 border-b-2 border-gray-600">
 
-          <div v-if="(freeshipping === true)">
-            <div class="grid grid-cols-12 gap-4">
-              <div class="font-[12px] col-span-3">Shipping:</div>
-
-              <div class="flex col-span-9">
-                Free Shipping Estimated {{ freeshippingdays }} days after
-                purchase
+              <div class="col-span-3 row-span-1 text-[16px] text-orange-600">
+                FREE SHIPPING
+              </div>
+              <div class="col-span-3 row-span-1 text-[14px] text-gray-600">
+                Estimated in {{ shippingdayfree }} days
               </div>
             </div>
+
+          </div>
+          <div v-if="shippingtwo === true">
+            <div class="text-[14px] font-weight-bold text-gray-700">
+              Shipping Option 2:
+            </div>
+            <div class="grid grid-cols-4 grid-rows-2 border-b-2 border-gray-600">
+              <div class="col-span-3 row-span-1 text-[14px] ">
+                Estimated in {{ shippingdayfree }} days
+              </div>
+              <div class="col-span-3 row-span-1 text-[20px]">
+                {{ shippingpricetwo }} {{ returncurrencysymbol (currency) }}
+              </div>
+
+            </div>
+
+          </div>
+          <div v-if="shippingthree === true">
+            <div class="text-[14px] font-weight-bold text-gray-700">
+              Shipping Option 3:
+            </div>
+            <div class="grid grid-cols-4 grid-rows-2 border-b-2 border-gray-600">
+              <div class="col-span-3 row-span-1 text-[14px] ">
+                Estimated in {{ shippingdayfree }} days
+              </div>
+              <div class="col-span-3 row-span-1 text-[20px]">
+                {{ shippingpricethree }} {{ returncurrencysymbol (currency) }}
+              </div>
+
+            </div>
+
           </div>
         </div>
       </div><!-- end column two -->
 
 
 
-      <div class="col-span-3 px-5 bg-white rounded-md"><!-- start column three -->
+      <div class="sm:col-span-6 md:col-span-12 lg:col-span-3 px-5 bg-white rounded-md"><!-- start column three -->
         <div class="flex justify-center mb-5 mt-5">
           <div v-if="user">
             <div v-if="vendoruuid != user.user_id">
@@ -207,7 +237,8 @@
                   </div>
 
                   <div v-if="vendoruuid">
-                    <div class="mb-5 mt-5 text-[14px] text-blue-500 hover:text-blue-300 hover:underline pl-3 text-center">
+                    <div
+                      class="mb-5 mt-5 text-[14px] text-blue-500 hover:text-blue-300 hover:underline pl-3 text-center">
                       <router-link v-if="user" :to="{
                         name: 'MsgCreateItem',
                         params: { uuid: vendoruuid, itemuuid: uuid },
@@ -301,6 +332,16 @@ export default defineComponent({
       exactstateorprovence: "",
       exactzipcode: "",
 
+      shippingfree: false,
+      shippingtwo: false,
+      shippingthree: false,
+      shippingpricetwo: "",
+      shippingdayfree: "",
+      shippingdaytwo: "",
+      shippingpricethree: "",
+      shippingdaythree: "",
+
+
     };
   },
   created () {
@@ -355,7 +396,7 @@ export default defineComponent({
 
             this.origin_country_name = response.data.origin_country_name;
             this.international = response.data.international;
-  
+
             this.image_one_250 = response.data.image_one_url_250;
             this.image_two_250 = response.data.image_two_url_250;
             this.image_three_250 = response.data.image_three_url_250;
@@ -366,6 +407,17 @@ export default defineComponent({
             this.image_two_500 = response.data.image_two_url_500;
             this.image_three_500 = response.data.image_three_url_500;
             this.image_four_500 = response.data.image_four_url_500;
+
+            this.freeshipping = response.data.shipping_free;
+            this.freeshippingdays = response.data.shipping_day_0;
+            this.shippingfree = response.data.shipping_free;
+            this.shippingtwo = response.data.shipping_two;
+            this.shippingthree = response.data.shipping_three;
+            this.shippingpricetwo = response.data.shipping_price_2;
+            this.shippingdayfree = response.data.shipping_day_0;
+            this.shippingdaytwo = response.data.shipping_day_2;
+            this.shippingpricethree = response.data.shipping_price_3;
+            this.shippingdaythree = response.data.shipping_day_3;
 
             this.getpricebch();
             this.getpricebtc();
@@ -488,31 +540,31 @@ export default defineComponent({
     },
     switchImageOne () {
       this.image_one_500 = this.current_main_image;
-    },  
-    switchImageSecond (){
-   
+    },
+    switchImageSecond () {
+
       this.image_one_500 = this.image_two_500;
-    
 
 
-    },  
+
+    },
 
     switchImageThird () {
 
       this.image_one_500 = this.image_three_500;
-     
 
 
 
-    },  
+
+    },
 
     switchImageFourth () {
-     
+
       this.image_one_500 = this.image_four_500;
-   
 
 
-    },      
+
+    },
 
 
     // Add item to cart
@@ -524,7 +576,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-         
+
           if ((response.status = 200)) {
             notify({
               title: "Shoppinng cart message",
@@ -553,7 +605,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-   
+
           this.shopping_cart_count = response.data.status;
           this.$emit("UpdateCart", this.shopping_cart_count);
         });

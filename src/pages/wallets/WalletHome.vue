@@ -1,6 +1,6 @@
 
 <template>
- 
+
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
@@ -9,7 +9,7 @@
     <MainHeaderVendor v-show="user.user_admin === 1" />
   </div>
   <!-- Top Stuff-->
-  <div class="container max-w-7xl mx-auto px-10">
+  <div class="container max-w-7xl mx-auto px-10 pb-72">
     <!-- Container-->
     <div class="mt-5 mb-5">
       <nav class="rounded-md w-full">
@@ -25,150 +25,138 @@
         </ol>
       </nav>
     </div>
-    <div class="sm:col-span-4 md:col-span-3 bg-white rounded-md p-5">
-      <div class="text-[18px] mb-10 text-left">Account Balances</div>
-      <div class="overflow-x-auto relative">
-        <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-          <thead class="text-xs text-gray-700 uppercase bg-blue-100 dark:bg-gray-700 dark:text-gray-400">
-            <tr>
-              <th scope="col" class="py-3 px-6">
-                Assets
-              </th>
-              <th scope="col" class="py-3 px-6">
-                Market Price
-              </th>
-              <th scope="col" class="py-3 px-6">
-                Amount
-              </th>
-              <th scope="col" class="py-3 px-6">
-                Actions
-              </th>
-            </tr>
-          </thead>
-          <tbody class=" font-large font-bold">
-            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-              <th scope="row" class="py-4 px-6 text-gray-900 whitespace-nowrap dark:text-white">
-                <div class="flex gap-3">
-                  <img class="object-contain" src="../../assets/coin/btc/btc_small.png" alt="No Image Found .." />
-                  Bitcoin
-                </div>
-              </th>
-              <td class="py-4 px-6">
-                ${{ btcprice }}
-              </td>
-              <td class="py-4 px-6">
-                {{ btcbalance }}
-              </td>
-              <td class="py-4 px-6">
-                <div class="flex-1 ">
-                  <router-link :to="{ name: 'btcwalletsend' }" class="px-3">
-                    <button
-                      class="bg-gray-700 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline">
-                      Withdraw
-                    </button>
-                  </router-link>
+    <div class="grid grid-cols-12 mb-5 md:mb-0 invisible md:visible text-[18px] bg-white rounded-t-md font-bold">
 
+      <div class="col-span-2 text-center">Coin</div>
+      <div class="col-span-2 text-center">Market</div>
+      <div class="col-span-3 text-center">Amount</div>
+      <div class="col-span-5 text-center">Actions</div>
 
-                  <router-link :to="{ name: 'btcwalletrecieve' }" class="px-3">
-                    <button
-                      class="bg-gray-700 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline">
-                      Deposit
-                    </button>
-                  </router-link>
+    </div>
 
+    <div class="grid grid-cols-12 border-t-2 border-gray-200 bg-white mb-5 md:mb-0 font-bold">
 
-                  <router-link :to="{ name: 'btcwallet' }" class="px-3">
-                    <button
-                      class="bg-gray-700 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline">
-                      Transactions
-                    </button>
-                  </router-link>
-                </div>
-              </td>
-            </tr>
-            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-              <th scope="row" class="py-4 px-6  text-gray-900 whitespace-nowrap dark:text-white">
-                  <div class="flex gap-3">
-                    <img class="object-contain" src="../../assets/coin/bch/bch_small.png" alt="No Image Found .." />
-                      Bitcoin Cash
-                  </div>
-              </th>
-              <td class="py-4 px-6">
-                ${{ bchprice }}
-              </td>
-              <td class="py-4 px-6">
-              {{ bchbalance }}
-              </td>
-              <td class="py-4 px-6">
-                <div class="flex-1 ">
-                  <router-link :to="{ name: 'bchwalletsend' }" class="px-3">
-                    <button
-                      class="bg-gray-700 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline">
-                      Withdraw
-                    </button>
-                  </router-link>
-
-
-                  <router-link :to="{ name: 'bchwalletrecieve' }" class="px-3">
-                    <button
-                      class="bg-gray-700 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline">
-                      Deposit
-                    </button>
-                  </router-link>
-
-
-                  <router-link :to="{ name: 'btcwallet' }" class="px-3">
-                    <button
-                      class="bg-gray-700 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline">
-                      Transactions
-                    </button>
-                  </router-link>
-                </div>
-              </td>
-            </tr>
-            <tr class="bg-white dark:bg-gray-800">
-              <th scope="row" class="py-4 px-6  text-gray-900 whitespace-nowrap dark:text-white">
-                <div class="flex gap-3">
-                <img class="object-contain" src="../../assets/coin/xmr/xmr_small.png" alt="No Image Found .." />   Monero
-                </div>
-              </th>
-              <td class="py-4 px-6">
-                ${{ xmrprice }}
-              </td>
-              <td class="py-4 px-6">
-                {{ xmrbalance }}
-              </td>
-              <td class="py-4 px-6">
-                <div class="flex-1 ">
-                  <router-link :to="{ name: 'xmrwalletsend' }" class="px-3">
-                    <button
-                      class="bg-gray-700 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline">
-                      Withdraw
-                    </button>
-                  </router-link>
-
-
-                  <router-link :to="{ name: 'xmrwalletrecieve' }" class="px-3">
-                    <button
-                      class="bg-gray-700 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline">
-                      Deposit
-                    </button>
-                  </router-link>
-
-
-                  <router-link :to="{ name: 'xmrwallet' }" class="px-3">
-                    <button
-                      class="bg-gray-700 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline">
-                      Transactions
-                    </button>
-                  </router-link>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="col-span-4 md:col-span-2 rounded-md p-5">
+        <div class="flex gap-3">
+          <img class="object-contain" src="../../assets/coin/btc/btc_small.png" alt="No Image Found .." />
+          Bitcoin
+        </div>
+      </div>
+      <div class=" md:col-span-2 invisible md:visible rounded-md p-5 text-center">
+          {{ btcprice }}
+      </div>
+      <div class="col-span-7 md:col-span-3  rounded-md p-5 text-center">
+          {{ btcbalance }}
+      </div>
+      <div class="col-span-12 md:col-span-5 justify-center flex py-3">
+        <router-link :to="{ name: 'btcwalletsend' }" class="px-1">
+          <button
+            class="bg-gray-700 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline">
+            Withdraw
+          </button>
+        </router-link>
+        <router-link :to="{ name: 'btcwalletrecieve' }" class="px-1">
+          <button
+            class="bg-gray-700 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline">
+            Deposit
+          </button>
+        </router-link>
+        <router-link :to="{ name: 'btcwallet' }" class="px-1">
+          <button
+            class="bg-gray-700 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline">
+            Transactions
+          </button>
+        </router-link>
       </div>
     </div>
+
+
+
+
+
+    <div class="grid grid-cols-12 border-t-2 border-gray-200 bg-white mb-5 md:mb-0 font-bold">
+      <div class="col-span-4 md:col-span-2 rounded-md p-5">
+        <div class="flex gap-3">
+          <img class="object-contain" src="../../assets/coin/bch/bch_small.png" alt="No Image Found .." />
+          Bitcoin Cash
+        </div>
+      </div>
+      <div class=" md:col-span-2 invisible md:visible rounded-md p-5 text-center">
+          {{ bchprice }}
+      </div>
+      <div class="col-span-7 md:col-span-3  rounded-md p-5 text-center">
+          {{ bchbalance }}
+      </div>
+      <div class="col-span-12 md:col-span-5 justify-center flex py-3">
+        <router-link :to="{ name: 'bchwalletsend' }" class="px-1">
+          <button
+            class="bg-gray-700 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline">
+            Withdraw
+          </button>
+        </router-link>
+        <router-link :to="{ name: 'bchwalletrecieve' }" class="px-1">
+          <button
+            class="bg-gray-700 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline">
+            Deposit
+          </button>
+        </router-link>
+        <router-link :to="{ name: 'bchwallet' }" class="px-1">
+          <button
+            class="bg-gray-700 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline">
+            Transactions
+          </button>
+        </router-link>
+      </div>
+    </div>
+
+
+
+
+    <div class="grid grid-cols-12 border-t-2 border-gray-200 bg-white mb-5 md:mb-0 rounded-b-md font-bold">
+      <div class="col-span-4 md:col-span-2 rounded-md p-5">
+        <div class="flex gap-3">
+          <img class="object-contain" src="../../assets/coin/xmr/xmr_small.png" alt="No Image Found .." />
+          Monero
+        </div>
+      </div>
+      <div class="md:col-span-2 invisible md:visible rounded-md p-5 text-center">
+     
+          {{ xmrprice }}
+    
+
+      </div>
+      <div class="col-span-7 md:col-span-3  rounded-md p-5 text-center">
+       
+          {{ xmrbalance }}
+    
+      </div>
+      <div class="col-span-12 md:col-span-5 justify-center flex py-3">
+        <router-link :to="{ name: 'xmrwalletsend' }" class="px-1">
+          <button
+            class="bg-gray-700 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline">
+            Withdraw
+          </button>
+        </router-link>
+        <router-link :to="{ name: 'xmrwalletrecieve' }" class="px-1">
+          <button
+            class="bg-gray-700 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline">
+            Deposit
+          </button>
+        </router-link>
+        <router-link :to="{ name: 'xmrwallet' }" class="px-1">
+          <button
+            class="bg-gray-700 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline">
+            Transactions
+          </button>
+        </router-link>
+      </div>
+    </div>
+
+
+
+
+
+
   </div>
 
   <!-- END container-->

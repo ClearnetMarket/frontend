@@ -5,8 +5,8 @@
   <MainHeaderMid />
   <MainHeaderBottom />
 
-  <div class="container  max-w-7xl mx-auto px-10 pb-60 bg-gray-300"><!-- Container-->
-    <div class="mt-5 mb-5">
+  <div class="container  max-w-7xl mx-auto pb-60 bg-gray-300"><!-- Container-->
+    <div class="mt-5 mb-5  px-10">
       <nav class="rounded-md w-full">
         <ol class="list-reset flex">
           <li>
@@ -17,7 +17,6 @@
           <li>
             <span class="text-gray-500 mx-2">/</span>
           </li>
-
           <li>
             <router-link :to="{ name: 'wallet' }">
               <a class="text-blue-600 hover:text-blue-700">Wallet Home</a>
@@ -30,16 +29,18 @@
       </nav>
     </div>
 
-    <div class="flex gap-4">
-      <div class="flex text-[22px] ">Deposit Bitcoin</div>
-      <div class=" mx-10 justify-center mt-20 text-[20px]">
+    <div class="flex text-[22px] invisible md:visible">Deposit Bitcoin</div>
+    
+    <div class="flex text-[22px] justify-center visible md:invisible">Deposit Bitcoin </div>
+    <div class="bg-white rounded-md">
+      <div class="flex justify-center mt-8 text-[20px]">
         Address:
       </div>
-      <div class=" mx-10 justify-center mt-20 text-[20px]">
+      <div class="flex py-10 justify-center mt-8 text-[14px]">
         {{ btc_address }}
       </div>
     </div>
-  </div>
+    </div>
 
   <MainFooter />
 </template>

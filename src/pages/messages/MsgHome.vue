@@ -19,8 +19,8 @@
       </ol>
     </nav>
 
-    <div class="grid grid-cols-12 pt-5  gap-4">
-      <div class="col-span-3 ">
+    <div class="grid grid-cols-12 pt-5 gap-4">
+      <div class="col-span-12 md:col-span-3">
         <div class="border border-1 bg-white rounded-md shadow-md text-gray-700 p-5">
           <div class="text-[18px] mb-5">Message Center</div>
 
@@ -43,7 +43,7 @@
           </div>
         </div>
       </div>
-      <div class="col-span-9 border border-1 rounded ">
+      <div class="col-span-12 md:col-span-9 border border-1 rounded ">
         <div class="text-center">Currently only allowing messaging to vendors through items to prevent botting</div>
         <div v-if="other_user_count > 0">
           <div class="text-[18px] mb-5">
@@ -63,14 +63,12 @@
       </div>
     </div>
   </div>
-
   <MainFooter />
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 import axios from "axios";
-import { mapGetters } from "vuex";
 import authHeader from "../../services/auth.header";
 import MainHeaderTop from "../../layouts/headers/MainHeaderTop.vue";
 import MainHeaderMid from "../../layouts/headers/MainHeaderMid.vue";

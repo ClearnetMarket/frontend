@@ -5,11 +5,22 @@
   <MainHeaderMid />
   <MainHeaderBottom />
   <div v-if="loaded">
-    <div class="container max-w-7xl mx-auto px-10 wrapper pb-10">
-
+    <div class="container max-w-7xl mx-auto px-10 pb-10">
+    <nav class="rounded-md w-full mt-5">
+      <ol class="list-reset flex">
+        <li>
+          <router-link :to="{ name: 'home' }">
+            <a class="text-blue-600 hover:text-blue-700">Home</a>
+          </router-link>
+        </li>
+        <li>
+          <span class="text-gray-500 mx-2">/</span>
+        </li>
+      </ol>
+    </nav>
       <div class="grid grid-cols-12 gap-4">
-        <div class="col-span-3">
-          <div class="border border-1 bg-white rounded-md shadow-md text-gray-700 p-5">
+        <div class="col-span-12 md:col-span-3">
+          <div class="border border-1 bg-white rounded-md shadow-md text-gray-700 p-5 mt-5">
             <div class="text-[18px] mb-5">Message Center</div>
 
             <div v-for="userobject in userlist">
@@ -19,13 +30,13 @@
                   params: { postid: userobject.post_id },
                 }">
                   <div class="grid grid-cols-12 mb-5 border-y-1 border rounded-md bg-blue-300 p-2 hover:bg-gray-300">
-                    <div class="col-span-6">
+                    <div class="col-span-12 md:col-span-6">
                       <div v-if="userobject.user_one === user.user_name">
                         {{ userobject.user_two }}
                       </div>
                       <div v-else>{{ userobject.user_one }}</div>
                     </div>
-                    <div class="col-span-6 text-[11px]">
+                    <div class="col-span-12 md:col-span-6 text-[11px]">
                       {{ relativeDate (userobject.timestamp) }}
                     </div>
                   </div>
@@ -38,13 +49,13 @@
                     params: { postid: userobject.post_id },
                   }">
                     <div class="grid grid-cols-12 mb-5 border-y-1 rounded-md p-2 hover:bg-gray-300">
-                      <div class="col-span-6">
+                      <div class="col-span-12 md:col-span-6">
                         <div v-if="userobject.user_one === user.user_name">
                           {{ userobject.user_two }}
                         </div>
                         <div v-else>{{ userobject.user_one }}</div>
                       </div>
-                      <div class="col-span-6 text-[11px]">
+                      <div class="col-span-12 md:col-span-6 text-[11px]">
                         {{ relativeDate (userobject.timestamp) }}
                       </div>
                     </div>
@@ -56,7 +67,7 @@
                     params: { postid: userobject.post_id },
                   }">
                     <div class="grid grid-cols-12 mb-5 border-y-1 bg-yellow-300 rounded-md p-2 hover:bg-gray-300">
-                      <div class="col-span-6">
+                      <div class="col-span-12 md:col-span-6">
                         <div v-if="userobject.user_one === user.user_name">
                           {{ userobject.user_two }}
                         </div>
@@ -73,13 +84,13 @@
           </div>
         </div>
 
-        <div class="col-span-9">
+        <div class="col-span-12 md:col-span-9">
           <div v-if="itemforsale"
             class="grid grid-cols-12 gap-4 mb-4 border border-1 bg-white rounded-md shadow-md text-gray-700 p-5">
-            <div class="col-span-2">
+            <div class="col-span-12 md:col-span-2">
               <img alt="" class="w-full" src="" />
             </div>
-            <div class="col-span-10">
+            <div class="col-span-12 md:col-span-10">
               <div class="font-bold text-[18px]">
                 <router-link class="hover:text-blue-500 hover:underline"
                   :to="{ name: 'MarketItem', params: { id: item_uuid } }">
@@ -121,7 +132,7 @@
           <!-- comments -->
           <!-- Top Post -->
           <div class="border border-1">
-            <div class="grid grid-cols-12 p-5 border-b border-gray-400">
+            <div class="grid grid-cols-12 p-5  border-gray-400 bg-white">
               <div class="col-span-12 text-gray-600">
                 <router-link class="hover:text-blue-500 hover:underline" :to="{
                   name: 'userprofile',
@@ -129,14 +140,14 @@
                 }">{{ mainpost.user_one }}</router-link>
                 - {{ relativeDate (mainpost.timestamp) }} ago
               </div>
-              <div class="col-span-12 text-gray-800 hover:bg-gray-300 p-3">
+              <div class="col-span-12 bg-white text-gray-800 p-3">
                 {{ mainpost.body }}
               </div>
             </div>
           </div>
           <div class="">
             <div v-for="comment in mainpostcomments" :key="comment.id">
-              <div class="grid grid-cols-12 p-5 border-b border-gray-400">
+              <div class="grid grid-cols-12 p-5 bg-white border-gray-400">
                 <div class="col-span-12 text-gray-600" v-if="comment.user_one_uuid">
                   <router-link class="hover:text-blue-500 hover:underline" :to="{
                     name: 'userprofile',

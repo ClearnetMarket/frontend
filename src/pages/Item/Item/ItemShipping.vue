@@ -1,49 +1,47 @@
 
 <template>
-  <div class="max-w-7xl mx-auto px-10 mt-10 bg-white rounded-md">
+  <div class="max-w-7xl mx-auto  mt-10 bg-white rounded-md">
     <div class="grid grid-cols-1 text-[20px] font-semibold text-gray-600">
       Shipping
     </div>
     <div class="rounded-md p-5">
       <div class="grid grid-cols-12 gap-4 mb-5">
-        <div class="sm:col-span-12 md:col-span-6">
+        <div class="col-span-12 md:col-span-6">
           <div class="grid grid-cols-12 gap-4">
-            <div class="col-span-3 font-bold">Shipping From:</div>
-            <div class="col-span-9 ">{{ origin_country_name }}</div>
+            <div class="col-span-6 font-bold">Shipping From:</div>
+            <div class="col-span-6 ">{{ origin_country_name }}</div>
           </div>
           <div class="grid grid-cols-12 gap-4 ">
-            <div class="col-span-12 font-bold">
+            <div class="col-span-12 font-bold text-center md:text-left">
               <div v-if="international === true">
                 Ships Internationally
               </div>
               <div v-else>
-                Domestic Shipping
+                Domestic Shipping ONLY
               </div>
             </div>
-
-
           </div>
         </div>
       </div>
       <div class="grid grid-cols-12 gap-4">
-        <div class="sm:col-span-12 md:col-span-12">Shipping Options:</div>
-        <div class="sm:col-span-12 md:col-span-12">
-          <div class="flex gap-4">
-            <div v-if="shippingfree === true">
-              <div class="border border-1 rounded-md p-5 ">
-                <div class="grid grid-cols-4 grid-rows-2">
+        <div class="col-span-12 md:col-span-12">Options:</div>
+        <div class="col-span-12 md:col-span-12">
+          <div class="md:flex gap-4 ">
 
-                  <div class="col-span-3 row-span-1 text-[20px]">
+            <div v-if="shippingfree === true">
+              <div class="border border-1 rounded-md p-5 bg-gray-200 text-gray-800 mb-5 md:mb-0">
+                <div class="grid grid-cols-12 grid-rows-2 md:grid-cols-4 md:grid-rows-2">
+                  <div class="col-span-12 md:col-span-3 row-span-1 text-[20px]">
                     FREE SHIPPING
                   </div>
-                  <div class="col-span-3 row-span-1 text-[14px] text-gray-600">
+                  <div class="col-span-12 row-span-1 text-[14px] text-gray-600">
                     Estimated in {{ shippingdayfree }} days
                   </div>
                 </div>
               </div>
             </div>
             <div v-if="shippingtwo === true">
-              <div class="border border-1 rounded-md p-5 ">
+              <div class="border border-1 rounded-md p-5 bg-gray-200 text-gray-800 mb-5 md:mb-0 ">
                 <div class="grid grid-cols-4 grid-rows-2">
 
                   <div class="col-span-3 row-span-1 text-[20px]">
@@ -56,7 +54,7 @@
               </div>
             </div>
             <div v-if="shippingthree === true">
-              <div class="border border-1 rounded-md p-5 ">
+              <div class="border border-1 rounded-md p-5 bg-gray-200 mb-5 md:mb-0">
                 <div class="grid grid-cols-4 grid-rows-2">
 
                   <div class="col-span-3 row-span-1 text-[20px]">

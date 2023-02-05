@@ -213,7 +213,7 @@ export default defineComponent({
               type: "success",
             });
             this.$router.push({
-              name: "item",
+              name: "MarketItem",
               params: { id: this.itemforsale.uuid },
             });
           }

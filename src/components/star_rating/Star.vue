@@ -1,10 +1,7 @@
 <template>
-
   <div v-if="final_rating === 0">
     <div class="flex items-center">
-
-
-      <p class="ml-2 text-sm font-medium text-gray-500 dark:text-gray-400">
+      <p class="text-sm font-medium text-gray-500 dark:text-gray-400">
         New Vendor
       </p>
     </div>

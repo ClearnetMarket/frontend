@@ -2,8 +2,8 @@
 <template>
 
   <HeaderPlain />
-  <div class="container max-w-7xl mx-auto px-10  h-screen">
-    <div class="mt-5 mb-5">
+  <div class="container max-w-7xl mx-auto  h-screen">
+    <div class="mt-5 mb-5 px-10 ">
       <nav class="rounded-md w-full">
         <ol class="list-reset flex">
           <li>
@@ -17,7 +17,7 @@
         </ol>
       </nav>
     </div>
-    <div class="mx-auto max-w-lg flex items-center justify-center mb-10 mt-20">
+    <div class="mx-auto max-w-lg flex items-center justify-center mb-10 mt-20 px-5">
       <form
         class="bg-white rounded-md px-8 pt-6 pb-8 mb-4 w-full"
         @submit.prevent="onSubmit"
@@ -61,7 +61,7 @@
             class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             type="submit"
           >
-            Sign In
+            Update
           </button>
         </div>
       </form>

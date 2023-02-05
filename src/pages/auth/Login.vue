@@ -1,10 +1,10 @@
 
 <template>
-
+<div class="h-screen">
   <HeaderPlain />
   
-  <div class="max-w-7xl mx-auto  h-screen">
-    <div class="mx-auto max-w-lg flex items-center justify-center mb-10 mt-4">
+  <div class="max-w-7xl mx-auto  ">
+    <div class="mx-auto max-w-lg flex items-center justify-center  mt-4">
       <form
         class="rounded-md px-8 pt-6 pb-8 mb-4 w-full bg-white"
         @submit.prevent="onSubmit"
@@ -75,7 +75,7 @@
       </form>
     </div>
   </div>
-
+</div>
 </template>
 
 <script lang="ts">
@@ -146,7 +146,8 @@ export default defineComponent({
             notify({
               title: "Authorization",
               text: "You have been logged in!",
-              type: "success",            });
+              type: "success",
+            });
           }
         })
         .catch((error) => {

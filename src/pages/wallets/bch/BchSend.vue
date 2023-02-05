@@ -30,17 +30,32 @@
         </ol>
       </nav>
     </div>
-    <div class="flex text-[22px] ">Send Bitcoin Cash</div>
-    <div class="flex gap-4">
+    <div class="flex text-[22px] invisible md:visible">Send Bitcoin Cash</div>
+    
+    <div class="flex text-[22px] justify-center visible md:invisible">Send Bitcoin Cash</div>
 
-      <div class="flex-1 bg-white rounded-md justify-center mt-20 p-5">
+    <div class="grid grid-cols-12 gap-4">
+      <div class="col-span-12 md:col-span-6">
+        <div class=" flex-1 f mt-8 w-full">
+          <div class="font-semibold">Bitcoin Balances (BCH)</div>
+          <div class="flex justify-between   border-b-gray-700 border-b-2">
+            <div class="grow-0">Total </div>
+            <div class="grow"> </div>
+            <div class="grow-0"> {{ bchbalance }}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-span-12 md:col-span-6">
+        <div class="flex-1 bg-white rounded-md justify-center mt-8 p-5">
         <form method="post" @submit="onSubmit">
           <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="username">Address</label>
             <label class="block text-gray-700 mb-2 text-[11px]" for="username">Address of the wallet you are sending
               coin too.</label>
             <input v-model="wallet.bch_address"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700
+               leading-tight focus:outline-none focus:shadow-outline"
               id="username" type="text" placeholder="Address" />
             <span v-if="v$.wallet.bch_address.$error" class="text-red-600 text-center">
               {{ v$.wallet.bch_address.$errors[0].$message }}
@@ -58,7 +73,6 @@
 
           <div class="mb-4">
             <label class="block text-gray-700 text-sm font-bold mb-2" for="password">Amount</label>
-
             <div class="flex flex-row">
               <input v-model="wallet.bch_amount"
                 class="basis-1/3 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -68,24 +82,15 @@
               </span>
             </div>
           </div>
-
           <div class="flex items-center justify-center mb-6">
             <button
               class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="submit">
               Send Coin
-            </button>
-          </div>
-        </form>
-      </div>
-      <div class=" flex-1 f mt-20 w-full">
-        <div class="font-semibold">Bitcoin Cash Balances (BCH)</div>
-        <div class="flex justify-between   border-b-gray-700 border-b-2">
-          <div class="grow-0">Total </div>
-          <div class="grow"> </div>
-          <div class="grow-0"> {{ bchbalance }}</div>
+              </button>
+            </div>
+          </form>
         </div>
-
       </div>
     </div>
   </div>

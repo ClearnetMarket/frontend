@@ -20,11 +20,11 @@
       </nav>
     </div>
 
-    <div class="flex justify-evenly">
+    <div class="sm:flex sm:justify-evenly">
       <div v-if="vendor_orders_new">
         <router-link :to="{ name: 'vendorordersnew' }">
           <button
-            class="flex py-2 px-4 shadow-md no-underline rounded-full text-white font-sans hover:text-white text-sm bg-zinc-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2">
+            class="mb-2 flex py-2 px-4 shadow-md no-underline rounded-full text-white font-sans hover:text-white text-sm bg-zinc-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2">
             <span class="px-2">{{ vendor_orders_new }}</span>
             <span class>New </span>
           </button>
@@ -33,7 +33,7 @@
       <div v-else>
         <router-link :to="{ name: 'vendorordersnew' }">
           <button
-            class="py-2 px-4 shadow-md no-underline rounded-full text-white font-sans text-sm hover:text-white bg-zinc-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2">
+            class="mb-2 py-2 px-4 shadow-md no-underline rounded-full text-white font-sans text-sm hover:text-white bg-zinc-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2">
             New
           </button>
         </router-link>
@@ -42,7 +42,7 @@
       <div v-if="vendor_orders_accepted" class="q-mt-none">
         <router-link :to="{ name: 'vendororderswaiting' }">
           <button
-            class="flex py-2 px-4 shadow-md text-sm no-underline rounded-full bg-zinc-600 hover:bg-zinc-400 text-white font-sans hover:text-white focus:outline-none active:shadow-none mr-2">
+            class="mb-2 flex py-2 px-4 shadow-md text-sm no-underline rounded-full bg-zinc-600 hover:bg-zinc-400 text-white font-sans hover:text-white focus:outline-none active:shadow-none mr-2">
             <span class="px-2">{{ vendor_orders_accepted }}</span>
             <span class>Waiting</span>
           </button>
@@ -51,8 +51,8 @@
       <div v-else>
         <router-link :to="{ name: 'vendororderswaiting' }">
           <button
-            class="py-2 px-4 shadow-md no-underline rounded-full text-white font-sans text-sm hover:text-white bg-zinc-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2">
-            Waiting on Shipment
+            class="mb-2 py-2 px-4 shadow-md no-underline rounded-full text-white font-sans text-sm hover:text-white bg-zinc-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2">
+            Waiting
           </button>
         </router-link>
       </div>
@@ -60,7 +60,7 @@
       <div v-if="vendor_orders_shipped">
         <router-link :to="{ name: 'vendorordersshipped' }">
           <button
-            class="flex py-2 px-4 shadow-md no-underline rounded-full bg-zinc-600 hover:bg-zinc-400 hover:text-white text-white font-sans text-sm btn-primary focus:outline-none active:shadow-none mr-2">
+            class="mb-2 flex py-2 px-4 shadow-md no-underline rounded-full bg-zinc-600 hover:bg-zinc-400 hover:text-white text-white font-sans text-sm btn-primary focus:outline-none active:shadow-none mr-2">
             <span class="px-2">{{ vendor_orders_shipped }}</span>
             <span class>Shipped</span>
           </button>
@@ -69,7 +69,7 @@
       <div v-else>
         <router-link :to="{ name: 'vendorordersshipped' }">
           <button
-            class="py-2 px-4 shadow-md no-underline rounded-full text-white font-sans text-sm hover:text-white bg-zinc-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2">
+            class="mb-2 py-2 px-4 shadow-md no-underline rounded-full text-white font-sans text-sm hover:text-white bg-zinc-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2">
             Shipped
           </button>
         </router-link>
@@ -78,7 +78,7 @@
       <div v-if="vendor_orders_finalized">
         <router-link :to="{ name: 'vendorordersfinalized' }">
           <button
-            class="flex py-2 px-4 shadow-md no-underline rounded-full bg-zinc-600 hover:bg-zinc-400 hover:text-white text-white font-sans text-sm btn-primary focus:outline-none active:shadow-none mr-2">
+            class="mb-2 flex py-2 px-4 shadow-md no-underline rounded-full bg-zinc-600 hover:bg-zinc-400 hover:text-white text-white font-sans text-sm btn-primary focus:outline-none active:shadow-none mr-2">
             <span class="px-2">{{ vendor_orders_finalized }}</span>
             <span class>Finalized</span>
           </button>
@@ -87,7 +87,7 @@
       <div v-else>
         <router-link :to="{ name: 'vendorordersfinalized' }">
           <button
-            class="py-2 px-4 shadow-md no-underline rounded-full text-white font-sans text-sm hover:text-white bg-zinc-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2">
+            class="mb-2 py-2 px-4 shadow-md no-underline rounded-full text-white font-sans text-sm hover:text-white bg-zinc-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2">
             Finalized
           </button>
         </router-link>
@@ -96,7 +96,7 @@
       <div v-if="vendor_orders_request_cancel">
         <router-link :to="{ name: 'vendororderscancel' }">
           <button
-            class="flex py-2 px-4 shadow-md no-underline rounded-full bg-zinc-600 hover:bg-zinc-400 hover:text-white text-white font-sans text-sm btn-primary focus:outline-none active:shadow-none mr-2">
+            class="mb-2 flex py-2 px-4 shadow-md no-underline rounded-full bg-zinc-600 hover:bg-zinc-400 hover:text-white text-white font-sans text-sm btn-primary focus:outline-none active:shadow-none mr-2">
             <span class="px-2">{{ vendor_orders_request_cancel }}</span>
             <span class>Request Cancel</span>
           </button>
@@ -105,7 +105,7 @@
       <div v-else>
         <router-link :to="{ name: 'vendororderscancel' }">
           <button
-            class="py-2 px-4 shadow-md no-underline rounded-full text-white font-sans text-sm hover:text-white bg-zinc-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2">
+            class="mb-2 py-2 px-4 shadow-md no-underline rounded-full text-white font-sans text-sm hover:text-white bg-zinc-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2">
             Cancel
           </button>
         </router-link>
@@ -113,15 +113,14 @@
     </div>
 
     <div class="grid grid-cols-1 w-full gap-4 mt-5">
-      <h1 class="col-span-1 font-semibold text-2xl">Waiting On Shipment</h1>
-
+      <h1 class="col-span-1 font-semibold text-2xl">Waiting</h1>
       <div v-for="order in orders" :key="order.id">
         <div v-if="order.uuid">
           <div class="grid grid-cols-12 rounded gap-5 p-5 bg-white ">
-            <div class="col-span-3 ">
+            <div class="col-span-12 sm:col-span-3 flex justify-center">
               <img class="object-contain" :src="order.image_one" alt="" />
             </div>
-            <div class="col-span-7 ">
+            <div class="col-span-12 sm:col-span-7 ">
               <div class="grid grid-cols-12">
 
                 <div class="col-span-12 mb-5">
@@ -131,15 +130,15 @@
                   </router-link>
                 </div>
 
-                <div class="col-span-4">
+                <div class="col-span-12 sm:col-span-4">
                   <div class="font-bold">Order Date</div>
                   {{ relativeDate (order.created) }}
                 </div>
-                <div class="col-span-4">
+                <div class="col-span-12 sm:col-span-4">
                   <div class="font-bold">Item Quantity:</div>
                   {{ order.quantity }}
                 </div>
-                <div class="col-span-4">
+                <div class="col-span-12 sm:col-span-4">
                   <div class="font-bold">Customer</div>
                   <router-link :to="{
                     name: 'userprofile',
@@ -153,21 +152,69 @@
                 <div class="col-span-12 font-bold">Coin:</div>
                 <div class="col-span-12 mb-2 text-[16px]">
                   <div v-if="order.digital_currency === 1">
-                    <span class="text-sm font-semibold text-orange-500">Bitcoin with shipping:</span>
-                    {{ order.price_total_btc }}
+
+                    <div class="col-span-12">
+                      <span class=" pr-5">BTC with shipping:</span>
+                      <span class="text-sm font-semibold text-orange-500">
+                        {{ order.price_total_btc }} BTC
+                      </span>
+                    </div>
+                    <div class="col-span-12">
+                      <span class="pr-5">Price per Item:</span>
+                      <span class="text-sm font-semibold text-orange-500">
+                        {{ order.price_per_item_btc }} BTC<br>
+                      </span>
+                    </div>
+                    <div class="col-span-12">
+                      <span class="pr-5">Total Shipping:</span>
+                      <span class="text-sm font-semibold text-orange-500">
+                        {{ order.shipping_price_btc }} BTC
+                      </span>
+                    </div>
+
                   </div>
                   <div v-if="order.digital_currency === 2">
-                    <div class="">
-                      <span class="text-sm font-semibold text-green-600">Bitcoin Cash with shipping:</span>
+                    <div class="col-span-12">
+                      <span class=" pr-5">BCH with shipping:</span>
+                      <span class="text-sm font-semibold text-greenh-500">
+                        {{ order.price_total_bch }} BCH
+                      </span>
                     </div>
-                    <div class="">
-                      {{ order.price_total_bch }}
+                    <div class="col-span-12">
+                      <span class="pr-5">Price per Item:</span>
+                      <span class="text-sm font-semibold text-green-500">
+                        {{ order.price_per_item_bch }} BCH
+                      </span>
+                    </div>
+                    <div class="col-span-12">
+                      <span class="pr-5">Total Shipping:</span>
+                      <span class="text-sm font-semibold text-green-500">
+                        {{ order.shipping_price_bch }} BCH
+                      </span>
                     </div>
                   </div>
                   <div v-if="order.digital_currency === 3">
-                    <span class="text-sm font-semibold text-orange-700">Monero with shipping:</span>
-                    {{ order.price_total_xmr }}
+                    <div class="col-span-12">
+                      <span class=" pr-5">XMR with shipping:</span>
+                      <span class="text-sm font-semibold text-orange-700">
+                        {{ order.price_total_xmr }} XMR
+                      </span>
+                    </div>
+                    <div class="col-span-12">
+                      <span class="pr-5">Price per Item:</span>
+                      <span class="text-sm font-semibold text-orange-700">
+                        {{ order.price_per_item_xmr }} XMR
+                      </span>
+                    </div>
+                    <div class="col-span-12">
+                      <span class="pr-5">Total Shipping:</span>
+                      <span class="text-sm font-semibold text-orange-700">
+                        {{ order.shipping_price_xmr }} XMR
+                      </span>
+                    </div>
                   </div>
+
+
                 </div>
 
 
@@ -193,7 +240,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-span-2">
+            <div class="col-span-12 sm:col-span-2">
 
               <button
                 class="bg-green-600 m-1 hover:bg-green-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"

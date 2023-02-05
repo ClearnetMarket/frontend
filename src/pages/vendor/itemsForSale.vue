@@ -9,7 +9,7 @@
     <MainHeaderVendor v-show="user.user_admin === 1" />
   </div>
 
-  <div class="container max-w-4xl mx-auto px-10 wrapper pb-72 bg-gray-300">
+  <div class="container max-w-4xl mx-auto px-2 wrapper pb-72 bg-gray-300">
     <div class="mt-5">
       <nav class="rounded-md w-full">
         <ol class="list-reset flex">
@@ -25,25 +25,22 @@
       </nav>
     </div>
 
-    <div class="grid grid-cols-1 rounded-md">
+    <div class="grid grid-cols-1 rounded-md ">
       <div class="text-[24px] text-center">Items for Sale</div>
-      <div class="">
-
-      </div>
-      <div class="flex justify-end">
+  
+      <div class="flex justify-center mt-5 md:mt-0 md:justify-end">
         <button v-on:click="createanitem()"
           class="bg-blue-600 hover:bg-zinc-700 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mr-2">
           Create Item
         </button>
       </div>
 
-      <div class="mt-10 grid grid-cols-12 pb-20 gap-4">
+      <div class="mt-5 grid grid-cols-12 gap-4 ">
 
-        <div v-for="item in items" class="col-span-12  p-5">
+        <div v-for="item in items" class="col-span-12">
           <div class="bg-white rounded-md ">
-            <div class="grid grid-cols-12 grid-row-5 ">
-
-              <div class="col-span-9 p-2">
+            <div class="grid grid-cols-12 grid-row-5 text-gray-700 ">
+              <div class="col-span-12 p-2">
                 <div class="w-full font-bold">Item uuid</div>
                 <div class="w-full">{{ item.uuid }}</div>
               </div>
@@ -51,30 +48,32 @@
             </div>
             <div class="grid grid-cols-12 rounded-md p-2">
 
-              <div class="col-span-2">
-                <div @click="$router.replace({ name: 'MarketItem', params: { id: item.uuid } })" style="cursor: pointer" class="">
-                  <div v-if="item.image_one_url_250">
-                  <img alt="" class=" " :src="item.image_one_url_250" />
-                </div>
-                <div v-else>
-                  <img alt="" src="../../assets/noimage.jpg " />
-                </div>  
+              <div class="col-span-12 md:col-span-3 pb-5">
+                <div class="flex justify-center">
+                  <div @click="$router.replace({ name: 'MarketItem', params: { id: item.uuid } })"
+                    style="cursor: pointer" class="">
+                    <div v-if="item.image_one_url_250">
+                      <img alt="" class="object-fill" :src="item.image_one_url_250" />
+                    </div>
+                    <div v-else>
+                      <img alt="" src="../../assets/noimage.jpg " />
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div class="col-span-8 px-3">
 
-                <div class="grid grid-cols-12 grid-row-5">
-                  <div class="col-span-12 text-center text-[18px] px-1">
+              <div class="col-span-12 md:col-span-6 px-3">
+                <div class="grid grid-cols-12 grid-row-5 text-gray-700 ">
+                  <div class="col-span-12 text-[18px] px-1 ">
                     <router-link :to="{ name: 'MarketItem', params: { id: item.uuid } }">
-                      <div class="text-blue-600 hover:text-blue-400 hover:underline">
+                      <div class="text-center  text-blue-600 hover:text-blue-400 hover:underline">
                         {{ item.item_title }}
                       </div>
                     </router-link>
                   </div>
-
                   <div class="flex gap-4 col-span-12 text-[14px] p-1">
                     <div class="font-bold">
-                      Online Status:
+                      Status:
                     </div>
                     <div v-if="item.online === 0" class="text-red-500">
                       <div class="">
@@ -83,15 +82,17 @@
                     </div>
                     <div v-else class="text-green-500">
                       <div class="">
-
                         online
                       </div>
                     </div>
                   </div>
                   <div class="col-span-12 text-[14px] p-1 flex gap-4">
+                    <div class="font-bold">Item Price:</div>
+                    <div class="">{{ item.price }}{{ returncurrencysymbol (item.currency) }}</div>
+                  </div>
+                  <div class="col-span-12 text-[14px] p-1 flex gap-4">
                     <div class="font-bold">Total Sold:</div>
                     <div class="">{{ item.total_sold }}</div>
-
                   </div>
                   <div class="col-span-12 text-[14px] p-1 flex gap-4">
                     <div class="font-bold">Total Views:</div>
@@ -100,17 +101,11 @@
                   <div class="col-span-12 text-[14px] p-1 flex gap-4">
                     <div class="font-bold">Item Quantity:</div>
                     <div class="">{{ item.item_count }}</div>
-
                   </div>
-                  <div class="col-span-12 text-[14px] p-1 flex gap-4">
-                    <div class="font-bold">Item Price:</div>
-                    <div class="">{{ item.price }}{{ returncurrencysymbol (item.currency) }}</div>
-                  </div>
-
                 </div>
               </div>
 
-              <div class="col-span-2 px-3">
+              <div class="col-span-12 md:col-span-3 px-3">
 
                 <div class="mb-2">
                   <div v-if="item.online === 0">
@@ -248,7 +243,7 @@ export default defineComponent({
         }
       });
     },
-  
+
     // creates an item
     createanitem () {
       axios({
@@ -367,14 +362,14 @@ export default defineComponent({
         if ((response.status = 200)) {
           if (response.data.status == "success") {
             console.log(response.data.status)
-          this.getvendoritems();
-          notify({
-            title: "Item:  " + itemid,
-            text: "Item is offline",
-            type: "success",
-          });
+            this.getvendoritems();
+            notify({
+              title: "Item:  " + itemid,
+              text: "Item is offline",
+              type: "success",
+            });
+          }
         }
-      }
       });
     },
     returncurrencysymbol (currencydigit: number) {

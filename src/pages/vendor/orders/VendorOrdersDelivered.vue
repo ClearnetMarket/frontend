@@ -43,7 +43,7 @@
           <button
             class="flex py-2 px-4 shadow-md text-sm no-underline rounded-full bg-zinc-600 hover:bg-zinc-400 text-white font-sans hover:text-white focus:outline-none active:shadow-none mr-2">
             <span class="px-2">{{ vendor_orders_accepted }}</span>
-            <span class>Waiting on Shipment</span>
+            <span class>Waiting</span>
           </button>
         </router-link>
       </div>
@@ -51,7 +51,7 @@
         <router-link :to="{ name: 'vendororderswaiting' }">
           <button
             class="py-2 px-4 shadow-md no-underline rounded-full text-white font-sans text-sm hover:text-white bg-zinc-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2">
-            Waiting on Shipment
+            Waiting
           </button>
         </router-link>
       </div>

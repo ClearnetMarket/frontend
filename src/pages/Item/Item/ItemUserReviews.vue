@@ -1,13 +1,10 @@
 
 <template>
-  <div class="max-w-7xl mx-auto px-10 pb-36 mt-10  rounded-md">
-    <div class="grid grid-cols-1 text-[20px] font-semibold text-gray-600 pb-4">
-      Reviews
-    </div>
-    <div class="grid grid-cols-12 gap-5">
-      <div class="col-span-4 p-5 bg-white rounded-md">
-        <div class="flex font-semibold text-gray-600">All Vendor Reviews</div>
+  <div class="max-w-7xl mx-auto  pb-36 mt-10  rounded-md ">
 
+    <div class="grid grid-cols-12 gap-5">
+      <div class="col-span-12 md:col-span-4 p-5 bg-white rounded-md">
+        <div class="flex font-semibold text-gray-600">All Vendor Reviews</div>
         <p class="text-sm font-medium text-gray-800 border-b">
           {{ vendor_reviews_total }} total ratings
         </p>
@@ -88,7 +85,11 @@
           <span class="text-sm font-medium text-gray-500 dark:text-gray-400">{{ vendor_reviews_percent_one }}%</span>
         </div>
       </div>
-      <div class="col-span-8">
+
+
+
+
+      <div class="col-span-12 md:col-span-8">
         <div class="" v-if="vendor_reviews_total > 0">
           <div v-for="review in vendorreviews" :key="review.id">
             <div class="grid grid-cols-12 bg-white rounded-md p-5">

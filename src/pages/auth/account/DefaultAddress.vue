@@ -9,9 +9,9 @@
   </div>
 
   <!-- Top Stuff-->
-  <div class="container h-screen max-w-7xl mx-auto mb-40 px-10 bg-gray-300">
+  <div class="container h-screen max-w-7xl mx-aut  bg-gray-300 ">
     <!-- Container-->
-    <div class="mt-5 mb-5">
+    <div class="mt-5 mb-5 ">
       <nav class="rounded-md w-full">
         <ol class="list-reset flex">
           <li>
@@ -34,26 +34,30 @@
       </nav>
     </div>
 
-    <form class="bg-white  rounded-md px-8 pt-6 pb-8 mb-4 w-full mx-auto max-w-2xl" @submit.prevent="onSubmit">
-      <div class="grid grid-cols-12 gap-4">
-        <div class="col-span-12 mb-4 text-center text-[28px] text-zinc-600">
+    <form class="bg-white  rounded-md px-8 pt-6 pb-8 mb-4  mx-auto max-w-2xl" @submit.prevent="onSubmit">
+      <div class="grid grid-cols-12 md:gap-4">
+        <div class="col-span-12 mb-4 text-center text-[28px] text-zinc-600 ">
           Set a default Address
         </div>
         <label class="col-span-12 text-gray-700 text-sm font-bold mb-2" for="">Country</label>
+       
         <select
-          class="col-span-12 shadow form-select appearance-none block w-full px-3 py-1.5 text-base font-normal focus:shadow-outline border-gray-500 text-gray-700 bg-white bg-clip-padding bg-no-repeat border rounded transition ease-in-out m-0 focus:text-gray-900 focus:bg-white focus:border-blue-600 focus:outline-none"
-          aria-label="Default select example" v-model="ChangeAddressForm.country">
+          class="mb-5 md:mb-0 col-span-12  shadow form-select appearance-none block w-full px-3 py-1.5 text-base 
+          font-normal focus:shadow-outline border-gray-500 text-gray-700 bg-white
+           bg-clip-padding bg-no-repeat border rounded transition ease-in-out m-0
+            focus:text-gray-900 focus:bg-white focus:border-blue-600 focus:outline-none"
+          aria-label="Default select example " v-model="ChangeAddressForm.country">
           <option class="text-gray-700" v-for="(country, index) in countryList" :key="index" :value="country.value">
             {{ country.name }}
           </option>
         </select>
-        <div class="col-span-12">
+        <div class="col-span-12 mb-5 md:mb-0">
           <label class="block text-gray-700 text-sm font-bold mb-2">Full Name or Business Name</label>
           <input v-model="ChangeAddressForm.address_name"
             class="shadow appearance-none border border-gray-500 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="address_name" type="text" placeholder="Enter Full Name" />
         </div>
-        <div class="col-span-12">
+        <div class="col-span-12 mb-5 md:mb-0">
           <label class="block text-gray-700 text-sm font-bold mb-2">Street Address</label>
           <input v-model="ChangeAddressForm.address"
             class="shadow appearance-none border border-gray-500 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -61,12 +65,12 @@
           <span v-if="v$.ChangeAddressForm.address.$error" class="text-red-600 text-center">
           </span>
         </div>
-        <div class="col-span-12">
+        <div class="col-span-12 mb-5 md:mb-0">
           <input v-model="ChangeAddressForm.apt"
             class="shadow appearance-none border border-gray-500 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="apt" type="text" placeholder="Apt, suite, unit, building, floor, etc" />
         </div>
-        <div class="col-span-4">
+        <div class="col-span-12 md:col-span-4 mb-5 md:mb-0">
           <label class="block text-gray-700 text-sm font-bold mb-2">City</label>
           <input v-model="ChangeAddressForm.city"
             class="shadow appearance-none border border-gray-500 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -74,7 +78,7 @@
           <span v-if="v$.ChangeAddressForm.city.$error" class="text-red-600 text-center">
           </span>
         </div>
-        <div class="col-span-4">
+        <div class="col-span-12 md:col-span-4 mb-5 md:mb-0">
           <label class="block text-gray-700 text-sm font-bold mb-2">State</label>
           <input v-model="ChangeAddressForm.stateorprovence"
             class="shadow appearance-none border border-gray-500 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -82,7 +86,7 @@
           <span v-if="v$.ChangeAddressForm.stateorprovence.$error" class="text-red-600 text-center">
           </span>
         </div>
-        <div class="col-span-4">
+        <div class="col-span-12 md:col-span-4 mb-5 md:mb-0">
           <label class="block text-gray-700 text-sm font-bold mb-2">Zip Code</label>
           <input v-model="ChangeAddressForm.zip"
             class="shadow appearance-none border border-gray-500 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -90,14 +94,14 @@
           <span v-if="v$.ChangeAddressForm.zip.$error" class="text-red-600 text-center">
           </span>
         </div>
-        <div class="col-span-12">
+        <div class="col-span-12 md:col-span-12">
           <label class="block text-gray-700 text-sm font-bold mb-2">Optional Address</label>
           <textarea v-model="ChangeAddressForm.message"
             class="shadow appearance-none border border-gray-500 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             id="message" type="textfield" placeholder="Optional instructions" />
         </div>
 
-        <div class="col-span-4 col-start-5 mt-5 mb-5">
+        <div class="col-span-12 md:col-span-12 flex justify-center mt-5 mb-5">
           <button
             class="bg-yellow-500 rounded-md font-semibold hover:bg-yellow-600 py-3 text-sm text-black uppercase w-full">
             Set Default Address

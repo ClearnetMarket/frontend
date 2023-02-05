@@ -3,7 +3,7 @@
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
-  <div class="h-screen">
+
     <div v-if="user">
       <MainHeaderVendor v-show="user.user_admin === 1" />
     </div>
@@ -117,7 +117,7 @@
         </div>
       </div>
     </div>
-  </div>
+
   <!-- END container-->
   <MainFooter />
 </template>
@@ -134,7 +134,6 @@ import authHeader from "../../../services/auth.header";
 /**
  *
  @typedef {Object} user.user_admin
-
  *
  */
 

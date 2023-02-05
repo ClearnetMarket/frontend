@@ -1,50 +1,60 @@
 <template>
-  <div class="grid grid-cols-12 gap-4 bg-white p-4 mb-2 rounded-md">
-    <div class="col-span-3">
+  <div class="grid grid-cols-12 bg-white mb-2 rounded-md">
+    <div class="col-span-12 sm:col-span-12 md:col-span-3">
       <router-link :to="{ name: 'MarketItem', params: { id: item.uuid } }">
         <img alt="" class="object-cover h-48 w-96" :src=item.image_one_url_250 />
       </router-link>
     </div>
-    <div class="col-span-9 bg-gray-">
-      <div class="grid grid-cols-12">
-        <div class="col-span-8 px-5">
-
-          <div class="col-span-12 text-[20px] font-bold">
-            <router-link :to="{ name: 'MarketItem', params: { id: item.uuid } }">
-              {{ item.item_title }}
-            </router-link>
-          </div>
-          <div class="col-span-12">
-            <StarRating v-bind:rating="item.item_rating" />
-          </div>
-          <div class="col-span-12 text-[24px] my-1">
+    <div class="col-span-12 sm:col-span-9  ">
+      <div class="grid grid-cols-12 ">
+        <div class="col-span-12 text-center text-[20px] font-bold ">
+          <router-link :to="{ name: 'MarketItem', params: { id: item.uuid } }">
+            {{ item.item_title }}
+          </router-link>
+        </div>
+        <div class="col-span-6 sm:col-span-8  px-2">
+          <div class="col-span-12 text-[26px] my-1">
             {{ item.price }}{{ returncurrencysymbol (item.currency) }}
           </div>
+          <div class="col-span-12">
+            <div class="flex">
+              <div v-if="item.digital_currency_1 === true">
+                <span class="inline-block  text-sm font-semibold text-orange-500 ">Bitcoin</span>
+              </div>
+              <div v-if="item.digital_currency_2 === true">
+                <span class="inline-block   text-sm font-semibold text-orange-700 ">Monero</span>
+              </div>
+              <div v-if="item.digital_currency_3 === true">
+                <span class="whitespace-nowrap inline-blocktext-sm font-semibold text-green-600">Bitcoin
+                  Cash</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-span-12 ">{{ item.item_count }} left</div>
           <div class="col-span-12" v-if="(item.shipping_free === true)">
             <div class="text-gray-500">Free Shipping</div>
           </div>
           <div class="col-span-12" v-else>
             {{ item.shipping_info_2 }}
           </div>
-          <div class="col-span-12 my-1">{{ item.item_count }} left</div>
-          <div class="flex">
-            <div v-if="item.digital_currency_1 === true">
-              <span
-                class="inline-block bg-gray-300 rounded-full px-3 py-1 text-sm font-semibold text-orange-500 mr-2 mb-2">Bitcoin</span>
-            </div>
-            <div v-if="item.digital_currency_2 === true">
-              <span
-                class="inline-block bg-gray-300 rounded-full px-3 py-1 text-sm font-semibold text-orange-700 mr-2 mb-2">Monero</span>
-            </div>
-            <div v-if="item.digital_currency_3 === true">
-              <span
-                class="whitespace-nowrap inline-block bg-gray-300 rounded-full px-3 py-1 text-sm font-semibold text-green-600 mr-2 mb-2">Bitcoin
-                Cash</span>
-            </div>
-          </div>
 
         </div>
-        <div class="col-span-4 flex justify-center py-10">
+        <div class="col-span-6 md:hidden px-2 ">
+          <div class="col-span-12 mt-10">
+            <router-link :to="{
+              name: 'userprofile',
+              params: { uuid: item.vendor_uuid },
+            }">
+              <div class="text-blue-500 hover:text-blue-300 hover:underline ">
+                {{ item.vendor_display_name }}
+              </div>
+            </router-link>
+          </div>
+          <div class="col-span-12 ">
+            <StarRating v-bind:rating="item.item_rating" />
+          </div>
+        </div>
+        <div class="col-span-12 sm:col-span-4 flex justify-center pt-5 pb-5">
           <router-link :to="{ name: 'MarketItem', params: { id: item.uuid } }">
             <button
               class="bg-yellow-500 hover:bg-zinc-400 hover:text-white rounded-lg text-black font-semibold py-2 px-10 focus:outline-none focus:shadow-outline content-center justify-center"

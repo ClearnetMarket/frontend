@@ -9,8 +9,8 @@
     <MainHeaderVendor v-show="user.user_admin === 1" />
   </div>
 
-  <div class="container max-w-7xl mx-auto px-5 wrapper pb-72 bg-gray-300">
-    <div class="mx-auto flex mb-1 px-10">
+  <div class="container max-w-7xl mx-auto px-1 wrapper bg-gray-300">
+    <div class="mx-auto flex mb-1 px-5">
       <div class="mt-1">
         <nav class="rounded-md">
           <ol class="list-reset flex bg-red">

@@ -30,7 +30,7 @@
     </nav>
 
     <div class="grid grid-cols-1 pt-20">
-      <div class="col-span-1 mb-5 text-[24px]">Bitcoin Cash Transactions</div>
+      <div class="col-span-1 mb-5 text-[24px] text-center">Bitcoin Cash Transactions</div>
     </div>
     <div class="grid grid-cols-1">
       <div class="text-gray-600 text-[11px]">
@@ -42,7 +42,7 @@
       <div class="">Confirmed at 6 Confirmations</div>
     </div>
 
-    <div v-if="transactions" class="mx-20 pb-20">
+    <div v-if="transactions" class=" pb-20">
       <!--#1 = Wallet created -->
       <!--#2 = Withdrawl -->
       <!--#3 = Deposit -->
@@ -59,10 +59,7 @@
         <div class="col-span-2">Balance</div>
       </div>
 
-      <div
-        v-for="t in transactions"
-        class="text-gray-700 font-semibold text-[14px]"
-      >
+      <div v-for="t in transactions" class="text-gray-700 font-semibold text-[14px]" >
         <!-- Wallet Created -->
 
         <div
@@ -81,7 +78,6 @@
           v-if="t.category === 2"
           class="grid grid-cols-12 grid-rows-3 border-b rounded-md p-1"
           :key="t.id"
-
         >
           <div class="col-span-2 row-span-1">{{ relativeDate(t.created) }}</div>
           <div class="col-span-6 row-span-3">
@@ -99,7 +95,6 @@
           v-if="t.category === 3"
           class="grid grid-cols-12 grid-rows-3 border-b rounded-md p-1"
           :key="t.id"
-
         >
           <div class="col-span-2 row-span-1">{{ relativeDate(t.created) }}</div>
           <div class="col-span-6 row-span-3">
@@ -177,7 +172,6 @@
           v-if="t.category === 6"
           class="grid grid-cols-12 grid-rows-2 border-b rounded-md p-1"
           :key="t.id"
-
         >
           <div class="col-span-2 row-span-1">{{ relativeDate(t.created) }}</div>
           <div class="col-span-6 row-span-2">
@@ -281,7 +275,6 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import axios from "axios";
-import { mapGetters } from "vuex";
 import { formatDistance } from "date-fns";
 import MainHeaderTop from "../../../layouts/headers/MainHeaderTop.vue";
 import MainHeaderMid from "../../../layouts/headers/MainHeaderMid.vue";

@@ -4,7 +4,7 @@
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
-  <div class="container max-w-7xl mx-auto px-10 wrapper">
+  <div class="container max-w-4xl mx-auto px-2 wrapper">
     <nav class="rounded-md w-full">
       <ol class="list-reset flex">
         <li>
@@ -19,23 +19,22 @@
     </nav>
 
     <div v-if="page_loaded">
-      <div class="max-w-4xl mx-auto px-10">
+      <div class=" mx-auto mt-5">
         <div class="flex justify-center">
-          <div class="grid grid-cols-12 mb-5  rounded-md gap-4 w-full max-w-4xl p-5 bg-white">
-            <div class="col-span-12 ">
+          <div class="grid grid-cols-12 mb-5 rounded-md gap-4 w-full p-5 bg-white">
+            <div class="col-span-12">
               <div v-if="user.user_id == userprofile.uuid">
-
                 <router-link :to="{ name: 'editprofile' }" class="text-blue-600 hover:text-blue-700"> Edit
-                  Profile</router-link>
+                  Profile
+                </router-link>
               </div>
             </div>
-                <div class="col-span-3"><img class="object-fit" :src="user.profileimage_url_250" alt=""></div>
-           
-
-            <div class="col-span-6">
-             
-              <div class="text-[20px]">{{ userprofile.display_name }}</div>
-              <div class="text-gray-500">
+            <div class="col-span-12 md:col-span-3 flex justify-center">
+              <img class="object-fit" :src="userprofile.profileimage_url_250" alt="">
+            </div>
+            <div class="col-span-12 md:col-span-6">
+              <div class="text-[20px] text-center">{{ userprofile.display_name }}</div>
+              <div class="text-gray-500 text-center  mb-5">
                 Member Since: {{ relativeDate (userprofile.member_since) }} ago
               </div>
               <div class="text-gray-600">{{ userprofile.bio }}</div>
@@ -66,10 +65,10 @@
 
           <div class="col-span-12">
             <div v-if="userprofile.admin_role == 1">
-              <div class="flex font-semibold text-gray-800">Vendor Reviews</div>
+           
               <div v-if="vendor_reviews_total > 0">
                 <div v-for="review in vendorreviews" :key="review.id">
-                  <div class="grid grid-cols-12 bg-white rounded-md p-5">
+                  <div class="grid grid-cols-12 bg-white rounded-md p-5 mb-2">
                     <div class="col-span-12 text-sm font-medium text-gray-500 dark:text-gray-400">
                       {{ review.customer_name }}
                     </div>
@@ -95,7 +94,7 @@
             <div v-else>
               <div class="flex font-semibold text-gray-800">User Reviews</div>
               <div v-for="review in userreviews" :key="review.id" class="pb-5">
-                <div class="grid grid-cols-12 px-5 rounded bg-white ">
+                <div class="grid grid-cols-12 px-5 rounded bg-white mb-2">
                   <div class="col-span-12 text-sm font-medium text-gray-500 dark:text-gray-400">
                     Vendor: {{ review.vendor_name }}
                   </div>
@@ -107,11 +106,9 @@
                   <div class="col-span-12 text-sm font-medium text-gray-500 dark:text-gray-400">
                     Date Purchased: {{ relativeDate (review.timestamp) }}
                   </div>
-
                   <div class="col-span-12 mb-2">
                     <StarRating v-bind:rating="review.customer_rating" />
                   </div>
-
                   <div class="col-span-12 mt-2">{{ review.review }}</div>
                 </div>
               </div>
@@ -137,9 +134,6 @@ import MainHeaderMid from "../../layouts/headers/MainHeaderMid.vue";
 import MainHeaderBottom from "../../layouts/headers/MainHeaderBottom.vue";
 import MainHeaderVendor from "../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../layouts/footers/FooterMain.vue";
-
-
-
 /**
  *
  @typedef {Object} user_stats.total_items_bought
@@ -245,6 +239,8 @@ export default defineComponent({
           this.userprofile.admin_role = response.data.admin_role;
           this.userprofile.vendor_name = response.data.vendor_name;
           this.userprofile.customer_rating = response.data.customer_rating;
+          this.userprofile.profileimage_url_250 = response.data.profileimage_url_250;
+
 
         }
       })
