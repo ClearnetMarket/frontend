@@ -137,7 +137,7 @@ export default defineComponent({
       })
         .then((response) => {
           if (response.data.user) {
-
+            
             localStorage.setItem("auth_token", response.data.token);
             localStorage.setItem("auth_user", response.data.user);
             this.$store.dispatch("user", response.data.user);
@@ -147,6 +147,13 @@ export default defineComponent({
               title: "Authorization",
               text: "You have been logged in!",
               type: "success",
+            });
+          }
+          else{
+            notify({
+              title: "Authorization",
+              text: "Login Failure!",
+              type: "error",
             });
           }
         })

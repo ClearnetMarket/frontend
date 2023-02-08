@@ -395,7 +395,7 @@ export default defineComponent({
             });
           }
           if (response.data.status == "error") {
-          console.log(response.data)
+      
             notify({
               title: "Item Error",
               text: "Item not Online.  Not all information provided.",

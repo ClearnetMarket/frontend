@@ -22,19 +22,19 @@
         </nav>
       </div>
     </div>
-    <div class="grid grid-cols-1 w-full gap-4">
+    <div class="grid grid-cols-1 w-full">
       <h1 class="col-span-1 font-semibold text-2xl text-center">Your Orders</h1>
-      <div class="" v-if="orderscount">
+      <div  v-if="orderscount">
         <div v-for="(order, i) in orders" :key="i" class="pb-5">
           <div class="grid grid-cols-12 rounded-md border border-gray-300 ">
             <div class="col-span-12 bg-gray-100 px-5 py-5 rounded-t-md">
               <div class="grid grid-cols-12 text-[12px]">
                 <div class="col-span-12 md:col-span-4  gap-2 text-[15px]">
-                  <div class="md:text-center">Order Placed</div>
+                  <div class="md:text-center font-bold">Order Placed</div>
                   <div class="md:text-center">{{ order.created }}</div>
                 </div>
                 <div class="col-span-12 md:col-span-3  gap-5 text-[15px]">
-                  <div class="md:text-center">Total</div>
+                  <div class="md:text-center font-bold">Total</div>
                   <div class="md:text-center ">
                   <div v-if="order.digital_currency === 1">
                     {{ order.price_total_btc }} BTC
@@ -49,7 +49,7 @@
                 </div>
              
                 <div class="col-span-12 md:col-span-4 gap-2 text-[15px]">
-                  <div class="md:text-center">Order #</div>
+                  <div class="md:text-center font-bold">Order #</div>
                   <div class="md:text-center">
                   <router-link class="text-blue-600 hover:text-blue-500 hover:underline" :to="{
                     name: 'ordersview',
@@ -86,9 +86,9 @@
                       </div>
                       <div v-if="order.overall_status === 10">Finalized</div>
                     </div>
-                    <div class="col-span-12 text-[14px] ">
+                    <div class="col-span-12 text-[14px]">
                       <div class="grid grid-cols-12 md:pt-5 md:gap-5">
-                        <div class="col-span-12 md:col-span-3 flex justify-center">
+                        <div class="col-span-12 md:col-span-3 flex justify-center pb-5">
                           <img class="object-contain" :src="order.image_one" alt="" />
                         </div>
                         <div class="col-span-12 md:col-span-9">
@@ -120,7 +120,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-span-3">
+                <div class="col-span-12 sm:col-span-3">
                   <div v-if="
                     order.overall_status === 3 ||
                     order.overall_status === 2 ||

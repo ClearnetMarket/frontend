@@ -230,11 +230,12 @@ export default defineComponent({
                 headers: authHeader(),
             })
                 .then((response) => {
-                    if ((response.status = 200)) { }
+                    if ((response.status = 200)) { 
+
+                        this.$router.push({ name: "userprofile", params: { uuid: this.user.user_id }, });
+                    }
                 });
         },
-
-
 
         pickFile1 () {
             let input = this.$refs.fileInput1 as HTMLInputElement;

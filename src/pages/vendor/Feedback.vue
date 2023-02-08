@@ -113,7 +113,7 @@
       <div class="col-span-12 md:col-span-8">
         <div class="" v-if="vendor_reviews_total > 0">
           <div v-for="review in vendorreviews" :key="review.id">
-            <div class="grid grid-cols-12 bg-white rounded-md p-5">
+            <div class="grid grid-cols-12 bg-white rounded-md p-5 mb-5">
               <div class="col-span-12 text-sm font-medium text-gray-500 dark:text-gray-400">
                 {{ review.customer_name }}
               </div>

@@ -192,7 +192,7 @@ export default defineComponent({
           type: "error",
         });
       } else {
-        console.log("good")
+        
         this.becomevendor(payLoad);
       }
     },

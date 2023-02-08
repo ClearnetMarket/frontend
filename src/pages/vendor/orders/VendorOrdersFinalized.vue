@@ -164,7 +164,6 @@
                   <div class="" v-if="order.digital_currency === 2">
                     <div v-if="order.shipping_price_bch === 0">Free Shipping</div>
                     <div v-else>{{ order.shipping_price_bch }}</div>
-
                     <div class="">{{ order.price_total_bch }} BCH</div>
                   </div>
                   <div class="" v-if="order.digital_currency === 3">

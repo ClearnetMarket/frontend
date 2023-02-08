@@ -116,7 +116,7 @@
       <h1 class="col-span-1 font-semibold text-2xl">Waiting</h1>
       <div v-for="order in orders" :key="order.id">
         <div v-if="order.uuid">
-          <div class="grid grid-cols-12 rounded gap-5 p-5 bg-white ">
+          <div class="grid grid-cols-12 rounded gap-5 p-5 bg-white mb-5">
             <div class="col-span-12 sm:col-span-3 flex justify-center">
               <img class="object-contain" :src="order.image_one" alt="" />
             </div>
@@ -171,7 +171,6 @@
                         {{ order.shipping_price_btc }} BTC
                       </span>
                     </div>
-
                   </div>
                   <div v-if="order.digital_currency === 2">
                     <div class="col-span-12">

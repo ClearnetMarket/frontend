@@ -51,8 +51,8 @@
         </div>
 
         <div class="col-span-12 md:col-span-6 lg:col-start-7 lg:col-span-6 ">
-          <div class="flex mr-5">
-            <div class="mx-3 pt-3 text-[13px] font-bold">
+          <div class="grid grid-cols-12 ">
+            <div class="col-span-2 sm:mx-3 pt-3 text-[13px] font-bold">
               <router-link :to="{ name: 'wallet' }" class="px-3 ">
                 <button
                   class="bg-yellow-400 hover:bg-zinc-400 text-black font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline">
@@ -60,32 +60,32 @@
                 </button>
               </router-link>
             </div>
-              <div class="grid grid-cols-12">
-                <div class="col-span-4 ">
+         
+              <div class="col-span-4 ">
                 <div class="mx-3 pt-2 text-[14px] font-bold">
                   <div class="text-white">BTC</div>
-                  <div class="">{{ btcprice }} USD</div>
+                  <div class="break-normal">{{ btcprice }} USD</div>
                 </div>
-                </div>
-                    <div class="col-span-4">
+              </div>
+              <div class="col-span-3">
                 <div class="mx-3 pt-2 text-[14px] font-bold">
                   <div class="text-white">BCH</div>
-                  <div class="">{{ bchprice }} USD</div>
+                  <div class="break-normal">{{ bchprice }} USD</div>
                 </div>
-                </div>
-                    <div class="col-span-4">
+              </div>
+              <div class="col-span-3">
                 <div class="mx-3 pt-2 text-[14px] font-bold">
                   <div class="text-white">XMR</div>
-                  <div class=" ">{{ xmrprice }} USD</div>
+                  <div class="">{{ xmrprice }} USD</div>
                 </div>
-                </div>
+              </div>
             </div>
           </div>
         </div>
 
       </div>
     </div>
-  </div>
+ 
 </template>
 
 <script lang="ts">
@@ -116,7 +116,7 @@ export default defineComponent({
   methods: {
     //  change url in dropdown
     gotourl (nameofurl: string) {
-      console.log("hello")
+     
       this.$router.replace({ name: nameofurl })
       this.$router.push({ name: nameofurl });
     },

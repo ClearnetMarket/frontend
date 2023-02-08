@@ -4,44 +4,42 @@
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
-  <div class="max-w-4xl mx-auto wrapper px-10">
-    <div class="grid grid-cols-1 w-full gap-4">
-      <div class="mb-10 mt-5 px-5">
-        <nav class="rounded-md">
-          <ol class="list-reset flex">
-            <li>
-              <router-link :to="{ name: 'home' }">
-                <a class="text-blue-600 hover:text-blue-700">Home</a>
-              </router-link>
-            </li>
-            <li>
-              <span class="text-gray-500 mx-2">/</span>
-            </li>
-            <li>
-              <router-link :to="{ name: 'userorders' }">
-                <a class="text-blue-600 hover:text-blue-700">Orders</a>
-              </router-link>
-            </li>
-            <li>
-              <span class="text-gray-500 mx-2">/</span>
-            </li>
-          </ol>
-          <ol class="list-reset flex"></ol>
-        </nav>
-      </div>
-    </div>
+  <div class="max-w-4xl mx-auto wrapper ">
+
+    <nav class="rounded-md px-5">
+      <ol class="list-reset flex">
+        <li>
+          <router-link :to="{ name: 'home' }">
+            <a class="text-blue-600 hover:text-blue-700">Home</a>
+          </router-link>
+        </li>
+        <li>
+          <span class="text-gray-500 mx-2">/</span>
+        </li>
+        <li>
+          <router-link :to="{ name: 'userorders' }">
+            <a class="text-blue-600 hover:text-blue-700">Orders</a>
+          </router-link>
+        </li>
+        <li>
+          <span class="text-gray-500 mx-2">/</span>
+        </li>
+      </ol>
+      <ol class="list-reset flex"></ol>
+    </nav>
+
     <div v-if="order_found">
-      <div class="grid grid-cols-1 w-full gap-4">
-        <h1 class="col-span-1 font-semibold text-2xl">{{ order.uuid }}</h1>
+      <div class="grid grid-cols-1 w-full px-5">
+        <h1 class="col-span-1 font-semibold text-[14px] md:text-2xl text-center">Order# {{ order.uuid }}</h1>
         <div class="grid grid-cols-12 rounded-md border border-gray-300 mb-5">
-          <div class="col-span-12 bg-gray-300 px-5 py-5">
-            <div class="grid grid-cols-12 text-[12px]">
-              <div class="col-span-3">
-                <div class="">Order Placed</div>
+          <div class="col-span-12 bg-gray-300  ">
+            <div class="grid grid-cols-12 text-[14px]">
+              <div class="col-span-12 sm:col-span-3">
+                <div class="font-bold">Order Placed</div>
                 <div class="">{{ order.created }}</div>
               </div>
-              <div class="col-span-3">
-                <div class="">Total</div>
+              <div class="col-span-12 sm:col-span-3">
+                <div class="font-bold">Total</div>
                 <div v-if="order.digital_currency === 1">
                   {{ order.price_total_btc }} BTC
                 </div>
@@ -52,18 +50,18 @@
                   {{ order.price_total_xmr }} XMR
                 </div>
               </div>
-              <div class="col-span-2"></div>
-              <div class="col-span-4">
-                <div class="">Order #{{ order.uuid }}</div>
-                <div class=""></div>
+
+              <div class="col-span-12 sm:col-span-6 mb-5 sm:mb-0 ">
+                <div class="font-bold">Order #</div>
+                <div class="">{{ order.uuid }}</div>
               </div>
             </div>
           </div>
-          <div class="col-span-12 bg-white px-5 py-5">
+          <div class="col-span-12 bg-white ">
             <div class="grid grid-cols-12">
-              <div class="col-span-9">
-                <div class="grid grid-cols-12">
-                  <div class="col-span-12 text-[20px]">
+              <div class="col-span-12 sm:col-span-9">
+                <div class="grid grid-cols-12 p-2">
+                  <div class="col-span-12 text-center sm:text-left text-[20px]">
                     <div v-if="order.overall_status === 1">
                       Waiting to be accepted
                     </div>
@@ -79,9 +77,11 @@
                   </div>
                   <div class="col-span-12 text-[14px]">
                     <div class="grid grid-cols-12 pt-5">
-                      <div class="col-span-2">Image</div>
-                      <div class="col-span-10">
-                        <div class="text-blue-500 hover:text-blue-300 hover:underline">
+                      <div class="col-span-12 md:col-span-3 flex justify-center mb-3">
+                        <img class="object-contain" :src="order.image_one" alt="" />
+                      </div>
+                      <div class="col-span-12 sm:col-span-9 mb-3">
+                        <div class="text-blue-500 hover:text-blue-300 hover:underline text-center text-[20px] mb-5">
                           <div v-if="order.item_uuid">
                             <router-link :to="{
                               name: 'MarketItem',
@@ -93,7 +93,7 @@
                           <div v-else>{{ order.title_of_item }}</div>
                         </div>
                         <div v-if="order.vendor_uuid">
-                          <div class="flex">
+                          <div class="flex px-3">
                             <div class="">Sold by:</div>
                             <router-link :to="{
                               name: 'userprofile',
@@ -108,8 +108,8 @@
                                     class="w-4 text-yellow-500 mr-1" role="img" xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 576 512">
                                     <path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 
-                            103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5
-                            105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z">
+                                          103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5
+                                          105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z">
                                     </path>
                                   </svg>)
                                 </div>
@@ -122,25 +122,14 @@
                   </div>
                 </div>
               </div>
-              <div class="col-span-3">
+              <div class="col-span-12 sm:col-span-3 px-3">
                 <div v-if="
                   order.overall_status === 3 ||
                   order.overall_status === 2 ||
                   order.overall_status === 4 ||
                   order.overall_status === 8
                 ">
-                  <div class="my-2">
-                    <router-link :to="{
-                      name: 'ordersview',
-                      params: { uuid: order.uuid }
-                    }">
-                      <button
-                        class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
-                        type="button">
-                        Tracking Info
-                      </button>
-                    </router-link>
-                  </div>
+                 
                 </div>
                 <!-- waiting on vendor acceptance order -->
                 <div v-if="order.overall_status === 1">
@@ -255,10 +244,17 @@
           </div>
         </div>
         <div v-if="tracking_number">
-          <div class="grid grid-cols-12 rounded-md border border-gray-300 mb-5 p-5">
+          <div class="grid grid-cols-12 rounded-md border bg-white  mb-5 p-5">
             <div class="col-span-12 text-[20px]">Tracking</div>
             <div class="col-span-12">Carrier: {{ carrier_name }}</div>
             <div class="col-span-12">Tracking Number: {{ tracking_number }}</div>
+          </div>
+        </div>
+        <div v-else>
+          <div class="grid grid-cols-12 rounded-md border bg-white  mb-5 p-5">
+            <div class="col-span-12 text-center font-bold">
+          Tracking Info not Provided
+          </div>
           </div>
         </div>
 
@@ -440,7 +436,7 @@ export default defineComponent({
           this.order = response.data;
           this.order_found = true;
           this.getvendorinfo();
-          console.log(this.order)
+         
           if (this.order) {
             this.getvendorinfo();
           }
@@ -602,6 +598,7 @@ export default defineComponent({
 
             this.tracking_number = response.data.tracking_number;
             this.carrier_name = response.data.carrier_name;
+           
           }
         });
     },

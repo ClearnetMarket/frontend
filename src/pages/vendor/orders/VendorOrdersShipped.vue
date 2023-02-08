@@ -117,30 +117,30 @@
 
       <div v-for="order in orders" :key="order.uuid">
         <div v-if="order.uuid">
-          <div class="grid grid-cols-12 rounded gap-5 bg-white p-5">
+          <div class="grid grid-cols-12 rounded gap-5 bg-white p-5 mb-5">
 
-            <div class="col-span-3 ">
+            <div class="col-span-12 flex justify-center sm:col-span-3 ">
               <img class="object-contain" :src="order.image_one" alt="" />
             </div>
-            <div class="col-span-9 ">
+            <div class="col-span-12 sm:col-span-9 ">
               <div class="grid grid-cols-12">
 
-                <div class="col-span-12 mb-5">
+                <div class="col-span-12 mb-5 text-center">
                   <router-link class="col-span-12 text-blue-600 hover:underline hover:text-blue-400 text-[18px] "
                     :to="{ name: 'MarketItem', params: { id: order.item_uuid } }">
                     {{ order.title_of_item }}
                   </router-link>
                 </div>
 
-                <div class="col-span-4">
+                <div class="col-span-12 sm:col-span-4">
                   <div class="font-bold">Order Date</div>
                   {{ relativeDate (order.created) }}
                 </div>
-                <div class="col-span-4">
+                <div class="col-span-12 sm:col-span-4">
                   <div class="font-bold">Item Quantity:</div>
                   {{ order.quantity }}
                 </div>
-                <div class="col-span-4">
+                <div class="col-span-12 sm:col-span-4">
                   <div class="font-bold">Customer</div>
                   <router-link :to="{
                     name: 'userprofile',
@@ -153,22 +153,69 @@
                 </div>
                 <div class="col-span-12 font-bold">Coin:</div>
                 <div class="col-span-12 mb-2 text-[16px]">
+
                   <div v-if="order.digital_currency === 1">
-                    <span class="text-sm font-semibold text-orange-500">Bitcoin with shipping:</span>
-                    {{ order.price_total_btc }}
+                  
+                    <div class="col-span-12">
+                      <span class=" pr-5">BTC with shipping:</span>
+                      <span class="text-sm font-semibold text-orange-500">
+                        {{ order.price_total_btc }} BTC
+                      </span>
+                    </div>
+                    <div class="col-span-12">
+                      <span class="pr-5">Price per Item:</span>
+                      <span class="text-sm font-semibold text-orange-500">
+                        {{ order.price_per_item_btc }} BTC<br>
+                      </span>
+                    </div>
+                    <div class="col-span-12">
+                      <span class="pr-5">Total Shipping:</span>
+                      <span class="text-sm font-semibold text-orange-500">
+                        {{ order.shipping_price_btc }} BTC
+                      </span>
+                    </div>
                   </div>
                   <div v-if="order.digital_currency === 2">
-                    <div class="">
-                      <span class="text-sm font-semibold text-green-600">Bitcoin Cash with shipping:</span>
+                    <div class="col-span-12">
+                      <span class=" pr-5">BCH with shipping:</span>
+                      <span class="text-sm font-semibold text-greenh-500">
+                        {{ order.price_total_bch }} BCH
+                      </span>
                     </div>
-                    <div class="">
-                      {{ order.price_total_bch }}
+                    <div class="col-span-12">
+                      <span class="pr-5">Price per Item:</span>
+                      <span class="text-sm font-semibold text-green-500">
+                        {{ order.price_per_item_bch }} BCH
+                      </span>
+                    </div>
+                    <div class="col-span-12">
+                      <span class="pr-5">Total Shipping:</span>
+                      <span class="text-sm font-semibold text-green-500">
+                        {{ order.shipping_price_bch }} BCH
+                      </span>
                     </div>
                   </div>
                   <div v-if="order.digital_currency === 3">
-                    <span class="text-sm font-semibold text-orange-700">Monero with shipping:</span>
-                    {{ order.price_total_xmr }}
+                    <div class="col-span-12">
+                      <span class=" pr-5">XMR with shipping:</span>
+                      <span class="text-sm font-semibold text-orange-700">
+                        {{ order.price_total_xmr }} XMR
+                      </span>
+                    </div>
+                    <div class="col-span-12">
+                      <span class="pr-5">Price per Item:</span>
+                      <span class="text-sm font-semibold text-orange-700">
+                        {{ order.price_per_item_xmr }} XMR
+                      </span>
+                    </div>
+                    <div class="col-span-12">
+                      <span class="pr-5">Total Shipping:</span>
+                      <span class="text-sm font-semibold text-orange-700">
+                        {{ order.shipping_price_xmr }} XMR
+                      </span>
+                    </div>
                   </div>
+
                 </div>
 
 

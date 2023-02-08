@@ -112,7 +112,7 @@
       </div>
     </div>
 
-    <div class="grid grid-cols-1 w-full gap-4 mt-5">
+    <div class="grid grid-cols-1 w-full gap-4 mt-5 mb-5">
       <div class="col-span-1 font-semibold text-2xl">Request Cancel</div>
       <div class="col-span-1 text-[14px]">
         The orders below have requested to cancel. You can deny them the

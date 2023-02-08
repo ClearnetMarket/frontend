@@ -112,7 +112,7 @@
       <h1 class="col-span-1 font-semibold text-2xl">New Orders</h1>
       <div v-for="order in orders" :key="order.id">
         <div v-if="order">
-          <div class="grid grid-cols-12 gap-5 rounded  bg-white p-5">
+          <div class="grid grid-cols-12 gap-5 rounded bg-white p-5 mb-5">
             <div class="col-span-12 sm:col-span-3 flex justify-center">
               <img class="object-contain" :src="order.image_one" alt="" />
             </div>

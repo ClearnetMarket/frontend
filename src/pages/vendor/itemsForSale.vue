@@ -361,7 +361,7 @@ export default defineComponent({
       }).then((response) => {
         if ((response.status = 200)) {
           if (response.data.status == "success") {
-            console.log(response.data.status)
+         
             this.getvendoritems();
             notify({
               title: "Item:  " + itemid,

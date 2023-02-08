@@ -19,31 +19,31 @@
     </div>
 
     <div class="flex justify-center mx-auto">
-      <div class="max-w-md">
+      <div class="max-w-3xl bg-white rounded-md p-5">
         <div class="text-center">
           In order to unlock your account, change password, or recover your
           account in the future you will need this account key. We dont do
           emails or other methods to recover your account.
 
-          <div class="text-[24px]">You should write these words down.</div>
+          <div class="text-[24px] mb-5">You should write these words down.</div>
         </div>
-        <div class="flex justify-center">
-          <div class="inline-block bg-gray-300 rounded-full px-3 py-1 text-sm font-semibold text-gray-800 mr-2 mb-2">
+        <div class="flex justify-center ">
+          <div class="inline-block bg-blue-600 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 text-[17px]">
             {{ word1 }}
           </div>
-          <div class="inline-block bg-gray-300 rounded-full px-3 py-1 text-sm font-semibold text-gray-800 mr-2 mb-2">
+          <div class="inline-block bg-blue-600 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 text-[17px]">
             {{ word2 }}
           </div>
-          <div class="inline-block bg-gray-300 rounded-full px-3 py-1 text-sm font-semibold text-gray-800 mr-2 mb-2">
+          <div class="inline-block bg-blue-600 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 text-[17px]">
             {{ word3 }}
           </div>
-          <div class="inline-block bg-gray-300 rounded-full px-3 py-1 text-sm font-semibold text-gray-800 mr-2 mb-2">
+          <div class="inline-block bg-blue-600 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 text-[17px]">
             {{ word4 }}
           </div>
-          <div class="inline-block bg-gray-300 rounded-full px-3 py-1 text-sm font-semibold text-gray-800 mr-2 mb-2">
+          <div class="inline-block bg-blue-600 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 text-[17px]">
             {{ word5 }}
           </div>
-          <div class="inline-block bg-gray-300 rounded-full px-3 py-1 text-sm font-semibold text-gray-800 mr-2 mb-2">
+          <div class="inline-block bg-blue-600 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 text-[17px]">
             {{ word6 }}
           </div>
         </div>

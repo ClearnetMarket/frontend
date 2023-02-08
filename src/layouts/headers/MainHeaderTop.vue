@@ -1,76 +1,80 @@
 <template>
   <div class="nav bg-blue-600 md:py-2 ">
     <div class="container gap-x-0 max-w-7xl mx-auto text-center ">
+ <div v-if="loaded">
+
       <div v-if="user">
-        <div class="grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-3">
-          <div class="col-span-1 invisible md:visible h-1">
-            <div class="flex sm:justify-between lg:justify-start ml-5 text-white font-bold pb-2">
-              <div class="px-3.5">English</div>
-              <div v-if="loaded === true">
+       
+          <div class="grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-3">
+            <div class="col-span-1 invisible md:visible h-1">
+              <div class="flex sm:justify-between lg:justify-start ml-5 text-white font-bold pb-2">
+                <div class="px-3.5">English</div>
+
                 <div class="px-3 ">{{ returncurrency (user.currency) }}</div>
+
               </div>
             </div>
-          </div>
-          <div class="col-span-1 lg:col-span-2 ">
-            <div class="flex flex-wrap lg:justify-end md:justify-evenly sm:justify-center">
-              <div v-if="user">
-                <div v-if="user.user_admin >= 2">
-                  <router-link :to="{ name: 'ModHome' }" class="px-3">
+            <div class="col-span-1 lg:col-span-2 ">
+              <div class="flex flex-wrap lg:justify-end md:justify-evenly sm:justify-center">
+                <div v-if="user">
+                  <div v-if="user.user_admin >= 2">
+                    <router-link :to="{ name: 'ModHome' }" class="px-3">
+                      <button
+                        class="hover:bg-zinc-700 text-white hover:text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline font-bold">
+                        Moderator
+                      </button>
+                    </router-link>
+                  </div>
+                  <router-link :to="{ name: 'sell' }">
+                    <button
+                      class="hover:bg-zinc-700 text-white hover:text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline mx-3 font-bold">
+                      Sell
+                    </button>
+                  </router-link>
+
+                  <router-link :to="{ name: 'MsgHome' }" class="px-3">
                     <button
                       class="hover:bg-zinc-700 text-white hover:text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline font-bold">
-                      Moderator
+                      Msg
+                    </button>
+                  </router-link>
+
+                  <router-link :to="{ name: 'userorders' }" class="px-3">
+                    <button
+                      class="hover:bg-zinc-700 text-white hover:text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline font-bold">
+                      Orders
+                    </button>
+                  </router-link>
+                  <router-link :to="{ name: 'account' }" class="px-3">
+                    <button
+                      class="hover:bg-zinc-700 text-white hover:text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline font-bold">
+                      {{ user.user_name }}
                     </button>
                   </router-link>
                 </div>
-                <router-link :to="{ name: 'sell' }">
-                  <button
-                    class="hover:bg-zinc-700 text-white hover:text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline mx-3 font-bold">
-                    Sell
-                  </button>
-                </router-link>
-
-                <router-link :to="{ name: 'MsgHome' }" class="px-3">
-                  <button
-                    class="hover:bg-zinc-700 text-white hover:text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline font-bold">
-                    Msg
-                  </button>
-                </router-link>
-
-                <router-link :to="{ name: 'userorders' }" class="px-3">
-                  <button
-                    class="hover:bg-zinc-700 text-white hover:text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline font-bold">
-                    Orders
-                  </button>
-                </router-link>
-                <router-link :to="{ name: 'account' }" class="px-3">
-                  <button
-                    class="hover:bg-zinc-700 text-white hover:text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline font-bold">
-                    {{ user.user_name }}
-                  </button>
-                </router-link>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div v-else class="">
+        <div v-else class="">
+          <div class="flex gap-5 justify-center p-5">
+            <router-link :to="{ name: 'login' }">
+              <button
+                class="bg-zinc-700 hover:bg-zinc-400 text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline font-bold">
+                Login
+              </button>
+            </router-link>
+            <router-link :to="{ name: 'register' }">
+              <button
+                class="bg-zinc-700 hover:bg-zinc-400 text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline font-bold">
+                Sign Up
+              </button>
+            </router-link>
+          </div>
 
-        <div class="flex gap-5 justify-center p-5">
-          <router-link :to="{ name: 'login' }">
-            <button
-              class="bg-zinc-700 hover:bg-zinc-400 text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline font-bold">
-              Login
-            </button>
-          </router-link>
-          <router-link :to="{ name: 'register' }">
-            <button
-              class="bg-zinc-700 hover:bg-zinc-400 text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline font-bold">
-              Sign Up
-            </button>
-          </router-link>
         </div>
-
       </div>
+
     </div>
   </div>
 </template>
@@ -84,6 +88,7 @@ export default defineComponent({
   name: "MainHeaderTop",
   mounted () {
     this.userstatus();
+    this.loaded = true;
   },
   data () {
     return {
@@ -103,7 +108,7 @@ export default defineComponent({
           if ((response.status = 200)) {
 
             this.user = response.data.user;
-            this.loaded = true;
+          
           }
         })
         .catch(() => {

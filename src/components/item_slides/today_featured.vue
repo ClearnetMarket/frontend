@@ -56,7 +56,7 @@ export default defineComponent({
     gettodayfeatured() {
       axios({
         method: "get",
-        url: ("/category/query/index/todayfeatured"),
+        url: ("/itemquery/query/todayfeatured"),
         withCredentials: true,
       })
           .then((response) => {

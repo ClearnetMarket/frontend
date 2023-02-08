@@ -127,7 +127,7 @@ export default defineComponent({
         .then((response) => {
          
           if ((response.status = 200)) {
-            console.log(response.data.status)
+         
             this.shopping_cart_count = response.data.status;
             
           }

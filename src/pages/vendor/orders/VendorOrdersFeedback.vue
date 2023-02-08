@@ -24,7 +24,6 @@
 
     <div class="grid grid-cols-1 w-full gap-4 mt-5 mb-5 ">
       <div class="col-span-1 font-semibold text-2xl">Leave Feedback </div>
-
       <div v-if="uuid && order">
         <div class="rounded-md bg-white p-5">
           <div class="grid grid-cols-12 ">
@@ -36,7 +35,7 @@
             </div>
           </div>
           <div class="grid grid-cols-12 gap-4 text-[14px]">
-            <div class="col-span-3 ">
+            <div class="col-span-12 flex justify-center sm:col-span-3">
               <img class="object-contain" alt="" :src="order.image_one" />
             </div>
             <div class="col-span-6 ">
@@ -97,7 +96,7 @@
 
     <div v-if="order && uuid">
       <div class="col-span-12 font-semibold text-2xl">Rate customer</div>
-      <div class="grid grid-cols-12 mt-5  p-5 bg-white rounded-md">
+      <div class="grid grid-cols-12 mt-5  p-5 bg-white rounded-md mb-5">
 
         <div class="col-span-12 bg-white rounded-md">
           <div class="grid grid-cols-12">
@@ -131,29 +130,29 @@
             </div>
           </div>
           <div v-if="rated === false">
-          <div class="grid grid-cols-12">
-            <div class="col-span-12 mb-1 text-[14px] pt-5">Leave a review:</div>
+            <div class="grid grid-cols-12">
+              <div class="col-span-12 mb-1 text-[14px] pt-5">Leave a review:</div>
 
-            <form class="col-span-12" @submit.prevent="sendreview(order.uuid)">
-              <div class="col-span-12">
-                <textarea v-model="review"
-                  class="shadow appearance-none border border-gray-500 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  id="message" type="textfield" placeholder="Review Rating" />
-              </div>
-              <div class="col-span-12  col-start-4">
-                <button
-                  class="bg-yellow-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline  "
-                  type="submit">
-                  Add Feedback
-                </button>
-              </div>
-            </form>
-              </div>
-</div>
-            <div v-if="rated === true">
-              <div class="col-span-12">{{ review }}</div>
+              <form class="col-span-12" @submit.prevent="sendreview(order.uuid)">
+                <div class="col-span-12">
+                  <textarea v-model="review"
+                    class="shadow appearance-none border border-gray-500 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    id="message" type="textfield" placeholder="Review Rating" />
+                </div>
+                <div class="col-span-12  col-start-4">
+                  <button
+                    class="bg-yellow-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline  "
+                    type="submit">
+                    Add Feedback
+                  </button>
+                </div>
+              </form>
             </div>
-       
+          </div>
+          <div v-if="rated === true">
+            <div class="col-span-12 mt-5">{{ review }}</div>
+          </div>
+
         </div>
       </div>
     </div>
@@ -302,7 +301,7 @@ export default defineComponent({
 
               // hide rating div
               this.selectedrating = false;
-            
+
             }
           }
         })
@@ -344,7 +343,7 @@ export default defineComponent({
               });
               this.rated = true
               this.getuserorder();
-              
+
             }
             else {
               notify({
