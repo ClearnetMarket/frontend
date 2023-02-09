@@ -1,10 +1,10 @@
 
 <template>
-
+<div class="h-screen">
   <HeaderPlain />
 
-  <div class="container max-w-7xl mx-auto px-10  h-screen">
-    <div class="mt-5 mb-5">
+  <div class="container max-w-7xl mx-auto ">
+    <div class="mt-5 mb-5  px-5">
       <nav class="rounded-md w-full">
         <ol class="list-reset flex">
           <li>
@@ -19,7 +19,7 @@
       </nav>
     </div>
   </div>
-  <div class="flex justify-center mx-auto">
+  <div class="flex justify-center mx-auto p-5 rounded-md bg-white">
     <div class="max-w-md">
       <div class="text-center">
         In order to unlock your account, please enter your account seed below.
@@ -126,7 +126,7 @@
       </form>
     </div>
   </div>
-
+</div>
 </template>
 
 <script lang="ts">

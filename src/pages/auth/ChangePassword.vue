@@ -1,8 +1,8 @@
 
 <template>
-
+<div class="h-screen">
   <HeaderPlain />
-  <div class="container max-w-7xl mx-auto  h-screen">
+  <div class="container max-w-7xl mx-auto">
     <div class="mt-5 mb-5 px-10 ">
       <nav class="rounded-md w-full">
         <ol class="list-reset flex">
@@ -67,7 +67,7 @@
       </form>
     </div>
   </div>
-
+</div>
 </template>
 
 <script lang="ts">

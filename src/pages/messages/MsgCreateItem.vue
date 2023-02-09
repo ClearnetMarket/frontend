@@ -4,8 +4,8 @@
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
-
-  <div class="container max-w-7xl mx-auto px-10 wrapper mb-10">
+    <div class="wrapper">
+  <div class="container max-w-7xl mx-auto px-10  mb-10">
     <div class="grid grid-cols-12">
       <div class="col-span-3">
         <div class="text-[18px] mb-5">Message Center</div>
@@ -15,7 +15,7 @@
 
       <div class="col-span-9">
         <div v-if="itemforsale">
-        <div class="grid grid-cols-12 gap-4 border border-1 p-4 mb-4">
+        <div class="grid grid-cols-12 gap-4 border border-1 p-4 mb-4 bg-white rounded-md">
           <div class="col-span-2">
             <img alt="" class="w-full" src="" />
           </div>
@@ -75,14 +75,14 @@
       </div>
     </div>
   </div>
-
+</div>
   <MainFooter />
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 import axios from "axios";
-import { mapGetters } from "vuex";
+
 import { useRoute } from "vue-router";
 import { notify } from "@kyvg/vue3-notification";
 import useValidate from "@vuelidate/core";

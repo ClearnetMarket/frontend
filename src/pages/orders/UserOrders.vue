@@ -4,8 +4,8 @@
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
-
-  <div class="max-w-4xl mx-auto wrapper px-2 ">
+  <div class="wrapper">
+  <div class="max-w-4xl mx-auto  px-2 ">
     <div class="grid grid-cols-1 w-full ">
       <div class="mb-10 mt-5">
         <nav class="rounded-md">
@@ -24,7 +24,7 @@
     </div>
     <div class="grid grid-cols-1 w-full">
       <h1 class="col-span-1 font-semibold text-2xl text-center">Your Orders</h1>
-      <div  v-if="orderscount">
+      <div  v-if="orderscount > 0">
         <div v-for="(order, i) in orders" :key="i" class="pb-5">
           <div class="grid grid-cols-12 rounded-md border border-gray-300 ">
             <div class="col-span-12 bg-gray-100 px-5 py-5 rounded-t-md">
@@ -258,12 +258,12 @@
           </div>
         </div>
       </div>
-      <div v-else class="text-gray-700">
+      <div v-else class="text-gray-700 text-center text-[20px] mt-10">
         You have no orders currently. Try buying something..or just HODL :)
       </div>
     </div>
   </div>
-
+</div>
   <MainFooter />
 </template>
 
@@ -292,7 +292,7 @@ export default defineComponent({
   data () {
     return {
       orders: null,
-      orderscount: 0,
+      orderscount: null,
       review: [],
       user: null,
     };
@@ -328,7 +328,8 @@ export default defineComponent({
         headers: authHeader(),
       }).then((response) => {
         if (response.status == 200) {
-          this.orderscount = response.data;
+          this.orderscount = response.data.count;
+          
         }
       });
     },

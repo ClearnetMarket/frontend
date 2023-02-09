@@ -5,6 +5,7 @@
   <MainHeaderMid />
   <MainHeaderBottom />
   <div v-if="loaded">
+    <div class="wrapper">
     <div class="container max-w-7xl mx-auto px-10 pb-10">
     <nav class="rounded-md w-full mt-5">
       <ol class="list-reset flex">
@@ -167,7 +168,7 @@
       </div>
     </div>
   </div>
-
+</div>
   <MainFooter />
 </template>
 

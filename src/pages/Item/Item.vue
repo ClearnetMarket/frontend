@@ -130,7 +130,15 @@ export default defineComponent({
       user: null,
     };
   },
+  watch: {
+    $route () {
+      this.item == null;
+      
+      this.item_id = this.$route.params.id;
+      this.getitem();
 
+    },
+  },
   mounted () {
     this.userstatus();
     this.getitem();
@@ -154,8 +162,8 @@ export default defineComponent({
 
     },
     getitem () {
-      let item_id_route = useRoute();
-      this.item_id = item_id_route.params.id;
+     
+      this.item_id = this.$route.params.id;
       axios({
         method: "get",
         url: "/item/" + this.item_id,

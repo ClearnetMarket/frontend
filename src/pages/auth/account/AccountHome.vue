@@ -3,12 +3,12 @@
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
-
+  <div class="wrapper">
     <div v-if="user">
       <MainHeaderVendor v-show="user.user_admin === 1" />
     </div>
 
-    <div class="container max-w-7xl mx-auto px-10 wrapper bg-gray-300">
+    <div class="container max-w-7xl mx-auto px-10  bg-gray-300">
       <!-- Container-->
       <div class="mt-5 mb-5">
         <nav class="rounded-md w-full">
@@ -117,7 +117,7 @@
         </div>
       </div>
     </div>
-
+</div>
   <!-- END container-->
   <MainFooter />
 </template>

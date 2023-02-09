@@ -1,5 +1,6 @@
 
 <template>
+ 
   <div v-if="loaded">
     <MainHeaderTop />
     <MainHeaderMid />
@@ -7,6 +8,7 @@
     <div v-if="user">
       <MainHeaderVendor v-show="user.user_admin === 1" />
     </div>
+    <div class="wrapper">
     <div class="max-w-7xl mx-auto pb-36 ">
       <div class="grid grid-cols-1 w-full gap-4 px-10 mb-5">
         <div class="mt-5">
@@ -247,6 +249,7 @@
           </div>
         </div>
       </div>
+    </div>
     </div>
     <MainFooter />
   </div>

@@ -4,7 +4,7 @@
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
-
+    <div class="wrapper">
   <div class="container max-w-7xl mx-auto px-10 wrapper pb-10">
     <nav class="rounded-md w-full">
       <ol class="list-reset flex">
@@ -62,6 +62,7 @@
         <div v-else></div>
       </div>
     </div>
+  </div>
   </div>
   <MainFooter />
 </template>

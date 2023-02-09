@@ -7,9 +7,9 @@
     <div v-if="user">
         <MainHeaderVendor v-show="user.user_admin === 1" />
     </div>
-
+<div class="wrapper">
     <!-- Top Stuff-->
-    <div class="containermax-w-7xl mx-auto  px-10 bg-gray-300">
+    <div class="container selection:max-w-7xl mx-auto  px-10 bg-gray-300">
         <!-- Container-->
         <div class="mt-5 mb-5">
             <nav class="rounded-md w-full">
@@ -100,7 +100,7 @@
         <!-- END Top Stuff-->
         <div class="grid sm:grid-cols-1 md:grid-cols-3 gap-5 my-3"></div>
     </div>
-
+</div>
     <!-- END container-->
     <MainFooter />
 </template>

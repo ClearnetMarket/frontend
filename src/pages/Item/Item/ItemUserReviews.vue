@@ -92,16 +92,18 @@
       <div class="col-span-12 md:col-span-8">
         <div class="" v-if="vendor_reviews_total > 0">
           <div v-for="review in vendorreviews" :key="review.id">
-            <div class="grid grid-cols-12 bg-white rounded-md p-5">
+            <div class="grid grid-cols-12 bg-white rounded-md p-5 mb-5">
               <div class="col-span-12 text-sm font-medium text-gray-500 dark:text-gray-400">
                 {{ review.customer_name }}
               </div>
-              <div class="col-span-12  text-blue-600 hover:text-blue-600 hover:underline text-[14px]"><router-link :to="{
+              <div class="col-span-12  text-blue-600 hover:text-blue-600 hover:underline text-[14px]">
+                <router-link :to="{
                 name: 'MarketItem',
                 params: { id: review.item_uuid },
-              }">
+                  }">
                   {{ review.title_of_item }}
-                </router-link></div>
+                </router-link>
+              </div>
 
               <div class="col-span-12 mb-2">
                 <StarRating v-bind:rating="review.vendor_rating" />
@@ -109,12 +111,10 @@
               <div class="col-span-12 text-sm font-medium text-gray-500 dark:text-gray-400">
                 Date Purchased: {{ relativeDate (review.timestamp) }} ago
               </div>
-
               <div class="col-span-12 mt-2">{{ review.review_of_vendor }}</div>
             </div>
           </div>
         </div>
-
         <div v-else class="text-[17px] font-semibold">
           No reviews for the vendor yet!
         </div>

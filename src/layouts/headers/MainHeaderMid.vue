@@ -50,6 +50,7 @@
           </div>
         </div>
       </router-link>
+
     </div>
   </div>
 </template>
@@ -66,6 +67,7 @@ export default defineComponent({
   data() {
     return {
       shopping_cart_count: 0,
+      currenturl: null,
       user: null,
       searchForm: {
         searchInput: "",
@@ -102,7 +104,7 @@ export default defineComponent({
       this.$router.replace({ name: nameofurl })
     },
     mainsearch() {
-
+      
       if (this.searchForm.searchInput !== ''){
           this.$router.push({
           name: "search",

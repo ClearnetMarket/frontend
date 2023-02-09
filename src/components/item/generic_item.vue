@@ -4,7 +4,7 @@
     <div @click="$router.replace({ name: 'MarketItem', params: { id: item.uuid } })" style="cursor: pointer" class="">
 
         <div class="rounded overflow-hidden border  text-center shadow-md w-42 h-42 bg-white mt-5">
-            <div class="flex justify-center w-full">
+            <div class="flex justify-center w-full  mb-5">
                 <div class="w-48 h-48 " v-if="item.image_one_url_250">
                     <img class="object-contain" :src="item.image_one_url_250" />
                 </div>
@@ -14,13 +14,13 @@
             </div>
 
             <!--- Price and Currency -->
-            <div class="flex justify-center text-[18px] font-bold h-4 py-3">
+            <div class="flex justify-center text-[18px] font-bold  ">
                 {{ item.price }} {{ returncurrencysymbol (item.currency) }}
             </div>
 
             <!--- Currency accepted bubbles -->
             <div class="flex justify-center pt-2">
-
+            
                 <span v-if="item.digital_currency_1 === true"
                     class="inline-block   px-3 py-1 text-sm font-semibold text-orange-500 mr-2 mb-2">BTC</span>
                 <span v-if="item.digital_currency_3 === true"
@@ -47,59 +47,55 @@ export default defineComponent({
     data () {
         return {
             coin: [],
+            price_coin_btc: null,
+            price_coin_bch: null,
+            price_coin_xmr: null,
 
         };
     },
     mounted () { },
     computed: {},
     methods: {
-        getpricebtc (currency: number, price: number) {
+        pricefilter_btc (price: number, currency: number) {
             axios({
                 method: "get",
-                url: "/price/btcprice/" + currency + "/" + price,
+                url: "/price/btcprice/" + price + '/' + currency,
                 withCredentials: true,
             })
                 .then((response) => {
                     if ((response.status = 200)) {
-
-                        return response.data.coin;
+                        this.price_coin_btc = response.data.coin;
                     }
                 })
-                .catch((error) => {
-
-                });
+                .catch(() => { });
         },
-        getpricebch (currency: number, price: number) {
+
+        pricefilter_bch (price: number, currency: number) {
             axios({
                 method: "get",
-                url: "/price/bchprice/" + currency + "/" + price,
+                url: "/price/bchprice/" + price + '/' + currency,
                 withCredentials: true,
             })
                 .then((response) => {
                     if ((response.status = 200)) {
-                        return response.data.coin;
+                        this.price_coin_bch = response.data.coin;
                     }
                 })
-                .catch((error) => {
-
-                });
-
+                .catch(() => { });
         },
-        getpricexmr (currency: number, price: number) {
+
+        pricefilter_xmr (price: number, currency: number) {
             axios({
                 method: "get",
-                url: "/price/xmrprice/" + currency + "/" + price,
+                url: "/price/xmrprice/" + price + '/' + currency,
                 withCredentials: true,
             })
                 .then((response) => {
                     if ((response.status = 200)) {
-                        let x = response.data.coin;
-                        return x
+                        this.price_coin_xmr = response.data.coin;
                     }
                 })
-                .catch((error) => {
-
-                });
+                .catch(() => { });
         },
         returncurrencysymbol (currencydigit: number) {
             if (currencydigit === 0) {

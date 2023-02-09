@@ -2,7 +2,7 @@
 <template>
 
   <HeaderPlain />
-  <div class="container max-w-7xl mx-auto px-10  h-screen">
+  <div class="container max-w-7xl b mx-auto px-10  h-screen">
     <div class="mt-5 mb-5">
       <nav class="rounded-md w-full">
         <ol class="list-reset flex">
@@ -18,8 +18,8 @@
       </nav>
     </div>
 
-    <div class="flex justify-center mx-auto">
-      <div class="max-w-3xl bg-white rounded-md p-5">
+    <div class="flex justify-center mx-auto bg-red-200">
+      <div class="max-w-3xl bg-white rounded-md">
         <div class="text-center">
           In order to unlock your account, change password, or recover your
           account in the future you will need this account key. We dont do
@@ -27,7 +27,7 @@
 
           <div class="text-[24px] mb-5">You should write these words down.</div>
         </div>
-        <div class="flex justify-center ">
+        <div class="md:flex md:justify-center text-center">
           <div class="inline-block bg-blue-600 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 text-[17px]">
             {{ word1 }}
           </div>
@@ -47,7 +47,7 @@
             {{ word6 }}
           </div>
         </div>
-        <div class="flex justify-center my-10 gap-5">
+        <div class="flex justify-center my-10 gap-5 px-5">
           <router-link :to="{ name: 'accountseedconfirm' }">
             <button
               class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-blue-300 focus:outline-none focus:shadow-outline"

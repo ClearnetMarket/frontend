@@ -4,7 +4,7 @@
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
-
+<div class="wrapper">
   <div class="container  max-w-7xl mx-auto pb-60 bg-gray-300"><!-- Container-->
     <div class="mt-5 mb-5 px-10">
       <nav class="rounded-md w-full">
@@ -43,7 +43,7 @@
     </div>
   </div>
 
-
+</div>
   <MainFooter />
 </template>
 

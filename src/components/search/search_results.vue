@@ -12,21 +12,40 @@
             {{ item.item_title }}
           </router-link>
         </div>
-        <div class="col-span-6 sm:col-span-8  px-2">
+        <div class="col-span-6 sm:col-span-8  px-5">
+
           <div class="col-span-12 text-[26px] my-1">
+
             {{ item.price }}{{ returncurrencysymbol (item.currency) }}
           </div>
           <div class="col-span-12">
-            <div class="flex">
-              <div v-if="item.digital_currency_1 === true">
-                <span class="inline-block  text-sm font-semibold text-orange-500 ">Bitcoin</span>
+            <div class="grid grid-cols-12 ">
+              <div class="col-span-12 sm:col-span-12">
+                <div v-if="item.digital_currency_1 === true">
+                  <div class="flex gap-4">
+                    <div class=" text-[14px] font-semibold text-orange-500 ">Bitcoin:</div>
+                    <div class=" text-[14px]">{{ pricefilter_btc (item.currency, item.price) }} {{ price_coin_btc }}
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div v-if="item.digital_currency_2 === true">
-                <span class="inline-block   text-sm font-semibold text-orange-700 ">Monero</span>
+              <div class="col-span-12 sm:col-span-12">
+                <div v-if="item.digital_currency_3 === true">
+                  <div class="flex gap-4">
+                    <div class=" text-[14px] font-semibold text-orange-700 ">Monero</div>
+                    <div class=" text-[14px]">{{ pricefilter_bch (item.currency, item.price) }} {{ price_coin_xmr }}
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div v-if="item.digital_currency_3 === true">
-                <span class="whitespace-nowrap inline-blocktext-sm font-semibold text-green-600">Bitcoin
-                  Cash</span>
+              <div class="col-span-12 sm:col-span-12">
+                <div v-if="item.digital_currency_2 === true">
+                  <div class="flex gap-4">
+                    <div class="whitespace-nowrap text-[14px] font-semibold text-green-600">Bitcoin Cash</div>
+                    <div class=" text-[14px]">{{ pricefilter_xmr (item.currency, item.price) }} {{ price_coin_bch }}
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -39,7 +58,7 @@
           </div>
 
         </div>
-        <div class="col-span-6 md:hidden px-2 ">
+        <div class="col-span-12 md:col-span-6 text-center md:hidden px-2 bg-red-200">
           <div class="col-span-12 mt-10">
             <router-link :to="{
               name: 'userprofile',
@@ -50,7 +69,7 @@
               </div>
             </router-link>
           </div>
-          <div class="col-span-12 ">
+          <div class="col-span-12 text-center justify-center flex">
             <StarRating v-bind:rating="item.item_rating" />
           </div>
         </div>
@@ -83,10 +102,16 @@ export default defineComponent({
   data () {
     return {
       vendorreviews: [],
+      price_coin_btc: null,
+      price_coin_bch: null,
+      price_coin_xmr: null,
+
     };
   },
 
-  mounted () { },
+  mounted () {
+
+  },
   computed: {},
 
   methods: {
@@ -102,6 +127,47 @@ export default defineComponent({
             if (this.vendorreviews == undefined) {
               this.vendorreviews = null;
             }
+          }
+        })
+        .catch(() => { });
+    },
+    pricefilter_btc (price: number, currency: number) {
+      axios({
+        method: "get",
+        url: "/price/btcprice/" + price + '/' + currency,
+        withCredentials: true,
+      })
+        .then((response) => {
+          if ((response.status = 200)) {
+            this.price_coin_btc = response.data.coin;
+          }
+        })
+        .catch(() => { });
+    },
+
+    pricefilter_bch (price: number, currency: number) {
+      axios({
+        method: "get",
+        url: "/price/bchprice/" + price + '/' + currency,
+        withCredentials: true,
+      })
+        .then((response) => {
+          if ((response.status = 200)) {
+            this.price_coin_bch = response.data.coin;
+          }
+        })
+        .catch(() => { });
+    },
+
+    pricefilter_xmr (price: number, currency: number) {
+      axios({
+        method: "get",
+        url: "/price/xmrprice/" + price + '/' + currency,
+        withCredentials: true,
+      })
+        .then((response) => {
+          if ((response.status = 200)) {
+            this.price_coin_xmr = response.data.coin;
           }
         })
         .catch(() => { });

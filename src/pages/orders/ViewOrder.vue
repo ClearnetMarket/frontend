@@ -4,6 +4,7 @@
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
+    <div class="wrapper">
   <div class="max-w-4xl mx-auto wrapper ">
 
     <nav class="rounded-md px-5">
@@ -329,7 +330,7 @@
       </div>
     </div>
   </div>
-
+</div>
   <MainFooter />
 </template>
 

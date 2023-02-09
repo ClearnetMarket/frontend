@@ -6,6 +6,6 @@ input[type=file]::file-selector-button {
     /*@apply text-white bg-gray-700 hover:bg-gray-600  rounded-md font-bold text-sm cursor-pointer border-0 py-2.5 pl-4 pr-4;*/
 }
 .wrapper {
-  min-height: calc(100vh - 590px);
+  min-height: calc(100vh - 558px);
   margin-top: 20px;
 }

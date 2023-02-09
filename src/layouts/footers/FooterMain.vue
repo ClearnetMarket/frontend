@@ -4,7 +4,7 @@
     <div class=" max-w-4xl mx-auto">
       <div class="flex flex-row w-full mb-10 gap-4">
 
-        <div class="sm:basis-1/2 lg:basis-1/4 text-center ">
+        <div class="basis-1/2 sm:basis-1/2 lg:basis-1/4 text-center ">
           <div class="text-[20px] mb-5 text-white"></div>
           <router-link :to="{ name: 'policies' }">
             <div class="text-[16px] py-1 text-white hover:text-gray-400">
@@ -35,7 +35,6 @@
 
         <div class="lg:basis-1/4  text-center">
           <div class="text-[38px]  mb-5 text-white">
-
           </div>
         </div>
 
@@ -43,7 +42,7 @@
           <div class="text-[38px]  mb-5 text-white">
             Privacy Sold Here
           </div>
-          <div class="text-[14px]  mb-5 text-white">
+          <div class="text-[14px]  mb-5 text-white break-words">
             We never sell data. We never give up personal information.  All Shipping information deleted after finalizing.
           </div>
         </div>

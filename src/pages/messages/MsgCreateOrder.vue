@@ -1,10 +1,10 @@
 
 <template>
-<div class="h-screen">
+
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
-
+    <div class="wrapper">
   <div class="container max-w-7xl mx-auto px-10 wrapper mb-10">
     <div class="grid grid-cols-12">
       <div class="col-span-3">
@@ -69,6 +69,7 @@
     </div>
   </div>
 </div>
+
   <MainFooter />
 </template>
 

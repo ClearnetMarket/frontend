@@ -1,8 +1,8 @@
 
 <template>
-
+<div class="h-screen">
   <HeaderPlain />
-  <div class="container max-w-7xl mx-auto  bg-gray-300 h-screen">
+  <div class="container max-w-7xl mx-auto  bg-gray-300 ">
     <div class="mx-auto flex mb-1">
       <div class="mt-5 mb-5 px-10">
         <nav class="rounded-md w-full">
@@ -59,6 +59,7 @@
         </div>
       </form>
     </div>
+  </div>
   </div>
 
 </template>

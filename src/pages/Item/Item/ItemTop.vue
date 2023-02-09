@@ -98,61 +98,55 @@
         <div class="text-[16px] font-weight-bold text-gray-700 font-bold">
           Located:
         </div>
-        <div class=" text-[14px] text-gray-700">
-          <div class="grid grid-cols-12 mb-2">
+        <div class="text-[14px] text-gray-700 ">
+          <div class="grid grid-cols-12 mb-2 px-5">
             <div class="col-span-12 text-[14px] ">{{ origin_country_name }}</div>
             <div class="col-span-12 text-[14px] ">
               {{ exactcity }} {{ exactstateorprovence }} {{ exactzipcode }}
               {{ origin_country_name }}
             </div>
           </div>
-          <div class="text-[16px] font-weight-bold text-gray-700 font-bold border-b-2 border-gray-600">
+          <div class="text-[16px] font-weight-bold text-gray-700 font-bold">
             Shipping:
           </div>
           <div v-if="shippingfree === true">
             <div class="text-[14px] font-weight-bold text-gray-700">
               Shipping Option 1:
             </div>
-            <div class="grid grid-cols-4 grid-rows-2 border-b-2 border-gray-600">
-
-              <div class="col-span-3 row-span-1 text-[16px] text-orange-600">
-                FREE SHIPPING
+            <div class="grid grid-cols-4 grid-rows-2 px-5">
+              <div class="col-span-3 row-span-1 text-[16px] text-yellow-600 font-bold">
+                *FREE SHIPPING*
               </div>
               <div class="col-span-3 row-span-1 text-[14px] text-gray-600">
                 Estimated in {{ shippingdayfree }} days
               </div>
             </div>
-
           </div>
           <div v-if="shippingtwo === true">
             <div class="text-[14px] font-weight-bold text-gray-700">
               Shipping Option 2:
             </div>
-            <div class="grid grid-cols-4 grid-rows-2 border-b-2 border-gray-600">
+            <div class="grid grid-cols-4 grid-rows-2 px-5">
               <div class="col-span-3 row-span-1 text-[14px] ">
                 Estimated in {{ shippingdayfree }} days
               </div>
-              <div class="col-span-3 row-span-1 text-[20px]">
+              <div class="col-span-3 row-span-1 text-[16px] p-0">
                 {{ shippingpricetwo }} {{ returncurrencysymbol (currency) }}
               </div>
-
             </div>
-
           </div>
           <div v-if="shippingthree === true">
-            <div class="text-[14px] font-weight-bold text-gray-700">
+            <div class="text-[14px] font-weight-bold text-gray-700 px-2">
               Shipping Option 3:
             </div>
-            <div class="grid grid-cols-4 grid-rows-2 border-b-2 border-gray-600">
+            <div class="grid grid-cols-4 grid-rows-2 ">
               <div class="col-span-3 row-span-1 text-[14px] ">
                 Estimated in {{ shippingdayfree }} days
               </div>
-              <div class="col-span-3 row-span-1 text-[20px]">
+              <div class="col-span-3 row-span-1 text-[16px]">
                 {{ shippingpricethree }} {{ returncurrencysymbol (currency) }}
               </div>
-
             </div>
-
           </div>
         </div>
       </div><!-- end column two -->
@@ -263,9 +257,6 @@
           </div>
         </div>
       </div><!-- end column three -->
-
-
-
     </div>
   </div>
 </template>
@@ -331,7 +322,6 @@ export default defineComponent({
       exactcity: "",
       exactstateorprovence: "",
       exactzipcode: "",
-
       shippingfree: false,
       shippingtwo: false,
       shippingthree: false,
@@ -340,8 +330,6 @@ export default defineComponent({
       shippingdaytwo: "",
       shippingpricethree: "",
       shippingdaythree: "",
-
-
     };
   },
   created () {
@@ -504,9 +492,7 @@ export default defineComponent({
             this.pricebtc = response.data.coin;
           }
         })
-        .catch(() => {
-
-        });
+        .catch(() => { });
     },
     getpricebch () {
       axios({
@@ -534,36 +520,21 @@ export default defineComponent({
             this.pricexmr = response.data.coin;
           }
         })
-        .catch(() => {
-
-        });
+        .catch(() => { });
     },
     switchImageOne () {
       this.image_one_500 = this.current_main_image;
     },
     switchImageSecond () {
-
       this.image_one_500 = this.image_two_500;
-
-
-
     },
 
     switchImageThird () {
-
       this.image_one_500 = this.image_three_500;
-
-
-
-
     },
 
     switchImageFourth () {
-
       this.image_one_500 = this.image_four_500;
-
-
-
     },
 
 

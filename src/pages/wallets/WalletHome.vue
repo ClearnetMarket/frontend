@@ -8,6 +8,7 @@
   <div v-if="user">
     <MainHeaderVendor v-show="user.user_admin === 1" />
   </div>
+  <div class="wrapper">
   <!-- Top Stuff-->
   <div class="container max-w-7xl mx-auto px-10 pb-72">
     <!-- Container-->
@@ -46,7 +47,8 @@
           {{ btcprice }}
       </div>
       <div class="col-span-7 md:col-span-3  rounded-md p-5 text-center">
-          {{ btcbalance }}
+        <div v-if="btcbalance == 0">0 BTC</div>
+        <div v-else>{{ btcbalance }} </div>
       </div>
       <div class="col-span-12 md:col-span-5 justify-center flex py-3">
         <router-link :to="{ name: 'btcwalletsend' }" class="px-1">
@@ -70,10 +72,6 @@
       </div>
     </div>
 
-
-
-
-
     <div class="grid grid-cols-12 border-t-2 border-gray-200 bg-white mb-5 md:mb-0 font-bold">
       <div class="col-span-4 md:col-span-2 rounded-md p-5">
         <div class="flex gap-3">
@@ -85,7 +83,9 @@
           {{ bchprice }}
       </div>
       <div class="col-span-7 md:col-span-3  rounded-md p-5 text-center">
-          {{ bchbalance }}
+        <div v-if="bchbalance == 0">0 BCH</div>
+        <div v-else>{{ bchbalance }} </div>
+         
       </div>
       <div class="col-span-12 md:col-span-5 justify-center flex py-3">
         <router-link :to="{ name: 'bchwalletsend' }" class="px-1">
@@ -120,15 +120,11 @@
         </div>
       </div>
       <div class="md:col-span-2 invisible md:visible rounded-md p-5 text-center">
-     
           {{ xmrprice }}
-    
-
       </div>
       <div class="col-span-7 md:col-span-3  rounded-md p-5 text-center">
-       
-          {{ xmrbalance }}
-    
+        <div v-if="xmrbalance == 0">0 XMR</div>
+        <div v-else>{{ xmrbalance }} </div>
       </div>
       <div class="col-span-12 md:col-span-5 justify-center flex py-3">
         <router-link :to="{ name: 'xmrwalletsend' }" class="px-1">
@@ -158,7 +154,7 @@
 
 
   </div>
-
+</div>
   <!-- END container-->
   <MainFooter />
 

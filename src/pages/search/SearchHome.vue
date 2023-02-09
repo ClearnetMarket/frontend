@@ -70,9 +70,12 @@ export default defineComponent({
     };
   },
     watch: {
-   /* $route() {
+    $route() {
+    this.searchresults == null;
+    this.searchstring = this.$route.params.searchstring;
     this.main_search();
-    },*/
+   
+    },
   },
   mounted(){
     this.searchstring = this.$route.params.searchstring;

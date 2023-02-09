@@ -128,10 +128,10 @@
               </div>
             </div>
             <div class="grid grid-cols-12 gap-4 text-[14px]">
-              <div class="col-span-12 sm:col-span-3 flex justify-center">
+              <div class="col-span-12 sm:col-span-3 flex justify-center ">
                 <img class="object-contain" alt="" :src="order.image_one" />
               </div>
-              <div class="col-span-12 sm:-span-6 ">
+              <div class="col-span-12 sm:col-span-6 ">
                 <div class="col-span-12 flex">
                   <div class="font-bold px-2">Order UUID:</div>
                   <div class="px-2">{{ order.uuid }}</div>
@@ -178,7 +178,7 @@
                   </div>
                 </div>
               </div>
-              <div class="col-span-12 sm:col-span-3">
+              <div class="col-span-12 sm:col-span-3 ">
                 <div class=" text-[14px] font-bold flex justify-center">
                   <router-link :to="{ name: 'vendorordersfeedback', params: { uuid: order.uuid }, }" class="px-3">
                     <button

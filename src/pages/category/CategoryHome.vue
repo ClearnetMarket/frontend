@@ -62,10 +62,8 @@
         </router-link>
       </div>
       <div class="col-span-12 sm:col-span-9">
-     
-          <div class="text-center text-[28px]">All Items</div>
-
-          <AllItems />
+        <div class="text-center text-[28px]">All Items</div>
+        <AllItems />
       </div>
     </div>
   </div>
@@ -92,13 +90,13 @@ export default defineComponent({
     AllItems,
   },
 
-  data() {
+  data () {
     return {
       user: null
     };
 
   },
-  mounted() {},
+  mounted () { },
   methods: {},
 });
 </script>
