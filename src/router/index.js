@@ -47,9 +47,6 @@ import MsgCreateOrder from "../pages/messages/MsgCreateOrder.vue";
 import MsgCreateUser from "../pages/messages/MsgCreate.vue";
 import MsgCreateItem from "../pages/messages/MsgCreateItem.vue";
 import MsgView from "../pages/messages/MsgView.vue";
-import Dispute from "../pages/moderator/Dispute.vue";
-import ModDispute from "../pages/moderator/ModDispute.vue";
-import ModHome from "../pages/moderator/ModHome.vue";
 import search from "../pages/search/SearchHome.vue";
 import Error404 from "../pages/error/Error404.vue";
 import categoryhome from "../pages/category/CategoryHome.vue";
@@ -69,27 +66,82 @@ import categorysportinggoods from "../pages/category/sports/SportsHome.vue";
 import legal from "../pages/commonpage/legal.vue";
 import vendoragreement from "../pages/legal/VendorAgreement.vue";
 import policies from "../pages/commonpage/policies.vue";
-import contact from "../pages/commonpage/contact.vue";
 import editprofile from "../pages/profile/editprofile/EditProfile.vue";
+
+import supportemail from "../pages/support/contact.vue";
+import supporthome from "../pages/support/supporthome.vue";
+import supportticket from "../pages/support/createticket.vue";
+import supportviewticket from "../pages/support/viewticket.vue";
+
+import Dispute from "../pages/moderator/Dispute.vue";
+import ModDisputeHome from "../pages/moderator/ModDisputeHome.vue";
+import ModDisputes from "../pages/moderator/ModDisputes.vue";
+import ModHome from "../pages/moderator/ModHome.vue";
+import ModTicketsHome from "../pages/moderator/ModTicketHome.vue";
+import ModTickets from "../pages/moderator/ModTickets.vue";
 
 
 const routes = [
+    {
+        path: "/mod/tickets/:uuid",
+        name: "ModTickets",
+        component: ModTickets,
+    },
+    {
+        path: "/mod/tickets",
+        name: "ModTicketsHome",
+        component: ModTicketsHome,
+    },
+    {
+        path: "/mod/dispute/:uuid",
+        name: "ModDisputes",
+        component: ModDisputes,
+    },
+    {
+        path: "/mod/disputes",
+        name: "ModDisputeHome",
+        component: ModDisputeHome,
+    },
+    {
+        path: "/mod/home",
+        name: "ModHome",
+        component: ModHome,
+    },
+
+
+    {
+        path: "/support",
+        name: "supporthome",
+        component: supporthome,
+    },
+        {
+        path: "/support/ticket",
+        name: "supportticket",
+        component: supportticket,
+    },
+    {
+        path: "/support/ticket/:uuid",
+        name: "supportviewticket",
+        component: supportviewticket,
+    },
+    {
+        path: "/support/email",
+        name: "supportemail",
+        component: supportemail,
+    },
+
+
     {
         path: "/editprofile",
         name: "editprofile",
         component: editprofile,
     },
-     
     {
         path: "/vendoragreement",
         name: "vendoragreement",
         component: vendoragreement,
     },
-    {
-        path: "/contact",
-        name: "contact",
-        component: contact,
-    },
+
     {
         path: "/policies",
         name: "policies",
@@ -358,16 +410,7 @@ const routes = [
         name: "MsgCreateOrder",
         component: MsgCreateOrder,
     },
-    {
-        path: "/mod/dispute/:uuid",
-        name: "ModDispute",
-        component: ModDispute,
-    },
-    {
-        path: "/mod/home",
-        name: "ModHome",
-        component: ModHome,
-    },
+
     {
         path: "/search/:searchstring",
         name: "search",

@@ -1,10 +1,10 @@
 
 <template>
 
-        <MainHeaderTop />
-        <MainHeaderMid />
-        <MainHeaderBottom />
-
+    <MainHeaderTop />
+    <MainHeaderMid />
+    <MainHeaderBottom />
+    <div class="wrapper">
         <div v-if="user">
             <MainHeaderVendor v-show="user.user_admin === 1" />
         </div>
@@ -33,7 +33,7 @@
             </div>
         </div>
 
-
+    </div>
     <MainFooter />
 </template>
 
@@ -47,7 +47,7 @@ import MainHeaderVendor from "../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../layouts/footers/FooterMain.vue";
 
 export default defineComponent({
-    name: "contact",
+    name: "supportemail",
     components: {
         MainHeaderTop,
         MainHeaderMid,

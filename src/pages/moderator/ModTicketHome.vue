@@ -1,0 +1,213 @@
+
+<template>
+    <MainHeaderTop />
+    <MainHeaderMid />
+    <MainHeaderBottom />
+        <div class="wrapper">
+    <div class="max-w-4xl mx-auto wrapper px-10">
+        <div class="grid grid-cols-1 w-full gap-4">
+
+            <nav class="rounded-md">
+                <ol class="list-reset flex">
+                    <li>
+                        <router-link :to="{ name: 'home' }">
+                            <a class="text-blue-600 hover:text-blue-700">Home</a>
+                        </router-link>
+                    </li>
+                    <li>
+                        <span class="text-gray-500 mx-2">/</span>
+                    </li>
+                      <li>
+                            <router-link :to="{ name: 'ModHome' }">
+                                <a class="text-blue-600 hover:text-blue-700">Mod Home</a>
+                            </router-link>
+                        </li>
+                        <li>
+                            <span class="text-gray-500 mx-2">/</span>
+                        </li>
+                </ol>
+            </nav>
+
+        </div>
+        <div class="text-center text-[20px] mb-5">Mod Tickets Home</div>
+        <div class="grid grid-cols-12 gap-5">
+            <div class="col-span-12 sm:col-span-4 ">
+                <div class="bg-white rounded-md p-3">
+                    <div class="text-[20px] font-bold ">Admin Navigation</div>
+                    <router-link :to="{ name: 'ModHome' }">
+                        <div class="hover:underline text-blue-600 hover:text-blue-700 my-5">Mod Home</div>
+                    </router-link>
+                    <router-link :to="{ name: 'ModTicketsHome' }">
+                        <div class="hover:underline text-blue-600 hover:text-blue-700 my-5">Tickets</div>
+                    </router-link>
+                    <router-link :to="{ name: 'ModDisputeHome' }">
+                        <div class="hover:underline text-blue-600 hover:text-blue-700 my-5">Disputes</div>
+                    </router-link>
+                </div>
+            </div>
+
+
+            <div class="col-span-12 sm:col-span-8  rounded-md p-5">
+                <div class="grid grid-cols-12 gap-5">
+
+                    <div class="col-span-12 sm:col-span-8">
+                        <div class="text-[18px] mb-5">Current Tickets</div>
+                        <div v-if="all_tickets.length > 0">
+                            <div v-for="ticket in all_tickets" :key="ticket.id">
+                                <div class="grid grid-cols-12 border-b-2 border-gray-400 mb-5 ">
+                                    <router-link class="col-span-12"
+                                        :to="{ name: 'ModTickets', params: { uuid: ticket.uuid } }">
+                                        <div
+                                            class="col-span-12  hover:underline hover:text-blue-500 text-[16px] overflow-hidden">
+                                            {{ ticket.subject }}
+                                        </div>
+                                    </router-link>
+                                    <div class="col-span-12 flex gap-5 mt-2">
+                                        <div class="">
+                                            User:
+                                        </div>
+                                        <div class="">
+                                            {{ ticket.author }}
+                                        </div>
+                                    </div>
+                                    <div class="col-span-12 flex gap-5 mt-2">
+                                        <div class="">
+                                            Created:
+                                        </div>
+                                        <div class="">
+                                            {{ relativeDate(ticket.timestamp) }} ago
+                                        </div>
+                                    </div>
+                                    <div class="col-span-12 flex gap-5">
+                                        <div class="">
+                                            Status:
+                                        </div>
+                                        <div class="">
+                                            <div v-if="ticket.status == 0">New Message</div>
+                                            <div v-if="ticket.status == 1">Open</div>
+                                            <div v-if="ticket.status == 2">Closed</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div v-else>
+                            No Previous Tickets
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+        </div>
+    <MainFooter />
+</template>
+
+<script lang="ts">
+import { defineComponent } from "vue";
+import axios from "axios";
+import authHeader from "../../services/auth.header";
+import MainHeaderTop from "../../layouts/headers/MainHeaderTop.vue";
+import MainHeaderMid from "../../layouts/headers/MainHeaderMid.vue";
+import MainHeaderBottom from "../../layouts/headers/MainHeaderBottom.vue";
+import MainHeaderVendor from "../../layouts/headers/MainHeaderVendor.vue";
+import MainFooter from "../../layouts/footers/FooterMain.vue";
+import { formatDistance } from "date-fns";
+
+export default defineComponent({
+    name: "ModTicketHome",
+
+    components: {
+        MainHeaderTop,
+        MainHeaderMid,
+        MainHeaderBottom,
+        MainHeaderVendor,
+        MainFooter,
+    },
+
+    data () {
+        return {
+
+            other_user: null,
+            userlist: [],
+            user: null,
+            all_tickets: [],
+            stats_count: 0,
+            stats_open: 0,
+            stats_completed: 0,
+
+
+        };
+    },
+    mounted () {
+        this.userstatus();
+        this.get_all_tickets();
+    },
+
+
+    methods: {
+        truncate: function (data: any, num: any) {
+            const reqdString =
+                data.split("").slice(0, num).join("");
+            return reqdString;
+        },
+        relativeDate (value: any) {
+            let e = new Date(value).valueOf();
+            return formatDistance(e, new Date());
+        },
+        userstatus () {
+            axios({
+                method: "get",
+                url: "/auth/whoami",
+                withCredentials: true,
+                headers: authHeader(),
+            })
+                .then((response) => {
+                    if ((response.status = 200)) {
+                        this.user = response.data.user;
+                        if (this.user.user_admin !== 10) {
+                            console.log("bad")
+                        }
+                    }
+                })
+                .catch(() => {
+                    this.user = null;
+                });
+        },
+        get_all_tickets () {
+            axios({
+                method: "get",
+                url: "/mod/getalltickets",
+                withCredentials: true,
+                headers: authHeader(),
+            })
+                .then((response) => {
+                    if ((response.status = 200)) {
+                        this.all_tickets = response.data;
+                    }
+                    else { }
+                });
+        },
+        get_ticket_stats () {
+            axios({
+                method: "get",
+                url: "/mod/getalltickets",
+                withCredentials: true,
+                headers: authHeader(),
+            })
+                .then((response) => {
+                    if ((response.status = 200)) {
+                        this.stats_count = response.data.count;
+                        this.stats_open = response.data.open;
+                        this.stats_completed = response.data.completed;
+                    }
+                    else { }
+                });
+        },
+
+
+    },
+});
+</script>
+

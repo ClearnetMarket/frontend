@@ -1,13 +1,12 @@
 
 <template>
-   
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
-
-  <div class="max-w-4xl mx-auto wrapper px-10">
-    <div class="grid grid-cols-1 w-full gap-4">
-      <div class="mb-10 mt-5 px-5">
+  <div class="wrapper">
+    
+    <div class="container max-w-4xl mx-auto wrapper px-10">
+      <div class="grid grid-cols-1 w-full gap-4">
         <nav class="rounded-md">
           <ol class="list-reset flex">
             <li>
@@ -21,86 +20,52 @@
           </ol>
         </nav>
       </div>
-    </div>
-    <div class="grid grid-cols-12">
-      <div class="col-span-12 mt-5 text-[20px]">Moderator Home</div>
-      <div class="col-span-12 mt-5 text-[16px]">Disputes Need Mod Support</div>
-      <div class="col-span-12 mt-5">
-        <div v-for="dispute in needmodorders">
-          <div
-            class="grid grid-cols-12 border border-1 p-2 rounded bg-gray-400"
-          >
-            <div class="col-span-12">Order id: {{ dispute.uuid }}</div>
-            <div class="col-span-6">Vendor: {{ dispute.vendor_user_name }}</div>
-            <div class="col-span-6">
-              Customer: {{ dispute.customer_user_name }}
-            </div>
+
+      <div class="text-center text-[20px] mb-5">Mod Home</div>
+      <div class="grid grid-cols-12 gap-5">
+        <div class="col-span-12 sm:col-span-4 ">
+          <div class="bg-white rounded-md p-3">
+            <div class="text-[20px] font-bold ">Admin Navigation</div>
+            <router-link :to="{ name: 'ModHome' }">
+              <div class="hover:underline text-blue-600 hover:text-blue-700 my-5">Mod Home</div>
+            </router-link>
+            <router-link :to="{ name: 'ModTicketsHome' }">
+              <div class="hover:underline text-blue-600 hover:text-blue-700 my-5">Tickets</div>
+            </router-link>
+            <router-link :to="{ name: 'ModDisputeHome' }">
+              <div class="hover:underline text-blue-600 hover:text-blue-700 my-5">Disputes</div>
+            </router-link>
+          </div>
+        </div>
+
+        <div class="col-span-12 sm:col-span-8 ">
+          <div class="grid grid-cols-12 ">
             <div class="col-span-12">
-              <div class="my-2 flex">
-                <router-link
-                  :to="{
-                    name: 'ModDispute',
-                    params: { uuid: dispute.uuid },
-                  }"
-                >
-                  <button
-                    class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 ml-5 mr-5 rounded focus:outline-none focus:shadow-outline"
-                    type="button"
-                  >
-                    View Dispute
-                  </button>
-                </router-link>
-                <div v-if="dispute.moderator_uuid == null">
-                  <button
-                    class="bg-yellow-400 hover:bg-yellow-600 text-white font-bold py-1 px-3 ml-5 mr-5 rounded focus:outline-none focus:shadow-outline"
-                    type="button"
-                    @click="becomemod(dispute.uuid)"
-                  >
-                    Become Moderator
-                  </button>
-                </div>
+              <div class="text-[18px] mb-3">
+                Ticket Stats
+              </div>
+              <div class="grid grid-cols-12 border-b-2 border-gray-400 mb-5 ">
+                <div class="col-span-12 ">Total Tickets: {{ stats_ticket_count }}</div>
+                <div class="col-span-12 ">Open Tickets: {{ stats_ticket_open }}</div>
+                <div class="col-span-12 ">Completed Tickets: {{ stats_ticket_completed }}</div>
+              </div>
+            </div>
+            <div class="col-span-12 sm:col-span-8">
+              <div class="text-[18px] mb-3">
+                Dispute Stats
+              </div>
+              <div class="grid grid-cols-12 border-b-2 border-gray-400 mb-5 ">
+                <div class="col-span-12 ">Total Disputes: {{ stats_dispute_count }}</div>
+                <div class="col-span-12 ">Open Disputes: {{ stats_dispute_count }}</div>
+                <div class="col-span-12 ">Completed Disputes: {{ stats_dispute_count }}</div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="col-span-12 mt-5 text-[16px]">Disputes being moderatored</div>
-      <div class="col-span-12 mt-5">
-        <div v-for="dispute in hadmodorders">
-          <div
-            class="grid grid-cols-12 border border-1 p-2 rounded bg-gray-400"
-          >
-            <div class="col-span-12">Order id: {{ dispute.uuid }}</div>
-            <div class="col-span-6">Vendor: {{ dispute.vendor_user_name }}</div>
-            <div class="col-span-6">
-              Customer: {{ dispute.customer_user_name }}
-            </div>
-            <div class="col-span-12">
-              Modded by: {{ dispute.moderator_uuid }}
-            </div>
-            <div class="col-span-12">
-              <div class="my-2 flex">
-                <router-link
-                  :to="{
-                    name: 'ModDispute',
-                    params: { uuid: dispute.uuid },
-                  }"
-                >
-                  <button
-                    class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 ml-5 mr-5 rounded focus:outline-none focus:shadow-outline"
-                    type="button"
-                  >
-                    View Dispute
-                  </button>
-                </router-link>
-              </div>
-            </div>
-          </div>
-        </div>
+
       </div>
     </div>
   </div>
-
   <MainFooter />
 </template>
 
@@ -126,83 +91,128 @@ export default defineComponent({
     MainFooter,
   },
 
-  data() {
+  data () {
     return {
       needmodorders: [],
       hadmodorders: [],
+      stats_ticket_count: 0,
+      stats_ticket_open: 0,
+      stats_ticket_completed: 0,
+
+      stats_dispute_count: 0,
+      stats_dispute_open: 0,
+      stats_dispute_completed: 0,
+
+
+
     };
   },
 
-  mounted() {
+  mounted () {
     this.userstatus();
     this.getdisputesneedmod();
     this.getdisputeshasmod();
+    this.get_ticket_stats();
   },
 
   methods: {
     // get user status
-     userstatus() {
+    userstatus () {
       axios({
         method: "get",
         url: "/auth/whoami",
         withCredentials: true,
         headers: authHeader(),
       })
-      .then((response) => {
-        if (response.status == 200) {
-          if (response.data.user.user_admin < 2) {
-            this.$router.push({ name: "home" });
+        .then((response) => {
+          if (response.status == 200) {
+            if (response.data.user.user_admin < 2) {
+              this.$router.push({ name: "home" });
+            }
           }
-        }
-      });
+        });
     },
     // date conversion
-    relativeDate(value: any) {
+    relativeDate (value: any) {
       let e = new Date(value).valueOf();
       return formatDistance(e, new Date());
     },
     // become the moderator of the order
-     becomemod(uuid: string) {
-       axios({
+    becomemod (uuid: string) {
+      axios({
         method: "get",
         url: "/mod/takeonmod/" + uuid,
         withCredentials: true,
         headers: authHeader(),
       })
-      .then((response) => {
-        if (response.status == 200) {
-          this.getdisputesneedmod();
-          this.getdisputeshasmod();
-        }
-      });
+        .then((response) => {
+          if (response.status == 200) {
+            this.getdisputesneedmod();
+            this.getdisputeshasmod();
+          }
+        });
     },
     // get the disputes that need mods
-     getdisputesneedmod() {
-       axios({
+    getdisputesneedmod () {
+      axios({
         method: "get",
         url: "/mod/disputes/available",
         withCredentials: true,
         headers: authHeader(),
       })
-      .then((response) => {
-        if (response.status == 200) {
-          this.needmodorders = response.data;
-        }
-      });
+        .then((response) => {
+          if (response.status == 200) {
+            this.needmodorders = response.data;
+          }
+        });
     },
     // get disputes that already has mods
-     getdisputeshasmod() {
+    getdisputeshasmod () {
       axios({
         method: "get",
         url: "/mod/disputes/modded",
         withCredentials: true,
         headers: authHeader(),
       })
-      .then((response) => {
-        if (response.status == 200) {
-          this.hadmodorders = response.data;
-        }
-      });
+        .then((response) => {
+          if (response.status == 200) {
+            this.hadmodorders = response.data;
+          }
+        });
+    },
+    get_ticket_stats () {
+      axios({
+        method: "get",
+        url: "/mod/tickets/stats",
+        withCredentials: true,
+        headers: authHeader(),
+      })
+        .then((response) => {
+          if ((response.status = 200)) {
+            console.log(response.data)
+            this.stats_ticket_count = response.data.count;
+            this.stats_ticket_open = response.data.open;
+            this.stats_ticket_completed = response.data.completed;
+          }
+          else { }
+        });
+    },
+    get_dispute_stats () {
+      axios({
+        method: "get",
+        url: "/mod/dispute/stats",
+        withCredentials: true,
+        headers: authHeader(),
+      })
+        .then((response) => {
+          if ((response.status = 200)) {
+            console.log(response.data)
+            this.stats_dispute_count = response.data.count;
+            this.stats_dispute_open = response.data.open;
+            this.stats_dispute_completed = response.data.completed;
+          }
+          else { }
+        });
     },
   },
 });

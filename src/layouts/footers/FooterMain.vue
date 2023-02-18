@@ -4,18 +4,19 @@
     <div class=" max-w-4xl mx-auto">
       <div class="flex flex-row w-full mb-10 gap-4">
 
-        <div class="basis-1/2 sm:basis-1/2 lg:basis-1/4 text-center ">
+        <div class="basis-1/2 sm:basis-1/2 lg:basis-1/4 text-left ">
           <div class="text-[20px] mb-5 text-white"></div>
           <router-link :to="{ name: 'policies' }">
             <div class="text-[16px] py-1 text-white hover:text-gray-400">
               Freeport Policies
             </div>
           </router-link>
-          <router-link :to="{ name: 'contact' }">
-            <div class="text-[16px] py-1 text-white hover:text-gray-400">
-              Contact
-            </div>
-          </router-link>
+            <router-link :to="{ name: 'supporthome' }">
+              <div class="text-[16px] py-1 text-white hover:text-gray-400">
+                Customer Support
+              </div>
+            </router-link>
+         
           <router-link :to="{ name: 'btcwallet' }">
             <div class="text-[16px] py-1 text-white hover:text-gray-400">
               BTC Wallet

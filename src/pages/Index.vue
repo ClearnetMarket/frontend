@@ -11,11 +11,12 @@
     <MainHeaderVendor v-show="user.user_admin === 1" />
   </div>
 
+
   <div class="container max-w-7xl mx-auto  mb-0  bg-text-white ">
-    <TodayFeatured />
       <TodayFeatured />
-        <TodayFeatured />
-          <TodayFeatured />
+      <TodayFeatured />
+      <TodayFeatured />
+      <TodayFeatured />
   </div>
 </div>
   <MainFooter />
@@ -30,6 +31,7 @@ import MainHeaderTop from "../layouts/headers/MainHeaderTop.vue";
 import MainHeaderMid from "../layouts/headers/MainHeaderMid.vue";
 import MainHeaderBottom from "../layouts/headers/MainHeaderBottom.vue";
 import MainHeaderVendor from "../layouts/headers/MainHeaderVendor.vue";
+
 import Confirmed from "../layouts/headers/NotConfirmed.vue";
 import TodayFeatured from "../components/item_slides/today_featured.vue";
 import MainFooter from "../layouts/footers/FooterMain.vue";
@@ -42,6 +44,7 @@ export default defineComponent({
     MainHeaderMid,
     MainHeaderBottom,
     MainHeaderVendor,
+
     TodayFeatured,
     MainFooter,
     Confirmed

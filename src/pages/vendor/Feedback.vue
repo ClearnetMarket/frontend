@@ -5,8 +5,9 @@
   <MainHeaderMid />
   <MainHeaderBottom />
   <MainHeaderVendor />
+  <div class="wrapper">
   <!-- Top Stuff-->
-  <div class="max-w-4xl mx-auto wrapper ">
+  <div class="max-w-4xl mx-auto  ">
     <div class="mt-5 mb-5 px-10">
       <nav class="rounded-md w-full">
         <ol class="list-reset flex">
@@ -139,6 +140,7 @@
         </div>
       </div>
     </div>
+  </div>
   </div>
   </div>
   <MainFooter />

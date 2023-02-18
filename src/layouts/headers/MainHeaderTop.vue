@@ -6,7 +6,20 @@
       <div v-if="user">
        
           <div class="grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-3">
+            <div class="col-span-3 ">
+                          <div v-if="user">
+                            <div v-if="user.user_admin >= 2">
+                              <router-link :to="{ name: 'ModHome' }" class="px-3">
+                                <button
+                                  class="hover:bg-zinc-700 text-white hover:text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline font-bold">
+                                  Moderator Home
+                                </button>
+                              </router-link>
+                            </div>
+                          </div>
+                          </div>
             <div class="col-span-1 invisible md:visible h-1">
+
               <div class="flex sm:justify-between lg:justify-start ml-5 text-white font-bold pb-2">
                 <div class="px-3.5">English</div>
 
@@ -17,14 +30,7 @@
             <div class="col-span-1 lg:col-span-2 ">
               <div class="flex flex-wrap lg:justify-end md:justify-evenly sm:justify-center">
                 <div v-if="user">
-                  <div v-if="user.user_admin >= 2">
-                    <router-link :to="{ name: 'ModHome' }" class="px-3">
-                      <button
-                        class="hover:bg-zinc-700 text-white hover:text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline font-bold">
-                        Moderator
-                      </button>
-                    </router-link>
-                  </div>
+           
                   <router-link :to="{ name: 'sell' }">
                     <button
                       class="hover:bg-zinc-700 text-white hover:text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline mx-3 font-bold">
