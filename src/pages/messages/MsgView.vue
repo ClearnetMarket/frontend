@@ -184,19 +184,6 @@ import MainHeaderBottom from "../../layouts/headers/MainHeaderBottom.vue";
 import MainHeaderVendor from "../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../layouts/footers/FooterMain.vue";
 
-/**
- *
- @typedef {Object} mainpost.user_one_uuid
- @typedef {Object} mainpost.body
- @typedef {Object} mainpost.timestamp
- @typedef {Object} mainpost.user_one
- @typedef {Object} mainpost.user_one_uuid
- @typedef {Object} itemforsale.shipping_info_2
- @typedef {Object} itemforsale.origin_country_name
- @typedef {Object} itemforsale.image_one_url
- @typedef {Object} userobject.post_id
- *
- */
 
 
 export default defineComponent({

@@ -226,13 +226,7 @@ import MainHeaderVendor from "../../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../../layouts/footers/FooterMain.vue";
 import authHeader from "../../../services/auth.header";
 
-/**
- *
- @typedef {Object} t.amount
- @typedef {Object} t.commentbch
 
- *
- */
 
 export default defineComponent({
   name: "btctransactions",

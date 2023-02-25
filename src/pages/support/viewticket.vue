@@ -68,6 +68,27 @@
                                                 {{ relativeDate(ticket.timestamp) }} ago
                                             </div>
                                         </div>
+                                        <div v-if="get_ticket.status == 0" class="col-span-12 ">
+                                            <div class="flex gap-3 col-span-12">
+                                                <div class="">Status:</div>
+                                                <div class="text-red-600">Closed</div>
+                                            </div>
+
+                                        </div>
+                                        <div v-else-if="get_ticket.status == 1" class="col-span-12">
+                                            <div class="flex gap-3 col-span-12">
+                                                <div class="">Status:</div>
+                                                <div class="text-green-600">Open</div>
+                                            </div>
+
+                                        </div>
+                                        <div v-else class="col-span-12">
+                                            <div class="flex gap-3 col-span-12 ">
+                                                <div class="">Status:</div>
+                                                <div class=" text-orange-400">New MSG</div>
+                                            </div>
+
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -77,25 +98,44 @@
                         </div>
                     </div>
                     <div class="col-span-12 sm:col-span-8">
-                        <div class="text-[18px] mb-3 text-center" v-if="get_ticket != null">
+                        <div class="text-[18px] mb-3 justify-center flex" v-if="get_ticket != null">
                             Ticket # {{ get_ticket.uuid }}:
                         </div>
-
-                        <form class="rounded-md pt-6 pb-8 mb-4 w-full bg-white p-5" @submit.prevent="onSubmit">
+                        <div class="flex col-span-12 justify-center">
+                            <div v-if="get_ticket.status == 0">
+                                <div class="flex gap-3">
+                                    <div class="">Status:</div>
+                                    <div class="text-red-600">Open</div>
+                                </div>
+                            </div>
+                            <div v-else-if="get_ticket.status == 1">
+                                <div class="flex gap-3">
+                                    <div class="">Status:</div>
+                                    <div class="text-green-600">Open</div>
+                                </div>
+                            </div>
+                            <div v-else>
+                                <div class="flex gap-3">
+                                    <div class="">Status:</div>
+                                    <div class=" text-orange-400">New MSG</div>
+                                </div>
+                            </div>
+                        </div>
+                        <form class="rounded-md pt-6 pb-8 mb-4 w-full bg-white p-5" @submit.prevent="onSubmit" v-if="get_ticket.status !== 0">
                             <div class="">
                                 <textarea v-model="SendMsgForm.msginfo" id="item_description"
                                     placeholder="Write something .." class="shadow appearance-none border rounded w-full py-2 px-3
-                                                             text-gray-700 leading-tight
-                                                             focus:outline-none focus:shadow-outline mb-3">
-                                        </textarea>
+                                                    text-gray-700 leading-tight
+                                                    focus:outline-none focus:shadow-outline mb-3">
+                                    </textarea>
                                 <span v-if="v$.SendMsgForm.msginfo.$error" class="text-red-600 text-center">
                                     {{ v$.SendMsgForm.msginfo.$errors[0].$message }}
                                 </span>
                             </div>
                             <div class="flex justify-end">
                                 <button class="bg-gray-600 hover:bg-zinc-400 text-white font-bold 
-                                                        py-2 px-4 rounded
-                                                        focus:outline-none focus:shadow-outline" type="submit">
+                                                                py-2 px-4 rounded
+                                                                focus:outline-none focus:shadow-outline" type="submit">
                                     Send Message
                                 </button>
                             </div>
@@ -146,7 +186,6 @@
             </div>
         </div>
     </div>
-
     <MainFooter />
 </template>
 
@@ -262,7 +301,9 @@ export default defineComponent({
                 headers: authHeader(),
             })
                 .then((response) => {
-                    if ((response.status = 200)) { this.get_ticket = response.data }
+                    if ((response.status = 200)) {
+                         this.get_ticket = response.data 
+                        }
                 });
         },
         get_current_ticket_messages () {

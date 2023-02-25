@@ -89,19 +89,6 @@ import MainHeaderVendor from "../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../layouts/footers/FooterMain.vue";
 
 
-/**
- *
- @typedef {Object} itemforsale.image_one_url
- @typedef {Object} itemforsale.item_title
- @typedef {Object} itemforsale.uuid
- @typedef {Object} itemforsale.price
- @typedef {Object} itemforsale.origin_country_name
- @typedef {Object} itemforsale.shipping_info_0
- @typedef {Object} itemforsale.display_name
- @typedef {Object} itemforsale.image_one_url
-
- *
- */
 
 export default defineComponent({
   name: "MsgCreateOrder",

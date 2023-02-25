@@ -9,7 +9,7 @@
   </div>
     <div class="wrapper">
   <!-- Top Stuff-->
-  <div class="container max-w-7xl mx-aut  bg-gray-300 ">
+  <div class="container max-w-4xl mx-auto  bg-gray-300 ">
     <!-- Container-->
     <div class="mt-5 mb-5 ">
       <nav class="rounded-md w-full">
@@ -131,12 +131,6 @@ import MainHeaderVendor from "../../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../../layouts/footers/FooterMain.vue";
 import authHeader from "../../../services/auth.header";
 
-/**
- *
- @typedef {Object} user.user_admin
-
- *
- */
 
 export default defineComponent({
   name: "defaultaddress",

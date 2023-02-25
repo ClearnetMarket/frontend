@@ -158,14 +158,7 @@ import MainHeaderBottom from "../../../layouts/headers/MainHeaderBottom.vue";
 import MainHeaderVendor from "../../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../../layouts/footers/FooterMain.vue";
 import { formatDistance } from "date-fns";
-/**
- *
 
- @typedef {Object} order.item_uuid
-
-
- *
- */
 export default defineComponent({
   name: "userorders",
 

@@ -56,8 +56,6 @@
               </div>
               <div class="grid grid-cols-12 border-b-2 border-gray-400 mb-5 ">
                 <div class="col-span-12 ">Total Disputes: {{ stats_dispute_count }}</div>
-                <div class="col-span-12 ">Open Disputes: {{ stats_dispute_count }}</div>
-                <div class="col-span-12 ">Completed Disputes: {{ stats_dispute_count }}</div>
               </div>
             </div>
           </div>
@@ -100,10 +98,6 @@ export default defineComponent({
       stats_ticket_completed: 0,
 
       stats_dispute_count: 0,
-      stats_dispute_open: 0,
-      stats_dispute_completed: 0,
-
-
 
     };
   },
@@ -113,6 +107,7 @@ export default defineComponent({
     this.getdisputesneedmod();
     this.getdisputeshasmod();
     this.get_ticket_stats();
+    this.get_dispute_stats();
   },
 
   methods: {
@@ -189,7 +184,7 @@ export default defineComponent({
       })
         .then((response) => {
           if ((response.status = 200)) {
-            console.log(response.data)
+          
             this.stats_ticket_count = response.data.count;
             this.stats_ticket_open = response.data.open;
             this.stats_ticket_completed = response.data.completed;
@@ -206,10 +201,9 @@ export default defineComponent({
       })
         .then((response) => {
           if ((response.status = 200)) {
-            console.log(response.data)
+         
             this.stats_dispute_count = response.data.count;
-            this.stats_dispute_open = response.data.open;
-            this.stats_dispute_completed = response.data.completed;
+          
           }
           else { }
         });

@@ -166,20 +166,6 @@ import MainHeaderVendor from "../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../layouts/footers/FooterMain.vue";
 
 
-/**
- *
- @typedef {Object} item.total_sold
- @typedef {Object} item.view_count
- @typedef {Object} t.category
- @typedef {Object} t.confirmations
- @typedef {Object} t.fee
- @typedef {Object} t.commentxmr
- @typedef {Object} t.txid
- @typedef {Object} user.user_admin
- @typedef {Object} user_admin
-
- *
- */
 
 export default defineComponent({
   name: "forsale",

@@ -163,14 +163,7 @@ import axios from "axios";
 import authHeader from "../../../services/auth.header";
 import { notify } from "@kyvg/vue3-notification";
 
-/**
- *
- @typedef {Object} marketitem.image_one_server
- @typedef {Object} marketitem.image_two_server
- @typedef {Object} marketitem.image_three_server
- @typedef {Object} marketitem.image_four_server
- *
- */
+
 
 export default defineComponent({
   name: "UploadImages",

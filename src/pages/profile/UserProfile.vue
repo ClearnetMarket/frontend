@@ -141,11 +141,7 @@ import MainHeaderMid from "../../layouts/headers/MainHeaderMid.vue";
 import MainHeaderBottom from "../../layouts/headers/MainHeaderBottom.vue";
 import MainHeaderVendor from "../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../layouts/footers/FooterMain.vue";
-/**
- *
- @typedef {Object} user_stats.total_items_bought
- *
- */
+
 
 export default defineComponent({
   name: "UserProfile",

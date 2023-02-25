@@ -335,13 +335,6 @@ import MainHeaderVendor from "../../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../../layouts/footers/FooterMain.vue";
 
 
-/**
- *
- @typedef {Object} order.shipping_description
- @typedef {Object} order.title_of_item
- @typedef {Object} order.customer_user_name
- *
- */
 
 export default defineComponent({
   name: "vendororderswaiting",

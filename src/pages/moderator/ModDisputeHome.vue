@@ -25,7 +25,6 @@
           <li>
             <span class="text-gray-500 mx-2">/</span>
           </li>
-
         </ol>
       </nav>
 
@@ -48,8 +47,8 @@
       </div>
 
 
-      <div class="col-span-12 sm:col-span-8 ">
-        <div class="grid grid-cols-12 ">
+      <div class="col-span-12 sm:col-span-8 mb-20 ">
+        <div class="grid grid-cols-12 bg-white p-5 rounded-md">
 
           <div class="col-span-12 mt-5 text-[18px] text-center">Disputes Need Mod Support</div>
           <div class="col-span-12 mt-5">
@@ -204,6 +203,7 @@ export default defineComponent({
         .then((response) => {
           if (response.status == 200) {
             this.needmodorders = response.data;
+           
           }
         });
     },
@@ -224,20 +224,3 @@ export default defineComponent({
   },
 });
 </script>
-Footer
-© 2023 GitHub, Inc.
-Footer navigation
-
-    Terms
-    Privacy
-    Security
-    Status
-    Docs
-    Contact GitHub
-    Pricing
-    API
-    Training
-    Blog
-    About
-
-frontend/ModHome.vue at main · ClearnetMarket/frontend

@@ -18,21 +18,7 @@
 import {defineComponent} from "vue";
 import axios from "axios";
 import generic_item from "../item/generic_item.vue";
-/**
- *
-@typedef {Object} item.id
-@typedef {Object} item.uuid
-@typedef {Object} item.image_one_url
-@typedef {Object} item.image_one_server
-@typedef {Object} item.item_title
-@typedef {Object} item.currency
-@typedef {Object} item.price
-@typedef {Object} item.origin_country_name
-@typedef {Object} item.digitalcurrencyone
-@typedef {Object} item.digitalcurrencytwo
-@typedef {Object} item.digitalcurrencythree
- *
- */
+
 
 export default defineComponent({
   name: "TodayFeatured",

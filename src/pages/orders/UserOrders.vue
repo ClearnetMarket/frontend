@@ -418,12 +418,35 @@ export default defineComponent({
             type: "success",
           });
           this.createdisputechat(uuid);
+          this.createdisputenotificationchat(uuid);
           this.getuserorders();
         }
       });
     },
     // creates dispute chat (background call)
     createdisputechat (uuid: any) {
+      axios({
+        method: "post",
+        url: "/msg/create/dispute/" + uuid,
+        withCredentials: true,
+        headers: authHeader(),
+      }).then(() => {
+
+      });
+    },
+    // creates dispute vendor notification
+    createdisputenotificationchat (uuid: any) {
+      axios({
+        method: "post",
+        url: "/vendororders/notification/dispute/" + uuid,
+        withCredentials: true,
+        headers: authHeader(),
+      }).then(() => {
+
+      });
+    },
+        // creates dispute chat (background call)
+    createdisputenotification (uuid: any) {
       axios({
         method: "post",
         url: "/msg/create/dispute/" + uuid,

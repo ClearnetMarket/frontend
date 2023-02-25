@@ -266,18 +266,6 @@ import MainHeaderBottom from "../../layouts/headers/MainHeaderBottom.vue";
 import MainHeaderVendor from "../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../layouts/footers/FooterMain.vue";
 
-/**
- *
- @typedef {Object} item.selected_shipping
- @typedef {Object} item.shipping_free
- @typedef {Object} item.quantity_of_item
- @typedef {Object} item.shipping_two
- @typedef {Object} item.shipping_info_3
- @typedef {Object} item.vendor_supply
- @typedef {Object} item.shipping_three
- @typedef {Object} item.shipping_three
- *
- */
 
 export default defineComponent({
   name: "Cart",

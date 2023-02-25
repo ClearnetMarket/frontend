@@ -131,12 +131,6 @@ import MainHeaderVendor from "../../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../../layouts/footers/FooterMain.vue";
 import authHeader from "../../../services/auth.header";
 
-/**
- *
- @typedef {Object} user.user_admin
- *
- */
-
 
 export default defineComponent({
   name: "account",

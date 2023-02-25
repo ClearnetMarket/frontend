@@ -70,12 +70,7 @@ import ItemShipping from "./Item/ItemShipping.vue";
 import ItemSimiliarItems from "./Item/ItemSimiliarItems.vue";
 import { notify } from "@kyvg/vue3-notification";
 
-/**
- *
- @typedef {Object} user.user_admin
 
- *
- */
 
 
 export default defineComponent({

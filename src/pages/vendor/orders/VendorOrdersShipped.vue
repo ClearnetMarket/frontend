@@ -262,19 +262,7 @@ import MainHeaderMid from "../../../layouts/headers/MainHeaderMid.vue";
 import MainHeaderBottom from "../../../layouts/headers/MainHeaderBottom.vue";
 import MainHeaderVendor from "../../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../../layouts/footers/FooterMain.vue";
-/**
- *
- @typedef {Object} order.price_total_xmr
- @typedef {Object} order.digital_currency
- @typedef {Object} order.shipping_price_btc
- @typedef {Object} order.shipping_price_xmr
- @typedef {Object} order.shipping_price_btc
- @typedef {Object} order.price_total_bch
- @typedef {Object} order.shipping_price_bch
- @typedef {Object} order.price_total_btc
 
- *
- */
 
 export default defineComponent({
   name: "vendorordersshipped",

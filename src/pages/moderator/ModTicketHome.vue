@@ -3,21 +3,21 @@
     <MainHeaderTop />
     <MainHeaderMid />
     <MainHeaderBottom />
-        <div class="wrapper">
-    <div class="max-w-4xl mx-auto wrapper px-10">
-        <div class="grid grid-cols-1 w-full gap-4">
+    <div class="wrapper">
+        <div class="max-w-4xl mx-auto wrapper px-10">
+            <div class="grid grid-cols-1 w-full gap-4">
 
-            <nav class="rounded-md">
-                <ol class="list-reset flex">
-                    <li>
-                        <router-link :to="{ name: 'home' }">
-                            <a class="text-blue-600 hover:text-blue-700">Home</a>
-                        </router-link>
-                    </li>
-                    <li>
-                        <span class="text-gray-500 mx-2">/</span>
-                    </li>
-                      <li>
+                <nav class="rounded-md">
+                    <ol class="list-reset flex">
+                        <li>
+                            <router-link :to="{ name: 'home' }">
+                                <a class="text-blue-600 hover:text-blue-700">Home</a>
+                            </router-link>
+                        </li>
+                        <li>
+                            <span class="text-gray-500 mx-2">/</span>
+                        </li>
+                        <li>
                             <router-link :to="{ name: 'ModHome' }">
                                 <a class="text-blue-600 hover:text-blue-700">Mod Home</a>
                             </router-link>
@@ -25,82 +25,82 @@
                         <li>
                             <span class="text-gray-500 mx-2">/</span>
                         </li>
-                </ol>
-            </nav>
+                    </ol>
+                </nav>
 
-        </div>
-        <div class="text-center text-[20px] mb-5">Mod Tickets Home</div>
-        <div class="grid grid-cols-12 gap-5">
-            <div class="col-span-12 sm:col-span-4 ">
-                <div class="bg-white rounded-md p-3">
-                    <div class="text-[20px] font-bold ">Admin Navigation</div>
-                    <router-link :to="{ name: 'ModHome' }">
-                        <div class="hover:underline text-blue-600 hover:text-blue-700 my-5">Mod Home</div>
-                    </router-link>
-                    <router-link :to="{ name: 'ModTicketsHome' }">
-                        <div class="hover:underline text-blue-600 hover:text-blue-700 my-5">Tickets</div>
-                    </router-link>
-                    <router-link :to="{ name: 'ModDisputeHome' }">
-                        <div class="hover:underline text-blue-600 hover:text-blue-700 my-5">Disputes</div>
-                    </router-link>
-                </div>
             </div>
+            <div class="text-center text-[20px] mb-5">Mod Tickets Home</div>
+            <div class="grid grid-cols-12 gap-5">
+                <div class="col-span-12 sm:col-span-4 ">
+                    <div class="bg-white rounded-md p-3">
+                        <div class="text-[20px] font-bold ">Admin Navigation</div>
+                        <router-link :to="{ name: 'ModHome' }">
+                            <div class="hover:underline text-blue-600 hover:text-blue-700 my-5">Mod Home</div>
+                        </router-link>
+                        <router-link :to="{ name: 'ModTicketsHome' }">
+                            <div class="hover:underline text-blue-600 hover:text-blue-700 my-5">Tickets</div>
+                        </router-link>
+                        <router-link :to="{ name: 'ModDisputeHome' }">
+                            <div class="hover:underline text-blue-600 hover:text-blue-700 my-5">Disputes</div>
+                        </router-link>
+                    </div>
+                </div>
 
 
-            <div class="col-span-12 sm:col-span-8  rounded-md p-5">
-                <div class="grid grid-cols-12 gap-5">
+                <div class="col-span-12 sm:col-span-8  rounded-md p-5">
+                    <div class="grid grid-cols-12 gap-5">
 
-                    <div class="col-span-12 sm:col-span-8">
-                        <div class="text-[18px] mb-5">Current Tickets</div>
-                        <div v-if="all_tickets.length > 0">
-                            <div v-for="ticket in all_tickets" :key="ticket.id">
-                                <div class="grid grid-cols-12 border-b-2 border-gray-400 mb-5 ">
-                                    <router-link class="col-span-12"
-                                        :to="{ name: 'ModTickets', params: { uuid: ticket.uuid } }">
-                                        <div
-                                            class="col-span-12  hover:underline hover:text-blue-500 text-[16px] overflow-hidden">
-                                            {{ ticket.subject }}
+                        <div class="col-span-12 sm:col-span-12 ">
+                         
+                            <div v-if="all_tickets.length > 0">
+                                <div v-for="ticket in all_tickets" :key="ticket.id">
+                                    <div class="grid grid-cols-12 border-b-2 border-gray-400  bg-white mb-5 p-5 rounded-md">
+                                        <router-link class="col-span-12"
+                                            :to="{ name: 'ModTicket', params: { uuid: ticket.uuid } }">
+                                            <div
+                                                class="col-span-12  text-blue-600 hover:underline hover:text-blue-500 text-[16px] overflow-hidden">
+                                                {{ ticket.subject }}
+                                            </div>
+                                        </router-link>
+                                        <div class="col-span-12 flex gap-5">
+                                            <div class="">
+                                                User:
+                                            </div>
+                                            <div class="">
+                                                {{ ticket.author }}
+                                            </div>
                                         </div>
-                                    </router-link>
-                                    <div class="col-span-12 flex gap-5 mt-2">
-                                        <div class="">
-                                            User:
+                                        <div class="col-span-12 flex gap-5 ">
+                                            <div class="">
+                                                Created:
+                                            </div>
+                                            <div class="">
+                                                {{ relativeDate(ticket.timestamp) }} ago
+                                            </div>
                                         </div>
-                                        <div class="">
-                                            {{ ticket.author }}
-                                        </div>
-                                    </div>
-                                    <div class="col-span-12 flex gap-5 mt-2">
-                                        <div class="">
-                                            Created:
-                                        </div>
-                                        <div class="">
-                                            {{ relativeDate(ticket.timestamp) }} ago
-                                        </div>
-                                    </div>
-                                    <div class="col-span-12 flex gap-5">
-                                        <div class="">
-                                            Status:
-                                        </div>
-                                        <div class="">
-                                            <div v-if="ticket.status == 0">New Message</div>
-                                            <div v-if="ticket.status == 1">Open</div>
-                                            <div v-if="ticket.status == 2">Closed</div>
+                                        <div class="col-span-12 flex gap-5">
+                                            <div class="">
+                                                Status:
+                                            </div>
+                                            <div class="">
+                                                <div v-if="ticket.status == 0">Closed</div>
+                                                <div v-if="ticket.status == 1">Open</div>
+                                                <div v-if="ticket.status == 2">New Message</div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div v-else>
-                            No Previous Tickets
+                            <div v-else>
+                                No Previous Tickets
+                            </div>
                         </div>
                     </div>
-                </div>
 
+                </div>
             </div>
         </div>
     </div>
-        </div>
     <MainFooter />
 </template>
 

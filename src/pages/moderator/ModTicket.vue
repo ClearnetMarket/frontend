@@ -3,9 +3,9 @@
     <MainHeaderTop />
     <MainHeaderMid />
     <MainHeaderBottom />
-    <div class="wrapper">
+    <div class="wrapper" v-if="loaded">
         <div class="container max-w-5xl mx-auto px-10  mb-10">
-            
+
             <div class="grid grid-cols-1 w-full gap-4 mb-5">
                 <nav class="rounded-md">
                     <ol class="list-reset flex">
@@ -37,81 +37,97 @@
                 </nav>
             </div>
 
-            <div v-if="loaded">
-                <div class="grid grid-cols-12 gap-5">
-                    <div class="col-span-12 sm:col-span-4">
-                        <div v-if="userprofile" class=" bg-white rounded-md p-5">
-                            <div class="col-span-12 md:col-span-3 flex justify-center">
-                                <img class="object-fit" :src="userprofile.profileimage_url_250">
-                            </div>
-                            <div class="col-span-12 md:col-span-9">
-                                <div class="text-[20px] text-center">{{ userprofile.display_name }}</div>
-                                <div class="text-gray-500 text-center  mb-5">
-                                    Member Since: {{ relativeDate(userprofile.member_since) }} ago
-                                </div>
+
+            <div class="grid grid-cols-12 gap-5">
+                <div class="col-span-12 sm:col-span-4">
+                    <div v-if="userprofile" class=" bg-white rounded-md p-5">
+                        <div class="col-span-12 md:col-span-3 flex justify-center">
+                            <img class="object-fit" :src="userprofile.profileimage_url_250">
+                        </div>
+                        <div class="col-span-12 md:col-span-9">
+                            <div class="text-[20px] text-center">{{ userprofile.display_name }}</div>
+                            <div class="text-gray-500 text-center  mb-5">
+                                Member Since: {{ relativeDate(userprofile.member_since) }} ago
                             </div>
                         </div>
                     </div>
-                    <div class="col-span-12 sm:col-span-8">
-                        <div class="text-[18px] text-center mb-3" v-if="get_ticket != null">
+                </div>
+
+                <div class="col-span-12 sm:col-span-8">
+                    <div class="grid grid-cols-12 p-5  bg-white rounded-md mb-5">
+                        <div class="col-span-12 text-[18px] text-center mb-3" v-if="get_ticket != null">
                             Ticket # {{ get_ticket.uuid }}:
                         </div>
-
-                        <form class="rounded-md pt-6 pb-8 mb-4 w-full bg-white p-5" @submit.prevent="onSubmit">
+                        <div class="col-span-12 text-[18px] text-center mb-3" v-if="get_ticket.status == 1">
+                            Status: Open
+                        </div>
+                        <div class="col-span-12 text-[18px] text-center mb-3" v-else>
+                            Status: Closed
+                        </div>
+                        <button class="col-span-12  bg-gray-600 hover:bg-zinc-400 text-white py-2 px-4 
+                            rounded focus:outline-none focus:shadow-outline mb-5" type="submit"
+                            @click.prevent="close_current_ticket()">
+                            Mark Ticket as Closed
+                        </button>
+                        <form class="col-span-12 rounded-md pt-6 pb-8 mb-4 w-full bg-white p-5" @submit.prevent="onSubmit">
 
                             <textarea v-model="SendMsgForm.msginfo" id="item_description" placeholder="Write something .."
                                 class="shadow appearance-none border rounded w-full py-2 px-3
-                                                                    text-gray-700 leading-tight
-                                                                    focus:outline-none focus:shadow-outline mb-3">
-                                                        </textarea>
+                                            text-gray-700 leading-tight
+                                            focus:outline-none focus:shadow-outline mb-3">
+                                </textarea>
                             <span v-if="v$.SendMsgForm.msginfo.$error" class="text-red-600 text-center">
                                 {{ v$.SendMsgForm.msginfo.$errors[0].$message }}
                             </span>
 
                             <div class="flex justify-end">
-                                <button class="bg-gray-600 hover:bg-zinc-400 text-white font-bold 
-                                                                            py-2 px-4 rounded
-                                                                            focus:outline-none focus:shadow-outline"
+                                <button
+                                    class="bg-gray-600 hover:bg-zinc-400 text-white font-bold 
+                                                                                            py-2 px-4 rounded
+                                                                                            focus:outline-none focus:shadow-outline"
                                     type="submit">
                                     Send Message
                                 </button>
                             </div>
                         </form>
-                        <div class="grid grid-cols-12 p-5  bg-white rounded-md">
-                            <div v-for="comment in get_ticket_data" :key="comment.id" class="col-span-12">
-                                <div class="grid grid-cols-12 mb-5">
-                                    <div v-if="comment.author_uuid == user.uuid" class="col-span-12 flex justify-start">
-                                        <div class="col-span-12 text-gray-600 font-bold text-[18px]">
-                                            <router-link class="hover:text-blue-500 hover:underline" :to="{
-                                                name: 'userprofile',
-                                                params: { uuid: comment.author_uuid },
-                                            }">
-                                                {{ comment.author }}
-                                            </router-link>
-                                        </div>
-                                        <div class="text-gray-600">
-                                            - {{ relativeDate(comment.timestamp) }} ago
+                    </div>
+                    <div class="grid grid-cols-12 p-5  bg-white rounded-md">
+                        <div v-for="comment in get_ticket_data" :key="comment.id" class="col-span-12">
+                            <div class="grid grid-cols-12 mb-5" v-if="user">
+                            
+
+                                <div v-if="comment.author_uuid != admin_user.user_id"
+                                    class="col-span-12 flex justify-start">
+                                    <div class="col-span-12 text-gray-600 font-bold text-[18px]">
+                                        <router-link class="hover:text-blue-500 hover:underline" :to="{
+                                            name: 'userprofile',
+                                            params: { uuid: comment.author_uuid },
+                                        }">
+                                            {{ comment.author }}
+                                        </router-link>
+                                    </div>
+                                    <div class="text-gray-600">
+                                        - {{ relativeDate(comment.timestamp) }} ago
+                                    </div>
+                                </div>
+                                <div v-else class="col-span-12  flex justify-end">
+                                    <div class="col-span-12 text-yellow-600 font-bold text-[18px]">
+                                        {{ comment.author }} [ADMIN]
+                                    </div>
+                                    <div class="text-gray-600">
+                                        - {{ relativeDate(comment.timestamp) }} ago
+                                    </div>
+                                </div>
+                                <div class=" col-span-12">
+                                    <div v-if="comment.author_uuid != admin_user.user_id"
+                                        class="col-span-12 flex   justify-start">
+                                        <div class="col-span-12 text-white bg-blue-500 p-3 border rounded-md  ">
+                                            {{ comment.text_body }}
                                         </div>
                                     </div>
-                                    <div v-else class="col-span-12  flex justify-end">
-                                        <div class="col-span-12 text-yellow-600 font-bold text-[18px]">
-                                            {{ comment.author }} [ADMIN]
-                                        </div>
-                                        <div class="text-gray-600">
-                                            - {{ relativeDate(comment.timestamp) }} ago
-                                        </div>
-                                    </div>
-                                    <div class="  col-span-12">
-                                        <div v-if="comment.author_uuid == user.uuid"
-                                            class="col-span-12 flex   justify-start">
-                                            <div class="col-span-12 text-white bg-blue-500 p-3 border rounded-md  ">
-                                                {{ comment.text_body }}
-                                            </div>
-                                        </div>
-                                        <div v-else class="col-span-12 flex  justify-end">
-                                            <div class="col-span-12 text-white bg-gray-700 p-3 border rounded-md">
-                                                {{ comment.text_body }}
-                                            </div>
+                                    <div v-else class="col-span-12 flex  justify-end">
+                                        <div class="col-span-12 text-white bg-gray-700 p-3 border rounded-md">
+                                            {{ comment.text_body }}
                                         </div>
                                     </div>
                                 </div>
@@ -120,6 +136,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
     <MainFooter />
@@ -141,7 +158,7 @@ import { formatDistance } from "date-fns";
 
 
 export default defineComponent({
-    name: "ModTickets",
+    name: "ModTicket",
 
     components: {
         MainHeaderTop,
@@ -156,6 +173,7 @@ export default defineComponent({
             v$: useValidate(),
             loaded: false,
             get_ticket: null,
+
             get_ticket_data: [],
             userlist: [],
             userprofile: null,
@@ -197,9 +215,9 @@ export default defineComponent({
                     if (response.status == 200) {
                         if (response.data.user.user_admin < 2) {
                             this.$router.push({ name: "home" });
-                        } else (
-                            this.admin_user = response.data.user
-                        )
+                        } else {
+                            this.admin_user = response.data.user;
+                        }
                     }
                 });
         },
@@ -239,6 +257,7 @@ export default defineComponent({
                         this.author_uuid = response.data.author_uuid;
                     }
                     this.getuser();
+                    this.loaded = true;
 
                 });
         },
@@ -260,7 +279,26 @@ export default defineComponent({
                     }
                 });
         },
-
+        close_current_ticket () {
+            let url = this.$route.params.uuid
+            axios({
+                method: "post",
+                url: "/mod/ticket/close/" + url,
+                withCredentials: true,
+                data: { ticketid: url },
+                headers: authHeader(),
+            })
+                .then((response) => {
+                    if ((response.status = 200)) {
+                        notify({
+                            title: "Message",
+                            text: "Successfully closed ticket",
+                            type: "success",
+                        });
+                        this.get_current_ticket();
+                    }
+                })
+        },
         sendMessage (payLoad: { textbody: string, ticketid: any }) {
             axios({
                 method: "post",

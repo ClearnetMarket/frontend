@@ -75,17 +75,17 @@ import supportviewticket from "../pages/support/viewticket.vue";
 
 import Dispute from "../pages/moderator/Dispute.vue";
 import ModDisputeHome from "../pages/moderator/ModDisputeHome.vue";
-import ModDisputes from "../pages/moderator/ModDisputes.vue";
+import ModDispute from "../pages/moderator/ModDispute.vue";
 import ModHome from "../pages/moderator/ModHome.vue";
 import ModTicketsHome from "../pages/moderator/ModTicketHome.vue";
-import ModTickets from "../pages/moderator/ModTickets.vue";
+import ModTicket from "../pages/moderator/ModTicket.vue";
 
 
 const routes = [
     {
         path: "/mod/tickets/:uuid",
-        name: "ModTickets",
-        component: ModTickets,
+        name: "ModTicket",
+        component: ModTicket,
     },
     {
         path: "/mod/tickets",
@@ -94,8 +94,8 @@ const routes = [
     },
     {
         path: "/mod/dispute/:uuid",
-        name: "ModDisputes",
-        component: ModDisputes,
+        name: "ModDispute",
+        component: ModDispute,
     },
     {
         path: "/mod/disputes",

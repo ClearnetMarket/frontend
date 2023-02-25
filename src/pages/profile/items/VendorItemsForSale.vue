@@ -46,18 +46,7 @@
 import { defineComponent } from "vue";
 import axios from "axios";
 
-/**
- *
- @typedef {Object} item.image_one
- @typedef {Object} item.id
- @typedef {Object} item.uuid
- @typedef {Object} item.image_one_server
- @typedef {Object} item.item_title
- @typedef {Object} item.price
- @typedef {Object} item.currency
- @typedef {Object} item.origin_country_name
- *
- */
+
 export default defineComponent({
   name: "GetVendorItems",
   props: ["vendoruuid"],

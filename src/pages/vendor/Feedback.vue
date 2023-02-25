@@ -159,15 +159,7 @@ import MainFooter from "../../layouts/footers/FooterMain.vue";
 import authHeader from "../../services/auth.header";
 import StarRating from "../../components/star_rating/Star.vue";
 
-/**
- *
- @typedef {Object} review.customer_name
- @typedef {Object} review.item_rating
- @typedef {Object} review.vendor_rating
- @typedef {Object} user.user_name
 
- *
- */
 
 export default defineComponent({
   name: "vendorfeedback",

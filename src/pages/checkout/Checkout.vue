@@ -235,15 +235,6 @@ import MainHeaderVendor from "../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../layouts/footers/FooterMain.vue";
 
 
-/**
- *
- @typedef {Object} item.selected_currency
- @typedef {Object} item.selected_digital_currency
- @typedef {Object} item.quantity_of_item
- @typedef {Object} item.price_of_item
- *
- */
-
 export default defineComponent({
   name: "Checkout",
 

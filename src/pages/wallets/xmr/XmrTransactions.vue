@@ -229,17 +229,7 @@ import MainHeaderVendor from "../../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../../layouts/footers/FooterMain.vue";
 import authHeader from "../../../services/auth.header.js";
 
-/**
- *
- @typedef {Object} t.balance
- @typedef {Object} t.orderid
- @typedef {Object} t.category
- @typedef {Object} t.confirmations
- @typedef {Object} t.fee
- @typedef {Object} t.commentxmr
- @typedef {Object} t.txid
- *
- */
+
 
 export default defineComponent({
   name: "xmrtransactions",
