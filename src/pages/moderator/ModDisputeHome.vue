@@ -146,6 +146,7 @@ export default defineComponent({
   },
   data () {
     return {
+      interval: null,
       needmodorders: [],
       hadmodorders: [],
     };
@@ -154,6 +155,15 @@ export default defineComponent({
     this.userstatus();
     this.getdisputesneedmod();
     this.getdisputeshasmod();
+  },
+  created () {
+    this.interval = setInterval(() => {
+      this.getdisputesneedmod();
+      this.getdisputeshasmod();
+    }, 30000);
+  },
+  destroyed () {
+    clearInterval(this.interval)
   },
   methods: {
     // get user status

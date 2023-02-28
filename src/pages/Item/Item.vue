@@ -36,7 +36,7 @@
     </div>
 
 
-    <ItemTop @UpdateCart="UpdateCart" />
+    <ItemTop @UpdateCart="UpdateCart"  />
 
     <ItemDescription v-bind:description="description" />
 
@@ -56,7 +56,6 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import axios from "axios";
-import { useRoute } from "vue-router";
 import authHeader from "../../services/auth.header";
 import MainHeaderTop from "../../layouts/headers/MainHeaderTop.vue";
 import MainHeaderMid from "../../layouts/headers/MainHeaderMid.vue";
@@ -128,6 +127,7 @@ export default defineComponent({
   watch: {
     $route () {
       this.item == null;
+      this.vendorreviews == null;
       
       this.item_id = this.$route.params.id;
       this.getitem();

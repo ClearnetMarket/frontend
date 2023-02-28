@@ -55,17 +55,21 @@
 
                 <div class="col-span-12 sm:col-span-8">
                     <div class="grid grid-cols-12 p-5  bg-white rounded-md mb-5">
-                        <div class="col-span-12 text-[18px] text-center mb-3" v-if="get_ticket != null">
+                        <div class="col-span-12 text-[18px]  mb-3" v-if="get_ticket != null">
                             Ticket # {{ get_ticket.uuid }}:
                         </div>
-                        <div class="col-span-12 text-[18px] text-center mb-3" v-if="get_ticket.status == 1">
+                         <div class="col-span-12 text-[18px]  mb-3 bg-gray-300 round-md" v-if="get_ticket != null">
+                            {{ get_ticket.subject }}
+                        </div>
+                        
+                        <div class="col-span-12 text-[18px] mb-3" v-if="get_ticket.status == 1">
                             Status: Open
                         </div>
-                        <div class="col-span-12 text-[18px] text-center mb-3" v-else>
+                        <div class="col-span-12 text-[18px] mb-3" v-else>
                             Status: Closed
                         </div>
                         <button class="col-span-12  bg-gray-600 hover:bg-zinc-400 text-white py-2 px-4 
-                            rounded focus:outline-none focus:shadow-outline mb-5" type="submit"
+                            rounded focus:outline-none focus:shadow-outline mb-5" type="submit" 
                             @click.prevent="close_current_ticket()">
                             Mark Ticket as Closed
                         </button>
@@ -83,8 +87,8 @@
                             <div class="flex justify-end">
                                 <button
                                     class="bg-gray-600 hover:bg-zinc-400 text-white font-bold 
-                                                                                            py-2 px-4 rounded
-                                                                                            focus:outline-none focus:shadow-outline"
+                                            py-2 px-4 rounded
+                                            focus:outline-none focus:shadow-outline"
                                     type="submit">
                                     Send Message
                                 </button>
@@ -173,7 +177,7 @@ export default defineComponent({
             v$: useValidate(),
             loaded: false,
             get_ticket: null,
-
+            interval: null,
             get_ticket_data: [],
             userlist: [],
             userprofile: null,
@@ -190,8 +194,17 @@ export default defineComponent({
         this.userstatus();
         this.get_current_ticket();
         this.get_current_ticket_messages();
+                this.interval = setInterval(() => {
+            this.get_current_ticket_messages();
+        }, 50000);
     },
 
+    created () {
+
+    },
+    destroyed () {
+        clearInterval(this.interval)
+    },
     validations () {
         return {
             SendMsgForm: {
@@ -245,10 +258,9 @@ export default defineComponent({
         get_current_ticket () {
             let url = this.$route.params.uuid
             axios({
-                method: "post",
-                url: "/mod/ticket",
+                method: "get",
+                url: "/mod/ticket/" + url,
                 withCredentials: true,
-                data: { ticketid: url },
                 headers: authHeader(),
             })
                 .then((response) => {
@@ -263,29 +275,29 @@ export default defineComponent({
         },
         get_current_ticket_messages () {
             let url = this.$route.params.uuid
+    
             axios({
-                method: "post",
-                url: "/mod/ticket/messages",
+                method: "get",
+                url: "/mod/ticket/messages/" + url,
                 withCredentials: true,
-                data: { ticketid: url },
+            
                 headers: authHeader(),
             })
                 .then((response) => {
                     if ((response.status = 200)) {
                         this.get_ticket_data = response.data;
-
                         this.loaded = true;
 
                     }
                 });
+          
         },
         close_current_ticket () {
             let url = this.$route.params.uuid
             axios({
-                method: "post",
+                method: "put",
                 url: "/mod/ticket/close/" + url,
                 withCredentials: true,
-                data: { ticketid: url },
                 headers: authHeader(),
             })
                 .then((response) => {
@@ -313,7 +325,6 @@ export default defineComponent({
                     }
                 })
                 .catch((error) => {
-
                     notify({
                         title: "Freeport Error",
                         text: "Error posting information.",

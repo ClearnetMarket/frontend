@@ -55,9 +55,9 @@
                                         Status:
                                     </div>
                                     <div class="">{{  }}
-                                        <div v-if="ticket.status == 0">Closed</div>
-                                        <div v-if="ticket.status == 1">Open</div>
-                                        <div v-if="ticket.status == 2">New Message</div>
+                                        <div class="text-red-600 font-bold" v-if="ticket.status == 0">Closed</div>
+                                        <div class="text-green-600 font-bold" v-if="ticket.status == 1">Open</div>
+                                        <div class="text-yellow-600 font-bold" v-if="ticket.status == 2">New Message</div>
                                     </div>
                                 </div>
                             </div>

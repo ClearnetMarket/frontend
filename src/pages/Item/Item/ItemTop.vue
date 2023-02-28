@@ -277,10 +277,11 @@ export default defineComponent({
 
   data () {
     return {
-      loaded_site: false,
+ 
+      item_id: null,
       uuid: null,
       user: null,
-      item_id: null,
+
       shopping_cart_count: "",
       vendor_reviews_total: "",
       exact_city: "",
@@ -333,16 +334,61 @@ export default defineComponent({
     };
   },
   created () {
+
+  },
+  watch: {
+    $route () {
+
+      this.title = null;
+      this.category_name = null;
+      this.itemcount = null;
+      this.totalsold = null;
+      this.condition = null;
+      this.vendorname = null;
+
+      this.digitalcurrencyone = null;
+      this.digitalcurrencytwo = null;
+      this.digitalcurrencythree = null;
+
+      this.origin_country_name = null;
+      this.international = null;
+
+      this.image_one_250 = null;
+      this.image_two_250 = null;
+      this.image_three_250 = null;
+      this.image_four_250 = null;
+
+      this.current_main_image = null;
+      this.image_one_500 = null;
+      this.image_two_500 = null;
+      this.image_three_500 = null;
+      this.image_four_500 = null;
+
+      this.freeshipping = null;
+      this.freeshippingdays = null;
+      this.shippingfree = null;
+      this.shippingtwo = null;
+      this.shippingthree = null;
+      this.shippingpricetwo = null;
+      this.shippingdayfree = null;
+      this.shippingdaytwo = null;
+      this.shippingpricethree = null;
+      this.shippingdaythree = null;
+      
+ 
+      console.log("changed")
+      this.getitem();
+
+    },
+  },
+  mounted () {
+
     this.userstatus();
     this.getitem();
   },
 
-  mounted () {
-    const item_id_route = useRoute();
-    this.item_id = item_id_route.params.id;
-  },
-
   methods: {
+
     userstatus () {
       axios({
         method: "get",
@@ -360,6 +406,8 @@ export default defineComponent({
         .catch(() => { this.user = null });
     },
     getitem () {
+      console.log("getting item")
+      console.log(this.item_id)
       let item_id_route = useRoute();
       this.item_id = item_id_route.params.id;
       axios({
@@ -390,7 +438,7 @@ export default defineComponent({
             this.image_three_250 = response.data.image_three_url_250;
             this.image_four_250 = response.data.image_four_url_250;
 
-            this.current_main_image = response.data.image_one_url_500
+            this.current_main_image = response.data.image_one_url_500;
             this.image_one_500 = response.data.image_one_url_500;
             this.image_two_500 = response.data.image_two_url_500;
             this.image_three_500 = response.data.image_three_url_500;

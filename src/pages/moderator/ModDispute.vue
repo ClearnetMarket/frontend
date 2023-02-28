@@ -360,6 +360,7 @@ export default defineComponent({
 
     data () {
         return {
+            interval: null,
             mainpostcomments: [],
             order_id: null,
             loaded: false,
@@ -382,6 +383,14 @@ export default defineComponent({
         const order_id_route = useRoute();
         this.order_id = order_id_route.params.uuid;
         this.getuserorder();
+        this.interval = setInterval(() => {
+            this.getmainpostcomments();
+            this.getautofinalizetime();
+        }, 30000);
+    },
+
+    destroyed () {
+        clearInterval(this.interval)
     },
 
     methods: {
@@ -399,7 +408,6 @@ export default defineComponent({
                 headers: authHeader(),
             }).then((response) => {
                 if (response.status == 200) {
-
                     if (response.data.user.user_admin < 2) {
                         this.$router.push({ name: "home" });
                     }

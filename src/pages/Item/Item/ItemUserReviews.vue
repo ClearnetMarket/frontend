@@ -96,13 +96,10 @@
               <div class="col-span-12 text-sm font-medium text-gray-500 dark:text-gray-400">
                 {{ review.customer_name }}
               </div>
-              <div class="col-span-12  text-blue-600 hover:text-blue-600 hover:underline text-[14px]">
-                <router-link :to="{
-                name: 'MarketItem',
-                params: { id: review.item_uuid },
-                  }">
+              <div class="col-span-12  text-[14px]">
+             
                   {{ review.title_of_item }}
-                </router-link>
+           
               </div>
 
               <div class="col-span-12 mb-2">

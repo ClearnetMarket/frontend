@@ -44,7 +44,7 @@
                 </router-link>
               </div>
               <div v-if="userobject.post_id !== postid">
-                <div v-if="userobject.read === 0">
+                <div v-if="userobject.read === 1">
                   <router-link :to="{
                     name: 'MsgView',
                     params: { postid: userobject.post_id },
@@ -62,7 +62,7 @@
                     </div>
                   </router-link>
                 </div>
-                <div v-if="userobject.read === 1">
+                <div v-if="userobject.read === 0">
                   <router-link :to="{
                     name: 'MsgView',
                     params: { postid: userobject.post_id },

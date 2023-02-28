@@ -7,8 +7,8 @@
           <div class="flex ml-5">
             <div class="pb-2">
               <select class="form-select mt-2 appearance-none block w-full 
-            px-3 py-1.5 text-base  text-black bg-white bg-clip-padding
-             bg-no-repeat rounded transition ease-in-out" aria-label="Default select example">
+                      px-3 py-1.5 text-base  text-black bg-white bg-clip-padding
+                       bg-no-repeat rounded transition ease-in-out" aria-label="Default select example">
                 <option selected @click="gotourl('categoryhome')">
                   Categories
                 </option>
@@ -60,20 +60,43 @@
                 </button>
               </router-link>
             </div>
-         
-              <div class="col-span-4 ">
+
+            <div class="col-span-4 ">
+              <div v-if="user">
+                <div class="mx-3 pt-2 text-[14px] font-bold">
+                  <div class="text-white">BTC</div>
+                  <div class="break-normal">{{ btcprice }} {{ returncurrency(user.currency) }}</div>
+                </div>
+              </div>
+              <div v-else>
                 <div class="mx-3 pt-2 text-[14px] font-bold">
                   <div class="text-white">BTC</div>
                   <div class="break-normal">{{ btcprice }} USD</div>
                 </div>
               </div>
-              <div class="col-span-3">
+            </div>
+            <div class="col-span-3">
+              <div v-if="user">
+                <div class="mx-3 pt-2 text-[14px] font-bold">
+                  <div class="text-white">BCH</div>
+                  <div class="break-normal">{{ bchprice }} {{ returncurrency(user.currency) }}</div>
+                </div>
+              </div>
+              <div v-else>
                 <div class="mx-3 pt-2 text-[14px] font-bold">
                   <div class="text-white">BCH</div>
                   <div class="break-normal">{{ bchprice }} USD</div>
                 </div>
               </div>
-              <div class="col-span-3">
+            </div>
+            <div class="col-span-3">
+              <div v-if="user">
+                <div class="mx-3 pt-2 text-[14px] font-bold">
+                  <div class="text-white">XMR</div>
+                  <div class="">{{ xmrprice }} {{ returncurrency(user.currency) }}</div>
+                </div>
+              </div>
+              <div v-else>
                 <div class="mx-3 pt-2 text-[14px] font-bold">
                   <div class="text-white">XMR</div>
                   <div class="">{{ xmrprice }} USD</div>
@@ -81,11 +104,13 @@
               </div>
             </div>
           </div>
-        </div>
 
+        </div>
       </div>
+
+
     </div>
- 
+  </div>
 </template>
 
 <script lang="ts">
@@ -100,8 +125,10 @@ export default defineComponent({
   components: { MenuIcon },
   data () {
     return {
+      user: null,
       btcprice: null,
       xmrprice: null,
+      interval: null,
       bchprice: null,
       categoriesList: {},
     };
@@ -111,12 +138,20 @@ export default defineComponent({
     this.userstatus();
 
     this.getCategoryList();
-  },
 
+    this.interval = setInterval(() => {
+      this.getbtcprice_anon();
+      this.getbchprice_anon();
+      this.getxmrprice_anon();
+    }, 10000);
+  },
+  destroyed () {
+    clearInterval(this.interval)
+  },
   methods: {
     //  change url in dropdown
     gotourl (nameofurl: string) {
-     
+
       this.$router.replace({ name: nameofurl })
       this.$router.push({ name: nameofurl });
     },
@@ -128,9 +163,10 @@ export default defineComponent({
         headers: authHeader(),
       }).then((response) => {
         if ((response.status = 200)) {
-          this.getbtcprice_anon();
-          this.getbchprice_anon();
-          this.getxmrprice_anon();
+          this.user = response.data.user
+          this.getbtcprice();
+          this.getbchprice();
+          this.getxmrprice();
         }
         else {
 
@@ -221,6 +257,73 @@ export default defineComponent({
         .then((response) => {
           this.categoriesList = response.data;
         })
+    },
+    returncurrency (currencydigit: number) {
+      if (currencydigit === 0) {
+        return "USD";
+      } else if (currencydigit === 1) {
+        return "PHP";
+      } else if (currencydigit === 2) {
+        return "CHF";
+      } else if (currencydigit === 3) {
+        return "SAD";
+      } else if (currencydigit === 4) {
+        return "SGD";
+      } else if (currencydigit === 5) {
+        return "RUB";
+      } else if (currencydigit === 6) {
+        return "DKK";
+      } else if (currencydigit === 7) {
+        return "RON";
+      } else if (currencydigit === 8) {
+        return "NOK";
+      } else if (currencydigit === 9) {
+        return "ILS";
+      } else if (currencydigit === 10) {
+        return "SEK";
+      } else if (currencydigit === 11) {
+        return "THB";
+      } else if (currencydigit === 12) {
+        return "BRL";
+      } else if (currencydigit === 13) {
+        return "INR";
+      } else if (currencydigit === 14) {
+        return "ZAR";
+      } else if (currencydigit === 14) {
+        return "HKD";
+      } else if (currencydigit === 16) {
+        return "JPY";
+      } else if (currencydigit === 17) {
+        return "HUF";
+      } else if (currencydigit === 18) {
+        return "MXN";
+      } else if (currencydigit === 19) {
+        return "CNY";
+      } else if (currencydigit === 20) {
+        return "AUD";
+      } else if (currencydigit === 21) {
+        return "PLN";
+      } else if (currencydigit === 22) {
+        return "GBP";
+      } else if (currencydigit === 23) {
+        return "TRY";
+      } else if (currencydigit === 24) {
+        return "KRW";
+      } else if (currencydigit === 25) {
+        return "IDR";
+      } else if (currencydigit === 26) {
+        return "NZD";
+      } else if (currencydigit === 27) {
+        return "MYR";
+      } else if (currencydigit === 28) {
+        return "BGN";
+      } else if (currencydigit === 29) {
+        return "EUR";
+      } else if (currencydigit === 31) {
+        return "HRK";
+      } else if (currencydigit === 30) {
+        return "CZK";
+      }
     },
   },
 });

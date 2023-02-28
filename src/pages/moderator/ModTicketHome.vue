@@ -49,9 +49,7 @@
 
                 <div class="col-span-12 sm:col-span-8  rounded-md p-5">
                     <div class="grid grid-cols-12 gap-5">
-
                         <div class="col-span-12 sm:col-span-12 ">
-                         
                             <div v-if="all_tickets.length > 0">
                                 <div v-for="ticket in all_tickets" :key="ticket.id">
                                     <div class="grid grid-cols-12 border-b-2 border-gray-400  bg-white mb-5 p-5 rounded-md">
@@ -83,9 +81,9 @@
                                                 Status:
                                             </div>
                                             <div class="">
-                                                <div v-if="ticket.status == 0">Closed</div>
-                                                <div v-if="ticket.status == 1">Open</div>
-                                                <div v-if="ticket.status == 2">New Message</div>
+                                                <div class="text-red-600 font-bold" v-if="ticket.status == 0">Closed</div>
+                                                <div class="text-green-600 font-bold" v-if="ticket.status == 1">Open</div>
+                                                <div class="text-orange-600 font-bold" v-if="ticket.status == 2">New Message</div>
                                             </div>
                                         </div>
                                     </div>
@@ -128,7 +126,7 @@ export default defineComponent({
 
     data () {
         return {
-
+            interval: null,
             other_user: null,
             userlist: [],
             user: null,
@@ -143,15 +141,16 @@ export default defineComponent({
     mounted () {
         this.userstatus();
         this.get_all_tickets();
+        this.interval = setInterval(() => {
+            this.get_all_tickets();
+        }, 30000);
     },
 
-
+    beforeDestroy  () {
+        clearInterval(this.interval)
+    },
     methods: {
-        truncate: function (data: any, num: any) {
-            const reqdString =
-                data.split("").slice(0, num).join("");
-            return reqdString;
-        },
+     
         relativeDate (value: any) {
             let e = new Date(value).valueOf();
             return formatDistance(e, new Date());
@@ -167,7 +166,7 @@ export default defineComponent({
                     if ((response.status = 200)) {
                         this.user = response.data.user;
                         if (this.user.user_admin !== 10) {
-                            console.log("bad")
+                         
                         }
                     }
                 })
