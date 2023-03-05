@@ -1,11 +1,29 @@
-
 <template>
-  
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
 <div class="wrapper">
   <div class="container max-w-7xl mx-auto px-10  mb-10">
+     <nav class="rounded-md w-full mb-5">
+          <ol class="list-reset flex">
+            <li>
+              <router-link :to="{ name: 'home' }">
+                <a class="text-blue-600 hover:text-blue-700">Home</a>
+              </router-link>
+            </li>
+            <li>
+              <span class="text-gray-500 mx-2">/</span>
+            </li>
+            <li>
+              <router-link :to="{ name: 'MsgHome' }">
+                <a class="text-blue-600 hover:text-blue-700">Message Center Home</a>
+              </router-link>
+            </li>
+            <li>
+              <span class="text-gray-500 mx-2">/</span>
+            </li>
+          </ol>
+        </nav>
     <div class="grid grid-cols-12">
       <div class="col-span-3">
         <div class="text-[18px] mb-5">Message Center</div>

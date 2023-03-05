@@ -2,8 +2,9 @@
 <template>
 
   <HeaderPlain />
-  <div class="container max-w-7xl mx-auto bg-gray-300  h-screen">
-    <div class="mx-auto max-w-lg flex items-center justify-centermt-36">
+    <div class="wrapperplain">
+  <div class="container max-w-7xl mx-auto bg-gray-300 ">
+    <div class="mx-auto max-w-lg flex items-center justify-center ">
       <form class="bg-white rounded-md  px-8 pt-6 pb-8 mb-4 mt-4 w-full" method="POST" @submit.prevent="onSubmit">
         <div class="mb-4 text-center text-[28px] text-zinc-600">Register</div>
 
@@ -100,10 +101,10 @@
         <div class="flex flex-col justify-center mt-5">
           <router-link :to="{ name: 'login' }"
             class="text-center font-bold text-sm text-blue-500 hover:text-blue-800">Login Here</router-link>
-        </div>
+        </div> 
       </form>
     </div>
-  </div>
+  </div> </div>
 
 </template>
 

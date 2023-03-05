@@ -62,7 +62,7 @@
         <div class="col-span-2">Balance</div>
       </div>
 
-      <div v-for="t in transactions" class="text-gray-700 font-semibold text-[14px]">
+      <div v-for="t in transactions" class="text-gray-700 font-semibold text-[14px] bg-white rounded-md">
 
         <!-- Wallet Created -->
         <div v-if="t.category === 1" class="grid grid-cols-12 grid-rows-1 border-b rounded-md m-1 p-1 my-5" :key="t.id">

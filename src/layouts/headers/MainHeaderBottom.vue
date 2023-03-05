@@ -143,7 +143,7 @@ export default defineComponent({
       this.getbtcprice_anon();
       this.getbchprice_anon();
       this.getxmrprice_anon();
-    }, 10000);
+    }, 100000);
   },
   destroyed () {
     clearInterval(this.interval)

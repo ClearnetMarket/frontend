@@ -1,8 +1,8 @@
 
 <template>
-<div class="h-screen">
+
   <HeaderPlain />
-  
+    <div class="wrapperplain">
   <div class="max-w-7xl mx-auto  ">
     <div class="mx-auto max-w-lg flex items-center justify-center  mt-4">
       <form
@@ -76,6 +76,7 @@
     </div>
   </div>
 </div>
+
 </template>
 
 <script lang="ts">

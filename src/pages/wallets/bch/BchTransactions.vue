@@ -43,7 +43,7 @@
         <div class="">Confirmed at 6 Confirmations</div>
       </div>
     </div>
-    <div v-if="transactions" class="px-5">
+    <div v-if="transactions" class="px-5 ">
       <!--#1 = Wallet created -->
       <!--#2 = Withdrawl -->
       <!--#3 = Deposit -->
@@ -60,7 +60,7 @@
         <div class="col-span-2">Balance</div>
       </div>
 
-      <div v-for="t in transactions" class="text-gray-700 font-semibold text-[14px]">
+      <div v-for="t in transactions" class="text-gray-700 font-semibold text-[14px] bg-white rounded-md">
         <!-- Wallet Created -->
 
         <div v-if="t.category === 1" class="grid grid-cols-12 grid-rows-1 border-b rounded-md p-1 my-5" :key="t.id">

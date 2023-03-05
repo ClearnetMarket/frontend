@@ -1,174 +1,233 @@
-
 <template>
-
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
   <div v-if="loaded">
     <div class="wrapper">
-    <div class="container max-w-7xl mx-auto px-10 pb-10">
-    <nav class="rounded-md w-full mt-5">
-      <ol class="list-reset flex">
-        <li>
-          <router-link :to="{ name: 'home' }">
-            <a class="text-blue-600 hover:text-blue-700">Home</a>
-          </router-link>
-        </li>
-        <li>
-          <span class="text-gray-500 mx-2">/</span>
-        </li>
-      </ol>
-    </nav>
-      <div class="grid grid-cols-12 gap-4">
-        <div class="col-span-12 md:col-span-3">
-          <div class="border border-1 bg-white rounded-md shadow-md text-gray-700 p-5 mt-5">
-            <div class="text-[18px] mb-5">Message Center</div>
+      <div class="container max-w-7xl mx-auto px-10 pb-10">
+        <nav class="rounded-md w-full mb-5">
+          <ol class="list-reset flex">
+            <li>
+              <router-link :to="{ name: 'home' }">
+                <a class="text-blue-600 hover:text-blue-700">Home</a>
+              </router-link>
+            </li>
+            <li>
+              <span class="text-gray-500 mx-2">/</span>
+            </li>
+            <li>
+              <router-link :to="{ name: 'MsgHome' }">
+                <a class="text-blue-600 hover:text-blue-700">Message Center Home</a>
+              </router-link>
+            </li>
+            <li>
+              <span class="text-gray-500 mx-2">/</span>
+            </li>
+          </ol>
+        </nav>
+        <div class="grid grid-cols-12 gap-4">
+          <div class="col-span-12 md:col-span-3">
+            <div class="  bg-white rounded-md shadow-md text-gray-700 p-5 mt-5">
+              <div class="text-[18px] mb-5">Message Center</div>
 
-            <div v-for="userobject in userlist">
-              <div v-if="userobject.post_id === postid">
-                <router-link :to="{
-                  name: 'MsgView',
-                  params: { postid: userobject.post_id },
-                }">
-                  <div class="grid grid-cols-12 mb-5 border-y-1 border rounded-md bg-blue-300 p-2 hover:bg-gray-300">
-                    <div class="col-span-12 md:col-span-6">
-                      <div v-if="userobject.user_one === user.user_name">
-                        {{ userobject.user_two }}
-                      </div>
-                      <div v-else>{{ userobject.user_one }}</div>
-                    </div>
-                    <div class="col-span-12 md:col-span-6 text-[11px]">
-                      {{ relativeDate (userobject.timestamp) }}
-                    </div>
-                  </div>
-                </router-link>
-              </div>
-              <div v-if="userobject.post_id !== postid">
-                <div v-if="userobject.read === 1">
+              <div v-for="othermsgs in userlist">
+                <div v-if="othermsgs.post_id === postid">
                   <router-link :to="{
                     name: 'MsgView',
-                    params: { postid: userobject.post_id },
+                    params: { postid: othermsgs.post_id },
                   }">
-                    <div class="grid grid-cols-12 mb-5 border-y-1 rounded-md p-2 hover:bg-gray-300">
-                      <div class="col-span-12 md:col-span-6">
-                        <div v-if="userobject.user_one === user.user_name">
-                          {{ userobject.user_two }}
+                    <div class="grid grid-cols-12  border-2  rounded-md bg-blue-300 p-2 hover:bg-gray-300">
+                      <div class="col-span-12 md:col-span-6 text-blue-600 hover:text-blue-700">
+                        <div v-if="othermsgs.user_one === user.user_name">
+                          {{ othermsgs.user_two }}
                         </div>
-                        <div v-else>{{ userobject.user_one }}</div>
+                        <div v-else>{{ othermsgs.user_one }}</div>
                       </div>
                       <div class="col-span-12 md:col-span-6 text-[11px]">
-                        {{ relativeDate (userobject.timestamp) }}
+                        {{ relativeDate(othermsgs.timestamp) }}
                       </div>
                     </div>
                   </router-link>
                 </div>
-                <div v-if="userobject.read === 0">
-                  <router-link :to="{
-                    name: 'MsgView',
-                    params: { postid: userobject.post_id },
-                  }">
-                    <div class="grid grid-cols-12 mb-5 border-y-1 bg-yellow-300 rounded-md p-2 hover:bg-gray-300">
-                      <div class="col-span-12 md:col-span-6">
-                        <div v-if="userobject.user_one === user.user_name">
-                          {{ userobject.user_two }}
+                <div v-if="othermsgs.post_id !== postid">
+                  <div v-if="othermsgs.read === 0" class="rounded-md">
+                    <router-link :to="{
+                      name: 'MsgView',
+                      params: { postid: othermsgs.post_id },
+                    }">
+                      <div class="grid grid-cols-12  border-y-1 rounded-md p-2 hover:bg-gray-300">
+                        <div class="col-span-12 md:col-span-6 text-blue-600 hover:text-blue-700">
+                          <div v-if="othermsgs.user_one === user.user_name">
+                            {{ othermsgs.user_two }}
+                          </div>
+                          <div v-else>{{ othermsgs.user_one }}</div>
                         </div>
-                        <div v-else>{{ userobject.user_one }}</div>
+                        <div class="col-span-12 md:col-span-6 text-[11px]">
+                          {{ relativeDate(othermsgs.timestamp) }}
+                        </div>
                       </div>
-                      <div class="col-span-6 text-[11px]">
-                        {{ relativeDate (userobject.timestamp) }}
+                    </router-link>
+                  </div>
+                  <div v-if="othermsgs.read === 1" class="rounded-md bg-yellow-400 border-2">
+                    <router-link :to="{
+                      name: 'MsgView',
+                      params: { postid: othermsgs.post_id },
+                    }">
+                      <div class="grid grid-cols-12  rounded-md p-2 hover:bg-gray-300">
+
+                        <div class="col-span-12 md:col-span-6">
+
+                          <div v-if="othermsgs.user_one === user.user_name">
+                            {{ othermsgs.user_two }}
+                          </div>
+                          <div v-else>{{ othermsgs.user_one }}</div>
+                        </div>
+                        <div class="col-span-6 text-[11px]">
+                          {{ relativeDate(othermsgs.timestamp) }}
+                        </div>
                       </div>
-                    </div>
-                  </router-link>
+                    </router-link>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <div class="col-span-12 md:col-span-9">
-          <div v-if="itemforsale"
-            class="grid grid-cols-12 gap-4 mb-4 border border-1 bg-white rounded-md shadow-md text-gray-700 p-5">
-            <div class="col-span-12 md:col-span-2">
-              <img alt="" class="w-full" src="" />
-            </div>
-            <div class="col-span-12 md:col-span-10">
-              <div class="font-bold text-[18px]">
-                <router-link class="hover:text-blue-500 hover:underline"
-                  :to="{ name: 'MarketItem', params: { id: item_uuid } }">
-                  {{ itemforsale.item_title }}
-                </router-link>
-              </div>
-              <div class="text-[14px]">Item ID: {{ itemforsale.uuid }}</div>
-              <div class="text-[14px]">
-                Item Price: {{ itemforsale.price }}
-              </div>
+          <div class="col-span-12 md:col-span-9">
+            <div v-if="itemforsale"
+              class="grid grid-cols-12 gap-4 mb-4 border border-1 bg-white rounded-md shadow-md text-gray-700 p-5">
+              <div class="col-span-12 md:col-span-2">
+                <img class="" :src="itemforsale.image_one_url_500" alt="" />
 
-              <div class="text-[14px]">
-                Item Location: {{ itemforsale.origin_country_name }}
               </div>
+              <div class="col-span-12 md:col-span-10">
+                <div class="font-bold text-[18px]">
+                  <router-link class="hover:text-blue-500 hover:underline"
+                    :to="{ name: 'MarketItem', params: { id: item_uuid } }">
+                    {{ itemforsale.item_title }}
+                  </router-link>
+                </div>
+                <div class="text-[14px]">Item ID: {{ itemforsale.uuid }}</div>
+                <div class="text-[14px]">
+                  Item Price: {{ itemforsale.price }}
+                </div>
 
-              <div class="text-[14px]">
-                Free Shipping: {{ itemforsale.shipping_info_0 }}
-              </div>
-              <div class="text-[14px]">
-                Paid Shipping: {{ itemforsale.shipping_info_2 }}
-              </div>
-            </div>
-          </div>
+                <div class="text-[14px]">
+                  Item Location: {{ itemforsale.origin_country_name }}
+                </div>
 
-          <!-- comment Form -->
-          <form class="rounded-md pt-6 pb-4 w-full" @submit.prevent="onSubmit">
-            <div class="">
-              <textarea v-model="SendMsgForm.msginfo" id="item_description" placeholder="Write something .."
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-3"></textarea>
-            </div>
-            <div class="flex justify-end">
-              <button
-                class="bg-gray-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                type="submit">
-                Reply
-              </button>
-            </div>
-          </form>
-          <!-- comments -->
-          <!-- Top Post -->
-          <div class="border border-1">
-            <div class="grid grid-cols-12 p-5  border-gray-400 bg-white">
-              <div class="col-span-12 text-gray-600">
-                <router-link class="hover:text-blue-500 hover:underline" :to="{
-                  name: 'userprofile',
-                  params: { uuid: mainpost.user_one_uuid },
-                }">{{ mainpost.user_one }}</router-link>
-                - {{ relativeDate (mainpost.timestamp) }} ago
-              </div>
-              <div class="col-span-12 bg-white text-gray-800 p-3">
-                {{ mainpost.body }}
+                <div class="text-[14px]">
+                  Free Shipping: {{ itemforsale.shipping_info_0 }}
+                </div>
+                <div class="text-[14px]">
+                  Paid Shipping: {{ itemforsale.shipping_info_2 }}
+                </div>
               </div>
             </div>
-          </div>
-          <div class="">
-            <div v-for="comment in mainpostcomments" :key="comment.id">
-              <div class="grid grid-cols-12 p-5 bg-white border-gray-400">
-                <div class="col-span-12 text-gray-600" v-if="comment.user_one_uuid">
+
+            <!-- comment Form -->
+            <form class="rounded-md pt-6 pb-4 w-full" @submit.prevent="onSubmit">
+              <div class="">
+                <textarea v-model="SendMsgForm.msginfo" id="item_description" placeholder="Write something .."
+                  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-3"></textarea>
+              </div>
+              <div class="flex justify-end">
+                <button
+                  class="bg-gray-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                  type="submit">
+                  Reply
+                </button>
+              </div>
+            </form>
+            <!-- comments -->
+            <!-- Top Post -->
+            <div class="border border-1">
+              <div class="grid grid-cols-12 p-5  border-gray-400 bg-white">
+                <div class="col-span-12 text-gray-600">
                   <router-link class="hover:text-blue-500 hover:underline" :to="{
                     name: 'userprofile',
-                    params: { uuid: comment.user_one_uuid },
-                  }">
-                    {{ comment.user_one }}</router-link>
-                  - {{ relativeDate (comment.timestamp) }} ago
+                    params: { uuid: mainpost.user_one_uuid },
+                  }">{{ mainpost.user_one }}
+                  </router-link>
+                  - {{ relativeDate(mainpost.timestamp) }} ago
+                </div>
+                <div class="col-span-12 bg-white text-gray-800 p-3">
+                  {{ mainpost.body }}
+                </div>
+              </div>
+            </div>
+
+            <div v-for="comment in mainpostcomments" :key="comment.id">
+              <div class="grid grid-cols-12 p-5 bg-white border-gray-400">
+
+
+
+                <!-- THis is for comment admin -->
+                <div class="col-span-12 flex justify-left" v-if="comment.user_one_uuid == null">
+                  <div class="col-span-12">
+                    <router-link class="hover:text-blue-500 hover:underline font-bold" :to="{
+                      name: 'userprofile',
+                      params: { uuid: comment.mod_uuid },
+                    }">
+                      {{ comment.mod_name }} [ADMIN]
+                    </router-link>
+                    - {{ relativeDate(comment.timestamp) }} ago
+
+                    <div class="col-span-12 text-yellow-600 bg-blue-200 p-3 border rounded-md">
+                      {{ comment.body }}
+                    </div>
+                  </div>
                 </div>
 
-                <div v-if="comment.user_one_uuid" class="col-span-12 text-gray-800 bg-gray-300 p-3 border rounded-md">
-                  {{ comment.body }}
+
+
+                <!-- THis is for comment current user -->
+                <div class="col-span-12 text-gray-600 flex justify-end" v-else-if="comment.user_one_uuid == user.user_id">
+                  <div class="col-span-12">
+                    <router-link class="hover:text-blue-500 hover:underline font-bold" :to="{
+                      name: 'userprofile',
+                      params: { uuid: comment.user_one_uuid },
+                    }">
+                      {{ comment.user_one }}
+                    </router-link>
+                    - {{ relativeDate(comment.timestamp) }} ago
+                    <div class="col-span-12 text-white bg-blue-500 p-3 border rounded-md">
+                      {{ comment.body }}
+                    </div>
+                  </div>
                 </div>
+
+
+
+
+
+                <!-- THis is for comment user two not admin -->
+                <div class="col-span-12 text-gray-600 flex justify-start" v-else>
+                  <div class="col-span-12">
+                    <router-link class="hover:text-blue-500 hover:underline font-bold" :to="{
+                      name: 'userprofile',
+                      params: { uuid: comment.user_one_uuid },
+                    }">
+                      {{ comment.user_one }}
+                    </router-link>
+                    - {{ relativeDate(comment.timestamp) }} ago
+                    <div class="col-span-12 text-white bg-gray-500 p-3 border rounded-md">
+                      {{ comment.body }}
+                    </div>
+                  </div>
+                </div>
+
+
+
+
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+
   </div>
-</div>
   <MainFooter />
 </template>
 
@@ -183,8 +242,6 @@ import MainHeaderMid from "../../layouts/headers/MainHeaderMid.vue";
 import MainHeaderBottom from "../../layouts/headers/MainHeaderBottom.vue";
 import MainHeaderVendor from "../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../layouts/footers/FooterMain.vue";
-
-
 
 export default defineComponent({
   name: "MsgView",
@@ -218,6 +275,7 @@ export default defineComponent({
       itemforsale: null,
       userlist: null,
       user: null,
+      interval: null,
       order: null,
       mainpost: null,
       mainpostcomments: [],
@@ -243,7 +301,9 @@ export default defineComponent({
             this.user = response.data.user
           }
         })
-        .catch(() => { this.user = null });
+        .catch(() => {
+          this.user = null
+        });
     },
     // get the date conversion
     relativeDate (value: any) {
@@ -260,24 +320,49 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-
-
           this.mainpost = response.data;
-
           this.item_uuid = response.data.item_uuid;
-
           this.order_uuid = response.data.order_uuid;
-
           this.gettheitem();
           this.getcountofusers();
           this.getmsgsofusers();
           this.getmainpostcomments();
+          this.message_notification_read();
+          this.message_markasread();
           this.loaded = true;
         })
         .catch((error) => {
           console.log(error)
         });
     },
+    // gets the count of posts
+    message_notification_read () {
+      axios({
+        method: "put",
+        url: "/msg/markasread/" + this.postid,
+        withCredentials: true,
+        headers: authHeader(),
+      })
+        .then((response) => {
+        })
+        .catch(() => {
+        });
+    },
+    // gets the count of posts
+    message_markasread () {
+      axios({
+        method: "put",
+        url: "/notification/new/messages/markasread",
+        withCredentials: true,
+        headers: authHeader(),
+      })
+        .then((response) => {
+          this.getmsgsofusers();
+        })
+        .catch(() => {
+        });
+    },
+
     // get the item
     gettheitem () {
       axios({
@@ -289,7 +374,6 @@ export default defineComponent({
         .then((response) => {
           if ((response.status = 200)) {
             this.itemforsale = response.data;
-
           }
         })
         .catch((error) => {
@@ -312,6 +396,7 @@ export default defineComponent({
           console.log(error)
         });
     },
+
     // gets the count of posts
     getcountofusers () {
       axios({
@@ -323,7 +408,8 @@ export default defineComponent({
         .then((response) => {
           this.other_user_count = response.data.get_count;
         })
-        .catch(() => { });
+        .catch(() => {
+        });
     },
     // gets the msds of the users
     getmsgsofusers () {
@@ -341,7 +427,7 @@ export default defineComponent({
         });
     },
     //sends a comment to the api
-    sendcomment (payLoad: { body: string }) {
+    sendcomment (payLoad: { textbody: string }) {
       axios({
         method: "post",
         url: "/msg/create/comment/" + this.postid,
@@ -356,19 +442,19 @@ export default defineComponent({
             this.getmainpostcomments();
             this.getmainpost();
           }
+
         })
         .catch((error) => {
           console.log(error)
         });
     },
     onSubmit () {
-      let payLoad = { body: this.SendMsgForm.msginfo }
+      let payLoad = { textbody: this.SendMsgForm.msginfo }
       this.sendcomment(payLoad);
+
     }
   },
 });
 </script>
 
-<style>
-
-</style>
+<style></style>

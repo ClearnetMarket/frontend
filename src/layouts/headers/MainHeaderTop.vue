@@ -27,24 +27,38 @@
                 <div class="px-3 ">{{ returncurrency(user.currency) }}</div>
 
               </div>
-            </div>
+            </div>              
+                    
             <div class="col-span-1 lg:col-span-2 ">
-              <div class="flex flex-wrap lg:justify-end md:justify-evenly sm:justify-center">
-                <div v-if="user">
+              <div class="flex flex-wrap lg:justify-end md:justify-evenly sm:justify-center ">
+                <div v-if="user" class="flex">
 
                   <router-link :to="{ name: 'sell' }">
                     <button
-                      class="hover:bg-zinc-700 text-white hover:text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline mx-3 font-bold">
+                      class="hover:bg-zinc-700  text-white hover:text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline mx-3 font-bold">
                       Sell
                     </button>
                   </router-link>
 
-                  <router-link :to="{ name: 'MsgHome' }" class="px-3">
-                    <button
-                      class="hover:bg-zinc-700 text-white hover:text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline font-bold">
-                      Msg
-                    </button>
+
+
+                  <router-link :to="{ name: 'MsgHome' }" class="px-3 ">
+                    <div v-if="msgcount == 0">
+                      <button
+                    
+                        class="hover:bg-zinc-700 text-white hover:text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline font-bold ">
+                        Msg
+                      </button>
+                    </div>
+                    <div v-else>
+                      <button
+                        class="bg-yellow-500 text-white hover:text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline font-bold ">
+                        Msg {{ msgcount }}
+                      </button>
+                    </div>
                   </router-link>
+
+
 
                   <router-link :to="{ name: 'userorders' }" class="px-3">
                     <button
@@ -101,6 +115,8 @@ export default defineComponent({
     return {
       user: null,
       loaded: false,
+      msgcount: 0,
+      bg_color: "text-red-500",
     };
   },
   methods: {
@@ -115,7 +131,29 @@ export default defineComponent({
           if ((response.status = 200)) {
 
             this.user = response.data.user;
+            this.getusermessagescount();
             this.loaded = true;
+
+
+          }
+        })
+        .catch(() => {
+          this.user = null;
+          this.loaded = true;
+        });
+    },
+    getusermessagescount () {
+      axios({
+        method: "get",
+        url: "/notification/new/messages",
+        withCredentials: true,
+        headers: authHeader(),
+      })
+        .then((response) => {
+          if ((response.status = 200)) {
+
+            this.msgcount = response.data.count;
+
 
           }
         })

@@ -1,73 +1,79 @@
 
 <template>
-
   <HeaderPlain />
-  <div class="container max-w-7xl b mx-auto px-10  h-screen">
-    <div class="mt-5 mb-5">
-      <nav class="rounded-md w-full">
-        <ol class="list-reset flex">
-          <li>
-            <router-link :to="{ name: 'home' }">
-              <a class="text-blue-600 hover:text-blue-700">Home</a>
+     <div class="wrapperplain">
+    <div class="container max-w-3xl b mx-auto  ">
+      <div class="mt-5 mb-5">
+        <nav class="rounded-md w-full">
+          <ol class="list-reset flex">
+            <li>
+              <router-link :to="{ name: 'home' }">
+                <a class="text-blue-600 hover:text-blue-700">Home</a>
+              </router-link>
+            </li>
+            <li>
+              <span class="text-gray-500 mx-2">/</span>
+            </li>
+          </ol>
+        </nav>
+      </div>
+
+      <div class="flex justify-center mx-auto bg-red-200">
+        <div class="max-w-3xl bg-white rounded-md">
+          <div class="text-center">
+            In order to unlock your account, change password, or recover your
+            account in the future you will need this account key. We dont do
+            emails or other methods to recover your account.
+
+            <div class="text-[24px] mb-5">You should write these words down.</div>
+          </div>
+          <div class="md:flex md:justify-center text-center">
+            <div
+              class="inline-block bg-blue-600 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 text-[17px]">
+              {{ word1 }}
+            </div>
+            <div
+              class="inline-block bg-blue-600 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 text-[17px]">
+              {{ word2 }}
+            </div>
+            <div
+              class="inline-block bg-blue-600 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 text-[17px]">
+              {{ word3 }}
+            </div>
+            <div
+              class="inline-block bg-blue-600 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 text-[17px]">
+              {{ word4 }}
+            </div>
+            <div
+              class="inline-block bg-blue-600 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 text-[17px]">
+              {{ word5 }}
+            </div>
+            <div
+              class="inline-block bg-blue-600 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 text-[17px]">
+              {{ word6 }}
+            </div>
+          </div>
+          <div class="flex justify-center my-10 gap-5 px-5">
+            <router-link :to="{ name: 'accountseedconfirm' }">
+              <button
+                class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-blue-300 focus:outline-none focus:shadow-outline"
+                type="submit">
+                Confirm Account
+              </button>
             </router-link>
-          </li>
-          <li>
-            <span class="text-gray-500 mx-2">/</span>
-          </li>
-        </ol>
-      </nav>
-    </div>
-
-    <div class="flex justify-center mx-auto bg-red-200">
-      <div class="max-w-3xl bg-white rounded-md">
-        <div class="text-center">
-          In order to unlock your account, change password, or recover your
-          account in the future you will need this account key. We dont do
-          emails or other methods to recover your account.
-
-          <div class="text-[24px] mb-5">You should write these words down.</div>
-        </div>
-        <div class="md:flex md:justify-center text-center">
-          <div class="inline-block bg-blue-600 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 text-[17px]">
-            {{ word1 }}
+            <div class="pt-3">OR</div>
+            <router-link :to="{ name: 'home' }">
+              <button
+                class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-blue-300 focus:outline-none focus:shadow-outline"
+                type="submit">
+                Proceed to Freeport
+              </button>
+            </router-link>
           </div>
-          <div class="inline-block bg-blue-600 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 text-[17px]">
-            {{ word2 }}
-          </div>
-          <div class="inline-block bg-blue-600 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 text-[17px]">
-            {{ word3 }}
-          </div>
-          <div class="inline-block bg-blue-600 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 text-[17px]">
-            {{ word4 }}
-          </div>
-          <div class="inline-block bg-blue-600 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 text-[17px]">
-            {{ word5 }}
-          </div>
-          <div class="inline-block bg-blue-600 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 text-[17px]">
-            {{ word6 }}
-          </div>
-        </div>
-        <div class="flex justify-center my-10 gap-5 px-5">
-          <router-link :to="{ name: 'accountseedconfirm' }">
-            <button
-              class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-blue-300 focus:outline-none focus:shadow-outline"
-              type="submit">
-              Confirm Account
-            </button>
-          </router-link>
-          <div class="pt-3">OR</div>
-          <router-link :to="{ name: 'home' }">
-            <button
-              class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-blue-300 focus:outline-none focus:shadow-outline"
-              type="submit">
-              Proceed to Freeport
-            </button>
-          </router-link>
         </div>
       </div>
     </div>
   </div>
-
 </template>
 
 <script lang="ts">
@@ -159,6 +165,4 @@ export default defineComponent({
 });
 </script>
 
-<style type="ts" scoped>
-
-</style>
+<style type="ts" scoped></style>

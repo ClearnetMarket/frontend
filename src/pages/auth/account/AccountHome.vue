@@ -115,7 +115,7 @@
         </div>
       </div>
     </div>
-</div>
+  </div>
   <!-- END container-->
   <MainFooter />
 </template>
@@ -192,6 +192,4 @@ export default defineComponent({
 });
 </script>
 
-<style type="ts" scoped>
-
-</style>
+<style type="ts" scoped></style>
