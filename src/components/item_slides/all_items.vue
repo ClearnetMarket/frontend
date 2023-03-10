@@ -1,61 +1,51 @@
 <template>
-
-    <div class="flex flex-nowrap flex-col p-5 mb-10 mt-10 ">
-
-        <div class="mt-5 mx-10  md:flex md:mb-5 gap-5">
+    <div class="flex flex-nowrap flex-col p-5 mb-10 mt-10">
+        <div class="mt-5 mx-10 md:flex md:mb-5 gap-5">
             <div v-for="item in allitems" :key="item.id">
-                <generic_item v-bind:item="item" />
+                <generic_item :item="item" />
             </div>
         </div>
     </div>
-
-
-
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import axios from "axios";
-import generic_item from "../item/generic_item.vue";
-
+import { defineComponent } from 'vue'
+import axios from 'axios'
+import generic_item from '../item/generic_item.vue'
 
 export default defineComponent({
-    name: "AllItems",
+    name: 'AllItems',
     components: {
         generic_item,
     },
-    data () {
+    data() {
         return {
             allitems: [],
             loadedbtcprice: false,
-        };
-    },
-
-    mounted () {
-        this.getallitems();
+        }
     },
     computed: {},
 
-    methods: {
+    mounted() {
+        this.getallitems()
+    },
 
+    methods: {
         getallitems() {
             axios({
-                method: "get",
-                url: ("/itemquery/query/all"),
+                method: 'get',
+                url: '/itemquery/query/all',
                 withCredentials: true,
             })
                 .then((response) => {
                     if ((response.status = 200)) {
-                        this.allitems = response.data;
-                     
+                        this.allitems = response.data
                     }
                 })
-                .catch((error) => {
-                });
+                .catch((error) => {})
         },
-
     },
-});
+})
 </script>
 <style>
 .break {

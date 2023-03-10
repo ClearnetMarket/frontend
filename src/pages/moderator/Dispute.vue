@@ -213,36 +213,81 @@
         </div>
         <div class="col-span-12">
           <div v-for="comment in mainpostcomments">
-            <div v-if="comment.mod_uuid != null">
-              <div class="grid grid-cols-12 p-2 rounded bg-white mb-2">
-                <div class="col-span-12 text-orange-500">
-                  Freeport Mod - {{ relativeDate(comment.timestamp) }} ago
-                </div>
-                <div class="col-span-12 text-gray-800 p-1">
-                  {{ comment.body }}
-                </div>
-              </div>
-            </div>
-            <div v-if="comment.mod_uuid == null">
-              <div class="grid grid-cols-12 p-2 rounded bg-white mb-2 g">
-                <div class="col-span-12 text-gray-500 flex gap-3">
-                  <router-link :to="{
-                    name: 'userprofile',
-                    params: { uuid: comment.user_one_uuid },
-                  }">
-                    <div class="text-blue-600 hover:text-blue-500 hover:underline pl-3">
-                      {{ comment.user_one }}
+           
+
+                  <!-- THis is for comment ADMIN -->
+                  <div class="col-span-12 flex " v-if="comment.who_commented === 3">
+                    <div class="col-span-12">
+                      <router-link class="hover:text-blue-500 hover:underline font-bold" :to="{
+                        name: 'userprofile',
+                        params: { uuid: comment.mod_uuid },
+                      }">
+                        {{ comment.mod_name }} [ADMIN]
+                      </router-link>
+                      - {{ relativeDate(comment.timestamp) }} ago
+
+                      <div class="col-span-12 text-yellow-600 bg-blue-200 p-3 border rounded-md">
+                        {{ comment.body }}
+                      </div>
                     </div>
-                  </router-link>
-                  <div class="col-span-12 text-gray-500 flex">
-                    - {{ relativeDate(comment.timestamp) }} ago
                   </div>
-                </div>
-                <div class="col-span-12 text-gray-800 p-1">
-                  {{ comment.body }}
-                </div>
-              </div>
-            </div>
+
+
+
+                  <!-- THis is for comment VENDOR  -->
+                  <div class="col-span-12 text-gray-600 flex justify-start" v-else-if="comment.who_commented === 1">
+                    <div class="col-span-12">
+                      <router-link class="hover:text-blue-500 hover:underline font-bold" :to="{
+                        name: 'userprofile',
+                        params: { uuid: comment.user_one_uuid },
+                      }">
+                        {{ comment.user_one }}
+                      </router-link>
+                      - {{ relativeDate(comment.timestamp) }} ago
+                      <div class="col-span-12 text-white bg-blue-500 p-3 border rounded-md">
+                        {{ comment.body }}
+                      </div>
+                    </div>
+                  </div>
+
+
+                    <!-- THis is for comment CUSTOMER -->
+                    <div class="col-span-12 text-gray-600 flex justify-end" v-else-if="comment.who_commented === 2">
+                      <div class="col-span-12">
+                        <router-link class="hover:text-blue-500 hover:underline font-bold" :to="{
+                          name: 'userprofile',
+                          params: { uuid: comment.user_two_uuid },
+                        }">
+                          {{ comment.user_two }}
+                        </router-link>
+                        - {{ relativeDate(comment.timestamp) }} ago
+                        <div class="col-span-12 text-white bg-gray-500 p-3 border rounded-md">
+                          {{ comment.body }}
+                        </div>
+                      </div>
+                    </div>
+
+
+
+
+                  <!-- THis is for comment from SITE -->
+                  <div class="col-span-12 text-gray-600 flex justify-start" v-else>
+                    <div class="col-span-12">
+                      <router-link class="hover:text-blue-500 hover:underline font-bold" :to="{
+                        name: 'userprofile',
+                        params: { uuid: comment.user_one_uuid },
+                      }">
+                        {{ comment.user_one }}
+                      </router-link>
+                      - {{ relativeDate(comment.timestamp) }} ago
+                      <div class="col-span-12 text-white bg-gray-500 p-3 border rounded-md">
+                        {{ comment.body }}
+                      </div>
+                    </div>
+                  </div>
+
+
+           
           </div>
         </div>
       </div>

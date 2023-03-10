@@ -293,36 +293,76 @@
                 </div>
                 <div class="col-span-12">
                     <div v-for="comment in mainpostcomments">
-                        <div v-if="comment.mod_uuid != null">
-                            <div class="grid grid-cols-12 p-2 rounded bg-white mb-2">
-                                <div class="col-span-12 text-orange-500" v-if="comment.timestamp">
-                                    Freeport Mod - {{ relativeDate(comment.timestamp) }} ago
-                                </div>
-                                <div class="col-span-12 text-gray-800 p-1">
-                                    {{ comment.body }}
-                                </div>
-                            </div>
+                
+                                        <!-- THis is for comment ADMIN -->
+                    <div class="col-span-12 flex " v-if="comment.who_commented === 3">
+                      <div class="col-span-12">
+                        <router-link class="hover:text-blue-500 hover:underline font-bold" :to="{
+                            name: 'userprofile',
+                            params: { uuid: comment.mod_uuid },
+                        }">
+                          {{ comment.mod_name }} [ADMIN]
+                        </router-link>
+                        - {{ relativeDate(comment.timestamp) }} ago
+
+                        <div class="col-span-12 text-yellow-600 bg-blue-200 p-3 border rounded-md">
+                          {{ comment.body }}
                         </div>
-                        <div v-if="comment.mod_uuid == null">
-                            <div class="grid grid-cols-12 p-2 rounded bg-white mb-2 g">
-                                <div class="col-span-12 text-gray-500 flex gap-3" v-if="comment.user_one_uuid">
-                                    <router-link :to="{
-                                        name: 'userprofile',
-                                        params: { uuid: comment.user_one_uuid },
-                                    }">
-                                        <div class="text-blue-600 hover:text-blue-500 hover:underline pl-3">
-                                            {{ comment.user_one }}
-                                        </div>
-                                    </router-link>
-                                    <div class="col-span-12 text-gray-500 flex" v-if="comment.timestamp">
-                                        - {{ relativeDate(comment.timestamp) }} ago
-                                    </div>
-                                </div>
-                                <div class="col-span-12 text-gray-800 p-1">
-                                    {{ comment.body }}
-                                </div>
-                            </div>
+                      </div>
+                    </div>
+
+
+
+                    <!-- THis is for comment VENDOR  -->
+                    <div class="col-span-12 text-gray-600 flex justify-start" v-else-if="comment.who_commented === 1">
+                      <div class="col-span-12">
+                        <router-link class="hover:text-blue-500 hover:underline font-bold" :to="{
+                            name: 'userprofile',
+                            params: { uuid: comment.user_one_uuid },
+                        }">
+                          {{ comment.user_one }}
+                        </router-link>
+                        - {{ relativeDate(comment.timestamp) }} ago
+                        <div class="col-span-12 text-white bg-blue-500 p-3 border rounded-md">
+                          {{ comment.body }}
                         </div>
+                      </div>
+                    </div>
+
+
+                      <!-- THis is for comment CUSTOMER -->
+                      <div class="col-span-12 text-gray-600 flex justify-end" v-else-if="comment.who_commented === 2">
+                        <div class="col-span-12">
+                          <router-link class="hover:text-blue-500 hover:underline font-bold" :to="{
+                              name: 'userprofile',
+                              params: { uuid: comment.user_two_uuid },
+                          }">
+                            {{ comment.user_two }}
+                          </router-link>
+                          - {{ relativeDate(comment.timestamp) }} ago
+                          <div class="col-span-12 text-white bg-gray-500 p-3 border rounded-md">
+                            {{ comment.body }}
+                          </div>
+                        </div>
+                      </div>
+
+
+                    <!-- THis is for comment from SITE -->
+                    <div class="col-span-12 text-gray-600 flex justify-start" v-else>
+                      <div class="col-span-12">
+                        <router-link class="hover:text-blue-500 hover:underline font-bold" :to="{
+                            name: 'userprofile',
+                            params: { uuid: comment.user_one_uuid },
+                        }">
+                          {{ comment.user_one }}
+                        </router-link>
+                        - {{ relativeDate(comment.timestamp) }} ago
+                        <div class="col-span-12 text-white bg-gray-500 p-3 border rounded-md">
+                          {{ comment.body }}
+                        </div>
+                      </div>
+                    </div>
+   
                     </div>
                 </div>
             </div>
@@ -360,6 +400,7 @@ export default defineComponent({
 
     data () {
         return {
+            user: null,
             interval: null,
             mainpostcomments: [],
             order_id: null,
@@ -380,6 +421,7 @@ export default defineComponent({
 
     mounted () {
         this.userstatus();
+
         const order_id_route = useRoute();
         this.order_id = order_id_route.params.uuid;
         this.getuserorder();
@@ -410,9 +452,26 @@ export default defineComponent({
                 if (response.status == 200) {
                     if (response.data.user.user_admin < 2) {
                         this.$router.push({ name: "home" });
+                    }else{
+                        this.user = response.data.user;
                     }
                 }
             });
+        },
+         // get the post comments
+        updatepostmodid () {
+            axios({
+                method: "put",
+                url: "/mod/takeonmod/msg/" + this.postid,
+                withCredentials: true,
+                headers: authHeader(),
+            })
+                .then((response) => {
+
+                })
+                .catch((error) => {
+
+                });
         },
         // get the post comments
         getautofinalizetime () {
@@ -441,6 +500,7 @@ export default defineComponent({
                 if (response.status == 200) {
                     this.order = response.data;
                     this.postid = response.data.dispute_post_id;
+                    this.updatepostmodid();
                     this.getmainpostcomments();
                     this.getcustomerfeedback();
                     this.getvendorfeedback();

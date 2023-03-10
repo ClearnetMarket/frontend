@@ -126,7 +126,7 @@
       </ul>
       <div v-for="order in orders" :key="order.id" class="pb-5">
         <div v-if="order.uuid">
-          <div class="grid grid-cols-12 gap-5 rounded  bg-white p-5">
+          <div class="grid grid-cols-12 gap-5 rounded  bg-white  p-5">
 
             <div class="col-span-3 ">
               <img class="object-contain" :src="order.image_one" alt="" />

@@ -116,13 +116,13 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import axios from "axios";
-import { MenuIcon } from "@heroicons/vue/solid";
+
 import authHeader from "../../services/auth.header";
 
 
 export default defineComponent({
   name: "MainHeaderBottom",
-  components: { MenuIcon },
+
   data () {
     return {
       user: null,

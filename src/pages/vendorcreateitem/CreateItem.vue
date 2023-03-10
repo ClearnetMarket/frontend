@@ -294,7 +294,7 @@
 
           <div class="text-[18px] mt-5 mb-5">Shipping</div>
 
-          <div class="mb-4 flex text-center">
+          <div class="mb-4 flex text-center ">
             <div class="flex-1">Option</div>
             <div class="flex-1">Shipping Price</div>
             <div class="flex-1">Estimated Days</div>

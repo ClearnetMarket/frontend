@@ -17,7 +17,7 @@
             </li>
             <li>
               <router-link :to="{ name: 'MsgHome' }">
-                <a class="text-blue-600 hover:text-blue-700">Message Center Home</a>
+                <a class="text-blue-600 hover:text-blue-700 bg-red-200">Message Center Home</a>
               </router-link>
             </li>
             <li>
@@ -36,7 +36,7 @@
           <div v-if="itemforsale">
             <div class="grid grid-cols-12 gap-4 border border-1 p-4 mb-4 bg-white rounded-md">
               <div class="col-span-2">
-                <img alt="" class="w-full" src="" />
+                <img class="" :src="itemforsale.image_one_url_500" alt="" />
               </div>
               <div class="col-span-10">
                 <div class="font-bold text-[18px]">
@@ -112,7 +112,7 @@ export default defineComponent({
     MainFooter,
   },
   mounted () {
-    const user_uuid_route = useRoute();
+    let user_uuid_route = useRoute();
     this.other_user_uuid = user_uuid_route.params.uuid;
     this.item_uuid = user_uuid_route.params.itemuuid;
 
@@ -202,7 +202,6 @@ export default defineComponent({
     },
     sendMessage (payLoad: {
       order_uuid: string;
-      user_two_uuid: string;
       body: string;
       item_uuid: string;
     }) {
@@ -246,7 +245,6 @@ export default defineComponent({
 
     onSubmit () {
       const payLoad = {
-        user_two_uuid: this.other_user.uuid,
         body: this.SendMsgForm.msginfo,
         item_uuid: this.item_uuid,
         order_uuid: '',

@@ -194,7 +194,7 @@ export default defineComponent({
         this.userstatus();
         this.get_current_ticket();
         this.get_current_ticket_messages();
-                this.interval = setInterval(() => {
+        this.interval = setInterval(() => {
             this.get_current_ticket_messages();
         }, 50000);
     },

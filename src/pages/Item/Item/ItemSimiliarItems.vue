@@ -1,26 +1,16 @@
-
-<template>
-
-</template>
+<template></template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-
+import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: "ItemSimiliarItems",
-  data() {
-    return {
-      
-    };
-  },
+    name: 'ItemSimiliarItems',
+    data() {
+        return {}
+    },
 
-  mounted() {
-  
-  },
+    mounted() {},
 
-  methods: {
-    
-  },
-});
+    methods: {},
+})
 </script>

@@ -219,9 +219,7 @@ export default defineComponent({
 
         },
 
-        adduserprofile (payLoad: {
-            bio: string;
-        }) {
+        adduserprofile (payLoad: { bio: string; }) {
             axios({
                 method: "put",
                 url: "/auth/change-profile",

@@ -141,29 +141,13 @@
             </form>
             <!-- comments -->
             <!-- Top Post -->
-            <div class="border border-1">
-              <div class="grid grid-cols-12 p-5  border-gray-400 bg-white">
-                <div class="col-span-12 text-gray-600">
-                  <router-link class="hover:text-blue-500 hover:underline" :to="{
-                    name: 'userprofile',
-                    params: { uuid: mainpost.user_one_uuid },
-                  }">{{ mainpost.user_one }}
-                  </router-link>
-                  - {{ relativeDate(mainpost.timestamp) }} ago
-                </div>
-                <div class="col-span-12 bg-white text-gray-800 p-3">
-                  {{ mainpost.body }}
-                </div>
-              </div>
-            </div>
 
             <div v-for="comment in mainpostcomments" :key="comment.id">
               <div class="grid grid-cols-12 p-5 bg-white border-gray-400">
+              
 
-
-
-                <!-- THis is for comment admin -->
-                <div class="col-span-12 flex justify-left" v-if="comment.user_one_uuid == null">
+                <!-- THis is for comment ADMIN -->
+                <div class="col-span-12 flex " v-if="comment.who_commented === 3">
                   <div class="col-span-12">
                     <router-link class="hover:text-blue-500 hover:underline font-bold" :to="{
                       name: 'userprofile',
@@ -181,8 +165,8 @@
 
 
 
-                <!-- THis is for comment current user -->
-                <div class="col-span-12 text-gray-600 flex justify-end" v-else-if="comment.user_one_uuid == user.user_id">
+                <!-- THis is for comment VENDOR  -->
+                <div class="col-span-12 text-gray-600 flex justify-start" v-else-if="comment.who_commented === 1">
                   <div class="col-span-12">
                     <router-link class="hover:text-blue-500 hover:underline font-bold" :to="{
                       name: 'userprofile',
@@ -198,10 +182,26 @@
                 </div>
 
 
+                  <!-- THis is for comment CUSTOMER -->
+                  <div class="col-span-12 text-gray-600 flex justify-end" v-else-if="comment.who_commented === 2">
+                    <div class="col-span-12">
+                      <router-link class="hover:text-blue-500 hover:underline font-bold" :to="{
+                        name: 'userprofile',
+                        params: { uuid: comment.user_two_uuid },
+                      }">
+                        {{ comment.user_two }}
+                      </router-link>
+                      - {{ relativeDate(comment.timestamp) }} ago
+                      <div class="col-span-12 text-white bg-gray-500 p-3 border rounded-md">
+                        {{ comment.body }}
+                      </div>
+                    </div>
+                  </div>
 
 
 
-                <!-- THis is for comment user two not admin -->
+
+                <!-- THis is for comment from SITE -->
                 <div class="col-span-12 text-gray-600 flex justify-start" v-else>
                   <div class="col-span-12">
                     <router-link class="hover:text-blue-500 hover:underline font-bold" :to="{
@@ -217,16 +217,12 @@
                   </div>
                 </div>
 
-
-
-
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-
   </div>
   <MainFooter />
 </template>

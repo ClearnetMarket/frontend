@@ -190,8 +190,8 @@ export default defineComponent({
     // become the moderator of the order
     becomemod (uuid: string) {
       axios({
-        method: "get",
-        url: "/mod/takeonmod/" + uuid,
+        method: "put",
+        url: "/mod/takeonmod/" + uuid ,
         withCredentials: true,
         headers: authHeader(),
       })

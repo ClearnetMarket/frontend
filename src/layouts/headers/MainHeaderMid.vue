@@ -35,10 +35,10 @@
       <router-link :to="{ name: 'cart' }">
         <div class="grid grid-cols-12 grid-rows-2 p-1 gap-x-3 hover:border-blue-600 border-transparent border-2 rounded">
           <div class="row-span-2 col-span-3 pt-1">
-            <ShoppingBagIcon class="text-white bg-blue-600 w-7 h-7" />
+         
           </div>
           <div class="row-span-1 col-span-9 font-bold text-[14px] text-gray-700">
-             Cart
+             Shopping Cart
           </div>
           <div class="row-span-1 col-span-9 text-[14px] text-gray-700">
             <div v-if="user" class="flex">
@@ -57,13 +57,13 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { ShoppingBagIcon } from "@heroicons/vue/solid";
+
 import axios from "axios";
 import authHeader from "../../services/auth.header";
 
 export default defineComponent({
   name: "MainHeaderMid",
-  components: { ShoppingBagIcon },
+
   data() {
     return {
       shopping_cart_count: 0,

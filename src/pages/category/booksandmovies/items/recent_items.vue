@@ -1,59 +1,52 @@
 <template>
-
-    <div class="flex flex-nowrap flex-col  ">
+    <div class="flex flex-nowrap flex-col">
         <div class="text-center text-[24px] font-bold">Recent Books and Entertainment</div>
-        
-        <div class="mt-5 mx-10  md:flex md:mb-5 gap-5">
+
+        <div class="mt-5 mx-10 md:flex md:mb-5 gap-5">
             <div v-for="item in items" :key="item.id">
-                <generic_item v-bind:item="item" />
+                <generic_item :item="item" />
             </div>
         </div>
     </div>
-
-
-
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import axios from "axios";
-import generic_item from "../../../../components/item/generic_item.vue";
-
+import { defineComponent } from 'vue'
+import axios from 'axios'
+import generic_item from '../../../../components/item/generic_item.vue'
 
 export default defineComponent({
-    name: "RecentBooks",
+    name: 'RecentBooks',
     components: {
         generic_item,
     },
-    data () {
+    data() {
         return {
             items: [],
-        };
-    },
-
-    mounted () {
-        this.getallitems();
+        }
     },
     computed: {},
 
-    methods: {
+    mounted() {
+        this.getallitems()
+    },
 
-        getallitems () {
+    methods: {
+        getallitems() {
             axios({
-                method: "get",
-                url: ("/category/query/index/automotive"),
+                method: 'get',
+                url: '/category/query/index/automotive',
                 withCredentials: true,
             })
                 .then((response) => {
                     if ((response.status = 200)) {
-                        this.items = response.data;
+                        this.items = response.data
                     }
                 })
-                .catch(() => {});
+                .catch(() => {})
         },
-
     },
-});
+})
 </script>
 <style>
 .break {

@@ -1,15 +1,10 @@
-<script setup lang="ts">
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  <html class="opensans bg-gray-300">
-
-  <router-view />
-  <notifications position="bottom left" />
-
-  </html>
+    <html class="opensans bg-gray-300">
+        <router-view />
+        <notifications position="bottom left" />
+    </html>
 </template>
 
-<style>
-
-</style>
+<style></style>
