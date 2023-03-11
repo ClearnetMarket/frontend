@@ -130,6 +130,7 @@ export default defineComponent({
   data () {
     return {
       v$: useValidate(),
+      user: null,
       btcbalance: 0,
       wallet: {
         btc_address: null,
@@ -159,11 +160,11 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if ((response.status = 200)) {
+          if (response.status == 200) {
+            this.user = response.data.user
           }
         })
-        .catch((error) => {
-
+        .catch(() => {
           this.$router.push("/login");
         });
     },

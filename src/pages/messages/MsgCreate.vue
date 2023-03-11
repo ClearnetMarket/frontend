@@ -81,18 +81,18 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import axios from "axios";
-import { useRoute } from "vue-router";
-import { notify } from "@kyvg/vue3-notification";
-import useValidate from "@vuelidate/core";
-import { required, minLength } from "@vuelidate/validators";
-import authHeader from "../../services/auth.header";
-import MainHeaderTop from "../../layouts/headers/MainHeaderTop.vue";
-import MainHeaderMid from "../../layouts/headers/MainHeaderMid.vue";
-import MainHeaderBottom from "../../layouts/headers/MainHeaderBottom.vue";
-import MainHeaderVendor from "../../layouts/headers/MainHeaderVendor.vue";
-import MainFooter from "../../layouts/footers/FooterMain.vue";
+import { defineComponent } from "vue"
+import axios from "axios"
+import { useRoute } from "vue-router"
+import { notify } from "@kyvg/vue3-notification"
+import useValidate from "@vuelidate/core"
+import { required, minLength } from "@vuelidate/validators"
+import authHeader from "../../services/auth.header"
+import MainHeaderTop from "../../layouts/headers/MainHeaderTop.vue"
+import MainHeaderMid from "../../layouts/headers/MainHeaderMid.vue"
+import MainHeaderBottom from "../../layouts/headers/MainHeaderBottom.vue"
+import MainHeaderVendor from "../../layouts/headers/MainHeaderVendor.vue"
+import MainFooter from "../../layouts/footers/FooterMain.vue"
 
 export default defineComponent({
   name: "MsgCreate",
@@ -193,7 +193,7 @@ export default defineComponent({
         }
         })
         .catch((error) => {
-          console.log(error)
+
           notify({
             title: "Freeport Error",
             text: "Error posting information.",

@@ -84,7 +84,7 @@
                     {{ bchprice }}
                 </div>
                 <div class="col-span-7 md:col-span-3 rounded-md p-5 text-center">
-                    <div v-if="bchbalance == 0">0 BCH</div>
+                    <div v-if="bchbalance === 0">0 BCH</div>
                     <div v-else>{{ bchbalance }}</div>
                 </div>
                 <div class="col-span-12 md:col-span-5 justify-center flex py-3">
@@ -123,7 +123,7 @@
                     {{ xmrprice }}
                 </div>
                 <div class="col-span-7 md:col-span-3 rounded-md p-5 text-center">
-                    <div v-if="xmrbalance == 0">0 XMR</div>
+                    <div v-if="xmrbalance === 0">0 XMR</div>
                     <div v-else>{{ xmrbalance }}</div>
                 </div>
                 <div class="col-span-12 md:col-span-5 justify-center flex py-3">
@@ -208,7 +208,7 @@ export default defineComponent({
                 headers: authHeader(),
             })
                 .then((response) => {
-                    if ((response.status = 200)) {
+                    if (response.status == 200) {
                         this.user = response.data.user
                         this.userinfo()
                         this.getwallettotals()
@@ -226,7 +226,7 @@ export default defineComponent({
                 withCredentials: true,
                 headers: authHeader(),
             }).then((response) => {
-                if ((response.status = 200)) {
+                if (response.status == 200) {
                     this.usercurrency = response.data.currency
                 }
             })

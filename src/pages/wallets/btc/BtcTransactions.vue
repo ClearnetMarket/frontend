@@ -217,7 +217,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import axios from "axios";
-import { mapGetters } from "vuex";
+
 import { formatDistance } from "date-fns";
 import MainHeaderTop from "../../../layouts/headers/MainHeaderTop.vue";
 import MainHeaderMid from "../../../layouts/headers/MainHeaderMid.vue";

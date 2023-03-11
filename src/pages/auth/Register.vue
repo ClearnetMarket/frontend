@@ -198,7 +198,7 @@ export default defineComponent({
           if (response.data.user) {
             localStorage.setItem("auth_user", response.data.user);
             localStorage.setItem("auth_token", response.data.token);
-            this.$store.dispatch("user", response.data.user);
+
             this.$router.push({ name: "accountseed" });
             notify({
               title: "Authorization",
@@ -219,7 +219,6 @@ export default defineComponent({
     },
     getCurrencyList () {
       const path = "/auth/query/currency";
-
       axios({
         method: "get",
         url: path,
@@ -228,9 +227,7 @@ export default defineComponent({
         .then((response) => {
           this.currencyList = response.data;
         })
-        .catch(() => {
 
-        });
     },
     getCountryList () {
       const path = "/auth/query/country";
@@ -251,6 +248,6 @@ export default defineComponent({
 });
 </script>
 
-<style type="ts" scoped>
+<style  scoped>
 
 </style>

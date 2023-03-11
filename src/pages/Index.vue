@@ -69,10 +69,9 @@ export default defineComponent({
                 headers: authHeader(),
             })
                 .then((response) => {
-                    if ((response.status = 200)) {
+                    if (response.status == 200) {
                         this.user = response.data.user
                         this.user.confirmed = response.data.user.confirmed
-                        this.$store.dispatch('user', response.data.user)
                     }
                 })
                 .catch(() => {

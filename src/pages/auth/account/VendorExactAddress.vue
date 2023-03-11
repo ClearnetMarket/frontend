@@ -76,15 +76,15 @@
 </template>
 
 <script lang="ts">
-import axios from "axios";
-import { defineComponent } from "vue";
-import MainHeaderTop from "../../../layouts/headers/MainHeaderTop.vue";
-import MainHeaderMid from "../../../layouts/headers/MainHeaderMid.vue";
-import MainHeaderBottom from "../../../layouts/headers/MainHeaderBottom.vue";
-import MainHeaderVendor from "../../../layouts/headers/MainHeaderVendor.vue";
-import MainFooter from "../../../layouts/footers/FooterMain.vue";
-import authHeader from "../../../services/auth.header";
-import { notify } from "@kyvg/vue3-notification";
+import axios from "axios"
+import { defineComponent } from "vue"
+import MainHeaderTop from "../../../layouts/headers/MainHeaderTop.vue"
+import MainHeaderMid from "../../../layouts/headers/MainHeaderMid.vue"
+import MainHeaderBottom from "../../../layouts/headers/MainHeaderBottom.vue"
+import MainHeaderVendor from "../../../layouts/headers/MainHeaderVendor.vue"
+import MainFooter from "../../../layouts/footers/FooterMain.vue"
+import authHeader from "../../../services/auth.header"
+import { notify } from "@kyvg/vue3-notification"
 
 
 export default defineComponent({
@@ -145,7 +145,7 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
-        if ((response.status = 200)) {
+        if (response.status == 200) {
           notify({
             title: "Authorization",
             text: "Success!",
@@ -163,7 +163,7 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
-        if ((response.status = 200)) {
+        if (response.status == 200) {
 
           this.ChangeAddressForm.city = response.data.city;
           this.ChangeAddressForm.stateorprovence = response.data.stateorprovence;
@@ -185,4 +185,4 @@ export default defineComponent({
 });
 </script>
 
-<style type="ts" scoped></style>
+<style scoped></style>

@@ -17,8 +17,5 @@
       "./src/types/",
     ]
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
-  "references": [{
-  
-  }]
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx","src/**/*.js", "src/**/*.vue"],
 }

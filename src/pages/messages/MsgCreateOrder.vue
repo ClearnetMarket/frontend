@@ -87,7 +87,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import axios from "axios";
-import { mapGetters } from "vuex";
+
 import { useRoute } from "vue-router";
 import useValidate from "@vuelidate/core";
 import { required, minLength } from "@vuelidate/validators";

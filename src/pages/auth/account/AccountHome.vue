@@ -96,8 +96,10 @@
                     </router-link>
 
                     <div
-                        class="border border-1 rounded-md p-5 bg-white hover:bg-gray-300" style="cursor: pointer"
-                        @click.prevent="logout()">
+                        class="border border-1 rounded-md p-5 bg-white hover:bg-gray-300"
+                        style="cursor: pointer"
+                        @click.prevent="logout()"
+                    >
                         <div class="grid grid-cols-4 grid-rows-2">
                             <div class="col-span-1 row-span-2"></div>
                             <div class="col-span-3 row-span-1 text-[20px]">Logout</div>
@@ -148,7 +150,7 @@ export default defineComponent({
             localStorage.removeItem('user_token')
             localStorage.removeItem('auth_token')
             localStorage.clear()
-            this.$store.dispatch('user', null)
+
             this.$router.push('/')
         },
         userstatus() {
@@ -158,24 +160,14 @@ export default defineComponent({
                 withCredentials: true,
                 headers: authHeader(),
             }).then((response) => {
-                if ((response.status = 200)) {
+                if (response.status == 200) {
                     this.user = response.data.user
                     this.user_id = response.data.user.user_id
                     this.loaded_user = true
                 }
             })
         },
-        userprofile() {
-            axios({
-                method: 'get',
-                url: '/profile/profile_home',
-                withCredentials: true,
-                headers: authHeader(),
-            }).then((response) => {
-                if ((response.status = 200)) {
-                }
-            })
-        },
+
     },
 })
 </script>

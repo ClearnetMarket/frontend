@@ -170,7 +170,7 @@
           Moderator: Waiting on a moderator to take the case ...
         </div>
         <div class="col-span-12 flex justify-center text-[20px] my-5">
-          <div v-if="order.extended_timer == 1">Autofinalize has been paused on this order.</div>
+          <div v-if="order.extended_timer === 1">Autofinalize has been paused on this order.</div>
           <div v-else>Order will autofinalize: {{ autofinalizetimer }}</div>
         </div>
 
@@ -344,7 +344,6 @@ export default defineComponent({
 
   methods: {
     relativeDate (value: any) {
-
       let e = new Date(value).valueOf();
       return formatDistance(e, new Date());
     },

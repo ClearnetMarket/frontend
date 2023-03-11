@@ -154,7 +154,7 @@
       <div class="sm:col-span-6 md:col-span-12 lg:col-span-3 px-5 bg-white rounded-md"><!-- start column three -->
         <div class="flex justify-center mb-5 mt-5">
           <div v-if="user">
-            <div v-if="vendoruuid != user.user_id">
+            <div v-if="vendoruuid !== user.user_id">
               <button
                 class="bg-yellow-500 hover:bg-zinc-400 hover:text-white rounded-lg text-black font-semibold py-2 px-10 focus:outline-none focus:shadow-outline content-center justify-center"
                 type="submit" @click="addtocart()">
@@ -397,7 +397,6 @@ export default defineComponent({
           if ((response.status = 200)) {
             this.user = response.data.user
             this.user.confirmed = response.data.user.confirmed
-            this.$store.dispatch("user", response.data.user);
           }
         })
         .catch(() => { this.user = null });

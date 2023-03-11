@@ -132,6 +132,7 @@ export default defineComponent({
     return {
       v$: useValidate(),
       xmrbalance: 0,
+      user: null,
       wallet: {
         xmr_address: "",
         xmr_description: "",
@@ -150,7 +151,6 @@ export default defineComponent({
     };
   },
 
-
   methods: {
     userstatus () {
       axios({
@@ -161,9 +161,9 @@ export default defineComponent({
       })
         .then((response) => {
 
-
+          this.user = response.data.user
         })
-        .catch((error) => {
+        .catch(() => {
           this.$router.push("/login")
         });
     },

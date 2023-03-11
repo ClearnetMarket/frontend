@@ -10,7 +10,6 @@ export default defineConfig({
         assetsInlineLimit: 2048, // 2kb
     },
     server: {
-        secure: false,
         host: '0.0.0.0',
         port: 8080,
     },

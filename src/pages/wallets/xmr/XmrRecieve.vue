@@ -49,7 +49,6 @@ import axios from 'axios'
 import MainHeaderTop from '../../../layouts/headers/MainHeaderTop.vue'
 import MainHeaderMid from '../../../layouts/headers/MainHeaderMid.vue'
 import MainHeaderBottom from '../../../layouts/headers/MainHeaderBottom.vue'
-import MainHeaderVendor from '../../../layouts/headers/MainHeaderVendor.vue'
 import MainFooter from '../../../layouts/footers/FooterMain.vue'
 import authHeader from '../../../services/auth.header.js'
 
@@ -59,12 +58,13 @@ export default defineComponent({
         MainHeaderTop,
         MainHeaderMid,
         MainHeaderBottom,
-        MainHeaderVendor,
+
         MainFooter,
     },
     data() {
         return {
             xmr_address: '',
+            user: null,
         }
     },
     mounted() {
@@ -81,11 +81,9 @@ export default defineComponent({
                 headers: authHeader(),
             })
                 .then((response) => {
-                    if ((response.status = 200)) {
-                    }
+                    this.user = response.data.user
                 })
-                .catch((error) => {
-                    console.log(error)
+                .catch(() => {
                     this.$router.push('/login')
                 })
         },
@@ -97,7 +95,7 @@ export default defineComponent({
                 headers: authHeader(),
             })
                 .then((response) => {
-                    if ((response.status = 200)) {
+                    if (response.status == 200) {
                         this.xmr_address = response.data.xmr_address
                     }
                 })

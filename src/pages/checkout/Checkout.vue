@@ -324,9 +324,6 @@ export default defineComponent({
             }
           }
         })
-        .catch((error) => {
-
-        });
     },
     updateprices () {
       axios({
@@ -339,9 +336,6 @@ export default defineComponent({
           if ((response.status = 200)) {
           }
         })
-        .catch((error) => {
-
-        });
     },
     get_shopping_cart_items () {
       axios({

@@ -51,7 +51,7 @@ export default defineComponent({
                 headers: authHeader(),
             })
                 .then((response) => {
-                    if ((response.status = 200)) {
+                    if (response.status == 200) {
                         this.user = response.data.user
                         this.loaded = true
                     }
@@ -64,7 +64,7 @@ export default defineComponent({
             localStorage.removeItem('user_token')
             localStorage.removeItem('auth_token')
             localStorage.clear()
-            this.$store.dispatch('user', null)
+
         },
     },
 })

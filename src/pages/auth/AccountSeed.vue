@@ -97,6 +97,7 @@ export default defineComponent({
 
     data() {
         return {
+            user: null,
             word1: null,
             word2: null,
             word3: null,
@@ -121,8 +122,9 @@ export default defineComponent({
                 headers: authHeader(),
             })
                 .then((response) => {
-                    if ((response.status = 200)) {
-                        this.$store.dispatch('user', response.data.user)
+                    if (response.status == 200) {
+                      this.user = response.data.user
+
                     }
                 })
                 .catch(() => {})

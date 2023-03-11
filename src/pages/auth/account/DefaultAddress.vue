@@ -118,10 +118,9 @@
 </template>
 
 <script lang="ts">
-import axios from "axios";
-import { defineComponent } from "vue";
+import axios from "axios"
+import { defineComponent } from "vue"
 import { notify } from "@kyvg/vue3-notification";
-
 import useValidate from "@vuelidate/core";
 import { required, minLength } from "@vuelidate/validators";
 import MainHeaderTop from "../../../layouts/headers/MainHeaderTop.vue";
@@ -213,15 +212,13 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
-        if ((response.status = 200)) {
+        if (response.status == 200) {
           this.ChangeAddressForm.country = response.data.country;
           this.ChangeAddressForm.address_name = response.data.address_name;
           this.ChangeAddressForm.address = response.data.address;
           this.ChangeAddressForm.apt = response.data.apt;
           this.ChangeAddressForm.city = response.data.city;
-          this.ChangeAddressForm.address = response.data.address;
-          this.ChangeAddressForm.stateorprovence =
-            response.data.state_or_provence;
+          this.ChangeAddressForm.stateorprovence = response.data.state_or_provence;
           this.ChangeAddressForm.zip = response.data.zip;
           this.ChangeAddressForm.message = response.data.message;
         }
@@ -239,7 +236,7 @@ export default defineComponent({
     },
 
     onSubmit () {
-      const payLoad = {
+      let payLoad = {
         country: this.ChangeAddressForm.country,
         address: this.ChangeAddressForm.address,
         address_name: this.ChangeAddressForm.address_name,

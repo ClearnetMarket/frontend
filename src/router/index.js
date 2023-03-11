@@ -80,6 +80,11 @@ import ModTicket from '../pages/moderator/ModTicket.vue'
 
 const routes = [
     {
+        path: '/',
+        name: 'home',
+        component: home,
+    },
+    {
         path: '/mod/tickets/:uuid',
         name: 'ModTicket',
         component: ModTicket,
@@ -157,11 +162,7 @@ const routes = [
         name: 'userorders',
         component: userorders,
     },
-    {
-        path: '/',
-        name: 'home',
-        component: home,
-    },
+
     {
         path: '/sell',
         name: 'sell',
@@ -482,9 +483,9 @@ const routes = [
         component: Error404,
     },
 ]
-const router = createRouter({
+let router = createRouter({
     history: createWebHistory(),
     routes,
 })
 export default router
-//# sourceMappingURL=index.js.map
+//sourceMappingURL=index.ts.map

@@ -80,13 +80,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import axios from "axios";
-import { notify } from "@kyvg/vue3-notification";
-import useValidate from "@vuelidate/core";
-import { required, minLength } from "@vuelidate/validators";
-import HeaderPlain from "../../layouts/headers/HeaderPlain.vue";
-import authHeader from "../../services/auth.header";
+import { defineComponent } from "vue"
+import axios from "axios"
+import { notify } from "@kyvg/vue3-notification"
+import useValidate from "@vuelidate/core"
+import { required, minLength } from "@vuelidate/validators"
+import HeaderPlain from "../../layouts/headers/HeaderPlain.vue"
+import authHeader from "../../services/auth.header"
 
 export default defineComponent({
   name: "Login",
@@ -141,7 +141,7 @@ export default defineComponent({
             
             localStorage.setItem("auth_token", response.data.token);
             localStorage.setItem("auth_user", response.data.user);
-            this.$store.dispatch("user", response.data.user);
+
 
             this.$router.push({ name: "home" });
             notify({

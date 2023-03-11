@@ -7,14 +7,12 @@
                 >
                     You currently have a new message on a ticket
                 </div>
-
                 <div class="text-blue-700 hover:text-blue-600">
                     <router-link :to="{ name: 'supportticket' }"> View it here </router-link>
                 </div>
             </div>
         </div>
     </div>
-
 </template>
 
 <script lang="ts">
@@ -44,10 +42,10 @@ export default defineComponent({
                 headers: authHeader(),
             })
                 .then((response) => {
-                    if ((response.status = 200)) {
+                    if (response.status == 200) {
                         this.user = response.data.user
                         this.user.confirmed = response.data.user.confirmed
-                        this.$store.dispatch('user', response.data.user)
+
                         this.loaded = true
                     }
                 })
@@ -63,7 +61,7 @@ export default defineComponent({
                 headers: authHeader(),
             })
                 .then((response) => {
-                    if ((response.status = 200)) {
+                    if (response.status == 200) {
                         this.newticket = response.data.count
                     }
                 })

@@ -410,7 +410,6 @@ import { defineComponent } from "vue";
 import axios from "axios";
 import { ref } from "vue";
 import authHeader from "../../services/auth.header";
-import { mapGetters } from "vuex";
 import MainHeaderTop from "../../layouts/headers/MainHeaderTop.vue";
 import MainHeaderMid from "../../layouts/headers/MainHeaderMid.vue";
 import MainHeaderBottom from "../../layouts/headers/MainHeaderBottom.vue";
@@ -444,7 +443,6 @@ export default defineComponent({
 
   data() {
     return {
-
       user: null,
       item_id: null,
       marketitem: Object,
@@ -550,7 +548,7 @@ export default defineComponent({
         .catch((error) => {
           if (error.response) {
             if (error.response.status === 401) {
-              this.$store.commit("loginFailure");
+
             } else if (error.response.status === 403) {
             }
           }
@@ -574,7 +572,6 @@ export default defineComponent({
 
      getItemForSale() {
       // Get the item thats being modified
-
       const path = "/item/" + this.item_id;
       axios({
         method: "get",
@@ -609,8 +606,7 @@ export default defineComponent({
 
      getCountryList() {
       // Get Countries
-      const path = "/vendorcreateitem/query/country";
-
+       let path = "/vendorcreateitem/query/country";
        axios({
         method: "get", //you can set what request you want to be
         url: path,
@@ -621,7 +617,6 @@ export default defineComponent({
           // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
           this.countryList = response.data;
         })
-        .catch(() => {});
     },
   
 

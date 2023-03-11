@@ -239,7 +239,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if ((response.status = 200)) {
+          if (response.status == 200) {
             this.newitemid = response.data.item_id;
             this.$router.push({
               name: "edititem",
@@ -265,7 +265,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if ((response.status = 200)) {
+          if (response.status == 200) {
             this.getvendoritems();
             notify({
               title: "Message Center",
@@ -274,7 +274,7 @@ export default defineComponent({
             });
           }
         })
-        .catch((error) => {
+        .catch(() => {
 
           notify({
             title: "Freeport Error",
@@ -300,7 +300,7 @@ export default defineComponent({
           });
         }
       })
-        .catch((error) => {
+        .catch(() => {
 
           notify({
             title: "Freeport Error",

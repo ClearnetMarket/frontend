@@ -407,7 +407,7 @@ export default defineComponent({
           if (error.response) {
           
             if (error.response.status === 401) {
-              this.$store.commit("loginFailure");
+
               notify({
                 title: "Freeport Error",
                 text: "Error.  Not logged in!",

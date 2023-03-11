@@ -237,10 +237,8 @@ export default defineComponent({
         url: "/vendor/new-feedback-count/markasread",
         withCredentials: true,
         headers: authHeader(),
-      }).then((response) => {
-        if (response.status == 200) {
+      }).then(() => {
 
-        }
       });
     },
     // gets the vendor reviews
@@ -252,16 +250,13 @@ export default defineComponent({
       })
         .then((response) => {
           if ((response.status = 200)) {
-
             this.vendorreviews = response.data;
             if (this.vendorreviews == undefined) {
               this.vendorreviews = null;
             }
           }
         })
-        .catch((error) => {
-          console.log(error)
-        });
+        .catch(() => { });
     },
     // gets the overall ratings on sidebar
     getratings () {

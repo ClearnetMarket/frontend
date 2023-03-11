@@ -88,10 +88,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import axios from "axios";
-import StarRating from "../../components/star_rating/Star.vue";
-
+import { defineComponent } from "vue"
+import axios from "axios"
+import StarRating from "../../components/star_rating/Star.vue"
 
 export default defineComponent({
   name: "Searchitems",
@@ -105,6 +104,8 @@ export default defineComponent({
       price_coin_btc: null,
       price_coin_bch: null,
       price_coin_xmr: null,
+      price: 0,
+      currency: 0,
 
     };
   },

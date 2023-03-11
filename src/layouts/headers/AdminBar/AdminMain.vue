@@ -50,7 +50,7 @@ export default defineComponent({
                 withCredentials: true,
                 headers: authHeader(),
             }).then((response) => {
-                if ((response.status = 200)) {
+                if (response.status == 200) {
                     let user = response.data.user
 
                     this.user = response.data.user
@@ -61,7 +61,6 @@ export default defineComponent({
                         this.getvendordisputes()
                         this.getvendororders()
                     }
-                } else {
                 }
             })
         },

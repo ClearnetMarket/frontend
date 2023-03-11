@@ -178,9 +178,8 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       })
-        .then((response) => {
+        .then(() => {
           this.getmsgsofusers();
-
         })
         .catch(() => {
         });
@@ -195,9 +194,7 @@ export default defineComponent({
         .then((response) => {
           this.userlist = response.data;
         })
-        .catch((error) => {
-          console.log(error)
-        })
+        .catch(() => { })
     },
   },
 });

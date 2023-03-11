@@ -56,7 +56,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent } from "vue"
 
 import axios from "axios";
 import authHeader from "../../services/auth.header";
@@ -93,7 +93,7 @@ export default defineComponent({
             if ((response.status = 200)) {
               this.user = response.data.user
               this.user.confirmed = response.data.user.confirmed
-              this.$store.dispatch("user", response.data.user);
+
               this.get_shopping_cart_count();
             }
           })

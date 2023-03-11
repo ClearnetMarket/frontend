@@ -128,7 +128,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if ((response.status = 200)) {
+          if (response.status == 200) {
 
             this.user = response.data.user;
             this.getusermessagescount();
@@ -150,11 +150,8 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if ((response.status = 200)) {
-
+          if (response.status == 200) {
             this.msgcount = response.data.count;
-
-
           }
         })
         .catch(() => {
@@ -165,7 +162,7 @@ export default defineComponent({
     logout () {
       localStorage.removeItem("auth_token");
       localStorage.clear();
-      this.$store.dispatch("user", null);
+
       this.userstatus();
       this.$router.push({ name: "home" });
     },

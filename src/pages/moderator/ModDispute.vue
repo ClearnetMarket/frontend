@@ -183,7 +183,7 @@
                 Moderator: Waiting on a moderator to take the case ...
             </div>
             <div class="col-span-12 flex justify-center text-[20px] my-5">
-                <div v-if="order.extended_timer == 1">Autofinalize has been paused on this order.</div>
+                <div v-if="order.extended_timer === 1">Autofinalize has been paused on this order.</div>
                 <div v-else>Order will autofinalize: {{ autofinalizetimer }}</div>
             </div>
 
@@ -372,18 +372,18 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import axios from "axios";
-import { useRoute } from "vue-router";
-import { formatDistance } from "date-fns";
-import authHeader from "../../services/auth.header";
-import MainHeaderTop from "../../layouts/headers/MainHeaderTop.vue";
-import MainHeaderMid from "../../layouts/headers/MainHeaderMid.vue";
-import MainHeaderBottom from "../../layouts/headers/MainHeaderBottom.vue";
-import MainHeaderVendor from "../../layouts/headers/MainHeaderVendor.vue";
-import MainFooter from "../../layouts/footers/FooterMain.vue";
-import StarRatingCustomer from "../../components/star_rating/StarCustomer.vue";
-import StarRating from "../../components/star_rating/Star.vue";
+import { defineComponent } from "vue"
+import axios from "axios"
+import { useRoute } from "vue-router"
+import { formatDistance } from "date-fns"
+import authHeader from "../../services/auth.header"
+import MainHeaderTop from "../../layouts/headers/MainHeaderTop.vue"
+import MainHeaderMid from "../../layouts/headers/MainHeaderMid.vue"
+import MainHeaderBottom from "../../layouts/headers/MainHeaderBottom.vue"
+import MainHeaderVendor from "../../layouts/headers/MainHeaderVendor.vue"
+import MainFooter from "../../layouts/footers/FooterMain.vue"
+import StarRatingCustomer from "../../components/star_rating/StarCustomer.vue"
+import StarRating from "../../components/star_rating/Star.vue"
 
 export default defineComponent({
     name: "ModDispute",
@@ -421,7 +421,6 @@ export default defineComponent({
 
     mounted () {
         this.userstatus();
-
         const order_id_route = useRoute();
         this.order_id = order_id_route.params.uuid;
         this.getuserorder();
@@ -466,12 +465,8 @@ export default defineComponent({
                 withCredentials: true,
                 headers: authHeader(),
             })
-                .then((response) => {
-
-                })
-                .catch((error) => {
-
-                });
+                .then(() => {})
+                .catch(() => {});
         },
         // get the post comments
         getautofinalizetime () {
@@ -484,9 +479,7 @@ export default defineComponent({
                 .then((response) => {
                     this.autofinalizetimer = response.data.status;
                 })
-                .catch((error) => {
-                    console.log(error)
-                });
+                .catch(() => { });
         },
 
         // get the user order
@@ -519,11 +512,8 @@ export default defineComponent({
             })
                 .then((response) => {
                     this.mainpostcomments = response.data;
-
                 })
-                .catch((error) => {
-
-                });
+                .catch(() => {});
         },
 
         // gets the customer feedback

@@ -9,7 +9,7 @@
   },
   "dependencies": {
 
-    "@kyvg/vue3-notification": "latest",
+    "@kyvg/vue3-notification": "*",
     "@types/express": "latest",
     "@vuelidate/core": "latest",
     "@vuelidate/validators": "latest",
@@ -17,28 +17,26 @@
     "axios": "latest",
     "date-fns": "latest",
     "npm": "latest",
-    "vue": "3.2.45",
+    "vue": "3.2.47",
     "vue-router": "latest",
-    "vue3-vt-notifications": "latest",
-    "vuex": "latest",
-    "vuex-persistedstate": "latest"
+    "vue3-vt-notifications": "latest"
+
   },
   "devDependencies": {
-    "@prettier/plugin-php": "^0.19.3",
+    "@prettier/plugin-php": "latest",
     "@types/vuelidate": "latest",
-    "@typescript-eslint/eslint-plugin": "^5.54.1",
-    "@typescript-eslint/parser": "^5.54.1",
+    "@typescript-eslint/eslint-plugin": "latest",
+    "@typescript-eslint/parser": "latest",
     "@vitejs/plugin-vue": "latest",
     "autoprefixer": "latest",
-    "eslint": "^8.35.0",
-    "eslint-config-prettier": "^8.7.0",
-    "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-vue": "^9.9.0",
+    "eslint": "latest",
+    "eslint-config-prettier": "latest",
+    "eslint-plugin-prettier": "latest",
+    "eslint-plugin-vue": "latest",
     "postcss": "latest",
-    "prettier": "^2.8.4",
     "tailwindcss": "latest",
-    "typescript": "^4.9.5",
-    "vite": "4.0.1",
+    "typescript": "latest",
+    "vite": "4.0.0",
     "vue-cli-plugin-tailwind": "latest",
     "vue-tsc": "latest"
   }

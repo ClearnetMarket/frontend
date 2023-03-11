@@ -54,22 +54,20 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import axios from "axios";
-import authHeader from "../../services/auth.header";
-import MainHeaderTop from "../../layouts/headers/MainHeaderTop.vue";
-import MainHeaderMid from "../../layouts/headers/MainHeaderMid.vue";
-import MainHeaderBottom from "../../layouts/headers/MainHeaderBottom.vue";
-import MainHeaderVendor from "../../layouts/headers/MainHeaderVendor.vue";
-import MainFooter from "../../layouts/footers/FooterMain.vue";
-import ItemDescription from "./Item/ItemDescription.vue";
-import ItemUserReviews from "./Item/ItemUserReviews.vue";
-import ItemTop from "./Item/ItemTop.vue";
-import ItemShipping from "./Item/ItemShipping.vue";
-import ItemSimiliarItems from "./Item/ItemSimiliarItems.vue";
-import { notify } from "@kyvg/vue3-notification";
-
-
+import { defineComponent } from "vue"
+import axios from "axios"
+import authHeader from "../../services/auth.header"
+import MainHeaderTop from "../../layouts/headers/MainHeaderTop.vue"
+import MainHeaderMid from "../../layouts/headers/MainHeaderMid.vue"
+import MainHeaderBottom from "../../layouts/headers/MainHeaderBottom.vue"
+import MainHeaderVendor from "../../layouts/headers/MainHeaderVendor.vue"
+import MainFooter from "../../layouts/footers/FooterMain.vue"
+import ItemDescription from "./Item/ItemDescription.vue"
+import ItemUserReviews from "./Item/ItemUserReviews.vue"
+import ItemTop from "./Item/ItemTop.vue"
+import ItemShipping from "./Item/ItemShipping.vue"
+import ItemSimiliarItems from "./Item/ItemSimiliarItems.vue"
+import { notify } from "@kyvg/vue3-notification"
 
 
 export default defineComponent({
@@ -117,18 +115,15 @@ export default defineComponent({
       shippingdayfree: 0,
       shippingdaytwo: 0,
       shippingdaythree: 0,
-
       shopping_cart_count: 0,
-
       vendorreviews: [],
       user: null,
     };
   },
   watch: {
     $route () {
-      this.item == null;
-      this.vendorreviews == null;
-      
+      this.item = null;
+      this.vendorreviews = null;
       this.item_id = this.$route.params.id;
       this.getitem();
 
@@ -150,11 +145,9 @@ export default defineComponent({
         .then((response) => {
           if ((response.status = 200)) {
             this.user = response.data.user
-
           }
         })
         .catch(() => { this.user = 'null' });
-
     },
     getitem () {
      
@@ -229,9 +222,7 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       })
-        .then(() => {
-
-        });
+        .then(() => { });
     },
     returncurrencysymbol (currencydigit: number) {
       if (currencydigit === 0) {
