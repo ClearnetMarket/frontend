@@ -147,7 +147,7 @@ export default defineComponent({
             this.user = response.data.user
           }
         })
-        .catch(() => { this.user = 'null' });
+        .catch(() => { this.user =null });
     },
     getitem () {
      
@@ -212,7 +212,8 @@ export default defineComponent({
           }
         })
         .catch((error) => {
-
+             console.log(error)
+           this.vendorreviews = null;
         });
     },
     add_view () {
@@ -222,7 +223,10 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       })
-        .then(() => { });
+        .then(() => { })
+        .catch((error) => {
+          console.log("cant add view")
+        });
     },
     returncurrencysymbol (currencydigit: number) {
       if (currencydigit === 0) {

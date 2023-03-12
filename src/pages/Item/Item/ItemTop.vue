@@ -149,8 +149,6 @@
         </div>
       </div><!-- end column two -->
 
-
-
       <div class="sm:col-span-6 md:col-span-12 lg:col-span-3 px-5 bg-white rounded-md"><!-- start column three -->
         <div class="flex justify-center mb-5 mt-5">
           <div v-if="user">
@@ -170,7 +168,7 @@
           <div v-else>
             <button
               class="bg-yellow-500 hover:bg-zinc-400 hover:text-white rounded-lg text-black font-semibold py-2 px-10 focus:outline-none focus:shadow-outline content-center justify-center"
-              type="submit">
+              type="submit" @click="addtocart()">
               Add to Cart
             </button>
           </div>
@@ -217,7 +215,7 @@
                       <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="star"
                         class="w-4 text-yellow-500 mr-1" role="img" xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 576 512">
-                        <path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7 
+                        <path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7
                                 103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5
                                 105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z">
                         </path>
@@ -274,11 +272,9 @@ export default defineComponent({
 
   data () {
     return {
-
       item_id: null,
       uuid: null,
       user: null,
-
       shopping_cart_count: "",
       vendor_reviews_total: "",
       exact_city: "",
@@ -342,25 +338,20 @@ export default defineComponent({
       this.totalsold = null;
       this.condition = null;
       this.vendorname = null;
-
       this.digitalcurrencyone = null;
       this.digitalcurrencytwo = null;
       this.digitalcurrencythree = null;
-
       this.origin_country_name = null;
       this.international = null;
-
       this.image_one_250 = null;
       this.image_two_250 = null;
       this.image_three_250 = null;
       this.image_four_250 = null;
-
       this.current_main_image = null;
       this.image_one_500 = null;
       this.image_two_500 = null;
       this.image_three_500 = null;
       this.image_four_500 = null;
-
       this.freeshipping = null;
       this.freeshippingdays = null;
       this.shippingfree = null;
@@ -583,6 +574,7 @@ export default defineComponent({
 
     // Add item to cart
     addtocart () {
+
       axios({
         method: "post",
         url: "/checkout/add/" + this.item_id,
@@ -590,9 +582,6 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-
-          if ((response.status = 200)) {
-
             if (response.data.status == 'success') {
               console.log("1")
               notify({
@@ -602,21 +591,12 @@ export default defineComponent({
               });
               this.get_shopping_cart_count();
             }
-            else {
-              console.log("2")
-              notify({
-                title: "Shopping Cart Error",
-                text: response.data.error,
-                type: "error",
-              });
-            }
-          }
         })
         .catch((error) => {
           if (error.response) {
             notify({
               title: "Shopping Cart Error",
-              text: "Error.  Could not add item to cart.",
+              text: error.response.statusText,
               type: "error",
             });
           }
