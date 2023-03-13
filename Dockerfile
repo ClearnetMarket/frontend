@@ -1,5 +1,7 @@
 FROM node:latest
 
+ENV BASE_URL="http://localhost:5000"
+
 RUN mkdir -p /app
 
 WORKDIR /app
