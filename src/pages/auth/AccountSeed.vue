@@ -31,31 +31,49 @@
                         >
                             {{ word1 }}
                         </div>
+                        <span v-if="v$.word1.$error" class="text-red-600 text-center">
+                            {{ v$.word1.$errors[0].$message }}
+                        </span>
                         <div
                             class="inline-block bg-blue-600 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 text-[17px]"
                         >
                             {{ word2 }}
                         </div>
+                        <span v-if="v$.word2.$error" class="text-red-600 text-center">
+                            {{ v$.word2.$errors[0].$message }}
+                        </span>
                         <div
                             class="inline-block bg-blue-600 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 text-[17px]"
                         >
                             {{ word3 }}
                         </div>
+                        <span v-if="v$.word3.$error" class="text-red-600 text-center">
+                            {{ v$.word3.$errors[0].$message }}
+                        </span>
                         <div
                             class="inline-block bg-blue-600 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 text-[17px]"
                         >
                             {{ word4 }}
                         </div>
+                        <span v-if="v$.word4.$error" class="text-red-600 text-center">
+                            {{ v$.word4.$errors[0].$message }}
+                        </span>
                         <div
                             class="inline-block bg-blue-600 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 text-[17px]"
                         >
                             {{ word5 }}
                         </div>
+                        <span v-if="v$.word5.$error" class="text-red-600 text-center">
+                            {{ v$.word5.$errors[0].$message }}
+                        </span>
                         <div
                             class="inline-block bg-blue-600 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 text-[17px]"
                         >
                             {{ word6 }}
                         </div>
+                        <span v-if="v$.word6.$error" class="text-red-600 text-center">
+                            {{ v$.word6.$errors[0].$message }}
+                        </span>
                     </div>
                     <div class="flex justify-center my-10 gap-5 px-5">
                         <router-link :to="{ name: 'accountseedconfirm' }">
@@ -88,6 +106,8 @@ import axios from 'axios'
 import { notify } from '@kyvg/vue3-notification'
 import authHeader from '../../services/auth.header'
 import HeaderPlain from '../../layouts/headers/HeaderPlain.vue'
+import { minLength, required } from '@vuelidate/validators'
+import useValidate from '@vuelidate/core'
 
 export default defineComponent({
     name: 'Accountseed',
@@ -97,6 +117,7 @@ export default defineComponent({
 
     data() {
         return {
+            v$: useValidate(),
             user: null,
             word1: null,
             word2: null,
@@ -112,7 +133,18 @@ export default defineComponent({
         this.userstatusconfirmed()
         this.sendwordrequest()
     },
-
+    validations() {
+        return {
+            loginForm: {
+                word1: { required, minLength: minLength(2) },
+                word2: { required, minLength: minLength(2) },
+                word3: { required, minLength: minLength(2) },
+                word4: { required, minLength: minLength(2) },
+                word5: { required, minLength: minLength(2) },
+                word6: { required, minLength: minLength(2) },
+            },
+        }
+    },
     methods: {
         userstatus() {
             axios({
@@ -123,8 +155,7 @@ export default defineComponent({
             })
                 .then((response) => {
                     if (response.status == 200) {
-                      this.user = response.data.user
-
+                        this.$router.push({ name: 'home' })
                     }
                 })
                 .catch(() => {})
@@ -173,4 +204,4 @@ export default defineComponent({
 })
 </script>
 
-<style type="ts" scoped></style>
+<style scoped></style>

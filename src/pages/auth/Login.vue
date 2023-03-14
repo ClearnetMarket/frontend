@@ -42,10 +42,10 @@
             placeholder="Password"
           />
           <span
-            v-if="v$.loginForm.username.$error"
+            v-if="v$.loginForm.password.$error"
             class="text-red-600 text-center"
           >
-            {{ v$.loginForm.username.$errors[0].$message }}
+            {{ v$.loginForm.password.$errors[0].$message }}
           </span>
         </div>
 

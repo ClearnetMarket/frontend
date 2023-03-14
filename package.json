@@ -8,8 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-
-    "@kyvg/vue3-notification": "*",
+    "@kyvg/vue3-notification": "latest",
     "@types/express": "latest",
     "@vuelidate/core": "latest",
     "@vuelidate/validators": "latest",
@@ -17,10 +16,9 @@
     "axios": "latest",
     "date-fns": "latest",
     "npm": "latest",
-    "vue": "3.2.47",
+    "vue": "latest",
     "vue-router": "latest",
     "vue3-vt-notifications": "latest"
-
   },
   "devDependencies": {
     "@prettier/plugin-php": "latest",
@@ -36,7 +34,7 @@
     "postcss": "latest",
     "tailwindcss": "latest",
     "typescript": "latest",
-    "vite": "4.0.0",
+    "vite": "latest",
     "vue-cli-plugin-tailwind": "latest",
     "vue-tsc": "latest"
   }

@@ -253,9 +253,6 @@ const routes = [
         name: 'xmrwalletrecieve',
         component: xmrwalletrecieve,
     },
-
-    // checkout
-
     {
         path: '/checkout',
         name: 'checkout',
@@ -264,12 +261,12 @@ const routes = [
 
     // Plain Stuff
     {
-        path: '/auth/login',
+        path: '/login',
         name: 'login',
         component: login,
     },
     {
-        path: '/auth/register',
+        path: '/register',
         name: 'register',
         component: register,
     },

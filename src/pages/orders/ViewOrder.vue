@@ -392,11 +392,9 @@ export default defineComponent({
   },
 
   mounted () {
-
     let order_id_route = useRoute();
 
     this.order_id = order_id_route.params.uuid;
-
 
     this.getuserorder();
 
@@ -445,7 +443,6 @@ export default defineComponent({
         url: "/vendor/vendor-info/" + "6ad833fd4b214b48beef0944c1931b14",
         withCredentials: true,
         headers: authHeader(),
-
       })
         .then((response) => {
           if ((response.status = 200)) {

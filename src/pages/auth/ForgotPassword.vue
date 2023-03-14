@@ -110,7 +110,6 @@ import useValidate from "@vuelidate/core"
 import { required } from "@vuelidate/validators"
 import HeaderPlain from "../../layouts/headers/HeaderPlain.vue"
 
-
 export default defineComponent({
   name: "forgotpassword",
   components: {
@@ -153,11 +152,11 @@ export default defineComponent({
     }) {
        axios({
         method: "post",
-        url: "/auth/login",
+        url: "/auth/unlock-account",
         data: payLoad,
       })
         .then((response) => {
-          if (response.data.status == "success") {
+          if (response.data.status == "Account Unlocked") {
             notify({
               title: "Authorization",
               text: "Success",
@@ -169,7 +168,7 @@ export default defineComponent({
         .catch(() => {
           notify({
             title: "Authorization",
-            text: "Incorrect Credentials",
+            text: "Form Error",
             type: "error",
           });
         });
@@ -193,13 +192,7 @@ export default defineComponent({
         });
       } 
       else {
-
-        notify({
-          title: "Authorization",
-          text: "Form success",
-          type: "success",
-        });
-      this.sendWordRequest(payLoad);
+        this.sendWordRequest(payLoad);
     }
   },
   },
