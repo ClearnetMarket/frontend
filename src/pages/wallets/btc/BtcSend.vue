@@ -160,7 +160,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if (response.status == 200) {
+         if ((response.data.login == true)) {
             this.user = response.data.user
           }
         })
@@ -188,7 +188,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if ((response.status = 200)) {
+          if ((response.data.success)) {
             const message_sent =
               "Success! Sent " +
               this.wallet.btc_amount +

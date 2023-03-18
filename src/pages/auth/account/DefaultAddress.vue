@@ -195,7 +195,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if ((response.status = 200)) {
+          if ((response.data.success)) {
             notify({
               title: "Updated Address",
               text: "Success!",
@@ -212,7 +212,7 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
-        if (response.status == 200) {
+        if (response.data.success) {
           this.ChangeAddressForm.country = response.data.country;
           this.ChangeAddressForm.address_name = response.data.address_name;
           this.ChangeAddressForm.address = response.data.address;

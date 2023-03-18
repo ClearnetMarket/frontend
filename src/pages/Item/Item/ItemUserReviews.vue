@@ -169,7 +169,7 @@ export default defineComponent({
         withCredentials: true,
       })
         .then((response) => {
-          if ((response.status = 200)) {
+          if ((response.data.success)) {
             this.vendor_reviews_total = response.data.total_feedback;
             this.vendor_reviews_percent_one = response.data.feedback_one;
             this.vendor_reviews_percent_two = response.data.feedback_two;

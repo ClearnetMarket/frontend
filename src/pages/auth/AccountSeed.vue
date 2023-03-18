@@ -29,50 +29,50 @@
                         <div
                             class="inline-block bg-blue-600 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 text-[17px]"
                         >
-                            {{ word1 }}
+                            {{ seedform.word1 }}
                         </div>
-                        <span v-if="v$.word1.$error" class="text-red-600 text-center">
-                            {{ v$.word1.$errors[0].$message }}
+                        <span v-if="v$.seedform.word1.$error" class="text-red-600 text-center">
+                            {{ v$.seedform.word1.$errors[0].$message }}
                         </span>
                         <div
                             class="inline-block bg-blue-600 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 text-[17px]"
                         >
-                            {{ word2 }}
+                            {{ seedform.word2 }}
                         </div>
-                        <span v-if="v$.word2.$error" class="text-red-600 text-center">
-                            {{ v$.word2.$errors[0].$message }}
+                        <span v-if="v$.seedform.word2.$error" class="text-red-600 text-center">
+                            {{ v$.seedform.word2.$errors[0].$message }}
                         </span>
                         <div
                             class="inline-block bg-blue-600 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 text-[17px]"
                         >
-                            {{ word3 }}
+                            {{ seedform.word3 }}
                         </div>
-                        <span v-if="v$.word3.$error" class="text-red-600 text-center">
-                            {{ v$.word3.$errors[0].$message }}
+                        <span v-if="v$.seedform.word3.$error" class="text-red-600 text-center">
+                            {{ v$.seedform.word3.$errors[0].$message }}
                         </span>
                         <div
                             class="inline-block bg-blue-600 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 text-[17px]"
                         >
-                            {{ word4 }}
+                            {{ seedform.word4 }}
                         </div>
-                        <span v-if="v$.word4.$error" class="text-red-600 text-center">
-                            {{ v$.word4.$errors[0].$message }}
+                        <span v-if="v$.seedform.word4.$error" class="text-red-600 text-center">
+                            {{ v$.seedform.word4.$errors[0].$message }}
                         </span>
                         <div
                             class="inline-block bg-blue-600 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 text-[17px]"
                         >
-                            {{ word5 }}
+                            {{ seedform.word5 }}
                         </div>
-                        <span v-if="v$.word5.$error" class="text-red-600 text-center">
-                            {{ v$.word5.$errors[0].$message }}
+                        <span v-if="v$.seedform.word5.$error" class="text-red-600 text-center">
+                            {{ v$.seedform.word5.$errors[0].$message }}
                         </span>
                         <div
                             class="inline-block bg-blue-600 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 text-[17px]"
                         >
-                            {{ word6 }}
+                            {{ seedform.word6 }}
                         </div>
-                        <span v-if="v$.word6.$error" class="text-red-600 text-center">
-                            {{ v$.word6.$errors[0].$message }}
+                        <span v-if="v$.seedform.word6.$error" class="text-red-600 text-center">
+                            {{ v$.seedform.word6.$errors[0].$message }}
                         </span>
                     </div>
                     <div class="flex justify-center my-10 gap-5 px-5">
@@ -118,13 +118,16 @@ export default defineComponent({
     data() {
         return {
             v$: useValidate(),
+
             user: null,
-            word1: null,
-            word2: null,
-            word3: null,
-            word4: null,
-            word5: null,
-            word6: null,
+               seedform: {
+                 word1: null,
+                 word2: null,
+                 word3: null,
+                 word4: null,
+                 word5: null,
+                 word6: null,
+               }
         }
     },
 
@@ -135,7 +138,7 @@ export default defineComponent({
     },
     validations() {
         return {
-            loginForm: {
+            seedform: {
                 word1: { required, minLength: minLength(2) },
                 word2: { required, minLength: minLength(2) },
                 word3: { required, minLength: minLength(2) },
@@ -154,8 +157,8 @@ export default defineComponent({
                 headers: authHeader(),
             })
                 .then((response) => {
-                    if (response.status == 200) {
-                        this.$router.push({ name: 'home' })
+                    if ((response.data.login == true)) {
+                    this.user = response.data.user
                     }
                 })
                 .catch(() => {})
@@ -168,7 +171,7 @@ export default defineComponent({
                 withCredentials: true,
                 headers: authHeader(),
             }).then((response) => {
-                if (response.status == 200) {
+                if (response.data.success) {
                     if (response.data.confirmed == true) {
                         this.$router.push({ name: 'home' })
                     }
@@ -183,13 +186,13 @@ export default defineComponent({
                 headers: authHeader(),
             })
                 .then((response) => {
-                    if (response.status == 200) {
-                        this.word1 = response.data.word1
-                        this.word2 = response.data.word2
-                        this.word3 = response.data.word3
-                        this.word4 = response.data.word4
-                        this.word5 = response.data.word5
-                        this.word6 = response.data.word6
+                    if (response.data.success) {
+                        this.seedform.word1 = response.data.word1
+                        this.seedform.word2 = response.data.word2
+                        this.seedform.word3 = response.data.word3
+                        this.seedform.word4 = response.data.word4
+                        this.seedform.word5 = response.data.word5
+                        this.seedform.word6 = response.data.word6
                     }
                 })
                 .catch(() => {

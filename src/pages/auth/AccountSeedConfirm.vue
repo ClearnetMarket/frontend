@@ -180,7 +180,7 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
-        if (response.status == 200) { }
+        if ((response.data.login == true)) { }
       }).catch(() => { });
     },
 
@@ -192,7 +192,6 @@ export default defineComponent({
       word4: string;
       word5: string;
     }) {
-
      axios({
         method: "post",
         url: "/auth/accountseedconfirm",
@@ -208,6 +207,13 @@ export default defineComponent({
               type: "success",
             });
             this.$router.push({ name: "home" });
+          }
+          if (response.data.error) {
+              notify({
+            title: "Error",
+            text: response.data.error,
+            type: "error",
+          });
           }
         })
         .catch(() => {

@@ -222,7 +222,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if (response.status == 200) {
+          if (response.data.success) {
             this.order = response.data;
           }
         });
@@ -236,9 +236,9 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if ((response.status = 200)) {
+          if ((response.data.success)) {
 
-            if (response.data.status == "success") {
+
               // hide rating div
               this.rating_number = response.data.customer_rating;
               this.review = response.data.review;
@@ -249,7 +249,7 @@ export default defineComponent({
               this.review = "";
               this.rated = false
             }
-          }
+
         })
         .catch(() => {
 
@@ -277,13 +277,10 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if ((response.status = 200)) {
-            if (response.data.status == "success") {
+          if ((response.data.success)) {
 
-              // hide rating div
-              this.selectedrating = false;
-
-            }
+            // hide rating div
+            this.selectedrating = false;
           }
         })
         .catch(() => {
@@ -313,9 +310,9 @@ export default defineComponent({
       })
 
         .then((response) => {
-          if (response.status == 200) {
+          if (response.data.success) {
 
-            if (response.data.status == "success") {
+
 
               notify({
                 title: "Message Center",
@@ -333,7 +330,7 @@ export default defineComponent({
                 type: "error",
               })
             }
-          }
+
         })
         .catch((error) => {
 

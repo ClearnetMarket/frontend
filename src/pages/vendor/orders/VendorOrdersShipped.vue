@@ -305,7 +305,7 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
-        if (response.status == 200) {
+        if (response.data.success) {
           this.orders = response.data;
         }
       });
@@ -318,7 +318,7 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
-        if (response.status == 200) {
+        if (response.data.success) {
           this.vendor_orders_new = response.data.vendor_orders_new;
           this.vendor_orders_accepted = response.data.vendor_orders_accepted;
           this.vendor_orders_shipped = response.data.vendor_orders_shipped;

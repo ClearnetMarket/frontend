@@ -148,7 +148,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if ((response.status = 200)) {
+          if ((response.data.success)) {
             this.itemforsale = response.data;
           }
         })
@@ -165,7 +165,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if ((response.status = 200)) {
+          if ((response.data.success)) {
             this.other_user = response.data;
           }
         })
@@ -214,7 +214,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if ((response.status = 200)) {
+          if ((response.data.success)) {
             notify({
               title: "Message Center",
               text: "Successfully sent message!",

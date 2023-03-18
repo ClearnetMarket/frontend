@@ -123,7 +123,7 @@ export default defineComponent({
         withCredentials: true,
       })
         .then((response) => {
-          if ((response.status = 200)) {
+          if ((response.data.success)) {
             this.vendorreviews = response.data;
             if (this.vendorreviews == undefined) {
               this.vendorreviews = null;
@@ -139,7 +139,7 @@ export default defineComponent({
         withCredentials: true,
       })
         .then((response) => {
-          if ((response.status = 200)) {
+          if ((response.data.success)) {
             this.price_coin_btc = response.data.coin;
           }
         })
@@ -153,7 +153,7 @@ export default defineComponent({
         withCredentials: true,
       })
         .then((response) => {
-          if ((response.status = 200)) {
+          if ((response.data.success)) {
             this.price_coin_bch = response.data.coin;
           }
         })
@@ -167,7 +167,7 @@ export default defineComponent({
         withCredentials: true,
       })
         .then((response) => {
-          if ((response.status = 200)) {
+          if ((response.data.success)) {
             this.price_coin_xmr = response.data.coin;
           }
         })

@@ -413,7 +413,7 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
-        if (response.status == 200) {
+        if (response.data.success) {
           this.order = response.data;
           this.order_found = true;
           this.getvendorinfo();
@@ -445,7 +445,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if ((response.status = 200)) {
+          if ((response.data.success)) {
             this.vendoruuid = response.data.vendoruuid;
             this.vendorrating = response.data.vendorrating;
             this.vendortotalsales = response.data.vendortotalsales;
@@ -462,7 +462,7 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
-        if (response.status == 200) {
+        if (response.data.success) {
           this.review = response.data.review;
           this.rating_vendor = response.data.vendor_rating;
           this.loaded_feedback = true;
@@ -513,7 +513,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if ((response.status = 200)) {
+          if ((response.data.success)) {
             notify({
               title: "Message Center",
               text: "Successfully sent feedback Review!",
@@ -543,7 +543,7 @@ export default defineComponent({
       })
         .then((response) => {
 
-          if ((response.status = 200)) {
+          if ((response.data.success)) {
             notify({
               title: "Message Center",
               text: "Successfully sent feedback Score!",
@@ -574,7 +574,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if (response.status == 200) {
+          if (response.data.success) {
 
             this.tracking_number = response.data.tracking_number;
             this.carrier_name = response.data.carrier_name;
@@ -591,7 +591,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if (response.status == 200) {
+          if (response.data.success) {
             window.location.reload();
           }
         });
@@ -605,7 +605,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if (response.status == 200) 
+          if (response.data.success)
           {
             this.createdisputechat(uuid);
             this.createdisputenotificationchat(uuid);
@@ -644,7 +644,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if (response.status == 200) {
+          if (response.data.success) {
             window.location.reload();
           }
         });
@@ -658,7 +658,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if (response.status == 200) {
+          if (response.data.success) {
             window.location.reload();
           }
         });

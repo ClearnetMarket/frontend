@@ -163,7 +163,7 @@ export default defineComponent({
                 headers: authHeader(),
             })
                 .then((response) => {
-                    if ((response.status = 200)) {
+                   if ((response.data.login == true)) {
                         this.user = response.data.user;
                         if (this.user.user_admin !== 10) {
                          
@@ -182,7 +182,7 @@ export default defineComponent({
                 headers: authHeader(),
             })
                 .then((response) => {
-                    if ((response.status = 200)) {
+                    if ((response.data.success)) {
                         this.all_tickets = response.data;
                     }
                     else { }
@@ -196,7 +196,7 @@ export default defineComponent({
                 headers: authHeader(),
             })
                 .then((response) => {
-                    if ((response.status = 200)) {
+                    if ((response.data.success)) {
                         this.stats_count = response.data.count;
                         this.stats_open = response.data.open;
                         this.stats_completed = response.data.completed;

@@ -498,7 +498,7 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
-        if (response.status != 200) {
+       if ((response.data.login != true)) {
           this.$router.push({ name: "home" });
         }
       });
@@ -538,7 +538,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if (response.data.status == "success") {
+          if (response.data.success) {
             this.$router.push("/vendor/itemsforsale");
           }
           if (response.data.status == "error") {
@@ -546,12 +546,7 @@ export default defineComponent({
           }
         })
         .catch((error) => {
-          if (error.response) {
-            if (error.response.status === 401) {
 
-            } else if (error.response.status === 403) {
-            }
-          }
         });
     },
 
@@ -579,7 +574,7 @@ export default defineComponent({
         withCredentials: true,
       })
         .then((response) => {
-          if (response.status === 200) {
+          if (response.data.success) {
             this.marketitem = response.data;
             this.image_main = response.data.image_one_server;
             this.image_two = response.data.image_two_server;
@@ -597,7 +592,7 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
-        if ((response.status = 200)) {
+        if ((response.data.success)) {
           this.item_id = response.data.item_id;
           this.getItemForSale();
         }
@@ -614,18 +609,16 @@ export default defineComponent({
         
       })
         .then((response) => {
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
           this.countryList = response.data;
         })
     },
   
 
      getCategoryList() {
-      // Get Categories
       const path = "/vendorcreateitem/query/category";
 
       axios({
-        method: "get", //you can set what request you want to be
+        method: "get",
         url: path,
         withCredentials: true,
       })
@@ -635,7 +628,6 @@ export default defineComponent({
         .catch(() => {});
     },
      getConditionList() {
-      // Get Conditions
       const path = "/vendorcreateitem/query/condition";
       axios({
         method: "get",

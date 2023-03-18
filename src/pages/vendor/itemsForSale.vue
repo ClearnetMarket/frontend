@@ -206,7 +206,7 @@ export default defineComponent({
         headers: authHeader(),
       }).then((response) => {
 
-        if (response.status == 200) {
+      if ((response.data.login == true)) {
           this.user = response.data.user
 
           if (response.data.user.user_admin == 0) {
@@ -224,7 +224,7 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
-        if ((response.status = 200)) {
+        if ((response.data.success)) {
           this.items = response.data;
         }
       });
@@ -239,7 +239,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if (response.status == 200) {
+          if (response.data.success) {
             this.newitemid = response.data.item_id;
             this.$router.push({
               name: "edititem",
@@ -265,7 +265,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if (response.status == 200) {
+          if (response.data.success) {
             this.getvendoritems();
             notify({
               title: "Message Center",
@@ -291,7 +291,7 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
-        if ((response.status = 200)) {
+        if ((response.data.success)) {
           this.getvendoritems();
           notify({
             title: "Message Center",
@@ -317,7 +317,7 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
-        if ((response.status = 200)) {
+        if ((response.data.success)) {
 
           this.getvendoritems();
           if (response.data.status == "success") {
@@ -345,16 +345,13 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
-        if ((response.status = 200)) {
-          if (response.data.status == "success") {
-         
+        if ((response.data.success)) {
             this.getvendoritems();
             notify({
               title: "Item:  " + itemid,
               text: "Item is offline",
               type: "success",
             });
-          }
         }
       });
     },

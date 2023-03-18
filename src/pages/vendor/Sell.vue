@@ -146,7 +146,7 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
-        if ((response.status = 200)) {
+      if ((response.data.login == true)) {
           this.user_admin = response.data.user.user_admin;
 
           if (this.user_admin == 1) {
@@ -169,7 +169,7 @@ export default defineComponent({
         data: payLoad,
         headers: authHeader(),
       }).then((response) => {
-        if ((response.status = 200)) {
+        if ((response.data.success)) {
           localStorage.setItem("auth_user", response.data.user);
           notify({
             title: "Message Center",

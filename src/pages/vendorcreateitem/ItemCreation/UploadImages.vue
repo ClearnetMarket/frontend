@@ -212,7 +212,7 @@ export default defineComponent({
         withCredentials: true,
       })
         .then((response) => {
-          if (response.status === 200) {
+          if (response.data.success) {
             this.marketitem = response.data;
 
             this.image_1_in_db = this.marketitem.image_one_server == null;
@@ -428,7 +428,7 @@ export default defineComponent({
       })
         .then((response) => {
 
-          if (response.status == 200) {
+          if (response.data.success) {
             // if any images uploaded success
             notify({
               title: "Image Deletion",
@@ -459,7 +459,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if (response.status == 200) {
+          if (response.data.success) {
             // if any images uploaded success
             notify({
               title: "Image Deletion",
@@ -490,7 +490,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if (response.status == 200) {
+          if (response.data.success) {
             // if any images uploaded success
             notify({
               title: "Image Deletion",
@@ -526,7 +526,7 @@ export default defineComponent({
         .then((response) => {
 
 
-          if (response.status == 200) {
+          if (response.data.success) {
             // if any images uploaded success
             notify({
               title: "Image Deletion",
@@ -557,7 +557,7 @@ export default defineComponent({
       })
         .then((response) => {
 
-          if (response.status == 200) {
+          if (response.data.success) {
             // if any images uploaded success
             this.marketitem.image_one_server = null;
             this.marketitem.image_one_server = response.data.status;
@@ -578,7 +578,7 @@ export default defineComponent({
       })
         .then((response) => {
 
-          if (response.status == 200) {
+          if (response.data.success) {
             // if any images uploaded success
             this.marketitem.image_two_server = null;
             this.marketitem.image_two_server = response.data.status;
@@ -598,7 +598,7 @@ export default defineComponent({
       })
         .then((response) => {
 
-          if (response.status == 200) {
+          if (response.data.success) {
             // if any images uploaded success
             this.marketitem.image_three_server = null;
             this.marketitem.image_three_server = response.data.status;
@@ -617,7 +617,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if (response.status == 200) {
+          if (response.data.success) {
             // if any images uploaded success
             this.marketitem.image_four_server = null;
             this.marketitem.image_four_server = response.data.status;
@@ -640,7 +640,7 @@ export default defineComponent({
       })
         .then((response) => {
 
-          if (response.status == 200) {
+          if (response.data.success) {
             // if any images uploaded success
             this.marketitem.image_one_url_250 = null;
             this.marketitem.image_one_url_250 = response.data.status;
@@ -661,7 +661,7 @@ export default defineComponent({
       })
         .then((response) => {
 
-          if (response.status == 200) {
+          if (response.data.success) {
             // if any images uploaded success
             this.marketitem.image_two_url_250 = null;
             this.marketitem.image_two_url_250 = response.data.status;
@@ -681,7 +681,7 @@ export default defineComponent({
       })
         .then((response) => {
 
-          if (response.status == 200) {
+          if (response.data.success) {
             // if any images uploaded success
             this.marketitem.image_three_url_250 = null;
             this.marketitem.image_three_url_250 = response.data.status;
@@ -700,7 +700,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if (response.status == 200) {
+          if (response.data.success) {
             // if any images uploaded success
             this.marketitem.image_four_url_250 = null;
             this.marketitem.image_four_url_250 = response.data.status;
@@ -715,12 +715,6 @@ export default defineComponent({
 });
 </script>
 <style scoped>
-.show {
-  visibility: visible
-}
 
-.hide {
-  visibility: hidden
-}
 </style>
 

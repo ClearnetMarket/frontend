@@ -217,7 +217,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if ((response.status = 200)) {
+          if ((response.data.login == true)) {
             this.user = response.data.user;
           }
         })
@@ -249,7 +249,7 @@ export default defineComponent({
         withCredentials: true,
       })
         .then((response) => {
-          if ((response.status = 200)) {
+          if ((response.data.success)) {
             this.vendorreviews = response.data;
             if (this.vendorreviews == undefined) {
               this.vendorreviews = null;
@@ -266,7 +266,7 @@ export default defineComponent({
         withCredentials: true,
       })
         .then((response) => {
-          if ((response.status = 200)) {
+          if ((response.data.success)) {
             this.vendor_reviews_total = response.data.total_feedback;
             this.vendor_reviews_percent_one = response.data.feedback_one;
             this.vendor_reviews_percent_two = response.data.feedback_two;

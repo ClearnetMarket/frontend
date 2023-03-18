@@ -123,7 +123,7 @@ export default defineComponent({
       })
 
         .then((response) => {
-          if ((response.status = 200)) {
+          if ((response.data.success)) {
 
             this.$router.push({ name: "home" });
           }
@@ -141,8 +141,6 @@ export default defineComponent({
             
             localStorage.setItem("auth_token", response.data.token);
             localStorage.setItem("auth_user", response.data.user);
-
-
             this.$router.push({ name: "home" });
             notify({
               title: "Authorization",
@@ -177,7 +175,7 @@ export default defineComponent({
       if (this.v$.$invalid) {
         notify({
           title: "Authorization",
-          text: "Form Failure",
+          text: "Form Error: Fields must be filled out correctly",
           type: "error",
         });
       } else {

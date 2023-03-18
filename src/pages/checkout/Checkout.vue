@@ -34,18 +34,13 @@
           </nav>
         </div>
       </div>
-
-
       <div v-if="shopping_cart_items_list_count == 1">
         <div class="text-center text-[28px] mb-10">Checkout ({{ shopping_cart_items_list_count }} item)</div>
       </div>
       <div v-else>
         <div class="text-center text-[28px] mb-10">Checkout ({{ shopping_cart_items_list_count }} items)</div>
       </div>
-
       <div class="grid grid-cols-12 w-full gap-4 px-2">
-
-
         <div class="col-span-12 md:col-span-8 grid-rows-3 bg-white rounded-md p-5 mb-5 ">
           <div class="grid grid-cols-12 border-b border-gray-300 pb-4 ">
             <div class="col-span-1 font-bold">1</div>
@@ -198,12 +193,9 @@
                 btctotalprice <= btcbalance">
                 </div>
                 <div v-else class="text-red-600 text-center font-bold">Not Enough Coin in your wallet</div>
-
                 <div v-if="address_name.length > 5">
                 </div>
                 <div v-else class="text-red-600 text-center font-bold">Need A Shipping Address</div>
-
-
                 <button v-show="
                   xmrtotalprice <= xmrbalance &&
                   bchtotalprice <= bchbalance &&
@@ -307,8 +299,8 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if ((response.status = 200)) {
-            if (response.data.status == "success") {
+          if ((response.data.success)) {
+
               notify({
                 title: "Freeport Message",
                 text: "Successfully completed order!",
@@ -321,7 +313,7 @@ export default defineComponent({
                 text: response.data.status,
                 type: "error",
               });
-            }
+
           }
         })
     },
@@ -333,7 +325,8 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if ((response.status = 200)) {
+          if ((response.data.success)) {
+
           }
         })
     },
@@ -345,8 +338,8 @@ export default defineComponent({
         withCredentials: true,
       })
         .then((response) => {
-          this.cart_status = response.status;
-          if (this.cart_status == 200) {
+
+          if (response.data.success) {
             this.shopping_cart_items_list = response.data;
           }
           else {
@@ -365,8 +358,8 @@ export default defineComponent({
         withCredentials: true,
       })
         .then((response) => {
-          this.cart_status = response.status;
-          if (this.cart_status == 200) {
+
+          if (response.data.success) {
             this.shopping_cart_items_list_count = response.data.cart_count;
           }
           else {
@@ -403,8 +396,8 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          this.cart_status = response.status;
-          if (this.cart_status == 200) {
+
+          if (response.data.success) {
             this.btcsumofitem = response.data.btc_sum_of_item;
             this.btcprice = response.data.btc_price;
             this.btcshippingprice = response.data.btc_shipping_price;
@@ -428,7 +421,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if ((response.status = 200)) {
+          if ((response.data.success)) {
             this.address_name = response.data.address_name;
             this.country = response.data.country;
             this.address = response.data.address;
@@ -450,7 +443,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if (response.data) {
+          if (response.data.success) {
             this.xmrbalance = response.data.xmr_balance;
           }
         })
@@ -465,7 +458,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if (response.data) {
+          if (response.data.success) {
             this.bchbalance = response.data.bch_balance;
           }
         })
@@ -480,7 +473,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if (response.data) {
+          if (response.data.success) {
             this.btcbalance = response.data.btc_balance;
           }
         })

@@ -295,8 +295,6 @@ export default defineComponent({
           shipping_3: false,
           shipping_3_days: "",
           shipping_3_price: "",
-
-
         },
       },
     };
@@ -314,7 +312,6 @@ export default defineComponent({
           item_count: { required },
           price: { required },
         },
-
       },
     };
   },
@@ -327,7 +324,7 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
-        if (response.status != 200) {
+       if ((response.data.login != true)) {
           this.$router.push({ name: "home" });
         }
       });
@@ -344,12 +341,11 @@ export default defineComponent({
         withCredentials: true,
       })
         .then((response) => {
-          if (response.status === 200) {
+          if (response.data.success) {
             this.marketitem = response.data;
 
           }
         })
-
     },
     // main item recreation function
     SendItemCreation (payLoad: {
@@ -403,26 +399,7 @@ export default defineComponent({
             });
           }
         })
-        .catch((error) => {
-          if (error.response) {
-          
-            if (error.response.status === 401) {
-
-              notify({
-                title: "Freeport Error",
-                text: "Error.  Not logged in!",
-                type: "error",
-              });
-            } 
-            else if (error.response.status === 403) {
-              notify({
-                title: "Freeport Error",
-                text: "Error.  Not logged in!",
-                type: "error",
-              });
-            }
-          }
-        });
+        .catch((error) => {});
     },
     // pre fill form data
     getFormData () {

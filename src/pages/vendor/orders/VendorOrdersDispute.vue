@@ -216,8 +216,7 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
-        if (response.status == 200) {
-
+        if (response.data.success) {
           this.dispute_count = response.data.count;
     
         }
@@ -231,7 +230,7 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
-        if (response.status == 200) {
+        if (response.data.success) {
 
           this.orders = response.data;
           this.loaded = true
@@ -246,7 +245,7 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
-        if (response.status == 200) {
+        if (response.data.success) {
 
         }
       });

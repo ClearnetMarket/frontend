@@ -279,7 +279,7 @@ export default defineComponent({
                 headers: authHeader(),
             })
                 .then((response) => {
-                    if ((response.status = 200)) {
+                   if ((response.data.login == true)) {
                         this.user = response.data.user;
                     }
                 })
@@ -295,7 +295,7 @@ export default defineComponent({
                 headers: authHeader(),
             })
                 .then((response) => {
-                    if ((response.status = 200)) {
+                    if ((response.data.success)) {
                         this.get_all_tickets();
                     }
                 })
@@ -323,7 +323,7 @@ export default defineComponent({
                 headers: authHeader(),
             })
                 .then((response) => {
-                    if ((response.status = 200)) {
+                    if ((response.data.success)) {
                         this.get_ticket = response.data
                     }
                 });
@@ -339,7 +339,7 @@ export default defineComponent({
                 headers: authHeader(),
             })
                 .then((response) => {
-                    if ((response.status = 200)) {
+                    if ((response.data.success)) {
                         this.get_ticket_data = response.data;
 
                         this.loaded = true;
@@ -358,7 +358,7 @@ export default defineComponent({
                 headers: authHeader(),
             })
                 .then((response) => {
-                    if ((response.status = 200)) {
+                    if ((response.data.success)) {
                         this.all_tickets = response.data;
                     }
                 });
@@ -373,7 +373,7 @@ export default defineComponent({
                 headers: authHeader(),
             })
                 .then((response) => {
-                    if ((response.status = 200)) {
+                    if ((response.data.success)) {
                         this.get_current_ticket_messages();
                     }
                 })

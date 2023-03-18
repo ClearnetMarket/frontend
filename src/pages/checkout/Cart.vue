@@ -310,7 +310,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if ((response.status = 200)) {
+      if ((response.data.login == true)) {
             this.user = response.data.user;
           }
         })
@@ -327,13 +327,9 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if (response.status == 200) {
-          }
+          if (response.data.success) { }
         })
-        .catch((error) => {
-
-
-        });
+        .catch((error) => {});
     },
     // gets the items in the shopping cart
     get_shopping_cart_items () {
@@ -343,15 +339,14 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          this.cart_status = response.status;
-          if (this.cart_status == 200) {
+
+          if (response.data.success) {
             if (response.data.status == 'error') {
               this.shopping_cart_items_list = null;
             }
             else {
               this.shopping_cart_items_list = response.data;
             }
-
           } else {
             this.shopping_cart_items_list = null;
           }
@@ -368,8 +363,8 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          this.cart_status = response.status;
-          if (this.cart_status == 200) {
+
+          if (response.data.success) {
             if (response.data.status !== "none") {
               this.shopping_cart_items_saved_list = response.data;
             } else {
@@ -389,8 +384,8 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          this.cart_status = response.status;
-          if (this.cart_status == 200) {
+
+          if (response.data.success) {
             this.order_summary_count = response.data.total_items;
             this.order_summary_shipping_cost = response.data.total_shipping;
             this.order_summary_cost = response.data.total_price_before_shipping;
@@ -431,14 +426,13 @@ export default defineComponent({
         data: payLoad,
       })
         .then((response) => {
-          if ((response.status = 200)) {
+          if ((response.data.success)) {
             notify({
               title: "Shopping Cart",
               text: "Item amount updated!",
               type: "success",
             });
             this.shopping_cart_count = response.data.status;
-
             this.get_shopping_cart_order_summary();
           }
         })
@@ -458,7 +452,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if ((response.status = 200)) {
+          if ((response.data.success)) {
             notify({
               title: "Success",
               text: "Item deleted from shopping cart.",
@@ -485,7 +479,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if ((response.status = 200)) {
+          if ((response.data.success)) {
             notify({
               title: "Shopping Cart",
               text: "Item saved for later!",
@@ -512,7 +506,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if ((response.status = 200)) {
+          if ((response.data.success)) {
             notify({
               title: "Shopping Cart",
               text: "Item moved to cart!",

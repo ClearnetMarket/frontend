@@ -160,8 +160,10 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
+          if ((response.data.login == true)) {
 
-          this.user = response.data.user
+            this.user = response.data.user
+          }
         })
         .catch(() => {
           this.$router.push("/login")
@@ -181,7 +183,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if ((response.status = 200)) {
+          if ((response.data.success)) {
             const message_sent =
               "Success! Sent " +
               this.wallet.xmr_amount +

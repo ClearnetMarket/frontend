@@ -358,7 +358,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if (response.status == 200) {
+          if (response.data.success) {
 
             this.order = response.data;
             this.postid = this.order.dispute_post_id;
@@ -410,7 +410,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if ((response.status = 200)) {
+          if ((response.data.success)) {
             notify({
               title: "Message Center",
               text: "Successfully sent message!",

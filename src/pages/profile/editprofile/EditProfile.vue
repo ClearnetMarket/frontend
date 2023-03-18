@@ -167,7 +167,7 @@ export default defineComponent({
                 headers: authHeader(),
             })
                 .then((response) => {
-                    if ((response.status = 200)) {
+                  if ((response.data.login == true)) {
                         this.user = response.data.user;
 
                         if (this.user.profile_image === null) {
@@ -190,7 +190,7 @@ export default defineComponent({
                 withCredentials: true,
                 headers: authHeader(),
             }).then((response) => {
-                if ((response.status = 200)) {
+                if ((response.data.success)) {
                     this.ProfileForm.bio = response.data.bio;
 
                 }
@@ -228,8 +228,7 @@ export default defineComponent({
                 headers: authHeader(),
             })
                 .then((response) => {
-                    if ((response.status = 200)) { 
-
+                    if ((response.data.success)) {
                         this.$router.push({ name: "userprofile", params: { uuid: this.user.user_id }, });
                     }
                 });
@@ -304,8 +303,8 @@ export default defineComponent({
                 headers: authHeader(),
             })
                 .then((response) => {
-                    console.log(response.status)
-                    if (response.status == 200) {
+
+                    if (response.data.success) {
                         // if any images uploaded success
                         notify({
                             title: "Image Deletion",
@@ -334,7 +333,7 @@ export default defineComponent({
             })
                 .then((response) => {
 
-                    if (response.status == 200) {
+                    if (response.data.success) {
                         // if any images uploaded success
                         this.user.profileimage = null;
                         this.user.profileimage_url_250 = null;
@@ -356,7 +355,7 @@ export default defineComponent({
             })
                 .then((response) => {
 
-                    if (response.status == 200) {
+                    if (response.data.success) {
                         // if any images uploaded success
                         this.user.image_one_url_250 = response.data.status;
                     }

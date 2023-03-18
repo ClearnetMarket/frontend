@@ -10,13 +10,13 @@
   "dependencies": {
     "@kyvg/vue3-notification": "latest",
     "@types/express": "latest",
-    "@vuelidate/core": "latest",
-    "@vuelidate/validators": "latest",
+    "@vuelidate/core": "*",
+    "@vuelidate/validators": "*",
     "@vueuse/core": "latest",
     "axios": "latest",
     "date-fns": "latest",
-    "npm": "latest",
-    "vue": "latest",
+    "npm": "*",
+    "vue": "3.2.47",
     "vue-router": "latest",
     "vue3-vt-notifications": "latest"
   },

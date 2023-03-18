@@ -275,7 +275,6 @@ export default defineComponent({
       item_id: null,
       uuid: null,
       user: null,
-      shopping_cart_count: "",
       vendor_reviews_total: "",
       exact_city: "",
       exact_stateorprovence: "",
@@ -385,7 +384,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if ((response.status = 200)) {
+       if ((response.data.login == true)) {
             this.user = response.data.user
             this.user.confirmed = response.data.user.confirmed
           }
@@ -402,7 +401,7 @@ export default defineComponent({
         withCredentials: true,
       })
         .then((response) => {
-          if ((response.status = 200)) {
+          if ((response.data.success)) {
             this.uuid = response.data.uuid;
             this.item = response.data;
             this.title = response.data.item_title;
@@ -411,25 +410,20 @@ export default defineComponent({
             this.totalsold = response.data.total_sold;
             this.condition = response.data.item_condition;
             this.vendorname = response.data.vendor_display_name;
-
             this.digitalcurrencyone = response.data.digital_currency_1;
             this.digitalcurrencytwo = response.data.digital_currency_2;
             this.digitalcurrencythree = response.data.digital_currency_3;
-
             this.origin_country_name = response.data.origin_country_name;
             this.international = response.data.international;
-
             this.image_one_250 = response.data.image_one_url_250;
             this.image_two_250 = response.data.image_two_url_250;
             this.image_three_250 = response.data.image_three_url_250;
             this.image_four_250 = response.data.image_four_url_250;
-
             this.current_main_image = response.data.image_one_url_500;
             this.image_one_500 = response.data.image_one_url_500;
             this.image_two_500 = response.data.image_two_url_500;
             this.image_three_500 = response.data.image_three_url_500;
             this.image_four_500 = response.data.image_four_url_500;
-
             this.freeshipping = response.data.shipping_free;
             this.freeshippingdays = response.data.shipping_day_0;
             this.shippingfree = response.data.shipping_free;
@@ -450,8 +444,7 @@ export default defineComponent({
             this.seeifuserhasdefaultaddress();
           }
         })
-        .catch((error) => {
-
+        .catch(() => {
           this.$router.push({ name: "home" });
           notify({
             title: "Error",
@@ -483,7 +476,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if ((response.status = 200)) {
+          if ((response.data.success)) {
             this.exactcity = response.data.city;
             this.exactstateorprovence = response.data.stateorprovence;
             this.exactzipcode = response.data.zipcode;
@@ -500,16 +493,14 @@ export default defineComponent({
         withCredentials: true,
       })
         .then((response) => {
-          if ((response.status = 200)) {
+          if ((response.data.success)) {
             this.vendoruuid = response.data.vendoruuid;
             this.vendorrating = response.data.vendorrating;
             this.vendortotalsales = response.data.vendortotalsales;
             this.loaded_feedback = true;
           }
         })
-        .catch(() => {
-
-        });
+        .catch(() => { });
     },
     getitemprice () {
       this.price = this.item.price;
@@ -522,7 +513,7 @@ export default defineComponent({
         withCredentials: true,
       })
         .then((response) => {
-          if ((response.status = 200)) {
+          if ((response.data.success)) {
             this.pricebtc = response.data.coin;
           }
         })
@@ -535,7 +526,7 @@ export default defineComponent({
         withCredentials: true,
       })
         .then((response) => {
-          if ((response.status = 200)) {
+          if ((response.data.success)) {
             this.pricebch = response.data.coin;
           }
         })
@@ -550,7 +541,7 @@ export default defineComponent({
         withCredentials: true,
       })
         .then((response) => {
-          if ((response.status = 200)) {
+          if ((response.data.success)) {
             this.pricexmr = response.data.coin;
           }
         })
@@ -582,8 +573,9 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-            if (response.data.status == 'success') {
-              console.log("1")
+
+            if (response.data.success) {
+            console.log("Here")
               notify({
                 title: "Shoppinng cart message",
                 text: "Successfully added item to cart",
@@ -591,15 +583,24 @@ export default defineComponent({
               });
               this.get_shopping_cart_count();
             }
+              if (response.data.error) {
+                 notify({
+                title: "Shoppinng cart message",
+                text: response.data.error,
+                type: "error",
+              });
+                 this.get_shopping_cart_count();
+              }
+
         })
         .catch((error) => {
-          if (error.response) {
+
             notify({
               title: "Shopping Cart Error",
               text: error.response.statusText,
               type: "error",
             });
-          }
+
         });
     },
 
@@ -611,10 +612,8 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-
-          this.shopping_cart_count = response.data.status;
-          console.log(response.data.status)
-          this.$emit("UpdateCart", this.shopping_cart_count);
+          this.shoppingcartcount = response.data.status;
+          this.$emit("UpdateCart", this.shoppingcartcount);
         });
     },
     returncurrencysymbol (currencydigit: number) {

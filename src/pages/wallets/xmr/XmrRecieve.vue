@@ -81,7 +81,9 @@ export default defineComponent({
                 headers: authHeader(),
             })
                 .then((response) => {
+                  if ((response.data.login == true)) {
                     this.user = response.data.user
+                  }
                 })
                 .catch(() => {
                     this.$router.push('/login')
@@ -95,7 +97,7 @@ export default defineComponent({
                 headers: authHeader(),
             })
                 .then((response) => {
-                    if (response.status == 200) {
+                    if (response.data.success) {
                         this.xmr_address = response.data.xmr_address
                     }
                 })

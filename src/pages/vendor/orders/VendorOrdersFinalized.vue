@@ -259,10 +259,10 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if (response.status == 200) {
+
             this.orders = response.data;
 
-          }
+
         });
     },
     // gets the count for the top bars count
@@ -274,7 +274,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if (response.status == 200) {
+          if (response.data.success) {
             this.vendor_orders_new = response.data.vendor_orders_new;
             this.vendor_orders_accepted = response.data.vendor_orders_accepted;
             this.vendor_orders_shipped = response.data.vendor_orders_shipped;

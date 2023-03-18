@@ -175,7 +175,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if (response.status == 200) {
+         if ((response.data.login == true)) {
             if (response.data.user.user_admin < 2) {
               this.$router.push({ name: "home" });
             }
@@ -196,7 +196,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if (response.status == 200) {
+          if (response.data.success) {
             this.getdisputesneedmod();
             this.getdisputeshasmod();
           }
@@ -211,7 +211,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if (response.status == 200) {
+          if (response.data.success) {
             this.needmodorders = response.data;
            
           }
@@ -226,7 +226,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if (response.status == 200) {
+          if (response.data.success) {
             this.hadmodorders = response.data;
           }
         });

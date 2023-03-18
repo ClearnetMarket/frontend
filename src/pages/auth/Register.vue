@@ -172,7 +172,7 @@ export default defineComponent({
       if (this.v$.$invalid) {
         notify({
           title: "Authorization",
-          text: "Form Failure",
+          text: "Form Failure;  Fields must be filled our correctly.",
           type: "error",
         });
       } else {
@@ -195,6 +195,15 @@ export default defineComponent({
         withCredentials: true,
       })
         .then((response) => {
+           if (response.data.error) {
+                       notify({
+            title: "Authorization",
+            text: response.data.error,
+            type: "error",
+          });
+
+           };
+
           if (response.data.user) {
             localStorage.setItem("auth_user", response.data.user);
             localStorage.setItem("auth_token", response.data.token);

@@ -120,7 +120,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if (response.status == 200) {
+       if ((response.data.login == true)) {
             if (response.data.user.user_admin < 2) {
               this.$router.push({ name: "home" });
             }
@@ -141,7 +141,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if (response.status == 200) {
+          if (response.data.success) {
             this.getdisputesneedmod();
             this.getdisputeshasmod();
           }
@@ -156,7 +156,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if (response.status == 200) {
+          if (response.data.success) {
             this.needmodorders = response.data;
           }
         });
@@ -170,7 +170,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if (response.status == 200) {
+          if (response.data.success) {
             this.hadmodorders = response.data;
           }
         });
@@ -183,8 +183,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if ((response.status = 200)) {
-          
+          if ((response.data.success)) {
             this.stats_ticket_count = response.data.count;
             this.stats_ticket_open = response.data.open;
             this.stats_ticket_completed = response.data.completed;
@@ -200,10 +199,8 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if ((response.status = 200)) {
-         
+          if ((response.data.success)) {
             this.stats_dispute_count = response.data.count;
-          
           }
           else { }
         });

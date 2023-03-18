@@ -216,7 +216,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if ((response.status = 200)) {
+        if ((response.data.login == true)) {
 
             this.user = response.data.user;
 
@@ -233,7 +233,7 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
-        if ((response.status = 200)) {
+        if ((response.data.success)) {
 
           this.userprofile = response.data;
           this.userprofile.profileimage = response.data.profileimage;
@@ -256,7 +256,7 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
-        if ((response.status = 200)) {
+        if ((response.data.success)) {
           this.user_stats = response.data;
           this.user_stats.total_items_bought = response.data.total_items_bought;
         }
@@ -269,7 +269,7 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
-        if ((response.status = 200)) {
+        if ((response.data.success)) {
           this.vendor_stats = response.data;
 
         }
@@ -282,7 +282,7 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
-        if ((response.status = 200)) {
+        if ((response.data.success)) {
           this.currencydefault = response.data.currency;
           this.countrydefault = response.data.country;
           this.country = this.countrydefault;
@@ -298,7 +298,7 @@ export default defineComponent({
         withCredentials: true,
       })
         .then((response) => {
-          if ((response.status = 200)) {
+          if ((response.data.success)) {
             this.userreviews = response.data;
             if (this.userreviews == undefined) {
               this.userreviews = null;
@@ -314,7 +314,7 @@ export default defineComponent({
         withCredentials: true,
       })
         .then((response) => {
-          if ((response.status = 200)) {
+          if ((response.data.success)) {
             this.vendor_reviews_total = response.data.total_feedback;
 
           }
@@ -331,7 +331,7 @@ export default defineComponent({
         withCredentials: true,
       })
         .then((response) => {
-          if ((response.status = 200)) {
+          if ((response.data.success)) {
 
             this.vendorreviews = response.data;
             if (this.vendorreviews == undefined) {
@@ -350,7 +350,7 @@ export default defineComponent({
         withCredentials: true,
       })
         .then((response) => {
-          if ((response.status = 200)) {
+          if ((response.data.success)) {
             this.user_reviews_total = response.data.total_feedback;
 
           }

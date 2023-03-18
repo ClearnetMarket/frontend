@@ -1,6 +1,6 @@
 FROM node:latest
 
-ENV BASE_URL="http://localhost:5000"
+ENV VITE_BASE_URL="http://localhost:5000"
 
 RUN mkdir -p /app
 

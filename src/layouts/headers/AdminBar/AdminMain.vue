@@ -50,7 +50,7 @@ export default defineComponent({
                 withCredentials: true,
                 headers: authHeader(),
             }).then((response) => {
-                if (response.status == 200) {
+             if ((response.data.login == true)) {
                     let user = response.data.user
 
                     this.user = response.data.user

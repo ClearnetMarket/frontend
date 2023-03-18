@@ -312,7 +312,7 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
-        if (response.status == 200) {
+        if (response.data.success) {
           this.orders = response.data;
 
 
@@ -327,7 +327,7 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
-        if (response.status == 200) {
+        if (response.data.success) {
           this.orderscount = response.data.count;
           
         }
@@ -341,7 +341,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if ((response.status = 200)) {
+         if ((response.data.login == true)) {
             this.user = response.data.user
           }
         })
@@ -356,7 +356,7 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
-        if (response.status == 200) {
+        if (response.data.success) {
           this.getuserorders();
           notify({
             title: "Message Center",
@@ -374,7 +374,7 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
-        if (response.status == 200) {
+        if (response.data.success) {
           this.getuserorders();
           notify({
             title: "Message Center",
@@ -392,7 +392,7 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
-        if (response.status == 200) {
+        if (response.data.success) {
           notify({
             title: "Message Center",
             text: "Successfully sent cancel request to vendor!",
@@ -411,7 +411,7 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
-        if (response.status == 200) {
+        if (response.data.success) {
           notify({
             title: "Message Center",
             text: "Successfully request a dispute.",

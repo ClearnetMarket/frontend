@@ -150,7 +150,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if ((response.status = 200)) {
+          if ((response.data.success)) {
             this.itemforsale = response.data;
           }
         })
@@ -167,7 +167,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if ((response.status = 200)) {
+          if ((response.data.success)) {
             this.other_user = response.data;
           }
         })
@@ -213,25 +213,25 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if ((response.status = 200)) {
-            if (response.data.error){
-                notify({
-                title: "Freeport Error",
-                text: response.data.error,
-                type: "error",
-              });
-            }else{
+          if ((response.data.success)) {
             notify({
               title: "Message Center",
               text: "Successfully sent message!",
               type: "success",
             });
           }
+            if (response.data.error){
+                notify({
+                title: "Freeport Error",
+                text: response.data.error,
+                type: "error",
+              });
+
             this.$router.push({
               name: "MarketItem",
               params: { id: this.itemforsale.uuid },
             });
-          }
+            }
         })
         .catch((error) => {
           console.log(error)

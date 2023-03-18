@@ -42,7 +42,7 @@
           </div>
           <div class="row-span-1 col-span-9 text-[14px] text-gray-700">
             <div v-if="user" class="flex">
-            {{ shopping_cart_count }} Items
+            {{ shoppingcartcount }} Items
             </div>
               <div v-else>
                 0 Items
@@ -57,7 +57,6 @@
 
 <script lang="ts">
 import { defineComponent } from "vue"
-
 import axios from "axios";
 import authHeader from "../../services/auth.header";
 
@@ -66,7 +65,7 @@ export default defineComponent({
 
   data() {
     return {
-      shopping_cart_count: 0,
+      shoppingcartcount: 0,
       currenturl: null,
       user: null,
       searchForm: {
@@ -74,12 +73,8 @@ export default defineComponent({
       },
     };
   },
-  created() {
-  
-  },
   mounted() {
     this.userstatus()
- 
   },
   methods: {
     userstatus() {
@@ -90,7 +85,7 @@ export default defineComponent({
         headers: authHeader(),
       })
           .then((response) => {
-            if ((response.status = 200)) {
+            if ((response.data.login == "true")) {
               this.user = response.data.user
               this.user.confirmed = response.data.user.confirmed
 
@@ -104,22 +99,15 @@ export default defineComponent({
       this.$router.replace({ name: nameofurl })
     },
     mainsearch() {
-      
       if (this.searchForm.searchInput !== ''){
           this.$router.push({
           name: "search",
           params: { searchstring: this.searchForm.searchInput },
         });
       }
-      else{
-
-      }
-
-
     },
     // Get How many items in shopping cart
     get_shopping_cart_count()  {
-
        axios({
         method: "get",
         url: "/info/user-cart-count",
@@ -127,14 +115,11 @@ export default defineComponent({
          headers: authHeader(),
       })
         .then((response) => {
-         
-          if ((response.status = 200)) {
-         
-            this.shopping_cart_count = response.data.status;
-            
+          if ((response.data.status)) {
+            this.shoppingcartcount = response.data.status;
           }
           else{
-            this.shopping_cart_count = 0
+            this.shoppingcartcount = 0
           }
       });
     },

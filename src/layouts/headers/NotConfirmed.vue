@@ -49,7 +49,7 @@ export default defineComponent({
                 headers: authHeader(),
             })
                 .then((response) => {
-                    if (response.status == 200) {
+                    if ((response.data.login == true)) {
                         this.user = response.data.user
                         this.user.confirmed = response.data.user.confirmed
                         this.loaded = true
@@ -67,7 +67,7 @@ export default defineComponent({
                 headers: authHeader(),
             })
                 .then((response) => {
-                    if (response.status == 200) {
+                    if (response.data.success) {
                         if (response.data.confirmed == true) {
                             this.confirmed = true
                         } else if (response.data.confirmed == false) {

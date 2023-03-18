@@ -293,7 +293,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if ((response.status = 200)) {
+         if ((response.data.login == true)) {
             this.user = response.data.user
           }
         })
@@ -369,7 +369,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if ((response.status = 200)) {
+          if ((response.data.success)) {
             this.itemforsale = response.data;
           }
         })
@@ -433,7 +433,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if ((response.status = 200)) {
+          if ((response.data.success)) {
             this.getcountofusers();
             this.getmsgsofusers();
             this.getmainpostcomments();

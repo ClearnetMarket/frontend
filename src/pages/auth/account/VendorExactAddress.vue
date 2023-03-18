@@ -124,7 +124,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if ((response.status = 200)) {
+        if ((response.data.login == true)) {
             this.user = response.data.user
 
             this.getcurrentshipping();
@@ -145,7 +145,7 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
-        if (response.status == 200) {
+        if (response.data.success) {
           notify({
             title: "Authorization",
             text: "Success!",
@@ -163,7 +163,7 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
-        if (response.status == 200) {
+        if (response.data.success) {
 
           this.ChangeAddressForm.city = response.data.city;
           this.ChangeAddressForm.stateorprovence = response.data.stateorprovence;

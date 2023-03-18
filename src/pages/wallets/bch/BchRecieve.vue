@@ -81,8 +81,7 @@ export default defineComponent({
                 headers: authHeader(),
             })
                 .then((response) => {
-                    if ((response.status = 200)) {
-                    }
+                    if ((response.data.login == true)) {  }
                 })
                 .catch((error) => {
                     console.log(error)
@@ -96,7 +95,7 @@ export default defineComponent({
                 headers: authHeader(),
             })
                 .then((response) => {
-                    if ((response.status = 200)) {
+                    if ((response.data.success)) {
                         this.bch_address = response.data.bch_address
                     }
                 })

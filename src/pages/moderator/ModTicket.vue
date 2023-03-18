@@ -225,7 +225,7 @@ export default defineComponent({
                 headers: authHeader(),
             })
                 .then((response) => {
-                    if (response.status == 200) {
+                    if (response.data.success) {
                         if (response.data.user.user_admin < 2) {
                             this.$router.push({ name: "home" });
                         } else {
@@ -241,7 +241,7 @@ export default defineComponent({
                 withCredentials: true,
                 headers: authHeader(),
             }).then((response) => {
-                if ((response.status = 200)) {
+                if ((response.data.success)) {
                     this.user = response.data;
                     this.userprofile = response.data;
                     this.userprofile.profileimage = response.data.profileimage;
@@ -264,7 +264,7 @@ export default defineComponent({
                 headers: authHeader(),
             })
                 .then((response) => {
-                    if ((response.status = 200)) {
+                    if ((response.data.success)) {
                         this.get_ticket = response.data;
                         this.author_uuid = response.data.author_uuid;
                     }
@@ -284,7 +284,7 @@ export default defineComponent({
                 headers: authHeader(),
             })
                 .then((response) => {
-                    if ((response.status = 200)) {
+                    if ((response.data.success)) {
                         this.get_ticket_data = response.data;
                         this.loaded = true;
 
@@ -301,7 +301,7 @@ export default defineComponent({
                 headers: authHeader(),
             })
                 .then((response) => {
-                    if ((response.status = 200)) {
+                    if ((response.data.success)) {
                         notify({
                             title: "Message",
                             text: "Successfully closed ticket",
@@ -320,7 +320,7 @@ export default defineComponent({
                 headers: authHeader(),
             })
                 .then((response) => {
-                    if ((response.status = 200)) {
+                    if ((response.data.success)) {
                         this.get_current_ticket_messages();
                     }
                 })

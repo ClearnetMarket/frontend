@@ -39,7 +39,7 @@ export default defineComponent({
                 withCredentials: true,
             })
                 .then((response) => {
-                    if ((response.status = 200)) {
+                    if ((response.data.success)) {
                         this.items = response.data
                     }
                 })

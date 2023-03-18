@@ -258,7 +258,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if ((response.status = 200)) {
+         if ((response.data.login == true)) {
             this.btctransactions();
           }
         })
@@ -275,7 +275,7 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
-        if ((response.status = 200)) {
+        if ((response.data.success)) {
 
           this.transactions = response.data;
         }
