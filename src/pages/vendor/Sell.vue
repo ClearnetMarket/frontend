@@ -9,7 +9,7 @@
     <MainHeaderVendor v-show="user.user_admin === 1" />
   </div>
 
-  <div class="container max-w-7xl mx-auto px-10 wrapper mb-10 overflow-hidden" v-if="loaded">
+  <div class="container max-w-7xl mx-auto px-10 wrapper mb-10 overflow-hidden text-neutral" v-if="loaded">
     <div class="mt-5 mb-5">
       <nav class="rounded-md w-full">
         <ol class="list-reset flex">

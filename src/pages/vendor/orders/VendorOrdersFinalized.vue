@@ -182,7 +182,7 @@
                 <div class=" text-[14px] font-bold flex justify-center">
                   <router-link :to="{ name: 'vendorordersfeedback', params: { uuid: order.uuid }, }" class="px-3">
                     <button
-                      class="bg-blue-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline ">
+                      class="bg-primary hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline ">
                       View Order
                     </button>
                   </router-link>

@@ -5,7 +5,7 @@
   <MainHeaderBottom />
   <div class="wrapper">
     
-    <div class="container max-w-4xl mx-auto wrapper px-10">
+    <div class="container max-w-4xl mx-auto wrapper px-10 text-neutral">
       <div class="grid grid-cols-1 w-full gap-4">
         <nav class="rounded-md">
           <ol class="list-reset flex">

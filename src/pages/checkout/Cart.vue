@@ -29,7 +29,7 @@
       <div class="grid grid-cols-12 gap-4">
         <div class="col-span-12 md:col-span-9 px-2">
           <div class="grid grid-cols-4 border-b pb-8">
-            <div class="col-span-3 font-semibold text-2xl">Shopping Cart</div>
+            <div class="col-span-3 font-semibold text-2xl ">Shopping Cart</div>
             <div class="col-span-1 col-start-4 font-semibold text-2xl">
               {{ order_summary_count }} Items
             </div>
@@ -245,7 +245,7 @@
             </div>
           </div>
           <div v-else>
-            <h1 class="font-semibold text-[16px] text-center">Add Items to your cart to checkout</h1>
+            <h1 class="font-semibold text-[16px] text-center text-neutral">Add Items to your cart to checkout</h1>
           </div>
         </div>
       </div>
@@ -339,17 +339,8 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-
-          if (response.data.success) {
-            if (response.data.status == 'error') {
-              this.shopping_cart_items_list = null;
-            }
-            else {
-              this.shopping_cart_items_list = response.data;
-            }
-          } else {
-            this.shopping_cart_items_list = null;
-          }
+          if (response.data.error) {this.shopping_cart_items_list = null}
+          else {this.shopping_cart_items_list = response.data}
         })
         .catch(() => {
           this.shopping_cart_items_list = null;
@@ -364,13 +355,9 @@ export default defineComponent({
       })
         .then((response) => {
 
-          if (response.data.success) {
-            if (response.data.status !== "none") {
-              this.shopping_cart_items_saved_list = response.data;
-            } else {
-              this.shopping_cart_items_saved_list = null;
-            }
-          }
+            if (response.data.error) {this.shopping_cart_items_saved_list = null}
+            else {this.shopping_cart_items_saved_list = response.data}
+
         })
         .catch(() => {
           this.shopping_cart_items_saved_list = null;

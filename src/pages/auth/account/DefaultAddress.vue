@@ -9,7 +9,7 @@
   </div>
     <div class="wrapper">
   <!-- Top Stuff-->
-  <div class="container max-w-4xl mx-auto  bg-gray-300 ">
+  <div class="container max-w-4xl mx-auto bg-gray-300 text-neutral">
     <!-- Container-->
     <div class="mt-5 mb-5 ">
       <nav class="rounded-md w-full">

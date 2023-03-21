@@ -5,7 +5,7 @@
     <MainHeaderBottom />
     <div class="wrapper">
 
-        <div class="container max-w-5xl mx-auto px-10  mb-10">
+        <div class="container max-w-5xl mx-auto px-10  mb-10 text-neutral">
             <div class="grid grid-cols-1 w-full gap-4 mb-5">
                 <nav class="rounded-md">
                     <ol class="list-reset flex">
@@ -307,10 +307,6 @@ export default defineComponent({
         get_current_ticket () {
             let url = this.$route.params.uuid
             if (url == null){
-                console.log("")
-                console.log("")
-                console.log(url)
-                console.log("")
                 clearInterval(this.interval)
                 this.interval = null;
             }else{

@@ -9,7 +9,7 @@
     </div>
 <div class="wrapper">
     <!-- Top Stuff-->
-    <div class="container selection:max-w-7xl mx-auto  px-10 bg-gray-300">
+    <div class="container selection:max-w-7xl mx-auto  px-10 bg-gray-300 text-neutral">
         <!-- Container-->
         <div class="mt-5 mb-5">
             <nav class="rounded-md w-full">
@@ -89,7 +89,7 @@
              
                 <div class="flex justify-center mt-20">
                     <button
-                        class="bg-blue-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                        class="bg-primary hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                         type="submit">
                         Submit
                     </button>

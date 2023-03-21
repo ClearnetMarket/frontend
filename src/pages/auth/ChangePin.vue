@@ -2,7 +2,7 @@
 <template>
   <HeaderPlain />
   <div class="wrapperplain">
-    <div class="container max-w-3xl mx-auto  bg-gray-300 ">
+    <div class="container max-w-3xl mx-auto bg-gray-300 text-neutral">
       <div class="mx-auto flex mb-1">
         <div class="mt-5 mb-5 px-10">
           <nav class="rounded-md w-full">

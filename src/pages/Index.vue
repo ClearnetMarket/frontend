@@ -1,5 +1,5 @@
 <template>
-    <div class="h-full">
+
         <MainHeaderTop />
         <MainHeaderMid />
         <MainHeaderBottom />
@@ -11,8 +11,8 @@
         <div v-if="user">
             <MainHeaderVendor v-show="user.user_admin === 1" />
         </div>
-
-        <div class="container max-w-7xl mx-auto mb-0 bg-text-white">
+    <div class="wrapper">
+        <div class="container max-w-7xl mx-auto mb-0 bg-text-white text-neutral">
             <TodayFeatured />
             <TodayFeatured />
             <TodayFeatured />

@@ -3,7 +3,7 @@
 
   <HeaderPlain />
     <div class="wrapperplain">
-  <div class="container max-w-7xl mx-auto bg-gray-300 ">
+  <div class="container max-w-7xl mx-auto bg-gray-300 text-neutral">
     <div class="mx-auto max-w-lg flex items-center justify-center ">
       <form class="bg-white rounded-md  px-8 pt-6 pb-8 mb-4 mt-4 w-full" method="POST" @submit.prevent="onSubmit">
         <div class="mb-4 text-center text-[28px] text-zinc-600">Register</div>
@@ -89,7 +89,7 @@
 
         <div class="flex items-center justify-center mb-6">
           <button
-            class="bg-blue-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            class="bg-primary hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             type="submit">
             Register
           </button>

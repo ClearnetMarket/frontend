@@ -237,10 +237,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if (response.data.success) {
             this.orders = response.data;
-
-          }
         });
     },
     // gets the count for the top bars count

@@ -9,7 +9,7 @@
     <MainHeaderVendor v-show="user.user_admin === 1" />
   </div>
 
-  <div class="container max-w-4xl mx-auto px-2 wrapper pb-72 bg-gray-300">
+  <div class="container max-w-4xl mx-auto px-2 wrapper pb-72 bg-gray-300 text-neutral">
     <div class="mt-5">
       <nav class="rounded-md w-full">
         <ol class="list-reset flex">
@@ -30,7 +30,7 @@
   
       <div class="flex justify-center mt-5 md:mt-0 md:justify-end">
         <button v-on:click="createanitem()"
-          class="bg-blue-600 hover:bg-zinc-700 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mr-2">
+          class="bg-primary hover:bg-zinc-700 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mr-2">
           Create Item
         </button>
       </div>
@@ -193,11 +193,9 @@ export default defineComponent({
   },
 
   methods: {
-
     gotoitem (itemid: any) {
       this.$router.push({ name: "edititem", params: { id: itemid } });
     },
-
     userstatus () {
       axios({
         method: "get",
@@ -208,7 +206,6 @@ export default defineComponent({
 
       if ((response.data.login == true)) {
           this.user = response.data.user
-
           if (response.data.user.user_admin == 0) {
             this.$router.push({ name: "home" });
           }
@@ -224,12 +221,9 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
-        if ((response.data.success)) {
           this.items = response.data;
-        }
       });
     },
-
     // creates an item
     createanitem () {
       axios({
@@ -247,7 +241,7 @@ export default defineComponent({
             });
           }
         })
-        .catch((error) => {
+        .catch(() => {
 
           notify({
             title: "Freeport Error",
@@ -301,7 +295,6 @@ export default defineComponent({
         }
       })
         .catch(() => {
-
           notify({
             title: "Freeport Error",
             text: "Error posting information.",

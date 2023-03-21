@@ -222,9 +222,9 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if (response.data.success) {
+
             this.order = response.data;
-          }
+
         });
     },
     //see if score already present

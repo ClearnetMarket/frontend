@@ -281,9 +281,7 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
-        if (response.data.success) {
           this.orders = response.data;
-        }
       }).catch((error) => {
         console.log(error)
       });

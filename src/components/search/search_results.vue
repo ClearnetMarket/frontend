@@ -1,5 +1,5 @@
 <template>
-  <div class="grid grid-cols-12 bg-white mb-2 rounded-md">
+  <div class="grid grid-cols-12 bg-white mb-2 rounded-md text-neutral">
     <div class="col-span-12 sm:col-span-12 md:col-span-3">
       <router-link :to="{ name: 'MarketItem', params: { id: item.uuid } }">
         <img alt="" class="object-cover h-48 w-96" :src=item.image_one_url_250 />

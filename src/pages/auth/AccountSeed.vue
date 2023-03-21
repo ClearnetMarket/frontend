@@ -1,7 +1,7 @@
 <template>
     <HeaderPlain />
     <div class="wrapperplain">
-        <div class="container max-w-3xl b mx-auto">
+        <div class="container max-w-3xl b mx-auto text-neutral">
             <div class="mt-5 mb-5">
                 <nav class="rounded-md w-full">
                     <ol class="list-reset flex">
@@ -27,7 +27,7 @@
                     </div>
                     <div class="md:flex md:justify-center text-center">
                         <div
-                            class="inline-block bg-blue-600 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 text-[17px]"
+                            class="inline-block bg-primary rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 text-[17px]"
                         >
                             {{ seedform.word1 }}
                         </div>
@@ -35,7 +35,7 @@
                             {{ v$.seedform.word1.$errors[0].$message }}
                         </span>
                         <div
-                            class="inline-block bg-blue-600 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 text-[17px]"
+                            class="inline-block bg-primary rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 text-[17px]"
                         >
                             {{ seedform.word2 }}
                         </div>
@@ -43,7 +43,7 @@
                             {{ v$.seedform.word2.$errors[0].$message }}
                         </span>
                         <div
-                            class="inline-block bg-blue-600 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 text-[17px]"
+                            class="inline-block bg-primary rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 text-[17px]"
                         >
                             {{ seedform.word3 }}
                         </div>
@@ -51,7 +51,7 @@
                             {{ v$.seedform.word3.$errors[0].$message }}
                         </span>
                         <div
-                            class="inline-block bg-blue-600 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 text-[17px]"
+                            class="inline-block bg-primary rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 text-[17px]"
                         >
                             {{ seedform.word4 }}
                         </div>
@@ -59,7 +59,7 @@
                             {{ v$.seedform.word4.$errors[0].$message }}
                         </span>
                         <div
-                            class="inline-block bg-blue-600 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 text-[17px]"
+                            class="inline-block bg-primary rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 text-[17px]"
                         >
                             {{ seedform.word5 }}
                         </div>
@@ -67,7 +67,7 @@
                             {{ v$.seedform.word5.$errors[0].$message }}
                         </span>
                         <div
-                            class="inline-block bg-blue-600 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 text-[17px]"
+                            class="inline-block bg-primary rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 text-[17px]"
                         >
                             {{ seedform.word6 }}
                         </div>

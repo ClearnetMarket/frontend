@@ -370,13 +370,10 @@ export default defineComponent({
   },
   created () {
     this.getuserorders();
-
   },
   mounted () {
-
     this.getuserneworderscount();
   },
-
   methods: {
     openModal (modalId: any) {
       let modal = document.getElementById(modalId);
@@ -395,9 +392,9 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
-        if (response.data.success) {
+
           this.orders = response.data;
-        }
+
       });
     },
     //accepted orders
@@ -438,8 +435,6 @@ export default defineComponent({
         }
       });
     },
-
-
     // send the tracking info on a popup modal
     sendtrackinginfo (payLoad: {
       order_uuid: string;
@@ -453,7 +448,6 @@ export default defineComponent({
         headers: authHeader(),
         data: payLoad,
       }).then((response) => {
-
         if (response.data.success) {
           notify({
             title: "Freeport",
@@ -472,7 +466,6 @@ export default defineComponent({
       };
       this.sendtrackinginfo(payLoad);
     },
-
     // gets the user order count
     getuserneworderscount () {
       axios({
@@ -495,7 +488,6 @@ export default defineComponent({
         }
       });
     },
-
     // converts time
     relativeDate (value: any) {
       let e = new Date(value).valueOf();

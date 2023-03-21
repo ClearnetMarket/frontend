@@ -1,64 +1,79 @@
 <template>
-  <div class="nav bg-blue-600 md:py-2 ">
+  <div class="nav bg-primary md:py-2 ">
     <div class="container gap-x-0 max-w-7xl mx-auto text-center bg">
       <div v-if="loaded">
-
         <div v-if="user">
-
           <div class="grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-3">
-
             <div class="col-span-3">
               <div v-if="user.user_admin >= 2">
-
                 <router-link :to="{ name: 'ModHome' }" class="px-3">
                   <button
                     class="hover:bg-zinc-700 text-white hover:text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline font-bold">
                     Moderator Home
                   </button>
                 </router-link>
-
               </div>
             </div>
             <div class="col-span-1 invisible md:visible h-1">
-
               <div class="flex sm:justify-between lg:justify-start ml-5 text-white font-bold pb-2">
                 <div class="px-3.5">English</div>
-
                 <div class="px-3 ">{{ returncurrency(user.currency) }}</div>
-
               </div>
-            </div>              
-                    
+            </div>
             <div class="col-span-1 lg:col-span-2 ">
               <div class="flex flex-wrap lg:justify-end md:justify-evenly sm:justify-center ">
                 <div v-if="user" class="flex">
 
+                   <div class="dropdown dropdown-end">
+                      <div v-if="notecount === 0">
+
+                        <button class="hover:bg-gray-600 text-white hover:text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline font-bold ">
+                              <font-awesome-icon icon="fa-solid fa-bell" class="text-[22px]" />
+                        </button>
+                        <ul tabindex="0" class="dropdown-content dropdown-hover dropdown-hover menu p-2 shadow bg-white rounded-box w-52 text-neutral text-left rounded-md w-96">
+                          <div v-for="notes in newnotes">
+                              <li class="w-full p-5 hover:bg-yellow-500 hover:text-neutral hover:font-bold">
+                                {{notes.message}}
+                              </li>
+                          </div>
+                        </ul>
+                      </div>
+                      <div v-else>
+                          <button class="bg-red-600 text-white hover:text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline font-bold bg-red-600 dropdown-hover"
+                                  @click.prevent="notificationsnotificiationmarkasread()">
+                              {{notecount}}  <font-awesome-icon icon="fa-solid fa-bell " class="text-[22px]" />
+                          </button>
+                          <ul tabindex="0" class="dropdown-content dropdown-hover menu p-2 shadow bg-white rounded-box w-52 text-neutral text-left rounded-md w-96">
+                              <div v-for="notes in newnotes">
+                                  <li class="w-full p-5 hover:bg-yellow-500 hover:text-neutral hover:font-bold ">
+                                    {{notes.message}}
+                                  </li>
+                              </div>
+                          </ul>
+                      </div>
+                    </div>
+
+                  <router-link :to="{ name: 'MsgHome' }" class="px-3 ">
+                    <div v-if="msgcount == 0">
+                      <button
+                        class="hover:bg-zinc-700 text-white hover:text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline font-bold ">
+                      <font-awesome-icon icon="fa-solid fa-envelope " class="text-[22px]" />
+                      </button>
+                    </div>
+                    <div v-else>
+                      <button
+                        class="hover:bg-red-600 bg-red-600 text-white hover:text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline font-bold "
+                       >
+                        {{ msgcount }}  <font-awesome-icon icon="fa-solid fa-envelope " class="text-[22px]" />
+                      </button>
+                    </div>
+                  </router-link>
                   <router-link :to="{ name: 'sell' }">
                     <button
                       class="hover:bg-zinc-700  text-white hover:text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline mx-3 font-bold">
                       Sell
                     </button>
                   </router-link>
-
-
-
-                  <router-link :to="{ name: 'MsgHome' }" class="px-3 ">
-                    <div v-if="msgcount == 0">
-                      <button
-                    
-                        class="hover:bg-zinc-700 text-white hover:text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline font-bold ">
-                        Msg
-                      </button>
-                    </div>
-                    <div v-else>
-                      <button
-                        class="bg-yellow-500 text-white hover:text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline font-bold ">
-                        Msg {{ msgcount }}
-                      </button>
-                    </div>
-                  </router-link>
-
-
 
                   <router-link :to="{ name: 'userorders' }" class="px-3">
                     <button
@@ -92,10 +107,8 @@
               </button>
             </router-link>
           </div>
-
         </div>
       </div>
-
     </div>
   </div>
 </template>
@@ -116,9 +129,13 @@ export default defineComponent({
       user: null,
       loaded: false,
       msgcount: 0,
-      bg_color: "text-red-500",
+      newnotes: [],
+      notecount: 0,
+      rednote: false
+
     };
   },
+
   methods: {
     userstatus () {
       axios({
@@ -129,12 +146,11 @@ export default defineComponent({
       })
         .then((response) => {
          if ((response.data.login == true)) {
-
             this.user = response.data.user;
-            this.getusermessagescount();
+            this.notificationscount();
+            this.notificationsgetlast();
+            this.notificationsmessagecount();
             this.loaded = true;
-
-
           }
         })
         .catch(() => {
@@ -142,10 +158,10 @@ export default defineComponent({
           this.loaded = true;
         });
     },
-    getusermessagescount () {
+      notificationsmessagecount() {
       axios({
         method: "get",
-        url: "/notification/new/messages",
+        url: "/notification/message/new/count",
         withCredentials: true,
         headers: authHeader(),
       })
@@ -154,10 +170,49 @@ export default defineComponent({
             this.msgcount = response.data.count;
           }
         })
-        .catch(() => {
-          this.user = null;
-          this.loaded = true;
-        });
+        .catch(() => {});
+    },
+
+    notificationscount () {
+      axios({
+        method: "get",
+        url: "/notification/notifications/new/count",
+        withCredentials: true,
+        headers: authHeader(),
+      })
+        .then((response) => {
+          if (response.data.success) {
+            this.notecount = response.data.count;
+          }
+        })
+        .catch(() => {});
+    },
+    notificationsgetlast () {
+      axios({
+        method: "get",
+        url: "/notification/notifications",
+        withCredentials: true,
+        headers: authHeader(),
+      })
+        .then((response) => {
+            this.newnotes = response.data;
+        })
+        .catch(() => {});
+    },
+    notificationsnotificiationmarkasread () {
+      axios({
+        method: "put",
+        url: "/notification/new/notification/markasread",
+        withCredentials: true,
+        headers: authHeader(),
+      })
+        .then((response) => {
+          if (response.data.success) {
+          this.rednote = !this.rednote;
+
+          }
+        })
+        .catch(() => {});
     },
     logout () {
       localStorage.removeItem("auth_token");

@@ -307,15 +307,22 @@ export default defineComponent({
                 type: "success",
               });
               this.$router.push({ name: "userorders" });
-            } else {
+            }
+           if ((response.data.error)) {
               notify({
                 title: "Error Checking Out",
-                text: response.data.status,
+                text: response.data.error + "poop",
                 type: "error",
               });
-
           }
         })
+        .catch((error) => {
+           notify({
+                title: "Error Checking Out",
+                text: error,
+                type: "error",
+              });
+      });
     },
     updateprices () {
       axios({
@@ -325,9 +332,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if ((response.data.success)) {
-
-          }
+          if ((response.data.success)) {}
         })
     },
     get_shopping_cart_items () {
@@ -339,11 +344,11 @@ export default defineComponent({
       })
         .then((response) => {
 
-          if (response.data.success) {
-            this.shopping_cart_items_list = response.data;
+          if (response.data.error) {
+            this.shopping_cart_items_list = null;
           }
           else {
-            this.shopping_cart_items_list = null;
+             this.shopping_cart_items_list = response.data;
           }
         })
         .catch(() => {

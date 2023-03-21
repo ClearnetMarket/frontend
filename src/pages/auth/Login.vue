@@ -51,7 +51,7 @@
 
         <div class="flex items-center justify-center mb-6">
           <button
-            class="bg-blue-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            class="bg-primary hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             type="submit"
           >
             Sign In

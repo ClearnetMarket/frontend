@@ -4,7 +4,7 @@
   <MainHeaderBottom />
   <div v-if="loaded">
     <div class="wrapper">
-      <div class="container max-w-7xl mx-auto px-10 pb-10">
+      <div class="container max-w-7xl mx-auto px-10 pb-10 text-neutral">
         <nav class="rounded-md w-full mb-5">
           <ol class="list-reset flex">
             <li>

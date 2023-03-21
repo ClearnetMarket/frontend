@@ -8,7 +8,7 @@
     <MainHeaderVendor v-show="user.user_admin === 1" />
   </div>
   <div class="">
-    <div class="container max-w-7xl mx-auto px-2 bg-gray-300 pb-72">
+    <div class="container max-w-7xl mx-auto px-2 bg-gray-300 pb-72 text-neutral">
       <div class="mt-5 mb-5">
         <nav class="rounded-md w-full">
           <ol class="list-reset flex">
@@ -206,7 +206,7 @@
           </div>
           <div class="flex justify-center mt-20">
             <button
-              class="bg-blue-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              class="bg-primary hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="submit">
               Submit
             </button>

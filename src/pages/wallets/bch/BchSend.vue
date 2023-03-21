@@ -5,7 +5,7 @@
   <MainHeaderMid />
   <MainHeaderBottom />
 
-  <div class="container  max-w-7xl mx-auto px-10 pb-60 bg-gray-300"><!-- Container-->
+  <div class="container  max-w-7xl mx-auto px-10 pb-60 bg-gray-300 text-neutral">
 
     <div class="mt-5 mb-5">
       <nav class="rounded-md w-full">

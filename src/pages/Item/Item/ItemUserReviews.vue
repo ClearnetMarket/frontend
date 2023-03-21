@@ -1,6 +1,6 @@
 
 <template>
-  <div class="max-w-7xl mx-auto  pb-36 mt-10  rounded-md ">
+  <div class="max-w-7xl mx-auto pb-36 mt-5 rounded-md">
 
     <div class="grid grid-cols-12 gap-5">
       <div class="col-span-12 md:col-span-4 p-5 bg-white rounded-md">

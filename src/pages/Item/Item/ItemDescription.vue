@@ -1,5 +1,5 @@
 <template>
-    <div class="max-w-7xl mx-auto bg-white rounded-md">
+    <div class="max-w-7xl mx-auto bg-white rounded-md mt-5 ">
         <div class="grid grid-cols-1 text-[20px] font-semibold text-gray-600 px-5">Item Description</div>
         <div class="rounded-md p-5">
             {{ description }}

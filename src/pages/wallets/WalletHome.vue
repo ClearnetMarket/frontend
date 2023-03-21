@@ -8,7 +8,7 @@
     </div>
     <div class="wrapper">
         <!-- Top Stuff-->
-        <div class="container max-w-7xl mx-auto px-10 pb-72">
+        <div class="container max-w-7xl mx-auto px-10 pb-72 text-neutral">
             <!-- Container-->
             <div class="mt-5 mb-5">
                 <nav class="rounded-md w-full">
@@ -24,10 +24,8 @@
                     </ol>
                 </nav>
             </div>
-            <div
-                class="grid grid-cols-12 mb-5 md:mb-0 invisible md:visible text-[18px] bg-white rounded-t-md font-bold"
-            >
-                >
+            <div class="grid grid-cols-12 mb-5 md:mb-0 invisible md:visible text-[18px] bg-white rounded-t-md font-bold ">
+
                 <div class="col-span-2 text-center">Coin</div>
                 <div class="col-span-2 text-center">Market</div>
                 <div class="col-span-3 text-center">Amount</div>
@@ -84,7 +82,7 @@
                     {{ bchprice }}
                 </div>
                 <div class="col-span-7 md:col-span-3 rounded-md p-5 text-center">
-                    <div v-if="bchbalance === 0">0 BCH</div>
+                    <div v-if="bchbalance == 0">0 BCH</div>
                     <div v-else>{{ bchbalance }}</div>
                 </div>
                 <div class="col-span-12 md:col-span-5 justify-center flex py-3">
@@ -123,7 +121,7 @@
                     {{ xmrprice }}
                 </div>
                 <div class="col-span-7 md:col-span-3 rounded-md p-5 text-center">
-                    <div v-if="xmrbalance === 0">0 XMR</div>
+                    <div v-if="xmrbalance == 0">0 XMR</div>
                     <div v-else>{{ xmrbalance }}</div>
                 </div>
                 <div class="col-span-12 md:col-span-5 justify-center flex py-3">

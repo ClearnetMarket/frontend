@@ -9,7 +9,7 @@
   </div>
   <div class="wrapper">
     <!-- Top Stuff-->
-    <div class="container max-w-7xl mx-auto px-10" v-if="user !== null">
+    <div class="container max-w-7xl mx-auto px-10 text-neutral" v-if="user !== null">
       <!-- Container-->
       <div class="mt-5 mb-5">
         <nav class="rounded-md w-full">

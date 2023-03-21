@@ -5,7 +5,7 @@
   <MainHeaderMid />
   <MainHeaderBottom />
 
-  <div class="container max-w-7xl mx-auto px-10 wrapper">
+  <div class="container max-w-7xl mx-auto px-10 wrapper text-neutral">
     <div class="mt-5">
       <nav class="rounded-md w-full">
         <ol class="list-reset flex">
@@ -172,7 +172,6 @@ export default defineComponent({
 
   data () {
     return {
-
       orders: [],
       vendor_orders_new: 0,
       vendor_orders_accepted: 0,
@@ -189,9 +188,7 @@ export default defineComponent({
     this.getuserneworderscount();
     this.deleteordernotice();
   },
-
   methods: {
-
     // gets the count of orders for top bars
     getuserneworderscount () {
       axios({

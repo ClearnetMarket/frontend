@@ -7,7 +7,7 @@
         <MainHeaderVendor v-show="user.user_admin === 1" />
     </div>
     <div class="wrapper">
-        <div class="container max-w-3xl mx-auto px-10 wrapper overflow-hidden">
+        <div class="container max-w-3xl mx-auto px-10 wrapper overflow-hidden text-neutral">
             <div class="mb-5">
                 <nav class="rounded-md w-full">
                     <ol class="list-reset flex">
@@ -22,7 +22,7 @@
                     </ol>
                 </nav>
             </div>
-            <div class="rounded-md mb-5">
+            <div class="rounded-md mb-5 text-white">
                 <div class="text-[18px] font-bold rounded-md mb-2">Contact us</div>
                 <div class="pb-5">
                     We are actively watching all tickets and responding as fast as possible. If you have an account you

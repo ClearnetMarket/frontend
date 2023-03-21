@@ -7,7 +7,7 @@
         <MainHeaderVendor v-show="user.user_admin === 1" />
     </div>
 
-    <div class="container max-w-7xl mx-auto px-10 mt-2 mb-72">
+    <div class="container max-w-7xl mx-auto px-10 mt-2 mb-72 text-neutral">
         <div class="mt-5 mb-5">
             <nav class="rounded-md w-full">
                 <ol class="list-reset flex">
@@ -26,14 +26,14 @@
         <div class="bg-white rounded-md p-5 mb-5">
             <div class="text-[18px] font-bold text-blue-600 rounded-md">Freeport Policies</div>
         </div>
-        <div class="bg-white rounded-md p-5 mb-5">
-            <div class="text-[18px] font-bold rounded-md">Code of conduct</div>
+        <div class="bg-white rounded-md p-5 mb-5 text-neutral">
+            <div class="text-[18px] font-bold rounded-md ">Code of conduct</div>
             <div class="text-red-600">- NO ILLEGAL ITEMS THAT WOULD BE ILLEGAL IN THE USA ARE ALLOWED</div>
             <div class="">- Any attempts to scam or decieve will result in a ban from the site.</div>
             <div class="">- Threatning site admins, mods, users, vendors will result in a ban.</div>
             <div class="">- Anything that will bring a bad reputation to freeport or a user will result in a ban.</div>
         </div>
-        <div class="bg-white rounded-md p-5 mb-5">
+        <div class="bg-white rounded-md p-5 mb-5 text-neutral">
             <div class="text-[18px] font-bold rounded-md">Escrow</div>
             <div class="">- Vendor has 48 hours to accept the order or the coin is returned to seller.</div>
             <div class="">
@@ -43,7 +43,7 @@
             <div class="">- Orders autofinalze after 20 days from order if no issues and vendor is paid.</div>
         </div>
 
-        <div class="bg-white rounded-md p-5 mb-5">
+        <div class="bg-white rounded-md p-5 mb-5 text-neutral">
             <div class="text-[18px] font-bold rounded-md">Wallets</div>
             <div class="">- It takes 1 confirmation for Bitcoin/ Bitcoincash/ Monero transactions to be visible.</div>
             <div class="">
@@ -55,7 +55,7 @@
             </div>
         </div>
 
-        <div class="bg-white rounded-md p-5 mb-5">
+        <div class="bg-white rounded-md p-5 mb-5 text-neutral">
             <div class="text-[18px] font-bold rounded-md">Data Policy and Privacy</div>
             <div class="">
                 - We collect email addresses solely for password recovery/ notifications/ and spamming you ads for

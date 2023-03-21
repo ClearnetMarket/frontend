@@ -6,8 +6,8 @@
     <div v-if="user">
         <MainHeaderVendor v-show="user.user_admin === 1" />
     </div>
-
-    <div class="container max-w-7xl mx-auto px-10 mt-2">
+    <div class="wrapper">
+    <div class="container max-w-7xl mx-auto px-10 mt-2 text-neutral">
         <div class="mt-5 mb-5">
             <nav class="rounded-md w-full">
                 <ol class="list-reset flex">
@@ -86,7 +86,7 @@
             </div>
         </div>
     </div>
-
+</div>
     <MainFooter />
 </template>
 

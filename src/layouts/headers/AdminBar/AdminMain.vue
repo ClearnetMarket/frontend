@@ -2,7 +2,7 @@
     <div class="text-center mt-1 flex justify-center">
         <router-link :to="{ name: 'ModTicket' }">
             <button
-                class="bg-blue-600 hover:bg-zinc-700 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mr-2"
+                class="bg-primary hover:bg-zinc-700 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mr-2"
             >
                 Tickets
             </button>

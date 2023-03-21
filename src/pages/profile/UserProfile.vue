@@ -5,7 +5,7 @@
   <MainHeaderMid />
   <MainHeaderBottom />
   <div class="wrapper">
-    <div class="container max-w-4xl mx-auto px-2 ">
+    <div class="container max-w-4xl mx-auto px-2 text-neutral">
       <nav class="rounded-md w-full">
         <ol class="list-reset flex">
           <li>
@@ -233,8 +233,6 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
-        if ((response.data.success)) {
-
           this.userprofile = response.data;
           this.userprofile.profileimage = response.data.profileimage;
           this.userprofile.display_name = response.data.display_name;
@@ -244,9 +242,7 @@ export default defineComponent({
           this.userprofile.vendor_name = response.data.vendor_name;
           this.userprofile.customer_rating = response.data.customer_rating;
           this.userprofile.profileimage_url_250 = response.data.profileimage_url_250;
-       
 
-        }
       })
     },
     getuserstats () {
@@ -256,10 +252,10 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
-        if ((response.data.success)) {
+
           this.user_stats = response.data;
           this.user_stats.total_items_bought = response.data.total_items_bought;
-        }
+
       });
     },
     getvendorstats () {
@@ -269,10 +265,7 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
-        if ((response.data.success)) {
-          this.vendor_stats = response.data;
-
-        }
+          this.vendor_stats = response.data
       });
     },
     getusercountryandcurrency () {
@@ -298,12 +291,9 @@ export default defineComponent({
         withCredentials: true,
       })
         .then((response) => {
-          if ((response.data.success)) {
             this.userreviews = response.data;
-            if (this.userreviews == undefined) {
-              this.userreviews = null;
-            }
-          }
+            if (this.userreviews == undefined)
+            {this.userreviews = null}
         })
         .catch(() => { });
     },
@@ -314,10 +304,7 @@ export default defineComponent({
         withCredentials: true,
       })
         .then((response) => {
-          if ((response.data.success)) {
-            this.vendor_reviews_total = response.data.total_feedback;
-
-          }
+          {this.vendor_reviews_total = response.data.total_feedback}
         })
         .catch((error) => {
           console.log(error)
@@ -331,13 +318,13 @@ export default defineComponent({
         withCredentials: true,
       })
         .then((response) => {
-          if ((response.data.success)) {
+
 
             this.vendorreviews = response.data;
             if (this.vendorreviews == undefined) {
               this.vendorreviews = null;
             }
-          }
+
         })
         .catch((error) => {
           console.log(error)

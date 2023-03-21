@@ -8,8 +8,8 @@
   <div v-if="user">
     <MainHeaderVendor v-show="user.user_admin === 1" />
   </div>
-
-  <div class="container max-w-7xl mx-auto px-1 wrapper bg-gray-300">
+<div class="wrapper">
+  <div class="container max-w-7xl mx-auto px-10 text-neutral ">
     <div class="mx-auto flex mb-1 px-5">
       <div class="mt-1">
         <nav class="rounded-md">
@@ -49,7 +49,7 @@
       <ItemUserReviews v-bind:vendorreviews="vendorreviews" v-bind:vendoruuid="vendoruuid" />
     </div>
   </div>
-
+</div>
   <MainFooter />
 </template>
 
@@ -158,8 +158,6 @@ export default defineComponent({
         withCredentials: true,
       })
         .then((response) => {
-          if ((response.data.success)) {
-
             this.item = response.data;
             this.itemcount = response.data.item_count;
             this.totalsold = response.data.total_sold;
@@ -176,11 +174,10 @@ export default defineComponent({
             this.shippingdaytwo = response.data.shipping_day_2;
             this.shippingpricethree = response.data.shipping_price_3;
             this.shippingdaythree = response.data.shipping_day_3;
-
             this.getvendorreviews();
             this.add_view();
             this.loaded_feedback = true;
-          }
+
         })
         .catch((error) => {
           console.log(error)
@@ -192,12 +189,10 @@ export default defineComponent({
           });
         });
     },
-
     UpdateCart () {
       this.shoppingcartcount += 1;
     },
     getvendorreviews () {
-
       axios({
         method: "get",
         url: "/vendor/vendor-feedback/" + this.item.vendor_uuid,
@@ -225,7 +220,7 @@ export default defineComponent({
       })
         .then(() => { })
         .catch((error) => {
-          console.log("cant add view")
+
         });
     },
     returncurrencysymbol (currencydigit: number) {

@@ -4,7 +4,7 @@
   <MainHeaderMid />
   <MainHeaderBottom />
   <div class="wrapper">
-    <div class="max-w-4xl mx-auto wrapper ">
+    <div class="max-w-4xl mx-auto text-neutral">
 
       <nav class="rounded-md px-5">
         <ol class="list-reset flex">
@@ -393,13 +393,9 @@ export default defineComponent({
 
   mounted () {
     let order_id_route = useRoute();
-
     this.order_id = order_id_route.params.uuid;
-
     this.getuserorder();
-
     this.getordertracking();
-
     this.getorderfeedback();
 
   },
@@ -413,7 +409,7 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
-        if (response.data.success) {
+
           this.order = response.data;
           this.order_found = true;
           this.getvendorinfo();
@@ -424,8 +420,6 @@ export default defineComponent({
           if (this.order.user_feedback == 1) {
             this.getorderfeedback();
           }
-
-        }
       })
         .catch(() => {
           this.$router.push({ name: "home" });
@@ -575,10 +569,8 @@ export default defineComponent({
       })
         .then((response) => {
           if (response.data.success) {
-
             this.tracking_number = response.data.tracking_number;
             this.carrier_name = response.data.carrier_name;
-
           }
         });
     },

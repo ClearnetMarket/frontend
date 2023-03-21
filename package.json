@@ -8,12 +8,18 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.3.0",
+    "@fortawesome/free-brands-svg-icons": "^6.3.0",
+    "@fortawesome/free-regular-svg-icons": "^6.3.0",
+    "@fortawesome/free-solid-svg-icons": "^6.3.0",
+    "@fortawesome/vue-fontawesome": "^3.0.3",
     "@kyvg/vue3-notification": "latest",
     "@types/express": "latest",
     "@vuelidate/core": "*",
     "@vuelidate/validators": "*",
     "@vueuse/core": "latest",
     "axios": "latest",
+    "daisyui": "^2.51.4",
     "date-fns": "latest",
     "npm": "*",
     "vue": "3.2.47",

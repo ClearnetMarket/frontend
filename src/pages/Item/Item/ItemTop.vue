@@ -1,6 +1,6 @@
 
 <template>
-  <div class="max-w-7xl mx-auto px-2 mb-10 ">
+  <div class="max-w-7xl mx-auto ">
 
     <div class="grid sm:grid-cols-1 md:grid-cols-12  gap-5 sm:pb-10  ">
 
@@ -10,7 +10,7 @@
           <div class="text-[20px] font-bold ">{{ title }}</div>
         </div>
       </div>
-      <div class="sm:col-span-12 md:col-span-8 lg:col-span-5"><!-- start column one -->
+      <div class="sm:col-span-12 md:col-span-8 lg:col-span-5 bg-white p-5 rounded-md" ><!-- start column one -->
         <div class="grid grid-cols-12 gap-4 px-1 ">
           <div class="col-span-12 text-center flex items-center justify-center">
             <img class="h-96" :src="image_one_500" alt="" />
@@ -401,7 +401,7 @@ export default defineComponent({
         withCredentials: true,
       })
         .then((response) => {
-          if ((response.data.success)) {
+
             this.uuid = response.data.uuid;
             this.item = response.data;
             this.title = response.data.item_title;
@@ -442,7 +442,7 @@ export default defineComponent({
             this.getvendorinfo();
             this.getitemcondition();
             this.seeifuserhasdefaultaddress();
-          }
+
         })
         .catch(() => {
           this.$router.push({ name: "home" });
@@ -575,7 +575,7 @@ export default defineComponent({
         .then((response) => {
 
             if (response.data.success) {
-            console.log("Here")
+
               notify({
                 title: "Shoppinng cart message",
                 text: "Successfully added item to cart",

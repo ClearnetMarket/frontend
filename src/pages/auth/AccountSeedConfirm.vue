@@ -2,8 +2,8 @@
 <template>
 
   <HeaderPlain />
-      <div class="wrapperplain">
-  <div class="container max-w-3xl mx-auto ">
+  <div class="wrapperplain">
+  <div class="container max-w-3xl mx-auto text-neutral">
     <div class="mt-5 mb-5  px-5">
       <nav class="rounded-md w-full">
         <ol class="list-reset flex">

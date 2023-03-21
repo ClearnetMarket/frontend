@@ -5,7 +5,7 @@
   <MainHeaderMid />
   <MainHeaderBottom />
   <div class="wrapper">
-  <div class="max-w-4xl mx-auto  px-2 ">
+  <div class="max-w-4xl mx-auto  px-2 text-neutral">
     <div class="grid grid-cols-1 w-full ">
       <div class="mb-10 mt-5">
         <nav class="rounded-md">
@@ -23,7 +23,7 @@
       </div>
     </div>
     <div class="grid grid-cols-1 w-full">
-      <h1 class="col-span-1 font-semibold text-2xl text-center">Your Orders</h1>
+      <h1 class="col-span-1 font-semibold text-2xl text-center text-white">Your Orders</h1>
       <div  v-if="orderscount > 0">
         <div v-for="(order, i) in orders" :key="i" class="pb-5">
           <div class="grid grid-cols-12 rounded-md border border-gray-300 ">
@@ -312,11 +312,7 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
-        if (response.data.success) {
           this.orders = response.data;
-
-
-        }
       });
     },
     // gets how many orders
@@ -327,10 +323,7 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
-        if (response.data.success) {
           this.orderscount = response.data.count;
-          
-        }
       });
     },
     userstatus () {
