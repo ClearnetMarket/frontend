@@ -9,7 +9,7 @@
     <MainHeaderVendor v-show="user.user_admin === 1" />
   </div>
 <div class="wrapper">
-  <div class="container max-w-7xl mx-auto px-10 text-neutral ">
+  <div class="container max-w-7xl mx-auto px-10 text-white ">
     <div class="mx-auto flex mb-1 px-5">
       <div class="mt-1">
         <nav class="rounded-md">
@@ -150,7 +150,6 @@ export default defineComponent({
         .catch(() => { this.user =null });
     },
     getitem () {
-     
       this.item_id = this.$route.params.id;
       axios({
         method: "get",
@@ -179,9 +178,7 @@ export default defineComponent({
             this.loaded_feedback = true;
 
         })
-        .catch((error) => {
-          console.log(error)
-
+        .catch(() => {
           notify({
             title: "Error",
             text: "Item has been deleted or doesnt exist",
@@ -199,17 +196,12 @@ export default defineComponent({
         withCredentials: true,
       })
         .then((response) => {
-          if ((response.data.success)) {
             this.vendorreviews = response.data;
             if (this.vendorreviews == undefined) {
               this.vendorreviews = null;
             }
-          }
         })
-        .catch((error) => {
-             console.log(error)
-           this.vendorreviews = null;
-        });
+        .catch(() => {this.vendorreviews = null; });
     },
     add_view () {
       axios({
@@ -219,7 +211,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then(() => { })
-        .catch((error) => {
+        .catch(() => {
 
         });
     },

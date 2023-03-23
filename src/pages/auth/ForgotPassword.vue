@@ -3,7 +3,7 @@
 
   <HeaderPlain />
     <div class="wrapperplain">
-  <div class="container max-w-3xl mx-auto text-neutral">
+  <div class="container max-w-3xl mx-auto text-white">
     <div class="mt-5 mb-5">
       <nav class="rounded-md w-full">
         <ol class="list-reset flex">
@@ -22,7 +22,7 @@
 
   <div class="mx-auto max-w-lg flex items-center justify-center mb-10 mt-12">
     <form
-      class="bg-white rounded-md px-8 pt-6 pb-8 mb-4 w-full"
+      class="bg-neutral rounded-md px-8 pt-6 pb-8 mb-4 w-full"
       @submit.prevent="onSubmit"
     >
       <div class="mb-4 text-center text-[20px] text-zinc-600">
@@ -31,7 +31,7 @@
 
       <input
         v-model="wordForm.word0"
-        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-blue-300 focus:outline-none focus:shadow-outline"
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-white mb-3 leading-tight focus:outline-blue-300 focus:outline-none focus:shadow-outline"
         type="text"
         autocomplete="off"
         placeholder="Word 1"
@@ -41,7 +41,7 @@
       </span>
       <input
         v-model="wordForm.word1"
-        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-blue-300 focus:outline-none focus:shadow-outline"
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-white mb-3 leading-tight focus:outline-blue-300 focus:outline-none focus:shadow-outline"
         type="text"
         autocomplete="off"
         placeholder="Word 2"
@@ -51,7 +51,7 @@
       </span>
       <input
         v-model="wordForm.word2"
-        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-blue-300 focus:outline-none focus:shadow-outline"
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-white mb-3 leading-tight focus:outline-blue-300 focus:outline-none focus:shadow-outline"
         type="text"
         autocomplete="off"
         placeholder="Word 3"
@@ -61,7 +61,7 @@
       </span>
       <input
         v-model="wordForm.word3"
-        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-blue-300 focus:outline-none focus:shadow-outline"
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-white mb-3 leading-tight focus:outline-blue-300 focus:outline-none focus:shadow-outline"
         type="text"
         autocomplete="off"
         placeholder="Word 4"
@@ -71,7 +71,7 @@
       </span>
       <input
         v-model="wordForm.word4"
-        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-blue-300 focus:outline-none focus:shadow-outline"
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-white mb-3 leading-tight focus:outline-blue-300 focus:outline-none focus:shadow-outline"
         type="text"
         autocomplete="off"
         placeholder="Word 5"
@@ -81,7 +81,7 @@
       </span>
       <input
         v-model="wordForm.word5"
-        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-blue-300 focus:outline-none focus:shadow-outline"
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-white mb-3 leading-tight focus:outline-blue-300 focus:outline-none focus:shadow-outline"
         type="text"
         autocomplete="off"
         placeholder="Word 6"

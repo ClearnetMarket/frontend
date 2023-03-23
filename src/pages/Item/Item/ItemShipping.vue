@@ -1,7 +1,7 @@
 
 <template>
-  <div class="max-w-7xl mx-auto mt-5 bg-white rounded-md p-5">
-    <div class="grid grid-cols-1 text-[20px] font-semibold text-gray-600 px-5">
+  <div class="max-w-7xl mx-auto mt-5 bg-neutral rounded-md p-5">
+    <div class="grid grid-cols-1 text-[20px] font-semibold text-white px-5">
       Shipping
     </div>
     <div class="rounded-md p-5">
@@ -29,19 +29,19 @@
           <div class="md:flex gap-4 ">
 
             <div v-if="shippingfree === true">
-              <div class="border border-1 rounded-md p-5 bg-gray-200 text-gray-800 mb-5 md:mb-0">
+              <div class="border border-1 rounded-md p-5 bg-neutral text-white mb-5 md:mb-0">
                 <div class="grid grid-cols-12 grid-rows-2 md:grid-cols-4 md:grid-rows-2">
                   <div class="col-span-12 md:col-span-3 row-span-1 text-[20px]">
                     FREE SHIPPING
                   </div>
-                  <div class="col-span-12 row-span-1 text-[14px] text-gray-600">
+                  <div class="col-span-12 row-span-1 text-[14px] text-white">
                     Estimated in {{ shippingdayfree }} days
                   </div>
                 </div>
               </div>
             </div>
             <div v-if="shippingtwo === true">
-              <div class="border border-1 rounded-md p-5 bg-gray-200 text-gray-800 mb-5 md:mb-0 ">
+              <div class="border border-1 rounded-md p-5 bg-neutral text-white mb-5 md:mb-0 ">
                 <div class="grid grid-cols-4 grid-rows-2">
 
                   <div class="col-span-3 row-span-1 text-[20px]">
@@ -54,7 +54,7 @@
               </div>
             </div>
             <div v-if="shippingthree === true">
-              <div class="border border-1 rounded-md p-5 bg-gray-200 mb-5 md:mb-0">
+              <div class="border border-1 rounded-md p-5 bg-neutral mb-5 md:mb-0">
                 <div class="grid grid-cols-4 grid-rows-2">
 
                   <div class="col-span-3 row-span-1 text-[20px]">

@@ -952,10 +952,10 @@ module.exports = {
           mytheme: {
                 "primary": "#2563EB",
                 "secondary": "#9b1f4e",
-                "accent": "#072138",
+                "accent": "#FDE047",
                 "neutral": "#343232",
                 "base-100": "#181717",
-                "info": "#679bda",
+                "info": "#74a0d5",
                 "success": "#1C8D63",
                 "warning": "#97520C",
                 "error": "#FA0A4E",

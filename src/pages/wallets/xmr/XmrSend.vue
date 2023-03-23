@@ -5,7 +5,7 @@
   <MainHeaderMid />
   <MainHeaderBottom />
 
-  <div class="container  max-w-7xl mx-auto px-10 pb-60 bg-gray-300 text-neutral">
+  <div class="container  max-w-7xl mx-auto px-10 pb-60 bg-gray-300 text-white">
 
     <div class="mt-5 mb-5">
       <nav class="rounded-md w-full">
@@ -47,35 +47,35 @@
       </div>
     
       <div class="col-span-12 md:col-span-6">
-      <div class="flex-1 bg-white rounded-md justify-center mt-8 p-5">
+      <div class="flex-1 bg-neutral rounded-md justify-center mt-8 p-5">
         <form method="post" @submit="onSubmit">
           <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="username">Address</label>
-            <label class="block text-gray-700 mb-2 text-[11px]" for="username">Address of the wallet you are sending
+            <label class="block text-white text-sm font-bold mb-2" for="username">Address</label>
+            <label class="block text-white mb-2 text-[11px]" for="username">Address of the wallet you are sending
               coin too.</label>
             <input v-model="wallet.xmr_address"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
               id="username" type="text" placeholder="Address" />
             <span v-if="v$.wallet.xmr_address.$error" class="text-red-600 text-center">
               {{ v$.wallet.xmr_address.$errors[0].$message }}
             </span>
           </div>
           <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="username">Transaction Description</label>
-            <label class="block text-gray-700 mb-2 text-[11px]" for="username">This is the name other users will see
+            <label class="block text-white text-sm font-bold mb-2" for="username">Transaction Description</label>
+            <label class="block text-white mb-2 text-[11px]" for="username">This is the name other users will see
               you as. It would be the name
               of your store.</label>
             <input v-model="wallet.xmr_description"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
               id="username" type="text" placeholder="Description" />
           </div>
 
           <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="password">Amount</label>
+            <label class="block text-white text-sm font-bold mb-2" for="password">Amount</label>
 
             <div class="flex flex-row">
               <input v-model="wallet.xmr_amount"
-                class="basis-1/3 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                class="basis-1/3 shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
                 id="amount" type="text" autocomplete="off" placeholder="Amount" />
               <span v-if="v$.wallet.xmr_amount.$error" class="text-red-600 text-center">
                 {{ v$.wallet.xmr_amount.$errors[0].$message }}

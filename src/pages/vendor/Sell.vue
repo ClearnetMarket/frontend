@@ -9,7 +9,7 @@
     <MainHeaderVendor v-show="user.user_admin === 1" />
   </div>
 
-  <div class="container max-w-7xl mx-auto px-10 wrapper mb-10 overflow-hidden text-neutral" v-if="loaded">
+  <div class="container max-w-7xl mx-auto px-10 wrapper mb-10 overflow-hidden text-white" v-if="loaded">
     <div class="mt-5 mb-5">
       <nav class="rounded-md w-full">
         <ol class="list-reset flex">
@@ -35,7 +35,7 @@
       selling today, and bring crypto ecommerce to your part of the world.
     </div>
     <div class="md:flex text-center gap-5">
-      <div class="flex-1 bg-white rounded-md border border-1 p-5">
+      <div class="flex-1 bg-neutral rounded-md border border-1 p-5">
         <div class="text-[20px]">No bullshit</div>
         <div class="flex mb-10 text-center">
           Selling without any hidden fees. No signup or annual fee. No paypal or
@@ -43,7 +43,7 @@
         </div>
       </div>
 
-      <div class="flex-1 bg-white rounded-md border border-1 p-5">
+      <div class="flex-1 bg-neutral rounded-md border border-1 p-5">
         <div class="text-[20px]">Privacy</div>
         <div class="flex mb-10 text-center">
           Sell with privacy. We don't store your personal information.
@@ -53,7 +53,7 @@
         </div>
       </div>
 
-      <div class="flex-1 bg-white rounded-md border border-1 p-5">
+      <div class="flex-1 bg-neutral rounded-md border border-1 p-5">
         <div class="text-[20px]">No banks</div>
         <div class="flex mb-10 text-center">
           Anyone anywhere can sell. No credit cards, banks, or third party
@@ -66,7 +66,7 @@
       <form method="post" @submit.prevent="onSubmit">
         <div class="flex flex-col">
           <div class="">
-            <div class="flex text-gray-700 text-sm font-bold">
+            <div class="flex text-white text-sm font-bold">
               I accept the terms of becoming a vendor
             </div>
             <router-link :to="{ name: 'policies' }">

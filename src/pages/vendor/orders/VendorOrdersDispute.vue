@@ -61,7 +61,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-span-12 bg-white px-5  rounded-b-md">
+            <div class="col-span-12 bg-neutral px-5  rounded-b-md">
               <div class="grid grid-cols-12 ">
                 <div class="col-span-12 md:col-span-9 ">
                   <div class="grid grid-cols-12">
@@ -202,7 +202,6 @@ export default defineComponent({
 
   mounted () {
     this.getdisputedorders();
-
     this.getdisputescount();
     this.deleteordernotice();
   },
@@ -218,7 +217,6 @@ export default defineComponent({
       }).then((response) => {
         if (response.data.success) {
           this.dispute_count = response.data.count;
-    
         }
       });
     },
@@ -241,9 +239,7 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
-        if (response.data.success) {
-
-        }
+        if (response.data.success) { }
       });
     },
     // date conversion

@@ -5,7 +5,7 @@
   <MainHeaderMid />
   <MainHeaderBottom />
   <div class="wrapper">
-  <div class="container max-w-7xl mx-auto  py-5 text-neutral">
+  <div class="container max-w-7xl mx-auto  py-5 text-white">
     <!-- Container-->
 
     <nav class="rounded-md px-5">
@@ -34,12 +34,12 @@
         <div class="col-span-1 mb-5 text-[24px] text-center">Bitcoin Transactions</div>
       </div>
       <div class="grid grid-cols-1 px-5">
-        <div class="text-gray-600 text-[11px]">
+        <div class="text-white text-[11px]">
           *Transactions are processed in the order received and can take a bit of
           time to show depending on volume.
         </div>
       </div>
-      <div class="grid grid-cols-1 text-gray-600 text-[11px] px-5">
+      <div class="grid grid-cols-1 text-white text-[11px] px-5">
         <div class="">Confirmed at 6 Confirmations</div>
       </div>
     </div>
@@ -59,7 +59,7 @@
         <div class="col-span-2">Balance</div>
       </div>
 
-      <div v-for="t in transactions" class="text-gray-700 font-semibold text-[14px] bg-white rounded-md">
+      <div v-for="t in transactions" class="text-white font-semibold text-[14px] bg-neutral rounded-md">
         <!-- Wallet Created -->
 
         <div v-if="t.category === 1" class="grid grid-cols-12 grid-rows-1 border-b  rounded-md  m-1 p-1 my-5"

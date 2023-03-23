@@ -1,7 +1,7 @@
 <template>
     <div v-if="loaded === true">
         <div v-if="user.confirmed === 0">
-            <div class="bg-yellow-400 py-1 text-gray-800 font-bold">
+            <div class="bg-yellow-400 py-1 text-white font-bold">
                 <div
                     class="container flex flex-col max-w-7xl mx-auto text-bold text-center justify-center align-center"
                 >

@@ -8,8 +8,8 @@
   <div v-if="user">
     <MainHeaderVendor v-show="user.user_admin === 1" />
   </div>
-
-  <div class="container max-w-4xl mx-auto px-2 wrapper pb-72 bg-gray-300 text-neutral">
+<div class="wrapper">
+  <div class="container max-w-4xl mx-auto px-2  pb-72 text-white">
     <div class="mt-5">
       <nav class="rounded-md w-full">
         <ol class="list-reset flex">
@@ -38,8 +38,8 @@
       <div class="mt-5 grid grid-cols-12 gap-4 ">
 
         <div v-for="item in items" class="col-span-12">
-          <div class="bg-white rounded-md ">
-            <div class="grid grid-cols-12 grid-row-5 text-gray-700 ">
+          <div class="bg-neutral rounded-md ">
+            <div class="grid grid-cols-12 grid-row-5 text-white ">
               <div class="col-span-12 p-2">
                 <div class="w-full font-bold">Item uuid</div>
                 <div class="w-full">{{ item.uuid }}</div>
@@ -63,7 +63,7 @@
               </div>
 
               <div class="col-span-12 md:col-span-6 px-3">
-                <div class="grid grid-cols-12 grid-row-5 text-gray-700 ">
+                <div class="grid grid-cols-12 grid-row-5 text-white ">
                   <div class="col-span-12 text-[18px] px-1 ">
                     <router-link :to="{ name: 'MarketItem', params: { id: item.uuid } }">
                       <div class="text-center  text-blue-600 hover:text-blue-400 hover:underline">
@@ -148,7 +148,7 @@
       </div>
     </div>
   </div>
-
+</div>
 
   <MainFooter />
 </template>

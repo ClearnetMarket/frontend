@@ -5,7 +5,7 @@
   <MainHeaderMid />
   <MainHeaderBottom />
 
-  <div class="container max-w-7xl mx-auto px-10 wrapper text-neutral">
+  <div class="container max-w-7xl mx-auto px-10 wrapper text-white">
     <div class="mt-5">
       <nav class="rounded-md w-full">
         <ol class="list-reset flex">

@@ -5,7 +5,7 @@
   <MainHeaderBottom />
   <div class="wrapper">
     
-    <div class="container max-w-4xl mx-auto wrapper px-10 text-neutral">
+    <div class="container max-w-4xl mx-auto wrapper px-10 text-white">
       <div class="grid grid-cols-1 w-full gap-4">
         <nav class="rounded-md">
           <ol class="list-reset flex">
@@ -15,7 +15,7 @@
               </router-link>
             </li>
             <li>
-              <span class="text-gray-500 mx-2">/</span>
+              <span class="text-white mx-2">/</span>
             </li>
           </ol>
         </nav>
@@ -24,7 +24,7 @@
       <div class="text-center text-[20px] mb-5">Mod Home</div>
       <div class="grid grid-cols-12 gap-5">
         <div class="col-span-12 sm:col-span-4 ">
-          <div class="bg-white rounded-md p-3">
+          <div class="bg-neutral rounded-md p-3">
             <div class="text-[20px] font-bold ">Admin Navigation</div>
             <router-link :to="{ name: 'ModHome' }">
               <div class="hover:underline text-blue-600 hover:text-blue-700 my-5">Mod Home</div>

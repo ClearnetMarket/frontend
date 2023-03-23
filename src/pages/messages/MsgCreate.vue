@@ -3,7 +3,7 @@
   <MainHeaderMid />
   <MainHeaderBottom />
 <div class="wrapper">
-  <div class="container max-w-7xl mx-auto px-10  mb-10 text-neutral">
+  <div class="container max-w-7xl mx-auto px-10  mb-10 text-white">
      <nav class="rounded-md w-full mb-5">
           <ol class="list-reset flex">
             <li>
@@ -12,7 +12,7 @@
               </router-link>
             </li>
             <li>
-              <span class="text-gray-500 mx-2">/</span>
+              <span class="text-white mx-2">/</span>
             </li>
             <li>
               <router-link :to="{ name: 'MsgHome' }">
@@ -20,7 +20,7 @@
               </router-link>
             </li>
             <li>
-              <span class="text-gray-500 mx-2">/</span>
+              <span class="text-white mx-2">/</span>
             </li>
           </ol>
         </nav>
@@ -44,7 +44,7 @@
               v-model="SendMsgForm.msginfo"
               id="item_description"
               placeholder="Write something .."
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-3"
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline mb-3"
             ></textarea>
             <span
               v-if="v$.SendMsgForm.msginfo.$error"

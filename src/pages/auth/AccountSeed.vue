@@ -1,7 +1,7 @@
 <template>
     <HeaderPlain />
     <div class="wrapperplain">
-        <div class="container max-w-3xl b mx-auto text-neutral">
+        <div class="container max-w-3xl b mx-auto text-white">
             <div class="mt-5 mb-5">
                 <nav class="rounded-md w-full">
                     <ol class="list-reset flex">
@@ -18,7 +18,7 @@
             </div>
 
             <div class="flex justify-center mx-auto bg-red-200">
-                <div class="max-w-3xl bg-white rounded-md">
+                <div class="max-w-3xl bg-neutral rounded-md">
                     <div class="text-center">
                         In order to unlock your account, change password, or recover your account in the future you will
                         need this account key. We dont do emails or other methods to recover your account.

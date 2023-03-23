@@ -6,17 +6,17 @@
   <div class="max-w-7xl mx-auto  ">
     <div class="mx-auto max-w-lg flex items-center justify-center  mt-4">
       <form
-        class="rounded-md px-8 pt-6 pb-8 mb-4 w-full bg-white"
+        class="rounded-md px-8 pt-6 pb-8 mb-4 w-full bg-neutral"
         @submit.prevent="onSubmit"
       >
         <div class="mb-4 text-center text-[28px] text-zinc-600">Login</div>
         <div class="mb-4">
-          <label class="block text-gray-700 text-sm font-bold mb-2"
+          <label class="block text-white text-sm font-bold mb-2"
             >Username</label
           >
           <input
             v-model="loginForm.username"
-            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
             id="username"
             type="text"
             placeholder="Username"
@@ -30,12 +30,12 @@
         </span>
 
         <div class="">
-          <label class="block text-gray-700 text-sm font-bold mb-2"
+          <label class="block text-white text-sm font-bold mb-2"
             >Password</label
           >
           <input
             v-model="loginForm.password"
-            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-white mb-3 leading-tight focus:outline-none focus:shadow-outline"
             id="password"
             type="password"
             autocomplete="off"

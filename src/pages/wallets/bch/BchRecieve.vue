@@ -3,7 +3,7 @@
     <MainHeaderMid />
     <MainHeaderBottom />
     <div class="wrapper">
-        <div class="container max-w-7xl mx-auto pb-60 bg-gray-300 text-neutral">
+        <div class="container max-w-7xl mx-auto pb-60 bg-gray-300 text-white">
             <!-- Container-->
             <div class="mt-5 mb-5 px-10">
                 <nav class="rounded-md w-full">
@@ -32,7 +32,7 @@
             <div class="flex text-[22px] invisible md:visible">Deposit Bitcoin Cash</div>
 
             <div class="flex text-[22px] justify-center visible md:invisible">Deposit Bitcoin Cash</div>
-            <div class="bg-white rounded-md">
+            <div class="bg-neutral rounded-md">
                 <div class="flex justify-center mt-8 text-[20px]">Address:</div>
                 <div class="flex py-10 justify-center mt-8 text-[14px]">
                     {{ bch_address }}

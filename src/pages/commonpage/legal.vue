@@ -7,7 +7,7 @@
         <MainHeaderVendor v-show="user.user_admin === 1" />
     </div>
 
-    <div class="container max-w-7xl mx-auto px-10 mt-2 pb-72 text-neutral">
+    <div class="container max-w-7xl mx-auto px-10 mt-2 pb-72 text-white">
         <div class="mt-5 mb-5">
             <nav class="rounded-md w-full">
                 <ol class="list-reset flex">
@@ -17,12 +17,12 @@
                         </router-link>
                     </li>
                     <li>
-                        <span class="text-gray-500 mx-2 mb-2 mt-2 bg-">/</span>
+                        <span class="text-white mx-2 mb-2 mt-2 bg-">/</span>
                     </li>
                 </ol>
             </nav>
         </div>
-        <div class="bg-white rounded-md p-5">
+        <div class="bg-neutral rounded-md p-5">
             <div class="col-12 text-dark border-bottom mb-3">
                 <h3>Crypto Disclaimer</h3>
                 <br />

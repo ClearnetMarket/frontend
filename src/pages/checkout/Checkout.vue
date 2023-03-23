@@ -41,7 +41,7 @@
         <div class="text-center text-[28px] mb-10">Checkout ({{ shopping_cart_items_list_count }} items)</div>
       </div>
       <div class="grid grid-cols-12 w-full gap-4 px-2">
-        <div class="col-span-12 md:col-span-8 grid-rows-3 bg-white rounded-md p-5 mb-5 ">
+        <div class="col-span-12 md:col-span-8 grid-rows-3 bg-neutral rounded-md p-5 mb-5 ">
           <div class="grid grid-cols-12 border-b border-gray-300 pb-4 ">
             <div class="col-span-1 font-bold">1</div>
             <div class="col-span-3 font-bold text-[20px]">Shipping Options</div>
@@ -149,7 +149,7 @@
         </div>
 
         <div class="col-span-12 md:col-span-4 px-10 mb-5">
-          <div class="grid grid-cols-1 bg-white rounded-md p-5">
+          <div class="grid grid-cols-1 bg-neutral rounded-md p-5">
             <div class="col-span-1">
               <h1 class="font-semibold text-2xl border-b pb-8">Order Summary</h1>
             </div>

@@ -4,7 +4,7 @@
     <MainHeaderMid />
     <MainHeaderBottom />
     <div class="wrapper">
-        <div class="container max-w-5xl mx-auto px-10  mb-10 text-neutral">
+        <div class="container max-w-5xl mx-auto px-10  mb-10 text-white">
             <div class="grid grid-cols-1 w-full gap-4 mb-5">
                 <nav class="rounded-md">
                     <ol class="list-reset flex">
@@ -29,7 +29,7 @@
             </div>
 
             <div class="grid grid-cols-12 gap-5">
-                <div class="col-span-12 sm:col-span-4 bg-white rounded-md p-5">
+                <div class="col-span-12 sm:col-span-4 bg-neutral rounded-md p-5">
                     <div class="text-[18px] mb-5 text-center">My Open Tickets</div>
                     <div v-if="all_tickets.length > 0">
                         <div v-for="ticket in all_tickets" :key="ticket.id">
@@ -72,18 +72,18 @@
                         Create a New Ticket
                     </div>
 
-                    <form class="rounded-md pt-6 pb-8 mb-4 w-full bg-white p-5" @submit.prevent="onSubmit">
-                        <label class="block text-gray-700 text-sm font-bold mb-2">Subject</label>
-                        <input v-model="SendMsgForm.subject" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 
+                    <form class="rounded-md pt-6 pb-8 mb-4 w-full bg-neutral p-5" @submit.prevent="onSubmit">
+                        <label class="block text-white text-sm font-bold mb-2">Subject</label>
+                        <input v-model="SendMsgForm.subject" class="shadow appearance-none border rounded w-full py-2 px-3 text-white
                                 leading-tight focus:outline-none focus:shadow-outline" id="subject" type="text"
                             placeholder="Enter a subject of your issue .." />
                         <span v-if="v$.SendMsgForm.subject.$error" class="text-red-600 text-center">
                             {{ v$.SendMsgForm.subject.$errors[0].$message }}
                         </span>
-                        <label class="block text-gray-700 text-sm font-bold mb-2 mt-3">Issue</label>
+                        <label class="block text-white text-sm font-bold mb-2 mt-3">Issue</label>
                         <textarea v-model="SendMsgForm.msginfo" id="item_description" placeholder="Write something .."
                             class="shadow appearance-none border rounded w-full py-2 px-3
-                                    text-gray-700 leading-tight
+                                    text-white leading-tight
                                     focus:outline-none focus:shadow-outline mb-3">
                             </textarea>
                         <span v-if="v$.SendMsgForm.msginfo.$error" class="text-red-600 text-center">

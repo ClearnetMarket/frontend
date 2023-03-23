@@ -3,7 +3,7 @@
 
   <HeaderPlain />
   <div class="wrapperplain">
-  <div class="container max-w-3xl mx-auto text-neutral">
+  <div class="container max-w-3xl mx-auto text-white">
     <div class="mt-5 mb-5 px-10 ">
       <nav class="rounded-md w-full">
         <ol class="list-reset flex">
@@ -20,19 +20,19 @@
     </div>
     <div class="mx-auto max-w-lg flex items-center justify-center mb-10 mt-20 px-5">
       <form
-        class="bg-white rounded-md px-8 pt-6 pb-8 mb-4 w-full"
+        class="bg-neutral rounded-md px-8 pt-6 pb-8 mb-4 w-full"
         @submit.prevent="onSubmit"
       >
         <div class="mb-4 text-center text-[28px] text-zinc-600">
           Change Password
         </div>
         <div class="mb-4">
-          <label class="block text-gray-700 text-sm font-bold mb-2"
+          <label class="block text-white text-sm font-bold mb-2"
             >Enter New Password</label
           >
           <input
             v-model="ChangePasswordForm.password"
-            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
             id="password"
             type="password"
             placeholder="Password"
@@ -42,12 +42,12 @@
       </span>
         </div>
         <div class="mb-6">
-          <label class="block text-gray-700 text-sm font-bold mb-2"
+          <label class="block text-white text-sm font-bold mb-2"
             >Confirm New Password</label
           >
           <input
             v-model="ChangePasswordForm.password_confirm"
-            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-white mb-3 leading-tight focus:outline-none focus:shadow-outline"
             id="passwordtwo"
             type="password"
             autocomplete="off"

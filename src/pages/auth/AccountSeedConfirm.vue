@@ -3,7 +3,7 @@
 
   <HeaderPlain />
   <div class="wrapperplain">
-  <div class="container max-w-3xl mx-auto text-neutral">
+  <div class="container max-w-3xl mx-auto text-white">
     <div class="mt-5 mb-5  px-5">
       <nav class="rounded-md w-full">
         <ol class="list-reset flex">
@@ -19,7 +19,7 @@
       </nav>
     </div>
   </div>
-  <div class="flex justify-center mx-auto p-5 rounded-md bg-white">
+  <div class="flex justify-center mx-auto p-5 rounded-md bg-neutral">
     <div class="max-w-md">
       <div class="text-center">
         In order to unlock your account, please enter your account seed below.
@@ -31,7 +31,7 @@
           </div>
           <input
             v-model="wordForm.word0"
-            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-blue-300 focus:outline-none focus:shadow-outline"
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-white mb-3 leading-tight focus:outline-blue-300 focus:outline-none focus:shadow-outline"
             type="text"
             autocomplete="off"
             placeholder="Word 1"
@@ -45,7 +45,7 @@
           </span>
           <input
             v-model="wordForm.word1"
-            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-blue-300 focus:outline-none focus:shadow-outline"
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-white mb-3 leading-tight focus:outline-blue-300 focus:outline-none focus:shadow-outline"
             type="text"
             autocomplete="off"
             placeholder="Word 2"
@@ -59,7 +59,7 @@
           </span>
           <input
             v-model="wordForm.word2"
-            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-blue-300 focus:outline-none focus:shadow-outline"
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-white mb-3 leading-tight focus:outline-blue-300 focus:outline-none focus:shadow-outline"
             type="text"
             autocomplete="off"
             placeholder="Word 3"
@@ -73,7 +73,7 @@
           </span>
           <input
             v-model="wordForm.word3"
-            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-blue-300 focus:outline-none focus:shadow-outline"
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-white mb-3 leading-tight focus:outline-blue-300 focus:outline-none focus:shadow-outline"
             type="text"
             autocomplete="off"
             placeholder="Word 4"
@@ -87,7 +87,7 @@
           </span>
           <input
             v-model="wordForm.word4"
-            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-blue-300 focus:outline-none focus:shadow-outline"
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-white mb-3 leading-tight focus:outline-blue-300 focus:outline-none focus:shadow-outline"
             type="text"
             autocomplete="off"
             placeholder="Word 5"
@@ -102,7 +102,7 @@
 
           <input
             v-model="wordForm.word5"
-            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-blue-300 focus:outline-none focus:shadow-outline"
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-white mb-3 leading-tight focus:outline-blue-300 focus:outline-none focus:shadow-outline"
             type="text"
             autocomplete="off"
             placeholder="Word 6"

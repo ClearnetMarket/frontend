@@ -16,7 +16,7 @@
                             </router-link>
                         </li>
                         <li>
-                            <span class="text-gray-500 mx-2">/</span>
+                            <span class="text-white mx-2">/</span>
                         </li>
                     </ol>
                 </nav>

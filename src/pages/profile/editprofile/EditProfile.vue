@@ -9,7 +9,7 @@
     </div>
 <div class="wrapper">
     <!-- Top Stuff-->
-    <div class="container selection:max-w-7xl mx-auto  px-10 bg-gray-300 text-neutral">
+    <div class="container selection:max-w-7xl mx-auto  px-10 bg-gray-300 text-white">
         <!-- Container-->
         <div class="mt-5 mb-5">
             <nav class="rounded-md w-full">
@@ -33,8 +33,8 @@
                 </ol>
             </nav>
         </div>
-        <div class="grid grid-cols-1 rounded-md  max-w-3xl mx-auto bg-white">
-            <div class="flex justify-center bg-white">
+        <div class="grid grid-cols-1 rounded-md  max-w-3xl mx-auto bg-neutral">
+            <div class="flex justify-center bg-neutral">
                 <div v-if="visibledelete1">
                     <div class="block bg-cover bg-center">
                         <div class="flex flex-col">
@@ -76,12 +76,12 @@
                 @submit.prevent="onSubmit">
                 <div class="text-[20px] mt-5 mb-5 font-bold ">User Info</div>
            
-                    <label class="block text-gray-700 text-sm font-bold mb-2">Bio</label>
+                    <label class="block text-white text-sm font-bold mb-2">Bio</label>
                     <div class="flex ">
                         <div class="flex-1">
                             <div class="flex-1">
                                 <textarea v-model="ProfileForm.bio" id="item_description" class="shadow appearance-none border rounded w-full py-2 px-3
-                                        text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                                        text-white leading-tight focus:outline-none focus:shadow-outline">
                                 </textarea>
                             </div>
                         </div>

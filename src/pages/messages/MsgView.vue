@@ -4,7 +4,7 @@
   <MainHeaderBottom />
   <div v-if="loaded">
     <div class="wrapper">
-      <div class="container max-w-7xl mx-auto px-10 pb-10 text-neutral">
+      <div class="container max-w-7xl mx-auto px-10 pb-10 text-white">
         <nav class="rounded-md w-full mb-5">
           <ol class="list-reset flex">
             <li>
@@ -27,7 +27,7 @@
         </nav>
         <div class="grid grid-cols-12 gap-4">
           <div class="col-span-12 md:col-span-3">
-            <div class="  bg-white rounded-md shadow-md text-gray-700 p-5 mt-5">
+            <div class="  bg-neutral rounded-md shadow-md text-white p-5 mt-5">
               <div class="text-[18px] mb-5">Message Center</div>
 
               <div v-for="othermsgs in userlist">
@@ -95,7 +95,7 @@
 
           <div class="col-span-12 md:col-span-9">
             <div v-if="itemforsale"
-              class="grid grid-cols-12 gap-4 mb-4 border border-1 bg-white rounded-md shadow-md text-gray-700 p-5">
+              class="grid grid-cols-12 gap-4 mb-4 border border-1 bg-neutral rounded-md shadow-md text-white p-5">
               <div class="col-span-12 md:col-span-2">
                 <img class="" :src="itemforsale.image_one_url_500" alt="" />
 
@@ -129,7 +129,7 @@
             <form class="rounded-md pt-6 pb-4 w-full" @submit.prevent="onSubmit">
               <div class="">
                 <textarea v-model="SendMsgForm.msginfo" id="item_description" placeholder="Write something .."
-                  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-3"></textarea>
+                  class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline mb-3"></textarea>
               </div>
               <div class="flex justify-end">
                 <button
@@ -143,7 +143,7 @@
             <!-- Top Post -->
 
             <div v-for="comment in mainpostcomments" :key="comment.id">
-              <div class="grid grid-cols-12 p-5 bg-white border-gray-400">
+              <div class="grid grid-cols-12 p-5 bg-neutral border-gray-400">
               
 
                 <!-- THis is for comment ADMIN -->
@@ -166,7 +166,7 @@
 
 
                 <!-- THis is for comment VENDOR  -->
-                <div class="col-span-12 text-gray-600 flex justify-start" v-else-if="comment.who_commented === 1">
+                <div class="col-span-12 text-white flex justify-start" v-else-if="comment.who_commented === 1">
                   <div class="col-span-12">
                     <router-link class="hover:text-blue-500 hover:underline font-bold" :to="{
                       name: 'userprofile',
@@ -183,7 +183,7 @@
 
 
                   <!-- THis is for comment CUSTOMER -->
-                  <div class="col-span-12 text-gray-600 flex justify-end" v-else-if="comment.who_commented === 2">
+                  <div class="col-span-12 text-white flex justify-end" v-else-if="comment.who_commented === 2">
                     <div class="col-span-12">
                       <router-link class="hover:text-blue-500 hover:underline font-bold" :to="{
                         name: 'userprofile',
@@ -202,7 +202,7 @@
 
 
                 <!-- THis is for comment from SITE -->
-                <div class="col-span-12 text-gray-600 flex justify-start" v-else>
+                <div class="col-span-12 text-white flex justify-start" v-else>
                   <div class="col-span-12">
                     <router-link class="hover:text-blue-500 hover:underline font-bold" :to="{
                       name: 'userprofile',

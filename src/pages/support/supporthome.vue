@@ -7,7 +7,7 @@
         <MainHeaderVendor v-show="user.user_admin === 1" />
     </div>
     <div class="wrapper">
-        <div class="container max-w-3xl mx-auto px-10 wrapper overflow-hidden text-neutral">
+        <div class="container max-w-3xl mx-auto px-10 wrapper overflow-hidden text-white">
             <div class="mb-5">
                 <nav class="rounded-md w-full">
                     <ol class="list-reset flex">
@@ -29,7 +29,7 @@
                     can create a ticket.
                 </div>
             </div>
-            <div class="bg-white rounded-md p-5 mb-5">
+            <div class="bg-neutral rounded-md p-5 mb-5">
                 <div class="text-[20px] font-bold rounded-md">Open a Ticket</div>
                 <div class="pb-5 pt-5">
                     You can raise a ticket on or messaging system for fastest response possible.
@@ -39,7 +39,7 @@
                 </router-link>
             </div>
 
-            <div class="bg-white rounded-md p-5 mb-5">
+            <div class="bg-neutral rounded-md p-5 mb-5">
                 <div class="text-[20px] font-bold rounded-md">Email</div>
                 <div class="pb-5 pt-5">Email: admin@freeport.com</div>
                 <div class="">

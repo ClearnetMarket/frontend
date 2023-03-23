@@ -1,7 +1,7 @@
 <template>
   <div class="max-w-7xl mx-auto grid grid-cols-12  py-2">
     <div
-      class="col-span-12 md:col-span-3 lg:col-span-3 text-center sm:mb-5  text-gray-800 hover:text-gray-600 "
+      class="col-span-12 md:col-span-3 lg:col-span-3 text-center sm:mb-5  text-white hover:text-white "
       @click="gotourl('home')"
       style="cursor: pointer"
     >
@@ -14,7 +14,7 @@
           <div class="col-span-8 md:col-span-8 ">
             <input
               v-model="searchForm.searchInput"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:shadow-outline focus:border"
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-white mb-3 leading-tight focus:shadow-outline focus:border"
               id="search"
               type="text"
               autocomplete="off"

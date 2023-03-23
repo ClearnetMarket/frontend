@@ -5,7 +5,7 @@
   <MainHeaderMid />
   <MainHeaderBottom />
   <div class="wrapper">
-  <div class="max-w-4xl mx-auto  px-2 text-neutral">
+  <div class="max-w-4xl mx-auto  px-2 text-white">
     <div class="grid grid-cols-1 w-full ">
       <div class="mb-10 mt-5">
         <nav class="rounded-md">
@@ -27,7 +27,7 @@
       <div  v-if="orderscount > 0">
         <div v-for="(order, i) in orders" :key="i" class="pb-5">
           <div class="grid grid-cols-12 rounded-md border border-gray-300 ">
-            <div class="col-span-12 bg-gray-100 px-5 py-5 rounded-t-md">
+            <div class="col-span-12 bg-info px-5 py-5 rounded-t-md">
               <div class="grid grid-cols-12 text-[12px]">
                 <div class="col-span-12 md:col-span-4  gap-2 text-[15px]">
                   <div class="md:text-center font-bold">Order Placed</div>
@@ -61,7 +61,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-span-12 bg-white px-5  rounded-b-md">
+            <div class="col-span-12 bg-neutral px-5  rounded-b-md">
               <div class="grid grid-cols-12 ">
                 <div class="col-span-12 md:col-span-9 ">
                   <div class="grid grid-cols-12">
@@ -258,7 +258,7 @@
           </div>
         </div>
       </div>
-      <div v-else class="text-gray-700 text-center text-[20px] mt-10">
+      <div v-else class="text-white text-center text-[20px] mt-10">
         You have no orders currently. Try buying something..or just HODL :)
       </div>
     </div>

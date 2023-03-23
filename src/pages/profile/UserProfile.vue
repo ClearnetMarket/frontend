@@ -5,7 +5,7 @@
   <MainHeaderMid />
   <MainHeaderBottom />
   <div class="wrapper">
-    <div class="container max-w-4xl mx-auto px-2 text-neutral">
+    <div class="container max-w-4xl mx-auto px-2 text-white">
       <nav class="rounded-md w-full">
         <ol class="list-reset flex">
           <li>
@@ -22,7 +22,7 @@
       <div v-if="page_loaded">
         <div class=" mx-auto mt-5">
           <div class="flex justify-center">
-            <div class="grid grid-cols-12 mb-5 rounded-md gap-4 w-full p-5 bg-white">
+            <div class="grid grid-cols-12 mb-5 rounded-md gap-4 w-full p-5 bg-neutral">
               <div class="col-span-12 ">
                 <div >
                   <router-link v-if="user.user_id == userprofile.uuid" :to="{ name: 'editprofile' }" class="text-blue-600 hover:text-blue-700"> Edit
@@ -43,21 +43,21 @@
 
                 <div v-if="userprofile.admin_role === 1" class=" ">
 
-                  <div class=" text-gray-800">
+                  <div class=" text-white">
                     Selling From: {{ country }}
                   </div>
-                  <div class=" text-gray-800">
+                  <div class=" text-white">
                     <div v-if="user_stats.total_items_bought !== null">
                       Total Items Bought: {{ user_stats.total_items_bought }}
                     </div>
                   </div>
-                  <div class=" text-gray-800">
+                  <div class=" text-white">
                     <div v-if="vendor_stats !== null">
                       Total Items Sold: {{ vendor_stats.total_sales }}
                     </div>
                   </div>
 
-                  <div class="text-gray-800 border-t border-gray-500 mt-5">{{ userprofile.bio }}</div>
+                  <div class="text-white border-t border-gray-500 mt-5">{{ userprofile.bio }}</div>
 
                 </div>
               </div>
@@ -65,14 +65,14 @@
             </div>
           </div>
 
-          <div class="grid grid-cols-12 gap-4 text-gray-700 pb-36">
+          <div class="grid grid-cols-12 gap-4 text-white pb-36">
 
             <div class="col-span-12">
               <div v-if="userprofile.admin_role == 1">
 
                 <div v-if="vendor_reviews_total > 0">
                   <div v-for="review in vendorreviews" :key="review.id">
-                    <div class="grid grid-cols-12 bg-white rounded-md p-5 mb-2">
+                    <div class="grid grid-cols-12 bg-neutral rounded-md p-5 mb-2">
                       <div class="col-span-12 text-sm font-medium text-gray-500 dark:text-gray-400">
                         {{ review.customer_name }}
                       </div>
@@ -98,9 +98,9 @@
               </div>
               <div v-else>
                 <div v-if="userreviews.length > 0">
-                  <div class="flex font-semibold text-gray-800">User Reviews</div>
+                  <div class="flex font-semibold text-white">User Reviews</div>
                   <div v-for="review in userreviews" :key="review.id" class="pb-5">
-                    <div class="grid grid-cols-12 px-5 rounded bg-white mb-2">
+                    <div class="grid grid-cols-12 px-5 rounded bg-neutral mb-2">
                       <div class="col-span-12 text-sm font-medium text-gray-500 dark:text-gray-400">
                         Vendor: {{ review.vendor_name }}
                       </div>

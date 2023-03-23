@@ -9,7 +9,7 @@
   </div>
   <div class="wrapper">
     <!-- Top Stuff-->
-    <div class="container max-w-7xl mx-auto px-10 text-neutral" v-if="user !== null">
+    <div class="container max-w-7xl mx-auto px-10 text-white" v-if="user !== null">
       <!-- Container-->
       <div class="mt-5 mb-5">
         <nav class="rounded-md w-full">
@@ -41,21 +41,21 @@
           </div>
 
           <div class="col-span-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2">City</label>
+            <label class="block text-white text-sm font-bold mb-2">City</label>
             <input v-model="ChangeAddressForm.city"
-              class="shadow appearance-none border border-gray-500 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              class="shadow appearance-none border border-gray-500 rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
               id="city" type="text" placeholder="City" />
           </div>
           <div class="col-span-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2">State</label>
+            <label class="block text-white text-sm font-bold mb-2">State</label>
             <input v-model="ChangeAddressForm.stateorprovence"
-              class="shadow appearance-none border border-gray-500 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              class="shadow appearance-none border border-gray-500 rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
               id="state" type="text" placeholder="State or Provence" />
           </div>
           <div class="col-span-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2">Zip Code</label>
+            <label class="block text-white text-sm font-bold mb-2">Zip Code</label>
             <input v-model="ChangeAddressForm.zip"
-              class="shadow appearance-none border border-gray-500 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              class="shadow appearance-none border border-gray-500 rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
               id="zip" type="text" placeholder="Zip" />
           </div>
 

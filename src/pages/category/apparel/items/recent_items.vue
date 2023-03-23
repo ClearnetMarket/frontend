@@ -16,7 +16,7 @@ import axios from 'axios'
 import generic_item from '../../../../components/item/generic_item.vue'
 
 export default defineComponent({
-    name: 'RecentAuto',
+    name: 'RecentApparel',
     components: {
         generic_item,
     },
@@ -35,7 +35,7 @@ export default defineComponent({
         getallitems() {
             axios({
                 method: 'get',
-                url: '/category/query/index/automotive',
+                url: '/category/query/index/apparel',
                 withCredentials: true,
             })
                 .then((response) => {

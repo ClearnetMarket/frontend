@@ -4,7 +4,7 @@
   <MainHeaderMid />
   <MainHeaderBottom />
   <div class="wrapper">
-    <div class="max-w-4xl mx-auto text-neutral">
+    <div class="max-w-4xl mx-auto text-white">
 
       <nav class="rounded-md px-5">
         <ol class="list-reset flex">
@@ -57,7 +57,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-span-12 bg-white ">
+            <div class="col-span-12 bg-neutral ">
               <div class="grid grid-cols-12">
                 <div class="col-span-12 sm:col-span-9">
                   <div class="grid grid-cols-12 p-2">
@@ -245,14 +245,14 @@
             </div>
           </div>
           <div v-if="tracking_number">
-            <div class="grid grid-cols-12 rounded-md border bg-white  mb-5 p-5">
+            <div class="grid grid-cols-12 rounded-md border bg-neutral  mb-5 p-5">
               <div class="col-span-12 text-[20px]">Tracking</div>
               <div class="col-span-12">Carrier: {{ carrier_name }}</div>
               <div class="col-span-12">Tracking Number: {{ tracking_number }}</div>
             </div>
           </div>
           <div v-else>
-            <div class="grid grid-cols-12 rounded-md border bg-white  mb-5 p-5">
+            <div class="grid grid-cols-12 rounded-md border bg-neutral  mb-5 p-5">
               <div class="col-span-12 text-center font-bold">
                 Tracking Info not Provided
               </div>
@@ -262,7 +262,7 @@
           <div v-if="order.overall_status === 10" class="pb-40">
             <div v-if="order.vendor_feedback === 0">
               <form @submit.prevent="onSubmitFeedback">
-                <div class="grid grid-cols-12 rounded-md border bg-white mb-5 p-5">
+                <div class="grid grid-cols-12 rounded-md border bg-neutral mb-5 p-5">
                   <div class="col-span-12 text-[14px] mb-5">Leave Feedback</div>
 
                   <div class="col-span-12">
@@ -297,7 +297,7 @@
                   </div>
                   <div class="col-span-12">
                     <textarea v-model="review"
-                      class="shadow appearance-none border border-gray-500 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                      class="shadow appearance-none border border-gray-500 rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
                       id="message" type="textfield" placeholder="Review Rating" />
                   </div>
                   <div class="col-span-12 text-center mt-5">

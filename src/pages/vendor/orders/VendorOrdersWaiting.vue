@@ -116,7 +116,7 @@
       <h1 class="col-span-1 font-semibold text-2xl">Waiting</h1>
       <div v-for="order in orders" :key="order.id">
         <div v-if="order.uuid">
-          <div class="grid grid-cols-12 rounded gap-5 p-5 bg-white mb-5">
+          <div class="grid grid-cols-12 rounded gap-5 p-5 bg-neutral mb-5">
             <div class="col-span-12 sm:col-span-3 flex justify-center">
               <img class="object-contain" :src="order.image_one" alt="" />
             </div>
@@ -212,10 +212,7 @@
                       </span>
                     </div>
                   </div>
-
-
                 </div>
-
 
                 <div class="col-span-12 mb-2">
                   <div class="font-bold">Shipping Description:</div>
@@ -240,7 +237,6 @@
               </div>
             </div>
             <div class="col-span-12 sm:col-span-2">
-
               <button
                 class="bg-green-600 m-1 hover:bg-green-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
                 type="button" @click.prevent="shiporder(order.uuid)">
@@ -259,14 +255,12 @@
                 Add/Edit Shipping Info
               </button>
 
-
-
               <!-- Main modal -->
               <div id="modal" tabindex="-1" aria-hidden="true"
                 class="hidden overflow-y-auto overflow-x-hidden fixed grid place-items-center h-screen w-full inset-0 h-modal h-full mb-36">
                 <div class="relative p-4 w-full max-w-md h-full md:h-auto">
                   <!-- Modal content -->
-                  <div class="relative text-gray-600 rounded-lg shadow bg-white">
+                  <div class="relative text-white rounded-lg shadow bg-neutral">
                     <div class="flex justify-end p-2">
                       <button type="button"
                         class="text-gray-400 bg-transparent hover:bg-gray-300 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-400 dark:hover:text-white"
@@ -287,7 +281,7 @@
                         <label for="carrier_name" class="block mb-2 text-sm font-medium text-gray-900">Carrier
                           Name</label>
                         <input v-model="trackingForm.carrier" type="text" name="carrier_name" id="carrier_name"
-                          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-400"
+                          class="shadow appearance-none border rounded w-full py-2 px-3 text-white mb-3 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-400"
                           placeholder="Enter name of shipping carrier" required />
                       </div>
                       <div>
@@ -295,7 +289,7 @@
                           Number</label>
                         <input v-model="trackingForm.tracking" type="text" name="tracking_number" id="tracking_number"
                           placeholder="Tracking Number"
-                          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-400"
+                          class="shadow appearance-none border rounded w-full py-2 px-3 text-white mb-3 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-400"
                           required />
                       </div>
 
@@ -312,7 +306,6 @@
                 </div>
               </div>
             </div>
-
           </div>
         </div>
       </div>
@@ -392,9 +385,7 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
-
           this.orders = response.data;
-
       });
     },
     //accepted orders

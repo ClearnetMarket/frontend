@@ -30,9 +30,9 @@
                         <button class="hover:bg-gray-600 text-white hover:text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline font-bold ">
                               <font-awesome-icon icon="fa-solid fa-bell" class="text-[22px]" />
                         </button>
-                        <ul tabindex="0" class="dropdown-content dropdown-hover dropdown-hover menu p-2 shadow bg-white rounded-box w-52 text-neutral text-left rounded-md w-96">
+                        <ul tabindex="0" class="dropdown-content dropdown-hover dropdown-hover menu p-2 shadow bg-neutral rounded-box w-52 text-white text-left rounded-md w-96">
                           <div v-for="notes in newnotes">
-                              <li class="w-full p-5 hover:bg-yellow-500 hover:text-neutral hover:font-bold">
+                              <li class="w-full p-5 hover:bg-yellow-500 hover:text-white hover:font-bold">
                                 {{notes.message}}
                               </li>
                           </div>
@@ -43,9 +43,9 @@
                                   @click.prevent="notificationsnotificiationmarkasread()">
                               {{notecount}}  <font-awesome-icon icon="fa-solid fa-bell " class="text-[22px]" />
                           </button>
-                          <ul tabindex="0" class="dropdown-content dropdown-hover menu p-2 shadow bg-white rounded-box w-52 text-neutral text-left rounded-md w-96">
+                          <ul tabindex="0" class="dropdown-content dropdown-hover menu p-2 shadow bg-neutral rounded-box w-52 text-white text-left rounded-md w-96">
                               <div v-for="notes in newnotes">
-                                  <li class="w-full p-5 hover:bg-yellow-500 hover:text-neutral hover:font-bold ">
+                                  <li class="w-full p-5 hover:bg-yellow-500 hover:text-white hover:font-bold ">
                                     {{notes.message}}
                                   </li>
                               </div>
@@ -54,19 +54,10 @@
                     </div>
 
                   <router-link :to="{ name: 'MsgHome' }" class="px-3 ">
-                    <div v-if="msgcount == 0">
                       <button
                         class="hover:bg-zinc-700 text-white hover:text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline font-bold ">
                       <font-awesome-icon icon="fa-solid fa-envelope " class="text-[22px]" />
                       </button>
-                    </div>
-                    <div v-else>
-                      <button
-                        class="hover:bg-red-600 bg-red-600 text-white hover:text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline font-bold "
-                       >
-                        {{ msgcount }}  <font-awesome-icon icon="fa-solid fa-envelope " class="text-[22px]" />
-                      </button>
-                    </div>
                   </router-link>
                   <router-link :to="{ name: 'sell' }">
                     <button

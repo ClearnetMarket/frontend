@@ -23,7 +23,9 @@
       <div v-if="vendor_orders_new">
         <router-link :to="{ name: 'vendorordersnew' }">
           <button
-            class="flex py-2 px-4 shadow-md no-underline rounded-full text-white font-sans hover:text-white text-sm bg-zinc-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2">
+            class="flex py-2 px-4 shadow-md no-underline rounded-full text-white
+             font-sans hover:text-white text-sm bg-zinc-600 hover:bg-zinc-400
+             focus:outline-none active:shadow-none mr-2">
             <span class="px-2">{{ vendor_orders_new }}</span>
             <span class>New Orders</span>
           </button>
@@ -32,7 +34,9 @@
       <div v-else>
         <router-link :to="{ name: 'vendorordersnew' }">
           <button
-            class="py-2 px-4 shadow-md no-underline rounded-full text-white font-sans text-sm hover:text-white bg-zinc-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2">
+            class="py-2 px-4 shadow-md no-underline rounded-full text-white font-sans
+            text-sm hover:text-white bg-zinc-600 hover:bg-zinc-400 focus:outline-none
+            active:shadow-none mr-2">
             New Orders
           </button>
         </router-link>
@@ -41,7 +45,9 @@
       <div v-if="vendor_orders_accepted" class="q-mt-none">
         <router-link :to="{ name: 'vendororderswaiting' }">
           <button
-            class="flex py-2 px-4 shadow-md text-sm no-underline rounded-full bg-zinc-600 hover:bg-zinc-400 text-white font-sans hover:text-white focus:outline-none active:shadow-none mr-2">
+            class="flex py-2 px-4 shadow-md text-sm no-underline rounded-full
+            bg-zinc-600 hover:bg-zinc-400 text-white font-sans hover:text-white
+             focus:outline-none active:shadow-none mr-2">
             <span class="px-2">{{ vendor_orders_accepted }}</span>
             <span class>Waiting</span>
           </button>
@@ -50,7 +56,9 @@
       <div v-else>
         <router-link :to="{ name: 'vendororderswaiting' }">
           <button
-            class="py-2 px-4 shadow-md no-underline rounded-full text-white font-sans text-sm hover:text-white bg-zinc-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2">
+            class="py-2 px-4 shadow-md no-underline rounded-full text-white
+            font-sans text-sm hover:text-white bg-zinc-600 hover:bg-zinc-400
+            focus:outline-none active:shadow-none mr-2">
             Waiting
           </button>
         </router-link>
@@ -59,7 +67,9 @@
       <div v-if="vendor_orders_shipped">
         <router-link :to="{ name: 'vendorordersshipped' }">
           <button
-            class="flex py-2 px-4 shadow-md no-underline rounded-full bg-zinc-600 hover:bg-zinc-400 hover:text-white text-white font-sans text-sm btn-primary focus:outline-none active:shadow-none mr-2">
+            class="flex py-2 px-4 shadow-md no-underline rounded-full
+            bg-zinc-600 hover:bg-zinc-400 hover:text-white text-white font-sans text-sm btn-primary
+             focus:outline-none active:shadow-none mr-2">
             <span class="px-2">{{ vendor_orders_shipped }}</span>
             <span class>Shipped</span>
           </button>
@@ -68,7 +78,9 @@
       <div v-else>
         <router-link :to="{ name: 'vendorordersshipped' }">
           <button
-            class="py-2 px-4 shadow-md no-underline rounded-full text-white font-sans text-sm hover:text-white bg-zinc-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2">
+            class="py-2 px-4 shadow-md no-underline rounded-full
+            text-white font-sans text-sm hover:text-white bg-zinc-600 hover:bg-zinc-400
+             focus:outline-none active:shadow-none mr-2">
             Shipped
           </button>
         </router-link>
@@ -77,7 +89,9 @@
       <div v-if="vendor_orders_finalized">
         <router-link :to="{ name: 'vendorordersfinalized' }">
           <button
-            class="flex py-2 px-4 shadow-md no-underline rounded-full bg-zinc-600 hover:bg-zinc-400 hover:text-white text-white font-sans text-sm btn-primary focus:outline-none active:shadow-none mr-2">
+            class="flex py-2 px-4 shadow-md no-underline rounded-full
+             bg-zinc-600 hover:bg-zinc-400 hover:text-white text-white font-sans text-sm btn-primary
+              focus:outline-none active:shadow-none mr-2">
             <span class="px-2">{{ vendor_orders_finalized }}</span>
             <span class>Finalized</span>
           </button>
@@ -86,7 +100,9 @@
       <div v-else>
         <router-link :to="{ name: 'vendorordersfinalized' }">
           <button
-            class="py-2 px-4 shadow-md no-underline rounded-full text-white font-sans text-sm hover:text-white bg-zinc-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2">
+            class="py-2 px-4 shadow-md no-underline rounded-full
+            text-white font-sans text-sm hover:text-white bg-zinc-600 hover:bg-zinc-400
+            focus:outline-none active:shadow-none mr-2">
             Finalized
           </button>
         </router-link>
@@ -95,7 +111,9 @@
       <div v-if="vendor_orders_request_cancel">
         <router-link :to="{ name: 'vendororderscancel' }">
           <button
-            class="flex py-2 px-4 shadow-md no-underline rounded-full bg-zinc-600 hover:bg-zinc-400 hover:text-white text-white font-sans text-sm btn-primary focus:outline-none active:shadow-none mr-2">
+            class="flex py-2 px-4 shadow-md no-underline rounded-full
+             bg-zinc-600 hover:bg-zinc-400 hover:text-white text-white font-sans text-sm
+              btn-primary focus:outline-none active:shadow-none mr-2">
             <span class="px-2">{{ vendor_orders_request_cancel }}</span>
             <span class>Request Cancel</span>
           </button>
@@ -104,7 +122,9 @@
       <div v-else>
         <router-link :to="{ name: 'vendororderscancel' }">
           <button
-            class="py-2 px-4 shadow-md no-underline rounded-full text-white font-sans text-sm hover:text-white bg-zinc-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2">
+            class="py-2 px-4 shadow-md no-underline rounded-full
+             text-white font-sans text-sm hover:text-white bg-zinc-600 hover:bg-zinc-400
+              focus:outline-none active:shadow-none mr-2">
             Cancel
           </button>
         </router-link>
@@ -160,7 +180,9 @@
                 <div class="mx-3 pt-3 text-[13px] font-bold">
                   <router-link :to="{ name: 'vendorordersfeedback', params: { uuid: order.uuid }, }" class="px-3">
                     <button
-                      class="bg-yellow-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline">
+                      class="bg-yellow-600 hover:bg-zinc-400 text-white
+                       font-bold py-1 px-3 rounded focus:outline-none
+                      focus:shadow-outline">
                       Wallets
                     </button>
                   </router-link>
@@ -179,7 +201,6 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import axios from "axios";
-import { notify } from "@kyvg/vue3-notification";
 import { formatDistance } from "date-fns";
 import authHeader from "../../../services/auth.header";
 import MainHeaderTop from "../../../layouts/headers/MainHeaderTop.vue";
@@ -187,7 +208,6 @@ import MainHeaderMid from "../../../layouts/headers/MainHeaderMid.vue";
 import MainHeaderBottom from "../../../layouts/headers/MainHeaderBottom.vue";
 import MainHeaderVendor from "../../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../../layouts/footers/FooterMain.vue";
-
 
 
 export default defineComponent({

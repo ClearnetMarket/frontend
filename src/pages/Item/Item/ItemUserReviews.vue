@@ -3,9 +3,9 @@
   <div class="max-w-7xl mx-auto pb-36 mt-5 rounded-md">
 
     <div class="grid grid-cols-12 gap-5">
-      <div class="col-span-12 md:col-span-4 p-5 bg-white rounded-md">
-        <div class="flex font-semibold text-gray-600">All Vendor Reviews</div>
-        <p class="text-sm font-medium text-gray-800 border-b">
+      <div class="col-span-12 md:col-span-4 p-5 bg-neutral rounded-md">
+        <div class="flex font-semibold text-white">All Vendor Reviews</div>
+        <p class="text-sm font-medium text-white border-b">
           {{ vendor_reviews_total }} total ratings
         </p>
         <div class="flex items-center mt-4">
@@ -92,16 +92,13 @@
       <div class="col-span-12 md:col-span-8">
         <div class="" v-if="vendor_reviews_total > 0">
           <div v-for="review in vendorreviews" :key="review.id">
-            <div class="grid grid-cols-12 bg-white rounded-md p-5 mb-5">
+            <div class="grid grid-cols-12 bg-neutral rounded-md p-5 mb-5">
               <div class="col-span-12 text-sm font-medium text-gray-500 dark:text-gray-400">
                 {{ review.customer_name }}
               </div>
               <div class="col-span-12  text-[14px]">
-             
                   {{ review.title_of_item }}
-           
               </div>
-
               <div class="col-span-12 mb-2">
                 <StarRating v-bind:rating="review.vendor_rating" />
               </div>

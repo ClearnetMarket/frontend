@@ -1,18 +1,18 @@
 <template>
 
-        <MainHeaderTop />
-        <MainHeaderMid />
-        <MainHeaderBottom />
-        <div v-if="user">
-            <Confirmed />
-            <Newticketmsg />
-        </div>
+    <MainHeaderTop />
+    <MainHeaderMid />
+    <MainHeaderBottom />
+    <div v-if="user">
+        <Confirmed />
+        <Newticketmsg />
+    </div>
 
-        <div v-if="user">
-            <MainHeaderVendor v-show="user.user_admin === 1" />
-        </div>
+    <div v-if="user">
+        <MainHeaderVendor v-show="user.user_admin === 1" />
+    </div>
     <div class="wrapper">
-        <div class="container max-w-7xl mx-auto mb-0 bg-text-white text-neutral">
+        <div class="container max-w-7xl mx-auto mb-0 bg-text-white text-white">
             <TodayFeatured />
             <TodayFeatured />
             <TodayFeatured />

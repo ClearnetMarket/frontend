@@ -37,7 +37,7 @@
           <div v-if="order_summary_count > 0">
             <div v-for="(item, index) in shopping_cart_items_list" :key="index">
               <div v-if="item.title_of_item">
-                <div class="bg-white hover:bg-blue-300 p-2 rounded-md">
+                <div class="bg-neutral hover:bg-blue-300 p-2 rounded-md">
                   <div class="grid grid-cols-12 px-1 py-1 gap-5">
                     <!-- product -->
 
@@ -145,7 +145,7 @@
 
           <div v-if="shopping_cart_items_saved_list">
             <div v-for="item in shopping_cart_items_saved_list">
-              <div class="hover:bg-blue-300 bg-white">
+              <div class="hover:bg-blue-300 bg-neutral">
                 <div class="grid grid-cols-12 px-1 py-1">
                   <!-- product -->
                   <div class="col-span-3">
@@ -157,7 +157,7 @@
                         {{ item.title_of_item }}
                       </div>
                       <div class="col-span-12 font-bold text-[18px] py-1">
-                        <span class="text-gray-600 text-xs">
+                        <span class="text-white text-xs">
                           Sold by: {{ item.vendor_user_name }}
                         </span>
                       </div>
@@ -193,7 +193,7 @@
           </div>
         </div>
         
-        <div class="col-span-12 md:col-span-3 px-8  rounded-md  bg-white">
+        <div class="col-span-12 md:col-span-3 px-8  rounded-md  bg-neutral">
           <div v-if="order_summary_count > 0">
             <div class="grid grid-cols-1">
               <div class="col-span-1">
@@ -245,7 +245,7 @@
             </div>
           </div>
           <div v-else>
-            <h1 class="font-semibold text-[16px] text-center text-neutral">Add Items to your cart to checkout</h1>
+            <h1 class="font-semibold text-[16px] text-center text-white">Add Items to your cart to checkout</h1>
           </div>
         </div>
       </div>

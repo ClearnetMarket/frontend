@@ -9,7 +9,7 @@
     <MainHeaderVendor v-show="user.user_admin === 1" />
   </div>
   <div class="">
-    <div class="container max-w-7xl mx-auto px-10 text-neutral">
+    <div class="container max-w-7xl mx-auto px-10 text-white">
       <div class="mt-5 mb-5">
         <nav class="rounded-md w-full">
           <ol class="list-reset flex">
@@ -19,7 +19,7 @@
               </router-link>
             </li>
             <li>
-              <span class="text-gray-500 mx-2">/</span>
+              <span class="text-white mx-2">/</span>
             </li>
             <li>
               <router-link :to="{ name: 'forsale' }">
@@ -27,7 +27,7 @@
               </router-link>
             </li>
             <li>
-              <span class="text-gray-500 mx-2">/</span>
+              <span class="text-white mx-2">/</span>
             </li>
           </ol>
         </nav>
@@ -49,12 +49,12 @@
         >
           <div class="text-[18px] mt-5 mb-5">General Info</div>
           <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2"
+            <label class="block text-white text-sm font-bold mb-2"
               >Item Title</label
             >
             <input
               v-model="CreateItemForm.basicInfo.title"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
               id="title"
               type="text"
               placeholder="Enter title of your item .."
@@ -62,17 +62,17 @@
           </div>
           <div class="flex gap-5">
             <div class="flex-1 mb-4">
-              <label class="block text-gray-700 text-sm font-bold mb-2"
+              <label class="block text-white text-sm font-bold mb-2"
                 >Category</label
               >
               <select
-                class="shadow form-select appearance-none block w-full px-3 py-1.5 text-base font-normal focus:shadow-outline text-gray-500 bg-white bg-clip-padding bg-no-repeat border rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                class="shadow form-select appearance-none block w-full px-3 py-1.5 text-base font-normal focus:shadow-outline text-gray-500 bg-neutral bg-clip-padding bg-no-repeat border rounded transition ease-in-out m-0 focus:text-white focus:bg-neutral focus:border-blue-600 focus:outline-none"
                 aria-label="Default select example"
                 id="category"
                 v-model="CreateItemForm.basicInfo.category_id_0"
               >
                 <option
-                  class="text-gray-700"
+                  class="text-white"
                   v-for="(category, index) in categoryList"
                   :key="index"
                   :value="category.value"
@@ -82,17 +82,17 @@
               </select>
             </div>
             <div class="flex-1 mb-4">
-              <label class="block text-gray-700 text-sm font-bold mb-2"
+              <label class="block text-white text-sm font-bold mb-2"
                 >Condition</label
               >
               <select
-                class="shadow form-select appearance-none block w-full px-3 py-1.5 text-base font-normal focus:shadow-outline text-gray-500 bg-white bg-clip-padding bg-no-repeat border rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                class="shadow form-select appearance-none block w-full px-3 py-1.5 text-base font-normal focus:shadow-outline text-gray-500 bg-neutral bg-clip-padding bg-no-repeat border rounded transition ease-in-out m-0 focus:text-white focus:bg-neutral focus:border-blue-600 focus:outline-none"
                 aria-label="Default select example"
                 id="condition"
                 v-model="CreateItemForm.basicInfo.item_condition"
               >
                 <option
-                  class="text-gray-700"
+                  class="text-white"
                   v-for="(condition, index) in conditionList"
                   :key="index"
                   :value="condition.value"
@@ -105,15 +105,15 @@
           <div class="text-[18px] mt-5 mb-5">Pricing</div>
           <div class="flex gap-5">
             <div class="mb-4 flex-1">
-              <label class="block text-gray-700 text-sm font-bold mb-2"
+              <label class="block text-white text-sm font-bold mb-2"
                 >Item Price</label
               >
-              <label class="block text-gray-700 text-sm mb-2 text-[11px]"
+              <label class="block text-white text-sm mb-2 text-[11px]"
                 >Item Price in your local currency per item</label
               >
               <input
                 v-model="CreateItemForm.pricingInfo.price"
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
                 id="price"
                 type="number"
                 min="0"
@@ -122,15 +122,15 @@
               />
             </div>
             <div class="mb-4 flex-1">
-              <label class="block text-gray-700 text-sm font-bold mb-2"
+              <label class="block text-white text-sm font-bold mb-2"
                 >Item Count</label
               >
-              <label class="block text-gray-700 text-sm mb-2 text-[11px]"
+              <label class="block text-white text-sm mb-2 text-[11px]"
                 >How many you have for sale</label
               >
               <input
                 v-model="CreateItemForm.pricingInfo.item_count"
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
                 id="count"
                 type="number"
                 min="0"
@@ -141,7 +141,7 @@
           </div>
           <div class="flex gap-5">
             <div class="mb-4 flex-1">
-              <label class="block text-gray-700 text-sm font-bold mb-2"
+              <label class="block text-white text-sm font-bold mb-2"
                 >Accept Bitcoin</label
               >
               <input
@@ -151,7 +151,7 @@
               />
             </div>
             <div class="mb-4 flex-1">
-              <label class="block text-gray-700 text-sm font-bold mb-2"
+              <label class="block text-white text-sm font-bold mb-2"
                 >Accept Bitcoin Cash</label
               >
               <input
@@ -161,7 +161,7 @@
               />
             </div>
             <div class="mb-4 flex-1">
-              <label class="block text-gray-700 text-sm font-bold mb-2"
+              <label class="block text-white text-sm font-bold mb-2"
                 >Accept Monero</label
               >
               <input
@@ -176,7 +176,7 @@
             <textarea
               v-model="CreateItemForm.basicInfo.item_description"
               id="item_description"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
             ></textarea>
           </div>
 
@@ -184,7 +184,7 @@
           <div class="mb-4">
             <div class="flex gap-5">
               <div class="mb-4 flex-1">
-                <label class="block text-gray-700 text-sm font-bold mb-2"
+                <label class="block text-white text-sm font-bold mb-2"
                   >Worldwide Shipping or Digital Item</label
                 >
                 <input
@@ -196,19 +196,19 @@
             </div>
             <div class="flex gap-5">
               <div class="mb-4 flex-1">
-                <label class="block text-gray-700 text-sm font-bold mb-2"
+                <label class="block text-white text-sm font-bold mb-2"
                   >Destination One</label
                 >
 
                 <select
-                  class="shadow form-select appearance-none block w-full px-3 py-1.5 text-base font-normal focus:shadow-outline text-gray-500 bg-white bg-clip-padding bg-no-repeat border rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                  class="shadow form-select appearance-none block w-full px-3 py-1.5 text-base font-normal focus:shadow-outline text-gray-500 bg-neutral bg-clip-padding bg-no-repeat border rounded transition ease-in-out m-0 focus:text-white focus:bg-neutral focus:border-blue-600 focus:outline-none"
                   aria-label="Default select example"
                   id="category"
                   v-model="CreateItemForm.shippingInfo.shipping_to_country_one"
                   :disabled="isSelectDisabled"
                 >
                   <option
-                    class="text-gray-700"
+                    class="text-white"
                     v-for="(country, index) in countryList"
                     :key="index"
                     :value="country.value"
@@ -219,19 +219,19 @@
               </div>
 
               <div class="mb-4 flex-1">
-                <label class="block text-gray-700 text-sm font-bold mb-2"
+                <label class="block text-white text-sm font-bold mb-2"
                   >Destination Two</label
                 >
 
                 <select
-                  class="shadow form-select appearance-none block w-full px-3 py-1.5 text-base font-normal focus:shadow-outline text-gray-500 bg-white bg-clip-padding bg-no-repeat border rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                  class="shadow form-select appearance-none block w-full px-3 py-1.5 text-base font-normal focus:shadow-outline text-gray-500 bg-neutral bg-clip-padding bg-no-repeat border rounded transition ease-in-out m-0 focus:text-white focus:bg-neutral focus:border-blue-600 focus:outline-none"
                   aria-label="Default select example"
                   id="category"
                   v-model="CreateItemForm.shippingInfo.shipping_to_country_two"
                   :disabled="isSelectDisabled"
                 >
                   <option
-                    class="text-gray-700"
+                    class="text-white"
                     v-for="(country, index) in countryList"
                     :key="index"
                     :value="country.value"
@@ -243,12 +243,12 @@
             </div>
             <div class="flex gap-5">
               <div class="mb-4 flex-1">
-                <label class="block text-gray-700 text-sm font-bold mb-2"
+                <label class="block text-white text-sm font-bold mb-2"
                   >Destination Three</label
                 >
 
                 <select
-                  class="shadow form-select appearance-none block w-full px-3 py-1.5 text-base font-normal focus:shadow-outline text-gray-500 bg-white bg-clip-padding bg-no-repeat border rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                  class="shadow form-select appearance-none block w-full px-3 py-1.5 text-base font-normal focus:shadow-outline text-gray-500 bg-neutral bg-clip-padding bg-no-repeat border rounded transition ease-in-out m-0 focus:text-white focus:bg-neutral focus:border-blue-600 focus:outline-none"
                   aria-label="Default select example"
                   id="category"
                   v-model="
@@ -257,7 +257,7 @@
                   :disabled="isSelectDisabled"
                 >
                   <option
-                    class="text-gray-700"
+                    class="text-white"
                     v-for="(country, index) in countryList"
                     :key="index"
                     :value="country.value"
@@ -268,19 +268,19 @@
               </div>
 
               <div class="mb-4 flex-1">
-                <label class="block text-gray-700 text-sm font-bold mb-2"
+                <label class="block text-white text-sm font-bold mb-2"
                   >Destination Four</label
                 >
 
                 <select
-                  class="shadow form-select appearance-none block w-full px-3 py-1.5 text-base font-normal focus:shadow-outline text-gray-500 bg-white bg-clip-padding bg-no-repeat border rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                  class="shadow form-select appearance-none block w-full px-3 py-1.5 text-base font-normal focus:shadow-outline text-gray-500 bg-neutral bg-clip-padding bg-no-repeat border rounded transition ease-in-out m-0 focus:text-white focus:bg-neutral focus:border-blue-600 focus:outline-none"
                   aria-label="Default select example"
                   id="category"
                   v-model="CreateItemForm.shippingInfo.shipping_to_country_four"
                   :disabled="isSelectDisabled"
                 >
                   <option
-                    class="text-gray-700"
+                    class="text-white"
                     v-for="(country, index) in countryList"
                     :key="index"
                     :value="country.value"
@@ -301,7 +301,7 @@
           </div>
 
           <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2"
+            <label class="block text-white text-sm font-bold mb-2"
               >Free Shipping</label
             >
             <div class="flex gap-5">
@@ -317,14 +317,14 @@
                   type="number"
                   placeholder="Estimated Days"
                   min="0"
-                  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
                   v-model="CreateItemForm.shippingInfo.free_shipping_days"
                 />
               </div>
             </div>
           </div>
           <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2"
+            <label class="block text-white text-sm font-bold mb-2"
               >Option 1</label
             >
             <div class="flex gap-5">
@@ -339,7 +339,7 @@
                   type="number"
                   placeholder="Price"
                   min="0"
-                  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
                   v-model="CreateItemForm.shippingInfo.shipping_2_price"
                   @keypress="onlyNumberWithDot"
                 />
@@ -349,7 +349,7 @@
                   type="number"
                   placeholder="Estimated Days"
                   min="0"
-                  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
                   v-model="CreateItemForm.shippingInfo.shipping_2_days"
                   @keypress="onlyNumber"
                 />
@@ -357,7 +357,7 @@
             </div>
           </div>
           <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2"
+            <label class="block text-white text-sm font-bold mb-2"
               >Option 3</label
             >
             <div class="flex gap-5">
@@ -372,7 +372,7 @@
                   type="number"
                   placeholder="Price"
                   min="0"
-                  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
                   v-model="CreateItemForm.shippingInfo.shipping_3_price"
                   @keypress="onlyNumberWithDot"
                 />
@@ -382,7 +382,7 @@
                   type="number"
                   placeholder="Estimated Days"
                   min="0"
-                  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
                   v-model="CreateItemForm.shippingInfo.shipping_3_days"
                   @keypress="onlyNumber"
                 />

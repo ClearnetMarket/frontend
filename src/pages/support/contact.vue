@@ -7,7 +7,7 @@
             <MainHeaderVendor v-show="user.user_admin === 1" />
         </div>
 
-        <div class="container max-w-7xl mx-auto px-10 mt-2 text-neutral">
+        <div class="container max-w-7xl mx-auto px-10 mt-2 text-white">
             <div class="mt-5 mb-5">
                 <nav class="rounded-md w-full">
                     <ol class="list-reset flex">
@@ -22,7 +22,7 @@
                     </ol>
                 </nav>
             </div>
-            <div class="bg-white rounded-md p-5 mb-5 ">
+            <div class="bg-neutral rounded-md p-5 mb-5 ">
                 <div class="text-[18px] font-bold rounded-md">Contact us</div>
                 <div class="pb-5">Our Email is admin@freeport.com</div>
                 <div class="">If you have an issue on the site please Open a Ticket.</div>

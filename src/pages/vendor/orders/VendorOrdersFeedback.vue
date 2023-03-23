@@ -21,11 +21,10 @@
       </nav>
     </div>
 
-
     <div class="grid grid-cols-1 w-full gap-4 mt-5 mb-5 ">
       <div class="col-span-1 font-semibold text-2xl">Leave Feedback </div>
       <div v-if="uuid && order">
-        <div class="rounded-md bg-white p-5">
+        <div class="rounded-md bg-neutral p-5">
           <div class="grid grid-cols-12 ">
             <div class="col-span-12 text-[20px]  mb-5">
               <router-link class="text-blue-600 hover:underline hover:text-blue-400 text-center"
@@ -86,19 +85,15 @@
                 </div>
               </div>
             </div>
-
           </div>
-
         </div>
-
       </div>
     </div>
 
     <div v-if="order && uuid">
       <div class="col-span-12 font-semibold text-2xl">Rate customer</div>
-      <div class="grid grid-cols-12 mt-5  p-5 bg-white rounded-md mb-5">
-
-        <div class="col-span-12 bg-white rounded-md">
+      <div class="grid grid-cols-12 mt-5  p-5 bg-neutral rounded-md mb-5">
+        <div class="col-span-12 bg-neutral rounded-md">
           <div class="grid grid-cols-12">
             <div class="col-span-12">Customer Rating:</div>
             <div class="col-span-12">
@@ -132,16 +127,17 @@
           <div v-if="rated === false">
             <div class="grid grid-cols-12">
               <div class="col-span-12 mb-1 text-[14px] pt-5">Leave a review:</div>
-
               <form class="col-span-12" @submit.prevent="sendreview(order.uuid)">
                 <div class="col-span-12">
                   <textarea v-model="review"
-                    class="shadow appearance-none border border-gray-500 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    class="shadow appearance-none border border-gray-500 rounded w-full py-2 px-3
+                     text-white leading-tight focus:outline-none focus:shadow-outline"
                     id="message" type="textfield" placeholder="Review Rating" />
                 </div>
                 <div class="col-span-12  col-start-4">
                   <button
-                    class="bg-yellow-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline  "
+                    class="bg-yellow-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded
+                     focus:outline-none focus:shadow-outline  "
                     type="submit">
                     Add Feedback
                   </button>
@@ -152,13 +148,10 @@
           <div v-if="rated === true">
             <div class="col-span-12 mt-5">{{ review }}</div>
           </div>
-
         </div>
       </div>
     </div>
-
   </div>
-
 
   <MainFooter />
 </template>
@@ -175,8 +168,6 @@ import MainHeaderMid from "../../../layouts/headers/MainHeaderMid.vue";
 import MainHeaderBottom from "../../../layouts/headers/MainHeaderBottom.vue";
 import MainHeaderVendor from "../../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../../layouts/footers/FooterMain.vue";
-
-
 
 
 export default defineComponent({
@@ -222,9 +213,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-
             this.order = response.data;
-
         });
     },
     //see if score already present
@@ -237,8 +226,6 @@ export default defineComponent({
       })
         .then((response) => {
           if ((response.data.success)) {
-
-
               // hide rating div
               this.rating_number = response.data.customer_rating;
               this.review = response.data.review;
@@ -252,7 +239,6 @@ export default defineComponent({
 
         })
         .catch(() => {
-
           notify({
             title: "Freeport Error",
             text: "Error Getting Review.",
@@ -311,9 +297,6 @@ export default defineComponent({
 
         .then((response) => {
           if (response.data.success) {
-
-
-
               notify({
                 title: "Message Center",
                 text: "Successfully sent feedback",
@@ -321,7 +304,6 @@ export default defineComponent({
               });
               this.rated = true
               this.getuserorder();
-
             }
             else {
               notify({
@@ -330,10 +312,8 @@ export default defineComponent({
                 type: "error",
               })
             }
-
         })
-        .catch((error) => {
-
+        .catch(() => {
           notify({
             title: "Freeport Error",
             text: "Error posting information.",

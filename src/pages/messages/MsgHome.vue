@@ -4,7 +4,7 @@
   <MainHeaderMid />
   <MainHeaderBottom />
   <div class="wrapper">
-    <div class="container max-w-7xl mx-auto px-10 pb-10 text-neutral">
+    <div class="container max-w-7xl mx-auto px-10 pb-10 text-white">
       <nav class="rounded-md w-full mb-5">
         <ol class="list-reset flex">
           <li>
@@ -28,7 +28,7 @@
 
       <div class="grid grid-cols-12 pt-5 gap-4">
         <div class="col-span-12 md:col-span-3">
-          <div class="border border-1 bg-white rounded-md shadow-md text-gray-700 p-5">
+          <div class="border border-1 bg-neutral rounded-md shadow-md text-white p-5">
             <div class="text-[18px] mb-5">Message Center</div>
 
             <div v-for="othermsgs in userlist" class="py-2 hover:bg-gray-300 hover:rounded-md">
@@ -174,7 +174,7 @@ export default defineComponent({
     messagemarkasread () {
       axios({
         method: "put",
-        url: "/notification/new/messages/markasread",
+        url: "/notification/new/message/markasread",
         withCredentials: true,
         headers: authHeader(),
       })

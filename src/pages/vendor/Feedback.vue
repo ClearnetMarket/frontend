@@ -1,6 +1,5 @@
 
 <template>
-
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
@@ -28,7 +27,7 @@
       My Feedback
     </div>
     <div class="grid grid-cols-12 p-5 gap-5">
-      <div class="col-span-12 md:col-span-4 bg-white rounded-md p-5">
+      <div class="col-span-12 md:col-span-4 bg-neutral rounded-md p-5">
         <div class="flex">All Vendor Reviews</div>
 
         <p class="text-sm font-medium text-gray-500 dark:text-gray-400">
@@ -69,9 +68,7 @@
           <div class="mx-4 w-2/4 h-5 bg-gray-300 rounded dark:bg-gray-700">
             <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_six }"></div>
           </div>
-          <span class="text-sm font-medium text-blue-600 dark:text-blue-500 pr-2">{{
-            vendor_reviews_percent_six
-          }}%</span>
+          <span class="text-sm font-medium text-blue-600 dark:text-blue-500 pr-2">{{ vendor_reviews_percent_six  }}%</span>
         </div>
         <div class="flex items-center mt-4">
           <span class="text-sm font-medium text-blue-600 dark:text-blue-500 pr-2">5 star</span>
@@ -92,9 +89,7 @@
           <div class="mx-4 w-2/4 h-5 bg-gray-300 rounded dark:bg-gray-700">
             <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_three }"></div>
           </div>
-          <span class="text-sm font-medium text-blue-600 dark:text-blue-500 pr-2">{{
-            vendor_reviews_percent_three
-          }}%</span>
+          <span class="text-sm font-medium text-blue-600 dark:text-blue-500 pr-2">{{ vendor_reviews_percent_three }}%</span>
         </div>
         <div class="flex items-center mt-4">
           <span class="text-sm font-medium text-blue-600 dark:text-blue-500 pr-2">2 star</span>
@@ -114,7 +109,7 @@
       <div class="col-span-12 md:col-span-8">
         <div class="" v-if="vendor_reviews_total > 0">
           <div v-for="review in vendorreviews" :key="review.id">
-            <div class="grid grid-cols-12 bg-white rounded-md p-5 mb-5">
+            <div class="grid grid-cols-12 bg-neutral rounded-md p-5 mb-5">
               <div class="col-span-12 text-sm font-medium text-gray-500 dark:text-gray-400">
                 {{ review.customer_name }}
               </div>
@@ -135,7 +130,7 @@
             </div>
           </div>
         </div>
-        <div v-else class="text-gray-700 text-[18px] text-center">
+        <div v-else class="text-white text-[18px] text-center">
           You have no Feedback yet ...
         </div>
       </div>
@@ -249,12 +244,10 @@ export default defineComponent({
         withCredentials: true,
       })
         .then((response) => {
-          if ((response.data.success)) {
+
             this.vendorreviews = response.data;
-            if (this.vendorreviews == undefined) {
-              this.vendorreviews = null;
-            }
-          }
+            if (this.vendorreviews == undefined)
+              {this.vendorreviews = null;}
         })
         .catch(() => { });
     },

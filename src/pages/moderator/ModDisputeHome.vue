@@ -15,7 +15,7 @@
             </router-link>
           </li>
           <li>
-            <span class="text-gray-500 mx-2">/</span>
+            <span class="text-white mx-2">/</span>
           </li>
           <li>
             <router-link :to="{ name: 'ModHome' }">
@@ -23,7 +23,7 @@
             </router-link>
           </li>
           <li>
-            <span class="text-gray-500 mx-2">/</span>
+            <span class="text-white mx-2">/</span>
           </li>
         </ol>
       </nav>
@@ -32,7 +32,7 @@
     <div class="text-center text-[20px] mb-5">Mod Disputes Home</div>
     <div class="grid grid-cols-12 gap-5">
       <div class="col-span-12 sm:col-span-4 ">
-        <div class="bg-white rounded-md p-3">
+        <div class="bg-neutral rounded-md p-3">
           <div class="text-[20px] font-bold ">Admin Navigation</div>
           <router-link :to="{ name: 'ModHome' }">
             <div class="hover:underline text-blue-600 hover:text-blue-700 my-5">Mod Home</div>
@@ -48,7 +48,7 @@
 
 
       <div class="col-span-12 sm:col-span-8 mb-20 ">
-        <div class="grid grid-cols-12 bg-white p-5 rounded-md">
+        <div class="grid grid-cols-12 bg-neutral p-5 rounded-md">
 
           <div class="col-span-12 mt-5 text-[18px] text-center">Disputes Need Mod Support</div>
           <div class="col-span-12 mt-5">

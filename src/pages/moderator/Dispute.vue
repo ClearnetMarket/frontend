@@ -15,7 +15,7 @@
               </router-link>
             </li>
             <li>
-              <span class="text-gray-500 mx-2">/</span>
+              <span class="text-white mx-2">/</span>
             </li>
           </ol>
         </nav>
@@ -58,7 +58,7 @@
           </div>
         </div>
       </div>
-      <div class="col-span-12 bg-white px-5  rounded-b-md">
+      <div class="col-span-12 bg-neutral px-5  rounded-b-md">
         <div class="grid grid-cols-12 ">
           <div class="col-span-12 md:col-span-9 ">
             <div class="grid grid-cols-12">
@@ -195,7 +195,7 @@
               <form class="rounded-md pt-6 pb-8 mb-4 w-full" @submit.prevent="sendMessagePayload">
                 <div class="">
                   <textarea v-model="SendMsgForm.msginfo" id="item_description" placeholder="Write something .."
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-3"></textarea>
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline mb-3"></textarea>
                 </div>
                 <div class="flex justify-end">
                   <button
@@ -235,7 +235,7 @@
 
 
                   <!-- THis is for comment VENDOR  -->
-                  <div class="col-span-12 text-gray-600 flex justify-start" v-else-if="comment.who_commented === 1">
+                  <div class="col-span-12 text-white flex justify-start" v-else-if="comment.who_commented === 1">
                     <div class="col-span-12">
                       <router-link class="hover:text-blue-500 hover:underline font-bold" :to="{
                         name: 'userprofile',
@@ -252,7 +252,7 @@
 
 
                     <!-- THis is for comment CUSTOMER -->
-                    <div class="col-span-12 text-gray-600 flex justify-end" v-else-if="comment.who_commented === 2">
+                    <div class="col-span-12 text-white flex justify-end" v-else-if="comment.who_commented === 2">
                       <div class="col-span-12">
                         <router-link class="hover:text-blue-500 hover:underline font-bold" :to="{
                           name: 'userprofile',
@@ -271,7 +271,7 @@
 
 
                   <!-- THis is for comment from SITE -->
-                  <div class="col-span-12 text-gray-600 flex justify-start" v-else>
+                  <div class="col-span-12 text-white flex justify-start" v-else>
                     <div class="col-span-12">
                       <router-link class="hover:text-blue-500 hover:underline font-bold" :to="{
                         name: 'userprofile',

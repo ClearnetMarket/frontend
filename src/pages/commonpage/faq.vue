@@ -7,7 +7,7 @@
         <MainHeaderVendor v-show="user.user_admin === 1" />
     </div>
     <div class="wrapper">
-    <div class="container max-w-7xl mx-auto px-10 mt-2 text-neutral">
+    <div class="container max-w-7xl mx-auto px-10 mt-2 text-white">
         <div class="mt-5 mb-5">
             <nav class="rounded-md w-full">
                 <ol class="list-reset flex">
@@ -17,13 +17,13 @@
                         </router-link>
                     </li>
                     <li>
-                        <span class="text-gray-500 mx-2 mb-2 mt-2 bg-">/</span>
+                        <span class="text-white mx-2 mb-2 mt-2 bg-">/</span>
                     </li>
                 </ol>
             </nav>
         </div>
         <div class="mb-72">
-            <div class="bg-white rounded-md p-5 mb-5">
+            <div class="bg-neutral rounded-md p-5 mb-5">
                 <div class="text-[18px] font-bold rounded-md">Can I pay without depositing money to the site?</div>
                 <div class="">
                     <ul class="list-disc">
@@ -36,7 +36,7 @@
                 </div>
             </div>
 
-            <div class="bg-white rounded-md p-5 mb-5">
+            <div class="bg-neutral rounded-md p-5 mb-5">
                 <div class="text-[18px] font-bold rounded-md">Can I pay in credit card or paypal?</div>
                 <div class="">
                     <ul class="list-disc">
@@ -45,7 +45,7 @@
                 </div>
             </div>
 
-            <div class="bg-white rounded-md p-5 mb-5">
+            <div class="bg-neutral rounded-md p-5 mb-5">
                 <div class="text-[18px] font-bold rounded-md">
                     Can I return something if its broken or I dont like it?
                 </div>
@@ -61,7 +61,7 @@
                 </div>
             </div>
 
-            <div class="bg-white rounded-md p-5 mb-5">
+            <div class="bg-neutral rounded-md p-5 mb-5">
                 <div class="text-[18px] font-bold rounded-md">What happens if they item is not as described?</div>
                 <div class="">
                     <ul class="list-disc">
@@ -73,7 +73,7 @@
                 </div>
             </div>
 
-            <div class="bg-white rounded-md p-5 mb-5">
+            <div class="bg-neutral rounded-md p-5 mb-5">
                 <div class="text-[18px] font-bold rounded-md">What happens if they item is broken when I got it?</div>
                 <div class="">
                     <ul class="list-disc">

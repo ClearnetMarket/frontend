@@ -23,7 +23,8 @@
       <div v-if="vendor_orders_new">
         <router-link :to="{ name: 'vendorordersnew' }">
           <button
-            class="mb-2 flex py-2 px-4 shadow-md no-underline rounded-full text-white font-sans hover:text-white text-sm bg-zinc-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2">
+            class="mb-2 flex py-2 px-4 shadow-md no-underline rounded-full text-white font-sans
+             hover:text-white text-sm bg-zinc-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2">
             <span class="px-2">{{ vendor_orders_new }}</span>
             <span class>New</span>
           </button>
@@ -32,7 +33,8 @@
       <div v-else>
         <router-link :to="{ name: 'vendorordersnew' }">
           <button
-            class="mb-2 py-2 px-4 shadow-md no-underline rounded-full text-white font-sans text-sm hover:text-white bg-zinc-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2">
+            class="mb-2 py-2 px-4 shadow-md no-underline rounded-full text-white font-sans
+            text-sm hover:text-white bg-zinc-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2">
             New
           </button>
         </router-link>
@@ -41,7 +43,8 @@
       <div v-if="vendor_orders_accepted" class="q-mt-none">
         <router-link :to="{ name: 'vendororderswaiting' }">
           <button
-            class="mb-2 flex py-2 px-4 shadow-md text-sm no-underline rounded-full bg-zinc-600 hover:bg-zinc-400 text-white font-sans hover:text-white focus:outline-none active:shadow-none mr-2">
+            class="mb-2 flex py-2 px-4 shadow-md text-sm no-underline rounded-full bg-zinc-600
+             hover:bg-zinc-400 text-white font-sans hover:text-white focus:outline-none active:shadow-none mr-2">
             <span class="px-2">{{ vendor_orders_accepted }}</span>
             <span class>Waiting</span>
           </button>
@@ -50,7 +53,9 @@
       <div v-else>
         <router-link :to="{ name: 'vendororderswaiting' }">
           <button
-            class="mb-2 py-2 px-4 shadow-md no-underline rounded-full text-white font-sans text-sm hover:text-white bg-zinc-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2">
+            class="mb-2 py-2 px-4 shadow-md no-underline rounded-full
+             text-white font-sans text-sm hover:text-white bg-zinc-600 hover:bg-zinc-400
+              focus:outline-none active:shadow-none mr-2">
             Waiting
           </button>
         </router-link>
@@ -59,7 +64,9 @@
       <div v-if="vendor_orders_shipped">
         <router-link :to="{ name: 'vendorordersshipped' }">
           <button
-            class="mb-2 flex py-2 px-4 shadow-md no-underline rounded-full bg-zinc-600 hover:bg-zinc-400 hover:text-white text-white font-sans text-sm btn-primary focus:outline-none active:shadow-none mr-2">
+            class="mb-2 flex py-2 px-4 shadow-md no-underline rounded-full
+             bg-zinc-600 hover:bg-zinc-400 hover:text-white text-white font-sans text-sm btn-primary
+              focus:outline-none active:shadow-none mr-2">
             <span class="px-2">{{ vendor_orders_shipped }}</span>
             <span class>Shipped</span>
           </button>
@@ -68,7 +75,9 @@
       <div v-else>
         <router-link :to="{ name: 'vendorordersshipped' }">
           <button
-            class="mb-2 py-2 px-4 shadow-md no-underline rounded-full text-white font-sans text-sm hover:text-white bg-zinc-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2">
+            class="mb-2 py-2 px-4 shadow-md no-underline rounded-full text-white
+             font-sans text-sm hover:text-white bg-zinc-600 hover:bg-zinc-400
+             focus:outline-none active:shadow-none mr-2">
             Shipped
           </button>
         </router-link>
@@ -77,7 +86,9 @@
       <div v-if="vendor_orders_finalized">
         <router-link :to="{ name: 'vendorordersfinalized' }">
           <button
-            class="mb-2 flex py-2 px-4 shadow-md no-underline rounded-full bg-zinc-600 hover:bg-zinc-400 hover:text-white text-white font-sans text-sm btn-primary focus:outline-none active:shadow-none mr-2">
+            class="mb-2 flex py-2 px-4 shadow-md no-underline rounded-full bg-zinc-600
+             hover:bg-zinc-400 hover:text-white text-white font-sans text-sm btn-primary
+              focus:outline-none active:shadow-none mr-2">
             <span class="px-2">{{ vendor_orders_finalized }}</span>
             <span class>Finalized</span>
           </button>
@@ -86,7 +97,9 @@
       <div v-else>
         <router-link :to="{ name: 'vendorordersfinalized' }">
           <button
-            class="mb-2 py-2 px-4 shadow-md no-underline rounded-full text-white font-sans text-sm hover:text-white bg-zinc-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2">
+            class="mb-2 py-2 px-4 shadow-md no-underline rounded-full
+             text-white font-sans text-sm hover:text-white bg-zinc-600
+              hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2">
             Finalized
           </button>
         </router-link>
@@ -95,7 +108,9 @@
       <div v-if="vendor_orders_request_cancel">
         <router-link :to="{ name: 'vendororderscancel' }">
           <button
-            class="mb-2 flex py-2 px-4 shadow-md no-underline rounded-full bg-zinc-600 hover:bg-zinc-400 hover:text-white text-white font-sans text-sm btn-primary focus:outline-none active:shadow-none mr-2">
+            class="mb-2 flex py-2 px-4 shadow-md no-underline rounded-full
+             bg-zinc-600 hover:bg-zinc-400 hover:text-white text-white font-sans
+              text-sm btn-primary focus:outline-none active:shadow-none mr-2">
             <span class="px-2">{{ vendor_orders_request_cancel }}</span>
             <span class>Request Cancel</span>
           </button>
@@ -104,7 +119,9 @@
       <div v-else>
         <router-link :to="{ name: 'vendororderscancel' }">
           <button
-            class="py-2 px-4 shadow-md no-underline rounded-full text-white font-sans text-sm hover:text-white bg-zinc-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2">
+            class="py-2 px-4 shadow-md no-underline rounded-full
+             text-white font-sans text-sm hover:text-white bg-zinc-600 hover:bg-zinc-400
+              focus:outline-none active:shadow-none mr-2">
             Cancel
           </button>
         </router-link>
@@ -118,7 +135,7 @@
       <div v-for="(order, i) in orders" :key="i" class="pb-5">
         <div v-if="order.uuid">
 
-          <div class="rounded-md bg-white p-5">
+          <div class="rounded-md bg-neutral p-5">
             <div class="grid grid-cols-12 ">
               <div class="col-span-12 text-[20px]  mb-5">
                 <router-link class="text-blue-600 hover:underline hover:text-blue-400 text-center"
@@ -182,7 +199,8 @@
                 <div class=" text-[14px] font-bold flex justify-center">
                   <router-link :to="{ name: 'vendorordersfeedback', params: { uuid: order.uuid }, }" class="px-3">
                     <button
-                      class="bg-primary hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline ">
+                      class="bg-primary hover:bg-zinc-400 text-white
+                       font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline ">
                       View Order
                     </button>
                   </router-link>
@@ -210,8 +228,6 @@ import MainHeaderVendor from "../../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../../layouts/footers/FooterMain.vue";
 
 
-
-
 export default defineComponent({
   name: "vendorordersfinalized",
 
@@ -228,7 +244,6 @@ export default defineComponent({
       date: Date.now(),
       tab: [],
       orders: null,
-
       vendor_orders_new: 0,
       vendor_orders_accepted: 0,
       vendor_orders_shipped: 0,
@@ -259,10 +274,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-
             this.orders = response.data;
-
-
         });
     },
     // gets the count for the top bars count

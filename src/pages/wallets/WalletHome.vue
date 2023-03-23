@@ -8,7 +8,7 @@
     </div>
     <div class="wrapper">
         <!-- Top Stuff-->
-        <div class="container max-w-7xl mx-auto px-10 pb-72 text-neutral">
+        <div class="container max-w-7xl mx-auto px-10 pb-72 text-white">
             <!-- Container-->
             <div class="mt-5 mb-5">
                 <nav class="rounded-md w-full">
@@ -24,7 +24,7 @@
                     </ol>
                 </nav>
             </div>
-            <div class="grid grid-cols-12 mb-5 md:mb-0 invisible md:visible text-[18px] bg-white rounded-t-md font-bold ">
+            <div class="grid grid-cols-12 mb-5 md:mb-0 invisible md:visible text-[18px] bg-neutral rounded-t-md font-bold ">
 
                 <div class="col-span-2 text-center">Coin</div>
                 <div class="col-span-2 text-center">Market</div>
@@ -32,7 +32,7 @@
                 <div class="col-span-5 text-center">Actions</div>
             </div>
 
-            <div class="grid grid-cols-12 border-t-2 border-gray-200 bg-white mb-5 md:mb-0 font-bold">
+            <div class="grid grid-cols-12 border-t-2 border-gray-200 bg-neutral mb-5 md:mb-0 font-bold">
                 <div class="col-span-4 md:col-span-2 rounded-md p-5">
                     <div class="flex gap-3">
                         <img class="object-contain" src="../../assets/coin/btc/btc_small.png" alt="No Image Found .." />
@@ -71,7 +71,7 @@
                 </div>
             </div>
 
-            <div class="grid grid-cols-12 border-t-2 border-gray-200 bg-white mb-5 md:mb-0 font-bold">
+            <div class="grid grid-cols-12 border-t-2 border-gray-200 bg-neutral mb-5 md:mb-0 font-bold">
                 <div class="col-span-4 md:col-span-2 rounded-md p-5">
                     <div class="flex gap-3">
                         <img class="object-contain" src="../../assets/coin/bch/bch_small.png" alt="No Image Found .." />
@@ -110,7 +110,7 @@
                 </div>
             </div>
 
-            <div class="grid grid-cols-12 border-t-2 border-gray-200 bg-white mb-5 md:mb-0 rounded-b-md font-bold">
+            <div class="grid grid-cols-12 border-t-2 border-gray-200 bg-neutral mb-5 md:mb-0 rounded-b-md font-bold">
                 <div class="col-span-4 md:col-span-2 rounded-md p-5">
                     <div class="flex gap-3">
                         <img class="object-contain" src="../../assets/coin/xmr/xmr_small.png" alt="No Image Found .." />

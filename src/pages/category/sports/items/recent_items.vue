@@ -39,9 +39,7 @@ export default defineComponent({
                 withCredentials: true,
             })
                 .then((response) => {
-                    if ((response.data.success)) {
                         this.items = response.data
-                    }
                 })
                 .catch(() => {})
         },

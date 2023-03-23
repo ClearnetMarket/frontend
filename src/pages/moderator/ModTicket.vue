@@ -4,7 +4,7 @@
     <MainHeaderMid />
     <MainHeaderBottom />
     <div class="wrapper" v-if="loaded">
-        <div class="container max-w-5xl mx-auto px-10 mb-10 text-neutral">
+        <div class="container max-w-5xl mx-auto px-10 mb-10 text-white">
 
             <div class="grid grid-cols-1 w-full gap-4 mb-5">
                 <nav class="rounded-md">
@@ -15,7 +15,7 @@
                             </router-link>
                         </li>
                         <li>
-                            <span class="text-gray-500 mx-2">/</span>
+                            <span class="text-white mx-2">/</span>
                         </li>
                         <li>
                             <router-link :to="{ name: 'ModHome' }">
@@ -23,7 +23,7 @@
                             </router-link>
                         </li>
                         <li>
-                            <span class="text-gray-500 mx-2">/</span>
+                            <span class="text-white mx-2">/</span>
                         </li>
                         <li>
                             <router-link :to="{ name: 'ModTicketsHome' }">
@@ -31,7 +31,7 @@
                             </router-link>
                         </li>
                         <li>
-                            <span class="text-gray-500 mx-2">/</span>
+                            <span class="text-white mx-2">/</span>
                         </li>
                     </ol>
                 </nav>
@@ -40,13 +40,13 @@
 
             <div class="grid grid-cols-12 gap-5">
                 <div class="col-span-12 sm:col-span-4">
-                    <div v-if="userprofile" class=" bg-white rounded-md p-5">
+                    <div v-if="userprofile" class=" bg-neutral rounded-md p-5">
                         <div class="col-span-12 md:col-span-3 flex justify-center">
                             <img class="object-fit" :src="userprofile.profileimage_url_250">
                         </div>
                         <div class="col-span-12 md:col-span-9">
                             <div class="text-[20px] text-center">{{ userprofile.display_name }}</div>
-                            <div class="text-gray-500 text-center  mb-5">
+                            <div class="text-white text-center  mb-5">
                                 Member Since: {{ relativeDate(userprofile.member_since) }} ago
                             </div>
                         </div>
@@ -54,7 +54,7 @@
                 </div>
 
                 <div class="col-span-12 sm:col-span-8">
-                    <div class="grid grid-cols-12 p-5  bg-white rounded-md mb-5">
+                    <div class="grid grid-cols-12 p-5  bg-neutral rounded-md mb-5">
                         <div class="col-span-12 text-[18px]  mb-3" v-if="get_ticket != null">
                             Ticket # {{ get_ticket.uuid }}:
                         </div>
@@ -73,11 +73,11 @@
                             @click.prevent="close_current_ticket()">
                             Mark Ticket as Closed
                         </button>
-                        <form class="col-span-12 rounded-md pt-6 pb-8 mb-4 w-full bg-white p-5" @submit.prevent="onSubmit">
+                        <form class="col-span-12 rounded-md pt-6 pb-8 mb-4 w-full bg-neutral p-5" @submit.prevent="onSubmit">
 
                             <textarea v-model="SendMsgForm.msginfo" id="item_description" placeholder="Write something .."
                                 class="shadow appearance-none border rounded w-full py-2 px-3
-                                            text-gray-700 leading-tight
+                                            text-white leading-tight
                                             focus:outline-none focus:shadow-outline mb-3">
                                 </textarea>
                             <span v-if="v$.SendMsgForm.msginfo.$error" class="text-red-600 text-center">
@@ -95,14 +95,14 @@
                             </div>
                         </form>
                     </div>
-                    <div class="grid grid-cols-12 p-5  bg-white rounded-md">
+                    <div class="grid grid-cols-12 p-5  bg-neutral rounded-md">
                         <div v-for="comment in get_ticket_data" :key="comment.id" class="col-span-12">
                             <div class="grid grid-cols-12 mb-5" v-if="user">
                             
 
                                 <div v-if="comment.author_uuid != admin_user.user_id"
                                     class="col-span-12 flex justify-start">
-                                    <div class="col-span-12 text-gray-600 font-bold text-[18px]">
+                                    <div class="col-span-12 text-white font-bold text-[18px]">
                                         <router-link class="hover:text-blue-500 hover:underline" :to="{
                                             name: 'userprofile',
                                             params: { uuid: comment.author_uuid },
@@ -110,7 +110,7 @@
                                             {{ comment.author }}
                                         </router-link>
                                     </div>
-                                    <div class="text-gray-600">
+                                    <div class="text-white">
                                         - {{ relativeDate(comment.timestamp) }} ago
                                     </div>
                                 </div>
@@ -118,7 +118,7 @@
                                     <div class="col-span-12 text-yellow-600 font-bold text-[18px]">
                                         {{ comment.author }} [ADMIN]
                                     </div>
-                                    <div class="text-gray-600">
+                                    <div class="text-white">
                                         - {{ relativeDate(comment.timestamp) }} ago
                                     </div>
                                 </div>

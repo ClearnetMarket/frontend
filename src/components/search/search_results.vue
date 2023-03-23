@@ -1,5 +1,5 @@
 <template>
-  <div class="grid grid-cols-12 bg-white mb-2 rounded-md text-neutral">
+  <div class="grid grid-cols-12 bg-neutral mb-2 rounded-md text-white">
     <div class="col-span-12 sm:col-span-12 md:col-span-3">
       <router-link :to="{ name: 'MarketItem', params: { id: item.uuid } }">
         <img alt="" class="object-cover h-48 w-96" :src=item.image_one_url_250 />
@@ -51,7 +51,7 @@
           </div>
           <div class="col-span-12 ">{{ item.item_count }} left</div>
           <div class="col-span-12" v-if="(item.shipping_free === true)">
-            <div class="text-gray-500">Free Shipping</div>
+            <div class="text-white">Free Shipping</div>
           </div>
           <div class="col-span-12" v-else>
             {{ item.shipping_info_2 }}

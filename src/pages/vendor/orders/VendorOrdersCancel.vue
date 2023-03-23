@@ -126,7 +126,7 @@
       </ul>
       <div v-for="order in orders" :key="order.id" class="pb-5">
         <div v-if="order.uuid">
-          <div class="grid grid-cols-12 gap-5 rounded  bg-white  p-5">
+          <div class="grid grid-cols-12 gap-5 rounded  bg-neutral  p-5">
 
             <div class="col-span-3 ">
               <img class="object-contain" :src="order.image_one" alt="" />
@@ -282,9 +282,7 @@ export default defineComponent({
         headers: authHeader(),
       }).then((response) => {
           this.orders = response.data;
-      }).catch((error) => {
-        console.log(error)
-      });
+      }).catch(() => {});
     },
     // rejects the orders
     rejectorder (uuid: any) {
@@ -303,9 +301,7 @@ export default defineComponent({
             type: "error",
           });
         }
-      }).catch((error) => {
-        console.log(error)
-      });
+      }).catch(() => {});
     },
     // accepts the orders
     acceptorder (uuid: any) {
@@ -324,9 +320,7 @@ export default defineComponent({
             type: "success",
           });
         }
-      }).catch((error) => {
-        console.log(error)
-      });
+      }).catch(() => {});
     },
     // gets the top bars count for orders
     getuserneworderscount () {
@@ -341,16 +335,12 @@ export default defineComponent({
           this.vendor_orders_accepted = response.data.vendor_orders_accepted;
           this.vendor_orders_shipped = response.data.vendor_orders_shipped;
           this.vendor_orders_finalized = response.data.vendor_orders_finalized;
-          this.vendor_orders_finalized_early =
-            response.data.vendor_orders_finalized_early;
-          this.vendor_orders_request_cancel =
-            response.data.vendor_orders_request_cancel;
+          this.vendor_orders_finalized_early = response.data.vendor_orders_finalized_early;
+          this.vendor_orders_request_cancel = response.data.vendor_orders_request_cancel;
           this.vendor_orders_cancelled = response.data.vendor_orders_cancelled;
           this.vendor_orders_dispute = response.data.vendor_orders_dispute;
         }
-      }).catch((error) => {
-        console.log(error)
-      });
+      }).catch(() => { });
     },
     // date conversion
     relativeDate (value: any) {

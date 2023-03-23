@@ -5,7 +5,7 @@
     <MainHeaderBottom />
     <div class="wrapper">
 
-        <div class="container max-w-5xl mx-auto px-10  mb-10 text-neutral">
+        <div class="container max-w-5xl mx-auto px-10  mb-10 text-white">
             <div class="grid grid-cols-1 w-full gap-4 mb-5">
                 <nav class="rounded-md">
                     <ol class="list-reset flex">
@@ -42,7 +42,7 @@
             <div v-if="loaded">
                 <div class="grid grid-cols-12 gap-5">
                     <div class="col-span-12 sm:col-span-4 ">
-                        <div class="bg-white rounded-md p-5">
+                        <div class="bg-neutral rounded-md p-5">
                             <div class="text-[18px] mb-5">Tickets</div>
                             <div v-if="all_tickets.length > 0">
                                 <div v-for="ticket in all_tickets" :key="ticket.id">
@@ -123,12 +123,12 @@
                                     </div>
                                 </div>
                             </div>
-                            <form class="rounded-md pt-6 pb-8 mb-4 w-full bg-white p-5" @submit.prevent="onSubmit"
+                            <form class="rounded-md pt-6 pb-8 mb-4 w-full bg-neutral p-5" @submit.prevent="onSubmit"
                                 v-if="get_ticket.status !== 0">
                                 <div class="">
                                     <textarea v-model="SendMsgForm.msginfo" id="item_description"
                                         placeholder="Write something .." class="shadow appearance-none border rounded w-full py-2 px-3
-                                                        text-gray-700 leading-tight
+                                                        text-white leading-tight
                                                         focus:outline-none focus:shadow-outline mb-3">
                                         </textarea>
                                     <span v-if="v$.SendMsgForm.msginfo.$error" class="text-red-600 text-center">
@@ -144,12 +144,12 @@
                                 </div>
                             </form>
 
-                            <div class="grid grid-cols-12 p-5  bg-white rounded-md">
+                            <div class="grid grid-cols-12 p-5  bg-neutral rounded-md">
                                 <div v-for="comment in get_ticket_data" :key="comment.id" class="col-span-12">
                                     <div class="grid grid-cols-12 mb-5">
                                         <div v-if="comment.author_uuid == user.user_id"
                                             class="col-span-12 flex justify-start">
-                                            <div class="col-span-12 text-gray-600">
+                                            <div class="col-span-12 text-white">
                                                 <router-link
                                                     class="hover:text-blue-500 hover:underline  font-bold text-[18px]" :to="{
                                                         name: 'userprofile',

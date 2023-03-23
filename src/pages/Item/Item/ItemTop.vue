@@ -1,6 +1,6 @@
 
 <template>
-  <div class="max-w-7xl mx-auto ">
+  <div class="max-w-7xl mx-auto text-white">
 
     <div class="grid sm:grid-cols-1 md:grid-cols-12  gap-5 sm:pb-10  ">
 
@@ -10,7 +10,7 @@
           <div class="text-[20px] font-bold ">{{ title }}</div>
         </div>
       </div>
-      <div class="sm:col-span-12 md:col-span-8 lg:col-span-5 bg-white p-5 rounded-md" ><!-- start column one -->
+      <div class="sm:col-span-12 md:col-span-8 lg:col-span-5 bg-neutral p-5 rounded-md" ><!-- start column one -->
         <div class="grid grid-cols-12 gap-4 px-1 ">
           <div class="col-span-12 text-center flex items-center justify-center">
             <img class="h-96" :src="image_one_500" alt="" />
@@ -32,22 +32,22 @@
         </div>
       </div><!-- end column one -->
 
-      <div class="sm:col-span-6 md:col-span-4 lg:col-span-4 px-5 bg-white rounded-md"><!-- start column two -->
+      <div class="sm:col-span-6 md:col-span-4 lg:col-span-4 px-5 bg-neutral rounded-md text-white"><!-- start column two -->
         <div class="text-[20px] mb-1 font-bold">{{ title }}</div>
         <div class="border-b-2 border-gray-600 mb-5"></div>
         <div class="flex gap-4">
-          <div class="text-[16px] font-weight-bold text-gray-700 font-bold">
+          <div class="text-[16px] font-weight-bold text-white font-bold">
             Conditon:
           </div>
-          <div class="text-[16px] text-gray-700 ">
+          <div class="text-[16px] text-white ">
             {{ condition }}
           </div>
         </div>
         <div class="flex gap-4">
-          <div class="text-[16px] font-weight-bold text-gray-700 font-bold">
+          <div class="text-[16px] font-weight-bold text-white font-bold">
             Quantity:
           </div>
-          <div class="text-[16px] text-gray-700" v-if="itemcount > 0">
+          <div class="text-[16px] text-white" v-if="itemcount > 0">
 
             {{ itemcount }}
           </div>
@@ -56,22 +56,22 @@
           </div>
         </div>
         <div class="flex gap-4">
-          <div class="text-[16px] font-weight-bold text-gray-700 font-bold">
+          <div class="text-[16px] font-weight-bold text-white font-bold">
             Category:
           </div>
-          <div class="text-[16px] text-gray-700">
+          <div class="text-[16px] text-white">
             {{ category_name }}
           </div>
         </div>
 
-        <div class="text-[24px] font-bold text-gray-700 text-center">
+        <div class="text-[24px] font-bold text-white text-center">
           {{ price }} {{ returncurrencysymbol(currency) }}
         </div>
         <div class="mb-2 text-[14px]">
           <div v-if="digitalcurrencyone === true">
             <div class="flex font-bold text-[19px]">
               <div class="text-orange-500 pr-5">BTC:</div>
-              <div class="font-weight-bold text-gray-700">
+              <div class="font-weight-bold text-white">
                 {{ pricebtc }}
               </div>
             </div>
@@ -79,7 +79,7 @@
           <div v-if="digitalcurrencytwo === true">
             <div class="flex font-bold text-[19px]">
               <div class="text-green-600 pr-5">BCH:</div>
-              <div class="] font-weight-bold text-gray-700">
+              <div class="] font-weight-bold text-white">
                 {{ pricebch }}
               </div>
             </div>
@@ -87,16 +87,16 @@
           <div v-if="digitalcurrencythree === true">
             <div class="flex font-bold text-[19px]">
               <div class="text-orange-700 pr-5">XMR:</div>
-              <div class="font-weight-bold text-gray-700">
+              <div class="font-weight-bold text-white">
                 {{ pricexmr }}
               </div>
             </div>
           </div>
         </div>
-        <div class="text-[16px] font-weight-bold text-gray-700 font-bold">
+        <div class="text-[16px] font-weight-bold text-white font-bold">
           Located:
         </div>
-        <div class="text-[14px] text-gray-700 ">
+        <div class="text-[14px] text-white ">
           <div class="grid grid-cols-12 mb-2 px-5">
             <div class="col-span-12 text-[14px] ">{{ origin_country_name }}</div>
             <div class="col-span-12 text-[14px] ">
@@ -104,24 +104,24 @@
               {{ origin_country_name }}
             </div>
           </div>
-          <div class="text-[16px] font-weight-bold text-gray-700 font-bold">
+          <div class="text-[16px] font-weight-bold text-white font-bold">
             Shipping:
           </div>
           <div v-if="shippingfree === true">
-            <div class="text-[14px] font-weight-bold text-gray-700">
+            <div class="text-[14px] font-weight-bold text-white">
               Shipping Option 1:
             </div>
             <div class="grid grid-cols-4 grid-rows-2 px-5">
               <div class="col-span-3 row-span-1 text-[16px] text-yellow-600 font-bold">
                 *FREE SHIPPING*
               </div>
-              <div class="col-span-3 row-span-1 text-[14px] text-gray-600">
+              <div class="col-span-3 row-span-1 text-[14px] text-white">
                 Estimated in {{ shippingdayfree }} days
               </div>
             </div>
           </div>
           <div v-if="shippingtwo === true">
-            <div class="text-[14px] font-weight-bold text-gray-700">
+            <div class="text-[14px] font-weight-bold text-white">
               Shipping Option 2:
             </div>
             <div class="grid grid-cols-4 grid-rows-2 px-5">
@@ -134,7 +134,7 @@
             </div>
           </div>
           <div v-if="shippingthree === true">
-            <div class="text-[14px] font-weight-bold text-gray-700 px-2">
+            <div class="text-[14px] font-weight-bold text-white px-2">
               Shipping Option 3:
             </div>
             <div class="grid grid-cols-4 grid-rows-2 ">
@@ -149,12 +149,12 @@
         </div>
       </div><!-- end column two -->
 
-      <div class="sm:col-span-6 md:col-span-12 lg:col-span-3 px-5 bg-white rounded-md"><!-- start column three -->
+      <div class="sm:col-span-6 md:col-span-12 lg:col-span-3 px-5 bg-neutral rounded-md"><!-- start column three -->
         <div class="flex justify-center mb-5 mt-5">
           <div v-if="user">
             <div v-if="vendoruuid !== user.user_id">
               <button
-                class="bg-yellow-500 hover:bg-zinc-400 hover:text-white rounded-lg text-black font-semibold py-2 px-10 focus:outline-none focus:shadow-outline content-center justify-center"
+                class="bg-accent hover:bg-zinc-400 hover:text-white rounded-lg text-black font-semibold py-2 px-10 focus:outline-none focus:shadow-outline content-center justify-center"
                 type="submit" @click="addtocart()">
                 Add to Cart
               </button>
@@ -167,7 +167,7 @@
           </div>
           <div v-else>
             <button
-              class="bg-yellow-500 hover:bg-zinc-400 hover:text-white rounded-lg text-black font-semibold py-2 px-10 focus:outline-none focus:shadow-outline content-center justify-center"
+              class="bg-accent hover:bg-zinc-400 hover:text-white rounded-lg text-black font-semibold py-2 px-10 focus:outline-none focus:shadow-outline content-center justify-center"
               type="submit" @click="addtocart()">
               Add to Cart
             </button>
@@ -177,7 +177,7 @@
           Free Shipping
         </div>
         <div class="flex flex-col">
-          <div class="px-2 mb-5 text-gray-700 font-semibold">
+          <div class="px-2 mb-5 text-white font-semibold">
             <div class="border rounded-lg px-2">
               <div class="px-5 text-[16px] text-center">
                 Moderator Supported
@@ -190,7 +190,7 @@
             </div>
           </div>
           <div class="flex flex-col">
-            <div class="px-2 mb-10 text-gray-700 font-semibold">
+            <div class="px-2 mb-10 text-white font-semibold">
               <div class="border rounded-lg px-2">
                 <div class="text-[16px]">
                   <div class="mb-5 text-[18px] text-center">Vendor Stats</div>
