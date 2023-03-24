@@ -6,9 +6,6 @@
 
     <div class="rounded-md border border-1 ">
       <div class="grid sm:grid-cols-1 md:grid-cols-2  gap-5 ">
-
-
-
         <div class="flex justify-center">
           <div v-if="visibledelete1">
             <div class="block bg-cover bg-center">
@@ -42,9 +39,6 @@
             </form>
           </div>
         </div>
-
-
-
         <div class="flex justify-center">
           <div v-if="visibledelete2">
             <div class="block bg-cover bg-center">
@@ -89,7 +83,7 @@
                 </div>
                 <div v-else>
                   <div class="h-48 w-48 block bg-cover bg-center" v-bind:style="{ 'background-image': `url(${previewImage3})` }"
-                    @click="selectImage3"></div>222
+                    @click="selectImage3"></div>
                 </div>
                 <div v-if="marketitem.image_three_server">
                   <button
@@ -212,7 +206,6 @@ export default defineComponent({
         withCredentials: true,
       })
         .then((response) => {
-          if (response.data.success) {
             this.marketitem = response.data;
 
             this.image_1_in_db = this.marketitem.image_one_server == null;
@@ -255,7 +248,6 @@ export default defineComponent({
             else {
               this.visibledelete4 = false;
               this.visibleform4 = true;
-            }
           }
         })
     },

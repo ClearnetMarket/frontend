@@ -91,7 +91,6 @@
                         <StarRating v-bind:rating="review.vendor_rating" />
                       </div>
                       <div class="col-span-12 mt-2">{{ review.review_of_vendor }}</div>
-
                     </div>
                   </div>
                 </div>
@@ -128,7 +127,7 @@
   </div>
   <MainFooter />
 </template>
-.
+
 <script lang="ts">
 import { defineComponent } from "vue";
 import axios from "axios";

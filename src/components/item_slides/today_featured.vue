@@ -1,7 +1,7 @@
 <template>
-    <div class="flex flex-nowrap flex-col p-5 mb-10 mt-10">
+    <div class="flex flex-nowrap flex-col p-5">
         <div class="text-[24px] text-white">Today Featured</div>
-        <div class="mt-5 mx-10 md:flex md:mb-5 gap-5">
+        <div class="md:flex md:mb-5 gap-5">
             <div v-for="item in todayfeatured" :key="item.id">
                 <generic_item :item="item" />
             </div>
@@ -39,9 +39,7 @@ export default defineComponent({
                 withCredentials: true,
             })
                 .then((response) => {
-
-                        this.todayfeatured = response.data
-
+                    this.todayfeatured = response.data
                 })
                 .catch(() => {})
         },

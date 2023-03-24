@@ -66,8 +66,11 @@
 
           <form class="rounded-md pt-6 pb-8 mb-4 w-full" @submit.prevent="onSubmit">
             <div class="">
-              <textarea v-model="SendMsgForm.msginfo" id="item_description" placeholder="Write something .."
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline mb-3"></textarea>
+              <textarea v-model="SendMsgForm.msginfo"
+                        id="item_description"
+                        placeholder="Write something .."
+                        class="rounded w-full py-2 px-3 input-primary text-black">
+              </textarea>
               <span v-if="v$.SendMsgForm.msginfo.$error" class="text-red-600 text-center">
                 {{ v$.SendMsgForm.msginfo.$errors[0].$message }}
               </span>

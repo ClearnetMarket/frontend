@@ -2,7 +2,7 @@
 <template>
   <HeaderPlain />
   <div class="wrapperplain">
-    <div class="container max-w-3xl mx-auto bg-gray-300 text-white">
+    <div class="container max-w-3xl mx-auto text-white">
       <div class="mx-auto flex mb-1">
         <div class="mt-5 mb-5 px-10">
           <nav class="rounded-md w-full">
@@ -25,8 +25,10 @@
           <div class="mb-4">
             <label class="block text-white text-sm font-bold mb-2">Enter current Password</label>
             <input v-model="ChangePinForm.password"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
-              id="password" type="password" placeholder="Password" />
+                   class="rounded w-full py-2 px-3 input-primary text-black"
+                   id="password"
+                   type="password"
+                   placeholder="Password" />
             <span v-if="v$.ChangePinForm.password.$error" class="text-red-600 text-center">
               {{ v$.ChangePinForm.password.$errors[0].$message }}
             </span>
@@ -34,8 +36,10 @@
           <div class="mb-4">
             <label class="block text-white text-sm font-bold mb-2">Enter New Pin</label>
             <input v-model="ChangePinForm.pin"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
-              id="password" type="password" placeholder="Password" />
+                    class="rounded w-full py-2 px-3 input-primary text-black"
+                    id="password"
+                    type="password"
+                    placeholder="Password" />
             <span v-if="v$.ChangePinForm.pin.$error" class="text-red-600 text-center">
               {{ v$.ChangePinForm.pin.$errors[0].$message }}
             </span>
@@ -44,15 +48,18 @@
           <div class="mb-6">
             <label class="block text-white text-sm font-bold mb-2">Confirm New Pin</label>
             <input v-model="ChangePinForm.pin_confirm"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-white mb-3 leading-tight focus:outline-none focus:shadow-outline"
-              id="passwordtwo" type="password" autocomplete="off" placeholder="Confirm Password" />
+                    class="rounded w-full py-2 px-3 input-primary text-black"
+                    id="passwordtwo"
+                    type="password"
+                    autocomplete="off"
+                    placeholder="Confirm Password" />
             <span v-if="v$.ChangePinForm.pin_confirm.$error" class="text-red-600 text-center">
               {{ v$.ChangePinForm.pin_confirm.$errors[0].$message }}
             </span>
           </div>
           <div class="flex items-center justify-center mb-6">
             <button
-              class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              class="bg-primary hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="submit">
               Update
             </button>

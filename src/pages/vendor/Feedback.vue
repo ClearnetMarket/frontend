@@ -23,10 +23,10 @@
     </div>
 
     <div v-if="loaded">
-    <div class="text-[20px] pt-5 pb-5 text-center">
+    <div class="text-[20px] text-center">
       My Feedback
     </div>
-    <div class="grid grid-cols-12 p-5 gap-5">
+    <div class="grid grid-cols-12 p-5 gap-5 text-white">
       <div class="col-span-12 md:col-span-4 bg-neutral rounded-md p-5">
         <div class="flex">All Vendor Reviews</div>
 
@@ -107,10 +107,10 @@
         </div>
       </div>
       <div class="col-span-12 md:col-span-8">
-        <div class="" v-if="vendor_reviews_total > 0">
+        <div class="text-white" v-if="vendor_reviews_total > 0">
           <div v-for="review in vendorreviews" :key="review.id">
             <div class="grid grid-cols-12 bg-neutral rounded-md p-5 mb-5">
-              <div class="col-span-12 text-sm font-medium text-gray-500 dark:text-gray-400">
+              <div class="col-span-12 text-sm font-medium ">
                 {{ review.customer_name }}
               </div>
               <div class="col-span-12  text-blue-600 hover:text-blue-600 hover:underline text-[14px]"><router-link :to="{
@@ -119,7 +119,7 @@
               }">
                   {{ review.title_of_item }}
                 </router-link></div>
-              <div class="col-span-12 text-sm font-medium text-gray-500 dark:text-gray-400">
+              <div class="col-span-12 text-sm font-medium ">
                 Date Purchased: {{ relativeDate (review.timestamp) }}
               </div>
               <div class="col-span-12 mb-2">

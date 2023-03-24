@@ -92,13 +92,11 @@
               </div>
             </div>
           </div>
-
           <div class="col-span-12 md:col-span-9">
             <div v-if="itemforsale"
               class="grid grid-cols-12 gap-4 mb-4 border border-1 bg-neutral rounded-md shadow-md text-white p-5">
               <div class="col-span-12 md:col-span-2">
                 <img class="" :src="itemforsale.image_one_url_500" alt="" />
-
               </div>
               <div class="col-span-12 md:col-span-10">
                 <div class="font-bold text-[18px]">
@@ -127,10 +125,12 @@
 
             <!-- comment Form -->
             <form class="rounded-md pt-6 pb-4 w-full" @submit.prevent="onSubmit">
-              <div class="">
-                <textarea v-model="SendMsgForm.msginfo" id="item_description" placeholder="Write something .."
-                  class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline mb-3"></textarea>
-              </div>
+                <textarea v-model="SendMsgForm.msginfo"
+                          id="item_description"
+                          placeholder="Write something .."
+                          class="rounded w-full py-2 px-3 input-primary text-black">
+                </textarea>
+
               <div class="flex justify-end">
                 <button
                   class="bg-gray-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
@@ -139,13 +139,8 @@
                 </button>
               </div>
             </form>
-            <!-- comments -->
-            <!-- Top Post -->
-
             <div v-for="comment in mainpostcomments" :key="comment.id">
               <div class="grid grid-cols-12 p-5 bg-neutral border-gray-400">
-              
-
                 <!-- THis is for comment ADMIN -->
                 <div class="col-span-12 flex " v-if="comment.who_commented === 3">
                   <div class="col-span-12">
@@ -163,8 +158,6 @@
                   </div>
                 </div>
 
-
-
                 <!-- THis is for comment VENDOR  -->
                 <div class="col-span-12 text-white flex justify-start" v-else-if="comment.who_commented === 1">
                   <div class="col-span-12">
@@ -181,25 +174,21 @@
                   </div>
                 </div>
 
-
-                  <!-- THis is for comment CUSTOMER -->
-                  <div class="col-span-12 text-white flex justify-end" v-else-if="comment.who_commented === 2">
-                    <div class="col-span-12">
-                      <router-link class="hover:text-blue-500 hover:underline font-bold" :to="{
-                        name: 'userprofile',
-                        params: { uuid: comment.user_two_uuid },
-                      }">
-                        {{ comment.user_two }}
-                      </router-link>
-                      - {{ relativeDate(comment.timestamp) }} ago
-                      <div class="col-span-12 text-white bg-gray-500 p-3 border rounded-md">
-                        {{ comment.body }}
-                      </div>
+                <!-- THis is for comment CUSTOMER -->
+                <div class="col-span-12 text-white flex justify-end" v-else-if="comment.who_commented === 2">
+                  <div class="col-span-12">
+                    <router-link class="hover:text-blue-500 hover:underline font-bold" :to="{
+                      name: 'userprofile',
+                      params: { uuid: comment.user_two_uuid },
+                    }">
+                      {{ comment.user_two }}
+                    </router-link>
+                    - {{ relativeDate(comment.timestamp) }} ago
+                    <div class="col-span-12 text-white bg-gray-500 p-3 border rounded-md">
+                      {{ comment.body }}
                     </div>
                   </div>
-
-
-
+                </div>
 
                 <!-- THis is for comment from SITE -->
                 <div class="col-span-12 text-white flex justify-start" v-else>
@@ -216,7 +205,6 @@
                     </div>
                   </div>
                 </div>
-
               </div>
             </div>
           </div>

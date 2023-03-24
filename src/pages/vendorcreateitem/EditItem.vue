@@ -8,7 +8,7 @@
     <MainHeaderVendor v-show="user.user_admin === 1" />
   </div>
   <div class="wrapper">
-    <div class="container max-w-7xl mx-auto px-2  pb-72 text-white">
+    <div class="container max-w-3xl mx-auto px-2  pb-72 text-white">
       <div class="mt-5 mb-5">
         <nav class="rounded-md w-full">
           <ol class="list-reset flex">
@@ -33,7 +33,6 @@
       </div>
       <div class="grid grid-cols-1 rounded-md p-6 max-w-3xl mx-auto bg-neutral">
         <div class="text-[18px] text-center ">Item# {{ item_id }}</div>
-
           <UploadImages :item_id="item_id" />
         <form class="rounded-md px-8 pt-6 pb-8 mb-4 w-full" enctype="multipart/form-data" @submit.prevent="onSubmit">
           <p v-for="error of v$.$errors" :key="error.$uid">
@@ -44,8 +43,10 @@
             <div class="mb-4">
               <label class="block text-white text-sm font-bold mb-2">Item Title</label>
               <input v-model="CreateItemForm.basicInfo.item_title"
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
-                id="item_title" type="text" placeholder="Enter title of your item .." />
+                      class="rounded w-full py-2 px-3 input-primary text-black"
+                      id="item_title"
+                      type="text"
+                      placeholder="Enter title of your item .." />
               <span v-if="v$.CreateItemForm.basicInfo.item_title.$error" class="text-red-600 text-center">
                 {{ v$.CreateItemForm.basicInfo.item_title.$errors[0].$message }}
               </span>
@@ -54,8 +55,10 @@
               <div class="flex-1 mb-4">
                 <label class="block text-white text-sm font-bold mb-2">Category</label>
                 <select
-                  class="shadow form-select appearance-none block w-full px-3 py-1.5 text-base font-normal focus:shadow-outline text-gray-500 bg-neutral bg-clip-padding bg-no-repeat border rounded transition ease-in-out m-0 focus:text-white focus:bg-neutral focus:border-blue-600 focus:outline-none"
-                  aria-label="Default select example" id="category" v-model="CreateItemForm.basicInfo.category_id_0">
+                 class="rounded w-full py-2 px-3 input-primary text-black focus:bg-neutral"
+                  aria-label="Default select example"
+                  id="category"
+                  v-model="CreateItemForm.basicInfo.category_id_0">
                   <option class="text-white" v-for="(category, index) in categoryList" :key="index"
                     :value="category.value">
                     {{ category.name }}
@@ -69,7 +72,7 @@
               <div class="flex-1 mb-4">
                 <label class="block text-white text-sm font-bold mb-2">Condition</label>
                 <select
-                  class="shadow form-select appearance-none block w-full px-3 py-1.5 text-base font-normal focus:shadow-outline text-gray-500 bg-neutral bg-clip-padding bg-no-repeat border rounded transition ease-in-out m-0 focus:text-white focus:bg-neutral focus:border-blue-600 focus:outline-none"
+                 class="rounded w-full py-2 px-3 input-primary text-black focus:bg-neutral"
                   aria-label="Default select example" id="condition" v-model="CreateItemForm.basicInfo.item_condition">
                   <option class="text-white" v-for="(condition, index) in conditionList" :key="index"
                     :value="condition.value">
@@ -90,7 +93,7 @@
                 <label class="block text-white text-sm mb-2 text-[11px]">Item Price in your local currency per
                   item</label>
                 <input v-model="CreateItemForm.pricingInfo.price"
-                  class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
+                  class="rounded w-full py-2 px-3 input-primary text-black"
                   id="price" placeholder="Price in your currency..." @keypress="onlyNumberWithDot" />
                 <span v-if="v$.CreateItemForm.pricingInfo.price.$error" class="text-red-600 text-center">
                   {{ v$.CreateItemForm.pricingInfo.price.$errors[0].$message }}
@@ -100,7 +103,7 @@
                 <label class="block text-white text-sm font-bold mb-2">Item Count</label>
                 <label class="block text-white text-sm mb-2 text-[11px]">How many you have for sale</label>
                 <input v-model="CreateItemForm.pricingInfo.item_count"
-                  class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
+                  class="rounded w-full py-2 px-3 input-primary text-black"
                   id="count" type="number" min="0" placeholder="How many your are selling ..." @keypress="onlyNumber" />
                 <span v-if="v$.CreateItemForm.pricingInfo.item_count.$error" class="text-red-600 text-center">
                   {{ v$.CreateItemForm.pricingInfo.item_count.$errors[0].$message }}
@@ -128,14 +131,15 @@
           <div class="border-b pb-10">
             <div class="text-[20px] mt-5 mb-5 font-bold ">Description</div>
             <div class="mb-4 flex-1">
-              <textarea v-model="CreateItemForm.basicInfo.item_description" id="item_description"
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"></textarea>
+              <textarea v-model="CreateItemForm.basicInfo.item_description"
+                        id="item_description"
+                        class="rounded w-full py-2 px-3 input-primary text-black">
+              </textarea>
               <span v-if="v$.CreateItemForm.basicInfo.item_description.$error" class="text-red-600 text-center">
                 {{ v$.CreateItemForm.basicInfo.item_description.$errors[0].$message }}
               </span>
             </div>
           </div>
-
 
           <div class="border-b pb-10">
             <div class="text-[20px] mt-5 mb-5 font-bold ">Shipping</div>
@@ -152,7 +156,6 @@
               <div class="flex-1">Shipping Price</div>
               <div class="flex-1">Estimated Days</div>
             </div>
-
             <div class="mb-4">
               <label class="block text-white text-sm font-bold mb-2">Free Shipping</label>
               <div class="flex gap-5">
@@ -162,7 +165,7 @@
                 <div class="flex-1"></div>
                 <div class="flex-1">
                   <input type="number" placeholder="Estimated Days" min="0"
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
+                    class="rounded w-full py-2 px-3 input-primary text-black"
                     v-model="CreateItemForm.shippingInfo.free_shipping_days" />
                 </div>
               </div>
@@ -175,12 +178,12 @@
                 </div>
                 <div class="flex-1">
                   <input type="number" placeholder="Price" min="0"
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
+                   class="rounded w-full py-2 px-3 input-primary text-black"
                     v-model="CreateItemForm.shippingInfo.shipping_2_price" @keypress="onlyNumberWithDot" />
                 </div>
                 <div class="flex-1">
                   <input type="number" placeholder="Estimated Days" min="0"
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
+                    class="rounded w-full py-2 px-3 input-primary text-black"
                     v-model="CreateItemForm.shippingInfo.shipping_2_days" @keypress="onlyNumber" />
                 </div>
               </div>
@@ -193,12 +196,12 @@
                 </div>
                 <div class="flex-1">
                   <input type="number" placeholder="Price" min="0"
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
+                    class="rounded w-full py-2 px-3 input-primary text-black"
                     v-model="CreateItemForm.shippingInfo.shipping_3_price" @keypress="onlyNumberWithDot" />
                 </div>
                 <div class="flex-1">
                   <input type="number" placeholder="Estimated Days" min="0"
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
+                    class="rounded w-full py-2 px-3 input-primary text-black"
                     v-model="CreateItemForm.shippingInfo.shipping_3_days" @keypress="onlyNumber" />
                 </div>
               </div>
@@ -212,12 +215,9 @@
             </button>
           </div>
         </form>
-
       </div>
     </div>
   </div>
-
-
 </template>
 
 <script lang="ts">

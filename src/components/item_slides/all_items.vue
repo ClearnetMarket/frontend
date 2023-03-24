@@ -1,6 +1,6 @@
 <template>
-    <div class="flex flex-nowrap flex-col p-5 mb-10 mt-10">
-        <div class="mt-5 mx-10 md:flex md:mb-5 gap-5">
+    <div class="flex flex-nowrap flex-col p-5">
+        <div class="md:flex md:mb-5 gap-5">
             <div v-for="item in allitems" :key="item.id">
                 <generic_item :item="item" />
             </div>
@@ -34,13 +34,11 @@ export default defineComponent({
         getallitems() {
             axios({
                 method: 'get',
-                url: '/itemquery/query/all',
+                url: '/category/query/index/all',
                 withCredentials: true,
             })
                 .then((response) => {
-                    if (response.data.success) {
-                        this.allitems = response.data
-                    }
+                    this.allitems = response.data
                 })
                 .catch(() => {})
         },

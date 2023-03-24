@@ -19,7 +19,7 @@
       </nav>
     </div>
   </div>
-  <div class="flex justify-center mx-auto p-5 rounded-md bg-neutral">
+  <div class="flex justify-center mx-auto p-5 rounded-md bg-neutral text-white">
     <div class="max-w-md">
       <div class="text-center">
         In order to unlock your account, please enter your account seed below.

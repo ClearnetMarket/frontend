@@ -44,8 +44,8 @@
               v-model="SendMsgForm.msginfo"
               id="item_description"
               placeholder="Write something .."
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline mb-3"
-            ></textarea>
+              class="rounded w-full py-2 px-3 input-primary text-black">
+            </textarea>
             <span
               v-if="v$.SendMsgForm.msginfo.$error"
               class="text-red-600 text-center"
@@ -55,7 +55,7 @@
           </div>
           <div class="flex justify-end">
             <button
-              class="bg-gray-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              class="bg-primary hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               type="submit"
             >
               Message User

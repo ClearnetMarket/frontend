@@ -32,7 +32,7 @@
           >
           <input
             v-model="ChangePasswordForm.password"
-            class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
+            class="rounded w-full py-2 px-3 input-primary text-black"
             id="password"
             type="password"
             placeholder="Password"
@@ -47,7 +47,7 @@
           >
           <input
             v-model="ChangePasswordForm.password_confirm"
-            class="shadow appearance-none border rounded w-full py-2 px-3 text-white mb-3 leading-tight focus:outline-none focus:shadow-outline"
+            class="rounded w-full py-2 px-3 input-primary text-black"
             id="passwordtwo"
             type="password"
             autocomplete="off"
@@ -59,7 +59,7 @@
         </div>
         <div class="flex items-center justify-center mb-6">
           <button
-            class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            class="bg-primary hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             type="submit"
           >
             Update

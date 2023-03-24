@@ -78,7 +78,7 @@
                     <div class="flex justify-center my-10 gap-5 px-5">
                         <router-link :to="{ name: 'accountseedconfirm' }">
                             <button
-                                class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-blue-300 focus:outline-none focus:shadow-outline"
+                                class="bg-primary hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-blue-300 focus:outline-none focus:shadow-outline"
                                 type="submit"
                             >
                                 Confirm Account
@@ -87,7 +87,7 @@
                         <div class="pt-3">OR</div>
                         <router-link :to="{ name: 'home' }">
                             <button
-                                class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-blue-300 focus:outline-none focus:shadow-outline"
+                                class="bg-primary hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-blue-300 focus:outline-none focus:shadow-outline"
                                 type="submit"
                             >
                                 Proceed to Freeport

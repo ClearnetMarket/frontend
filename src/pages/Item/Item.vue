@@ -8,49 +8,45 @@
   <div v-if="user">
     <MainHeaderVendor v-show="user.user_admin === 1" />
   </div>
-<div class="wrapper">
-  <div class="container max-w-7xl mx-auto px-10 text-white ">
-    <div class="mx-auto flex mb-1 px-5">
-      <div class="mt-1">
-        <nav class="rounded-md">
-          <ol class="list-reset flex bg-red">
-            <li>
-              <router-link :to="{ name: 'home' }">
-                <a class="text-blue-600 hover:text-blue-700 ">Home</a>
-              </router-link>
-            </li>
-            <li>
-              <span class="text-gray-500 mx-2">/</span>
-            </li>
-            <li>
-              <router-link :to="{ name: 'categoryhome' }">
-                <a class="text-blue-600 hover:text-blue-700">Categories</a>
-              </router-link>
-            </li>
-            <li>
-              <span class="text-gray-500 mx-2">/</span>
-            </li>
-          </ol>
-        </nav>
+  <div class="wrapper">
+    <div class="container max-w-7xl mx-auto px-10 text-white ">
+      <div class="mx-auto flex mb-1 px-5">
+        <div class="mt-1">
+          <nav class="rounded-md">
+            <ol class="list-reset flex bg-red">
+              <li>
+                <router-link :to="{ name: 'home' }">
+                  <a class="text-blue-600 hover:text-blue-700 ">Home</a>
+                </router-link>
+              </li>
+              <li>
+                <span class="text-gray-500 mx-2">/</span>
+              </li>
+              <li>
+                <router-link :to="{ name: 'categoryhome' }">
+                  <a class="text-blue-600 hover:text-blue-700">Categories</a>
+                </router-link>
+              </li>
+              <li>
+                <span class="text-gray-500 mx-2">/</span>
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+      <ItemTop @UpdateCart="UpdateCart"  />
+      <ItemDescription v-bind:description="description" />
+      <ItemShipping v-bind:origin_country_name="origin_country_name" v-bind:shippingfree="shippingfree"
+        v-bind:shippingtwo="shippingtwo" v-bind:shippingthree="shippingthree" v-bind:shippingpricetwo="shippingpricetwo"
+        v-bind:shippingdayfree="shippingdayfree" v-bind:shippingdaytwo="shippingdaytwo"
+        v-bind:shippingpricethree="shippingpricethree" v-bind:shippingdaythree="shippingdaythree"
+        v-bind:currency="currency" />
+      <div v-if="loaded_feedback">
+        <ItemUserReviews v-bind:vendorreviews="vendorreviews" v-bind:vendoruuid="vendoruuid" />
       </div>
     </div>
-
-
-    <ItemTop @UpdateCart="UpdateCart"  />
-
-    <ItemDescription v-bind:description="description" />
-
-    <ItemShipping v-bind:origin_country_name="origin_country_name" v-bind:shippingfree="shippingfree"
-      v-bind:shippingtwo="shippingtwo" v-bind:shippingthree="shippingthree" v-bind:shippingpricetwo="shippingpricetwo"
-      v-bind:shippingdayfree="shippingdayfree" v-bind:shippingdaytwo="shippingdaytwo"
-      v-bind:shippingpricethree="shippingpricethree" v-bind:shippingdaythree="shippingdaythree"
-      v-bind:currency="currency" />
-    <div v-if="loaded_feedback">
-      <ItemUserReviews v-bind:vendorreviews="vendorreviews" v-bind:vendoruuid="vendoruuid" />
-    </div>
   </div>
-</div>
-  <MainFooter />
+<MainFooter />
 </template>
 
 <script lang="ts">

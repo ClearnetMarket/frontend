@@ -9,14 +9,12 @@
         class="rounded-md px-8 pt-6 pb-8 mb-4 w-full bg-neutral"
         @submit.prevent="onSubmit"
       >
-        <div class="mb-4 text-center text-[28px] text-zinc-600">Login</div>
+        <div class="mb-4 text-center text-[28px] ">Login</div>
         <div class="mb-4">
-          <label class="block text-white text-sm font-bold mb-2"
-            >Username</label
-          >
+          <label class="block text-white text-sm font-bold mb-2">Username</label>
           <input
             v-model="loginForm.username"
-            class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
+            class="rounded w-full py-2 px-3 input-primary text-black"
             id="username"
             type="text"
             placeholder="Username"
@@ -35,7 +33,8 @@
           >
           <input
             v-model="loginForm.password"
-            class="shadow appearance-none border rounded w-full py-2 px-3 text-white mb-3 leading-tight focus:outline-none focus:shadow-outline"
+            class="rounded w-full py-2 px-3
+             input-primary text-black"
             id="password"
             type="password"
             autocomplete="off"
@@ -49,7 +48,7 @@
           </span>
         </div>
 
-        <div class="flex items-center justify-center mb-6">
+        <div class="flex items-center justify-center mb-6 mt-4">
           <button
             class="bg-primary hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             type="submit"

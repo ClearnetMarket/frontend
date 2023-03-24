@@ -310,13 +310,12 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-      if ((response.data.login == true)) {
+      if (response.data.login == true) {
             this.user = response.data.user;
           }
         })
         .catch(() => {
           this.$router.push({ name: "login" });
-
         });
     },
     // gets the item to update price and quanity for cart

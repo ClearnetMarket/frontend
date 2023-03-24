@@ -3,15 +3,15 @@
 
   <HeaderPlain />
     <div class="wrapperplain">
-  <div class="container max-w-7xl mx-auto bg-gray-300 text-white">
-    <div class="mx-auto max-w-lg flex items-center justify-center ">
+  <div class="container mx-auto max-w-lg text-white">
+    <div class="mx-auto flex items-center justify-center ">
       <form class="bg-neutral rounded-md  px-8 pt-6 pb-8 mb-4 mt-4 w-full" method="POST" @submit.prevent="onSubmit">
-        <div class="mb-4 text-center text-[28px] text-zinc-600">Register</div>
+        <div class="mb-4 text-center text-[28px] ">Register</div>
 
         <div class="mb-4">
           <label class="block text-white text-sm font-bold mb-2" for="username">Username</label>
           <input v-model="registerForm.username"
-            class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
+            class="rounded w-full py-2 px-3 input-primary text-black"
             id="username" type="text" placeholder="Login Username" />
           <span v-if="v$.registerForm.username.$error" class="text-red-600 text-center">
             {{ v$.registerForm.username.$errors[0].$message }}
@@ -23,7 +23,7 @@
             as. It would be the name
             of your store.</label>
           <input v-model="registerForm.display_username"
-            class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
+            class="rounded w-full py-2 px-3 input-primary text-black"
             id="display_username" type="text" placeholder="Username" />
           <span v-if="v$.registerForm.display_username.$error" class="text-red-600 text-center">
             {{ v$.registerForm.display_username.$errors[0].$message }}
@@ -33,7 +33,7 @@
           <label class="block text-white text-sm font-bold mb-2" for="username">Email</label>
 
           <input v-model="registerForm.email"
-            class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
+            class="rounded w-full py-2 px-3 input-primary text-black"
             id="email" type="text" placeholder="Email" />
           <span v-if="v$.registerForm.email.$error" class="text-red-600 text-center">
             {{ v$.registerForm.email.$errors[0].$message }}
@@ -42,7 +42,7 @@
         <div class="mb-4">
           <label class="block text-white text-sm font-bold mb-2" for="password">Password</label>
           <input v-model="registerForm.password"
-            class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
+            class="rounded w-full py-2 px-3 input-primary text-black"
             id="password" type="password" autocomplete="off" placeholder="Password" />
           <span v-if="v$.registerForm.password.$error" class="text-red-600 text-center">
             {{ v$.registerForm.password.$errors[0].$message }}
@@ -51,7 +51,7 @@
         <div class="mb-4">
           <label class="block text-white text-sm font-bold mb-2" for="password_confirm">Confirm Password</label>
           <input v-model="registerForm.password_confirm"
-            class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
+            class="rounded w-full py-2 px-3 input-primary text-black"
             id="password" type="password" autocomplete="off" placeholder="Confirm Password" />
           <span v-if="v$.registerForm.password_confirm.$error" class="text-red-600 text-center">
             {{ v$.registerForm.password_confirm.$errors[0].$message }}
@@ -61,7 +61,7 @@
         <div class="mb-4">
           <label class="block text-white text-sm font-bold mb-2" for="password_confirm">Country</label>
           <select
-            class="shadow form-select appearance-none block w-full px-3 py-1.5 text-base font-normal focus:shadow-outline text-gray-500 bg-neutral bg-clip-padding bg-no-repeat border rounded transition ease-in-out m-0 focus:text-white focus:bg-neutral focus:border-blue-600 focus:outline-none"
+            class="rounded w-full py-2 px-3 input-primary text-black focus:bg-neutral"
             aria-label="Default select example" v-model="registerForm.country">
             <option class="text-white" v-for="(country, index) in countryList" :key="index" :value="country.value">
               {{ country.name }}
@@ -75,7 +75,7 @@
         <div class="mb-4">
           <label class="block text-white text-sm font-bold mb-2" for="password_confirm">Currency</label>
           <select
-            class="shadow form-select appearance-none block w-full px-3 py-1.5 text-base font-normal focus:shadow-outline text-gray-500 bg-neutral bg-clip-padding bg-no-repeat border rounded transition ease-in-out m-0 focus:text-white focus:bg-neutral focus:border-blue-600 focus:outline-none"
+            class="rounded w-full py-2 px-3 input-primary text-black focus:bg-neutral"
             aria-label="Default select example" v-model="registerForm.currency">
             <option class="text-white" v-for="(currency, index) in currencyList" :key="index"
               :value="currency.value">

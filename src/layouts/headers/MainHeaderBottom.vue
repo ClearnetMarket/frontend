@@ -42,8 +42,7 @@
                             <router-link :to="{ name: 'wallet' }" class="px-3">
                                 <button
                                     class="bg-yellow-500 hover:bg-zinc-400 text-black font-bold py-1 px-3
-                                    rounded focus:outline-none focus:shadow-outline"
-                                >
+                                    rounded focus:outline-none focus:shadow-outline">
                                     Wallets
                                 </button>
                             </router-link>

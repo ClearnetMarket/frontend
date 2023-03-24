@@ -2,7 +2,8 @@
 <template>
 
   <HeaderPlain />
-    <div class="wrapperplain">
+  <div class="wrapperplain">
+    
   <div class="container max-w-3xl mx-auto text-white">
     <div class="mt-5 mb-5">
       <nav class="rounded-md w-full">
@@ -20,18 +21,18 @@
     </div>
   </div>
 
-  <div class="mx-auto max-w-lg flex items-center justify-center mb-10 mt-12">
+  <div class="mx-auto max-w-lg flex items-center justify-center mb-10 mt-12 text-white">
     <form
       class="bg-neutral rounded-md px-8 pt-6 pb-8 mb-4 w-full"
       @submit.prevent="onSubmit"
     >
-      <div class="mb-4 text-center text-[20px] text-zinc-600">
+      <div class="mb-4 text-center text-[20px] ">
         In order to unlock your account, please enter your account seed below.
       </div>
-
+    <div class="my-5">
       <input
         v-model="wordForm.word0"
-        class="shadow appearance-none border rounded w-full py-2 px-3 text-white mb-3 leading-tight focus:outline-blue-300 focus:outline-none focus:shadow-outline"
+        class="rounded w-full py-2 px-3 input-primary text-black"
         type="text"
         autocomplete="off"
         placeholder="Word 1"
@@ -39,9 +40,11 @@
             <span v-if="v$.wordForm.word0.$error" class="text-red-600 text-center">
         {{ v$.wordForm.word0.$errors[0].$message }}
       </span>
+      </div>
+          <div class="my-5">
       <input
         v-model="wordForm.word1"
-        class="shadow appearance-none border rounded w-full py-2 px-3 text-white mb-3 leading-tight focus:outline-blue-300 focus:outline-none focus:shadow-outline"
+        class="rounded w-full py-2 px-3 input-primary text-black"
         type="text"
         autocomplete="off"
         placeholder="Word 2"
@@ -49,9 +52,11 @@
             <span v-if="v$.wordForm.word1.$error" class="text-red-600 text-center">
         {{ v$.wordForm.word1.$errors[0].$message }}
       </span>
+          </div>
+             <div class="my-5">
       <input
         v-model="wordForm.word2"
-        class="shadow appearance-none border rounded w-full py-2 px-3 text-white mb-3 leading-tight focus:outline-blue-300 focus:outline-none focus:shadow-outline"
+        class="rounded w-full py-2 px-3 input-primary text-black"
         type="text"
         autocomplete="off"
         placeholder="Word 3"
@@ -59,9 +64,11 @@
             <span v-if="v$.wordForm.word2.$error" class="text-red-600 text-center">
         {{ v$.wordForm.word2.$errors[0].$message }}
       </span>
+             </div>
+        <div class="my-5">
       <input
         v-model="wordForm.word3"
-        class="shadow appearance-none border rounded w-full py-2 px-3 text-white mb-3 leading-tight focus:outline-blue-300 focus:outline-none focus:shadow-outline"
+        class="rounded w-full py-2 px-3 input-primary text-black"
         type="text"
         autocomplete="off"
         placeholder="Word 4"
@@ -69,9 +76,11 @@
             <span v-if="v$.wordForm.word3.$error" class="text-red-600 text-center">
         {{ v$.wordForm.word3.$errors[0].$message }}
       </span>
+        </div>
+        <div class="my-5">
       <input
         v-model="wordForm.word4"
-        class="shadow appearance-none border rounded w-full py-2 px-3 text-white mb-3 leading-tight focus:outline-blue-300 focus:outline-none focus:shadow-outline"
+        class="rounded w-full py-2 px-3 input-primary text-black"
         type="text"
         autocomplete="off"
         placeholder="Word 5"
@@ -79,9 +88,11 @@
             <span v-if="v$.wordForm.word4.$error" class="text-red-600 text-center">
         {{ v$.wordForm.word4.$errors[0].$message }}
       </span>
+        </div>
+        <div class="my-5">
       <input
         v-model="wordForm.word5"
-        class="shadow appearance-none border rounded w-full py-2 px-3 text-white mb-3 leading-tight focus:outline-blue-300 focus:outline-none focus:shadow-outline"
+        class="rounded w-full py-2 px-3 input-primary text-black"
         type="text"
         autocomplete="off"
         placeholder="Word 6"
@@ -89,9 +100,10 @@
       <span v-if="v$.wordForm.word5.$error" class="text-red-600 text-center">
         {{ v$.wordForm.word5.$errors[0].$message }}
       </span>
+        </div>
       <div class="flex p-md justify-center">
         <button
-          class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-blue-300 focus:outline-none focus:shadow-outline"
+          class="bg-primary hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-blue-300 focus:outline-none focus:shadow-outline"
           type="submit"
         >
           Confirm

@@ -21,15 +21,13 @@
     </div>
 
     <div class="grid grid-cols-1 w-full gap-4 mt-5 mb-20">
-      <h1 class="col-span-1 font-semibold text-2xl">Disputed Orders</h1>
-
+      <h1 class="col-span-1 font-bold text-2xl">Disputed Orders</h1>
       <div v-for="order in orders" :key="order.id">
         <div v-if="order.uuid">
-
-          <div class="grid grid-cols-12 rounded-md border border-gray-300 ">
-            <div class="col-span-12 bg-gray-100 px-5 py-5 rounded-t-md">
-              <div class="grid grid-cols-12 text-[12px]">
-                <div class="col-span-12 md:col-span-4  gap-2 text-[15px]">
+          <div class="grid grid-cols-12 rounded-md border ">
+            <div class="col-span-12 bg-gray-100 px-5 py-5 rounded-t-md bg-base-100">
+              <div class="grid grid-cols-12 text-[12px] ">
+                <div class="col-span-12 md:col-span-4  gap-2 text-[15px] ">
                   <div class="md:text-center font-bold">Order Placed</div>
                   <div class="md:text-center">{{ order.created }}</div>
                 </div>
@@ -65,7 +63,7 @@
               <div class="grid grid-cols-12 ">
                 <div class="col-span-12 md:col-span-9 ">
                   <div class="grid grid-cols-12">
-                    <div class="col-span-12 text-[20px] text-center md:text-left">
+                    <div class="col-span-12 text-[20px] text-center md:text-left pr-10">
                       <div v-if="order.overall_status === 1" class="col-span-3">
                         Waiting to be accepted
                       </div>
@@ -81,7 +79,7 @@
                         Requested cancel from vendor
                       </div>
                       <div v-if="order.overall_status === 7" class="col-span-3">Cancelled</div>
-                      <div class="text-red-600 col-span-2" v-if="order.overall_status === 8">
+                      <div class="text-red-600 col-span-2 font-bold" v-if="order.overall_status === 8">
                         Disputed
                       </div>
                       <div v-if="order.overall_status === 10" class="col-span-3">Finalized</div>
@@ -114,17 +112,16 @@
                                 </router-link>
                               </div>
                             </div>
-                       
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-
+                <div class="col-span-3 my-10 ">
                 <!-- Requested Cancel from vendor -->
-                <div v-if="order.overall_status === 6" class="col-span-3"></div>
+                <div v-if="order.overall_status === 6" class=""></div>
                 <!-- Disputed order -->
-                <div v-if="order.overall_status === 8" class="col-span-3">
+                <div v-if="order.overall_status === 8" class=" ">
                   <router-link :to="{
                     name: 'Dispute',
                     params: { uuid: order.uuid },
@@ -136,7 +133,7 @@
                   </router-link>
                 </div>
                 <!-- Finalized order -->
-                <div v-if="order.overall_status === 10" class="col-span-3">
+                <div v-if="order.overall_status === 10" class="">
                   <div v-if="order.vendor_feedback === 0">
                     <router-link :to="{
                       name: 'Dispute',
@@ -157,6 +154,7 @@
                     </router-link>
                   </div>
                 </div>
+              </div>
               </div>
             </div>
           </div>
