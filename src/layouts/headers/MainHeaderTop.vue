@@ -140,7 +140,7 @@ export default defineComponent({
             this.user = response.data.user;
             this.notificationscount();
             this.notificationsgetlast();
-            this.notificationsmessagecount();
+
             this.loaded = true;
           }
         })
@@ -148,20 +148,6 @@ export default defineComponent({
           this.user = null;
           this.loaded = true;
         });
-    },
-      notificationsmessagecount() {
-      axios({
-        method: "get",
-        url: "/notification/message/new/count",
-        withCredentials: true,
-        headers: authHeader(),
-      })
-        .then((response) => {
-          if (response.data.success) {
-            this.msgcount = response.data.count;
-          }
-        })
-        .catch(() => {});
     },
 
     notificationscount () {

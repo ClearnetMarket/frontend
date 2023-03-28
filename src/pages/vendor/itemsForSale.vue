@@ -8,7 +8,9 @@
   <div v-if="user">
     <MainHeaderVendor v-show="user.user_admin === 1" />
   </div>
+
 <div class="wrapper">
+
   <div class="container max-w-4xl mx-auto px-2  pb-72 text-white">
     <div class="mt-5">
       <nav class="rounded-md w-full">
@@ -37,7 +39,7 @@
 
       <div class="mt-5 grid grid-cols-12 gap-4 ">
 
-        <div v-for="item in items" class="col-span-12">
+        <div v-for="(item, index)  in displayedRecords" :key="index" class="col-span-12">
           <div class="bg-neutral rounded-md ">
             <div class="grid grid-cols-12 grid-row-5 text-white ">
               <div class="col-span-12 p-2">
@@ -145,9 +147,14 @@
             </div>
           </div>
         </div>
+          <div class="col-span-12" v-if="recordsLength > 10">
+             <pagination :records="items.length" v-model="page" :per-page="perPage" :options="options"> </pagination>
+          </div>
+        <div class="col-span-12 flex justify-center" v-else>{{recordsLength}} items</div>
       </div>
     </div>
   </div>
+
 </div>
 
   <MainFooter />
@@ -164,7 +171,7 @@ import MainHeaderMid from "../../layouts/headers/MainHeaderMid.vue";
 import MainHeaderBottom from "../../layouts/headers/MainHeaderBottom.vue";
 import MainHeaderVendor from "../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../layouts/footers/FooterMain.vue";
-
+import PaginationComp from '../../components/MyPagination.vue'
 
 
 export default defineComponent({
@@ -179,8 +186,9 @@ export default defineComponent({
 
   mounted () {
     this.userstatus();
-
+    this.getvendoritemscount();
     this.getvendoritems();
+
   },
   data () {
     return {
@@ -189,9 +197,25 @@ export default defineComponent({
       items: [],
       newitemid: null,
       accept: ref(false),
+
+      page: 1,
+      perPage: 10,
+      recordsLength: 0,
+        options: {
+        edgeNavigation: false,
+        format: false,
+        template: PaginationComp
+      }
+
     };
   },
-
+computed: {
+    displayedRecords() {
+      const startIndex = this.perPage * (this.page - 1);
+      const endIndex = startIndex + this.perPage;
+      return this.items.slice(startIndex, endIndex);
+    }
+  },
   methods: {
     gotoitem (itemid: any) {
       this.$router.push({ name: "edititem", params: { id: itemid } });
@@ -211,6 +235,19 @@ export default defineComponent({
           }
           this.loaded_user = true;
         }
+      });
+    },
+
+
+    // gets the vendor items
+    getvendoritemscount () {
+      axios({
+        method: "get",
+        url: "/vendorcreate/itemsforsale/count",
+        withCredentials: true,
+        headers: authHeader(),
+      }).then((response) => {
+          this.recordsLength = response.data.count;
       });
     },
     // gets the vendor items
