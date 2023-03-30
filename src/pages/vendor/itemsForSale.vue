@@ -39,7 +39,7 @@
 
       <div class="mt-5 grid grid-cols-12 gap-4 ">
 
-        <div v-for="(item, index)  in displayedRecords" :key="index" class="col-span-12">
+        <div v-for="(item, index)  in items" :key="index" class="col-span-12">
           <div class="bg-neutral rounded-md ">
             <div class="grid grid-cols-12 grid-row-5 text-white ">
               <div class="col-span-12 p-2">
@@ -147,8 +147,9 @@
             </div>
           </div>
         </div>
-          <div class="col-span-12" v-if="recordsLength > 10">
-             <pagination :records="items.length" v-model="page" :per-page="perPage" :options="options"> </pagination>
+          <div class="col-span-12" v-if="recordsLength > 9">
+             <pagination @paginate="getPage" :records="recordsLength" v-model="page" :per-page="perPage" :options="options"> </pagination>
+          <div class="flex justify-center">   {{ recordsLength }} items Found</div>
           </div>
         <div class="col-span-12 flex justify-center" v-else>{{recordsLength}} items</div>
       </div>
@@ -187,7 +188,8 @@ export default defineComponent({
   mounted () {
     this.userstatus();
     this.getvendoritemscount();
-    this.getvendoritems();
+    this.getPage(this.page)
+ 
 
   },
   data () {
@@ -199,7 +201,7 @@ export default defineComponent({
       accept: ref(false),
 
       page: 1,
-      perPage: 10,
+      perPage: 3,
       recordsLength: 0,
         options: {
         edgeNavigation: false,
@@ -209,16 +211,10 @@ export default defineComponent({
 
     };
   },
-computed: {
-    displayedRecords() {
-      const startIndex = this.perPage * (this.page - 1);
-      const endIndex = startIndex + this.perPage;
-      return this.items.slice(startIndex, endIndex);
-    }
-  },
+
   methods: {
-    gotoitem (itemid: any) {
-      this.$router.push({ name: "edititem", params: { id: itemid } });
+    gotoitem (uuid: any) {
+      this.$router.push({ name: "edititem", params: { id: uuid } });
     },
     userstatus () {
       axios({
@@ -237,7 +233,17 @@ computed: {
         }
       });
     },
-
+    getPage: function (page: any) {
+      // we simulate an api call that fetch the records from a backend
+      this.items = [];
+      const startIndex = this.perPage * (page - 1) + 1;
+      const endIndex = startIndex + this.perPage - 1;
+      for (let i = startIndex; i <= endIndex; i++) {
+         // gets the vendor items
+        this.getvendoritems(page) 
+         
+      }
+    },
 
     // gets the vendor items
     getvendoritemscount () {
@@ -248,13 +254,15 @@ computed: {
         headers: authHeader(),
       }).then((response) => {
           this.recordsLength = response.data.count;
+     
+        
       });
     },
     // gets the vendor items
-    getvendoritems () {
+    getvendoritems (page: any) {
       axios({
         method: "get",
-        url: "/vendorcreate/itemsforsale",
+        url: "/vendorcreate/itemsforsale/" + page,
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
@@ -297,7 +305,7 @@ computed: {
       })
         .then((response) => {
           if (response.data.success) {
-            this.getvendoritems();
+            this.getPage(this.page);
             notify({
               title: "Message Center",
               text: "Item has been cloned",
@@ -323,7 +331,7 @@ computed: {
         headers: authHeader(),
       }).then((response) => {
         if ((response.data.success)) {
-          this.getvendoritems();
+          this.getPage(this.page);
           notify({
             title: "Message Center",
             text: "Item has been deleted",
@@ -349,7 +357,7 @@ computed: {
       }).then((response) => {
         if ((response.data.success)) {
 
-          this.getvendoritems();
+          this.getPage(this.page);
           if (response.data.status == "success") {
             notify({
               title: "Item:  " + itemid,
@@ -376,7 +384,7 @@ computed: {
         headers: authHeader(),
       }).then((response) => {
         if ((response.data.success)) {
-            this.getvendoritems();
+            this.getPage(this.page);
             notify({
               title: "Item:  " + itemid,
               text: "Item is offline",
