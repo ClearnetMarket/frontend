@@ -2,9 +2,7 @@
     <MainHeaderTop />
     <MainHeaderMid />
     <MainHeaderBottom />
-    <div v-if="user">
-        <MainHeaderVendor v-show="user.user_admin === 1" />
-    </div>
+
     <div class="max-w-7xl mx-auto mb-20 wrapper px-10">
         <div class="grid grid-cols-1 w-full gap-4">
             <div class="mb-10 mt-5">
@@ -30,11 +28,16 @@
                 </nav>
             </div>
         </div>
-
         <div class="grid grid-cols-12 gap-4">
-            <div class="col-span-12 text-[30px] mb-5">Home and Garden</div>
-
-            <div class="col-span-12 mb-5 text-[20px]">All Items</div>
+            <div class="col-span-12 sm:col-span-3">
+                <CategoryList />
+            </div>
+            <div class="col-span-12 sm:col-span-9 ">
+                <div class="text-center text-[28px]">Home and Garden</div>
+                <div class="col-span-12 sm:col-span-9 ">
+                    <AllItemsCategory :categoryid="category_id" />
+                </div>
+            </div>
         </div>
     </div>
     <MainFooter />
@@ -47,6 +50,9 @@ import MainHeaderMid from '../../../layouts/headers/MainHeaderMid.vue'
 import MainHeaderBottom from '../../../layouts/headers/MainHeaderBottom.vue'
 import MainHeaderVendor from '../../../layouts/headers/MainHeaderVendor.vue'
 import MainFooter from '../../../layouts/footers/FooterMain.vue'
+import CategoryList from '../../../components/category_slides/categorylist.vue'
+import AllItemsCategory from '../../../components/category_slides/allcat.vue'
+
 
 export default defineComponent({
     name: 'Categoryhomeandgarden',
@@ -56,11 +62,14 @@ export default defineComponent({
         MainHeaderBottom,
         MainHeaderVendor,
         MainFooter,
+        CategoryList,
+        AllItemsCategory
     },
 
     data() {
         return {
             user: null,
+            category_id: 10,
         }
     },
     mounted() {},

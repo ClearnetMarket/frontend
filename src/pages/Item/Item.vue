@@ -170,7 +170,7 @@ export default defineComponent({
             this.shippingpricethree = response.data.shipping_price_3;
             this.shippingdaythree = response.data.shipping_day_3;
             this.getvendorreviews();
-            this.add_view();
+      
             this.loaded_feedback = true;
 
         })
@@ -188,7 +188,7 @@ export default defineComponent({
     getvendorreviews () {
       axios({
         method: "get",
-        url: "/vendor/vendor-feedback/" + this.item.vendor_uuid,
+        url: "/vendor/vendor-feedback/" + this.item.vendor_uuid + "/1",
         withCredentials: true,
       })
         .then((response) => {
@@ -199,18 +199,7 @@ export default defineComponent({
         })
         .catch(() => {this.vendorreviews = null; });
     },
-    add_view () {
-      axios({
-        method: "get",
-        url: "/item/count/" + this.item.uuid,
-        withCredentials: true,
-        headers: authHeader(),
-      })
-        .then(() => { })
-        .catch(() => {
 
-        });
-    },
     returncurrencysymbol (currencydigit: number) {
       if (currencydigit === 0) {
         return "$";

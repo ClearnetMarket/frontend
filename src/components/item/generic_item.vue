@@ -1,7 +1,7 @@
 <template>
     <!--Card 1 Type-->
 
-    <div @click="$router.replace({ name: 'MarketItem', params: { id: item.uuid } })" style="cursor: pointer">
+    <div class="" @click="$router.replace({ name: 'MarketItem', params: { id: item.uuid } })" style="cursor: pointer">
 
         <div class="rounded overflow-hidden border  text-center shadow-md w-42 h-42 bg-neutral mt-5">
             <div class="flex justify-center w-full  mb-5">

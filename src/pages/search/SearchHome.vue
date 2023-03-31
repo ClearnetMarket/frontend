@@ -25,10 +25,16 @@
                 <CategoryList />
             </div>
             <div class="col-span-12 md:col-span-9">
-                <div class="flex mb-2 font-bold">{{ searchresultscount }} results for {{ searchstring }}</div>
+                <div class="flex mb-2 font-bold">{{ recordsLength }} results for {{ searchstring }}</div>
                 <div v-for="(f, index) in searchresults">
                     <Searchitems :item="f" :selected-index="index" />
                 </div>
+                 <div class="col-span-12 mb-20" v-if="recordsLength > 0">
+                <pagination @paginate="getPage" :records="recordsLength" v-model="page" :per-page="perPage"
+                  :options="options"> </pagination>
+                <div class="flex justify-center"> {{ recordsLength }} items Found</div>
+              </div>
+              <div class="col-span-12 mb-20 flex justify-center" v-else>{{ recordsLength }} items</div>
             </div>
         </div>
     </div>
@@ -47,6 +53,8 @@ import MainHeaderVendor from '../../layouts/headers/MainHeaderVendor.vue'
 import MainFooter from '../../layouts/footers/FooterMain.vue'
 import Searchitems from '../../components/search/search_results.vue'
 import CategoryList from '../../components/category_slides/categorylist.vue'
+import PaginationComp from '../../components/MyPagination.vue'
+
 
 export default defineComponent({
     name: 'Search',
@@ -65,38 +73,54 @@ export default defineComponent({
             searchresults: [],
             searchresultscount: 0,
             searchstring: null,
+            
+            page: 1,
+            perPage: 50,
+            recordsLength: 0,
+            options: {
+                edgeNavigation: false,
+                format: false,
+                template: PaginationComp
+            }
+
         }
     },
     watch: {
         $route() {
             this.searchresults == null
             this.searchstring = this.$route.params.searchstring
-            this.main_search()
+            this.getPage(this.page);
         },
     },
     mounted() {
         this.searchstring = this.$route.params.searchstring
-        this.main_search()
         this.main_search_count()
+        this.getPage(this.page);
     },
     methods: {
-        main_search() {
+        getPage: function (page: any) {
+            // we simulate an api call that fetch the records from a backend
+            this.searchresults = [];
+            const startIndex = this.perPage * (page - 1) + 1;
+            const endIndex = startIndex + this.perPage - 1;
+          
+            this.main_search(page)
+       
+        },
+
+        main_search(page: any) {
             axios({
                 method: 'get',
-                url: '/search/query/' + this.searchstring,
+                url: '/search/query/' + this.searchstring + '/' + this.page,
                 headers: authHeader(),
-            }).then((response) => {
-                this.searchresults = response.data
-            })
+            }).then((response) => {this.searchresults = response.data})
         },
         main_search_count() {
             axios({
                 method: 'get',
-                url: '/search/query/' + this.searchstring + '/count',
+                url: '/search/query/count/' + this.searchstring ,
                 headers: authHeader(),
-            }).then((response) => {
-                this.searchresultscount = response.data.count
-            })
+            }).then((response) => { this.recordsLength = response.data.count})
         },
     },
 })

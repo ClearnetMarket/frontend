@@ -266,9 +266,7 @@ import authHeader from "../../../services/auth.header";
 
 export default defineComponent({
   name: "ItemTop",
-  props: [
-
-  ],
+  props: [ ],
 
   data () {
     return {

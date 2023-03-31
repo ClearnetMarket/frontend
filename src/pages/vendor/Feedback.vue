@@ -5,154 +5,166 @@
   <MainHeaderBottom />
   <MainHeaderVendor />
   <div class="wrapper">
-  <!-- Top Stuff-->
-  <div class="max-w-4xl mx-auto  ">
-    <div class="mt-5 mb-5 px-10">
-      <nav class="rounded-md w-full">
-        <ol class="list-reset flex">
-          <li>
-            <router-link :to="{ name: 'home' }">
-              <a class="text-blue-600 hover:text-blue-700">Home</a>
-            </router-link>
-          </li>
-          <li>
-            <span class="text-gray-500 mx-2">/</span>
-          </li>
-        </ol>
-      </nav>
-    </div>
-
-    <div v-if="loaded">
-    <div class="text-[20px] text-center">
-      My Feedback
-    </div>
-    <div class="grid grid-cols-12 p-5 gap-5 text-white">
-      <div class="col-span-12 md:col-span-4 bg-neutral rounded-md p-5">
-        <div class="flex">All Vendor Reviews</div>
-
-        <p class="text-sm font-medium text-gray-500 dark:text-gray-400">
-          {{ vendor_reviews_total }} total ratings
-        </p>
-        <div class="flex items-center mt-4">
-          <span class="text-sm font-medium text-blue-600 dark:text-blue-500">10 star</span>
-          <div class="mx-4 w-2/4 h-5 bg-gray-300 rounded dark:bg-gray-700">
-            <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_ten }"></div>
-          </div>
-          <span class="text-sm font-medium text-blue-600 dark:text-blue-500">{{ vendor_reviews_percent_ten }}%</span>
-        </div>
-        <div class="flex items-center mt-4">
-          <span class="text-sm font-medium text-blue-600 dark:text-blue-500 pr-2">9 star</span>
-          <div class="mx-4 w-2/4 h-5 bg-gray-300 rounded dark:bg-gray-700">
-            <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_nine }"></div>
-          </div>
-          <span class="text-sm font-medium text-blue-600 dark:text-blue-500">{{ vendor_reviews_percent_nine }}%</span>
-        </div>
-        <div class="flex items-center mt-4">
-          <span class="text-sm font-medium text-blue-600 dark:text-blue-500 pr-2">8 star</span>
-          <div class="mx-4 w-2/4 h-5 bg-gray-300 rounded dark:bg-gray-700">
-            <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_eight }"></div>
-          </div>
-          <span class="text-sm font-medium text-blue-600 dark:text-blue-500">
-            {{ vendor_reviews_percent_eight }}%</span>
-        </div>
-        <div class="flex items-center mt-4">
-          <span class="text-sm font-medium text-blue-600 dark:text-blue-500 pr-2">7 star</span>
-          <div class="mx-4 w-2/4 h-5 bg-gray-300 rounded dark:bg-gray-700">
-            <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_seven }"></div>
-          </div>
-          <span class="text-sm font-medium text-blue-600 dark:text-blue-500">
-            {{ vendor_reviews_percent_seven }}%</span>
-        </div>
-        <div class="flex items-center mt-4">
-          <span class="text-sm font-medium text-blue-600 dark:text-blue-500 pr-2">6 star</span>
-          <div class="mx-4 w-2/4 h-5 bg-gray-300 rounded dark:bg-gray-700">
-            <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_six }"></div>
-          </div>
-          <span class="text-sm font-medium text-blue-600 dark:text-blue-500 pr-2">{{ vendor_reviews_percent_six  }}%</span>
-        </div>
-        <div class="flex items-center mt-4">
-          <span class="text-sm font-medium text-blue-600 dark:text-blue-500 pr-2">5 star</span>
-          <div class="mx-4 w-2/4 h-5 bg-gray-300 rounded dark:bg-gray-700">
-            <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_five }"></div>
-          </div>
-          <span class="text-sm font-medium text-blue-600 dark:text-blue-500">{{ vendor_reviews_percent_five }}%</span>
-        </div>
-        <div class="flex items-center mt-4">
-          <span class="text-sm font-medium text-blue-600 dark:text-blue-500 pr-2">4 star</span>
-          <div class="mx-4 w-2/4 h-5 bg-gray-300 rounded dark:bg-gray-700">
-            <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_four }"></div>
-          </div>
-          <span class="text-sm font-medium text-blue-600 dark:text-blue-500">{{ vendor_reviews_percent_four }}%</span>
-        </div>
-        <div class="flex items-center mt-4">
-          <span class="text-sm font-medium text-blue-600 dark:text-blue-500 pr-2">3 star</span>
-          <div class="mx-4 w-2/4 h-5 bg-gray-300 rounded dark:bg-gray-700">
-            <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_three }"></div>
-          </div>
-          <span class="text-sm font-medium text-blue-600 dark:text-blue-500 pr-2">{{ vendor_reviews_percent_three }}%</span>
-        </div>
-        <div class="flex items-center mt-4">
-          <span class="text-sm font-medium text-blue-600 dark:text-blue-500 pr-2">2 star</span>
-          <div class="mx-4 w-2/4 h-5 bg-gray-300 rounded dark:bg-gray-700">
-            <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_two }"></div>
-          </div>
-          <span class="text-sm font-medium text-blue-600 dark:text-blue-500">{{ vendor_reviews_percent_two }}%</span>
-        </div>
-        <div class="flex items-center mt-4">
-          <span class="text-sm font-medium text-blue-600 dark:text-blue-500 pr-2">1 star</span>
-          <div class="mx-4 w-2/4 h-5 bg-gray-300 rounded dark:bg-gray-700">
-            <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_one }"></div>
-          </div>
-          <span class="text-sm font-medium text-blue-600 dark:text-blue-500">{{ vendor_reviews_percent_one }}%</span>
-        </div>
+    <!-- Top Stuff-->
+    <div class="max-w-4xl mx-auto  ">
+      <div class="mt-5 mb-5 px-10">
+        <nav class="rounded-md w-full">
+          <ol class="list-reset flex">
+            <li>
+              <router-link :to="{ name: 'home' }">
+                <a class="text-blue-600 hover:text-blue-700">Home</a>
+              </router-link>
+            </li>
+            <li>
+              <span class="text-gray-500 mx-2">/</span>
+            </li>
+          </ol>
+        </nav>
       </div>
-      <div class="col-span-12 md:col-span-8">
-        <div class="text-white" v-if="vendor_reviews_total > 0">
-          <div v-for="review in vendorreviews" :key="review.id">
-            <div class="grid grid-cols-12 bg-neutral rounded-md p-5 mb-5">
-              <div class="col-span-12 text-sm font-medium ">
-                {{ review.customer_name }}
-              </div>
-              <div class="col-span-12  text-blue-600 hover:text-blue-600 hover:underline text-[14px]"><router-link :to="{
-                name: 'MarketItem',
-                params: { id: review.item_uuid },
-              }">
-                  {{ review.title_of_item }}
-                </router-link></div>
-              <div class="col-span-12 text-sm font-medium ">
-                Date Purchased: {{ relativeDate (review.timestamp) }}
-              </div>
-              <div class="col-span-12 mb-2">
-                <StarRating v-bind:rating="review.vendor_rating" />
-              </div>
-              <div class="col-span-12 mt-2">{{ review.review_of_vendor }}</div>
 
+      <div v-if="loaded">
+        <div class="text-[20px] text-center">
+          My Feedback
+        </div>
+        <div class="grid grid-cols-12 p-5 gap-5 text-white">
+          <div class="col-span-12 md:col-span-4 bg-neutral rounded-md p-5">
+            <div class="flex">All Vendor Reviews</div>
+
+            <p class="text-sm font-medium text-gray-500 dark:text-gray-400">
+              {{ vendor_reviews_total }} total ratings
+            </p>
+            <div class="flex items-center mt-4">
+              <span class="text-sm font-medium text-blue-600 dark:text-blue-500">10 star</span>
+              <div class="mx-4 w-2/4 h-5 bg-gray-300 rounded dark:bg-gray-700">
+                <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_ten }"></div>
+              </div>
+              <span class="text-sm font-medium text-blue-600 dark:text-blue-500">{{ vendor_reviews_percent_ten }}%</span>
+            </div>
+            <div class="flex items-center mt-4">
+              <span class="text-sm font-medium text-blue-600 dark:text-blue-500 pr-2">9 star</span>
+              <div class="mx-4 w-2/4 h-5 bg-gray-300 rounded dark:bg-gray-700">
+                <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_nine }"></div>
+              </div>
+              <span class="text-sm font-medium text-blue-600 dark:text-blue-500">{{ vendor_reviews_percent_nine }}%</span>
+            </div>
+            <div class="flex items-center mt-4">
+              <span class="text-sm font-medium text-blue-600 dark:text-blue-500 pr-2">8 star</span>
+              <div class="mx-4 w-2/4 h-5 bg-gray-300 rounded dark:bg-gray-700">
+                <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_eight }"></div>
+              </div>
+              <span class="text-sm font-medium text-blue-600 dark:text-blue-500">
+                {{ vendor_reviews_percent_eight }}%</span>
+            </div>
+            <div class="flex items-center mt-4">
+              <span class="text-sm font-medium text-blue-600 dark:text-blue-500 pr-2">7 star</span>
+              <div class="mx-4 w-2/4 h-5 bg-gray-300 rounded dark:bg-gray-700">
+                <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_seven }"></div>
+              </div>
+              <span class="text-sm font-medium text-blue-600 dark:text-blue-500">
+                {{ vendor_reviews_percent_seven }}%</span>
+            </div>
+            <div class="flex items-center mt-4">
+              <span class="text-sm font-medium text-blue-600 dark:text-blue-500 pr-2">6 star</span>
+              <div class="mx-4 w-2/4 h-5 bg-gray-300 rounded dark:bg-gray-700">
+                <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_six }"></div>
+              </div>
+              <span class="text-sm font-medium text-blue-600 dark:text-blue-500 pr-2">{{ vendor_reviews_percent_six
+              }}%</span>
+            </div>
+            <div class="flex items-center mt-4">
+              <span class="text-sm font-medium text-blue-600 dark:text-blue-500 pr-2">5 star</span>
+              <div class="mx-4 w-2/4 h-5 bg-gray-300 rounded dark:bg-gray-700">
+                <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_five }"></div>
+              </div>
+              <span class="text-sm font-medium text-blue-600 dark:text-blue-500">{{ vendor_reviews_percent_five }}%</span>
+            </div>
+            <div class="flex items-center mt-4">
+              <span class="text-sm font-medium text-blue-600 dark:text-blue-500 pr-2">4 star</span>
+              <div class="mx-4 w-2/4 h-5 bg-gray-300 rounded dark:bg-gray-700">
+                <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_four }"></div>
+              </div>
+              <span class="text-sm font-medium text-blue-600 dark:text-blue-500">{{ vendor_reviews_percent_four }}%</span>
+            </div>
+            <div class="flex items-center mt-4">
+              <span class="text-sm font-medium text-blue-600 dark:text-blue-500 pr-2">3 star</span>
+              <div class="mx-4 w-2/4 h-5 bg-gray-300 rounded dark:bg-gray-700">
+                <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_three }"></div>
+              </div>
+              <span class="text-sm font-medium text-blue-600 dark:text-blue-500 pr-2">{{ vendor_reviews_percent_three
+              }}%</span>
+            </div>
+            <div class="flex items-center mt-4">
+              <span class="text-sm font-medium text-blue-600 dark:text-blue-500 pr-2">2 star</span>
+              <div class="mx-4 w-2/4 h-5 bg-gray-300 rounded dark:bg-gray-700">
+                <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_two }"></div>
+              </div>
+              <span class="text-sm font-medium text-blue-600 dark:text-blue-500">{{ vendor_reviews_percent_two }}%</span>
+            </div>
+            <div class="flex items-center mt-4">
+              <span class="text-sm font-medium text-blue-600 dark:text-blue-500 pr-2">1 star</span>
+              <div class="mx-4 w-2/4 h-5 bg-gray-300 rounded dark:bg-gray-700">
+                <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_one }"></div>
+              </div>
+              <span class="text-sm font-medium text-blue-600 dark:text-blue-500">{{ vendor_reviews_percent_one }}%</span>
+            </div>
+          </div>
+          <div class="col-span-12 md:col-span-8">
+            <div class="text-white" v-if="recordsLength > 0 ">
+
+              <div v-for="(review, index) in vendorreviews" :key="review.id">
+                <div class="grid grid-cols-12 bg-neutral rounded-md p-5 mb-5">
+                  <div class="col-span-12 text-sm font-medium ">
+                    {{ review.customer_name }}
+                  </div>
+                  <div class="col-span-12  text-blue-600 hover:text-blue-600 hover:underline text-[14px]"><router-link
+                      :to="{
+                        name: 'MarketItem',
+                        params: { id: review.item_uuid },
+                      }">
+                      {{ review.title_of_item }}
+                    </router-link></div>
+                  <div class="col-span-12 text-sm font-medium ">
+                    Date Purchased: {{ relativeDate(review.timestamp) }}
+                  </div>
+                  <div class="col-span-12 mb-2">
+                    <StarRating v-bind:rating="review.vendor_rating" />
+                  </div>
+                  <div class="col-span-12 mt-2">{{ review.review_of_vendor }}</div>
+
+                </div>
+              </div>
+              <div class="col-span-12 mb-10" v-if="recordsLength > 9">
+                <pagination @paginate="getPage" :records="recordsLength" v-model="page" :per-page="perPage"
+                  :options="options"> </pagination>
+                <div class="flex justify-center mb-10"> {{ recordsLength }} items Found</div>
+              </div>
+              <div class="col-span-12 flex justify-center" v-else>{{ recordsLength }} items</div>
+            </div>
+            
+            <div v-else class="text-white text-[18px] text-center">
+              You have no Feedback yet ...
             </div>
           </div>
         </div>
-        <div v-else class="text-white text-[18px] text-center">
-          You have no Feedback yet ...
-        </div>
       </div>
     </div>
-  </div>
-  </div>
   </div>
   <MainFooter />
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import axios from "axios";
-import { formatDistance } from "date-fns";
-import { useRoute } from "vue-router";
-import MainHeaderTop from "../../layouts/headers/MainHeaderTop.vue";
-import MainHeaderMid from "../../layouts/headers/MainHeaderMid.vue";
-import MainHeaderBottom from "../../layouts/headers/MainHeaderBottom.vue";
-import MainHeaderVendor from "../../layouts/headers/MainHeaderVendor.vue";
-import MainFooter from "../../layouts/footers/FooterMain.vue";
-import authHeader from "../../services/auth.header";
-import StarRating from "../../components/star_rating/Star.vue";
+import { defineComponent } from "vue"
+import axios from "axios"
+import { formatDistance } from "date-fns"
+import { useRoute } from "vue-router"
+import MainHeaderTop from "../../layouts/headers/MainHeaderTop.vue"
+import MainHeaderMid from "../../layouts/headers/MainHeaderMid.vue"
+import MainHeaderBottom from "../../layouts/headers/MainHeaderBottom.vue"
+import MainHeaderVendor from "../../layouts/headers/MainHeaderVendor.vue"
+import MainFooter from "../../layouts/footers/FooterMain.vue"
+import authHeader from "../../services/auth.header"
+import StarRating from "../../components/star_rating/Star.vue"
+import PaginationComp from '../../components/MyPagination.vue'
 
 
 
@@ -188,19 +200,28 @@ export default defineComponent({
       vendor_reviews_percent_eight: null,
       vendor_reviews_percent_nine: null,
       vendor_reviews_percent_ten: null,
+
+      page: 1,
+      perPage: 10,
+      recordsLength: 0,
+      options: {
+        edgeNavigation: false,
+        format: false,
+        template: PaginationComp
+      }
+
     };
   },
   created () {
     this.userstatus();
   },
   mounted () {
-
     const user_uuid_route = useRoute();
     this.user_id = user_uuid_route.params.uuid;
-
+    this.getPage(this.page);
     this.getratings();
     this.deleteordernotice();
-    this.getvendorreviews();
+    this.getvendorreviewscount();
   },
 
   methods: {
@@ -225,6 +246,17 @@ export default defineComponent({
       let e = new Date(value).valueOf();
       return formatDistance(e, new Date());
     },
+    getPage: function (page: any) {
+      // we simulate an api call that fetch the records from a backend
+      this.vendorreviews = [];
+      const startIndex = this.perPage * (page - 1) + 1;
+      const endIndex = startIndex + this.perPage - 1;
+  
+        // gets the vendor items
+      this.getvendorreviews(page)
+  
+    },
+
     // deletes feeeback notification
     deleteordernotice () {
       axios({
@@ -237,20 +269,35 @@ export default defineComponent({
       });
     },
     // gets the vendor reviews
-    getvendorreviews () {
+    getvendorreviews (page: any) {
       axios({
         method: "get",
-        url: "/vendor/vendor-feedback/" + this.user_id,
+        url: "/vendor/vendor-feedback/" + this.user_id + "/" + this.page,
         withCredentials: true,
+        headers: authHeader(),
       })
         .then((response) => {
-
-            this.vendorreviews = response.data;
-            if (this.vendorreviews == undefined)
-              {this.vendorreviews = null;}
+          this.vendorreviews = response.data;
+         
         })
         .catch(() => { });
     },
+        // gets the vendor reviews
+    getvendorreviewscount () {
+      axios({
+        method: "get",
+        url: "/vendor/vendor-feedback/count/" + this.user_id,
+        withCredentials: true,
+        headers: authHeader(),
+      })
+        .then((response) => {
+          this.recordsLength = response.data.count;
+     
+       
+        })
+        .catch(() => { });
+    },
+
     // gets the overall ratings on sidebar
     getratings () {
       axios({
@@ -274,9 +321,7 @@ export default defineComponent({
             this.loaded = true;
           }
         })
-        .catch((error) => {
-          console.log(error)
-        });
+        .catch(() => { });
     },
   },
 });

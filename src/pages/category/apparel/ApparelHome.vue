@@ -30,11 +30,16 @@
                 </nav>
             </div>
         </div>
-
         <div class="grid grid-cols-12 gap-4">
-            <div class="col-span-12 text-[30px] mb-5">Apparel and Clothing Accessories</div>
-
-            <div class="col-span-12 mb-5 text-[20px]">All Items</div>
+            <div class="col-span-12 sm:col-span-3">
+                <CategoryList />
+            </div>
+            <div class="col-span-12 sm:col-span-9 ">
+                <div class="text-center text-[28px]">Apparal Clothing and Accessories</div>
+                <div class="col-span-12 sm:col-span-9 ">
+                    <AllItemsCategory :categoryid="category_id" />
+                </div>
+            </div>
         </div>
     </div>
     <MainFooter />
@@ -47,6 +52,9 @@ import MainHeaderMid from '../../../layouts/headers/MainHeaderMid.vue'
 import MainHeaderBottom from '../../../layouts/headers/MainHeaderBottom.vue'
 import MainHeaderVendor from '../../../layouts/headers/MainHeaderVendor.vue'
 import MainFooter from '../../../layouts/footers/FooterMain.vue'
+import CategoryList from '../../../components/category_slides/categorylist.vue'
+import AllItemsCategory from '../../../components/category_slides/allcat.vue'
+
 
 export default defineComponent({
     name: 'Categoryapparel',
@@ -56,10 +64,13 @@ export default defineComponent({
         MainHeaderBottom,
         MainHeaderVendor,
         MainFooter,
+        CategoryList,
+        AllItemsCategory
     },
 
     data() {
         return {
+            category_id: 2,
             user: null,
         }
     },

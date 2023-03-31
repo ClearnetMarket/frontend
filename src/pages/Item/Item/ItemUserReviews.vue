@@ -86,9 +86,6 @@
         </div>
       </div>
 
-
-
-
       <div class="col-span-12 md:col-span-8">
         <div class="" v-if="vendor_reviews_total > 0">
           <div v-for="review in vendorreviews" :key="review.id">
@@ -97,13 +94,13 @@
                 {{ review.customer_name }}
               </div>
               <div class="col-span-12  text-[14px]">
-                  {{ review.title_of_item }}
+                {{ review.title_of_item }}
               </div>
               <div class="col-span-12 mb-2">
                 <StarRating v-bind:rating="review.vendor_rating" />
               </div>
               <div class="col-span-12 text-sm font-medium text-gray-500 dark:text-gray-400">
-                Date Purchased: {{ relativeDate (review.timestamp) }} ago
+                Date Purchased: {{ relativeDate(review.timestamp) }} ago
               </div>
               <div class="col-span-12 mt-2">{{ review.review_of_vendor }}</div>
             </div>
@@ -114,7 +111,9 @@
         </div>
       </div>
     </div>
+     
   </div>
+
 </template>
 
 <script lang="ts">
@@ -147,10 +146,13 @@ export default defineComponent({
       vendor_reviews_percent_eight: null,
       vendor_reviews_percent_nine: null,
       vendor_reviews_percent_ten: null,
+
+
     };
   },
   mounted () {
     this.getratings();
+ 
   },
 
   methods: {
@@ -166,6 +168,7 @@ export default defineComponent({
         withCredentials: true,
       })
         .then((response) => {
+          
           if ((response.data.success)) {
             this.vendor_reviews_total = response.data.total_feedback;
             this.vendor_reviews_percent_one = response.data.feedback_one;

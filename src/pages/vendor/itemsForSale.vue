@@ -1,6 +1,5 @@
 
 <template>
-
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
@@ -9,155 +8,154 @@
     <MainHeaderVendor v-show="user.user_admin === 1" />
   </div>
 
-<div class="wrapper">
+  <div class="wrapper">
 
-  <div class="container max-w-4xl mx-auto px-2  pb-72 text-white">
-    <div class="mt-5">
-      <nav class="rounded-md w-full">
-        <ol class="list-reset flex">
-          <li>
-            <router-link :to="{ name: 'home' }">
-              <a class="text-blue-600 hover:text-blue-700">Home</a>
-            </router-link>
-          </li>
-          <li>
-            <span class="text-gray-500 mx-2">/</span>
-          </li>
-        </ol>
-      </nav>
-    </div>
-
-    <div class="grid grid-cols-1 rounded-md ">
-      <div class="text-[24px] text-center">Items for Sale</div>
-  
-      <div class="flex justify-center mt-5 md:mt-0 md:justify-end">
-        <button v-on:click="createanitem()"
-          class="bg-primary hover:bg-zinc-700 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mr-2">
-          Create Item
-        </button>
+    <div class="container max-w-4xl mx-auto px-2  pb-72 text-white">
+      <div class="mt-5">
+        <nav class="rounded-md w-full">
+          <ol class="list-reset flex">
+            <li>
+              <router-link :to="{ name: 'home' }">
+                <a class="text-blue-600 hover:text-blue-700">Home</a>
+              </router-link>
+            </li>
+            <li>
+              <span class="text-gray-500 mx-2">/</span>
+            </li>
+          </ol>
+        </nav>
       </div>
 
-      <div class="mt-5 grid grid-cols-12 gap-4 ">
+      <div class="grid grid-cols-1 rounded-md ">
+        <div class="text-[24px] text-center">Items for Sale</div>
 
-        <div v-for="(item, index)  in items" :key="index" class="col-span-12">
-          <div class="bg-neutral rounded-md ">
-            <div class="grid grid-cols-12 grid-row-5 text-white ">
-              <div class="col-span-12 p-2">
-                <div class="w-full font-bold">Item uuid</div>
-                <div class="w-full">{{ item.uuid }}</div>
+        <div class="flex justify-center mt-5 md:mt-0 md:justify-end">
+          <button v-on:click="createanitem()"
+            class="bg-primary hover:bg-zinc-700 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mr-2">
+            Create Item
+          </button>
+        </div>
+
+        <div class="mt-5 grid grid-cols-12 gap-4 ">
+
+          <div v-for="(item, index)  in items" :key="index" class="col-span-12">
+            <div class="bg-neutral rounded-md ">
+              <div class="grid grid-cols-12 grid-row-5 text-white ">
+                <div class="col-span-12 p-2">
+                  <div class="w-full font-bold">Item uuid</div>
+                  <div class="w-full">{{ item.uuid }}</div>
+                </div>
+
               </div>
+              <div class="grid grid-cols-12 rounded-md p-2">
 
-            </div>
-            <div class="grid grid-cols-12 rounded-md p-2">
+                <div class="col-span-12 md:col-span-3 pb-5">
+                  <div class="flex justify-center">
+                    <div @click="$router.replace({ name: 'MarketItem', params: { id: item.uuid } })"
+                      style="cursor: pointer" class="">
+                      <div v-if="item.image_one_url_250">
+                        <img alt="" class="object-fill" :src="item.image_one_url_250" />
+                      </div>
+                      <div v-else>
+                        <img alt="" src="../../assets/noimage.jpg " />
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
-              <div class="col-span-12 md:col-span-3 pb-5">
-                <div class="flex justify-center">
-                  <div @click="$router.replace({ name: 'MarketItem', params: { id: item.uuid } })"
-                    style="cursor: pointer" class="">
-                    <div v-if="item.image_one_url_250">
-                      <img alt="" class="object-fill" :src="item.image_one_url_250" />
+                <div class="col-span-12 md:col-span-6 px-3">
+                  <div class="grid grid-cols-12 grid-row-5 text-white ">
+                    <div class="col-span-12 text-[18px] px-1 ">
+                      <router-link :to="{ name: 'MarketItem', params: { id: item.uuid } }">
+                        <div class="text-center  text-blue-600 hover:text-blue-400 hover:underline">
+                          {{ item.item_title }}
+                        </div>
+                      </router-link>
+                    </div>
+                    <div class="flex gap-4 col-span-12 text-[14px] p-1">
+                      <div class="font-bold">
+                        Status:
+                      </div>
+                      <div v-if="item.online === 0" class="text-red-500">
+                        <div class="">
+                          offline
+                        </div>
+                      </div>
+                      <div v-else class="text-green-500">
+                        <div class="">
+                          online
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-span-12 text-[14px] p-1 flex gap-4">
+                      <div class="font-bold">Item Price:</div>
+                      <div class="">{{ item.price }}{{ returncurrencysymbol(item.currency) }}</div>
+                    </div>
+                    <div class="col-span-12 text-[14px] p-1 flex gap-4">
+                      <div class="font-bold">Total Sold:</div>
+                      <div class="">{{ item.total_sold }}</div>
+                    </div>
+                    <div class="col-span-12 text-[14px] p-1 flex gap-4">
+                      <div class="font-bold">Total Views:</div>
+                      <div class="">{{ item.view_count }}</div>
+                    </div>
+                    <div class="col-span-12 text-[14px] p-1 flex gap-4">
+                      <div class="font-bold">Item Quantity:</div>
+                      <div class="">{{ item.item_count }}</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-span-12 md:col-span-3 px-3">
+
+                  <div class="mb-2">
+                    <div v-if="item.online === 0">
+                      <button @click.prevent="putonline(item.uuid)"
+                        class="bg-zinc-600 hover:bg-zinc-700 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mr-2 w-full">
+                        Turn On
+                      </button>
                     </div>
                     <div v-else>
-                      <img alt="" src="../../assets/noimage.jpg " />
+                      <button @click.prevent="putoffline(item.uuid)"
+                        class="bg-zinc-600 hover:bg-zinc-700 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mr-2 w-full">
+                        Turn Off
+                      </button>
                     </div>
                   </div>
-                </div>
-              </div>
 
-              <div class="col-span-12 md:col-span-6 px-3">
-                <div class="grid grid-cols-12 grid-row-5 text-white ">
-                  <div class="col-span-12 text-[18px] px-1 ">
-                    <router-link :to="{ name: 'MarketItem', params: { id: item.uuid } }">
-                      <div class="text-center  text-blue-600 hover:text-blue-400 hover:underline">
-                        {{ item.item_title }}
-                      </div>
-                    </router-link>
-                  </div>
-                  <div class="flex gap-4 col-span-12 text-[14px] p-1">
-                    <div class="font-bold">
-                      Status:
-                    </div>
-                    <div v-if="item.online === 0" class="text-red-500">
-                      <div class="">
-                        offline
-                      </div>
-                    </div>
-                    <div v-else class="text-green-500">
-                      <div class="">
-                        online
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-span-12 text-[14px] p-1 flex gap-4">
-                    <div class="font-bold">Item Price:</div>
-                    <div class="">{{ item.price }}{{ returncurrencysymbol (item.currency) }}</div>
-                  </div>
-                  <div class="col-span-12 text-[14px] p-1 flex gap-4">
-                    <div class="font-bold">Total Sold:</div>
-                    <div class="">{{ item.total_sold }}</div>
-                  </div>
-                  <div class="col-span-12 text-[14px] p-1 flex gap-4">
-                    <div class="font-bold">Total Views:</div>
-                    <div class="">{{ item.view_count }}</div>
-                  </div>
-                  <div class="col-span-12 text-[14px] p-1 flex gap-4">
-                    <div class="font-bold">Item Quantity:</div>
-                    <div class="">{{ item.item_count }}</div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="col-span-12 md:col-span-3 px-3">
-
-                <div class="mb-2">
-                  <div v-if="item.online === 0">
-                    <button @click.prevent="putonline(item.uuid)"
+                  <div class="mb-2">
+                    <button v-on:click="gotoitem(item.uuid)"
                       class="bg-zinc-600 hover:bg-zinc-700 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mr-2 w-full">
-                      Turn On
+                      Edit
                     </button>
                   </div>
-                  <div v-else>
-                    <button @click.prevent="putoffline(item.uuid)"
+                  <div class="mb-2">
+                    <button @click.prevent="cloneitem(item.uuid)"
                       class="bg-zinc-600 hover:bg-zinc-700 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mr-2 w-full">
-                      Turn Off
+                      Clone
                     </button>
                   </div>
-                </div>
 
-                <div class="mb-2">
-                  <button v-on:click="gotoitem(item.uuid)"
-                    class="bg-zinc-600 hover:bg-zinc-700 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mr-2 w-full">
-                    Edit
-                  </button>
-                </div>
-                <div class="mb-2">
-                  <button @click.prevent="cloneitem(item.uuid)"
-                    class="bg-zinc-600 hover:bg-zinc-700 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mr-2 w-full">
-                    Clone
-                  </button>
-                </div>
-
-                <div class="mb-2">
-                  <button @click.prevent="deleteitem(item.uuid)"
-                    class="bg-red-600 hover:bg-zinc-700 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mr-2 w-full">
-                    Delete
-                  </button>
+                  <div class="mb-2">
+                    <button @click.prevent="deleteitem(item.uuid)"
+                      class="bg-red-600 hover:bg-zinc-700 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mr-2 w-full">
+                      Delete
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
           <div class="col-span-12" v-if="recordsLength > 9">
-             <pagination @paginate="getPage" :records="recordsLength" v-model="page" :per-page="perPage" :options="options"> </pagination>
-          <div class="flex justify-center">   {{ recordsLength }} items Found</div>
+            <pagination @paginate="getPage" :records="recordsLength" v-model="page" :per-page="perPage"
+              :options="options"> </pagination>
+            <div class="flex justify-center"> {{ recordsLength }} items Found</div>
           </div>
-        <div class="col-span-12 flex justify-center" v-else>{{recordsLength}} items</div>
+          <div class="col-span-12 flex justify-center" v-else>{{ recordsLength }} items</div>
+        </div>
       </div>
     </div>
   </div>
-
-</div>
-
   <MainFooter />
 </template>
 
@@ -189,7 +187,7 @@ export default defineComponent({
     this.userstatus();
     this.getvendoritemscount();
     this.getPage(this.page)
- 
+
 
   },
   data () {
@@ -203,7 +201,7 @@ export default defineComponent({
       page: 1,
       perPage: 3,
       recordsLength: 0,
-        options: {
+      options: {
         edgeNavigation: false,
         format: false,
         template: PaginationComp
@@ -224,7 +222,7 @@ export default defineComponent({
         headers: authHeader(),
       }).then((response) => {
 
-      if ((response.data.login == true)) {
+        if ((response.data.login == true)) {
           this.user = response.data.user
           if (response.data.user.user_admin == 0) {
             this.$router.push({ name: "home" });
@@ -238,11 +236,11 @@ export default defineComponent({
       this.items = [];
       const startIndex = this.perPage * (page - 1) + 1;
       const endIndex = startIndex + this.perPage - 1;
-      for (let i = startIndex; i <= endIndex; i++) {
-         // gets the vendor items
-        this.getvendoritems(page) 
-         
-      }
+     
+        // gets the vendor items
+      this.getvendoritems(page)
+
+    
     },
 
     // gets the vendor items
@@ -253,9 +251,9 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
-          this.recordsLength = response.data.count;
-     
-        
+        this.recordsLength = response.data.count;
+
+
       });
     },
     // gets the vendor items
@@ -266,7 +264,7 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
-          this.items = response.data;
+        this.items = response.data;
       });
     },
     // creates an item
@@ -384,12 +382,12 @@ export default defineComponent({
         headers: authHeader(),
       }).then((response) => {
         if ((response.data.success)) {
-            this.getPage(this.page);
-            notify({
-              title: "Item:  " + itemid,
-              text: "Item is offline",
-              type: "success",
-            });
+          this.getPage(this.page);
+          notify({
+            title: "Item:  " + itemid,
+            text: "Item is offline",
+            type: "success",
+          });
         }
       });
     },
