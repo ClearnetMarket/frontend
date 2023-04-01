@@ -17,7 +17,7 @@
           </li>
           <li>
             <router-link :to="{ name: 'MsgHome' }">
-              <a class="text-blue-600 hover:text-blue-700">Message Center Home</a>
+              <a class="text-blue-600 hover:text-blue-700">Message Center</a>
             </router-link>
           </li>
           <li>
@@ -25,21 +25,20 @@
           </li>
         </ol>
       </nav>
-
       <div class="grid grid-cols-12 pt-5 gap-4">
         <div class="col-span-12 md:col-span-3">
           <div class="border border-1 bg-neutral rounded-md shadow-md text-white p-5">
             <div class="text-[18px] mb-5">Message Center</div>
 
-            <div v-for="othermsgs in userlist" class="py-2 hover:bg-gray-300 hover:rounded-md">
+            <div v-for="othermsgs in userlist" class="py-2  hover:rounded-md">
 
               <div v-if="othermsgs.read === 0" class="rounded-md">
                 <router-link :to="{
                   name: 'MsgView',
                   params: { postid: othermsgs.post_id },
                 }">
-                  <div class="grid grid-cols-12  border-y-1 rounded-md p-2 hover:bg-gray-300">
-                    <div class="col-span-12 md:col-span-6 text-blue-600 hover:text-blue-700">
+                  <div class="grid grid-cols-12  border-y-1 rounded-md p-2 hover:bg-accent hover:text-black">
+                    <div class="col-span-12 md:col-span-6 ">
                       <div v-if="othermsgs.user_one === user.user_name">
                         {{ othermsgs.user_two }}
                       </div>
@@ -56,10 +55,8 @@
                   name: 'MsgView',
                   params: { postid: othermsgs.post_id },
                 }">
-                  <div class="grid grid-cols-12 rounded-md p-2 hover:bg-gray-300">
-
+                  <div class="grid grid-cols-12 rounded-md p-2 hover:bg-accent">
                     <div class="col-span-12 md:col-span-6 ">
-
                       <div v-if="othermsgs.user_one === user.user_name" class="">
                         {{ othermsgs.user_two }}
                       </div>
@@ -120,13 +117,10 @@ export default defineComponent({
     MainHeaderVendor,
     MainFooter,
   },
-  created () {
-    this.userstatus();
-  },
+  
   mounted () {
-    this.getcountofusers();
-    this.getmsgsofusers();
-    this.messagemarkasread()
+    this.userstatus();
+   
   },
   data () {
     return {
@@ -153,36 +147,10 @@ export default defineComponent({
         .then((response) => {
          if ((response.data.login == true)) {
             this.user = response.data.user
+            this.getmsgsofusers();
           }
         })
         .catch(() => { this.user = null });
-    },
-    getcountofusers () {
-      axios({
-        method: "get",
-        url: "/msg/count",
-        withCredentials: true,
-        headers: authHeader(),
-      })
-        .then((response) => {
-          this.other_user_count = response.data.get_count;
-        })
-        .catch((error) => {
-          console.log(error)
-        });
-    },
-    messagemarkasread () {
-      axios({
-        method: "put",
-        url: "/notification/new/message/markasread",
-        withCredentials: true,
-        headers: authHeader(),
-      })
-        .then(() => {
-          this.getmsgsofusers();
-        })
-        .catch(() => {
-        });
     },
     getmsgsofusers () {
       axios({
@@ -191,10 +159,8 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       })
-        .then((response) => {
-          this.userlist = response.data;
-        })
-        .catch(() => { })
+        .then((response) => {this.userlist = response.data })
+        .catch(() => {})
     },
   },
 });

@@ -17,7 +17,7 @@
             </li>
             <li>
               <router-link :to="{ name: 'MsgHome' }">
-                <a class="text-blue-600 hover:text-blue-700">Message Center Home</a>
+                <a class="text-blue-600 hover:text-blue-700">Message Center</a>
               </router-link>
             </li>
             <li>
@@ -36,7 +36,7 @@
                     name: 'MsgView',
                     params: { postid: othermsgs.post_id },
                   }">
-                    <div class="grid grid-cols-12  border-2  rounded-md bg-blue-300 p-2 hover:bg-gray-300">
+                    <div class="grid grid-cols-12  border-2  rounded-md bg-blue-300 p-2 hover:bg-accent hover:text-black">
                       <div class="col-span-12 md:col-span-6 text-blue-600 hover:text-blue-700">
                         <div v-if="othermsgs.user_one === user.user_name">
                           {{ othermsgs.user_two }}
@@ -55,8 +55,8 @@
                       name: 'MsgView',
                       params: { postid: othermsgs.post_id },
                     }">
-                      <div class="grid grid-cols-12  border-y-1 rounded-md p-2 hover:bg-gray-300">
-                        <div class="col-span-12 md:col-span-6 text-blue-600 hover:text-blue-700">
+                      <div class="grid grid-cols-12  border-y-1 rounded-md p-2  hover:bg-accent hover:text-black">
+                        <div class="col-span-12 md:col-span-6  hover:bg-accent hover:text-black">
                           <div v-if="othermsgs.user_one === user.user_name">
                             {{ othermsgs.user_two }}
                           </div>
@@ -71,12 +71,9 @@
                   <div v-if="othermsgs.read === 1" class="rounded-md bg-yellow-400 border-2">
                     <router-link :to="{
                       name: 'MsgView',
-                      params: { postid: othermsgs.post_id },
-                    }">
-                      <div class="grid grid-cols-12  rounded-md p-2 hover:bg-gray-300">
-
+                      params: { postid: othermsgs.post_id }}">
+                      <div class="grid grid-cols-12 rounded-md p-2">
                         <div class="col-span-12 md:col-span-6">
-
                           <div v-if="othermsgs.user_one === user.user_name">
                             {{ othermsgs.user_two }}
                           </div>
@@ -207,6 +204,12 @@
                 </div>
               </div>
             </div>
+              <div class="col-span-12 mb-20" v-if="recordsLength > 0">
+                <pagination @paginate="getPage" :records="recordsLength" v-model="page" :per-page="perPage"
+                  :options="options"> </pagination>
+                <div class="flex justify-center"> {{ recordsLength }} Messages</div>
+              </div>
+              <div class="col-span-12 mb-20 flex justify-center" v-else>{{ recordsLength }} Messages</div>
           </div>
         </div>
       </div>
@@ -226,6 +229,8 @@ import MainHeaderMid from "../../layouts/headers/MainHeaderMid.vue";
 import MainHeaderBottom from "../../layouts/headers/MainHeaderBottom.vue";
 import MainHeaderVendor from "../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../layouts/footers/FooterMain.vue";
+import PaginationComp from '../../components/MyPagination.vue'
+
 
 export default defineComponent({
   name: "MsgView",
@@ -269,6 +274,16 @@ export default defineComponent({
       SendMsgForm: {
         msginfo: "",
       },
+
+      
+      page: 1,
+      perPage: 25,
+      recordsLength: 0,
+      options: {
+        edgeNavigation: false,
+        format: false,
+        template: PaginationComp
+      }
     }
   },
 
@@ -308,11 +323,11 @@ export default defineComponent({
           this.item_uuid = response.data.item_uuid;
           this.order_uuid = response.data.order_uuid;
           this.gettheitem();
-          this.getcountofusers();
           this.getmsgsofusers();
-          this.getmainpostcomments();
+          this.get_main_post_comments(this.page);
           this.message_notification_read();
-          this.message_markasread();
+          this.getmain_post_comments_count();
+ 
           this.loaded = true;
         })
         .catch((error) => {
@@ -334,19 +349,7 @@ export default defineComponent({
         });
     },
     // gets the count of posts
-    message_markasread () {
-      axios({
-        method: "put",
-        url: "/notification/new/messages/markasread",
-        withCredentials: true,
-        headers: authHeader(),
-      })
-        .then(() => {
-          this.getmsgsofusers();
-        })
-        .catch(() => {
-        });
-    },
+  
 
     // get the item
     gettheitem () {
@@ -367,35 +370,31 @@ export default defineComponent({
     },
     // gets coments of main post
 
-    getmainpostcomments () {
+    getPage: function (page: any) {
+      // we simulate an api call that fetch the records from a backend
+      this.mainpostcomments = [];
+      const startIndex = this.perPage * (page - 1) + 1;
+      const endIndex = startIndex + this.perPage - 1;
+      this.get_main_post_comments(page)
+    },
+    get_main_post_comments (page: any) {
       axios({
-        method: "get",
-        url: "/msg/main/comment/" + this.postid,
-        withCredentials: true,
+        method: 'get',
+        url: "/msg/main/comment/" + this.postid + "/" + page,
         headers: authHeader(),
-      })
-        .then((response) => {
-          this.mainpostcomments = response.data;
-        })
-        .catch((error) => {
-          console.log(error)
-        });
+      }).then((response) => { this.mainpostcomments = response.data; })
+
+    },
+    getmain_post_comments_count () {
+      axios({
+        method: 'get',
+        url: "/msg/count/" + this.postid,
+        headers: authHeader(),
+      }).then((response) => { 
+        this.recordsLength = response.data.count
+       })
     },
 
-    // gets the count of posts
-    getcountofusers () {
-      axios({
-        method: "get",
-        url: "/msg/main/comment/" + this.postid,
-        withCredentials: true,
-        headers: authHeader(),
-      })
-        .then((response) => {
-          this.other_user_count = response.data.get_count;
-        })
-        .catch(() => {
-        });
-    },
     // gets the msds of the users
     getmsgsofusers () {
       axios({
@@ -422,10 +421,10 @@ export default defineComponent({
       })
         .then((response) => {
           if ((response.data.success)) {
-            this.getcountofusers();
             this.getmsgsofusers();
-            this.getmainpostcomments();
+            this.get_main_post_comments(this.page);
             this.getmainpost();
+            this.getmain_post_comments_count();
           }
 
         })

@@ -23,7 +23,7 @@
         class="bg-neutral rounded-md px-8 pt-6 pb-8 mb-4 w-full"
         @submit.prevent="onSubmit"
       >
-        <div class="mb-4 text-center text-[28px] text-zinc-600">
+        <div class="mb-4 text-center text-[28px] ">
           Change Password
         </div>
         <div class="mb-4">

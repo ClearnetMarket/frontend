@@ -24,40 +24,52 @@
               <div class="flex flex-wrap lg:justify-end md:justify-evenly sm:justify-center ">
                 <div v-if="user" class="flex">
 
-                   <div class="dropdown dropdown-end">
-                      <div v-if="notecount === 0">
-
-                        <button class="hover:bg-gray-600 text-white hover:text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline font-bold ">
-                              <font-awesome-icon icon="fa-solid fa-bell" class="text-[22px]" />
-                        </button>
-                        <ul tabindex="0" class="dropdown-content dropdown-hover dropdown-hover menu p-2 shadow bg-neutral rounded-box w-52 text-white text-left rounded-md w-96">
-                          <div v-for="notes in newnotes">
-                              <li class="w-full p-5 hover:bg-yellow-500 hover:text-white hover:font-bold">
-                                {{notes.message}}
-                              </li>
-                          </div>
-                        </ul>
-                      </div>
-                      <div v-else>
-                          <button class="bg-red-600 text-white hover:text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline font-bold bg-red-600 dropdown-hover"
-                                  @click.prevent="notificationsnotificiationmarkasread()">
-                              {{notecount}}  <font-awesome-icon icon="fa-solid fa-bell " class="text-[22px]" />
-                          </button>
-                          <ul tabindex="0" class="dropdown-content dropdown-hover menu p-2 shadow bg-neutral rounded-box w-52 text-white text-left rounded-md w-96">
-                              <div v-for="notes in newnotes">
-                                  <li class="w-full p-5 hover:bg-yellow-500 hover:text-white hover:font-bold ">
-                                    {{notes.message}}
-                                  </li>
-                              </div>
-                          </ul>
-                      </div>
+                  <div class="dropdown dropdown-end">
+                    <div v-if="notecount === 0">
+                      <button
+                        class="hover:bg-gray-600 text-white hover:text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline font-bold ">
+                        <font-awesome-icon icon="fa-solid fa-bell" class="text-[22px]" />
+                      </button>
+                      <ul tabindex="0"
+                        class="dropdown-content dropdown-hover  menu p-2 shadow bg-neutral rounded-box w-52 text-white text-left">
+                        <div v-for="notes in newnotes">
+                          <li class="w-full p-5  hover:text-white hover:font-bold text-[13px]">
+                            {{ notes.message }}
+                          </li>
+                        </div>
+                      </ul>
                     </div>
+                    <div v-else>
+                      <button
+                        class="bg-red-600 text-white hover:text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline font-bold dropdown-hover"
+                        @click.prevent="notificationsnotificiationmarkasread()">
+                        {{ notecount }} <font-awesome-icon icon="fa-solid fa-bell " class="text-[22px]" />
+                      </button>
+                      <ul tabindex="0"
+                        class="dropdown-content dropdown-hover menu p-2 shadow bg-neutral rounded-box w-52 text-white text-left">
+                        <div v-for="notes in newnotes">
+                          <div v-if="notes.read == 0">
+                            <li class="w-full p-5  hover:text-white hover:font-bold ">
+                              {{ notes.message }}
+                            </li>
+                          </div>
+                          <div v-else>
+                            <li class="w-full p-5 bg-red-300hover:font-bold ">
+                              {{ notes.message }}
+                            </li>
+
+                          </div>
+
+                        </div>
+                      </ul>
+                    </div>
+                  </div>
 
                   <router-link :to="{ name: 'MsgHome' }" class="px-3 ">
-                      <button
-                        class="hover:bg-zinc-700 text-white hover:text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline font-bold ">
+                    <button
+                      class="hover:bg-zinc-700 text-white hover:text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline font-bold ">
                       <font-awesome-icon icon="fa-solid fa-envelope " class="text-[22px]" />
-                      </button>
+                    </button>
                   </router-link>
                   <router-link :to="{ name: 'sell' }">
                     <button
@@ -136,7 +148,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-         if ((response.data.login == true)) {
+          if ((response.data.login == true)) {
             this.user = response.data.user;
             this.notificationscount();
             this.notificationsgetlast();
@@ -162,7 +174,7 @@ export default defineComponent({
             this.notecount = response.data.count;
           }
         })
-        .catch(() => {});
+        .catch(() => { });
     },
     notificationsgetlast () {
       axios({
@@ -172,9 +184,9 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-            this.newnotes = response.data;
+          this.newnotes = response.data;
         })
-        .catch(() => {});
+        .catch(() => { });
     },
     notificationsnotificiationmarkasread () {
       axios({
@@ -185,11 +197,11 @@ export default defineComponent({
       })
         .then((response) => {
           if (response.data.success) {
-          this.rednote = !this.rednote;
+            this.rednote = !this.rednote;
 
           }
         })
-        .catch(() => {});
+        .catch(() => { });
     },
     logout () {
       localStorage.removeItem("auth_token");

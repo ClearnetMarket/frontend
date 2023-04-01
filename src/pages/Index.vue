@@ -1,5 +1,4 @@
 <template>
-
     <MainHeaderTop />
     <MainHeaderMid />
     <MainHeaderBottom />
@@ -14,9 +13,7 @@
     <div class="wrapper">
         <div class="container max-w-7xl mx-auto mb-0 bg-text-white text-white">
             <TodayFeatured />
-            <TodayFeatured />
-            <TodayFeatured />
-            <TodayFeatured />
+            <AllItems />
         </div>
     </div>
     <MainFooter />
@@ -32,8 +29,10 @@ import MainHeaderBottom from '../layouts/headers/MainHeaderBottom.vue'
 import MainHeaderVendor from '../layouts/headers/MainHeaderVendor.vue'
 import Newticketmsg from '../layouts/headers/Ticketmsg.vue'
 import Confirmed from '../layouts/headers/NotConfirmed.vue'
-import TodayFeatured from '../components/item_slides/today_featured.vue'
 import MainFooter from '../layouts/footers/FooterMain.vue'
+
+import TodayFeatured from '../components/item_slides/today_featured.vue'
+import AllItems from '../components/item_slides/all_items.vue'
 
 export default defineComponent({
     name: 'Home',
@@ -44,9 +43,10 @@ export default defineComponent({
         MainHeaderBottom,
         MainHeaderVendor,
         Newticketmsg,
-        TodayFeatured,
         MainFooter,
         Confirmed,
+        TodayFeatured,
+        AllItems,
     },
 
     data() {
@@ -59,7 +59,6 @@ export default defineComponent({
     mounted() {
         this.userstatus()
     },
-
     methods: {
         userstatus() {
             axios({

@@ -3,7 +3,7 @@
     <MainHeaderMid />
     <MainHeaderBottom />
     <div class="wrapper">
-        <div class="container max-w-7xl mx-auto pb-60 bg-gray-300 text-white">
+        <div class="container max-w-7xl mx-auto  text-white">
             <!-- Container-->
             <div class="mt-5 mb-5 px-10">
                 <nav class="rounded-md w-full">

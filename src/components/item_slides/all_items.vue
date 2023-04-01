@@ -1,6 +1,8 @@
 <template>
     <div class="flex flex-nowrap flex-col p-5">
+               <div class="text-[24px] text-white">Freeport Items</div>
         <div class="md:flex md:mb-5 gap-5">
+             
             <div v-for="item in allitems" :key="item.id">
                 <generic_item :item="item" />
             </div>
@@ -34,7 +36,7 @@ export default defineComponent({
         getallitems() {
             axios({
                 method: 'get',
-                url: '/category/query/index/all',
+                url: '/itemquery/query/all',
                 withCredentials: true,
             })
                 .then((response) => {

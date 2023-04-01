@@ -36,7 +36,7 @@
               </div>
               <div class="col-span-12 md:col-span-9">
                 <div class="text-[20px] text-center">{{ userprofile.display_name }}</div>
-                <div class="text-gray-500 text-center  mb-5">
+                <div class=" text-center  mb-5">
                   Member Since: {{ relativeDate (userprofile.member_since) }} ago
                 </div>
                

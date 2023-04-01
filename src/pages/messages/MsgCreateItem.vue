@@ -5,98 +5,139 @@
   <MainHeaderBottom />
   <div class="wrapper">
     <div class="container max-w-7xl mx-auto px-10  mb-10 text-white">
-       <nav class="rounded-md w-full mb-5">
-          <ol class="list-reset flex">
-            <li>
-              <router-link :to="{ name: 'home' }">
-                <a class="text-blue-600 hover:text-blue-700">Home</a>
-              </router-link>
-            </li>
-            <li>
-              <span class="text-white mx-2">/</span>
-            </li>
-            <li>
-              <router-link :to="{ name: 'MsgHome' }">
-                <a class="text-blue-600 hover:text-blue-700">Message Center Home</a>
-              </router-link>
-            </li>
-            <li>
-              <span class="text-white mx-2">/</span>
-            </li>
-          </ol>
-        </nav>
-      <div class="grid grid-cols-12">
-        <div class="col-span-3">
-          <div class="text-[18px] mb-5">Message Center</div>
-          <div class="text-[12px]">Conversations</div>
-          <div class=""></div>
-        </div>
+      <nav class="rounded-md w-full mb-5">
+        <ol class="list-reset flex">
+          <li>
+            <router-link :to="{ name: 'home' }">
+              <a class="text-blue-600 hover:text-blue-700">Home</a>
+            </router-link>
+          </li>
+          <li>
+            <span class="text-white mx-2">/</span>
+          </li>
+          <li>
+            <router-link :to="{ name: 'MsgHome' }">
+              <a class="text-blue-600 hover:text-blue-700">Message Center Home</a>
+            </router-link>
+          </li>
+          <li>
+            <span class="text-white mx-2">/</span>
+          </li>
+        </ol>
+      </nav>
+      <div class="grid grid-cols-12 gap-4 ">
+        <div class="col-span-12 md:col-span-3">
+          <div class="  bg-neutral rounded-md shadow-md text-white p-5">
+            <div class="text-[18px] mb-5">Message Center</div>
 
-        <div class="col-span-9">
-          <div v-if="itemforsale">
-            <div class="grid grid-cols-12 gap-4 border border-1 p-4 mb-4 bg-neutral rounded-md">
-              <div class="col-span-2">
-                <img class="" :src="itemforsale.image_one_url_500" alt="" />
+            <div v-for="othermsgs in userlist" class="py-2  hover:rounded-md">
+
+              <div v-if="othermsgs.read === 0" class="rounded-md">
+                <router-link :to="{
+                  name: 'MsgView',
+                  params: { postid: othermsgs.post_id },
+                }">
+                  <div class="grid grid-cols-12  border-y-1 rounded-md p-2 hover:bg-accent hover:text-black">
+                    <div class="col-span-12 md:col-span-6 ">
+                      <div v-if="othermsgs.user_one === user.user_name">
+                        {{ othermsgs.user_two }}
+                      </div>
+                      <div v-else>{{ othermsgs.user_one }}</div>
+                    </div>
+                    <div class="col-span-12 md:col-span-6 text-[11px]">
+                      {{ relativeDate(othermsgs.timestamp) }}
+                    </div>
+                  </div>
+                </router-link>
               </div>
-              <div class="col-span-10">
-                <div class="font-bold text-[18px]">
-                  {{ itemforsale.item_title }}
-                </div>
-                <div class="text-[14px]">Item ID: {{ itemforsale.uuid }}</div>
-                <div class="text-[14px]">Item Price: {{ itemforsale.price }}</div>
 
-                <div class="text-[14px]">
-                  Item Location: {{ itemforsale.origin_country_name }}
-                </div>
-
-                <div class="text-[14px]">
-                  Free Shipping: {{ itemforsale.shipping_info_0 }}
-                </div>
-                <div class="text-[14px]">
-                  Paid Shipping: {{ itemforsale.shipping_info_2 }}
-                </div>
+              <div v-if="othermsgs.read === 1" class="rounded-md bg-yellow-400 border-2">
+                <router-link :to="{
+                  name: 'MsgView',
+                  params: { postid: othermsgs.post_id },
+                }">
+                  <div class="grid grid-cols-12 rounded-md p-2 hover:bg-accent">
+                    <div class="col-span-12 md:col-span-6 ">
+                      <div v-if="othermsgs.user_one === user.user_name" class="">
+                        {{ othermsgs.user_two }}
+                      </div>
+                      <div v-else>
+                        {{ othermsgs.user_one }}
+                      </div>
+                    </div>
+                    <div class="col-span-6 text-[11px]">
+                      {{ relativeDate(othermsgs.timestamp) }}
+                    </div>
+                  </div>
+                </router-link>
               </div>
             </div>
           </div>
-          <div class="text-[18px] mb-3">
-            <div v-if="other_user">
-              Contact {{ other_user.display_name }}
+        </div>
+     
+      <div class="col-span-12 md:col-span-9">
+        <div v-if="itemforsale">
+          <div class="grid grid-cols-12 gap-4 border border-1 p-4 mb-4 bg-neutral rounded-md">
+            <div class="col-span-2">
+              <img class="" :src="itemforsale.image_one_url_500" alt="" />
+            </div>
+            <div class="col-span-10">
+              <div class="font-bold text-[18px]">
+                {{ itemforsale.item_title }}
+              </div>
+              <div class="text-[14px]">Item ID: {{ itemforsale.uuid }}</div>
+              <div class="text-[14px]">Item Price: {{ itemforsale.price }}</div>
+
+              <div class="text-[14px]">
+                Item Location: {{ itemforsale.origin_country_name }}
+              </div>
+
+              <div class="text-[14px]">
+                Free Shipping: {{ itemforsale.shipping_info_0 }}
+              </div>
+              <div class="text-[14px]">
+                Paid Shipping: {{ itemforsale.shipping_info_2 }}
+              </div>
             </div>
           </div>
-
-          <form class="rounded-md pt-6 pb-8 mb-4 w-full" @submit.prevent="onSubmit">
-            <div class="">
-              <textarea v-model="SendMsgForm.msginfo"
-                        id="item_description"
-                        placeholder="Write something .."
-                        class="rounded w-full py-2 px-3 input-primary text-black">
-              </textarea>
-              <span v-if="v$.SendMsgForm.msginfo.$error" class="text-red-600 text-center">
-                {{ v$.SendMsgForm.msginfo.$errors[0].$message }}
-              </span>
-            </div>
-            <div class="flex justify-end">
-              <button
-                class="bg-gray-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                type="submit">
-                Message User
-              </button>
-            </div>
-          </form>
         </div>
+        <div class="text-[18px] mb-3">
+          <div v-if="other_user">
+            Contact {{ other_user.display_name }}
+          </div>
+        </div>
+        <form class="rounded-md pt-6 pb-8 mb-4 w-full" @submit.prevent="onSubmit">
+          <div class="">
+            <textarea v-model="SendMsgForm.msginfo" id="item_description" placeholder="Write something .."
+              class="rounded w-full py-2 px-3 input-primary text-black">
+                  </textarea>
+            <span v-if="v$.SendMsgForm.msginfo.$error" class="text-red-600 text-center">
+              {{ v$.SendMsgForm.msginfo.$errors[0].$message }}
+            </span>
+          </div>
+          <div class="flex justify-end">
+            <button
+              class="bg-gray-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              type="submit">
+              Message User
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
+   </div>
+
   <MainFooter />
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 import axios from "axios";
-
 import { useRoute } from "vue-router";
 import { notify } from "@kyvg/vue3-notification";
 import useValidate from "@vuelidate/core";
+import { formatDistance } from "date-fns";
 import { required, minLength } from "@vuelidate/validators";
 import authHeader from "../../services/auth.header";
 import MainHeaderTop from "../../layouts/headers/MainHeaderTop.vue";
@@ -118,9 +159,10 @@ export default defineComponent({
     let user_uuid_route = useRoute();
     this.other_user_uuid = user_uuid_route.params.uuid;
     this.item_uuid = user_uuid_route.params.itemuuid;
-
+    this.userstatus();
     this.getotheruser();
     this.gettheitem();
+    this.getmsgsofusers();
   },
   data () {
     return {
@@ -131,12 +173,16 @@ export default defineComponent({
       userlist: null,
       other_user_uuid: null,
       item_uuid: null,
+      user_one: null,
+      user_two: null,
+      user: null,
       SendMsgForm: {
         msginfo: "",
       },
     };
   },
   validations () {
+
     return {
       SendMsgForm: {
         msginfo: { required, minLength: minLength(4) },
@@ -145,7 +191,29 @@ export default defineComponent({
   },
 
   methods: {
+    relativeDate (value: any) {
+      let e = new Date(value).valueOf();
+      return formatDistance(e, new Date());
+    },
+    userstatus () {
+      axios({
+        method: "get",
+        url: "/auth/whoami",
+        withCredentials: true,
+        headers: authHeader(),
+      })
+        .then((response) => {
+          if ((response.data.login == true)) {
+            this.user = response.data.user
+          }
+        })
+        .catch(() => {
+          this.user = null
+        });
+    },
+
     gettheitem () {
+
       axios({
         method: "get",
         url: "/item/" + this.item_uuid,
@@ -153,9 +221,10 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if ((response.data.success)) {
-            this.itemforsale = response.data;
-          }
+
+          this.itemforsale = response.data;
+
+
         })
         .catch((error) => {
           console.log(error)
@@ -182,14 +251,16 @@ export default defineComponent({
     getmsgsofusers () {
       axios({
         method: "get",
-        url: "/msg/count",
+        url: "/msg/msgs/all",
         withCredentials: true,
+        headers: authHeader(),
       })
         .then((response) => {
           this.userlist = response.data;
+          console.log(this.userlist)
         })
-        .catch((error) => {
-          console.log(error)
+        .catch(() => {
+
         });
     },
     getcountofusers () {
@@ -223,18 +294,18 @@ export default defineComponent({
               type: "success",
             });
           }
-            if (response.data.error){
-                notify({
-                title: "Freeport Error",
-                text: response.data.error,
-                type: "error",
-              });
+          if (response.data.error) {
+            notify({
+              title: "Freeport Error",
+              text: response.data.error,
+              type: "error",
+            });
 
             this.$router.push({
               name: "MarketItem",
               params: { id: this.itemforsale.uuid },
             });
-            }
+          }
         })
         .catch((error) => {
           console.log(error)

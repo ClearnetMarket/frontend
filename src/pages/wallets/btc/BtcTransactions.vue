@@ -5,7 +5,8 @@
   <MainHeaderMid />
   <MainHeaderBottom />
   <div class="wrapper">
-  <div class="container max-w-7xl mx-auto  py-5 text-white">
+  <div class="container max-w-7xl mx-auto 
+  py-5 text-white">
     <!-- Container-->
 
     <nav class="rounded-md px-5">
@@ -204,6 +205,14 @@
           <div class="col-span-6 sm:col-span-2 row-span-1 ">{{ t.balance }}</div>
         </div>
       </div>
+
+      <div class="col-span-12 mb-20" v-if="recordsLength > 0">
+        <pagination @paginate="getPage" :records="recordsLength" v-model="page" :per-page="perPage"
+          :options="options"> </pagination>
+        <div class="flex justify-center"> {{ recordsLength }} Transactions Found</div>
+      </div>
+      <div class="col-span-12 mb-20 flex justify-center" v-else>{{ recordsLength }} Transactions</div>
+
     </div>
     <div v-else>
       <div class="pt-5 text-center">
@@ -226,7 +235,7 @@ import MainHeaderBottom from "../../../layouts/headers/MainHeaderBottom.vue";
 import MainHeaderVendor from "../../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../../layouts/footers/FooterMain.vue";
 import authHeader from "../../../services/auth.header";
-
+import PaginationComp from '../../../components/MyPagination.vue'
 
 
 export default defineComponent({
@@ -246,9 +255,17 @@ export default defineComponent({
       transactions: [],
       date: Date.now(),
       tab: [],
+      
+      page: 1,
+      perPage: 50,
+      recordsLength: 0,
+      options: {
+        edgeNavigation: false,
+        format: false,
+        template: PaginationComp
+      }
     };
   },
-
 
   methods: {
     userstatus () {
@@ -260,7 +277,7 @@ export default defineComponent({
       })
         .then((response) => {
          if ((response.data.login == true)) {
-            this.btctransactions();
+          this.getPage(this.page);
           }
         })
         .catch((error) => {
@@ -269,20 +286,30 @@ export default defineComponent({
         });
     },
 
-    btctransactions () {
-      axios({
-        method: "get",
-        url: "/btc/transactions",
-        withCredentials: true,
-        headers: authHeader(),
-      }).then((response) => {
-        if ((response.data.success)) {
+    getPage: function (page: any) {
+      // we simulate an api call that fetch the records from a backend
+      this.transactions = [];
+      const startIndex = this.perPage * (page - 1) + 1;
+      const endIndex = startIndex + this.perPage - 1;
 
-          this.transactions = response.data;
-        }
+      this.transactionsbtc(page)
 
-      });
     },
+    transactionsbtc (page: any) {
+      axios({
+        method: 'get',
+        url: "/btc/transactions",
+        headers: authHeader(),
+      }).then((response) => {  this.transactions = response.data; })
+    },
+    transactions_btc_count () {
+      axios({
+        method: 'get',
+        url: "/btc/transactions/count",
+        headers: authHeader(),
+      }).then((response) => { this.recordsLength = response.data.count })
+    },
+
     relativeDate (value: any) {
       let e = new Date(value).valueOf();
       return formatDistance(e, new Date());

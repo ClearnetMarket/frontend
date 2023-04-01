@@ -3,7 +3,7 @@
 <template>
     <html class="opensans">
         <router-view />
-        <notifications position="bottom left" />
+        <notifications position="top center" />
     </html>
 </template>
 

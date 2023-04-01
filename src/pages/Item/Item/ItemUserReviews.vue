@@ -1,6 +1,6 @@
 
 <template>
-  <div class="max-w-7xl mx-auto pb-36 mt-5 rounded-md">
+  <div class="max-w-7xl mx-auto pb-36 mt-5 rounded-md text-white">
 
     <div class="grid grid-cols-12 gap-5">
       <div class="col-span-12 md:col-span-4 p-5 bg-neutral rounded-md">
@@ -8,89 +8,97 @@
         <p class="text-sm font-medium text-white border-b">
           {{ vendor_reviews_total }} total ratings
         </p>
-        <div class="flex items-center mt-4">
-          <span class="text-sm font-medium text-gray-500">10 star</span>
-          <div class="mx-4 w-2/4 h-5 bg-gray-300 rounded dark:bg-gray-700">
-            <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_ten }"></div>
-          </div>
-          <span class="text-sm font-medium text-gray-500 dark:text-gray-400">{{ vendor_reviews_percent_ten }}%</span>
-        </div>
-        <div class="flex items-center mt-4">
-          <span class="text-sm font-medium pr-2 text-gray-500 dark:text-gray-400">9 star</span>
-          <div class="mx-4 w-2/4 h-5 bg-gray-300 rounded dark:bg-gray-700">
-            <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_nine }"></div>
-          </div>
-          <span class="text-sm font-medium text-gray-500 dark:text-gray-400">{{ vendor_reviews_percent_nine }}%</span>
-        </div>
-        <div class="flex items-center mt-4">
-          <span class="text-sm font-medium pr-2 text-gray-500 dark:text-gray-400">8 star</span>
-          <div class="mx-4 w-2/4 h-5 bg-gray-300 rounded dark:bg-gray-700">
-            <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_eight }"></div>
-          </div>
-          <span class="text-sm font-medium text-gray-500 dark:text-gray-400">
-            {{ vendor_reviews_percent_eight }}%</span>
-        </div>
-        <div class="flex items-center mt-4">
-          <span class="text-sm font-medium pr-2 text-gray-500 dark:text-gray-400">7 star</span>
-          <div class="mx-4 w-2/4 h-5 bg-gray-300 rounded dark:bg-gray-700">
-            <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_seven }"></div>
-          </div>
-          <span class="text-sm font-medium text-gray-500 dark:text-gray-400">
-            {{ vendor_reviews_percent_seven }}%</span>
-        </div>
-        <div class="flex items-center mt-4">
-          <span class="text-sm font-medium pr-2 text-gray-500 dark:text-gray-400">6 star</span>
-          <div class="mx-4 w-2/4 h-5 bg-gray-300 rounded dark:bg-gray-700">
-            <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_six }"></div>
-          </div>
-          <span class="text-sm font-medium pr-2 text-gray-500 dark:text-gray-400">{{
-            vendor_reviews_percent_six
-          }}%</span>
-        </div>
-        <div class="flex items-center mt-4">
-          <span class="text-sm font-medium pr-2 text-gray-500 dark:text-gray-400">5 star</span>
-          <div class="mx-4 w-2/4 h-5 bg-gray-300 rounded dark:bg-gray-700">
-            <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_five }"></div>
-          </div>
-          <span class="text-sm font-medium text-gray-500 dark:text-gray-400">{{ vendor_reviews_percent_five }}%</span>
-        </div>
-        <div class="flex items-center mt-4">
-          <span class="text-sm font-medium pr-2 text-gray-500 dark:text-gray-400">4 star</span>
-          <div class="mx-4 w-2/4 h-5 bg-gray-300 rounded dark:bg-gray-700">
-            <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_four }"></div>
-          </div>
-          <span class="text-sm font-medium text-gray-500 dark:text-gray-400">{{ vendor_reviews_percent_four }}%</span>
-        </div>
-        <div class="flex items-center mt-4">
-          <span class="text-sm font-medium pr-2 text-gray-500 dark:text-gray-400">3 star</span>
-          <div class="mx-4 w-2/4 h-5 bg-gray-300 rounded dark:bg-gray-700">
-            <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_three }"></div>
-          </div>
-          <span class="text-sm font-medium pr-2 text-gray-500 dark:text-gray-400">{{
-            vendor_reviews_percent_three
-          }}%</span>
-        </div>
-        <div class="flex items-center mt-4">
-          <span class="text-sm font-medium pr-2 text-gray-500 dark:text-gray-400">2 star</span>
-          <div class="mx-4 w-2/4 h-5 bg-gray-300 rounded dark:bg-gray-700">
-            <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_two }"></div>
-          </div>
-          <span class="text-sm font-medium text-gray-500 dark:text-gray-400">{{ vendor_reviews_percent_two }}%</span>
-        </div>
-        <div class="flex items-center mt-4">
-          <span class="text-sm font-medium pr-2 text-gray-500 dark:text-gray-400">1 star</span>
-          <div class="mx-4 w-2/4 h-5 bg-gray-300 rounded dark:bg-gray-700">
-            <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_one }"></div>
-          </div>
-          <span class="text-sm font-medium text-gray-500 dark:text-gray-400">{{ vendor_reviews_percent_one }}%</span>
-        </div>
-      </div>
+
+
+       
+                <div class="flex items-center mt-4">
+                  <span class="text-sm font-medium pr-2 flex">10</span>
+                  <div class="mx-4 w-2/4 h-5 rounded ">
+                    <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_ten + '%' }"></div>
+                  </div>
+                  <span class="text-sm font-medium pr-2">{{ vendor_reviews_percent_ten }}%</span>
+                </div>
+
+              <div class="flex items-center mt-4">
+                <span class="text-sm font-medium  pr-2">9 </span>
+                <div class="mx-4 w-2/4 h-5  rounded ">
+                  <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_nine + '%' }"></div>
+                </div>
+                <span class="text-sm font-medium pl-2">{{ vendor_reviews_percent_nine }}%</span>
+              </div>
+
+              <div class="flex items-center mt-4">
+                <span class="text-sm font-medium pr-2">8 </span>
+                <div class="mx-4 w-2/4 h-5 rounded ">
+                  <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_eight + '%' }"></div>
+                </div>
+                <span class="text-sm font-medium pl-2">
+                  {{ vendor_reviews_percent_eight }}%</span>
+              </div>
+
+              <div class="flex items-center mt-4">
+                <span class="text-sm font-medium pr-2 flex">7 </span>
+                <div class="mx-4 w-2/4 h-5 rounded ">
+                  <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_seven + '%' }"></div>
+                </div>
+                <span class="text-sm font-medium pl-2">{{ vendor_reviews_percent_seven }}%</span>
+              </div>
+
+              <div class="flex items-center mt-4">
+                <span class="text-sm font-medium pr-2">6 </span>
+                <div class="mx-4 w-2/4 h-5  rounded ">
+                  <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_six + '%' }"></div>
+                </div>
+                <span class="text-sm font-medium pl-2">{{ vendor_reviews_percent_six }}%</span>
+              </div>
+
+              <div class="flex items-center mt-4">
+                <span class="text-sm font-medium pr-2 ">5 </span>
+                <div class="mx-4 w-2/4 h-5  rounded ">
+                  <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_five + '%' }"></div>
+                </div>
+                <span class="text-sm font-medium pl-2">{{ vendor_reviews_percent_five }}%</span>
+              </div>
+
+              <div class="flex items-center mt-4">
+                <span class="text-sm font-medium pr-2">4 </span>
+                <div class="mx-4 w-2/4 h-5  rounded ">
+                  <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_four + '%' }"></div>
+                </div>
+                <span class="text-sm font-medium pl-2">{{ vendor_reviews_percent_four }}%</span>
+              </div>
+
+              <div class="flex items-center mt-4">
+                <span class="text-sm font-medium pr-2">3 </span>
+                <div class="mx-4 w-2/4 h-5  rounded ">
+                  <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_three + '%' }"></div>
+                </div>
+                <span class="text-sm font-medium pl-2">{{ vendor_reviews_percent_three }}%</span>
+              </div>
+
+              <div class="flex items-center mt-4">
+                <span class="text-sm font-medium pr-2">2 </span>
+                <div class="mx-4 w-2/4 h-5  rounded ">
+                  <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_two + '%' }"></div>
+                </div>
+                <span class="text-sm font-medium pl-2">{{ vendor_reviews_percent_two }}%</span>
+              </div>
+              <div class="flex items-center mt-4">
+                <span class="text-sm font-medium pr-2">1 </span>
+                <div class="mx-4 w-2/4 h-5  rounded ">
+                  <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_one + '%' }"></div>
+                </div>
+                <span class="text-sm font-medium pl-2">{{ vendor_reviews_percent_one }}%</span>
+              </div>
+            </div>
+
+      
 
       <div class="col-span-12 md:col-span-8">
         <div class="" v-if="vendor_reviews_total > 0">
           <div v-for="review in vendorreviews" :key="review.id">
             <div class="grid grid-cols-12 bg-neutral rounded-md p-5 mb-5">
-              <div class="col-span-12 text-sm font-medium text-gray-500 dark:text-gray-400">
+              <div class="col-span-12 text-sm font-medium ">
                 {{ review.customer_name }}
               </div>
               <div class="col-span-12  text-[14px]">
@@ -99,7 +107,7 @@
               <div class="col-span-12 mb-2">
                 <StarRating v-bind:rating="review.vendor_rating" />
               </div>
-              <div class="col-span-12 text-sm font-medium text-gray-500 dark:text-gray-400">
+              <div class="col-span-12 text-sm font-medium ">
                 Date Purchased: {{ relativeDate(review.timestamp) }} ago
               </div>
               <div class="col-span-12 mt-2">{{ review.review_of_vendor }}</div>

@@ -21,7 +21,7 @@
       </div>
       <div class="mx-auto max-w-lg flex items-center justify-center mb-10 mt-12 px-5">
         <form class="bg-neutral rounded-md px-8 pt-6 pb-8 mb-4 w-full" @submit.prevent="onSubmit">
-          <div class="mb-4 text-center text-[28px] text-zinc-600">Change Pin</div>
+          <div class="mb-4 text-center text-[28px] ">Change Pin</div>
           <div class="mb-4">
             <label class="block text-white text-sm font-bold mb-2">Enter current Password</label>
             <input v-model="ChangePinForm.password"

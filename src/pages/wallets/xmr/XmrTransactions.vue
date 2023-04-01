@@ -208,6 +208,14 @@
           <div class="col-span-12 sm:col-span-2 row-span-1 ">{{ t.balance }}</div>
         </div>
       </div>
+
+        <div class="col-span-12 mb-20" v-if="recordsLength > 0">
+            <pagination @paginate="getPage" :records="recordsLength" v-model="page" :per-page="perPage"
+              :options="options"> </pagination>
+            <div class="flex justify-center"> {{ recordsLength }} Transactions Found</div>
+          </div>
+          <div class="col-span-12 mb-20 flex justify-center" v-else>{{ recordsLength }} Transactions</div>
+
     </div>
     <div v-else>
       <div class="pt-5 text-center">
@@ -229,6 +237,7 @@ import MainHeaderBottom from "../../../layouts/headers/MainHeaderBottom.vue"
 import MainHeaderVendor from "../../../layouts/headers/MainHeaderVendor.vue"
 import MainFooter from "../../../layouts/footers/FooterMain.vue"
 import authHeader from "../../../services/auth.header.js"
+import PaginationComp from '../../../components/MyPagination.vue'
 
 
 export default defineComponent({
@@ -242,13 +251,22 @@ export default defineComponent({
   },
   mounted () {
     this.userstatus();
-    this.xmrtransactions();
+
   },
   data () {
     return {
       transactions: [],
       date: Date.now(),
       tab: [],
+
+      page: 1,
+      perPage: 50,
+      recordsLength: 0,
+      options: {
+        edgeNavigation: false,
+        format: false,
+        template: PaginationComp
+      }
     };
   },
 
@@ -263,7 +281,7 @@ export default defineComponent({
       })
         .then((response) => {
          if ((response.data.login == true)) {
-            this.xmrtransactions();
+            this.getPage(this.page);
           }
         })
         .catch((error) => {
@@ -271,22 +289,29 @@ export default defineComponent({
           console.log(error)
         });
     },
-    xmrtransactions () {
-      axios({
-        method: "get",
-        url: "/xmr/transactions",
-        withCredentials: true,
-        headers: authHeader(),
-      }).then((response) => {
-        if ((response.data.success)) {
-          this.transactions = response.data;
-        }
-      })
-        .catch((error) => {
-          this.$router.push("/login");
-          console.log(error)
-        });
+
+    getPage: function (page: any) {
+      // we simulate an api call that fetch the records from a backend
+      this.transactions = [];
+      const startIndex = this.perPage * (page - 1) + 1;
+      const endIndex = startIndex + this.perPage - 1;
+      this.transactionsxmr(page)
     },
+    transactionsxmr (page: any) {
+      axios({
+        method: 'get',
+        url: "/xmr/transactions",
+        headers: authHeader(),
+      }).then((response) => { this.transactions = response.data; })
+    },
+    transactions_xmr_count () {
+      axios({
+        method: 'get',
+        url: "/xmr/transactions/count",
+        headers: authHeader(),
+      }).then((response) => { this.recordsLength = response.data.count })
+    },
+
     relativeDate (value: any) {
       let e = new Date(value).valueOf();
       return formatDistance(e, new Date());

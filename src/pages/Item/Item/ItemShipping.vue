@@ -1,6 +1,6 @@
 
 <template>
-  <div class="max-w-7xl mx-auto mt-5 bg-neutral rounded-md p-5">
+  <div class="max-w-7xl mx-auto mt-5 bg-neutral rounded-md ">
     <div class="grid grid-cols-1 text-[20px] font-semibold text-white px-5">
       Shipping
     </div>

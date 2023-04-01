@@ -12,25 +12,18 @@
                                     Categories
                                 </button>
                                 <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-neutral rounded-box w-52 text-white text-left ">
-                                    <li class="text-white hover:bg-yellow-500 hover:font-bold"><a @click="gotourl('categoryhome')"> Categories </a></li>
-                                    <li class="text-white hover:bg-yellow-500 hover:font-bold"><a @click="gotourl('categoryelectronics')"> Electronics </a></li>
-                                    <li class="text-white hover:bg-yellow-500  hover:font-bold"><a @click="gotourl('categorycomputers')"> Computers and Parts </a></li>
-                                    <li class="text-white hover:bg-yellow-500  hover:font-bold">
-                                        <a @click="gotourl('categorysmartphones')">Smart Phones and Accessories</a>
-                                    </li>
-                                    <li class="text-white hover:bg-yellow-500 hover:font-bold"><a @click="gotourl('categoryautomotive')">Automotive </a></li>
-
-                                    <li class="text-white hover:bg-yellow-500  hover:font-bold"><a @click="gotourl('categoryhobbies')">Hobbies and Collectibles</a></li>
-                                    <li class="text-white hover:bg-yellow-500  hover:font-bold">
-                                        <a @click="gotourl('categoryjewelrygold')">
-                                            Jewelry Precious Metals and Coins
-                                        </a>
-                                    </li>
-                                    <li class="text-white hover:bg-yellow-500  hover:font-bold"><a @click="gotourl('categoryapparel')"> Apparel </a></li>
-                                    <li class="text-white hover:bg-yellow-500  hover:font-bold"><a @click="gotourl('categoryhomeandgarden')"> Home and Garden </a></li>
-                                    <li class="text-white hover:bg-yellow-500  hover:font-bold"><a @click="gotourl('categoryart')"> Arts and Crafts </a></li>
-                                    <li class="text-white hover:bg-yellow-500  hover:font-bold"><a @click="gotourl('categorybooksandmovies')"> Books and Movies </a></li>
-                                    <li class="text-white hover:bg-yellow-500 hover:font-bold"><a @click="gotourl('categorydigital')"> Digital Items </a></li>
+                                    <li class="text-white hover:bg-accent hover:font-bold hover:text-black"><a @click="gotourl('categoryhome')"> Categories </a></li>
+                                    <li class="text-white hover:bg-accent hover:font-bold hover:text-black"><a @click="gotourl('categoryelectronics')"> Electronics </a></li>
+                                    <li class="text-white hover:bg-accent hover:font-bold hover:text-black"><a @click="gotourl('categorycomputers')"> Computers and Parts </a></li>
+                                    <li class="text-white hover:bg-accent hover:font-bold hover:text-black"> <a @click="gotourl('categorysmartphones')">Smart Phones and Accessories</a> </li>
+                                    <li class="text-white hover:bg-accent hover:font-bold hover:text-black"><a @click="gotourl('categoryautomotive')">Automotive </a></li>
+                                    <li class="text-white hover:bg-accent hover:font-bold hover:text-black"><a @click="gotourl('categoryhobbies')">Hobbies and Collectibles</a></li>
+                                    <li class="text-white hover:bg-accent hover:font-bold hover:text-black"><a @click="gotourl('categoryjewelrygold')">  Jewelry Precious Metals and Coins</a> </li>
+                                    <li class="text-white hover:bg-accent hover:font-bold hover:text-black"><a @click="gotourl('categoryapparel')"> Apparel </a></li>
+                                    <li class="text-white hover:bg-accent hover:font-bold hover:text-black"><a @click="gotourl('categoryhomeandgarden')"> Home and Garden </a></li>
+                                    <li class="text-white hover:bg-accent hover:font-bold hover:text-black"><a @click="gotourl('categoryart')"> Arts and Crafts </a></li>
+                                    <li class="text-white hover:bg-accent hover:font-bold hover:text-black"><a @click="gotourl('categorybooksandmovies')"> Books and Movies </a></li>
+                                    <li class="text-white hover:bg-accent hover:font-bold hover:text-black"><a @click="gotourl('categorydigital')"> Digital Items </a></li>
                                 </ul>
                             </div>
                         </div>
@@ -41,7 +34,7 @@
                         <div class="col-span-2 sm:mx-3 pt-3 text-[13px] font-bold">
                             <router-link :to="{ name: 'wallet' }" class="px-3">
                                 <button
-                                    class="bg-yellow-500 hover:bg-zinc-400 text-black font-bold py-1 px-3
+                                    class="bg-accent hover:bg-zinc-400 text-black font-bold py-1 px-3
                                     rounded focus:outline-none focus:shadow-outline">
                                     Wallets
                                 </button>

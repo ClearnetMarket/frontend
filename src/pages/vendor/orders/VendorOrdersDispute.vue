@@ -25,7 +25,7 @@
       <div v-for="order in orders" :key="order.id">
         <div v-if="order.uuid">
           <div class="grid grid-cols-12 rounded-md border ">
-            <div class="col-span-12 bg-gray-100 px-5 py-5 rounded-t-md bg-base-100">
+            <div class="col-span-12  px-5 py-5 rounded-t-md ">
               <div class="grid grid-cols-12 text-[12px] ">
                 <div class="col-span-12 md:col-span-4  gap-2 text-[15px] ">
                   <div class="md:text-center font-bold">Order Placed</div>

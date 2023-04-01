@@ -35,7 +35,7 @@
                 </div>
             </div>
 
-            <div class="flex text-white justify-center">Freeport.cash 2022</div>
+            <div class="flex text-white justify-center">Copyright Freeport.cash 2022</div>
             <div class="flex text-white justify-center">
                 <router-link :to="{ name: 'legal' }">
                     <div class="text-[16px] text-white hover:text-gray-400">Legal</div>
