@@ -84,7 +84,7 @@ export default defineComponent({
         headers: authHeader(),
       })
           .then((response) => {
-            if ((response.data.login == true)) {
+            if (response.data.login == true) {
               this.user = response.data.user
               this.user.confirmed = response.data.user.confirmed
 
@@ -115,7 +115,7 @@ export default defineComponent({
       })
         .then((response) => {
 
-          if ((response.data.success)) {
+          if (response.data.success) {
             this.shoppingcartcount = response.data.amount;
           }
           else{

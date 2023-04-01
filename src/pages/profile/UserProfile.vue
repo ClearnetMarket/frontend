@@ -120,8 +120,14 @@
                 </div>
               </div>
             </div>
+               <div class="col-span-12 mb-10" v-if="recordsLength > 9">
+                    <pagination @paginate="getPage" :records="recordsLength" v-model="page" :per-page="perPage"
+                      :options="options"> </pagination>
+                    <div class="flex justify-center mb-10"> {{ recordsLength }} items Found</div>
+                  </div>
+                  <div class="col-span-12 flex justify-center" v-else>{{ recordsLength }} items</div>
           </div>
-        </div>
+        </div>     
       </div>
     </div>
   </div>
@@ -140,6 +146,8 @@ import MainHeaderMid from "../../layouts/headers/MainHeaderMid.vue";
 import MainHeaderBottom from "../../layouts/headers/MainHeaderBottom.vue";
 import MainHeaderVendor from "../../layouts/headers/MainHeaderVendor.vue";
 import MainFooter from "../../layouts/footers/FooterMain.vue";
+import PaginationComp from '../../components/MyPagination.vue'
+
 
 
 export default defineComponent({
@@ -189,6 +197,16 @@ export default defineComponent({
       vendor_reviews_total: 0,
       userreviews: [],
       vendorreviews: [],
+      
+      page: 1,
+      perPage: 10,
+      recordsLength: 0,
+      options: {
+        edgeNavigation: false,
+        format: false,
+        template: PaginationComp
+      }
+
     };
   },
   mounted () {
@@ -196,11 +214,12 @@ export default defineComponent({
     this.getratingsvendor();
     this.getratingscustomer();
     this.getreviews();
-    this.getvendorreviews();
+    this.getPage(this.page);
     this.getuser();
     this.getuserstats();
     this.getvendorstats();
     this.getusercountryandcurrency();
+    this.getvendorreviewscount();
   },
   methods: {
     relativeDate (value: any) {
@@ -215,16 +234,25 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-        if ((response.data.login == true)) {
-
+        if (response.data.login == true) {
             this.user = response.data.user;
-
           }
         })
         .catch(() => {
           this.user = null;
         });
     },
+       getPage: function (page: any) {
+      // we simulate an api call that fetch the records from a backend
+      this.vendorreviews = [];
+      const startIndex = this.perPage * (page - 1) + 1;
+      const endIndex = startIndex + this.perPage - 1;
+
+      // gets the vendor items
+      this.getvendorreviews(page)
+
+    },
+
     getuser () {
       axios({
         method: "get",
@@ -274,7 +302,7 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
-        if ((response.data.success)) {
+        if (response.data.success) {
           this.currencydefault = response.data.currency;
           this.countrydefault = response.data.country;
           this.country = this.countrydefault;
@@ -296,6 +324,20 @@ export default defineComponent({
         })
         .catch(() => { });
     },
+        // gets the vendor reviews
+    getvendorreviewscount () {
+      axios({
+        method: "get",
+        url: "/vendor/vendor-feedback/count/" + this.user_uuid,
+        withCredentials: true,
+        headers: authHeader(),
+      })
+        .then((response) => {
+          this.recordsLength = response.data.count;
+        })
+        .catch(() => { });
+    },
+
     getratingsvendor () {
       axios({
         method: "get",
@@ -310,23 +352,20 @@ export default defineComponent({
         });
     },
     // gets the vendor reviews
-    getvendorreviews () {
+    getvendorreviews (page: any) {
       axios({
         method: "get",
-        url: "/vendor/vendor-feedback/" + this.user_uuid,
+        url: "/vendor/vendor-feedback/" + this.user_uuid + '/' + this.page,
         withCredentials: true,
       })
         .then((response) => {
-
-
             this.vendorreviews = response.data;
             if (this.vendorreviews == undefined) {
               this.vendorreviews = null;
             }
-
         })
-        .catch((error) => {
-          console.log(error)
+        .catch(() => {
+          console.log()
         });
     },
     getratingscustomer () {
@@ -336,7 +375,7 @@ export default defineComponent({
         withCredentials: true,
       })
         .then((response) => {
-          if ((response.data.success)) {
+          if (response.data.success) {
             this.user_reviews_total = response.data.total_feedback;
 
           }

@@ -36,7 +36,7 @@
 
       <form class="shadow-md border-2 rounded-md px-8 pt-6 pb-8 mb-4 w-full mx-auto max-w-2xl" @submit.prevent="onSubmit">
         <div class="grid grid-cols-12 gap-4">
-          <div class="col-span-12 mb-4 text-center text-[20px] text-zinc-600">
+          <div class="col-span-12 mb-4 text-center text-[20px] ">
             Set your address to help customers find nearby vendors
           </div>
 
@@ -124,7 +124,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-        if ((response.data.login == true)) {
+        if (response.data.login == true) {
             this.user = response.data.user
 
             this.getcurrentshipping();

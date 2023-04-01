@@ -36,7 +36,7 @@
 
     <form class="bg-neutral  rounded-md px-8 pt-6 pb-8 mb-4  mx-auto max-w-2xl" @submit.prevent="onSubmit">
       <div class="grid grid-cols-12 md:gap-4">
-        <div class="col-span-12 mb-4 text-center text-[28px] text-zinc-600 ">
+        <div class="col-span-12 mb-4 text-center text-[28px]">
           Set a default Address
         </div>
         <label class="col-span-12 text-white text-sm font-bold mb-2" for="">Country</label>
@@ -195,7 +195,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if ((response.data.success)) {
+          if (response.data.success) {
             notify({
               title: "Updated Address",
               text: "Success!",

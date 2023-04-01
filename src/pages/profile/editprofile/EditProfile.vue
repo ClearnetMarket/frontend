@@ -9,7 +9,7 @@
     </div>
 <div class="wrapper">
     <!-- Top Stuff-->
-    <div class="container selection:max-w-7xl mx-auto  px-10 bg-gray-300 text-white">
+    <div class="container selection:max-w-7xl mx-auto  px-10  text-white">
         <!-- Container-->
         <div class="mt-5 mb-5">
             <nav class="rounded-md w-full">
@@ -76,12 +76,13 @@
                 @submit.prevent="onSubmit">
                 <div class="text-[20px] mt-5 mb-5 font-bold ">User Info</div>
            
-                    <label class="block text-white text-sm font-bold mb-2">Bio</label>
+                    <label class="block text-sm font-bold mb-2">Bio</label>
                     <div class="flex ">
                         <div class="flex-1">
                             <div class="flex-1">
-                                <textarea v-model="ProfileForm.bio" id="item_description" class="shadow appearance-none border rounded w-full py-2 px-3
-                                        text-white leading-tight focus:outline-none focus:shadow-outline">
+                                <textarea v-model="ProfileForm.bio" id="item_description"
+                                 class="shadow appearance-none border rounded w-full py-2 px-3 text-black
+                                         leading-tight focus:outline-none focus:shadow-outline">
                                 </textarea>
                             </div>
                         </div>
@@ -167,7 +168,7 @@ export default defineComponent({
                 headers: authHeader(),
             })
                 .then((response) => {
-                  if ((response.data.login == true)) {
+                  if (response.data.login == true) {
                         this.user = response.data.user;
 
                         if (this.user.profile_image === null) {
@@ -190,11 +191,9 @@ export default defineComponent({
                 withCredentials: true,
                 headers: authHeader(),
             }).then((response) => {
-                if ((response.data.success)) {
+                if (response.data.success) {
                     this.ProfileForm.bio = response.data.bio;
-
                 }
-
             });
         },
 
@@ -228,7 +227,7 @@ export default defineComponent({
                 headers: authHeader(),
             })
                 .then((response) => {
-                    if ((response.data.success)) {
+                    if (response.data.success) {
                         this.$router.push({ name: "userprofile", params: { uuid: this.user.user_id }, });
                     }
                 });

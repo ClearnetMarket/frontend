@@ -180,7 +180,7 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
-        if ((response.data.login == true)) { }
+        if (response.data.login == true) { }
       }).catch(() => { });
     },
 

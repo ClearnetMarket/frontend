@@ -592,7 +592,7 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
-        if ((response.data.success)) {
+        if (response.data.success) {
           this.item_id = response.data.item_id;
           this.getItemForSale();
         }

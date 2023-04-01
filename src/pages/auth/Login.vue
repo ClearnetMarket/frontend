@@ -122,7 +122,7 @@ export default defineComponent({
       })
 
         .then((response) => {
-          if ((response.data.success)) {
+          if (response.data.success) {
 
             this.$router.push({ name: "home" });
           }

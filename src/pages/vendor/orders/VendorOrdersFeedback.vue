@@ -225,7 +225,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if ((response.data.success)) {
+          if (response.data.success) {
               // hide rating div
               this.rating_number = response.data.customer_rating;
               this.review = response.data.review;
@@ -263,7 +263,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if ((response.data.success)) {
+          if (response.data.success) {
 
             // hide rating div
             this.selectedrating = false;

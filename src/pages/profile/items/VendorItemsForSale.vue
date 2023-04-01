@@ -70,7 +70,7 @@ export default defineComponent({
         withCredentials: true,
       })
         .then((response) => {
-          if ((response.data.success)) {
+          if (response.data.success) {
             this.itemsforsale = response.data;
           }
         })

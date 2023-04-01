@@ -299,7 +299,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if ((response.data.success)) {
+          if (response.data.success) {
 
               notify({
                 title: "Freeport Message",
@@ -308,7 +308,7 @@ export default defineComponent({
               });
               this.$router.push({ name: "userorders" });
             }
-           if ((response.data.error)) {
+           if (response.data.error) {
               notify({
                 title: "Error Checking Out",
                 text: response.data.error + "poop",
@@ -332,7 +332,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if ((response.data.success)) {}
+          if (response.data.success) {}
         })
     },
     get_shopping_cart_items () {
@@ -426,7 +426,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if ((response.data.success)) {
+          if (response.data.success) {
             this.address_name = response.data.address_name;
             this.country = response.data.country;
             this.address = response.data.address;

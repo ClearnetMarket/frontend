@@ -175,7 +175,7 @@ export default defineComponent({
                 headers: authHeader(),
             })
                 .then((response) => {
-                   if ((response.data.login == true)) {
+                   if (response.data.login == true) {
                         this.user = response.data.user;
                     }
                 })
@@ -191,7 +191,7 @@ export default defineComponent({
                 headers: authHeader(),
             })
                 .then((response) => {
-                    if ((response.data.success)) {
+                    if (response.data.success) {
                         this.all_tickets = response.data;
                     }
                     else { }
@@ -206,7 +206,7 @@ export default defineComponent({
                 headers: authHeader(),
             })
                 .then((response) => {
-                    if ((response.data.success)) {
+                    if (response.data.success) {
                         this.$router.push({ name: "supportviewticket", params: { uuid: response.data.ticket }, });
                     }
                 })

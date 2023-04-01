@@ -410,7 +410,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if ((response.data.success)) {
+          if (response.data.success) {
             notify({
               title: "Message Center",
               text: "Successfully sent message!",

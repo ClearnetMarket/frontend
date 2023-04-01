@@ -169,7 +169,7 @@ export default defineComponent({
         data: payLoad,
         headers: authHeader(),
       }).then((response) => {
-        if ((response.data.success)) {
+        if (response.data.success) {
           localStorage.setItem("auth_user", response.data.user);
           notify({
             title: "Message Center",

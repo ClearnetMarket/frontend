@@ -412,7 +412,7 @@ export default defineComponent({
         data: payLoad,
       })
         .then((response) => {
-          if ((response.data.success)) {
+          if (response.data.success) {
             notify({
               title: "Shopping Cart",
               text: "Item amount updated!",
@@ -438,7 +438,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if ((response.data.success)) {
+          if (response.data.success) {
             notify({
               title: "Success",
               text: "Item deleted from shopping cart.",
@@ -465,7 +465,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if ((response.data.success)) {
+          if (response.data.success) {
             notify({
               title: "Shopping Cart",
               text: "Item saved for later!",
@@ -492,7 +492,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if ((response.data.success)) {
+          if (response.data.success) {
             notify({
               title: "Shopping Cart",
               text: "Item moved to cart!",

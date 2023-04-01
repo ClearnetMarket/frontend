@@ -382,7 +382,8 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if (response.data.status == "success") {
+          console.log(response.data)
+          if (response.data.success == "success") {
             this.$router.push("/vendor/itemsforsale");
             notify({
               title: "Freeport",
@@ -390,7 +391,7 @@ export default defineComponent({
               type: "success",
             });
           }
-          if (response.data.status == "error") {
+          if (response.data.error == "error") {
       
             notify({
               title: "Item Error",
@@ -399,13 +400,13 @@ export default defineComponent({
             });
           }
         })
-        .catch((error) => {});
+        .catch((error) => {
+          console.log("errorr!@")
+        });
     },
     // pre fill form data
     getFormData () {
-
       let path = "/vendorcreateitem/get-fields/" + this.item_id;
-
       axios({
         method: "get", //you can set what request you want to be
         url: path,

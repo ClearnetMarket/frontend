@@ -42,7 +42,7 @@ export default defineComponent({
                 headers: authHeader(),
             })
                 .then((response) => {
-                 if ((response.data.login == true)) {
+                 if (response.data.login == true) {
                         this.user = response.data.user
                         this.user.confirmed = response.data.user.confirmed
 

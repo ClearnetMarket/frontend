@@ -439,7 +439,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if ((response.data.success)) {
+          if (response.data.success) {
             this.vendoruuid = response.data.vendoruuid;
             this.vendorrating = response.data.vendorrating;
             this.vendortotalsales = response.data.vendortotalsales;
@@ -507,7 +507,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if ((response.data.success)) {
+          if (response.data.success) {
             notify({
               title: "Message Center",
               text: "Successfully sent feedback Review!",
@@ -537,7 +537,7 @@ export default defineComponent({
       })
         .then((response) => {
 
-          if ((response.data.success)) {
+          if (response.data.success) {
             notify({
               title: "Message Center",
               text: "Successfully sent feedback Score!",

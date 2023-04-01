@@ -191,7 +191,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if ((response.data.success)) {
+          if (response.data.success) {
             const message_sent =
               "Success! Sent " +
               this.wallet.bch_amount +

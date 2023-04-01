@@ -448,7 +448,7 @@ export default defineComponent({
                 withCredentials: true,
                 headers: authHeader(),
             }).then((response) => {
-           if ((response.data.login == true)) {
+           if (response.data.login == true) {
                     if (response.data.user.user_admin < 2) {
                         this.$router.push({ name: "home" });
                     }else{
@@ -582,7 +582,7 @@ export default defineComponent({
 
             })
                 .then((response) => {
-                    if ((response.data.success)) {
+                    if (response.data.success) {
                         this.getuserorder();
                     }
                 })
@@ -604,7 +604,7 @@ export default defineComponent({
                 headers: authHeader(),
             })
                 .then((response) => {
-                   if ((response.data.success)) {
+                   if (response.data.success) {
                         this.getuserorder();
                     }
                 })
@@ -633,7 +633,7 @@ export default defineComponent({
                 headers: authHeader(),
             })
                 .then((response) => {
-                    if ((response.data.success)) {
+                    if (response.data.success) {
                         this.getuserorder();
                     }
                 })
@@ -662,7 +662,7 @@ export default defineComponent({
                 headers: authHeader(),
             })
                 .then((response) => {
-                    if ((response.data.success)) {
+                    if (response.data.success) {
                         this.getuserorder();
                     }
                 })
@@ -691,7 +691,7 @@ export default defineComponent({
                 headers: authHeader(),
             })
                 .then((response) => {
-                    if ((response.data.success)) {
+                    if (response.data.success) {
                         this.getuserorder();
                     }
                 })
@@ -719,7 +719,7 @@ export default defineComponent({
                 headers: authHeader(),
             })
                 .then((response) => {
-                    if ((response.data.success)) {
+                    if (response.data.success) {
                         this.getuserorder();
                     }
                 })
@@ -744,7 +744,7 @@ export default defineComponent({
                 headers: authHeader(),
             })
                 .then((response) => {
-                    if ((response.data.success)) {
+                    if (response.data.success) {
                         this.getuserorder();
                         this.SendDisputeForm.disputemsginfo = "";
                     }
@@ -769,7 +769,7 @@ export default defineComponent({
                 headers: authHeader(),
             })
                 .then((response) => {
-                    if ((response.data.success)) {
+                    if (response.data.success) {
                         this.getuserorder();
                         this.SendMsgForm.msginfo = "";
                     }

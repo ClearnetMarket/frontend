@@ -382,7 +382,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-       if ((response.data.login == true)) {
+       if (response.data.login == true) {
             this.user = response.data.user
             this.user.confirmed = response.data.user.confirmed
           }
@@ -474,7 +474,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if ((response.data.success)) {
+          if (response.data.success) {
             this.exactcity = response.data.city;
             this.exactstateorprovence = response.data.stateorprovence;
             this.exactzipcode = response.data.zipcode;
@@ -491,7 +491,7 @@ export default defineComponent({
         withCredentials: true,
       })
         .then((response) => {
-          if ((response.data.success)) {
+          if (response.data.success) {
             this.vendoruuid = response.data.vendoruuid;
             this.vendorrating = response.data.vendorrating;
             this.vendortotalsales = response.data.vendortotalsales;
@@ -511,7 +511,7 @@ export default defineComponent({
         withCredentials: true,
       })
         .then((response) => {
-          if ((response.data.success)) {
+          if (response.data.success) {
             this.pricebtc = response.data.coin;
           }
         })
@@ -524,7 +524,7 @@ export default defineComponent({
         withCredentials: true,
       })
         .then((response) => {
-          if ((response.data.success)) {
+          if (response.data.success) {
             this.pricebch = response.data.coin;
           }
         })
@@ -539,7 +539,7 @@ export default defineComponent({
         withCredentials: true,
       })
         .then((response) => {
-          if ((response.data.success)) {
+          if (response.data.success) {
             this.pricexmr = response.data.coin;
           }
         })

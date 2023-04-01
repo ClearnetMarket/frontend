@@ -328,7 +328,7 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
-        if ((response.data.success)) {
+        if (response.data.success) {
           this.getPage(this.page);
           notify({
             title: "Message Center",
@@ -353,10 +353,10 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
-        if ((response.data.success)) {
+        if (response.data.success) {
 
           this.getPage(this.page);
-          if (response.data.status == "success") {
+          if (response.data.success) {
             notify({
               title: "Item:  " + itemid,
               text: "Item is online",
@@ -365,7 +365,7 @@ export default defineComponent({
           } else {
             notify({
               title: "Item:  " + itemid,
-              text: response.data.status,
+              text: response.data,
               type: "error",
             });
           }
@@ -381,12 +381,12 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
-        if ((response.data.success)) {
+        if (response.data.success) {
           this.getPage(this.page);
           notify({
             title: "Item:  " + itemid,
             text: "Item is offline",
-            type: "success",
+            type: "error",
           });
         }
       });

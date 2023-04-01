@@ -63,7 +63,7 @@ export default defineComponent({
                 withCredentials: true,
             })
                 .then((response) => {
-                    if ((response.data.success)) {
+                    if (response.data.success) {
                         this.price_coin_btc = response.data.coin;
                     }
                 })
@@ -77,7 +77,7 @@ export default defineComponent({
                 withCredentials: true,
             })
                 .then((response) => {
-                    if ((response.data.success)) {
+                    if (response.data.success) {
                         this.price_coin_bch = response.data.coin;
                     }
                 })
@@ -91,7 +91,7 @@ export default defineComponent({
                 withCredentials: true,
             })
                 .then((response) => {
-                    if ((response.data.success)) {
+                    if (response.data.success) {
                         this.price_coin_xmr = response.data.coin;
                     }
                 })

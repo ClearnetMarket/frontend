@@ -164,7 +164,7 @@ export default defineComponent({
                 withCredentials: true,
                 headers: authHeader(),
             }).then((response) => {
-              if ((response.data.login == true)) {
+              if (response.data.login == true) {
                     this.user = response.data.user
                     this.user_id = response.data.user.user_id
                     this.loaded_user = true

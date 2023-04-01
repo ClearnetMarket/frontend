@@ -97,7 +97,7 @@ export default defineComponent({
                 headers: authHeader(),
             })
                 .then((response) => {
-                    if ((response.data.success)) {
+                    if (response.data.success) {
                         this.btc_address = response.data.btc_address
                     }
                 })
