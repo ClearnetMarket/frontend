@@ -10,7 +10,7 @@
   </div>
   <div class="wrapper">
     <div class="container max-w-7xl mx-auto px-10 text-white ">
-      <div class="mx-auto flex mb-1 px-5">
+      <div class="mx-auto flex justify-between mb-1 px-5">
         <div class="mt-1">
           <nav class="rounded-md">
             <ol class="list-reset flex bg-red">
@@ -33,6 +33,17 @@
             </ol>
           </nav>
         </div>
+
+        <div class="text-red-600" v-if="reported_item"> 
+            Item Reported
+          </div>
+          <div v-else>
+               <button
+                  class="bg-red-600 hover:bg-zinc-400 text-black font-bold py-1 px-3
+                  rounded focus:outline-none focus:shadow-outline"  @click.prevent="reportitem()">
+                  Report Item
+              </button>
+          </div>
       </div>
       <ItemTop @UpdateCart="UpdateCart"  />
       <ItemDescription v-bind:description="description" />
@@ -114,6 +125,7 @@ export default defineComponent({
       shopping_cart_count: 0,
       vendorreviews: [],
       user: null,
+      reported_item: false
     };
   },
   watch: {
@@ -128,6 +140,7 @@ export default defineComponent({
   mounted () {
     this.userstatus();
     this.getitem();
+
   },
 
   methods: {
@@ -170,6 +183,7 @@ export default defineComponent({
             this.shippingpricethree = response.data.shipping_price_3;
             this.shippingdaythree = response.data.shipping_day_3;
             this.getvendorreviews();
+            this.checkifreporteditem();
       
             this.loaded_feedback = true;
 
@@ -200,6 +214,48 @@ export default defineComponent({
         .catch(() => {this.vendorreviews = null; });
     },
 
+    reportitem () {
+      axios({
+        method: "post",
+        url: "/item/report/" + this.item.uuid,
+        headers: authHeader(),
+        withCredentials: true,
+      })
+        .then((response) => {
+          if (response.data.success) {
+            notify({
+              title: "Item Reported",
+              text: "Successfully reported Item to admins",
+              type: "success",
+            });
+
+          }
+          if (response.data.error) {
+            notify({
+              title: "Item Reported error",
+              text: response.data.error,
+              type: "error",
+            });
+          }
+          this.checkifreporteditem();
+        })
+    },
+    checkifreporteditem () {
+      axios({
+        method: "get",
+        url: "/item/check-report/" + this.item.uuid,
+        withCredentials: true,
+        headers: authHeader(),
+      })
+        .then((response) => {
+          if (response.data.success) {
+            this.reported_item = true
+          }
+          if (response.data.error) {
+            this.reported_item = false
+          }
+        })
+    },
     returncurrencysymbol (currencydigit: number) {
       if (currencydigit === 0) {
         return "$";

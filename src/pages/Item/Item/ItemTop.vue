@@ -321,6 +321,7 @@ export default defineComponent({
       shippingdaytwo: "",
       shippingpricethree: "",
       shippingdaythree: "",
+      
     };
   },
   created () {
@@ -440,6 +441,7 @@ export default defineComponent({
             this.getvendorinfo();
             this.getitemcondition();
             this.seeifuserhasdefaultaddress();
+            
 
         })
         .catch(() => {
@@ -500,6 +502,7 @@ export default defineComponent({
         })
         .catch(() => { });
     },
+
     getitemprice () {
       this.price = this.item.price;
       this.currency = this.item.currency;
@@ -563,7 +566,6 @@ export default defineComponent({
 
     // Add item to cart
     addtocart () {
-
       axios({
         method: "post",
         url: "/checkout/add/" + this.item_id,
@@ -571,9 +573,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-
             if (response.data.success) {
-
               notify({
                 title: "Shoppinng cart message",
                 text: "Successfully added item to cart",
@@ -589,7 +589,6 @@ export default defineComponent({
               });
                  this.get_shopping_cart_count();
               }
-
         })
         .catch((error) => {
 
@@ -598,7 +597,6 @@ export default defineComponent({
               text: error.response.statusText,
               type: "error",
             });
-
         });
     },
 
@@ -607,6 +605,7 @@ export default defineComponent({
       axios({
         method: "get",
         url: "/info/user-cart-count",
+        withCredentials: true,
         headers: authHeader(),
       })
         .then((response) => {
