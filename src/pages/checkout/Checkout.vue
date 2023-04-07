@@ -66,7 +66,7 @@
           </div>
           <div class="grid grid-cols-12 pb-4 pt-4 border-b border-gray-300 mb-10">
             <div class="col-span-1 font-bold">2</div>
-            <div class="col-span-3 font-bold text-[20px]">Payment Method</div>
+            <div class="col-span-3 font-bold text-[20px]">Wallet Balances</div>
             <div class="col-span-6">
               <div class="grid grid-cols-1">
                 <div class="text-[14px]">
@@ -83,6 +83,7 @@
                 </div>
               </div>
             </div>
+            
             <div class="col-span-2 text-center text-[12px]"></div>
           </div>
           <div class="grid grid-cols-12 pb-4">
@@ -141,6 +142,9 @@
                         <label class="px-5" for="xmr">Monero</label>
                       </div>
                     </div>
+
+
+
                   </div>
                 </div>
               </div>

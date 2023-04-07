@@ -41,7 +41,7 @@
                <button
                   class="bg-red-600 hover:bg-zinc-400 text-black font-bold py-1 px-3
                   rounded focus:outline-none focus:shadow-outline"  @click.prevent="reportitem()">
-                  Report Item
+                  Report
               </button>
           </div>
       </div>

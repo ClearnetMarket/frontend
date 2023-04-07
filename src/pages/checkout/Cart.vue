@@ -238,7 +238,7 @@
                   </router-link>
 
                   <div class="text-black bg-blue-300 mt-5 mb-5 text-center font-bold">
-                    Crypto Prices will be calculatd on next page
+                    Crypto Prices will be calculated on next page
                   </div>
                 </div>
               </div>
