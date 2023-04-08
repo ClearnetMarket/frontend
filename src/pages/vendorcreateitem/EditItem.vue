@@ -373,7 +373,6 @@ export default defineComponent({
 
     }) {
       let path = "/vendorcreateitem/create-item-main/" + this.item_id;
-
       axios({
         method: "post",
         url: path,
@@ -416,14 +415,10 @@ export default defineComponent({
         .then((response) => {
           this.CreateItemForm.basicInfo.item_title = response.data.item_title;
           this.CreateItemForm.pricingInfo.item_count = response.data.item_count;
-          this.CreateItemForm.basicInfo.item_description =
-            response.data.item_description;
-          this.CreateItemForm.basicInfo.item_condition =
-            response.data.item_condition;
-          this.CreateItemForm.basicInfo.category_name_0 =
-            response.data.category_name_0;
-          this.CreateItemForm.basicInfo.category_id_0 =
-            response.data.category_id_0;
+          this.CreateItemForm.basicInfo.item_description = response.data.item_description;
+          this.CreateItemForm.basicInfo.item_condition = response.data.item_condition;
+          this.CreateItemForm.basicInfo.category_name_0 = response.data.category_name_0;
+          this.CreateItemForm.basicInfo.category_id_0 = response.data.category_id_0;
           this.CreateItemForm.pricingInfo.price = response.data.price;
           this.CreateItemForm.pricingInfo.digital_currency_1 =
             response.data.digital_currency_1;

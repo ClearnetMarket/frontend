@@ -3,13 +3,13 @@
 
     <div class="" @click="$router.replace({ name: 'MarketItem', params: { id: item.uuid } })" style="cursor: pointer">
 
-        <div class="rounded overflow-hidden border  text-center shadow-md w-42 h-42 bg-neutral mt-5">
-            <div class="flex justify-center w-full  mb-5">
-                <div class="w-48 h-48 " v-if="item.image_one_url_250">
-                    <img class="object-contain" :src="item.image_one_url_250" />
+        <div class="rounded overflow-hidden border  text-center shadow-md w-64 md:w-42 md:h-42 bg-neutral mt-5 ">
+            <div class="flex justify-center w-full  mb-5 overflow-hidden">
+                <div class="md:w-48 md:h-48 " v-if="item.image_one_url_250">
+                    <img class="object-contain " :src="item.image_one_url_250" />
                 </div>
                 <div v-else class="">
-                    <img class=" object-cover w-48 h-48" src="../../assets/noimage.jpg" alt="" />
+                    <img class=" object-cover w-48 h-36" src="../../assets/noimage.jpg" alt="" />
                 </div>
             </div>
 

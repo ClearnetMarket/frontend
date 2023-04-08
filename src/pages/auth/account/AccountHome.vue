@@ -44,8 +44,7 @@
                     <router-link :to="{ name: 'changepassword' }">
                         <div
                             class="col-span-1 border border-1 rounded-md p-5 bg-neutral hover:bg-yellow-300 hover:text-black"
-                            style="cursor: pointer"
-                        >
+                            style="cursor: pointer">
                             <div class="grid grid-cols-4 grid-rows-2">
                                 <div class="col-span-1 row-span-2"></div>
                                 <div class="col-span-3 row-span-1 text-[20px]">Account Password</div>
@@ -55,16 +54,7 @@
                             </div>
                         </div>
                     </router-link>
-                    <router-link :to="{ name: 'changepin' }">
-                        <div class="border border-1 rounded-md p-5 bg-neutral hover:bg-yellow-300 hover:text-black"
-                         style="cursor: pointer">
-                            <div class="grid grid-cols-4 grid-rows-2">
-                                <div class="col-span-1 row-span-2"></div>
-                                <div class="col-span-3 row-span-1 text-[20px]">Account Pin</div>
-                                <div class="col-span-3 row-span-1 text-[14px] ">Change Wallet Pin</div>
-                            </div>
-                        </div>
-                    </router-link>
+                 
 
                     <router-link :to="{ name: 'userprofile', params: { uuid: user.user_id } }">
                         <div class="border border-1 rounded-md p-5 bg-neutral hover:bg-yellow-300 hover:text-black"

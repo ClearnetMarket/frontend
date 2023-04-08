@@ -74,6 +74,11 @@
                 Vendor Agreement
               </div>
             </router-link>
+            <router-link :to="{ name: 'policies' }">
+              <div class="text-blue-600 hover:text-blue-500 text-sm font-bold">
+                Prohibited Items
+              </div>
+            </router-link>
           </div>
           <div class="">
             <input type="checkbox" v-model="accept" name="acceptTerms" />

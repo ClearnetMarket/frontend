@@ -13,7 +13,7 @@
       <div class="mx-auto flex justify-between mb-1 px-5">
         <div class="mt-1">
           <nav class="rounded-md">
-            <ol class="list-reset flex bg-red">
+            <ol class="list-reset flex">
               <li>
                 <router-link :to="{ name: 'home' }">
                   <a class="text-blue-600 hover:text-blue-700 ">Home</a>
@@ -140,9 +140,7 @@ export default defineComponent({
   mounted () {
     this.userstatus();
     this.getitem();
-
   },
-
   methods: {
     userstatus () {
       axios({
@@ -184,9 +182,7 @@ export default defineComponent({
             this.shippingdaythree = response.data.shipping_day_3;
             this.getvendorreviews();
             this.checkifreporteditem();
-      
             this.loaded_feedback = true;
-
         })
         .catch(() => {
           notify({
@@ -213,7 +209,6 @@ export default defineComponent({
         })
         .catch(() => {this.vendorreviews = null; });
     },
-
     reportitem () {
       axios({
         method: "post",
@@ -248,11 +243,14 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
+
           if (response.data.success) {
             this.reported_item = true
+      
           }
           if (response.data.error) {
-            this.reported_item = false
+          this.reported_item = false
+
           }
         })
     },

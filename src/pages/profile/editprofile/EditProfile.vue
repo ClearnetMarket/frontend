@@ -273,7 +273,7 @@ export default defineComponent({
             })
                 .then((response) => {
 
-                    if (response.data.status == "success") {
+                    if (response.data.status) {
                         // if any images uploaded success
                         notify({
                             title: "Upload",

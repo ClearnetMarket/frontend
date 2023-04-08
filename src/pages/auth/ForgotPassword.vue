@@ -168,13 +168,10 @@ export default defineComponent({
         data: payLoad,
       })
         .then((response) => {
-          if (response.data.status == "Account Unlocked") {
-            notify({
-              title: "Authorization",
-              text: "Success",
-              type: "success",
-            });
-            this.$router.push({ name: "login" });
+          if (response.data.login) {
+            localStorage.setItem("auth_token", response.data.token);
+            localStorage.setItem("auth_user", response.data.user);
+            this.$router.push({ name: "changepassword" });
           }
         })
         .catch(() => {

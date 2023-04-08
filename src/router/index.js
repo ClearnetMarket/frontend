@@ -64,6 +64,7 @@ import categoryhomeandgarden from '../pages/category/homeandgarden/HomeandGarden
 import categorysmartphones from '../pages/category/smartphones/SmartPhonesHome.vue'
 import categorysportinggoods from '../pages/category/sports/SportsHome.vue'
 import legal from '../pages/commonpage/legal.vue'
+import Prohibited from '../pages/commonpage/prohibited.vue'
 import vendoragreement from '../pages/legal/VendorAgreement.vue'
 import policies from '../pages/commonpage/policies.vue'
 import editprofile from '../pages/profile/editprofile/EditProfile.vue'
@@ -151,6 +152,11 @@ const routes = [
         path: '/legal',
         name: 'legal',
         component: legal,
+    },
+    {
+        path: '/prohibited',
+        name: 'prohibited',
+        component: Prohibited,
     },
     {
         path: '/user/orders/:uuid',

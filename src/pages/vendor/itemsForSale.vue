@@ -353,24 +353,21 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
-        if (response.data.success) {
-
           this.getPage(this.page);
           if (response.data.success) {
             notify({
-              title: "Item:  " + itemid,
+              title: "Item: " + itemid,
               text: "Item is online",
               type: "success",
             });
-          } else {
+          }   
+          if (response.data.error) {
             notify({
-              title: "Item:  " + itemid,
-              text: response.data,
+              title: "Item: " + itemid,
+              text: response.data.error,
               type: "error",
             });
           }
-
-        }
       });
     },
     // put item offline
@@ -384,7 +381,7 @@ export default defineComponent({
         if (response.data.success) {
           this.getPage(this.page);
           notify({
-            title: "Item:  " + itemid,
+            title: "Item: " + itemid,
             text: "Item is offline",
             type: "error",
           });

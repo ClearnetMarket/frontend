@@ -5,7 +5,7 @@
     <div v-if="user">
         <MainHeaderVendor v-show="user.user_admin === 1" />
     </div>
-    <div class="max-w-7xl mx-auto mb-20 wrapper px-10">
+    <div class="max-w-7xl mx-auto mb-20 wrapper px-10 overflow-hidden">
         <div class="grid grid-cols-1 w-full gap-4">
             <div class="mb-10 mt-5">
                 <nav class="rounded-md">
@@ -24,14 +24,13 @@
         </div>
 
         <div class="grid grid-cols-12 gap-4">
-            <div class="col-span-12 sm:col-span-3">
+            <div class="col-span-12 sm:col-span-12 md:col-span-3">
                <CategoryList />
             </div>
-            <div class="col-span-12 sm:col-span-9">
+            <div class="col-span-12 sm:col-span-12 md:col-span-9 ">
                 <div class="text-center text-[28px]">All Items</div>
                 <AllItems />
             </div>
-           
         </div>
     </div>
     <MainFooter />

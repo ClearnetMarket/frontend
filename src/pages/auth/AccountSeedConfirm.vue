@@ -18,11 +18,11 @@
         </ol>
       </nav>
     </div>
-  </div>
+
   <div class="flex justify-center mx-auto p-5 rounded-md bg-neutral text-white">
     <div class="max-w-md">
       <div class="text-center">
-        In order to unlock your account, please enter your account seed below.
+        In order to unlock your account, provide proof of account ownership, or recover account you will need this seed.  P{lease enter your account seed below.
       </div>
       <form class="" method="POST" @submit.prevent="onSubmit">
         <div class="gap-6">
@@ -125,6 +125,7 @@
         </div>
       </form>
     </div>
+      </div>
   </div>
 </div>
 </template>
@@ -200,7 +201,8 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if (response.data.status == "success") {
+          console.log(response.data)
+          if (response.data.success) {
             notify({
               title: "Authorization",
               text: "Success! Welcome to freeport!!",
@@ -210,10 +212,10 @@ export default defineComponent({
           }
           if (response.data.error) {
               notify({
-            title: "Error",
-            text: response.data.error,
-            type: "error",
-          });
+                title: "Error",
+                text: response.data.error,
+                type: "error",
+              });
           }
         })
         .catch(() => {

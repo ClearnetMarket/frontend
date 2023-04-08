@@ -1,7 +1,7 @@
 <template>
-    <div class="flex flex-nowrap flex-col p-5">
+    <div class="flex flex-nowrap flex-col p-5 ">
         <div class="text-[24px] text-white">Today Featured</div>
-        <div class="md:flex md:mb-5 gap-5">
+        <div class="md:flex md:mb-5 gap-5 mx-auto">
             <div v-for="item in todayfeatured" :key="item.id">
                 <generic_item :item="item" />
             </div>

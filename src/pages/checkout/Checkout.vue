@@ -9,7 +9,7 @@
     </div>
 
     <div class="max-w-7xl mx-auto wrapper">
-      
+
       <div class="grid grid-cols-1 w-full gap-4">
         <div class="mb-5 mt-5 px-5">
           <nav class="rounded-md">
@@ -83,7 +83,7 @@
                 </div>
               </div>
             </div>
-            
+
             <div class="col-span-2 text-center text-[12px]"></div>
           </div>
           <div class="grid grid-cols-12 pb-4">
@@ -156,6 +156,7 @@
           <div class="grid grid-cols-1 bg-neutral rounded-md p-5">
             <div class="col-span-1">
               <h1 class="font-semibold text-2xl border-b pb-8">Order Summary</h1>
+
             </div>
             <div class="mb-5">
               <div v-if="btctotalprice > 0">
@@ -193,8 +194,8 @@
               </div>
               <div class="mt-5 mb-5">
                 <div v-if="xmrtotalprice <= xmrbalance &&
-                bchtotalprice <= bchbalance &&
-                btctotalprice <= btcbalance">
+                  bchtotalprice <= bchbalance &&
+                  btctotalprice <= btcbalance">
                 </div>
                 <div v-else class="text-red-600 text-center font-bold">Not Enough Coin in your wallet</div>
                 <div v-if="address_name.length > 5">
@@ -209,6 +210,13 @@
                   class="bg-yellow-500 bg-r rounded-md font-semibold hover:bg-yellow-600 py-3 text-sm text-white uppercase w-full">
                   Place Order
                 </button>
+                <span class="flex font-semibold text-[10px] uppercase text-center mt-10">By Clicking checkout, you agree to the terms
+                  of Freeport </span>
+                <router-link :to="{ name: 'policies' }">
+                  <div class="text-blue-600 hover:text-blue-500 text-sm font-bold flex justify-center">
+                    Freeport Terms
+                  </div>
+                </router-link>
               </div>
             </div>
           </div>
@@ -305,28 +313,28 @@ export default defineComponent({
         .then((response) => {
           if (response.data.success) {
 
-              notify({
-                title: "Freeport Message",
-                text: "Successfully completed order!",
-                type: "success",
-              });
-              this.$router.push({ name: "userorders" });
-            }
-           if (response.data.error) {
-              notify({
-                title: "Error Checking Out",
-                text: response.data.error + "poop",
-                type: "error",
-              });
+            notify({
+              title: "Freeport Message",
+              text: "Successfully completed order!",
+              type: "success",
+            });
+            this.$router.push({ name: "userorders" });
+          }
+          if (response.data.error) {
+            notify({
+              title: "Error Checking Out",
+              text: response.data.error + "poop",
+              type: "error",
+            });
           }
         })
         .catch((error) => {
-           notify({
-                title: "Error Checking Out",
-                text: error,
-                type: "error",
-              });
-      });
+          notify({
+            title: "Error Checking Out",
+            text: error,
+            type: "error",
+          });
+        });
     },
     updateprices () {
       axios({
@@ -336,7 +344,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if (response.data.success) {}
+          if (response.data.success) { }
         })
     },
     get_shopping_cart_items () {
@@ -352,7 +360,7 @@ export default defineComponent({
             this.shopping_cart_items_list = null;
           }
           else {
-             this.shopping_cart_items_list = response.data;
+            this.shopping_cart_items_list = response.data;
           }
         })
         .catch(() => {

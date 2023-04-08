@@ -7,6 +7,9 @@
                     <router-link :to="{ name: 'policies' }">
                         <div class="text-[16px] py-1 text-white hover:text-gray-400">Freeport Policies</div>
                     </router-link>
+                    <router-link :to="{ name: 'prohibited' }">
+                            <div class="text-[16px] py-1 text-white hover:text-gray-400">Prohibited Items</div>
+                        </router-link>
                     <router-link :to="{ name: 'supporthome' }">
                         <div class="text-[16px] py-1 text-white hover:text-gray-400">Customer Support</div>
                     </router-link>

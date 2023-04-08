@@ -28,15 +28,15 @@
                 </nav>
             </div>
         </div>
-        <div class="grid grid-cols-12 gap-4">
-            <div class="col-span-12 sm:col-span-3">
-                <CategoryList />
-            </div>
-            <div class="col-span-12 sm:col-span-9 ">
-                <div class="text-center text-[28px]">Hobbies</div>
-                <div class="col-span-12 sm:col-span-9 ">
-                    <AllItemsCategory :categoryid="category_id" />
+            <div class="grid grid-cols-12 gap-4">
+                <div class="col-span-12 sm:col-span-12 md:col-span-3">
+                   <CategoryList />
                 </div>
+                <div class="col-span-12 sm:col-span-12 md:col-span-9 ">
+                <div class="text-center text-[28px]">Hobbies</div>
+          
+                    <AllItemsCategory :categoryid="category_id" />
+                
             </div>
         </div>
     </div>

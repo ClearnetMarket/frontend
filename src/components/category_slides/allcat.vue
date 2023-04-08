@@ -1,7 +1,8 @@
 <template>
-    <div class="flex flex-nowrap flex-col p-5">
-        <div class="md:flex md:mb-5 gap-5">
-            <div v-for="item in items">
+    <div class="sm:flex sm:flex-nowrap sm:flex-col sm:p-5">
+        <div class="text-[24px] text-white">Freeport Items</div>
+        <div class="md:flex md:mb-5 gap-5 sm:mx-auto ">
+            <div v-for="item in items" :key="item.id">
                 <generic_item :item="item" />
             </div>
         </div>

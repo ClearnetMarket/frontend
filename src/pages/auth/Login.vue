@@ -137,17 +137,27 @@ export default defineComponent({
       })
         .then((response) => {
           if (response.data.user) {
-            
             localStorage.setItem("auth_token", response.data.token);
             localStorage.setItem("auth_user", response.data.user);
             this.$router.push({ name: "home" });
+
             notify({
               title: "Authorization",
               text: "You have been logged in!",
               type: "success",
             });
+            
           }
-          else{
+          else if (response.data.locked) {
+              notify({
+              title: "Authorization",
+              text: "Account has been locked for security reasons.  Please unlock.",
+              type: "error",
+            });
+
+            this.$router.push({ name: "forgotpassword" });
+          }
+          else {
             notify({
               title: "Authorization",
               text: "Login Failure!",

@@ -28,7 +28,13 @@
         </div>
         <div class="bg-neutral rounded-md p-5 mb-5 text-white">
             <div class="text-[18px] font-bold rounded-md ">Code of conduct</div>
-            <div class="text-red-600">- NO ILLEGAL ITEMS THAT WOULD BE ILLEGAL IN THE USA ARE ALLOWED</div>
+            <div class="text-red-600">- NO ILLEGAL ITEMS THAT WOULD BE ILLEGAL IN THE USA ARE ALLOWED. Refer to
+                <router-link :to="{ name: 'policies' }">
+                    <div class="text-blue-600 hover:text-blue-500 text-sm font-bold">
+                        Prohibited Items
+                    </div>
+                </router-link>
+            </div>
             <div class="">- Any attempts to scam or decieve will result in a ban from the site.</div>
             <div class="">- Threatning site admins, mods, users, vendors will result in a ban.</div>
             <div class="">- Anything that will bring a bad reputation to freeport or a user will result in a ban.</div>
@@ -73,6 +79,26 @@
                 - We strongly recommend setting up PGP and teaching your vendors/customers how to use it.
             </div>
         </div>
+
+        <div class="bg-neutral rounded-md p-5 mb-5 text-white">
+            <div class="text-[18px] font-bold rounded-md">Disputes</div>
+            <div class="">
+                - A dispute can be issued by the vendor or the customer.
+            </div>
+            <div class="">
+                - Upon dispute, a moderator will hear both sides of the case and ask for proof of shipping, delivery, etc
+            </div>
+            <div class="">
+                - The moderator can return coin to the customer, cancel the order, or return coin to the vendor.
+            </div>
+            <div class="">
+                - Once a moderator desicion is made that is final and coin cannot be moved again.
+            </div>
+            <div class="">
+                - The moderator reserves the right to judge who gets the coin or percent of split.
+            </div>
+        </div>
+
     </div>
 
     <MainFooter />
@@ -95,13 +121,13 @@ export default defineComponent({
         MainHeaderVendor,
         MainFooter,
     },
-    data() {
+    data () {
         return {
             user: null,
         }
     },
 
-    mounted() {},
+    mounted () { },
 
     methods: {},
 })

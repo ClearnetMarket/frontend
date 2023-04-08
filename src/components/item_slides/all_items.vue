@@ -1,8 +1,7 @@
 <template>
     <div class="flex flex-nowrap flex-col p-5">
-               <div class="text-[24px] text-white">Freeport Items</div>
-        <div class="md:flex md:mb-5 gap-5">
-             
+        <div class="text-[24px] text-white">Freeport Items</div>
+        <div class="md:flex md:mb-5 gap-5 mx-auto">
             <div v-for="item in allitems" :key="item.id">
                 <generic_item :item="item" />
             </div>
@@ -20,7 +19,7 @@ export default defineComponent({
     components: {
         generic_item,
     },
-    data() {
+    data () {
         return {
             allitems: [],
             loadedbtcprice: false,
@@ -28,12 +27,12 @@ export default defineComponent({
     },
     computed: {},
 
-    mounted() {
+    mounted () {
         this.getallitems()
     },
 
     methods: {
-        getallitems() {
+        getallitems () {
             axios({
                 method: 'get',
                 url: '/itemquery/query/all',
@@ -42,7 +41,7 @@ export default defineComponent({
                 .then((response) => {
                     this.allitems = response.data
                 })
-                .catch(() => {})
+                .catch(() => { })
         },
     },
 })

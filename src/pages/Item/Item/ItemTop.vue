@@ -32,7 +32,7 @@
         </div>
       </div><!-- end column one -->
 
-      <div class="sm:col-span-6 md:col-span-4 lg:col-span-4 px-5 bg-neutral rounded-md text-white"><!-- start column two -->
+      <div class="sm:col-span-12 md:col-span-4 lg:col-span-4 px-5 bg-neutral rounded-md text-white"><!-- start column two -->
         <div class="text-[20px] mb-1 font-bold">{{ title }}</div>
         <div class="border-b-2 border-gray-600 mb-5"></div>
         <div class="flex gap-4">
@@ -149,7 +149,7 @@
         </div>
       </div><!-- end column two -->
 
-      <div class="sm:col-span-6 md:col-span-12 lg:col-span-3 px-5 bg-neutral rounded-md"><!-- start column three -->
+      <div class="sm:col-span-12 md:col-span-12 lg:col-span-3 px-5 bg-neutral rounded-md"><!-- start column three -->
         <div class="flex justify-center mb-5 mt-5">
           <div v-if="user">
             <div v-if="vendoruuid !== user.user_id">

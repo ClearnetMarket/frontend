@@ -12,10 +12,9 @@
                                     Categories
                                 </button>
                                 <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-neutral rounded-box w-52 text-white text-left ">
-                                    <li class="text-white hover:bg-accent hover:font-bold hover:text-black"><a @click="gotourl('categoryhome')"> Categories </a></li>
                                     <li class="text-white hover:bg-accent hover:font-bold hover:text-black"><a @click="gotourl('categoryelectronics')"> Electronics </a></li>
                                     <li class="text-white hover:bg-accent hover:font-bold hover:text-black"><a @click="gotourl('categorycomputers')"> Computers and Parts </a></li>
-                                    <li class="text-white hover:bg-accent hover:font-bold hover:text-black"> <a @click="gotourl('categorysmartphones')">Smart Phones and Accessories</a> </li>
+                                    <li class="text-white hover:bg-accent hover:font-bold hover:text-black"><a @click="gotourl('categorysmartphones')">Smart Phones and Accessories</a> </li>
                                     <li class="text-white hover:bg-accent hover:font-bold hover:text-black"><a @click="gotourl('categoryautomotive')">Automotive </a></li>
                                     <li class="text-white hover:bg-accent hover:font-bold hover:text-black"><a @click="gotourl('categoryhobbies')">Hobbies and Collectibles</a></li>
                                     <li class="text-white hover:bg-accent hover:font-bold hover:text-black"><a @click="gotourl('categoryjewelrygold')">  Jewelry Precious Metals and Coins</a> </li>
