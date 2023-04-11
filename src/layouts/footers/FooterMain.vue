@@ -1,27 +1,27 @@
 <template>
-    <div class="bg-zinc-800 mt-50 pb-24 inset-x-0 bottom-0 footerclass">
+    <div class="bg-neutral mt-50 pb-24 inset-x-0 bottom-0 footerclass">
         <div class="max-w-4xl mx-auto">
-            <div class="flex flex-row w-full mb-10 gap-4">
+            <div class="flex flex-row w-full mb-10 gap-4 px-5">
                 <div class="basis-1/2 sm:basis-1/2 lg:basis-1/4 text-left">
                     <div class="text-[20px] mb-5 text-white"></div>
                     <router-link :to="{ name: 'policies' }">
-                        <div class="text-[16px] py-1 text-white hover:text-gray-400">Freeport Policies</div>
+                        <div class="text-[16px] py-1 text-white hover:text-accent">Freeport Policies</div>
                     </router-link>
                     <router-link :to="{ name: 'prohibited' }">
-                            <div class="text-[16px] py-1 text-white hover:text-gray-400">Prohibited Items</div>
+                            <div class="text-[16px] py-1 text-white hover:text-accent">Prohibited Items</div>
                         </router-link>
                     <router-link :to="{ name: 'supporthome' }">
-                        <div class="text-[16px] py-1 text-white hover:text-gray-400">Customer Support</div>
+                        <div class="text-[16px] py-1 text-white hover:text-accent">Customer Support</div>
                     </router-link>
 
                     <router-link :to="{ name: 'btcwallet' }">
-                        <div class="text-[16px] py-1 text-white hover:text-gray-400">BTC Wallet</div>
+                        <div class="text-[16px] py-1 text-white hover:text-accent">BTC Wallet</div>
                     </router-link>
                     <router-link :to="{ name: 'bchwallet' }">
-                        <div class="text-[16px] py-1 text-white hover:text-gray-400">BCH Wallet</div>
+                        <div class="text-[16px] py-1 text-white hover:text-accent">BCH Wallet</div>
                     </router-link>
                     <router-link :to="{ name: 'xmrwallet' }">
-                        <div class="text-[16px] py-1 text-white hover:text-gray-400">XMR Wallet</div>
+                        <div class="text-[16px] py-1 text-white hover:text-accent">XMR Wallet</div>
                     </router-link>
                 </div>
 

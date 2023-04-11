@@ -5,17 +5,16 @@
         <img alt="" class="object-cover h-48 w-96" :src=item.image_one_url_250 />
       </router-link>
     </div>
-    <div class="col-span-12 sm:col-span-9  ">
+    <div class="sm:col-span-12 md:col-span-9  ">
       <div class="grid grid-cols-12 ">
-        <div class="col-span-12 text-center text-[20px] font-bold ">
+        <div class="sm:col-span-12 text-center text-[20px] font-bold ">
           <router-link :to="{ name: 'MarketItem', params: { id: item.uuid } }">
             {{ item.item_title }}
           </router-link>
         </div>
         <div class="col-span-6 sm:col-span-8  px-5">
 
-          <div class="col-span-12 text-[26px] my-1">
-
+          <div class="col-span-12 text-[26px] ">
             {{ item.price }}{{ returncurrencysymbol (item.currency) }}
           </div>
           <div class="col-span-12">
@@ -58,8 +57,9 @@
           </div>
 
         </div>
-        <div class="col-span-12 md:col-span-6 text-center md:hidden px-2 bg-red-200">
-          <div class="col-span-12 mt-10">
+        <div class="col-span-12 md:col-span-6 text-center md:hidden  ">
+          <div class="col-span-12 ">
+            sold by:
             <router-link :to="{
               name: 'userprofile',
               params: { uuid: item.vendor_uuid },
@@ -73,7 +73,7 @@
             <StarRating v-bind:rating="item.item_rating" />
           </div>
         </div>
-        <div class="col-span-12 sm:col-span-4 flex justify-center pt-5 pb-5">
+        <div class="sm:col-span-12 md:col-span-4 flex justify-center pt-5 pb-5">
           <router-link :to="{ name: 'MarketItem', params: { id: item.uuid } }">
             <button
               class="bg-yellow-500 hover:bg-zinc-400 hover:text-white rounded-lg text-black font-semibold py-2 px-10 focus:outline-none focus:shadow-outline content-center justify-center"

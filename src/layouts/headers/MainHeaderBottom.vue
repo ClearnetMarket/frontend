@@ -2,83 +2,101 @@
     <div class="bg-neutral">
         <div class="container max-w-7xl mx-auto text-bold text-center">
             <div class="grid grid-cols-12">
-                <div class="col-span-12 md:col-span-6 lg:col-span-3 invisible md:visible h-1">
+                <div class="col-span-12 md:col-span-0 lg:col-span-3 invisible lg:visible h-1">
                     <div class="flex ml-5">
                         <div class="pb-2">
                             <div class="dropdown">
                                 <button
-                                    class="hover:bg-gray-600 text-white hover:text-white py-1 pt-3 rounded focus:outline-none focus:shadow-outline font-bold"
-                                >
+                                    class="hover:bg-gray-600 text-white hover:text-white py-1 pt-3 rounded focus:outline-none focus:shadow-outline font-bold">
                                     Categories
                                 </button>
-                                <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-neutral rounded-box w-52 text-white text-left ">
-                                    <li class="text-white hover:bg-accent hover:font-bold hover:text-black"><a @click="gotourl('categoryelectronics')"> Electronics </a></li>
-                                    <li class="text-white hover:bg-accent hover:font-bold hover:text-black"><a @click="gotourl('categorycomputers')"> Computers and Parts </a></li>
-                                    <li class="text-white hover:bg-accent hover:font-bold hover:text-black"><a @click="gotourl('categorysmartphones')">Smart Phones and Accessories</a> </li>
-                                    <li class="text-white hover:bg-accent hover:font-bold hover:text-black"><a @click="gotourl('categoryautomotive')">Automotive </a></li>
-                                    <li class="text-white hover:bg-accent hover:font-bold hover:text-black"><a @click="gotourl('categoryhobbies')">Hobbies and Collectibles</a></li>
-                                    <li class="text-white hover:bg-accent hover:font-bold hover:text-black"><a @click="gotourl('categoryjewelrygold')">  Jewelry Precious Metals and Coins</a> </li>
-                                    <li class="text-white hover:bg-accent hover:font-bold hover:text-black"><a @click="gotourl('categoryapparel')"> Apparel </a></li>
-                                    <li class="text-white hover:bg-accent hover:font-bold hover:text-black"><a @click="gotourl('categoryhomeandgarden')"> Home and Garden </a></li>
-                                    <li class="text-white hover:bg-accent hover:font-bold hover:text-black"><a @click="gotourl('categoryart')"> Arts and Crafts </a></li>
-                                    <li class="text-white hover:bg-accent hover:font-bold hover:text-black"><a @click="gotourl('categorybooksandmovies')"> Books and Movies </a></li>
-                                    <li class="text-white hover:bg-accent hover:font-bold hover:text-black"><a @click="gotourl('categorydigital')"> Digital Items </a></li>
+                                <ul tabindex="0"
+                                    class="dropdown-content menu p-2 shadow bg-neutral rounded-box w-52 text-white text-left ">
+                                    <li class="text-white hover:bg-accent hover:font-bold hover:text-black"><a
+                                            @click="gotourl('categoryelectronics')"> Electronics </a></li>
+                                    <li class="text-white hover:bg-accent hover:font-bold hover:text-black"><a
+                                            @click="gotourl('categorycomputers')"> Computers and Parts </a></li>
+                                    <li class="text-white hover:bg-accent hover:font-bold hover:text-black"><a
+                                            @click="gotourl('categorysmartphones')">Smart Phones and Accessories</a> </li>
+                                    <li class="text-white hover:bg-accent hover:font-bold hover:text-black"><a
+                                            @click="gotourl('categoryautomotive')">Automotive </a></li>
+                                    <li class="text-white hover:bg-accent hover:font-bold hover:text-black"><a
+                                            @click="gotourl('categoryhobbies')">Hobbies and Collectibles</a></li>
+                                    <li class="text-white hover:bg-accent hover:font-bold hover:text-black"><a
+                                            @click="gotourl('categoryjewelrygold')"> Jewelry Precious Metals and Coins</a>
+                                    </li>
+                                    <li class="text-white hover:bg-accent hover:font-bold hover:text-black"><a
+                                            @click="gotourl('categoryapparel')"> Apparel </a></li>
+                                    <li class="text-white hover:bg-accent hover:font-bold hover:text-black"><a
+                                            @click="gotourl('categoryhomeandgarden')"> Home and Garden </a></li>
+                                    <li class="text-white hover:bg-accent hover:font-bold hover:text-black"><a
+                                            @click="gotourl('categoryart')"> Arts and Crafts </a></li>
+                                    <li class="text-white hover:bg-accent hover:font-bold hover:text-black"><a
+                                            @click="gotourl('categorybooksandmovies')"> Books and Movies </a></li>
+                                    <li class="text-white hover:bg-accent hover:font-bold hover:text-black"><a
+                                            @click="gotourl('categorydigital')"> Digital Items </a></li>
                                 </ul>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-span-12 md:col-span-6 lg:col-start-7 lg:col-span-6">
+                <div class="sm:col-span-12 md:col-span-12 lg:col-start-6 lg:col-span-8 xxl:col-start-7 ">
                     <div class="grid grid-cols-12">
-                        <div class="col-span-2 sm:mx-3 pt-3 text-[13px] font-bold">
-                            <router-link :to="{ name: 'wallet' }" class="px-3">
-                                <button
-                                    class="bg-accent hover:bg-zinc-400 text-black font-bold py-1 px-3
-                                    rounded focus:outline-none focus:shadow-outline">
-                                    Wallets
-                                </button>
-                            </router-link>
-                        </div>
-
-                        <div class="col-span-4">
-                            <div v-if="user">
-                                <div class="mx-3 pt-2 text-[14px] font-bold">
-                                    <div class="text-white">BTC</div>
-                                    <div class="break-normal">{{ btcprice }} {{ returncurrency(user.currency) }}</div>
-                                </div>
-                            </div>
-                            <div v-else>
-                                <div class="mx-3 pt-2 text-[14px] font-bold">
-                                    <div class="text-white">BTC</div>
-                                    <div class="break-normal">{{ btcprice }} USD</div>
-                                </div>
+                        <div class="sm:col-span-12 sm:invisible sm:h-0 md:visible md:h-auto md:col-span-2">
+                            <div class=" md:pt-2 text-[13px] font-bold">
+                                <router-link :to="{ name: 'wallet' }" class="px-3">
+                                    <button class="bg-accent hover:bg-yellow-500 text-black font-bold py-1 px-3
+                                        rounded focus:outline-none focus:shadow-outline">
+                                        Wallets
+                                    </button>
+                                </router-link>
                             </div>
                         </div>
-                        <div class="col-span-3">
-                            <div v-if="user">
-                                <div class="mx-3 pt-2 text-[14px] font-bold">
-                                    <div class="text-white">BCH</div>
-                                    <div class="break-normal">{{ bchprice }} {{ returncurrency(user.currency) }}</div>
+                        <div class="sm:col-span-12 md:col-span-9">
+                            <div class="grid grid-cols-12">
+                                <div class="sm:col-span-4 md:col-span-4 ">
+                                    <div v-if="user">
+                                        <div class=" text-[14px] font-bold">
+                                            <div class="text-white">BTC</div>
+                                            <div class="break-normal">{{ btcprice }} {{ returncurrency(user.currency) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div v-else>
+                                        <div class=" text-[14px] font-bold">
+                                            <div class="text-white">BTC</div>
+                                            <div class="break-normal">{{ btcprice }} USD</div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div v-else>
-                                <div class="mx-3 pt-2 text-[14px] font-bold">
-                                    <div class="text-white">BCH</div>
-                                    <div class="break-normal">{{ bchprice }} USD</div>
+                                <div class="sm:col-span-4 md:col-span-3">
+                                    <div v-if="user">
+                                        <div class=" text-[14px] font-bold">
+                                            <div class="text-white">BCH</div>
+                                            <div class="break-normal">{{ bchprice }} {{ returncurrency(user.currency) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div v-else>
+                                        <div class=" text-[14px] font-bold">
+                                            <div class="text-white">BCH</div>
+                                            <div class="break-normal">{{ bchprice }} USD</div>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-span-3">
-                            <div v-if="user">
-                                <div class="mx-3 pt-2 text-[14px] font-bold">
-                                    <div class="text-white">XMR</div>
-                                    <div class="">{{ xmrprice }} {{ returncurrency(user.currency) }}</div>
-                                </div>
-                            </div>
-                            <div v-else>
-                                <div class="mx-3 pt-2 text-[14px] font-bold">
-                                    <div class="text-white">XMR</div>
-                                    <div class="">{{ xmrprice }} USD</div>
+                                <div class="sm:col-span-4 md:col-span-3 ">
+                                    <div v-if="user">
+                                        <div class=" text-[14px] font-bold">
+                                            <div class="text-white">XMR</div>
+                                            <div class="">{{ xmrprice }} {{ returncurrency(user.currency) }}</div>
+                                        </div>
+                                    </div>
+                                    <div v-else>
+                                        <div class=" text-[14px] font-bold">
+                                            <div class="text-white">XMR</div>
+                                            <div class="">{{ xmrprice }} USD</div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -97,7 +115,7 @@ import authHeader from '../../services/auth.header'
 export default defineComponent({
     name: 'MainHeaderBottom',
 
-    data() {
+    data () {
         return {
             user: null,
             btcprice: null,
@@ -108,7 +126,7 @@ export default defineComponent({
         }
     },
 
-    mounted() {
+    mounted () {
         this.userstatus()
 
         this.getCategoryList()
@@ -119,18 +137,18 @@ export default defineComponent({
             this.getxmrprice_anon()
         }, 100000)
     },
-    unmounted() {
+    unmounted () {
         clearInterval(this.interval)
     },
     methods: {
         //  change url in dropdown
-        getCategoryList() {
+        getCategoryList () {
             let path = '/category/sidebar'
             axios.get(path).then((response) => {
                 this.categoriesList = response.data
             })
         },
-        getbchprice() {
+        getbchprice () {
             axios({
                 method: 'get',
                 url: '/bch/price',
@@ -142,7 +160,7 @@ export default defineComponent({
             })
         },
         //  Get prices of current coins
-        getbchprice_anon() {
+        getbchprice_anon () {
             axios({
                 method: 'get',
                 url: '/bch/price/usd',
@@ -152,7 +170,7 @@ export default defineComponent({
                 }
             })
         },
-        getbtcprice() {
+        getbtcprice () {
             axios({
                 method: 'get',
                 url: '/btc/price',
@@ -163,7 +181,7 @@ export default defineComponent({
                 }
             })
         },
-        getbtcprice_anon() {
+        getbtcprice_anon () {
             axios({
                 method: 'get',
                 url: '/btc/price/usd',
@@ -174,7 +192,7 @@ export default defineComponent({
             })
         },
         //  Get prices of current coins
-        getxmrprice() {
+        getxmrprice () {
             axios({
                 method: 'get',
                 url: '/xmr/price',
@@ -185,7 +203,7 @@ export default defineComponent({
                 }
             })
         },
-        getxmrprice_anon() {
+        getxmrprice_anon () {
             axios({
                 method: 'get',
                 url: '/xmr/price/usd',
@@ -195,12 +213,12 @@ export default defineComponent({
                 }
             })
         },
-        gotourl(nameofurl: string) {
+        gotourl (nameofurl: string) {
             this.$router.replace({ name: nameofurl })
             this.$router.push({ name: nameofurl })
         },
 
-        returncurrency(currencydigit: number) {
+        returncurrency (currencydigit: number) {
             if (currencydigit === 0) {
                 return 'USD'
             } else if (currencydigit === 1) {
@@ -267,7 +285,7 @@ export default defineComponent({
                 return 'CZK'
             }
         },
-        userstatus() {
+        userstatus () {
             axios({
                 method: 'get',
                 url: '/auth/whoami',

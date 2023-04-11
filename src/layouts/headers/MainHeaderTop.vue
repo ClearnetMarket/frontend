@@ -14,16 +14,15 @@
                 </router-link>
               </div>
             </div>
-            <div class="col-span-1 invisible md:visible h-1">
-              <div class="flex sm:justify-between lg:justify-start ml-5 text-white font-bold pb-2">
+            <div class="sm:col-span-3 sm:invisible sm:h-1 md:visible md:col-span-1">
+              <div class="flex justify-center sm:justify-between lg:justify-start ml-5 text-white font-bold pb-2">
                 <div class="px-3.5">English</div>
                 <div class="px-3 ">{{ returncurrency(user.currency) }}</div>
               </div>
             </div>
             <div class="col-span-1 lg:col-span-2 ">
-              <div class="flex flex-wrap lg:justify-end md:justify-evenly sm:justify-center ">
+              <div class="flex flex-wrap sm:justify-center lg:justify-end md:justify-evenly">
                 <div v-if="user" class="flex">
-
                   <div class="dropdown dropdown-end">
                     <div v-if="notecount === 0">
                       <button
@@ -57,9 +56,7 @@
                             <li class="w-full p-5 bg-red-300hover:font-bold ">
                               {{ notes.message }}
                             </li>
-
                           </div>
-
                         </div>
                       </ul>
                     </div>
@@ -87,7 +84,7 @@
                   <router-link :to="{ name: 'account' }" class="px-3">
                     <button
                       class="hover:bg-zinc-700 text-white hover:text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline font-bold">
-                      {{ user.user_name }}
+                      Account
                     </button>
                   </router-link>
                 </div>

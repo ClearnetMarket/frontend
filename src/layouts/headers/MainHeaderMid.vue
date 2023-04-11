@@ -1,18 +1,18 @@
 <template>
-  <div class="max-w-7xl mx-auto grid grid-cols-12  py-2">
+  <div class="max-w-7xl mx-auto grid grid-cols-12 md:py-2">
     <div
-      class="col-span-12 md:col-span-3 lg:col-span-3 text-center sm:mb-5  text-white hover:text-white "
+      class="col-span-12 md:col-span-3 lg:col-span-3 text-center  text-white hover:text-white "
       @click="gotourl('home')"
       style="cursor: pointer"
     >
-      <div class=" text-[24px] text-blue-600 font-semibold pt-1">Freeport</div>
+      <div class="text-[24px] text-blue-600 font-semibold pt-1 ">Freeport</div>
     </div>
-    <div class="col-span-8  md:col-span-6 lg:col-span-7 sm:pl-5 overflow-hidden pt-1">
-      <form class="grid grid-cols-12 " @submit.prevent="mainsearch()">
-          <div class="col-span-8 md:col-span-8 ">
+    <div class="sm:col-span-12 sm:px-10 md:col-span-6 lg:col-span-7 overflow-hidden ">
+      <form class="grid grid-cols-12" @submit.prevent="mainsearch()">
+          <div class="sm:col-span-10 md:col-span-8">
             <input
               v-model="searchForm.searchInput"
-            class="rounded w-full py-2 px-3
+              class="rounded w-full py-2 px-3
              input-primary text-black leading-tight"
               id="search"
               type="text"
@@ -30,10 +30,9 @@
           </div>
       </form>
     </div>
-    <div class="col-span-4 md:col-span-3 lg:col-span-2 pr-5 ">
+    <div class="sm:invisible sm:h-1 sm:col-span-12 md:visible md:col-span-3 lg:col-span-2 pr-5 ">
       <router-link :to="{ name: 'cart' }">
-        <div class="grid grid-cols-12 grid-rows-2 p-1 gap-x-3 hover:border-blue-600
-         border-transparent border-2 rounded text-white">
+        <div class="grid grid-cols-12 grid-rows-2 p-1 gap-x-3 border-transparent border-2 rounded text-white">
           <div class="row-span-2 col-span-3 pt-1">
             <font-awesome-icon icon="fa-solid fa-cart-shopping" class="text-[24px]" />
           </div>
