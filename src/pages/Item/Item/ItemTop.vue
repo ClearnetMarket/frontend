@@ -10,7 +10,7 @@
           <div class="text-[20px] font-bold ">{{ title }}</div>
         </div>
       </div>
-      <div class="sm:col-span-12 md:col-span-8 lg:col-span-5 bg-neutral p-5 rounded-md" ><!-- start column one -->
+      <div class="sm:col-span-12 md:col-span-8 lg:col-span-5 bg-neutral p-5 rounded-md"><!-- start column one -->
         <div class="grid grid-cols-12 gap-4 px-1 ">
           <div class="col-span-12 text-center flex items-center justify-center">
             <img class="h-96" :src="image_one_500" alt="" />
@@ -32,7 +32,8 @@
         </div>
       </div><!-- end column one -->
 
-      <div class="sm:col-span-12 md:col-span-4 lg:col-span-4 px-5 bg-neutral rounded-md text-white"><!-- start column two -->
+      <div class="sm:col-span-12 md:col-span-4 lg:col-span-4 px-5 bg-neutral rounded-md text-white">
+        <!-- start column two -->
         <div class="text-[20px] mb-1 font-bold">{{ title }}</div>
         <div class="border-b-2 border-gray-600 mb-5"></div>
         <div class="flex gap-4">
@@ -67,9 +68,9 @@
         <div class="text-[24px] font-bold text-white text-center">
           {{ price }} {{ returncurrencysymbol(currency) }}
         </div>
-        <div class="mb-2 text-[14px]">
+        <div class="mb-2 sm:text-[16px] md:text-[14px] lg:text-[16px]">
           <div v-if="digitalcurrencyone === true">
-            <div class="flex font-bold text-[19px]">
+            <div class="flex font-bold ">
               <div class="text-orange-500 pr-5">BTC:</div>
               <div class="font-weight-bold text-white">
                 {{ pricebtc }}
@@ -77,7 +78,7 @@
             </div>
           </div>
           <div v-if="digitalcurrencytwo === true">
-            <div class="flex font-bold text-[19px]">
+            <div class="flex font-bold ">
               <div class="text-green-600 pr-5">BCH:</div>
               <div class="] font-weight-bold text-white">
                 {{ pricebch }}
@@ -85,7 +86,7 @@
             </div>
           </div>
           <div v-if="digitalcurrencythree === true">
-            <div class="flex font-bold text-[19px]">
+            <div class="flex font-bold">
               <div class="text-orange-700 pr-5">XMR:</div>
               <div class="font-weight-bold text-white">
                 {{ pricexmr }}
@@ -149,7 +150,7 @@
         </div>
       </div><!-- end column two -->
 
-      <div class="sm:col-span-12 md:col-span-12 lg:col-span-3 px-5 bg-neutral rounded-md"><!-- start column three -->
+      <div class="sm:col-span-12 md:col-span-12 lg:col-span-3  bg-neutral rounded-md"><!-- start column three -->
         <div class="flex justify-center mb-5 mt-5">
           <div v-if="user">
             <div v-if="vendoruuid !== user.user_id">
@@ -215,9 +216,10 @@
                       <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="star"
                         class="w-4 text-yellow-500 mr-1" role="img" xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 576 512">
-                        <path fill="currentColor" d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7
-                                103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5
-                                105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z">
+                        <path fill="currentColor"
+                          d="M259.3 17.8L194 150.2 47.9 171.5c-26.2 3.8-36.7 36.1-17.7 54.6l105.7
+                                    103-25 145.5c-4.5 26.3 23.2 46 46.4 33.7L288 439.6l130.7 68.7c23.2 12.2 50.9-7.4 46.4-33.7l-25-145.5
+                                    105.7-103c19-18.5 8.5-50.8-17.7-54.6L382 150.2 316.7 17.8c-11.7-23.6-45.6-23.9-57.4 0z">
                         </path>
                       </svg>)
                     </div>
@@ -249,6 +251,17 @@
                 </div>
               </div>
             </div>
+            <div class="flex justify-center">
+              <div class="text-red-600 flex justify-center" v-if="reported_item">
+                Item Reported
+              </div>
+              <div v-else>
+                <button class="bg-grey-600  text-black font-bold py-1 px-3
+                          rounded focus:outline-none focus:shadow-outline" @click.prevent="reportitem()">
+                  Report Item
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div><!-- end column three -->
@@ -266,7 +279,7 @@ import authHeader from "../../../services/auth.header";
 
 export default defineComponent({
   name: "ItemTop",
-  props: [ ],
+  props: [],
 
   data () {
     return {
@@ -321,7 +334,8 @@ export default defineComponent({
       shippingdaytwo: "",
       shippingpricethree: "",
       shippingdaythree: "",
-      
+      reported_item: false
+
     };
   },
   created () {
@@ -383,7 +397,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-       if (response.data.login == true) {
+          if (response.data.login == true) {
             this.user = response.data.user
             this.user.confirmed = response.data.user.confirmed
           }
@@ -401,47 +415,48 @@ export default defineComponent({
       })
         .then((response) => {
 
-            this.uuid = response.data.uuid;
-            this.item = response.data;
-            this.title = response.data.item_title;
-            this.category_name = response.data.category_name_0;
-            this.itemcount = response.data.item_count;
-            this.totalsold = response.data.total_sold;
-            this.condition = response.data.item_condition;
-            this.vendorname = response.data.vendor_display_name;
-            this.digitalcurrencyone = response.data.digital_currency_1;
-            this.digitalcurrencytwo = response.data.digital_currency_2;
-            this.digitalcurrencythree = response.data.digital_currency_3;
-            this.origin_country_name = response.data.origin_country_name;
-            this.international = response.data.international;
-            this.image_one_250 = response.data.image_one_url_250;
-            this.image_two_250 = response.data.image_two_url_250;
-            this.image_three_250 = response.data.image_three_url_250;
-            this.image_four_250 = response.data.image_four_url_250;
-            this.current_main_image = response.data.image_one_url_500;
-            this.image_one_500 = response.data.image_one_url_500;
-            this.image_two_500 = response.data.image_two_url_500;
-            this.image_three_500 = response.data.image_three_url_500;
-            this.image_four_500 = response.data.image_four_url_500;
-            this.freeshipping = response.data.shipping_free;
-            this.freeshippingdays = response.data.shipping_day_0;
-            this.shippingfree = response.data.shipping_free;
-            this.shippingtwo = response.data.shipping_two;
-            this.shippingthree = response.data.shipping_three;
-            this.shippingpricetwo = response.data.shipping_price_2;
-            this.shippingdayfree = response.data.shipping_day_0;
-            this.shippingdaytwo = response.data.shipping_day_2;
-            this.shippingpricethree = response.data.shipping_price_3;
-            this.shippingdaythree = response.data.shipping_day_3;
+          this.uuid = response.data.uuid;
+          this.item = response.data;
+          this.title = response.data.item_title;
+          this.category_name = response.data.category_name_0;
+          this.itemcount = response.data.item_count;
+          this.totalsold = response.data.total_sold;
+          this.condition = response.data.item_condition;
+          this.vendorname = response.data.vendor_display_name;
+          this.digitalcurrencyone = response.data.digital_currency_1;
+          this.digitalcurrencytwo = response.data.digital_currency_2;
+          this.digitalcurrencythree = response.data.digital_currency_3;
+          this.origin_country_name = response.data.origin_country_name;
+          this.international = response.data.international;
+          this.image_one_250 = response.data.image_one_url_250;
+          this.image_two_250 = response.data.image_two_url_250;
+          this.image_three_250 = response.data.image_three_url_250;
+          this.image_four_250 = response.data.image_four_url_250;
+          this.current_main_image = response.data.image_one_url_500;
+          this.image_one_500 = response.data.image_one_url_500;
+          this.image_two_500 = response.data.image_two_url_500;
+          this.image_three_500 = response.data.image_three_url_500;
+          this.image_four_500 = response.data.image_four_url_500;
+          this.freeshipping = response.data.shipping_free;
+          this.freeshippingdays = response.data.shipping_day_0;
+          this.shippingfree = response.data.shipping_free;
+          this.shippingtwo = response.data.shipping_two;
+          this.shippingthree = response.data.shipping_three;
+          this.shippingpricetwo = response.data.shipping_price_2;
+          this.shippingdayfree = response.data.shipping_day_0;
+          this.shippingdaytwo = response.data.shipping_day_2;
+          this.shippingpricethree = response.data.shipping_price_3;
+          this.shippingdaythree = response.data.shipping_day_3;
 
-            this.getpricebch();
-            this.getpricebtc();
-            this.getpricexmr();
-            this.getitemprice();
-            this.getvendorinfo();
-            this.getitemcondition();
-            this.seeifuserhasdefaultaddress();
-            
+          this.getpricebch();
+          this.getpricebtc();
+          this.getpricexmr();
+          this.getitemprice();
+          this.getvendorinfo();
+          this.getitemcondition();
+          this.seeifuserhasdefaultaddress();
+          this.checkifreporteditem();
+
 
         })
         .catch(() => {
@@ -502,7 +517,51 @@ export default defineComponent({
         })
         .catch(() => { });
     },
+    reportitem () {
+      axios({
+        method: "post",
+        url: "/item/report/" + this.item.uuid,
+        headers: authHeader(),
+        withCredentials: true,
+      })
+        .then((response) => {
+          if (response.data.success) {
+            notify({
+              title: "Item Reported",
+              text: "Successfully reported Item to admins",
+              type: "success",
+            });
 
+          }
+          if (response.data.error) {
+            notify({
+              title: "Item Reported error",
+              text: response.data.error,
+              type: "error",
+            });
+          }
+          this.checkifreporteditem();
+        })
+    },
+    checkifreporteditem () {
+      axios({
+        method: "get",
+        url: "/item/check-report/" + this.item.uuid,
+        withCredentials: true,
+        headers: authHeader(),
+      })
+        .then((response) => {
+
+          if (response.data.success) {
+            this.reported_item = true
+
+          }
+          if (response.data.error) {
+            this.reported_item = false
+
+          }
+        })
+    },
     getitemprice () {
       this.price = this.item.price;
       this.currency = this.item.currency;
@@ -573,30 +632,30 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-            if (response.data.success) {
-              notify({
-                title: "Shoppinng cart message",
-                text: "Successfully added item to cart",
-                type: "success",
-              });
-              this.get_shopping_cart_count();
-            }
-              if (response.data.error) {
-                 notify({
-                title: "Shoppinng cart message",
-                text: response.data.error,
-                type: "error",
-              });
-                 this.get_shopping_cart_count();
-              }
+          if (response.data.success) {
+            notify({
+              title: "Shoppinng cart message",
+              text: "Successfully added item to cart",
+              type: "success",
+            });
+            this.get_shopping_cart_count();
+          }
+          if (response.data.error) {
+            notify({
+              title: "Shoppinng cart message",
+              text: response.data.error,
+              type: "error",
+            });
+            this.get_shopping_cart_count();
+          }
         })
         .catch((error) => {
 
-            notify({
-              title: "Shopping Cart Error",
-              text: error.response.statusText,
-              type: "error",
-            });
+          notify({
+            title: "Shopping Cart Error",
+            text: error.response.statusText,
+            type: "error",
+          });
         });
     },
 

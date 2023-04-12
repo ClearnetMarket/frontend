@@ -37,7 +37,6 @@
         </div>
 
         <div class="mt-5 grid grid-cols-12 gap-4 ">
-
           <div v-for="(item, index)  in items" :key="index" class="col-span-12">
             <div class="bg-neutral rounded-md ">
               <div class="grid grid-cols-12 grid-row-5 text-white ">
@@ -45,10 +44,8 @@
                   <div class="w-full font-bold">Item uuid</div>
                   <div class="w-full">{{ item.uuid }}</div>
                 </div>
-
               </div>
               <div class="grid grid-cols-12 rounded-md p-2">
-
                 <div class="col-span-12 md:col-span-3 pb-5">
                   <div class="flex justify-center">
                     <div @click="$router.replace({ name: 'MarketItem', params: { id: item.uuid } })"
@@ -107,22 +104,20 @@
                 </div>
 
                 <div class="col-span-12 md:col-span-3 px-3">
-
                   <div class="mb-2">
                     <div v-if="item.online === 0">
-                      <button @click.prevent="putonline(item.uuid)"
+                      <button v-on:click="putonline(item.uuid)"
                         class="bg-zinc-600 hover:bg-zinc-700 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mr-2 w-full">
                         Turn On
                       </button>
                     </div>
                     <div v-else>
-                      <button @click.prevent="putoffline(item.uuid)"
+                      <button v-on:click="putoffline(item.uuid)"
                         class="bg-zinc-600 hover:bg-zinc-700 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mr-2 w-full">
                         Turn Off
                       </button>
                     </div>
                   </div>
-
                   <div class="mb-2">
                     <button v-on:click="gotoitem(item.uuid)"
                       class="bg-zinc-600 hover:bg-zinc-700 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mr-2 w-full">
@@ -130,14 +125,13 @@
                     </button>
                   </div>
                   <div class="mb-2">
-                    <button @click.prevent="cloneitem(item.uuid)"
+                    <button v-on:click="cloneitem(item.uuid)"
                       class="bg-zinc-600 hover:bg-zinc-700 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mr-2 w-full">
                       Clone
                     </button>
                   </div>
-
                   <div class="mb-2">
-                    <button @click.prevent="deleteitem(item.uuid)"
+                    <button v-on:click="deleteitem(item.uuid)"
                       class="bg-red-600 hover:bg-zinc-700 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mr-2 w-full">
                       Delete
                     </button>
@@ -312,7 +306,6 @@ export default defineComponent({
           }
         })
         .catch(() => {
-
           notify({
             title: "Freeport Error",
             text: "Error posting information.",
@@ -353,8 +346,9 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
-          this.getPage(this.page);
+        
           if (response.data.success) {
+              this.getPage(this.page);
             notify({
               title: "Item: " + itemid,
               text: "Item is online",
@@ -378,8 +372,9 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
+     
         if (response.data.success) {
-          this.getPage(this.page);
+             this.getPage(this.page);
           notify({
             title: "Item: " + itemid,
             text: "Item is offline",
@@ -389,138 +384,72 @@ export default defineComponent({
       });
     },
     returncurrencysymbol (currencydigit: number) {
-      if (currencydigit === 0) {
-        return "$";
-      } else if (currencydigit === 1) {
-        return "₱";
-      } else if (currencydigit === 2) {
-        return "CHF";
-      } else if (currencydigit === 3) {
-        return "SAD";
-      } else if (currencydigit === 4) {
-        return "B/.";
-      } else if (currencydigit === 5) {
-        return "₽";
-      } else if (currencydigit === 6) {
-        return "kr";
-      } else if (currencydigit === 7) {
-        return "kr";
-      } else if (currencydigit === 8) {
-        return "kr";
-      } else if (currencydigit === 9) {
-        return "₪";
-      } else if (currencydigit === 10) {
-        return "kr";
-      } else if (currencydigit === 11) {
-        return "฿";
-      } else if (currencydigit === 12) {
-        return "R$";
-      } else if (currencydigit === 13) {
-        return "₹";
-      } else if (currencydigit === 14) {
-        return "R";
-      } else if (currencydigit === 14) {
-        return "$";
-      } else if (currencydigit === 16) {
-        return "¥";
-      } else if (currencydigit === 17) {
-        return "Ft";
-      } else if (currencydigit === 18) {
-        return "$";
-      } else if (currencydigit === 19) {
-        return "¥";
-      } else if (currencydigit === 20) {
-        return "$";
-      } else if (currencydigit === 21) {
-        return "zł";
-      } else if (currencydigit === 22) {
-        return "£";
-      } else if (currencydigit === 23) {
-        return "₺";
-      } else if (currencydigit === 24) {
-        return "₩";
-      } else if (currencydigit === 25) {
-        return "Rp";
-      } else if (currencydigit === 26) {
-        return "$";
-      } else if (currencydigit === 27) {
-        return "RM";
-      } else if (currencydigit === 28) {
-        return "лв";
-      } else if (currencydigit === 29) {
-        return "€";
-      } else if (currencydigit === 31) {
-        return "kn";
-      } else if (currencydigit === 30) {
-        return "Kč";
-      }
+      if (currencydigit === 0) { return "$" }
+      else if (currencydigit === 1) { return "₱" }
+      else if (currencydigit === 2) { return "CHF" }
+      else if (currencydigit === 3) { return "SAD" }
+      else if (currencydigit === 4) { return "B/." }
+      else if (currencydigit === 5) { return "₽" }
+      else if (currencydigit === 6) { return "kr" }
+      else if (currencydigit === 7) { return "kr" }
+      else if (currencydigit === 8) { return "kr" }
+      else if (currencydigit === 9) { return "₪" }
+      else if (currencydigit === 10) { return "kr" }
+      else if (currencydigit === 11) { return "฿" }
+      else if (currencydigit === 12) { return "R$" }
+      else if (currencydigit === 13) { return "₹" }
+      else if (currencydigit === 14) { return "R" }
+      else if (currencydigit === 14) { return "$" }
+      else if (currencydigit === 16) { return "¥" }
+      else if (currencydigit === 17) { return "Ft" }
+      else if (currencydigit === 18) { return "$" }
+      else if (currencydigit === 19) { return "¥" }
+      else if (currencydigit === 20) { return "$" }
+      else if (currencydigit === 21) { return "zł" }
+      else if (currencydigit === 22) { return "£" }
+      else if (currencydigit === 23) { return "₺" }
+      else if (currencydigit === 24) { return "₩" }
+      else if (currencydigit === 25) { return "Rp" }
+      else if (currencydigit === 26) { return "$" }
+      else if (currencydigit === 27) { return "RM" }
+      else if (currencydigit === 28) { return "лв" }
+      else if (currencydigit === 29) { return "€" }
+      else if (currencydigit === 31) { return "kn" }
+      else if (currencydigit === 30) { return "Kč" }
     },
-    returncurrency (currencydigit: number) {
-      if (currencydigit === 0) {
-        return "USD";
-      } else if (currencydigit === 1) {
-        return "PHP";
-      } else if (currencydigit === 2) {
-        return "CHF";
-      } else if (currencydigit === 3) {
-        return "SAD";
-      } else if (currencydigit === 4) {
-        return "SGD";
-      } else if (currencydigit === 5) {
-        return "RUB";
-      } else if (currencydigit === 6) {
-        return "DKK";
-      } else if (currencydigit === 7) {
-        return "RON";
-      } else if (currencydigit === 8) {
-        return "NOK";
-      } else if (currencydigit === 9) {
-        return "ILS";
-      } else if (currencydigit === 10) {
-        return "SEK";
-      } else if (currencydigit === 11) {
-        return "THB";
-      } else if (currencydigit === 12) {
-        return "BRL";
-      } else if (currencydigit === 13) {
-        return "INR";
-      } else if (currencydigit === 14) {
-        return "ZAR";
-      } else if (currencydigit === 14) {
-        return "HKD";
-      } else if (currencydigit === 16) {
-        return "JPY";
-      } else if (currencydigit === 17) {
-        return "HUF";
-      } else if (currencydigit === 18) {
-        return "MXN";
-      } else if (currencydigit === 19) {
-        return "CNY";
-      } else if (currencydigit === 20) {
-        return "AUD";
-      } else if (currencydigit === 21) {
-        return "PLN";
-      } else if (currencydigit === 22) {
-        return "GBP";
-      } else if (currencydigit === 23) {
-        return "TRY";
-      } else if (currencydigit === 24) {
-        return "KRW";
-      } else if (currencydigit === 25) {
-        return "IDR";
-      } else if (currencydigit === 26) {
-        return "NZD";
-      } else if (currencydigit === 27) {
-        return "MYR";
-      } else if (currencydigit === 28) {
-        return "BGN";
-      } else if (currencydigit === 29) {
-        return "EUR";
-      } else if (currencydigit === 31) {
-        return "HRK";
-      } else if (currencydigit === 30) {
-        return "CZK";
-      }
+    returncurrency (currencydigit: any) {
+      if (currencydigit === 0) { return "USD" }
+      else if (currencydigit === 1) { return "PHP" }
+      else if (currencydigit === 2) { return "CHF" }
+      else if (currencydigit === 3) { return "SAD" }
+      else if (currencydigit === 4) { return "SGD" }
+      else if (currencydigit === 5) { return "RUB" }
+      else if (currencydigit === 6) { return "DKK" }
+      else if (currencydigit === 7) { return "RON" }
+      else if (currencydigit === 8) { return "NOK" }
+      else if (currencydigit === 9) { return "ILS"; }
+      else if (currencydigit === 10) { return "SEK" }
+      else if (currencydigit === 11) { return "THB" }
+      else if (currencydigit === 12) { return "BRL" }
+      else if (currencydigit === 13) { return "INR" }
+      else if (currencydigit === 14) { return "ZAR" }
+      else if (currencydigit === 14) { return "HKD" }
+      else if (currencydigit === 16) { return "JPY" }
+      else if (currencydigit === 17) { return "HUF" }
+      else if (currencydigit === 18) { return "MXN" }
+      else if (currencydigit === 19) { return "CNY" }
+      else if (currencydigit === 20) { return "AUD" }
+      else if (currencydigit === 21) { return "PLN" }
+      else if (currencydigit === 22) { return "GBP" }
+      else if (currencydigit === 23) { return "TRY" }
+      else if (currencydigit === 24) { return "KRW" }
+      else if (currencydigit === 25) { return "IDR" }
+      else if (currencydigit === 26) { return "NZD" }
+      else if (currencydigit === 27) { return "MYR" }
+      else if (currencydigit === 28) { return "BGN" }
+      else if (currencydigit === 29) { return "EUR" }
+      else if (currencydigit === 31) { return "HRK" }
+      else if (currencydigit === 30) { return "CZK" }
     },
 
   },

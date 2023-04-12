@@ -1,9 +1,9 @@
 <template>
     <!--Card 1 Type-->
 
-    <div class="" @click="$router.replace({ name: 'MarketItem', params: { id: item.uuid } })" style="cursor: pointer">
+    <div class="h-80 " @click="$router.replace({ name: 'MarketItem', params: { id: item.uuid } })" style="cursor: pointer">
 
-        <div class="rounded overflow-hidden border  text-center shadow-md w-48 md:w-42 md:h-42 bg-neutral mt-5 ">
+        <div class="rounded overflow-hidden border  text-center shadow-md w-48 md:w-42 h-80 bg-neutral mt-5 ">
             <div class="flex justify-center w-full overflow-hidden">
                 <div class="md:w-48 md:h-48 " v-if="item.image_one_url_250">
                     <img class="object-contain " :src="item.image_one_url_250" />
@@ -15,22 +15,27 @@
 
             <!--- Price and Currency -->
             <div class="flex justify-center text-[18px] font-bold  ">
-                {{ item.price }} {{ returncurrencysymbol (item.currency) }}
+                {{ item.price }} {{ returncurrencysymbol(item.currency) }}
             </div>
 
             <!--- Currency accepted bubbles -->
-            <div class="flex justify-center pt-2">
-            
+            <div class=" justify-center pt-2">
+
                 <span v-if="item.digital_currency_1 === true"
-                    class="inline-block   px-3 py-1 text-sm font-semibold text-orange-500 mr-2 mb-2">BTC</span>
+                    class="inline-block    py-1 text-sm font-semibold text-orange-500 ">
+                  {{ pricefilter_btc(item.currency, item.price) }} {{ price_coin_btc }}  BTC
+                </span>
                 <span v-if="item.digital_currency_3 === true"
-                    class="inline-block   px-3 py-1 text-sm font-semibold text-orange-700 mr-2 mb-2">XMR</span>
+                    class="inline-block    py-1 text-sm font-semibold text-orange-700  ">
+                  {{ pricefilter_xmr (item.currency, item.price) }} {{ price_coin_xmr }}  XMR
+                </span>
                 <span v-if="item.digital_currency_2 === true"
-                    class="inline-block  px-2 py-1 text-sm font-semibold text-green-600 mr-2 mb-2">BCH</span>
+                    class="inline-block  py-1 text-sm font-semibold text-green-600 ">
+                {{ pricefilter_bch(item.currency, item.price) }} {{ price_coin_bch }}    BCH
+                </span>
             </div>
         </div>
     </div>
-
 </template>
 
 <script lang="ts">
@@ -39,7 +44,7 @@ import { defineComponent } from "vue";
 import axios from "axios";
 
 export default defineComponent({
-    name: "generic_item",
+    name: "generic_item_price",
     props: [
         "item",
 
@@ -97,7 +102,7 @@ export default defineComponent({
                 })
                 .catch(() => { });
         },
-        returncurrencysymbol (currencydigit: number) {
+       returncurrencysymbol (currencydigit: number) {
             if (currencydigit === 0) { return "$" }
             else if (currencydigit === 1) { return "₱" }
             else if (currencydigit === 2) { return "CHF" }
@@ -165,6 +170,7 @@ export default defineComponent({
             else if (currencydigit === 31) { return "HRK" }
             else if (currencydigit === 30) { return "CZK" }
         },
+
     },
 });
 </script>
