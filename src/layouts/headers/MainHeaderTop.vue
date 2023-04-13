@@ -1,5 +1,5 @@
 <template>
-  <div class="nav bg-primary md:py-2 ">
+  <div class="nav bg-neutral md:py-2 ">
     <div class="container gap-x-0 max-w-7xl mx-auto text-center bg">
       <div v-if="loaded">
         <div v-if="user">

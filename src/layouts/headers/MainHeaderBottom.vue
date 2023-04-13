@@ -46,7 +46,7 @@
                             <div class=" md:pt-2 text-[13px] font-bold">
                                 <router-link :to="{ name: 'wallet' }" class="px-3">
                                     <button class="bg-accent hover:bg-yellow-500 text-black font-bold py-1 px-3
-                                        rounded focus:outline-none focus:shadow-outline">
+                                                        rounded focus:outline-none focus:shadow-outline">
                                         Wallets
                                     </button>
                                 </router-link>
@@ -58,14 +58,24 @@
                                     <div v-if="user">
                                         <div class=" text-[14px] font-bold">
                                             <div class="text-white">BTC</div>
-                                            <div class="break-normal">{{ btcprice }} {{ returncurrency(user.currency) }}
+
+                                            <div class="break-normal text-red-600" v-if="btcpricechange == 0">
+                                                {{ btcprice }} {{ returncurrency(user.currency) }}
+                                            </div>
+                                            <div class="break-normal text-green-600" v-if="btcpricechange == 1">
+                                                {{ btcprice }} {{ returncurrency(user.currency) }}
                                             </div>
                                         </div>
                                     </div>
                                     <div v-else>
                                         <div class=" text-[14px] font-bold">
                                             <div class="text-white">BTC</div>
-                                            <div class="break-normal">{{ btcprice }} USD</div>
+                                            <div class="break-normal text-red-600" v-if="btcpricechange == 0">
+                                                {{ btcprice }} USD
+                                            </div>
+                                            <div class="break-normal text-green-600" v-if="btcpricechange == 1">
+                                                {{ btcprice }} USD
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -73,14 +83,23 @@
                                     <div v-if="user">
                                         <div class=" text-[14px] font-bold">
                                             <div class="text-white">BCH</div>
-                                            <div class="break-normal">{{ bchprice }} {{ returncurrency(user.currency) }}
+                                            <div class="break-normal text-red-600" v-if="bchpricechange == 0">
+                                                {{ bchprice }} {{ returncurrency(user.currency) }}
+                                            </div>
+                                            <div class="break-normal text-green-600" v-if="bchpricechange == 1">
+                                                {{ bchprice }} {{ returncurrency(user.currency) }}
                                             </div>
                                         </div>
                                     </div>
                                     <div v-else>
                                         <div class=" text-[14px] font-bold">
                                             <div class="text-white">BCH</div>
-                                            <div class="break-normal">{{ bchprice }} USD</div>
+                                            <div class="break-normal text-red-600" v-if="bchpricechange == 0">
+                                                {{ bchprice }} {{ returncurrency(user.currency) }}
+                                            </div>
+                                            <div class="break-normal text-green-600" v-if="bchpricechange == 1">
+                                                {{ bchprice }} {{ returncurrency(user.currency) }}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -88,13 +107,23 @@
                                     <div v-if="user">
                                         <div class=" text-[14px] font-bold">
                                             <div class="text-white">XMR</div>
-                                            <div class="">{{ xmrprice }} {{ returncurrency(user.currency) }}</div>
+                                            <div class="break-normal text-red-600" v-if="xmrpricechange == 0">
+                                                {{ xmrprice }} {{ returncurrency(user.currency) }}
+                                            </div>
+                                            <div class="break-normal text-green-600" v-if="xmrpricechange == 1">
+                                                {{ xmrprice }} {{ returncurrency(user.currency) }}
+                                            </div>
                                         </div>
                                     </div>
                                     <div v-else>
                                         <div class=" text-[14px] font-bold">
                                             <div class="text-white">XMR</div>
-                                            <div class="">{{ xmrprice }} USD</div>
+                                            <div class="break-normal text-red-600" v-if="xmrpricechange == 0">
+                                                    {{ xmrprice }} {{ returncurrency(user.currency) }}
+                                                </div>
+                                                <div class="break-normal text-green-600" v-if="xmrpricechange == 1">
+                                                    {{ xmrprice }} {{ returncurrency(user.currency) }}
+                                                </div>
                                         </div>
                                     </div>
                                 </div>
@@ -120,16 +149,21 @@ export default defineComponent({
             user: null,
             btcprice: null,
             xmrprice: null,
-            interval: null,
             bchprice: null,
+            btcpricechange: null,
+            xmrpricechange: null,
+            bchpricechange: null,
+            interval: null,
             categoriesList: {},
         }
     },
 
-    mounted () {
+    created () {
         this.userstatus()
-
         this.getCategoryList()
+        this.getbchpricechange24hour()
+        this.getxmrpricechange24hour()
+        this.getbtcpricechange24hour()
 
         this.interval = setInterval(() => {
             this.getbtcprice_anon()
@@ -148,6 +182,40 @@ export default defineComponent({
                 this.categoriesList = response.data
             })
         },
+        getbchpricechange24hour () {
+            axios({
+                method: 'get',
+                url: '/bch/price/change',
+                headers: authHeader(),
+            }).then((response) => {
+                if (response.data.success) {
+                    this.bchpricechange = response.data.change
+                }
+            })
+        },
+        getbtcpricechange24hour () {
+            axios({
+                method: 'get',
+                url: '/btc/price/change',
+                headers: authHeader(),
+            }).then((response) => {
+                if (response.data.success) {
+                    this.btcpricechange = response.data.change
+                }
+            })
+        },
+        getxmrpricechange24hour () {
+            axios({
+                method: 'get',
+                url: '/xmr/price/change',
+                headers: authHeader(),
+            }).then((response) => {
+                if (response.data.success) {
+                    this.xmrpricechange = response.data.change
+                }
+            })
+        },
+
         getbchprice () {
             axios({
                 method: 'get',
