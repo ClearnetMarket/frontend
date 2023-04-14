@@ -159,11 +159,12 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-        if ((response.data.login == true)) {}
+          if ((response.data.login == true)) { }
+          else { this.$router.push("/login"); }
         })
         .catch(() => {
           this.$router.push("/login");
-        });
+        })
     },
     getbchbalance () {
       axios({

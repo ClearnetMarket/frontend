@@ -23,7 +23,7 @@
                     </ol>
                 </nav>
             </div>
-            <div v-if="loaded_user">
+            <div>
                 <div class="flex text-white">
                     <div class="text-[24px] text-white">My Account</div>
                 </div>
@@ -148,7 +148,7 @@ export default defineComponent({
 
     data () {
         return {
-            loaded_user: false,
+            
             user: null,
             user_id: null,
         }
@@ -166,18 +166,21 @@ export default defineComponent({
             this.$router.push('/')
         },
         userstatus () {
-            axios({
-                method: 'get',
-                url: '/auth/whoami',
-                withCredentials: true,
-                headers: authHeader(),
-            }).then((response) => {
+        axios({
+            method: "get",
+            url: "/auth/whoami",
+            withCredentials: true,
+            headers: authHeader(),
+        })
+            .then((response) => {
                 if (response.data.login == true) {
-                    this.user = response.data.user
-                    this.user_id = response.data.user.user_id
-                    this.loaded_user = true
+                    this.user = response.data.user;
+                 
                 }
             })
+            .catch(() => {
+                this.$router.push({ name: "login" });
+            });
         },
 
     },

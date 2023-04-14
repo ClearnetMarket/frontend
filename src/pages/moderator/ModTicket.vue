@@ -191,7 +191,6 @@ export default defineComponent({
         };
     },
     mounted () {
-        this.userstatus();
         this.get_current_ticket();
         this.get_current_ticket_messages();
         this.interval = setInterval(() => {
@@ -200,7 +199,7 @@ export default defineComponent({
     },
 
     created () {
-
+        this.userstatus();
     },
     destroyed () {
         clearInterval(this.interval)

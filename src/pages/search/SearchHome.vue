@@ -19,7 +19,6 @@
                 </nav>
             </div>
         </div>
-
         <div class="grid grid-cols-12 gap-4">
             <div class="col-span-3 hidden md:flex sm:h-50">
                 <CategoryList />

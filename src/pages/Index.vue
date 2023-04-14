@@ -49,18 +49,18 @@ export default defineComponent({
         AllItems,
     },
 
-    data() {
+    data () {
         return {
             token: null,
             user: null,
         }
     },
 
-    mounted() {
+    created () {
         this.userstatus()
     },
     methods: {
-        userstatus() {
+        userstatus () {
             axios({
                 method: 'get',
                 url: '/auth/whoami',

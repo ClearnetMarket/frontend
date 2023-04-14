@@ -144,8 +144,11 @@ export default defineComponent({
             },
         };
     },
-    mounted () {
+    created () {
         this.userstatus();
+        
+    },
+    mounted(){
         this.get_all_tickets();
     },
 
@@ -178,9 +181,12 @@ export default defineComponent({
                    if (response.data.login == true) {
                         this.user = response.data.user;
                     }
+                    else{
+                        this.$router.push({ name: 'login' })
+                    }
                 })
                 .catch(() => {
-                    this.user = null;
+                        this.$router.push({ name: 'login' })
                 });
         },
         get_all_tickets () {

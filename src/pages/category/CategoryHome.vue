@@ -63,16 +63,9 @@ export default defineComponent({
     data () {
         return {
             user: null,
-
-         
-
         }
     },
     mounted () { },
-    methods: {
-
-
-        
-    },
+    methods: { },
 })
 </script>

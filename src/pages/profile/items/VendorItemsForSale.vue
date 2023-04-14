@@ -56,7 +56,6 @@ export default defineComponent({
       loadedbtcprice: false,
     };
   },
-
   mounted () {
     this.getvendorsitemsforsale();
   },

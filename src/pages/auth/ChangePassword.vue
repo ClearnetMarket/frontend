@@ -22,8 +22,6 @@
           <div class="mb-4 text-center text-[28px] ">
             Change Password
           </div>
-
-
           <div class="mb-4">
             <label class="block text-white text-sm font-bold mb-2">Enter New Password</label>
             <input v-model="ChangePasswordForm.new_password" class="rounded w-full py-2 px-3 input-primary text-black"
@@ -74,9 +72,7 @@ export default defineComponent({
         user: null,
         user_admin: 0,
         loaded: false,
-
       ChangePasswordForm: {
-  
         new_password: "",
         password_confirm: "",
       },
@@ -85,13 +81,12 @@ export default defineComponent({
   validations () {
     return {
       ChangePasswordForm: {
-
         new_password: { required, minLength: minLength(6) },
         password_confirm: { required, minLength: minLength(6) },
       },
     };
   },
-  mounted () {
+  created () {
     this.userstatus();
   },
 
@@ -105,10 +100,12 @@ export default defineComponent({
       })
         .then((response) => {
           if (response.data.login == true) {
-            this.user = response.data.user
+            this.user = response.data.user;
           }
         })
-        .catch(() => { this.user = null });
+        .catch(() => {
+          this.$router.push({ name: "login" });
+        });
     },
 
     sendWordRequest (payLoad: { new_password: string; password_confirm: string }) {

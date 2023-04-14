@@ -186,13 +186,11 @@ export default defineComponent({
             wallettotal: 0,
         }
     },
-    mounted() {
+    created () {
         this.userstatus()
-
         this.getbtcprice()
         this.getbchprice()
         this.getxmrprice()
-
         this.getxmrbalance()
         this.getbchbalance()
         this.getbtcbalance()

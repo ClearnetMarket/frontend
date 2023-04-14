@@ -123,7 +123,7 @@ export default defineComponent({
     MainHeaderVendor,
     MainFooter,
   },
-  mounted () {
+  created () {
     this.userstatus();
     this.getbtcbalance();
   },
@@ -149,8 +149,6 @@ export default defineComponent({
       },
     };
   },
-
-
   methods: {
     userstatus () {
       axios({
@@ -160,13 +158,12 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-         if ((response.data.login == true)) {
-            this.user = response.data.user
-          }
+          if (response.data.login == true) { this.user = response.data.user }
+          else { this.$router.push("/login") }
         })
-        .catch(() => {
-          this.$router.push("/login");
-        });
+        .catch((error) => {
+          this.$router.push("/login")
+        })
     },
     getbtcbalance () {
       axios({

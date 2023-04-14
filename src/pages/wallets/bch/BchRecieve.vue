@@ -67,8 +67,8 @@ export default defineComponent({
             bch_address: '',
         }
     },
-    mounted() {
-        // this.userstatus();
+    created() {
+        this.userstatus();
         this.getbchaddress()
     },
 
@@ -82,9 +82,10 @@ export default defineComponent({
             })
                 .then((response) => {
                     if ((response.data.login == true)) {  }
+                    else{ this.$router.push("/login"); }
                 })
                 .catch((error) => {
-                    console.log(error)
+                     this.$router.push("/login");
                 })
         },
         getbchaddress() {

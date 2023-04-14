@@ -3,8 +3,8 @@
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
-
-  <div class="max-w-4xl mx-auto wrapper px-10">
+<div class="wrapper">
+  <div class="max-w-4xl mx-auto  px-10">
     <div class="grid grid-cols-1 w-full gap-4">
 
       <nav class="rounded-md">
@@ -120,6 +120,7 @@
           </div>
         </div>
       </div>
+    </div>
     </div>
   </div>
   <MainFooter />

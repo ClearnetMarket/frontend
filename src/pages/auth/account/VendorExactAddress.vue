@@ -108,12 +108,14 @@ export default defineComponent({
     };
   },
 
-
+  created(){
+    this.userstatus();
+  },
 
   mounted () {
-    this.userstatus();
-
+    this.getcurrentshipping();
   },
+
 
   methods: {
     userstatus () {
@@ -124,13 +126,13 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-        if (response.data.login == true) {
-            this.user = response.data.user
-
-            this.getcurrentshipping();
+          if (response.data.login == true) {
+            this.user = response.data.user;
           }
         })
-        .catch(() => { this.user = null });
+        .catch(() => {
+          this.$router.push({ name: "login" });
+        });
     },
 
     addusershipping (payLoad: {

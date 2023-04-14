@@ -134,23 +134,21 @@ export default defineComponent({
             stats_count: 0,
             stats_open: 0,
             stats_completed: 0,
-
-
         };
     },
-    mounted () {
+    created(){
         this.userstatus();
+    },
+    mounted () {
         this.get_all_tickets();
         this.interval = setInterval(() => {
             this.get_all_tickets();
         }, 30000);
     },
-
     beforeDestroy  () {
         clearInterval(this.interval)
     },
     methods: {
-     
         relativeDate (value: any) {
             let e = new Date(value).valueOf();
             return formatDistance(e, new Date());

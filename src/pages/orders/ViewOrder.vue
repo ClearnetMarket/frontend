@@ -365,6 +365,7 @@ export default defineComponent({
       loaded_feedback: false,
       order_found: false,
       order: null,
+      user: null,
       order_id: null,
       tracking_number: null,
       carrier_name: "",
@@ -390,7 +391,9 @@ export default defineComponent({
 
     };
   },
-
+created(){
+    this.userstatus();
+},
   mounted () {
     let order_id_route = useRoute();
     this.order_id = order_id_route.params.uuid;
@@ -402,6 +405,23 @@ export default defineComponent({
 
   methods: {
     //  get the order from the params
+    userstatus () {
+      axios({
+        method: "get",
+        url: "/auth/whoami",
+        withCredentials: true,
+        headers: authHeader(),
+      })
+        .then((response) => {
+          if (response.data.login == true)
+            { this.user = response.data.user }
+          else
+            { this.$router.push("/login") }
+        })
+        .catch(() => {
+          this.$router.push("/login")
+        })
+    },
     getuserorder () {
       axios({
         method: "get",

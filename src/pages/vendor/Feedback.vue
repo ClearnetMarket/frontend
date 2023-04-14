@@ -207,7 +207,6 @@ export default defineComponent({
       vendor_reviews_percent_eight: 0,
       vendor_reviews_percent_nine: 0,
       vendor_reviews_percent_ten: 0,
-
       page: 1,
       perPage: 10,
       recordsLength: 0,
@@ -216,7 +215,6 @@ export default defineComponent({
         format: false,
         template: PaginationComp
       }
-
     };
   },
   created () {

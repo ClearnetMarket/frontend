@@ -323,11 +323,16 @@ export default defineComponent({
         url: "/auth/whoami",
         withCredentials: true,
         headers: authHeader(),
-      }).then((response) => {
-       if ((response.data.login != true)) {
-          this.$router.push({ name: "home" });
-        }
-      });
+      })
+      .then((response) => {
+        if (response.data.login == true)
+           { this.user = response.data.user }
+        else 
+          { this.$router.push("/login") }
+        })
+        .catch(() => {
+          this.$router.push("/login")
+        })
     },
     // gets the item from paramater router
     getItemForSale () {

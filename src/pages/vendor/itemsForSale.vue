@@ -177,12 +177,10 @@ export default defineComponent({
     MainFooter,
   },
 
-  mounted () {
+  created () {
     this.userstatus();
     this.getvendoritemscount();
     this.getPage(this.page)
-
-
   },
   data () {
     return {
@@ -200,7 +198,6 @@ export default defineComponent({
         format: false,
         template: PaginationComp
       }
-
     };
   },
 

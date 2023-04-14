@@ -96,14 +96,15 @@ export default defineComponent({
       stats_ticket_count: 0,
       stats_ticket_open: 0,
       stats_ticket_completed: 0,
-
+      user: null,
       stats_dispute_count: 0,
 
     };
   },
-
-  mounted () {
+  created(){
     this.userstatus();
+  },
+  mounted () {
     this.getdisputesneedmod();
     this.getdisputeshasmod();
     this.get_ticket_stats();

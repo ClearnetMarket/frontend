@@ -27,48 +27,42 @@
                     </div>
                     <div class="md:flex md:justify-center text-center">
                         <div
-                            class="inline-block bg-primary rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 text-[17px]"
-                        >
+                            class="inline-block bg-primary rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 text-[17px]">
                             {{ seedform.word1 }}
                         </div>
                         <span v-if="v$.seedform.word1.$error" class="text-red-600 text-center">
                             {{ v$.seedform.word1.$errors[0].$message }}
                         </span>
                         <div
-                            class="inline-block bg-primary rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 text-[17px]"
-                        >
+                            class="inline-block bg-primary rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 text-[17px]">
                             {{ seedform.word2 }}
                         </div>
                         <span v-if="v$.seedform.word2.$error" class="text-red-600 text-center">
                             {{ v$.seedform.word2.$errors[0].$message }}
                         </span>
                         <div
-                            class="inline-block bg-primary rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 text-[17px]"
-                        >
+                            class="inline-block bg-primary rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 text-[17px]">
                             {{ seedform.word3 }}
                         </div>
                         <span v-if="v$.seedform.word3.$error" class="text-red-600 text-center">
                             {{ v$.seedform.word3.$errors[0].$message }}
                         </span>
                         <div
-                            class="inline-block bg-primary rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 text-[17px]"
-                        >
+                            class="inline-block bg-primary rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 text-[17px]">
                             {{ seedform.word4 }}
                         </div>
                         <span v-if="v$.seedform.word4.$error" class="text-red-600 text-center">
                             {{ v$.seedform.word4.$errors[0].$message }}
                         </span>
                         <div
-                            class="inline-block bg-primary rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 text-[17px]"
-                        >
+                            class="inline-block bg-primary rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 text-[17px]">
                             {{ seedform.word5 }}
                         </div>
                         <span v-if="v$.seedform.word5.$error" class="text-red-600 text-center">
                             {{ v$.seedform.word5.$errors[0].$message }}
                         </span>
                         <div
-                            class="inline-block bg-primary rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 text-[17px]"
-                        >
+                            class="inline-block bg-primary rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2 text-[17px]">
                             {{ seedform.word6 }}
                         </div>
                         <span v-if="v$.seedform.word6.$error" class="text-red-600 text-center">
@@ -79,8 +73,7 @@
                         <router-link :to="{ name: 'accountseedconfirm' }">
                             <button
                                 class="bg-primary hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-blue-300 focus:outline-none focus:shadow-outline"
-                                type="submit"
-                            >
+                                type="submit">
                                 Confirm Account
                             </button>
                         </router-link>
@@ -88,8 +81,7 @@
                         <router-link :to="{ name: 'home' }">
                             <button
                                 class="bg-primary hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-blue-300 focus:outline-none focus:shadow-outline"
-                                type="submit"
-                            >
+                                type="submit">
                                 Proceed to Freeport
                             </button>
                         </router-link>
@@ -115,28 +107,30 @@ export default defineComponent({
         HeaderPlain,
     },
 
-    data() {
+    data () {
         return {
             v$: useValidate(),
 
             user: null,
-               seedform: {
-                 word1: null,
-                 word2: null,
-                 word3: null,
-                 word4: null,
-                 word5: null,
-                 word6: null,
-               }
+            seedform: {
+                word1: null,
+                word2: null,
+                word3: null,
+                word4: null,
+                word5: null,
+                word6: null,
+            }
         }
     },
 
-    mounted() {
+    created () {
         this.userstatus()
+    },
+    mounted () {
         this.userstatusconfirmed()
         this.sendwordrequest()
     },
-    validations() {
+    validations () {
         return {
             seedform: {
                 word1: { required, minLength: minLength(2) },
@@ -149,36 +143,36 @@ export default defineComponent({
         }
     },
     methods: {
-        userstatus() {
+        userstatus () {
             axios({
-                method: 'get',
-                url: '/auth/whoami',
+                method: "get",
+                url: "/auth/whoami",
                 withCredentials: true,
                 headers: authHeader(),
             })
                 .then((response) => {
                     if (response.data.login == true) {
-                    this.user = response.data.user
+                        this.user = response.data.user;
                     }
                 })
-                .catch(() => {})
+                .catch(() => {
+                    this.$router.push({ name: "login" });
+                });
         },
-
-        userstatusconfirmed() {
+        userstatusconfirmed () {
             axios({
-                method: 'get',
-                url: '/auth/amiconfirmed',
+                method: "get",
+                url: "/auth/amiconfirmed",
                 withCredentials: true,
                 headers: authHeader(),
             }).then((response) => {
-                if (response.data.success) {
-                    if (response.data.confirmed == true) {
-                        this.$router.push({ name: 'home' })
-                    }
+                if (response.data.status == true) {
+                    this.$router.push({ name: "home" });
                 }
-            })
+            }).catch(() => { });
         },
-        sendwordrequest() {
+
+        sendwordrequest () {
             axios({
                 method: 'get',
                 url: '/auth/account-seed',

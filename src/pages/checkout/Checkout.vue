@@ -142,21 +142,16 @@
                         <label class="px-5" for="xmr">Monero</label>
                       </div>
                     </div>
-
-
-
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-
         <div class="col-span-12 md:col-span-4 px-10 mb-5">
           <div class="grid grid-cols-1 bg-neutral rounded-md p-5">
             <div class="col-span-1">
               <h1 class="font-semibold text-2xl border-b pb-8">Order Summary</h1>
-
             </div>
             <div class="mb-5">
               <div v-if="btctotalprice > 0">
@@ -287,7 +282,14 @@ export default defineComponent({
     };
   },
 
-  mounted () {
+ 
+  created () {
+    this.userstatus();
+    this.interval = setInterval(() => {
+      this.updateprices();
+    }, 50000);
+  },
+   mounted () {
     this.getxmrprice();
     this.getbchprice();
     this.getbtcprice();
@@ -297,12 +299,24 @@ export default defineComponent({
     this.get_shopping_cart_order_summary();
     this.getcurrentshipping();
   },
-  created () {
-    this.interval = setInterval(() => {
-      this.updateprices();
-    }, 50000);
-  },
   methods: {
+    userstatus () {
+      axios({
+        method: "get",
+        url: "/auth/whoami",
+        withCredentials: true,
+        headers: authHeader(),
+      })
+        .then((response) => {
+          if (response.data.login == true) {
+            this.user = response.data.user;
+          }
+        })
+        .catch(() => {
+          this.$router.push({ name: "login" });
+        });
+    },
+
     checkoutorder () {
       axios({
         method: "post",

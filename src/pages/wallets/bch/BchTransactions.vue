@@ -245,7 +245,7 @@ export default defineComponent({
     MainHeaderVendor,
     MainFooter,
   },
-  mounted () {
+  created () {
     this.userstatus();
   
   },
@@ -278,7 +278,9 @@ export default defineComponent({
           if ((response.data.login == true)) {
             this.getPage(this.page);
           }
+            else { this.$router.push("/login"); }
         })
+        
         .catch((error) => {
           console.log(error)
           this.$router.push("/login");

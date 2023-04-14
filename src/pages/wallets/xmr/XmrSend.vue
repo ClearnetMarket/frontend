@@ -145,7 +145,6 @@ export default defineComponent({
       wallet: {
         xmr_address: { required, minLength: minLength(25) },
         xmr_amount: { required, minLength: minLength(1) },
-
       },
     };
   },
@@ -158,15 +157,15 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       })
-        .then((response) => {
-          if ((response.data.login == true)) {
-
-            this.user = response.data.user
-          }
+         .then((response) => {
+          if (response.data.login == true)
+           { this.user = response.data.user }
+          else
+           { this.$router.push("/login") }
         })
-        .catch(() => {
+        .catch((error) => {
           this.$router.push("/login")
-        });
+        })
     },
     SendCoin (payLoad: {
       xmr_address: string;

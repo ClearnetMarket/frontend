@@ -3,135 +3,136 @@
     <MainHeaderTop />
     <MainHeaderMid />
     <MainHeaderBottom />
+    <div class="wrapper">
+        <div class="max-w-4xl mx-auto px-10">
 
-    <div class="max-w-4xl mx-auto wrapper px-10" v-if="loaded">
+            <div class="grid grid-cols-1 w-full gap-4 mb-5">
+                <nav class="rounded-md">
+                    <ol class="list-reset flex">
+                        <li>
+                            <router-link :to="{ name: 'home' }">
+                                <a class="text-blue-600 hover:text-blue-700">Home</a>
+                            </router-link>
+                        </li>
+                        <li>
+                            <span class="text-white mx-2">/</span>
+                        </li>
+                        <li>
+                            <router-link :to="{ name: 'ModHome' }">
+                                <a class="text-blue-600 hover:text-blue-700">Mod Home</a>
+                            </router-link>
+                        </li>
+                        <li>
+                            <span class="text-white mx-2">/</span>
+                        </li>
+                        <li>
+                            <router-link :to="{ name: 'ModDisputeHome' }">
+                                <a class="text-blue-600 hover:text-blue-700">Dispute Home</a>
+                            </router-link>
+                        </li>
+                        <li>
+                            <span class="text-white mx-2">/</span>
+                        </li>
+                    </ol>
+                </nav>
+            </div>
 
-        <div class="grid grid-cols-1 w-full gap-4 mb-5">
-            <nav class="rounded-md">
-                <ol class="list-reset flex">
-                    <li>
-                        <router-link :to="{ name: 'home' }">
-                            <a class="text-blue-600 hover:text-blue-700">Home</a>
-                        </router-link>
-                    </li>
-                    <li>
-                        <span class="text-white mx-2">/</span>
-                    </li>
-                    <li>
-                        <router-link :to="{ name: 'ModHome' }">
-                            <a class="text-blue-600 hover:text-blue-700">Mod Home</a>
-                        </router-link>
-                    </li>
-                    <li>
-                        <span class="text-white mx-2">/</span>
-                    </li>
-                    <li>
-                        <router-link :to="{ name: 'ModDisputeHome' }">
-                            <a class="text-blue-600 hover:text-blue-700">Dispute Home</a>
-                        </router-link>
-                    </li>
-                    <li>
-                        <span class="text-white mx-2">/</span>
-                    </li>
-                </ol>
-            </nav>
-        </div>
-
-        <div class="grid grid-cols-12">
-            <div class="col-span-12 mt-5 ">
-                <div class="grid grid-cols-12 text-[12px] ">
+            <div class="grid grid-cols-12">
+                <div class="col-span-12 mt-5 ">
+                    <div class="grid grid-cols-12 text-[12px] ">
 
 
-                    <div class="col-span-12 bg-gray-100 px-5 py-5 rounded-t-md">
-                        <div class="grid grid-cols-12 text-[12px]">
-                            <div class="col-span-12 md:col-span-4  gap-2 text-[15px]">
-                                <div class="md:text-center font-bold">Order Placed</div>
-                                <div class="md:text-center">{{ order.created }}</div>
-                            </div>
-                            <div class="col-span-12 md:col-span-3  gap-5 text-[15px]">
-                                <div class="md:text-center font-bold">Total</div>
-                                <div class="md:text-center ">
-                                    <div v-if="order.digital_currency === 1">
-                                        {{ order.price_total_btc }} BTC
-                                    </div>
-                                    <div v-if="order.digital_currency === 2">
-                                        {{ order.price_total_bch }} BCH
-                                    </div>
-                                    <div v-if="order.digital_currency === 3">
-                                        {{ order.price_total_xmr }} XMR
+                        <div class="col-span-12 bg-gray-100 px-5 py-5 rounded-t-md">
+                            <div class="grid grid-cols-12 text-[12px]">
+                                <div class="col-span-12 md:col-span-4  gap-2 text-[15px]">
+                                    <div class="md:text-center font-bold">Order Placed</div>
+                                    <div class="md:text-center">{{ order.created }}</div>
+                                </div>
+                                <div class="col-span-12 md:col-span-3  gap-5 text-[15px]">
+                                    <div class="md:text-center font-bold">Total</div>
+                                    <div class="md:text-center ">
+                                        <div v-if="order.digital_currency === 1">
+                                            {{ order.price_total_btc }} BTC
+                                        </div>
+                                        <div v-if="order.digital_currency === 2">
+                                            {{ order.price_total_bch }} BCH
+                                        </div>
+                                        <div v-if="order.digital_currency === 3">
+                                            {{ order.price_total_xmr }} XMR
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div class="col-span-12 md:col-span-4 gap-2 text-[15px]">
-                                <div class="md:text-center font-bold">Order #</div>
-                                <div class="md:text-center">
-                                    <router-link class="text-blue-600 hover:text-blue-500 hover:underline" :to="{
-                                        name: 'ordersview',
-                                        params: { uuid: order.uuid },
-                                    }">
-                                        {{ order.uuid }}
-                                    </router-link>
+                                <div class="col-span-12 md:col-span-4 gap-2 text-[15px]">
+                                    <div class="md:text-center font-bold">Order #</div>
+                                    <div class="md:text-center">
+                                        <router-link class="text-blue-600 hover:text-blue-500 hover:underline" :to="{
+                                            name: 'ordersview',
+                                            params: { uuid: order.uuid },
+                                        }">
+                                            {{ order.uuid }}
+                                        </router-link>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-span-12 bg-neutral px-5  rounded-b-md">
-                        <div class="grid grid-cols-12 ">
-                            <div class="col-span-12 md:col-span-9 ">
-                                <div class="grid grid-cols-12">
-                                    <div class="col-span-12 text-[20px] text-center md:text-left">
-                                        <div v-if="order.overall_status === 1" class="col-span-3">
-                                            Waiting to be accepted
-                                        </div>
-                                        <div v-if="order.overall_status === 2" class="col-span-3">
-                                            Waiting on Shipment
-                                        </div>
-                                        <div v-if="order.overall_status === 3" class="col-span-3">Shipped</div>
-                                        <div v-if="order.overall_status === 4" class="col-span-3">Delivered
-                                        </div>
-                                        <div v-if="order.overall_status === 5" class="col-span-3">
-                                            Finalized Order
-                                        </div>
-                                        <div v-if="order.overall_status === 6" class="col-span-3">
-                                            Requested cancel from vendor
-                                        </div>
-                                        <div v-if="order.overall_status === 7" class="col-span-3">Cancelled
-                                        </div>
-                                        <div class="text-red-600 col-span-2" v-if="order.overall_status === 8">
-                                            Disputed
-                                        </div>
-                                        <div v-if="order.overall_status === 10" class="col-span-3">Finalized
-                                        </div>
-                                    </div>
-                                    <div class="col-span-12 text-[14px]">
-                                        <div class="grid grid-cols-12 md:pt-5 md:gap-5">
-                                            <div class="col-span-12 md:col-span-3 flex justify-center pb-5">
-                                                <img class="object-contain" :src="order.image_one" alt="" />
+                        <div class="col-span-12 bg-neutral px-5  rounded-b-md">
+                            <div class="grid grid-cols-12 ">
+                                <div class="col-span-12 md:col-span-9 ">
+                                    <div class="grid grid-cols-12">
+                                        <div class="col-span-12 text-[20px] text-center md:text-left">
+                                            <div v-if="order.overall_status === 1" class="col-span-3">
+                                                Waiting to be accepted
                                             </div>
-                                            <div class="col-span-12 md:col-span-9">
-                                                <div
-                                                    class="text-blue-600 hover:text-blue-600 hover:underline text-[18px] text-center">
-                                                    <router-link :to="{
-                                                        name: 'MarketItem',
-                                                        params: { id: order.item_uuid },
-                                                    }">
-                                                        {{ order.title_of_item }}
-                                                    </router-link>
+                                            <div v-if="order.overall_status === 2" class="col-span-3">
+                                                Waiting on Shipment
+                                            </div>
+                                            <div v-if="order.overall_status === 3" class="col-span-3">Shipped</div>
+                                            <div v-if="order.overall_status === 4" class="col-span-3">Delivered
+                                            </div>
+                                            <div v-if="order.overall_status === 5" class="col-span-3">
+                                                Finalized Order
+                                            </div>
+                                            <div v-if="order.overall_status === 6" class="col-span-3">
+                                                Requested cancel from vendor
+                                            </div>
+                                            <div v-if="order.overall_status === 7" class="col-span-3">Cancelled
+                                            </div>
+                                            <div class="text-red-600 col-span-2" v-if="order.overall_status === 8">
+                                                Disputed
+                                            </div>
+                                            <div v-if="order.overall_status === 10" class="col-span-3">Finalized
+                                            </div>
+                                        </div>
+                                        <div class="col-span-12 text-[14px]">
+                                            <div class="grid grid-cols-12 md:pt-5 md:gap-5">
+                                                <div class="col-span-12 md:col-span-3 flex justify-center pb-5">
+                                                    <img class="object-contain" :src="order.image_one" alt="" />
                                                 </div>
-                                                <div class="">
-                                                    <div v-if="order.vendor_uuid">
-                                                        <div class="flex justify-center md:justify-start">
-                                                            <div class="">Sold by:</div>
-                                                            <router-link :to="{
-                                                                name: 'userprofile',
-                                                                params: { uuid: order.vendor_uuid },
-                                                            }">
-                                                                <div
-                                                                    class="text-blue-600 hover:text-blue-500 hover:underline pl-3">
-                                                                    {{ order.vendor_user_name }}
-                                                                </div>
-                                                            </router-link>
+                                                <div class="col-span-12 md:col-span-9">
+                                                    <div
+                                                        class="text-blue-600 hover:text-blue-600 hover:underline text-[18px] text-center">
+                                                        <router-link :to="{
+                                                            name: 'MarketItem',
+                                                            params: { id: order.item_uuid },
+                                                        }">
+                                                            {{ order.title_of_item }}
+                                                        </router-link>
+                                                    </div>
+                                                    <div class="">
+                                                        <div v-if="order.vendor_uuid">
+                                                            <div class="flex justify-center md:justify-start">
+                                                                <div class="">Sold by:</div>
+                                                                <router-link :to="{
+                                                                    name: 'userprofile',
+                                                                    params: { uuid: order.vendor_uuid },
+                                                                }">
+                                                                    <div
+                                                                        class="text-blue-600 hover:text-blue-500 hover:underline pl-3">
+                                                                        {{ order.vendor_user_name }}
+                                                                    </div>
+                                                                </router-link>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -139,146 +140,129 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <!-- Requested Cancel from vendor -->
-                            <div v-if="order.overall_status === 6" class="col-span-3"></div>
-                            <!-- Disputed order -->
-                            <div v-if="order.overall_status === 8" class="col-span-3">
-                              
-                            </div>
-                            <!-- Finalized order -->
-                            <div v-if="order.overall_status === 10" class="col-span-3">
-                                <div v-if="order.vendor_feedback === 0">
-                                    <router-link :to="{
-                                        name: 'Dispute',
-                                        params: { uuid: order.uuid },
-                                    }">
-                                    </router-link>
+                                <!-- Requested Cancel from vendor -->
+                                <div v-if="order.overall_status === 6" class="col-span-3"></div>
+                                <!-- Disputed order -->
+                                <div v-if="order.overall_status === 8" class="col-span-3">
 
-                                    <router-link class="text-blue-600 hover:text-blue-500 hover:underline" :to="{
-                                        name: 'ordersview',
-                                        params: { uuid: order.uuid },
-                                    }">
-                                        <button class="bg-yellow-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 
-                                                    rounded focus:outline-none focus:shadow-outline w-full" type="button">
-                                            Leave Feedback
-                                        </button>
-                                    </router-link>
+                                </div>
+                                <!-- Finalized order -->
+                                <div v-if="order.overall_status === 10" class="col-span-3">
+                                    <div v-if="order.vendor_feedback === 0">
+                                        <router-link :to="{
+                                            name: 'Dispute',
+                                            params: { uuid: order.uuid },
+                                        }">
+                                        </router-link>
+
+                                        <router-link class="text-blue-600 hover:text-blue-500 hover:underline" :to="{
+                                            name: 'ordersview',
+                                            params: { uuid: order.uuid },
+                                        }">
+                                            <button class="bg-yellow-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 
+                                                        rounded focus:outline-none focus:shadow-outline w-full"
+                                                type="button">
+                                                Leave Feedback
+                                            </button>
+                                        </router-link>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="rounded-md border border-gray-300 bg-gray-300 p-5 mb-5 ">
-            <div class="col-span-12 justify-center  text-[18px] mb-5 flex gap-2" v-if="order.moderator_uuid">
-                <div class=""> moderator: </div>
-                <div class="text-orange-500 font-bold">  {{ order.moderator_user_name }}</div>
-              
-            </div>
-            <div class="col-span-12 text-orange-500 text-[18px] mb-5" v-else>
-                Moderator: Waiting on a moderator to take the case ...
-            </div>
-            <div class="col-span-12 flex justify-center text-[20px] my-5">
-                <div v-if="order.extended_timer === 1">Autofinalize has been paused on this order.</div>
-                <div v-else>Order will autofinalize: {{ autofinalizetimer }}</div>
+            <div class="rounded-md border border-gray-300 bg-gray-300 p-5 mb-5 ">
+                <div class="col-span-12 justify-center  text-[18px] mb-5 flex gap-2" v-if="order.moderator_uuid">
+                    <div class=""> moderator: </div>
+                    <div class="text-orange-500 font-bold"> {{ order.moderator_user_name }}</div>
+
+                </div>
+                <div class="col-span-12 text-orange-500 text-[18px] mb-5" v-else>
+                    Moderator: Waiting on a moderator to take the case ...
+                </div>
+                <div class="col-span-12 flex justify-center text-[20px] my-5">
+                    <div v-if="order.extended_timer === 1">Autofinalize has been paused on this order.</div>
+                    <div v-else>Order will autofinalize: {{ autofinalizetimer }}</div>
+                </div>
+
+                <div class="flex gap-4 text-[14px] mb-2 justify-center">
+                    <button
+                        class="bg-gray-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                        @click="extenddisputetime()">
+                        Extend Time before Auto Finalize
+                    </button>
+                    <button
+                        class="bg-purple-900 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                        type="submit" @click="markdisputecancelledstillclosed()">
+                        Cancel-Close order
+                    </button>
+
+                    <button
+                        class="bg-pink-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                        type="submit" @click.prevent="markdisputecancelledstillopen()">
+                        Cancel-Open Order
+                    </button>
+                </div>
+                <div class="flex gap-4 text-[14px] justify-center">
+                    <button
+                        class="bg-green-600 hover:bg-zinc-400 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                        type="submit" @click.prevent="sendsplit100vendor()">
+                        100-V 0-C
+                    </button>
+                    <button
+                        class="bg-green-600 hover:bg-zinc-400 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                        type="submit" @click.prevent="sendsplit75vendor()">
+                        75-V 25-C
+                    </button>
+                    <button
+                        class="bg-green-600 hover:bg-zinc-400 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                        type="submit" @click.prevent="sendsplit50vendor()">
+                        50/50
+                    </button>
+                    <button
+                        class="bg-green-600 hover:bg-zinc-400 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                        type="submit" @click.prevent="sendsplit25vendor()">
+                        25-V 75-C
+                    </button>
+                    <button
+                        class="bg-green-600 hover:bg-zinc-400 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                        type="submit" @click.prevent="sendsplit0vendor()">
+                        0-V 100-C
+                    </button>
+                </div>
             </div>
 
-            <div class="flex gap-4 text-[14px] mb-2 justify-center">
-                <button
-                    class="bg-gray-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                    @click="extenddisputetime()">
-                    Extend Time before Auto Finalize
-                </button>
-                <button
-                    class="bg-purple-900 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                    type="submit" @click="markdisputecancelledstillclosed()">
-                    Cancel-Close order
-                </button>
-
-                <button
-                    class="bg-pink-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                    type="submit" @click.prevent="markdisputecancelledstillopen()">
-                    Cancel-Open Order
-                </button>
-            </div>
-            <div class="flex gap-4 text-[14px] justify-center">
-                <button
-                    class="bg-green-600 hover:bg-zinc-400 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                    type="submit" @click.prevent="sendsplit100vendor()">
-                    100-V 0-C
-                </button>
-                <button
-                    class="bg-green-600 hover:bg-zinc-400 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                    type="submit" @click.prevent="sendsplit75vendor()">
-                    75-V 25-C
-                </button>
-                <button
-                    class="bg-green-600 hover:bg-zinc-400 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                    type="submit" @click.prevent="sendsplit50vendor()">
-                    50/50
-                </button>
-                <button
-                    class="bg-green-600 hover:bg-zinc-400 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                    type="submit" @click.prevent="sendsplit25vendor()">
-                    25-V 75-C
-                </button>
-                <button
-                    class="bg-green-600 hover:bg-zinc-400 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                    type="submit" @click.prevent="sendsplit0vendor()">
-                    0-V 100-C
-                </button>
-            </div>
-        </div>
-
-        <div class="rounded-md border border-gray-300 bg-gray-300 p-5">
-            <div class="grid grid-cols-12">
-                <div class="col-span-6">
-                    <div class="mb-2">
-                        Customer Ratings ({{ order.customer_user_name }})
-                    </div>
-                    <div v-for="customer in customerratings" class="mb-1">
-                        <div class="border-t-1">
-                            <StarRatingCustomer v-bind:rating="customer.customer_rating" />
-                            <div class="">{{ customer.review }}</div>
+            <div class="rounded-md border border-gray-300 bg-gray-300 p-5">
+                <div class="grid grid-cols-12">
+                    <div class="col-span-6">
+                        <div class="mb-2">
+                            Customer Ratings ({{ order.customer_user_name }})
+                        </div>
+                        <div v-for="customer in customerratings" class="mb-1">
+                            <div class="border-t-1">
+                                <StarRatingCustomer v-bind:rating="customer.customer_rating" />
+                                <div class="">{{ customer.review }}</div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-span-6">
-                    <div class="mb-2">
-                        Vendor Ratings ({{ order.vendor_user_name }})
-                    </div>
-                    <div v-for="vendor in vendorratings" class="mb-1">
-                        <StarRating v-bind:rating="vendor.vendor_rating" />
+                    <div class="col-span-6">
+                        <div class="mb-2">
+                            Vendor Ratings ({{ order.vendor_user_name }})
+                        </div>
+                        <div v-for="vendor in vendorratings" class="mb-1">
+                            <StarRating v-bind:rating="vendor.vendor_rating" />
 
-                        <div class="">{{ vendor.review }}</div>
+                            <div class="">{{ vendor.review }}</div>
+                        </div>
                     </div>
-                </div>
-                <div class="col-span-12">
-                    <form class="rounded-md pt-6 pb-8 mb-4 w-full" @submit.prevent="sendMessagePayload">
-                        <div class="">
-                            <textarea v-model="SendMsgForm.msginfo" id="item_description" placeholder="Write something .."
-                                class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline mb-3"></textarea>
-                        </div>
-                        <div class="flex justify-end">
-                            <button
-                                class="bg-gray-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                                type="submit">
-                                Send
-                            </button>
-                        </div>
-                    </form>
-                </div>
-                <div class="col-span-12">
-                    <div v-if="order.overall_status === 10">
-                        <div class="font-bold">Add a post dispute message</div>
-                        <form class="pb-8 mb-4 w-full" @submit.prevent="sendMessagePayloadDispute">
+                    <div class="col-span-12">
+                        <form class="rounded-md pt-6 pb-8 mb-4 w-full" @submit.prevent="sendMessagePayload">
                             <div class="">
-                                <textarea v-model="SendDisputeForm.disputemsginfo" id="item_description"
-                                    placeholder="Leave a message saying split percent and overall reason for split percent .."
+                                <textarea v-model="SendMsgForm.msginfo" id="item_description"
+                                    placeholder="Write something .."
                                     class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline mb-3"></textarea>
                             </div>
                             <div class="flex justify-end">
@@ -290,79 +274,98 @@
                             </div>
                         </form>
                     </div>
-                </div>
-                <div class="col-span-12">
-                    <div v-for="comment in mainpostcomments">
-                
-                                        <!-- THis is for comment ADMIN -->
-                    <div class="col-span-12 flex " v-if="comment.who_commented === 3">
-                      <div class="col-span-12">
-                        <router-link class="hover:text-blue-500 hover:underline font-bold" :to="{
-                            name: 'userprofile',
-                            params: { uuid: comment.mod_uuid },
-                        }">
-                          {{ comment.mod_name }} [ADMIN]
-                        </router-link>
-                        - {{ relativeDate(comment.timestamp) }} ago
-
-                        <div class="col-span-12 text-yellow-600 bg-blue-200 p-3 border rounded-md">
-                          {{ comment.body }}
+                    <div class="col-span-12">
+                        <div v-if="order.overall_status === 10">
+                            <div class="font-bold">Add a post dispute message</div>
+                            <form class="pb-8 mb-4 w-full" @submit.prevent="sendMessagePayloadDispute">
+                                <div class="">
+                                    <textarea v-model="SendDisputeForm.disputemsginfo" id="item_description"
+                                        placeholder="Leave a message saying split percent and overall reason for split percent .."
+                                        class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline mb-3"></textarea>
+                                </div>
+                                <div class="flex justify-end">
+                                    <button
+                                        class="bg-gray-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                                        type="submit">
+                                        Send
+                                    </button>
+                                </div>
+                            </form>
                         </div>
-                      </div>
                     </div>
+                    <div class="col-span-12">
+                        <div v-for="comment in mainpostcomments">
+
+                            <!-- THis is for comment ADMIN -->
+                            <div class="col-span-12 flex " v-if="comment.who_commented === 3">
+                                <div class="col-span-12">
+                                    <router-link class="hover:text-blue-500 hover:underline font-bold" :to="{
+                                        name: 'userprofile',
+                                        params: { uuid: comment.mod_uuid },
+                                    }">
+                                        {{ comment.mod_name }} [ADMIN]
+                                    </router-link>
+                                    - {{ relativeDate(comment.timestamp) }} ago
+
+                                    <div class="col-span-12 text-yellow-600 bg-blue-200 p-3 border rounded-md">
+                                        {{ comment.body }}
+                                    </div>
+                                </div>
+                            </div>
 
 
 
-                    <!-- THis is for comment VENDOR  -->
-                    <div class="col-span-12 text-white flex justify-start" v-else-if="comment.who_commented === 1">
-                      <div class="col-span-12">
-                        <router-link class="hover:text-blue-500 hover:underline font-bold" :to="{
-                            name: 'userprofile',
-                            params: { uuid: comment.user_one_uuid },
-                        }">
-                          {{ comment.user_one }}
-                        </router-link>
-                        - {{ relativeDate(comment.timestamp) }} ago
-                        <div class="col-span-12 text-white bg-blue-500 p-3 border rounded-md">
-                          {{ comment.body }}
+                            <!-- THis is for comment VENDOR  -->
+                            <div class="col-span-12 text-white flex justify-start" v-else-if="comment.who_commented === 1">
+                                <div class="col-span-12">
+                                    <router-link class="hover:text-blue-500 hover:underline font-bold" :to="{
+                                        name: 'userprofile',
+                                        params: { uuid: comment.user_one_uuid },
+                                    }">
+                                        {{ comment.user_one }}
+                                    </router-link>
+                                    - {{ relativeDate(comment.timestamp) }} ago
+                                    <div class="col-span-12 text-white bg-blue-500 p-3 border rounded-md">
+                                        {{ comment.body }}
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!-- THis is for comment CUSTOMER -->
+                            <div class="col-span-12 text-white flex justify-end" v-else-if="comment.who_commented === 2">
+                                <div class="col-span-12">
+                                    <router-link class="hover:text-blue-500 hover:underline font-bold" :to="{
+                                        name: 'userprofile',
+                                        params: { uuid: comment.user_two_uuid },
+                                    }">
+                                        {{ comment.user_two }}
+                                    </router-link>
+                                    - {{ relativeDate(comment.timestamp) }} ago
+                                    <div class="col-span-12 text-white bg-gray-500 p-3 border rounded-md">
+                                        {{ comment.body }}
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!-- THis is for comment from SITE -->
+                            <div class="col-span-12 text-white flex justify-start" v-else>
+                                <div class="col-span-12">
+                                    <router-link class="hover:text-blue-500 hover:underline font-bold" :to="{
+                                        name: 'userprofile',
+                                        params: { uuid: comment.user_one_uuid },
+                                    }">
+                                        {{ comment.user_one }}
+                                    </router-link>
+                                    - {{ relativeDate(comment.timestamp) }} ago
+                                    <div class="col-span-12 text-white bg-gray-500 p-3 border rounded-md">
+                                        {{ comment.body }}
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
-                      </div>
-                    </div>
-
-
-                      <!-- THis is for comment CUSTOMER -->
-                      <div class="col-span-12 text-white flex justify-end" v-else-if="comment.who_commented === 2">
-                        <div class="col-span-12">
-                          <router-link class="hover:text-blue-500 hover:underline font-bold" :to="{
-                              name: 'userprofile',
-                              params: { uuid: comment.user_two_uuid },
-                          }">
-                            {{ comment.user_two }}
-                          </router-link>
-                          - {{ relativeDate(comment.timestamp) }} ago
-                          <div class="col-span-12 text-white bg-gray-500 p-3 border rounded-md">
-                            {{ comment.body }}
-                          </div>
-                        </div>
-                      </div>
-
-
-                    <!-- THis is for comment from SITE -->
-                    <div class="col-span-12 text-white flex justify-start" v-else>
-                      <div class="col-span-12">
-                        <router-link class="hover:text-blue-500 hover:underline font-bold" :to="{
-                            name: 'userprofile',
-                            params: { uuid: comment.user_one_uuid },
-                        }">
-                          {{ comment.user_one }}
-                        </router-link>
-                        - {{ relativeDate(comment.timestamp) }} ago
-                        <div class="col-span-12 text-white bg-gray-500 p-3 border rounded-md">
-                          {{ comment.body }}
-                        </div>
-                      </div>
-                    </div>
-   
                     </div>
                 </div>
             </div>
@@ -418,9 +421,10 @@ export default defineComponent({
             },
         };
     },
-
-    mounted () {
+    created () {
         this.userstatus();
+    },
+    mounted () {
         const order_id_route = useRoute();
         this.order_id = order_id_route.params.uuid;
         this.getuserorder();
@@ -448,16 +452,16 @@ export default defineComponent({
                 withCredentials: true,
                 headers: authHeader(),
             }).then((response) => {
-           if (response.data.login == true) {
+                if (response.data.login == true) {
                     if (response.data.user.user_admin < 2) {
                         this.$router.push({ name: "home" });
-                    }else{
+                    } else {
                         this.user = response.data.user;
                     }
                 }
             });
         },
-         // get the post comments
+        // get the post comments
         updatepostmodid () {
             axios({
                 method: "put",
@@ -465,8 +469,8 @@ export default defineComponent({
                 withCredentials: true,
                 headers: authHeader(),
             })
-                .then(() => {})
-                .catch(() => {});
+                .then(() => { })
+                .catch(() => { });
         },
         // get the post comments
         getautofinalizetime () {
@@ -513,7 +517,7 @@ export default defineComponent({
                 .then((response) => {
                     this.mainpostcomments = response.data;
                 })
-                .catch(() => {});
+                .catch(() => { });
         },
 
         // gets the customer feedback
@@ -604,7 +608,7 @@ export default defineComponent({
                 headers: authHeader(),
             })
                 .then((response) => {
-                   if (response.data.success) {
+                    if (response.data.success) {
                         this.getuserorder();
                     }
                 })

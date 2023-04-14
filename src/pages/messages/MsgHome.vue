@@ -117,9 +117,11 @@ export default defineComponent({
     MainHeaderVendor,
     MainFooter,
   },
-  
-  mounted () {
+  created(){
     this.userstatus();
+  },
+  mounted () {
+    this.getmsgsofusers();
    
   },
   data () {
@@ -145,13 +147,16 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-         if (response.data.login == true) {
-            this.user = response.data.user
-            this.getmsgsofusers();
-          }
+          if (response.data.login == true)
+           { this.user = response.data.user }
+          else 
+           { this.$router.push("/login") }
         })
-        .catch(() => { this.user = null });
+        .catch(() => {
+          this.$router.push("/login")
+        })
     },
+
     getmsgsofusers () {
       axios({
         method: "get",

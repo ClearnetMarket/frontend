@@ -1,116 +1,79 @@
 
 <template>
-
   <HeaderPlain />
   <div class="wrapperplain">
-    
-  <div class="container max-w-3xl mx-auto text-white">
-    <div class="mt-5 mb-5">
-      <nav class="rounded-md w-full">
-        <ol class="list-reset flex">
-          <li>
-            <router-link :to="{ name: 'home' }">
-              <a class="text-blue-600 hover:text-blue-700">Home</a>
-            </router-link>
-          </li>
-          <li>
-            <span class="text-gray-500 mx-2">/</span>
-          </li>
-        </ol>
-      </nav>
+    <div class="container max-w-3xl mx-auto text-white">
+      <div class="mt-5 mb-5">
+        <nav class="rounded-md w-full">
+          <ol class="list-reset flex">
+            <li>
+              <router-link :to="{ name: 'home' }">
+                <a class="text-blue-600 hover:text-blue-700">Home</a>
+              </router-link>
+            </li>
+            <li>
+              <span class="text-gray-500 mx-2">/</span>
+            </li>
+          </ol>
+        </nav>
+      </div>
     </div>
-  </div>
-
-  <div class="mx-auto max-w-lg flex items-center justify-center mb-10 mt-12 text-white">
-    <form
-      class="bg-neutral rounded-md px-8 pt-6 pb-8 mb-4 w-full"
-      @submit.prevent="onSubmit"
-    >
-      <div class="mb-4 text-center text-[20px] ">
-        In order to unlock your account, please enter your account seed below.
-      </div>
-    <div class="my-5">
-      <input
-        v-model="wordForm.word0"
-        class="rounded w-full py-2 px-3 input-primary text-black"
-        type="text"
-        autocomplete="off"
-        placeholder="Word 1"
-      />
-            <span v-if="v$.wordForm.word0.$error" class="text-red-600 text-center">
-        {{ v$.wordForm.word0.$errors[0].$message }}
-      </span>
-      </div>
-          <div class="my-5">
-      <input
-        v-model="wordForm.word1"
-        class="rounded w-full py-2 px-3 input-primary text-black"
-        type="text"
-        autocomplete="off"
-        placeholder="Word 2"
-      />
-            <span v-if="v$.wordForm.word1.$error" class="text-red-600 text-center">
-        {{ v$.wordForm.word1.$errors[0].$message }}
-      </span>
-          </div>
-             <div class="my-5">
-      <input
-        v-model="wordForm.word2"
-        class="rounded w-full py-2 px-3 input-primary text-black"
-        type="text"
-        autocomplete="off"
-        placeholder="Word 3"
-      />
-            <span v-if="v$.wordForm.word2.$error" class="text-red-600 text-center">
-        {{ v$.wordForm.word2.$errors[0].$message }}
-      </span>
-             </div>
-        <div class="my-5">
-      <input
-        v-model="wordForm.word3"
-        class="rounded w-full py-2 px-3 input-primary text-black"
-        type="text"
-        autocomplete="off"
-        placeholder="Word 4"
-      />
-            <span v-if="v$.wordForm.word3.$error" class="text-red-600 text-center">
-        {{ v$.wordForm.word3.$errors[0].$message }}
-      </span>
+    <div class="mx-auto max-w-lg flex items-center justify-center mb-10 mt-12 text-white">
+      <form class="bg-neutral rounded-md px-8 pt-6 pb-8 mb-4 w-full" @submit.prevent="onSubmit">
+        <div class="mb-4 text-center text-[20px] ">
+          In order to unlock your account, please enter your account seed below.
         </div>
         <div class="my-5">
-      <input
-        v-model="wordForm.word4"
-        class="rounded w-full py-2 px-3 input-primary text-black"
-        type="text"
-        autocomplete="off"
-        placeholder="Word 5"
-      />
-            <span v-if="v$.wordForm.word4.$error" class="text-red-600 text-center">
-        {{ v$.wordForm.word4.$errors[0].$message }}
-      </span>
+          <input v-model="wordForm.word0" class="rounded w-full py-2 px-3 input-primary text-black" type="text"
+            autocomplete="off" placeholder="Word 1" />
+          <span v-if="v$.wordForm.word0.$error" class="text-red-600 text-center">
+            {{ v$.wordForm.word0.$errors[0].$message }}
+          </span>
         </div>
         <div class="my-5">
-      <input
-        v-model="wordForm.word5"
-        class="rounded w-full py-2 px-3 input-primary text-black"
-        type="text"
-        autocomplete="off"
-        placeholder="Word 6"
-      />
-      <span v-if="v$.wordForm.word5.$error" class="text-red-600 text-center">
-        {{ v$.wordForm.word5.$errors[0].$message }}
-      </span>
+          <input v-model="wordForm.word1" class="rounded w-full py-2 px-3 input-primary text-black" type="text"
+            autocomplete="off" placeholder="Word 2" />
+          <span v-if="v$.wordForm.word1.$error" class="text-red-600 text-center">
+            {{ v$.wordForm.word1.$errors[0].$message }}
+          </span>
         </div>
-      <div class="flex p-md justify-center">
-        <button
-          class="bg-primary hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-blue-300 focus:outline-none focus:shadow-outline"
-          type="submit"
-        >
-          Confirm
-        </button>
-      </div>
-    </form>
-  </div>
+        <div class="my-5">
+          <input v-model="wordForm.word2" class="rounded w-full py-2 px-3 input-primary text-black" type="text"
+            autocomplete="off" placeholder="Word 3" />
+          <span v-if="v$.wordForm.word2.$error" class="text-red-600 text-center">
+            {{ v$.wordForm.word2.$errors[0].$message }}
+          </span>
+        </div>
+        <div class="my-5">
+          <input v-model="wordForm.word3" class="rounded w-full py-2 px-3 input-primary text-black" type="text"
+            autocomplete="off" placeholder="Word 4" />
+          <span v-if="v$.wordForm.word3.$error" class="text-red-600 text-center">
+            {{ v$.wordForm.word3.$errors[0].$message }}
+          </span>
+        </div>
+        <div class="my-5">
+          <input v-model="wordForm.word4" class="rounded w-full py-2 px-3 input-primary text-black" type="text"
+            autocomplete="off" placeholder="Word 5" />
+          <span v-if="v$.wordForm.word4.$error" class="text-red-600 text-center">
+            {{ v$.wordForm.word4.$errors[0].$message }}
+          </span>
+        </div>
+        <div class="my-5">
+          <input v-model="wordForm.word5" class="rounded w-full py-2 px-3 input-primary text-black" type="text"
+            autocomplete="off" placeholder="Word 6" />
+          <span v-if="v$.wordForm.word5.$error" class="text-red-600 text-center">
+            {{ v$.wordForm.word5.$errors[0].$message }}
+          </span>
+        </div>
+        <div class="flex p-md justify-center">
+          <button
+            class="bg-primary hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-blue-300 focus:outline-none focus:shadow-outline"
+            type="submit">
+            Confirm
+          </button>
+        </div>
+      </form>
+    </div>
   </div>
 </template>
 
@@ -127,7 +90,7 @@ export default defineComponent({
   components: {
     HeaderPlain,
   },
-  data() {
+  data () {
     return {
       v$: useValidate(),
       wordForm: {
@@ -140,7 +103,7 @@ export default defineComponent({
       },
     }
   },
-  validations() {
+  validations () {
     return {
       wordForm: {
         word0: { required },
@@ -154,7 +117,7 @@ export default defineComponent({
   },
 
   methods: {
-    sendWordRequest(payLoad: {
+    sendWordRequest (payLoad: {
       word0: string;
       word1: string;
       word2: string;
@@ -162,13 +125,13 @@ export default defineComponent({
       word4: string;
       word5: string;
     }) {
-       axios({
+      axios({
         method: "post",
         url: "/auth/unlock-account",
         data: payLoad,
       })
         .then((response) => {
-          if (response.data.login) {
+          if (response.data.login == true) {
             localStorage.setItem("auth_token", response.data.token);
             localStorage.setItem("auth_user", response.data.user);
             this.$router.push({ name: "changepassword" });
@@ -182,7 +145,7 @@ export default defineComponent({
           });
         });
     },
-    onSubmit() {
+    onSubmit () {
       const payLoad = {
         word0: this.wordForm.word0,
         word1: this.wordForm.word1,
@@ -191,7 +154,7 @@ export default defineComponent({
         word4: this.wordForm.word4,
         word5: this.wordForm.word5,
       }
-      
+
       this.v$.$validate(); // checks all inputs
       if (this.v$.$invalid) {
         notify({
@@ -199,11 +162,11 @@ export default defineComponent({
           text: "Form Failure",
           type: "error",
         });
-      } 
+      }
       else {
         this.sendWordRequest(payLoad);
-    }
-  },
+      }
+    },
   },
 });
 </script>

@@ -153,7 +153,6 @@ export default defineComponent({
       }).then((response) => {
       if ((response.data.login == true)) {
           this.user_admin = response.data.user.user_admin;
-
           if (this.user_admin == 1) {
             this.$router.push({ name: "forsale" });
             this.loaded = false

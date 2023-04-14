@@ -133,10 +133,11 @@ export default defineComponent({
 
     },
   },
-  mounted () {
+  created(){
     this.userstatus();
+  },
+  mounted () {
     this.getitem();
-
   },
   methods: {
     userstatus () {

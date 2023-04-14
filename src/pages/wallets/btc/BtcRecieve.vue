@@ -67,7 +67,7 @@ export default defineComponent({
             btc_address: '',
         }
     },
-    mounted() {
+    created() {
         this.userstatus()
         this.getbtcaddress()
     },
@@ -81,12 +81,13 @@ export default defineComponent({
                 headers: authHeader(),
             })
                 .then((response) => {
-                  if ((response.data.login == true)) {
-                        this.user = response.data.user
-                    }
+                  if (response.data.login == true)
+                     {this.user = response.data.user}
+                else
+                     {this.$router.push("/login")}
                 })
                 .catch((error) => {
-                    console.log(error)
+                    this.$router.push("/login")
                 })
         },
         getbtcaddress() {

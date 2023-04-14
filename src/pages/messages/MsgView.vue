@@ -251,10 +251,9 @@ export default defineComponent({
     this.userstatus();
     const post_id_route = useRoute();
     this.postid = post_id_route.params.postid;
-    this.getmainpost();
   },
   mounted () {
-
+    this.getmainpost();
   },
   data () {
     return {
@@ -296,14 +295,14 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-         if (response.data.login == true) {
-            this.user = response.data.user
-          }
+          if (response.data.login == true) { this.user = response.data.user }
+          else { this.$router.push("/login") }
         })
-        .catch(() => {
-          this.user = null
-        });
+        .catch((error) => {
+          this.$router.push("/login")
+        })
     },
+
     // get the date conversion
     relativeDate (value: any) {
       let e = new Date(value).valueOf();

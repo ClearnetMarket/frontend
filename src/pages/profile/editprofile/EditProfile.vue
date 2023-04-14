@@ -155,7 +155,7 @@ export default defineComponent({
     },
 
 
-    mounted () {
+    created () {
         this.userstatus();
     },
 
@@ -167,22 +167,21 @@ export default defineComponent({
                 withCredentials: true,
                 headers: authHeader(),
             })
-                .then((response) => {
-                  if (response.data.login == true) {
-                        this.user = response.data.user;
-
-                        if (this.user.profile_image === null) {
-                            this.visibledelete1 = false;
-                            this.visibleform1 = true;
-                        }
-                        else {
-                            this.visibledelete1 = true;
-                            this.visibleform1 = false;
-                        }
-                        this.getcurrentbio();
+            .then((response) => {
+                if (response.data.login == true) {
+                    this.user = response.data.user;
+                    if (this.user.profile_image === null) {
+                        this.visibledelete1 = false;
+                        this.visibleform1 = true;
                     }
-                })
-                .catch(() => { this.user = null });
+                    else {
+                        this.visibledelete1 = true;
+                        this.visibleform1 = false;
+                    }
+                    this.getcurrentbio();
+                }
+            })
+            .catch(() => { this.user = null });
         },
         getcurrentbio () {
             axios({
@@ -217,7 +216,6 @@ export default defineComponent({
             }
 
         },
-
         adduserprofile (payLoad: { bio: string; }) {
             axios({
                 method: "put",
@@ -226,17 +224,16 @@ export default defineComponent({
                 withCredentials: true,
                 headers: authHeader(),
             })
-                .then((response) => {
-                    if (response.data.success) {
-                        this.$router.push({ name: "userprofile", params: { uuid: this.user.user_id }, });
-                    }
-                });
+            .then((response) => {
+                if (response.data.success) {
+                    this.$router.push({ name: "userprofile", params: { uuid: this.user.user_id }, });
+                }
+            });
         },
 
         pickFile1 () {
             let input = this.$refs.fileInput1 as HTMLInputElement;
             let file = input.files;
-
             if (file && file[0]) {
                 let reader = new FileReader();
                 reader.onload = (e) => {
@@ -246,14 +243,11 @@ export default defineComponent({
                 this.$emit("input", file[0]);
                 let clicker = this.$refs.clicktoshow1 as HTMLInputElement;
                 clicker.click();
-
                 this.CreateItemImages()
             }
         },
         CreateItemImages () {
-
             let formData = new FormData();
-
             if (this.$refs.fileInput1 !== null) {
                 const fileInput1 = this.$refs.fileInput1 as HTMLInputElement
                 if (fileInput1?.files && fileInput1.files[0]) {
@@ -263,7 +257,6 @@ export default defineComponent({
                 }
             }
             let path = "/auth/create-profile-image/" + this.user.user_id;
-
             axios({
                 method: "POST",
                 url: path,
@@ -272,7 +265,6 @@ export default defineComponent({
                 headers: authHeader(),
             })
                 .then((response) => {
-
                     if (response.data.status) {
                         // if any images uploaded success
                         notify({

@@ -293,8 +293,10 @@ export default defineComponent({
       order_summary_shipping_and_price_cost: "",
     };
   },
+  created(){
+    
+  },
   mounted () {
-    this.userstatus();
     this.get_updated_prices_and_quantity();
     this.get_shopping_cart_items();
     this.get_shopping_cart_items_saved_for_later();

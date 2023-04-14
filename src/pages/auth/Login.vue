@@ -1,6 +1,5 @@
 
 <template>
-
   <HeaderPlain />
     <div class="wrapperplain">
   <div class="max-w-7xl mx-auto  ">
@@ -120,10 +119,8 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       })
-
         .then((response) => {
           if (response.data.success) {
-
             this.$router.push({ name: "home" });
           }
         })

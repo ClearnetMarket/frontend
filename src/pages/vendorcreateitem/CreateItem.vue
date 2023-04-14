@@ -433,7 +433,7 @@ export default defineComponent({
     const isSelectDisabled = ref(false); // Form Toggle
     return { isSelectDisabled }; // Form Toggle
   },
-  mounted() {
+  created() {
     this.userstatus();
     this.createitemtemporary();
     this.getCategoryList(); // Query Categories
@@ -491,17 +491,20 @@ export default defineComponent({
 
   methods: {
      userstatus() {
-      //user Auth
        axios({
         method: "get",
         url: "/auth/whoami",
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
-       if ((response.data.login != true)) {
-          this.$router.push({ name: "home" });
-        }
-      });
+      if (response.data.login == true) 
+        { this.user = response.data.user }
+      else 
+        { this.$router.push("/login") }
+      })
+      .catch(() => {
+        this.$router.push("/login")
+      })
     },
 
      CreateItem(payload: {

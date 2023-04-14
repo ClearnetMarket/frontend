@@ -46,7 +46,7 @@
                             <div class=" md:pt-2 text-[13px] font-bold">
                                 <router-link :to="{ name: 'wallet' }" class="px-3">
                                     <button class="bg-accent hover:bg-yellow-500 text-black font-bold py-1 px-3
-                                                        rounded focus:outline-none focus:shadow-outline">
+                                                                rounded focus:outline-none focus:shadow-outline">
                                         Wallets
                                     </button>
                                 </router-link>
@@ -95,10 +95,10 @@
                                         <div class=" text-[14px] font-bold">
                                             <div class="text-white">BCH</div>
                                             <div class="break-normal text-red-600" v-if="bchpricechange == 0">
-                                                {{ bchprice }} {{ returncurrency(user.currency) }}
+                                                {{ bchprice }} USD
                                             </div>
                                             <div class="break-normal text-green-600" v-if="bchpricechange == 1">
-                                                {{ bchprice }} {{ returncurrency(user.currency) }}
+                                                {{ bchprice }} USD
                                             </div>
                                         </div>
                                     </div>
@@ -119,11 +119,11 @@
                                         <div class=" text-[14px] font-bold">
                                             <div class="text-white">XMR</div>
                                             <div class="break-normal text-red-600" v-if="xmrpricechange == 0">
-                                                    {{ xmrprice }} {{ returncurrency(user.currency) }}
-                                                </div>
-                                                <div class="break-normal text-green-600" v-if="xmrpricechange == 1">
-                                                    {{ xmrprice }} {{ returncurrency(user.currency) }}
-                                                </div>
+                                                {{ xmrprice }} USD
+                                            </div>
+                                            <div class="break-normal text-green-600" v-if="xmrpricechange == 1">
+                                                {{ xmrprice }} USD
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -160,16 +160,20 @@ export default defineComponent({
 
     created () {
         this.userstatus()
-        this.getCategoryList()
-        this.getbchpricechange24hour()
-        this.getxmrpricechange24hour()
-        this.getbtcpricechange24hour()
+       
+
 
         this.interval = setInterval(() => {
             this.getbtcprice_anon()
             this.getbchprice_anon()
             this.getxmrprice_anon()
         }, 100000)
+    },
+    mounted () {
+         this.getCategoryList()
+        this.getbchpricechange24hour()
+        this.getxmrpricechange24hour()
+        this.getbtcpricechange24hour()
     },
     unmounted () {
         clearInterval(this.interval)

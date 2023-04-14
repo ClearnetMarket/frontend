@@ -33,11 +33,9 @@
                         <li>
                             <span class="text-gray-500 mx-2">/</span>
                         </li>
-
                     </ol>
                 </nav>
             </div>
-
 
             <div v-if="loaded">
                 <div class="grid grid-cols-12 gap-5">
@@ -234,8 +232,10 @@ export default defineComponent({
             },
         };
     },
-    mounted () {
+    created(){
         this.userstatus();
+    },
+    mounted () {
         this.get_all_tickets();
         this.get_current_ticket();
         this.get_current_ticket_messages();

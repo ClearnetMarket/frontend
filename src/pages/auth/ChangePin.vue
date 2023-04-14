@@ -77,6 +77,8 @@ import { notify } from "@kyvg/vue3-notification"
 import useValidate from "@vuelidate/core"
 import { required, minLength } from "@vuelidate/validators"
 import HeaderPlain from "../../layouts/headers/HeaderPlain.vue"
+import authHeader from "../../services/auth.header"
+
 
 export default defineComponent({
   name: "changepin",
@@ -87,12 +89,16 @@ export default defineComponent({
   data () {
     return {
       v$: useValidate(),
+      user: null,
       ChangePinForm: {
         pin: "",
         pin_confirm: "",
         password: "",
       },
     };
+  },
+  created(){
+    this.userstatus;
   },
   validations () {
     return {
@@ -104,7 +110,22 @@ export default defineComponent({
     };
   },
   methods: {
-
+    userstatus () {
+      axios({
+        method: "get",
+        url: "/auth/whoami",
+        withCredentials: true,
+        headers: authHeader(),
+      })
+        .then((response) => {
+          if (response.data.login == true) {
+            this.user = response.data.user;
+          }
+        })
+        .catch(() => {
+          this.$router.push({ name: "login" });
+        });
+    },
     sendRequest (payLoad: { pin: string; pin_confirm: string }) {
       axios({
         method: "post",

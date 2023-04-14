@@ -160,11 +160,7 @@ export default defineComponent({
     MainFooter,
     StarRating,
   },
-  created () {
-    const user_uuid_route = useRoute();
-    this.user_uuid = user_uuid_route.params.uuid;
-    this.getuserstats();
-  },
+
   data () {
     return {
       page_loaded: false,
@@ -209,8 +205,13 @@ export default defineComponent({
 
     };
   },
-  mounted () {
+  created () {
+    const user_uuid_route = useRoute();
+    this.user_uuid = user_uuid_route.params.uuid;
+    this.getuserstats();
     this.userstatus();
+  },
+  mounted () {
     this.getratingsvendor();
     this.getratingscustomer();
     this.getreviews();

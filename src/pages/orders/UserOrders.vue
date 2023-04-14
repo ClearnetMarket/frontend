@@ -301,7 +301,6 @@ export default defineComponent({
       orders: [],
       review: [],
       user: null,
-
       page: 1,
       perPage: 20,
       recordsLength: 0,
@@ -313,13 +312,35 @@ export default defineComponent({
 
     };
   },
-  mounted () {
+  created(){
     this.userstatus();
+  },
+  mounted(){
+ 
     this.getuserorderscount();
     this.getPage(this.page);
   },
 
   methods: {
+    userstatus () {
+      axios({
+        method: "get",
+        url: "/auth/whoami",
+        withCredentials: true,
+        headers: authHeader(),
+      })
+      .then((response) => {
+      if (response.data.login == true) 
+        { this.user = response.data.user }
+      else 
+        { this.$router.push("/login") }
+      })
+      .catch(() => {
+        this.$router.push("/login")
+      })
+    },
+
+
     getPage: function (page: any) {
       // we simulate an api call that fetch the records from a backend
       this.orders = [];
@@ -348,20 +369,6 @@ export default defineComponent({
         this.recordsLength = response.data.count;
 
       });
-    },
-    userstatus () {
-      axios({
-        method: "get",
-        url: "/auth/whoami",
-        withCredentials: true,
-        headers: authHeader(),
-      })
-        .then((response) => {
-          if (response.data.login == true) {
-            this.user = response.data.user
-          }
-        })
-        .catch(() => { this.user = null });
     },
 
     // mark as delivered

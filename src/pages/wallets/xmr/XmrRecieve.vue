@@ -67,7 +67,7 @@ export default defineComponent({
             user: null,
         }
     },
-    mounted() {
+    created() {
         this.userstatus()
         this.getxmraddress()
     },
@@ -81,12 +81,13 @@ export default defineComponent({
                 headers: authHeader(),
             })
                 .then((response) => {
-                  if ((response.data.login == true)) {
-                    this.user = response.data.user
-                  }
+                    if (response.data.login == true) 
+                    { this.user = response.data.user }
+                    else
+                     { this.$router.push("/login") }
                 })
                 .catch(() => {
-                    this.$router.push('/login')
+                    this.$router.push("/login")
                 })
         },
         getxmraddress() {

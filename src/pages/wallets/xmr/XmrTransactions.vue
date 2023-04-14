@@ -258,7 +258,7 @@ export default defineComponent({
       transactions: [],
       date: Date.now(),
       tab: [],
-
+      user: null,
       page: 1,
       perPage: 50,
       recordsLength: 0,
@@ -279,15 +279,15 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       })
-        .then((response) => {
-         if ((response.data.login == true)) {
-            this.getPage(this.page);
-          }
+       .then((response) => {
+          if (response.data.login == true)
+           { this.user = response.data.user }
+          else
+           { this.$router.push("/login") }
         })
         .catch((error) => {
-          this.$router.push("/login");
-          console.log(error)
-        });
+          this.$router.push("/login")
+        })
     },
 
     getPage: function (page: any) {
