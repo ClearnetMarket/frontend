@@ -7,9 +7,9 @@
     >
       <div class="text-[24px] text-blue-600 font-semibold pt-1 ">Freeport</div>
     </div>
-    <div class="sm:col-span-12 sm:px-10 md:col-span-6 lg:col-span-7 overflow-hidden ">
+    <div class="sm:col-span-12 sm:px-10 md:col-span-6 lg:col-span-7 overflow-hidden">
       <form class="grid grid-cols-12" @submit.prevent="mainsearch()">
-          <div class="sm:col-span-10 md:col-span-8">
+          <div class="sm:col-span-9 md:col-span-8 ">
             <input
               v-model="searchForm.searchInput"
               class="rounded w-full py-2 px-3
@@ -20,7 +20,7 @@
               placeholder="Search freeport..."
             />
           </div>
-          <div class="col-span-2 md:col-span-4">
+          <div class="col-span-2 md:col-span-4 ">
             <button
               class="bg-primary hover:bg-zinc-700 text-white font-bold py-2 pt-1
                px-4 rounded focus:outline-none focus:shadow-outline"

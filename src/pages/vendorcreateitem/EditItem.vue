@@ -247,14 +247,13 @@ export default defineComponent({
   },
   created () {
     this.userstatus();
+  },
+  mounted () {
     this.getItemForSale();
     this.getCategoryList(); // Query Categories
     this.getConditionList(); // Query Conditionlist
     this.getCountryList(); // Query Countries
     this.getFormData();
-  },
-  mounted () {
-
     const isSelectDisabled = ref(false); // Form Toggle
     return { isSelectDisabled }; // Form Toggle
   },

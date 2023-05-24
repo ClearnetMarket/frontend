@@ -294,7 +294,7 @@ export default defineComponent({
     };
   },
   created(){
-    
+    this.userstatus();
   },
   mounted () {
     this.get_updated_prices_and_quantity();

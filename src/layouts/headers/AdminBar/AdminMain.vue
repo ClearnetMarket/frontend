@@ -2,16 +2,14 @@
     <div class="text-center mt-1 flex justify-center">
         <router-link :to="{ name: 'ModTicket' }">
             <button
-                class="bg-primary hover:bg-zinc-700 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mr-2"
-            >
+                class="bg-primary hover:bg-zinc-700 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mr-2">
                 Tickets
             </button>
         </router-link>
         <div v-if="disputes">
             <router-link :to="{ name: 'ModTicket' }">
                 <button
-                    class="bg-orange-600 hover:bg-zinc-700 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mr-2"
-                >
+                    class="bg-orange-600 hover:bg-zinc-700 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mr-2">
                     <span class="px-2">{{}}</span>
                     <span class>Tickets</span>
                 </button>
@@ -28,7 +26,7 @@ import authHeader from '../../../services/auth.header'
 export default defineComponent({
     name: 'MainHeaderAdmin',
 
-    data() {
+    data () {
         return {
             login: null,
             user: null,
@@ -38,19 +36,19 @@ export default defineComponent({
         }
     },
 
-    mounted() {
+    mounted () {
         this.userstatus()
     },
 
     methods: {
-        userstatus() {
+        userstatus () {
             axios({
                 method: 'get',
                 url: '/auth/whoami',
                 withCredentials: true,
                 headers: authHeader(),
             }).then((response) => {
-             if (response.data.login == true) {
+                if (response.data.login == true) {
                     let user = response.data.user
 
                     this.user = response.data.user
@@ -62,9 +60,13 @@ export default defineComponent({
                         this.getvendororders()
                     }
                 }
+                 else {
+                    this.$router.push({ name: 'login' })
+                }
+                
             })
         },
-        getvendorfeedback() {
+        getvendorfeedback () {
             axios({
                 method: 'get',
                 url: '/vendor/new-feedback-count',
@@ -76,7 +78,7 @@ export default defineComponent({
                 }
             })
         },
-        getvendordisputes() {
+        getvendordisputes () {
             axios({
                 method: 'get',
                 url: '/vendor/new-disputes-count',
@@ -88,7 +90,7 @@ export default defineComponent({
                 }
             })
         },
-        getvendororders() {
+        getvendororders () {
             axios({
                 method: 'get',
                 url: '/vendor/new-orders-count',

@@ -331,7 +331,7 @@ export default defineComponent({
 });
 </script>
 <style>
-@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
 
 fieldset,
 label {

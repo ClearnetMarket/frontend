@@ -3,39 +3,41 @@
     <MainHeaderMid />
     <MainHeaderBottom />
     <div class="wrapper">
-        <div class="container max-w-7xl mx-auto  text-white">
-            <!-- Container-->
-            <div class="mt-5 mb-5 px-10">
-                <nav class="rounded-md w-full">
-                    <ol class="list-reset flex">
-                        <li>
-                            <router-link :to="{ name: 'home' }">
-                                <a class="text-blue-600 hover:text-blue-700">Home</a>
-                            </router-link>
-                        </li>
-                        <li>
-                            <span class="text-gray-500 mx-2">/</span>
-                        </li>
+        <div v-if="user">
+            <div class="container max-w-7xl mx-auto text-white">
+                <!-- Container-->
+                <div class="mt-5 mb-5 px-10">
+                    <nav class="rounded-md w-full">
+                        <ol class="list-reset flex">
+                            <li>
+                                <router-link :to="{ name: 'home' }">
+                                    <a class="text-blue-600 hover:text-blue-700">Home</a>
+                                </router-link>
+                            </li>
+                            <li>
+                                <span class="text-gray-500 mx-2">/</span>
+                            </li>
 
-                        <li>
-                            <router-link :to="{ name: 'wallet' }">
-                                <a class="text-blue-600 hover:text-blue-700">Wallet Home</a>
-                            </router-link>
-                        </li>
-                        <li>
-                            <span class="text-gray-500 mx-2">/</span>
-                        </li>
-                    </ol>
-                </nav>
-            </div>
+                            <li>
+                                <router-link :to="{ name: 'wallet' }">
+                                    <a class="text-blue-600 hover:text-blue-700">Wallet Home</a>
+                                </router-link>
+                            </li>
+                            <li>
+                                <span class="text-gray-500 mx-2">/</span>
+                            </li>
+                        </ol>
+                    </nav>
+                </div>
 
-            <div class="flex text-[22px] invisible md:visible">Deposit Bitcoin Cash</div>
+                <div class="flex text-[22px] invisible md:visible">Deposit Bitcoin Cash</div>
 
-            <div class="flex text-[22px] justify-center visible md:invisible">Deposit Bitcoin Cash</div>
-            <div class="bg-neutral rounded-md">
-                <div class="flex justify-center mt-8 text-[20px]">Address:</div>
-                <div class="flex py-10 justify-center mt-8 text-[14px]">
-                    {{ bch_address }}
+                <div class="flex text-[22px] justify-center visible md:invisible">Deposit Bitcoin Cash</div>
+                <div class="bg-neutral rounded-md">
+                    <div class="flex justify-center mt-8 text-[20px]">Address:</div>
+                    <div class="flex py-10 justify-center mt-8 text-[14px]">
+                        {{ bch_address }}
+                    </div>
                 </div>
             </div>
         </div>
@@ -62,18 +64,19 @@ export default defineComponent({
         MainHeaderVendor,
         MainFooter,
     },
-    data() {
+    data () {
         return {
             bch_address: '',
+            user: null,
         }
     },
-    created() {
+    created () {
         this.userstatus();
         this.getbchaddress()
     },
 
     methods: {
-        userstatus() {
+        userstatus () {
             axios({
                 method: 'get',
                 url: '/auth/whoami',
@@ -81,14 +84,16 @@ export default defineComponent({
                 headers: authHeader(),
             })
                 .then((response) => {
-                    if ((response.data.login == true)) {  }
-                    else{ this.$router.push("/login"); }
+                    if ((response.data.login == true)) {
+                        { this.user = response.data.user }
+                    }
+                    else { this.$router.push("/login"); }
                 })
                 .catch((error) => {
-                     this.$router.push("/login");
+                    this.$router.push("/login");
                 })
         },
-        getbchaddress() {
+        getbchaddress () {
             axios({
                 method: 'get',
                 url: '/bch/receive',

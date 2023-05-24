@@ -435,6 +435,8 @@ export default defineComponent({
   },
   created() {
     this.userstatus();
+  },
+  mounted(){
     this.createitemtemporary();
     this.getCategoryList(); // Query Categories
     this.getConditionList(); // Query Conditionlist

@@ -6,7 +6,9 @@
     <div v-if="user">
         <MainHeaderVendor v-show="user.user_admin === 1" />
     </div>
+    
     <div class="wrapper">
+          <div v-if="user">
         <!-- Top Stuff-->
         <div class="container max-w-7xl mx-auto px-10 pb-72 text-white">
             <!-- Container-->
@@ -150,6 +152,7 @@
             </div>
         </div>
     </div>
+    </div>
     <!-- END container-->
     <MainFooter />
 </template>
@@ -188,12 +191,14 @@ export default defineComponent({
     },
     created () {
         this.userstatus()
+    },
+    mounted() {
         this.getbtcprice()
         this.getbchprice()
         this.getxmrprice()
         this.getxmrbalance()
         this.getbchbalance()
-        this.getbtcbalance()
+        this.getbtcbalance() 
     },
     methods: {
         userstatus() {
@@ -208,6 +213,9 @@ export default defineComponent({
                         this.user = response.data.user
                         this.userinfo()
                         this.getwallettotals()
+                    }
+                    else{
+                        this.$router.push({ name: 'login' })
                     }
                 })
                 .catch(() => {

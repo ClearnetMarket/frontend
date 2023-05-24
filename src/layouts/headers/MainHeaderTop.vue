@@ -53,7 +53,7 @@
                             </li>
                           </div>
                           <div v-else>
-                            <li class="w-full p-5 bg-red-300hover:font-bold ">
+                            <li class="w-full p-5 bg-red-300hover:font-bold">
                               {{ notes.message }}
                             </li>
                           </div>
@@ -62,7 +62,7 @@
                     </div>
                   </div>
 
-                  <router-link :to="{ name: 'MsgHome' }" class="px-3 ">
+                  <router-link :to="{ name: 'MsgHome' }" class="px-1">
                     <button
                       class="hover:bg-zinc-700 text-white hover:text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline font-bold ">
                       <font-awesome-icon icon="fa-solid fa-envelope " class="text-[22px]" />
@@ -75,13 +75,13 @@
                     </button>
                   </router-link>
 
-                  <router-link :to="{ name: 'userorders' }" class="px-3">
+                  <router-link :to="{ name: 'userorders' }" class="px-1">
                     <button
                       class="hover:bg-zinc-700 text-white hover:text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline font-bold">
                       Orders
                     </button>
                   </router-link>
-                  <router-link :to="{ name: 'account' }" class="px-3">
+                  <router-link :to="{ name: 'account' }" class="px-1">
                     <button
                       class="hover:bg-zinc-700 text-white hover:text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline font-bold">
                       Account

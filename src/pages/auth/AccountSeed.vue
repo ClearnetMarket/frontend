@@ -154,6 +154,9 @@ export default defineComponent({
                     if (response.data.login == true) {
                         this.user = response.data.user;
                     }
+                    else{
+                        this.$router.push({ name: "login" });
+                    }
                 })
                 .catch(() => {
                     this.$router.push({ name: "login" });

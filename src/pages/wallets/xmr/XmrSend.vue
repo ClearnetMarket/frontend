@@ -4,6 +4,7 @@
   <MainHeaderMid />
   <MainHeaderBottom />
   <div class="wrapper">
+    <div v-if="user">
     <div class="container  max-w-7xl mx-auto px-10 pb-60  text-white">
 
       <div class="mt-5 mb-5">
@@ -94,6 +95,7 @@
         </div>
       </div>
     </div>
+    </div>
   </div>
   <MainFooter />
 </template>
@@ -122,9 +124,10 @@ export default defineComponent({
     MainHeaderVendor,
     MainFooter,
   },
-
-  mounted () {
+  created(){
     this.userstatus();
+  },
+  mounted () {
     this.getxmrbalance();
   },
   data () {

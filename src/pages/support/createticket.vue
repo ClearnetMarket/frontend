@@ -4,99 +4,102 @@
     <MainHeaderMid />
     <MainHeaderBottom />
     <div class="wrapper">
-        <div class="container max-w-5xl mx-auto px-10  mb-10 text-white">
-            <div class="grid grid-cols-1 w-full gap-4 mb-5">
-                <nav class="rounded-md">
-                    <ol class="list-reset flex">
-                        <li>
-                            <router-link :to="{ name: 'home' }">
-                                <a class="text-blue-600 hover:text-blue-700">Home</a>
-                            </router-link>
-                        </li>
-                        <li>
-                            <span class="text-gray-500 mx-2">/</span>
-                        </li>
-                        <li>
-                            <router-link :to="{ name: 'supporthome' }">
-                                <a class="text-blue-600 hover:text-blue-700">Customer Support</a>
-                            </router-link>
-                        </li>
-                        <li>
-                            <span class="text-gray-500 mx-2">/</span>
-                        </li>
-                    </ol>
-                </nav>
-            </div>
-
-            <div class="grid grid-cols-12 gap-5">
-                <div class="col-span-12 sm:col-span-4 bg-neutral rounded-md p-5">
-                    <div class="text-[18px] mb-5 text-center">My Open Tickets</div>
-                    <div v-if="all_tickets.length > 0">
-                        <div v-for="ticket in all_tickets" :key="ticket.id">
-                            <div class="grid grid-cols-12 border-b-2 border-gray-400 mb-5 ">
-                                <router-link class="col-span-12"
-                                    :to="{ name: 'supportviewticket', params: { uuid: ticket.uuid } }">
-                                    <div
-                                        class="col-span-12  hover:underline text-blue-600 hover:text-blue-500 text-[16px] overflow-hidden">
-                                        {{ ticket.subject }}
-                                    </div>
+        <div v-if="user">
+            <div class="container max-w-5xl mx-auto px-10  mb-10 text-white">
+                <div class="grid grid-cols-1 w-full gap-4 mb-5">
+                    <nav class="rounded-md">
+                        <ol class="list-reset flex">
+                            <li>
+                                <router-link :to="{ name: 'home' }">
+                                    <a class="text-blue-600 hover:text-blue-700">Home</a>
                                 </router-link>
+                            </li>
+                            <li>
+                                <span class="text-gray-500 mx-2">/</span>
+                            </li>
+                            <li>
+                                <router-link :to="{ name: 'supporthome' }">
+                                    <a class="text-blue-600 hover:text-blue-700">Customer Support</a>
+                                </router-link>
+                            </li>
+                            <li>
+                                <span class="text-gray-500 mx-2">/</span>
+                            </li>
+                        </ol>
+                    </nav>
+                </div>
 
-                                <div class="col-span-12 flex gap-5 mt-2">
-                                    <div class="">
-                                        Created:
+                <div class="grid grid-cols-12 gap-5">
+                    <div class="col-span-12 sm:col-span-4 bg-neutral rounded-md p-5">
+                        <div class="text-[18px] mb-5 text-center">My Open Tickets</div>
+                        <div v-if="all_tickets.length > 0">
+                            <div v-for="ticket in all_tickets" :key="ticket.id">
+                                <div class="grid grid-cols-12 border-b-2 border-gray-400 mb-5 ">
+                                    <router-link class="col-span-12"
+                                        :to="{ name: 'supportviewticket', params: { uuid: ticket.uuid } }">
+                                        <div
+                                            class="col-span-12  hover:underline text-blue-600 hover:text-blue-500 text-[16px] overflow-hidden">
+                                            {{ ticket.subject }}
+                                        </div>
+                                    </router-link>
+
+                                    <div class="col-span-12 flex gap-5 mt-2">
+                                        <div class="">
+                                            Created:
+                                        </div>
+                                        <div class="">
+                                            {{ relativeDate(ticket.timestamp) }} ago
+                                        </div>
                                     </div>
-                                    <div class="">
-                                        {{ relativeDate(ticket.timestamp) }} ago
-                                    </div>
-                                </div>
-                                <div class="col-span-12 flex gap-5">
-                                    <div class="">
-                                        Status:
-                                    </div>
-                                    <div class="">{{  }}
-                                        <div class="text-red-600 font-bold" v-if="ticket.status == 0">Closed</div>
-                                        <div class="text-green-600 font-bold" v-if="ticket.status == 1">Open</div>
-                                        <div class="text-yellow-600 font-bold" v-if="ticket.status == 2">New Message</div>
+                                    <div class="col-span-12 flex gap-5">
+                                        <div class="">
+                                            Status:
+                                        </div>
+                                        <div class="">{{ }}
+                                            <div class="text-red-600 font-bold" v-if="ticket.status == 0">Closed</div>
+                                            <div class="text-green-600 font-bold" v-if="ticket.status == 1">Open</div>
+                                            <div class="text-yellow-600 font-bold" v-if="ticket.status == 2">New Message
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <div v-else>
+                            No Previous Tickets
+                        </div>
                     </div>
-                    <div v-else>
-                        No Previous Tickets
-                    </div>
-                </div>
-                <div class="col-span-12 sm:col-span-8">
-                    <div class="text-[18px] mb-3 text-center">
-                        Create a New Ticket
-                    </div>
+                    <div class="col-span-12 sm:col-span-8">
+                        <div class="text-[18px] mb-3 text-center">
+                            Create a New Ticket
+                        </div>
 
-                    <form class="rounded-md pt-6 pb-8 mb-4 w-full bg-neutral p-5" @submit.prevent="onSubmit">
-                        <label class="block text-white text-sm font-bold mb-2">Subject</label>
-                        <input v-model="SendMsgForm.subject" class="shadow appearance-none border rounded w-full py-2 px-3 text-white
+                        <form class="rounded-md pt-6 pb-8 mb-4 w-full bg-neutral p-5" @submit.prevent="onSubmit">
+                            <label class="block text-white text-sm font-bold mb-2">Subject</label>
+                            <input v-model="SendMsgForm.subject" class="shadow appearance-none border rounded w-full py-2 px-3 text-white
                                 leading-tight focus:outline-none focus:shadow-outline" id="subject" type="text"
-                            placeholder="Enter a subject of your issue .." />
-                        <span v-if="v$.SendMsgForm.subject.$error" class="text-red-600 text-center">
-                            {{ v$.SendMsgForm.subject.$errors[0].$message }}
-                        </span>
-                        <label class="block text-white text-sm font-bold mb-2 mt-3">Issue</label>
-                        <textarea v-model="SendMsgForm.msginfo" id="item_description" placeholder="Write something .."
-                            class="shadow appearance-none border rounded w-full py-2 px-3
+                                placeholder="Enter a subject of your issue .." />
+                            <span v-if="v$.SendMsgForm.subject.$error" class="text-red-600 text-center">
+                                {{ v$.SendMsgForm.subject.$errors[0].$message }}
+                            </span>
+                            <label class="block text-white text-sm font-bold mb-2 mt-3">Issue</label>
+                            <textarea v-model="SendMsgForm.msginfo" id="item_description" placeholder="Write something .."
+                                class="shadow appearance-none border rounded w-full py-2 px-3
                                     text-white leading-tight
                                     focus:outline-none focus:shadow-outline mb-3">
                             </textarea>
-                        <span v-if="v$.SendMsgForm.msginfo.$error" class="text-red-600 text-center">
-                            {{ v$.SendMsgForm.msginfo.$errors[0].$message }}
-                        </span>
-                        <div class="flex justify-end">
-                            <button class="bg-gray-600 hover:bg-zinc-400 text-white font-bold 
+                            <span v-if="v$.SendMsgForm.msginfo.$error" class="text-red-600 text-center">
+                                {{ v$.SendMsgForm.msginfo.$errors[0].$message }}
+                            </span>
+                            <div class="flex justify-end">
+                                <button class="bg-gray-600 hover:bg-zinc-400 text-white font-bold 
                                             py-2 px-4 rounded
                                             focus:outline-none focus:shadow-outline" type="submit">
-                                Create Ticket
-                            </button>
-                        </div>
-                    </form>
+                                    Create Ticket
+                                </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -146,12 +149,10 @@ export default defineComponent({
     },
     created () {
         this.userstatus();
-        
     },
-    mounted(){
+    mounted () {
         this.get_all_tickets();
     },
-
     validations () {
         return {
             SendMsgForm: {
@@ -178,15 +179,15 @@ export default defineComponent({
                 headers: authHeader(),
             })
                 .then((response) => {
-                   if (response.data.login == true) {
+                    if (response.data.login == true) {
                         this.user = response.data.user;
                     }
-                    else{
+                    else {
                         this.$router.push({ name: 'login' })
                     }
                 })
                 .catch(() => {
-                        this.$router.push({ name: 'login' })
+                    this.$router.push({ name: 'login' })
                 });
         },
         get_all_tickets () {

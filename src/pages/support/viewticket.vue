@@ -4,7 +4,6 @@
     <MainHeaderMid />
     <MainHeaderBottom />
     <div class="wrapper">
-
         <div class="container max-w-5xl mx-auto px-10  mb-10 text-white">
             <div class="grid grid-cols-1 w-full gap-4 mb-5">
                 <nav class="rounded-md">
@@ -208,7 +207,6 @@ import MainFooter from "../../layouts/footers/FooterMain.vue";
 import { formatDistance } from "date-fns";
 export default defineComponent({
     name: "supportviewticket",
-
     components: {
         MainHeaderTop,
         MainHeaderMid,
@@ -216,7 +214,6 @@ export default defineComponent({
         MainHeaderVendor,
         MainFooter,
     },
-
     data () {
         return {
             v$: useValidate(),

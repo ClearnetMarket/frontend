@@ -1,5 +1,5 @@
 <template>
-    <div class="text-center mt-1 flex justify-center">
+    <div class="text-center mt-1 flex justify-evenly pl-1">
         <router-link :to="{ name: 'forsale' }">
             <button
                 class="bg-primary hover:bg-zinc-700 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mr-2"

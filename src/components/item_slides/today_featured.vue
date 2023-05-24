@@ -1,7 +1,10 @@
 <template>
-    <div class="flex flex-nowrap flex-col p-5 ">
-        <div class="text-[24px] text-white">Today Featured</div>
-        <div class="md:flex md:mb-5 gap-5 mx-auto">
+    <div class="grid grid-cols-12 flex-col  ">
+        <div class="col-span-12 text-[24px] text-white pl-3">Featured Items</div>
+        <div class="col-span-12 sm:gap-1 md:gap-5 md:mb-5
+                        flex sm:justify-center sm:flex-wrap md:flex-nowrap 
+                         md:justify-start 
+                        md:overflow-hidden ">
             <div v-for="item in todayfeatured" :key="item.id">
                 <generic_item_price :item="item" />
             </div>
@@ -19,12 +22,12 @@ export default defineComponent({
     components: {
         generic_item_price,
     },
-    data() {
+    data () {
         return {
             todayfeatured: [],
             loadedbtcprice: false,
 
-                  price_coin_btc: null,
+            price_coin_btc: null,
             price_coin_bch: null,
             price_coin_xmr: null,
             price: 0,
@@ -33,12 +36,12 @@ export default defineComponent({
     },
     computed: {},
 
-    mounted() {
+    mounted () {
         this.gettodayfeatured()
     },
 
     methods: {
-        gettodayfeatured() {
+        gettodayfeatured () {
             axios({
                 method: 'get',
                 url: '/itemquery/query/todayfeatured',
@@ -47,9 +50,9 @@ export default defineComponent({
                 .then((response) => {
                     this.todayfeatured = response.data
                 })
-                .catch(() => {})
+                .catch(() => { })
         },
-            pricefilter_btc (price: number, currency: number) {
+        pricefilter_btc (price: number, currency: number) {
             axios({
                 method: "get",
                 url: "/price/btcprice/" + price + '/' + currency,

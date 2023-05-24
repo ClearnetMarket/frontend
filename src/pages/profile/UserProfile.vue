@@ -24,8 +24,9 @@
           <div class="flex justify-center">
             <div class="grid grid-cols-12 mb-5 rounded-md gap-4 w-full p-5 bg-neutral">
               <div class="col-span-12 ">
-                <div >
-                  <router-link v-if="user.user_id == userprofile.uuid" :to="{ name: 'editprofile' }" class="text-blue-600 hover:text-blue-700"> Edit
+                <div v-if="user">
+                  <router-link v-if="user.user_id == userprofile.uuid" :to="{ name: 'editprofile' }" 
+                  class="text-blue-600 hover:text-blue-700"> Edit
                     Profile
                   </router-link>
                 </div>
@@ -243,15 +244,13 @@ export default defineComponent({
           this.user = null;
         });
     },
-       getPage: function (page: any) {
+    getPage: function (page: any) {
       // we simulate an api call that fetch the records from a backend
       this.vendorreviews = [];
       const startIndex = this.perPage * (page - 1) + 1;
       const endIndex = startIndex + this.perPage - 1;
-
       // gets the vendor items
       this.getvendorreviews(page)
-
     },
 
     getuser () {
@@ -259,7 +258,7 @@ export default defineComponent({
         method: "get",
         url: "/info/user-info/" + this.user_uuid,
         withCredentials: true,
-        headers: authHeader(),
+    
       }).then((response) => {
           this.userprofile = response.data;
           this.userprofile.profileimage = response.data.profileimage;
@@ -270,7 +269,6 @@ export default defineComponent({
           this.userprofile.vendor_name = response.data.vendor_name;
           this.userprofile.customer_rating = response.data.customer_rating;
           this.userprofile.profileimage_url_250 = response.data.profileimage_url_250;
-
       })
     },
     getuserstats () {
@@ -278,12 +276,10 @@ export default defineComponent({
         method: "get",
         url: "/info/user-stats/" + this.user_uuid,
         withCredentials: true,
-        headers: authHeader(),
-      }).then((response) => {
 
+      }).then((response) => {
           this.user_stats = response.data;
           this.user_stats.total_items_bought = response.data.total_items_bought;
-
       });
     },
     getvendorstats () {
@@ -291,7 +287,7 @@ export default defineComponent({
         method: "get",
         url: "/info/vendor-stats/" + this.user_uuid,
         withCredentials: true,
-        headers: authHeader(),
+   
       }).then((response) => {
           this.vendor_stats = response.data
       });
@@ -299,9 +295,9 @@ export default defineComponent({
     getusercountryandcurrency () {
       axios({
         method: "get",
-        url: "/info/country-currency",
+        url: "/info/country-currency/" + this.user_uuid,
         withCredentials: true,
-        headers: authHeader(),
+     
       }).then((response) => {
         if (response.data.success) {
           this.currencydefault = response.data.currency;
@@ -331,7 +327,7 @@ export default defineComponent({
         method: "get",
         url: "/vendor/vendor-feedback/count/" + this.user_uuid,
         withCredentials: true,
-        headers: authHeader(),
+  
       })
         .then((response) => {
           this.recordsLength = response.data.count;
@@ -344,6 +340,7 @@ export default defineComponent({
         method: "get",
         url: "/vendor/all-feedback/" + this.user_uuid,
         withCredentials: true,
+        
       })
         .then((response) => {
           {this.vendor_reviews_total = response.data.total_feedback}
