@@ -23,51 +23,10 @@
             <div class="col-span-1 lg:col-span-2 ">
               <div class="flex flex-wrap sm:justify-center lg:justify-end md:justify-evenly">
                 <div v-if="user" class="flex">
-                  <div class="dropdown dropdown-end">
-                    <div v-if="notecount === 0">
-                      <button
-                        class="hover:bg-gray-600 text-white hover:text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline font-bold ">
-                        <font-awesome-icon icon="fa-solid fa-bell" class="text-[22px]" />
-                      </button>
-                      <ul tabindex="0"
-                        class="dropdown-content dropdown-hover  menu p-2 shadow bg-neutral rounded-box w-52 text-white text-left">
-                        <div v-for="notes in newnotes">
-                          <li class="w-full p-5  hover:text-white hover:font-bold text-[13px]">
-                            {{ notes.message }}
-                          </li>
-                        </div>
-                      </ul>
-                    </div>
-                    <div v-else>
-                      <button
-                        class="bg-red-600 text-white hover:text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline font-bold dropdown-hover"
-                        @click.prevent="notificationsnotificiationmarkasread()">
-                        {{ notecount }} <font-awesome-icon icon="fa-solid fa-bell " class="text-[22px]" />
-                      </button>
-                      <ul tabindex="0"
-                        class="dropdown-content dropdown-hover menu p-2 shadow bg-neutral rounded-box w-52 text-white text-left">
-                        <div v-for="notes in newnotes">
-                          <div v-if="notes.read == 0">
-                            <li class="w-full p-5  hover:text-white hover:font-bold ">
-                              {{ notes.message }}
-                            </li>
-                          </div>
-                          <div v-else>
-                            <li class="w-full p-5 bg-red-300hover:font-bold">
-                              {{ notes.message }}
-                            </li>
-                          </div>
-                        </div>
-                      </ul>
-                    </div>
-                  </div>
 
-                  <router-link :to="{ name: 'MsgHome' }" class="px-1">
-                    <button
-                      class="hover:bg-zinc-700 text-white hover:text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline font-bold ">
-                      <font-awesome-icon icon="fa-solid fa-envelope " class="text-[22px]" />
-                    </button>
-                  </router-link>
+
+
+                  <!-- # Selling -->
                   <router-link :to="{ name: 'sell' }">
                     <button
                       class="hover:bg-zinc-700  text-white hover:text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline mx-3 font-bold">
@@ -75,18 +34,74 @@
                     </button>
                   </router-link>
 
+                  <!-- # Orders -->
                   <router-link :to="{ name: 'userorders' }" class="px-1">
                     <button
                       class="hover:bg-zinc-700 text-white hover:text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline font-bold">
                       Orders
                     </button>
                   </router-link>
+
+
+                  <!-- # Account  -->
                   <router-link :to="{ name: 'account' }" class="px-1">
                     <button
                       class="hover:bg-zinc-700 text-white hover:text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline font-bold">
                       Account
                     </button>
                   </router-link>
+
+
+                    <!-- # Messages -->
+                    <router-link :to="{ name: 'MsgHome' }" class="px-1">
+                      <button
+                        class="hover:bg-zinc-700 text-white hover:text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline font-bold ">
+                        <font-awesome-icon icon="fa-solid fa-envelope " class="text-[22px]" />
+                      </button>
+                    </router-link>
+
+                    <!-- # dropdown notes -->
+                    <div class="dropdown dropdown-end">
+                      <div v-if="notecount === 0">
+                        <button
+                          class="hover:bg-gray-600 text-white hover:text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline font-bold ">
+                          <font-awesome-icon icon="fa-solid fa-bell" class="text-[22px]" />
+                        </button>
+                        <ul tabindex="0"
+                          class="dropdown-content dropdown-hover  menu p-2 shadow bg-neutral rounded-box w-52 text-white text-left">
+                          <div v-for="notes in newnotes">
+                            <li class="w-full p-5  hover:text-white hover:font-bold text-[13px]">
+                              {{ notes.message }}
+                            </li>
+                          </div>
+                        </ul>
+                      </div>
+                      <div v-else>
+                        <button
+                          class="bg-red-600 text-white hover:text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline font-bold dropdown-hover"
+                          @click.prevent="notificationsnotificiationmarkasread()">
+                          {{ notecount }} <font-awesome-icon icon="fa-solid fa-bell " class="text-[22px]" />
+                        </button>
+                        <ul tabindex="0"
+                          class="dropdown-content dropdown-hover menu p-2 shadow bg-neutral rounded-box w-52 text-white text-left">
+                          <div v-for="notes in newnotes">
+                            <div v-if="notes.read == 0">
+                              <li class="w-full p-5  hover:text-white hover:font-bold ">
+                                {{ notes.message }}
+                              </li>
+                            </div>
+                            <div v-else>
+                              <li class="w-full p-5 bg-red-300hover:font-bold">
+                                {{ notes.message }}
+                              </li>
+                            </div>
+                          </div>
+                        </ul>
+                      </div>
+                    </div>
+
+
+
                 </div>
               </div>
             </div>

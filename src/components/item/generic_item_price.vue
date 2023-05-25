@@ -1,9 +1,9 @@
 <template>
     <!--Card 1 Type-->
 
-    <div class="h-80 w-40" @click="$router.replace({ name: 'MarketItem', params: { id: item.uuid } })" style="cursor: pointer">
+    <div class="h-80 w-40 md:w-48 rounded-md" @click="$router.replace({ name: 'MarketItem', params: { id: item.uuid } })" style="cursor: pointer">
 
-        <div class="rounded overflow-hidden border  text-center shadow-md w-40 md:w-42 h-80 bg-neutral mt-5 ">
+        <div class="rounded overflow-hidden border  text-center shadow-md w-40 md:w-48 md:w-42 h-80 bg-neutral mt-5 ">
             <div class="flex justify-center w-full overflow-hidden h-48">
                 <div class="md:w-48 md:h-48 " v-if="item.image_one_url_250">
                     <img class="object-contain " :src="item.image_one_url_250" />
