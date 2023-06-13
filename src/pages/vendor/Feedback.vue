@@ -12,7 +12,7 @@
           <ol class="list-reset flex">
             <li>
               <router-link :to="{ name: 'home' }">
-                <a class="text-blue-600 hover:text-blue-700">Home</a>
+                <a class="text-primary hover:text-primary ">Home</a>
               </router-link>
             </li>
             <li>
@@ -34,13 +34,13 @@
               {{ vendor_reviews_total }} total ratings
             </p>
 
-              <div class="flex items-center mt-4">
-                <span class="text-sm font-medium pr-2 flex">10</span>
-                <div class="mx-4 w-2/4 h-5 rounded ">
-                  <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_ten + '%' }"></div>
-                </div>
-                <span class="text-sm font-medium ">{{ vendor_reviews_percent_ten }}%</span>
+            <div class="flex items-center mt-4">
+              <span class="text-sm font-medium pr-2 flex">10</span>
+              <div class="mx-4 w-2/4 h-5 rounded ">
+                <div class="h-5 bg-yellow-400 rounded" :style="{ width: vendor_reviews_percent_ten + '%' }"></div>
               </div>
+              <span class="text-sm font-medium ">{{ vendor_reviews_percent_ten }}%</span>
+            </div>
 
             <div class="flex items-center mt-4">
               <span class="text-sm font-medium  pr-2">9 </span>
@@ -116,7 +116,7 @@
           </div>
 
 
-          
+
           <div class="col-span-12 md:col-span-8">
             <div class="text-white" v-if="recordsLength > 0">
               <div v-for="(review, index) in vendorreviews" :key="review.id">

@@ -8,7 +8,7 @@
           <ol class="list-reset flex">
             <li>
               <router-link :to="{ name: 'home' }">
-                <a class="text-blue-600 hover:text-blue-700">Home</a>
+                <a class="text-primary hover:text-primary ">Home</a>
               </router-link>
             </li>
             <li>
@@ -69,9 +69,9 @@ export default defineComponent({
   data () {
     return {
       v$: useValidate(),
-        user: null,
-        user_admin: 0,
-        loaded: false,
+      user: null,
+      user_admin: 0,
+      loaded: false,
       ChangePasswordForm: {
         new_password: "",
         password_confirm: "",
@@ -124,13 +124,13 @@ export default defineComponent({
           });
           this.$router.push({ name: "login" });
         }
-          if (response.data.error) {
+        if (response.data.error) {
           notify({
             title: "Authorization Error",
             text: response.data.error,
             type: "error",
           });
-        
+
         }
       })
         .catch(() => {
@@ -143,7 +143,7 @@ export default defineComponent({
     },
     onSubmit () {
       const payLoad = {
-  
+
         new_password: this.ChangePasswordForm.new_password,
         password_confirm: this.ChangePasswordForm.password_confirm,
       };
@@ -155,7 +155,7 @@ export default defineComponent({
           type: "error",
         });
       } else {
-      
+
         this.sendWordRequest(payLoad);
       }
     },

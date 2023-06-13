@@ -1,6 +1,5 @@
 
 <template>
-
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
@@ -11,7 +10,7 @@
         <ol class="list-reset flex">
           <li>
             <router-link :to="{ name: 'home' }">
-              <a class="text-blue-600 hover:text-blue-700">Home</a>
+              <a class="text-primary hover:text-primary ">Home</a>
             </router-link>
           </li>
           <li>
@@ -135,7 +134,7 @@
               <div class="grid grid-cols-12">
 
                 <div class="col-span-12 mb-5">
-                  <router-link class="col-span-12 text-blue-600 hover:underline hover:text-blue-400 text-[18px] "
+                  <router-link class="col-span-12 text-primary hover:underline hover:text-primary text-[18px] "
                     :to="{ name: 'MarketItem', params: { id: order.item_uuid } }">
                     {{ order.title_of_item }}
                   </router-link>
@@ -145,7 +144,7 @@
                 </div>
                 <div class="col-span-4">
                   <div class="font-bold">Order Date</div>
-                  {{ relativeDate (order.created) }}
+                  {{ relativeDate(order.created) }}
                 </div>
                 <div class="col-span-4">
                   <div class="font-bold">Item Quantity:</div>
@@ -157,7 +156,7 @@
                     name: 'userprofile',
                     params: { uuid: order.customer_uuid },
                   }">
-                    <div class="text-blue-700 hover:underline hover:text-blue-500">
+                    <div class="text-primary hover:underline hover:text-blue-500">
                       {{ order.customer_user_name }}
                     </div>
                   </router-link>
@@ -281,8 +280,8 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
-          this.orders = response.data;
-      }).catch(() => {});
+        this.orders = response.data;
+      }).catch(() => { });
     },
     // rejects the orders
     rejectorder (uuid: any) {
@@ -301,7 +300,7 @@ export default defineComponent({
             type: "error",
           });
         }
-      }).catch(() => {});
+      }).catch(() => { });
     },
     // accepts the orders
     acceptorder (uuid: any) {
@@ -320,7 +319,7 @@ export default defineComponent({
             type: "success",
           });
         }
-      }).catch(() => {});
+      }).catch(() => { });
     },
     // gets the top bars count for orders
     getuserneworderscount () {

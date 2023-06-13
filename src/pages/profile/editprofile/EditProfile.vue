@@ -7,101 +7,100 @@
     <div v-if="user">
         <MainHeaderVendor v-show="user.user_admin === 1" />
     </div>
-<div class="wrapper">
-    <!-- Top Stuff-->
-    <div class="container selection:max-w-7xl mx-auto  px-10  text-white">
-        <!-- Container-->
-        <div class="mt-5 mb-5">
-            <nav class="rounded-md w-full">
-                <ol class="list-reset flex">
-                    <li>
-                        <router-link :to="{ name: 'home' }">
-                            <a class="text-blue-600 hover:text-blue-700">Home</a>
-                        </router-link>
-                    </li>
-                    <li>
-                        <span class="text-gray-500 mx-2">/</span>
-                    </li>
-                    <li>
-                        <router-link :to="{ name: 'account' }">
-                            <a class="text-blue-600 hover:text-blue-700">Account</a>
-                        </router-link>
-                    </li>
-                    <li>
-                        <span class="text-gray-500 mx-2">/</span>
-                    </li>
-                </ol>
-            </nav>
-        </div>
-        <div class="grid grid-cols-1 rounded-md  max-w-3xl mx-auto bg-neutral">
-            <div class="flex justify-center bg-neutral">
-                <div v-if="visibledelete1">
-                    <div class="block bg-cover bg-center">
-                        <div class="flex flex-col">
-                            <div class="font-bold text-center">Profile Image</div>
-                            <div v-if="user.profileimage_url_250">
-                                <img  class="w-48 h-48" :src="user.profileimage_url_250" />
-                            </div>
-                            <div v-else>
-                                <div class="h-48 w-48 block bg-cover bg-center"
-                                    v-bind:style="{ 'background-image': `url(${previewImage1})` }"
-                                    @click="selectImage1">
+    <div class="wrapper">
+        <!-- Top Stuff-->
+        <div class="container selection:max-w-7xl mx-auto  px-10  text-white">
+            <!-- Container-->
+            <div class="mt-5 mb-5">
+                <nav class="rounded-md w-full">
+                    <ol class="list-reset flex">
+                        <li>
+                            <router-link :to="{ name: 'home' }">
+                                <a class="text-primary hover:text-primary ">Home</a>
+                            </router-link>
+                        </li>
+                        <li>
+                            <span class="text-gray-500 mx-2">/</span>
+                        </li>
+                        <li>
+                            <router-link :to="{ name: 'account' }">
+                                <a class="text-primary hover:text-primary ">Account</a>
+                            </router-link>
+                        </li>
+                        <li>
+                            <span class="text-gray-500 mx-2">/</span>
+                        </li>
+                    </ol>
+                </nav>
+            </div>
+            <div class="grid grid-cols-1 rounded-md  max-w-3xl mx-auto bg-neutral">
+                <div class="flex justify-center bg-neutral">
+                    <div v-if="visibledelete1">
+                        <div class="block bg-cover bg-center">
+                            <div class="flex flex-col">
+                                <div class="font-bold text-center">Profile Image</div>
+                                <div v-if="user.profileimage_url_250">
+                                    <img class="w-48 h-48" :src="user.profileimage_url_250" />
                                 </div>
-                            </div>
-                            <div v-if="user.profile_image">
-                                <div class="flex justify-center">
-                                    <button class="bg-red-600 mt-5 hover:bg-zinc-400 text-white font-bold py-2 px-4
+                                <div v-else>
+                                    <div class="h-48 w-48 block bg-cover bg-center"
+                                        v-bind:style="{ 'background-image': `url(${previewImage1})` }"
+                                        @click="selectImage1">
+                                    </div>
+                                </div>
+                                <div v-if="user.profile_image">
+                                    <div class="flex justify-center">
+                                        <button class="bg-red-600 mt-5 hover:bg-zinc-400 text-white font-bold py-2 px-4
                                          rounded focus:outline-none focus:shadow-outline" type="submit"
-                                        @click="deleteitemimage1(user.profile_image)">
-                                        Delete Image
-                                    </button>
+                                            @click="deleteitemimage1(user.profile_image)">
+                                            Delete Image
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div v-if="visibleform1">
-                    <form class="rounded-md px-8 pt-6 pb-8 mb-4 w-full" enctype="multipart/form-data" method="POST"
-                        @submit.prevent="CreateItemImages">
-                        <div class="font-bold text-center">Image One</div>
-                        <div class="h-44 block bg-cover bg-center"
-                            v-bind:style="{ 'background-image': `url(${previewImage1})` }" @click="selectImage1"></div>
-                        <input class="" ref="fileInput1" type="file" @input="pickFile1" accept=".jpg,.jpeg,.png" />
-                        <input type="hidden" ref="clicktoshow1" />
-                    </form>
-                </div>
+                    <div v-if="visibleform1">
+                        <form class="rounded-md px-8 pt-6 pb-8 mb-4 w-full" enctype="multipart/form-data" method="POST"
+                            @submit.prevent="CreateItemImages">
+                            <div class="font-bold text-center">Image One</div>
+                            <div class="h-44 block bg-cover bg-center"
+                                v-bind:style="{ 'background-image': `url(${previewImage1})` }" @click="selectImage1"></div>
+                            <input class="" ref="fileInput1" type="file" @input="pickFile1" accept=".jpg,.jpeg,.png" />
+                            <input type="hidden" ref="clicktoshow1" />
+                        </form>
+                    </div>
 
-            </div>
-            <form class="rounded-md px-2 pt-2 pb-2 mb-4 w-full" enctype="multipart/form-data"
-                @submit.prevent="onSubmit">
-                <div class="text-[20px] mt-5 mb-5 font-bold ">User Info</div>
-           
+                </div>
+                <form class="rounded-md px-2 pt-2 pb-2 mb-4 w-full" enctype="multipart/form-data"
+                    @submit.prevent="onSubmit">
+                    <div class="text-[20px] mt-5 mb-5 font-bold ">User Info</div>
+
                     <label class="block text-sm font-bold mb-2">Bio</label>
                     <div class="flex ">
                         <div class="flex-1">
                             <div class="flex-1">
-                                <textarea v-model="ProfileForm.bio" id="item_description"
-                                 class="shadow appearance-none border rounded w-full py-2 px-3 text-black
+                                <textarea v-model="ProfileForm.bio" id="item_description" class="shadow appearance-none border rounded w-full py-2 px-3 text-black
                                          leading-tight focus:outline-none focus:shadow-outline">
                                 </textarea>
                             </div>
                         </div>
                     </div>
-             
-                <div class="flex justify-center mt-20">
-                    <button
-                        class="bg-primary hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                        type="submit">
-                        Submit
-                    </button>
-                </div>
-            </form>
-        </div>
 
-        <!-- END Top Stuff-->
-        <div class="grid sm:grid-cols-1 md:grid-cols-3 gap-5 my-3"></div>
+                    <div class="flex justify-center mt-20">
+                        <button
+                            class="bg-primary hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                            type="submit">
+                            Submit
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- END Top Stuff-->
+            <div class="grid sm:grid-cols-1 md:grid-cols-3 gap-5 my-3"></div>
+        </div>
     </div>
-</div>
     <!-- END container-->
     <MainFooter />
 </template>
@@ -167,21 +166,21 @@ export default defineComponent({
                 withCredentials: true,
                 headers: authHeader(),
             })
-            .then((response) => {
-                if (response.data.login == true) {
-                    this.user = response.data.user;
-                    if (this.user.profile_image === null) {
-                        this.visibledelete1 = false;
-                        this.visibleform1 = true;
+                .then((response) => {
+                    if (response.data.login == true) {
+                        this.user = response.data.user;
+                        if (this.user.profile_image === null) {
+                            this.visibledelete1 = false;
+                            this.visibleform1 = true;
+                        }
+                        else {
+                            this.visibledelete1 = true;
+                            this.visibleform1 = false;
+                        }
+                        this.getcurrentbio();
                     }
-                    else {
-                        this.visibledelete1 = true;
-                        this.visibleform1 = false;
-                    }
-                    this.getcurrentbio();
-                }
-            })
-            .catch(() => { this.user = null });
+                })
+                .catch(() => { this.user = null });
         },
         getcurrentbio () {
             axios({
@@ -224,11 +223,11 @@ export default defineComponent({
                 withCredentials: true,
                 headers: authHeader(),
             })
-            .then((response) => {
-                if (response.data.success) {
-                    this.$router.push({ name: "userprofile", params: { uuid: this.user.user_id }, });
-                }
-            });
+                .then((response) => {
+                    if (response.data.success) {
+                        this.$router.push({ name: "userprofile", params: { uuid: this.user.user_id }, });
+                    }
+                });
         },
 
         pickFile1 () {

@@ -12,7 +12,7 @@
           <ol class="list-reset flex">
             <li>
               <router-link :to="{ name: 'home' }">
-                <a class="text-blue-600 hover:text-blue-700">Home</a>
+                <a class="text-primary hover:text-primary ">Home</a>
               </router-link>
             </li>
             <li>
@@ -21,7 +21,7 @@
 
             <li>
               <router-link :to="{ name: 'wallet' }">
-                <a class="text-blue-600 hover:text-blue-700">Wallet Home</a>
+                <a class="text-primary hover:text-primary ">Wallet Home</a>
               </router-link>
             </li>
             <li>
@@ -122,7 +122,7 @@
               <div class="col-span-12 sm:col-span-6 row-span-1">
                 <div class="col-span-12 sm:col-span-6 row-span-2"></div>
                 <div v-if="t.orderid">
-                  <router-link class="linkcolor_shopping hover:text-blue-400 hover:underline"
+                  <router-link class="linkcolor_shopping hover:text-primary hover:underline"
                     :to="{ name: 'vendorordersview', params: { uuid: t.order_uuid } }">Transaction Order # {{
                       t.orderid
                     }}</router-link>

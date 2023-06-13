@@ -9,7 +9,7 @@
           <ol class="list-reset flex">
             <li>
               <router-link :to="{ name: 'home' }">
-                <a class="text-blue-600 hover:text-blue-700">Home</a>
+                <a class="text-primary hover:text-primary ">Home</a>
               </router-link>
             </li>
             <li>
@@ -17,7 +17,7 @@
             </li>
             <li>
               <router-link :to="{ name: 'MsgHome' }">
-                <a class="text-blue-600 hover:text-blue-700">Message Center</a>
+                <a class="text-primary hover:text-primary ">Message Center</a>
               </router-link>
             </li>
             <li>
@@ -29,7 +29,6 @@
           <div class="col-span-12 md:col-span-3">
             <div class="  bg-neutral rounded-md shadow-md text-white p-5 mt-5">
               <div class="text-[18px] mb-5">Message Center</div>
-
               <div v-for="othermsgs in userlist">
                 <div v-if="othermsgs.post_id === postid">
                   <router-link :to="{
@@ -37,7 +36,7 @@
                     params: { postid: othermsgs.post_id },
                   }">
                     <div class="grid grid-cols-12  border-2  rounded-md bg-blue-300 p-2 hover:bg-accent hover:text-black">
-                      <div class="col-span-12 md:col-span-6 text-blue-600 hover:text-blue-700">
+                      <div class="col-span-12 md:col-span-6 text-primary hover:text-primary">
                         <div v-if="othermsgs.user_one === user.user_name">
                           {{ othermsgs.user_two }}
                         </div>
@@ -71,7 +70,8 @@
                   <div v-if="othermsgs.read === 1" class="rounded-md bg-yellow-400 border-2">
                     <router-link :to="{
                       name: 'MsgView',
-                      params: { postid: othermsgs.post_id }}">
+                      params: { postid: othermsgs.post_id }
+                    }">
                       <div class="grid grid-cols-12 rounded-md p-2">
                         <div class="col-span-12 md:col-span-6">
                           <div v-if="othermsgs.user_one === user.user_name">
@@ -122,10 +122,8 @@
 
             <!-- comment Form -->
             <form class="rounded-md pt-6 pb-4 w-full" @submit.prevent="onSubmit">
-                <textarea v-model="SendMsgForm.msginfo"
-                          id="item_description"
-                          placeholder="Write something .."
-                          class="rounded w-full py-2 px-3 input-primary text-black">
+              <textarea v-model="SendMsgForm.msginfo" id="item_description" placeholder="Write something .."
+                class="rounded w-full py-2 px-3 input-primary text-black">
                 </textarea>
 
               <div class="flex justify-end">
@@ -204,12 +202,12 @@
                 </div>
               </div>
             </div>
-              <div class="col-span-12 mb-20" v-if="recordsLength > 0">
-                <pagination @paginate="getPage" :records="recordsLength" v-model="page" :per-page="perPage"
-                  :options="options"> </pagination>
-                <div class="flex justify-center"> {{ recordsLength }} Messages</div>
-              </div>
-              <div class="col-span-12 mb-20 flex justify-center" v-else>{{ recordsLength }} Messages</div>
+            <div class="col-span-12 mb-20" v-if="recordsLength > 0">
+              <pagination @paginate="getPage" :records="recordsLength" v-model="page" :per-page="perPage"
+                :options="options"> </pagination>
+              <div class="flex justify-center"> {{ recordsLength }} Messages</div>
+            </div>
+            <div class="col-span-12 mb-20 flex justify-center" v-else>{{ recordsLength }} Messages</div>
           </div>
         </div>
       </div>
@@ -274,7 +272,7 @@ export default defineComponent({
         msginfo: "",
       },
 
-      
+
       page: 1,
       perPage: 25,
       recordsLength: 0,
@@ -326,7 +324,7 @@ export default defineComponent({
           this.get_main_post_comments(this.page);
           this.message_notification_read();
           this.getmain_post_comments_count();
- 
+
           this.loaded = true;
         })
         .catch((error) => {
@@ -342,14 +340,10 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then(() => {
-
         })
         .catch(() => {
         });
     },
-    // gets the count of posts
-  
-
     // get the item
     gettheitem () {
       axios({
@@ -368,7 +362,6 @@ export default defineComponent({
         });
     },
     // gets coments of main post
-
     getPage: function (page: any) {
       // we simulate an api call that fetch the records from a backend
       this.mainpostcomments = [];
@@ -389,11 +382,10 @@ export default defineComponent({
         method: 'get',
         url: "/msg/count/" + this.postid,
         headers: authHeader(),
-      }).then((response) => { 
+      }).then((response) => {
         this.recordsLength = response.data.count
-       })
+      })
     },
-
     // gets the msds of the users
     getmsgsofusers () {
       axios({
@@ -425,7 +417,6 @@ export default defineComponent({
             this.getmainpost();
             this.getmain_post_comments_count();
           }
-
         })
         .catch((error) => {
           console.log(error)

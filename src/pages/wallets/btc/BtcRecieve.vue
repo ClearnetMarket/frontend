@@ -11,7 +11,7 @@
                         <ol class="list-reset flex">
                             <li>
                                 <router-link :to="{ name: 'home' }">
-                                    <a class="text-blue-600 hover:text-blue-700">Home</a>
+                                    <a class="text-primary hover:text-primary ">Home</a>
                                 </router-link>
                             </li>
                             <li>
@@ -19,7 +19,7 @@
                             </li>
                             <li>
                                 <router-link :to="{ name: 'wallet' }">
-                                    <a class="text-blue-600 hover:text-blue-700">Wallet Home</a>
+                                    <a class="text-primary hover:text-primary ">Wallet Home</a>
                                 </router-link>
                             </li>
                             <li>
@@ -71,7 +71,7 @@ export default defineComponent({
     created () {
         this.userstatus()
     },
-    mounted(){
+    mounted () {
         this.getbtcaddress()
     },
     methods: {
@@ -98,7 +98,7 @@ export default defineComponent({
                 headers: authHeader(),
             })
                 .then((response) => {
-                    if (response.data.success) {this.btc_address = response.data.btc_address }
+                    if (response.data.success) { this.btc_address = response.data.btc_address }
                 })
                 .catch((error) => { this.$router.push('/login') })
         },

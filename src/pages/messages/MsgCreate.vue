@@ -2,81 +2,71 @@
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
-<div class="wrapper">
-  <div class="container max-w-7xl mx-auto px-10  mb-10 text-white">
-     <nav class="rounded-md w-full mb-5">
-          <ol class="list-reset flex">
-            <li>
-              <router-link :to="{ name: 'home' }">
-                <a class="text-blue-600 hover:text-blue-700">Home</a>
-              </router-link>
-            </li>
-            <li>
-              <span class="text-white mx-2">/</span>
-            </li>
-            <li>
-              <router-link :to="{ name: 'MsgHome' }">
-                <a class="text-blue-600 hover:text-blue-700">Message Center Home</a>
-              </router-link>
-            </li>
-            <li>
-              <span class="text-white mx-2">/</span>
-            </li>
-          </ol>
-        </nav>
-    <div class="grid grid-cols-12">
-      <div class="col-span-3">
-        <div class="text-[18px] mb-5">Message Center</div>
-        <div class="text-[12px]">Conversations</div>
-        <div class=""></div>
-      </div>
-      <div class="col-span-6">
-        <div class="text-[18px] mb-3">
-          Contact {{ other_user.display_name }}
+  <div class="wrapper">
+    <div class="container max-w-7xl mx-auto px-10  mb-10 text-white">
+      <nav class="rounded-md w-full mb-5">
+        <ol class="list-reset flex">
+          <li>
+            <router-link :to="{ name: 'home' }">
+              <a class="text-primary hover:text-primary ">Home</a>
+            </router-link>
+          </li>
+          <li>
+            <span class="text-white mx-2">/</span>
+          </li>
+          <li>
+            <router-link :to="{ name: 'MsgHome' }">
+              <a class="text-primary hover:text-primary ">Message Center Home</a>
+            </router-link>
+          </li>
+          <li>
+            <span class="text-white mx-2">/</span>
+          </li>
+        </ol>
+      </nav>
+      <div class="grid grid-cols-12">
+        <div class="col-span-3">
+          <div class="text-[18px] mb-5">Message Center</div>
+          <div class="text-[12px]">Conversations</div>
+          <div class=""></div>
         </div>
+        <div class="col-span-6">
+          <div class="text-[18px] mb-3">
+            Contact {{ other_user.display_name }}
+          </div>
 
-        <form
-          class="rounded-md pt-6 pb-8 mb-4 w-full"
-          @submit.prevent="onSubmit"
-        >
-          <div class="">
-            <textarea
-              v-model="SendMsgForm.msginfo"
-              id="item_description"
-              placeholder="Write something .."
-              class="rounded w-full py-2 px-3 input-primary text-black">
+          <form class="rounded-md pt-6 pb-8 mb-4 w-full" @submit.prevent="onSubmit">
+            <div class="">
+              <textarea v-model="SendMsgForm.msginfo" id="item_description" placeholder="Write something .."
+                class="rounded w-full py-2 px-3 input-primary text-black">
             </textarea>
-            <span
-              v-if="v$.SendMsgForm.msginfo.$error"
-              class="text-red-600 text-center"
-            >
-              {{ v$.SendMsgForm.msginfo.$errors[0].$message }}
-            </span>
+              <span v-if="v$.SendMsgForm.msginfo.$error" class="text-red-600 text-center">
+                {{ v$.SendMsgForm.msginfo.$errors[0].$message }}
+              </span>
+            </div>
+            <div class="flex justify-end">
+              <button
+                class="bg-primary hover:bg-secondary text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                type="submit">
+                Message Vendor
+              </button>
+            </div>
+          </form>
+        </div>
+        <div class="col-span-3 p-5">
+          <div class="text-[16px]">Rules:</div>
+          <div class="text-[12px]">
+            <ul class="font-bold list-inside list-disc">
+              <li>Be Respectful Of Others</li>
+              <li>Do not solicit</li>
+              <li>Review bombing is not tolerated</li>
+              <li>Asking for payment outside of Freeport invalidates escrow.</li>
+            </ul>
           </div>
-          <div class="flex justify-end">
-            <button
-              class="bg-primary hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              type="submit"
-            >
-              Message User
-            </button>
-          </div>
-        </form>
-      </div>
-      <div class="col-span-3 p-5">
-        <div class="text-[16px]">Rules:</div>
-        <div class="text-[12px]">
-          <ul class="font-bold list-inside list-disc">
-            <li>Be Respectful Of Others</li>
-            <li>Do not solicit</li>
-            <li>Review bombing is not tolerated</li>
-            <li>Asking for payment outside of Freeport invalidates escrow.</li>
-          </ul>
         </div>
       </div>
     </div>
   </div>
-</div>
   <MainFooter />
 </template>
 
@@ -104,7 +94,7 @@ export default defineComponent({
     MainFooter,
   },
 
-  data() {
+  data () {
     return {
       v$: useValidate(),
       other_user: null,
@@ -116,13 +106,13 @@ export default defineComponent({
       },
     };
   },
-  mounted() {
+  mounted () {
     const user_uuid_route = useRoute();
     this.other_user_uuid = user_uuid_route.params.uuid;
     this.getotheruser();
   },
 
-  validations() {
+  validations () {
     return {
       SendMsgForm: {
         msginfo: { required, minLength: minLength(4) },
@@ -130,67 +120,67 @@ export default defineComponent({
     };
   },
   methods: {
-     getotheruser() {
-       axios({
+    getotheruser () {
+      axios({
         method: "get",
         url: "/info/user-info/" + this.other_user_uuid,
         withCredentials: true,
         headers: authHeader(),
       })
-      .then((response) => {
-        if (response.data.success) {
-          this.other_user = response.data;
-        }
-      });
+        .then((response) => {
+          if (response.data.success) {
+            this.other_user = response.data;
+          }
+        });
     },
 
-     getmsgsofusers() {
+    getmsgsofusers () {
       axios({
         method: "get",
         url: "/msg/count",
         withCredentials: true,
       })
-      .then((response) => {
-        this.userlist = response.data;
-      })
-      .catch((error) => {
-        console.log(error)
-      });
+        .then((response) => {
+          this.userlist = response.data;
+        })
+        .catch((error) => {
+          console.log(error)
+        });
     },
-     getcountofusers() {
+    getcountofusers () {
       axios({
         method: "get",
         url: "/msg/msgs/all",
         withCredentials: true,
       })
-      .then((response) => {
-        this.other_user_count = response.data.get_count;
-      })
-      .catch((error) => {
-        console.log(error)
-      });
+        .then((response) => {
+          this.other_user_count = response.data.get_count;
+        })
+        .catch((error) => {
+          console.log(error)
+        });
     },
-     sendMessage(payLoad: {
+    sendMessage (payLoad: {
       order_uuid: any;
       user_two_uuid: string;
       body: string;
     }) {
-       axios({
+      axios({
         method: "post",
         url: "/msg/create",
         data: payLoad,
       })
-      .then((response) => {
-        if (response.data.success) {
-          notify({
-            title: "Message Center",
-            text: "Successfully sent message!",
-            type: "success",
-          });
-          this.$router.push({
-            name: "MsgHome",
-          });
-        }
+        .then((response) => {
+          if (response.data.success) {
+            notify({
+              title: "Message Center",
+              text: "Successfully sent message!",
+              type: "success",
+            });
+            this.$router.push({
+              name: "MsgHome",
+            });
+          }
         })
         .catch((error) => {
 
@@ -202,7 +192,7 @@ export default defineComponent({
         });
     },
 
-    onSubmit() {
+    onSubmit () {
       let payLoad = {
         user_two_uuid: this.other_user.uuid,
         body: this.SendMsgForm.msginfo,

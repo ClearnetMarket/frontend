@@ -1,6 +1,5 @@
 
 <template>
-
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
@@ -11,7 +10,7 @@
         <ol class="list-reset flex">
           <li>
             <router-link :to="{ name: 'home' }">
-              <a class="text-blue-600 hover:text-blue-700">Home</a>
+              <a class="text-primary hover:text-primary ">Home</a>
             </router-link>
           </li>
           <li>
@@ -118,8 +117,8 @@
       <div v-for="order in orders" :key="order.id">
         <div v-if="order.uuid">
           <div class="grid grid-cols-12 rounded border border-1 border-gray-300 bg-gray-300 p-5">
-            <div class="col-span-2">{{ relativeDate (order.created) }}</div>
-            <router-link class="col-span-4 text-blue-600 hover:underline hover:text-blue-400"
+            <div class="col-span-2">{{ relativeDate(order.created) }}</div>
+            <router-link class="col-span-4 text-primary hover:underline hover:text-primary"
               :to="{ name: 'item', params: { id: order.item_uuid } }">
               <div>{{ order.title_of_item }}</div>
             </router-link>

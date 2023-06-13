@@ -11,7 +11,7 @@
                     <ol class="list-reset flex">
                         <li>
                             <router-link :to="{ name: 'home' }">
-                                <a class="text-blue-600 hover:text-blue-700">Home</a>
+                                <a class="text-primary hover:text-primary ">Home</a>
                             </router-link>
                         </li>
                         <li>
@@ -19,7 +19,7 @@
                         </li>
                         <li>
                             <router-link :to="{ name: 'ModHome' }">
-                                <a class="text-blue-600 hover:text-blue-700">Mod Home</a>
+                                <a class="text-primary hover:text-primary ">Mod Home</a>
                             </router-link>
                         </li>
                         <li>
@@ -27,7 +27,7 @@
                         </li>
                         <li>
                             <router-link :to="{ name: 'ModDisputeHome' }">
-                                <a class="text-blue-600 hover:text-blue-700">Dispute Home</a>
+                                <a class="text-primary hover:text-primary ">Dispute Home</a>
                             </router-link>
                         </li>
                         <li>
@@ -66,7 +66,7 @@
                                 <div class="col-span-12 md:col-span-4 gap-2 text-[15px]">
                                     <div class="md:text-center font-bold">Order #</div>
                                     <div class="md:text-center">
-                                        <router-link class="text-blue-600 hover:text-blue-500 hover:underline" :to="{
+                                        <router-link class="text-primary hover:text-blue-500 hover:underline" :to="{
                                             name: 'ordersview',
                                             params: { uuid: order.uuid },
                                         }">
@@ -111,7 +111,7 @@
                                                 </div>
                                                 <div class="col-span-12 md:col-span-9">
                                                     <div
-                                                        class="text-blue-600 hover:text-blue-600 hover:underline text-[18px] text-center">
+                                                        class="text-primary hover:text-primary hover:underline text-[18px] text-center">
                                                         <router-link :to="{
                                                             name: 'MarketItem',
                                                             params: { id: order.item_uuid },
@@ -128,7 +128,7 @@
                                                                     params: { uuid: order.vendor_uuid },
                                                                 }">
                                                                     <div
-                                                                        class="text-blue-600 hover:text-blue-500 hover:underline pl-3">
+                                                                        class="text-primary hover:text-blue-500 hover:underline pl-3">
                                                                         {{ order.vendor_user_name }}
                                                                     </div>
                                                                 </router-link>
@@ -156,7 +156,7 @@
                                         }">
                                         </router-link>
 
-                                        <router-link class="text-blue-600 hover:text-blue-500 hover:underline" :to="{
+                                        <router-link class="text-primary hover:text-blue-500 hover:underline" :to="{
                                             name: 'ordersview',
                                             params: { uuid: order.uuid },
                                         }">

@@ -11,7 +11,7 @@
                     <ol class="list-reset flex">
                         <li>
                             <router-link :to="{ name: 'home' }">
-                                <a class="text-blue-600 hover:text-blue-700">Home</a>
+                                <a class="text-primary hover:text-primary ">Home</a>
                             </router-link>
                         </li>
                         <li>
@@ -19,7 +19,7 @@
                         </li>
                         <li>
                             <router-link :to="{ name: 'ModHome' }">
-                                <a class="text-blue-600 hover:text-blue-700">Mod Home</a>
+                                <a class="text-primary hover:text-primary ">Mod Home</a>
                             </router-link>
                         </li>
                         <li>
@@ -27,7 +27,7 @@
                         </li>
                         <li>
                             <router-link :to="{ name: 'ModTicketsHome' }">
-                                <a class="text-blue-600 hover:text-blue-700">Ticket Home</a>
+                                <a class="text-primary hover:text-primary ">Ticket Home</a>
                             </router-link>
                         </li>
                         <li>
@@ -58,10 +58,10 @@
                         <div class="col-span-12 text-[18px]  mb-3" v-if="get_ticket != null">
                             Ticket # {{ get_ticket.uuid }}:
                         </div>
-                         <div class="col-span-12 text-[18px]  mb-3 bg-gray-300 round-md" v-if="get_ticket != null">
+                        <div class="col-span-12 text-[18px]  mb-3 bg-gray-300 round-md" v-if="get_ticket != null">
                             {{ get_ticket.subject }}
                         </div>
-                        
+
                         <div class="col-span-12 text-[18px] mb-3" v-if="get_ticket.status == 1">
                             Status: Open
                         </div>
@@ -69,11 +69,12 @@
                             Status: Closed
                         </div>
                         <button class="col-span-12  bg-gray-600 hover:bg-zinc-400 text-white py-2 px-4 
-                            rounded focus:outline-none focus:shadow-outline mb-5" type="submit" 
+                            rounded focus:outline-none focus:shadow-outline mb-5" type="submit"
                             @click.prevent="close_current_ticket()">
                             Mark Ticket as Closed
                         </button>
-                        <form class="col-span-12 rounded-md pt-6 pb-8 mb-4 w-full bg-neutral p-5" @submit.prevent="onSubmit">
+                        <form class="col-span-12 rounded-md pt-6 pb-8 mb-4 w-full bg-neutral p-5"
+                            @submit.prevent="onSubmit">
 
                             <textarea v-model="SendMsgForm.msginfo" id="item_description" placeholder="Write something .."
                                 class="shadow appearance-none border rounded w-full py-2 px-3
@@ -85,11 +86,9 @@
                             </span>
 
                             <div class="flex justify-end">
-                                <button
-                                    class="bg-gray-600 hover:bg-zinc-400 text-white font-bold 
+                                <button class="bg-gray-600 hover:bg-zinc-400 text-white font-bold 
                                             py-2 px-4 rounded
-                                            focus:outline-none focus:shadow-outline"
-                                    type="submit">
+                                            focus:outline-none focus:shadow-outline" type="submit">
                                     Send Message
                                 </button>
                             </div>
@@ -98,7 +97,7 @@
                     <div class="grid grid-cols-12 p-5  bg-neutral rounded-md">
                         <div v-for="comment in get_ticket_data" :key="comment.id" class="col-span-12">
                             <div class="grid grid-cols-12 mb-5" v-if="user">
-                            
+
 
                                 <div v-if="comment.author_uuid != admin_user.user_id"
                                     class="col-span-12 flex justify-start">
@@ -274,12 +273,12 @@ export default defineComponent({
         },
         get_current_ticket_messages () {
             let url = this.$route.params.uuid
-    
+
             axios({
                 method: "get",
                 url: "/mod/ticket/messages/" + url,
                 withCredentials: true,
-            
+
                 headers: authHeader(),
             })
                 .then((response) => {
@@ -289,7 +288,7 @@ export default defineComponent({
 
                     }
                 });
-          
+
         },
         close_current_ticket () {
             let url = this.$route.params.uuid

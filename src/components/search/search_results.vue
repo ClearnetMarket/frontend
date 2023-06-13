@@ -64,7 +64,7 @@
               name: 'userprofile',
               params: { uuid: item.vendor_uuid },
             }">
-              <div class="text-blue-500 hover:text-blue-300 hover:underline ">
+              <div class="text-primary hover:text-blue-300 hover:underline ">
                 {{ item.vendor_display_name }}
               </div>
             </router-link>

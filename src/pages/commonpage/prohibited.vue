@@ -13,7 +13,7 @@
                 <ol class="list-reset flex">
                     <li>
                         <router-link :to="{ name: 'home' }">
-                            <a class="text-blue-600 hover:text-blue-700">Home</a>
+                            <a class="text-primary hover:text-primary ">Home</a>
                         </router-link>
                     </li>
                     <li>
@@ -23,12 +23,12 @@
             </nav>
         </div>
         <div class="bg-neutral rounded-md p-5 mb-5">
-            <div class="text-[18px] font-bold text-blue-600 rounded-md">Prohibited Items you cant sell here</div>
+            <div class="text-[18px] font-bold text-primary rounded-md">Prohibited Items you cant sell here</div>
         </div>
 
 
         <div class="bg-neutral rounded-md p-5 mb-5 text-white">
-            <div class="text-[14px] font-bold text-blue-600 rounded-md mb-5">
+            <div class="text-[14px] font-bold text-primary rounded-md mb-5">
                 We reserve the right to remove items we consider borderline to these items. We want to keep the items clean
                 so we
                 can grow the market and not scare away new vendors/users. Please keep items friendly.
@@ -45,23 +45,23 @@
                 <div class="">- Any attempt to sell porography items such as videos, images, chats, meetings or
                     links to other social media.</div>
             </div>
-           <div class="flex mb-2">
+            <div class="flex mb-2">
                 <div class="font-bold px-2">Weapons</div>
                 <div class="">- Guns and ammo are not allowed. Gun attachments or items related are not allowed.
                     Knives/swords are allowed.</div>
             </div>
-           <div class="flex mb-2">
+            <div class="flex mb-2">
                 <div class="font-bold px-2">Potential Scam Items</div>
                 <div class="">- Any attempts to scam or decieve will result in a ban from the site.</div>
             </div>
-           <div class="flex mb-2">
+            <div class="flex mb-2">
                 <div class="font-bold px-2">Hacked Items</div>
                 <div class=""> - This includes account information, database information, accounts, or "hacking"
                     services.</div>
             </div>
             <div class="flex mb-2">
                 <div class="font-bold px-2">Downloaded Items</div>
-                <div class=""> - Downloaded movies, books, mp3s are not alowed.</div>
+                <div class=""> - Downloaded movies, books, mp3s are not allowed.</div>
             </div>
             <div class="flex mb-2">
                 <div class="font-bold px-2">Stolen Items</div>

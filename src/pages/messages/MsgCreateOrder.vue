@@ -9,7 +9,7 @@
         <ol class="list-reset flex">
           <li>
             <router-link :to="{ name: 'home' }">
-              <a class="text-blue-600 hover:text-blue-700">Home</a>
+              <a class="text-primary hover:text-primary ">Home</a>
             </router-link>
           </li>
           <li>
@@ -17,7 +17,7 @@
           </li>
           <li>
             <router-link :to="{ name: 'MsgHome' }">
-              <a class="text-blue-600 hover:text-blue-700">Message Center Home</a>
+              <a class="text-primary hover:text-primary ">Message Center Home</a>
             </router-link>
           </li>
           <li>
@@ -70,9 +70,9 @@
             </div>
             <div class="flex justify-end">
               <button
-                class="bg-gray-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                class="bg-primary hover:bg-secondary text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                 type="submit">
-                Message User
+                Message Vendor
               </button>
             </div>
           </form>

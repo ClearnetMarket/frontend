@@ -1,5 +1,4 @@
 <template>
-
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
@@ -11,7 +10,7 @@
         <ol class="list-reset flex">
           <li>
             <router-link :to="{ name: 'home' }">
-              <a class="text-blue-600 hover:text-blue-700">Home</a>
+              <a class="text-primary hover:text-primary ">Home</a>
             </router-link>
           </li>
           <li>
@@ -22,8 +21,7 @@
     </div>
     <div class="sm:flex sm:justify-evenly ">
       <div v-if="vendor_orders_new">
-        <button
-          class="mb-2 py-2 px-4 shadow-md no-underline rounded-full text-white
+        <button class="mb-2 py-2 px-4 shadow-md no-underline rounded-full text-white
            font-sans hover:text-white text-sm bg-zinc-600 hover:bg-zinc-400
             focus:outline-none active:shadow-none mr-2">
           <span class="px-2">{{ vendor_orders_new }}</span>
@@ -31,8 +29,7 @@
         </button>
       </div>
       <div v-else>
-        <button
-          class="mb-2 py-2 px-4 shadow-md no-underline rounded-full
+        <button class="mb-2 py-2 px-4 shadow-md no-underline rounded-full
            text-white font-sans text-sm hover:text-white bg-zinc-600 hover:bg-zinc-400
             focus:outline-none active:shadow-none mr-2">
           New
@@ -41,8 +38,7 @@
 
       <div v-if="vendor_orders_accepted" class="q-mt-none">
         <router-link :to="{ name: 'vendororderswaiting' }">
-          <button
-            class="mb-2 flex py-2 px-4 shadow-md text-sm no-underline
+          <button class="mb-2 flex py-2 px-4 shadow-md text-sm no-underline
              rounded-full bg-zinc-600 hover:bg-zinc-400 text-white font-sans hover:text-white
              focus:outline-none active:shadow-none mr-2">
             <span class="px-2">{{ vendor_orders_accepted }}</span>
@@ -52,8 +48,7 @@
       </div>
       <div v-else>
         <router-link :to="{ name: 'vendororderswaiting' }">
-          <button
-            class="mb-2 py-2 px-4 shadow-md no-underline rounded-full
+          <button class="mb-2 py-2 px-4 shadow-md no-underline rounded-full
              text-white font-sans text-sm hover:text-white bg-zinc-600 hover:bg-zinc-400
              focus:outline-none active:shadow-none mr-2">
             Waiting
@@ -63,8 +58,7 @@
 
       <div v-if="vendor_orders_shipped">
         <router-link :to="{ name: 'vendorordersshipped' }">
-          <button
-            class="mb-2 flex py-2 px-4 shadow-md no-underline
+          <button class="mb-2 flex py-2 px-4 shadow-md no-underline
              rounded-full bg-zinc-600 hover:bg-zinc-400 hover:text-white text-white font-sans
               text-sm btn-primary focus:outline-none active:shadow-none mr-2">
             <span class="px-2">{{ vendor_orders_shipped }}</span>
@@ -74,8 +68,7 @@
       </div>
       <div v-else>
         <router-link :to="{ name: 'vendorordersshipped' }">
-          <button
-            class="mb-2 py-2 px-4 shadow-md no-underline rounded-full
+          <button class="mb-2 py-2 px-4 shadow-md no-underline rounded-full
             text-white font-sans text-sm hover:text-white bg-zinc-600 hover:bg-zinc-400
              focus:outline-none active:shadow-none mr-2">
             Shipped
@@ -85,8 +78,7 @@
 
       <div v-if="vendor_orders_finalized">
         <router-link :to="{ name: 'vendorordersfinalized' }">
-          <button
-            class="mb-2 flex py-2 px-4 shadow-md no-underline rounded-full
+          <button class="mb-2 flex py-2 px-4 shadow-md no-underline rounded-full
             bg-zinc-600 hover:bg-zinc-400 hover:text-white text-white font-sans text-sm btn-primary
             focus:outline-none active:shadow-none mr-2">
             <span class="px-2">{{ vendor_orders_finalized }}</span>
@@ -96,8 +88,7 @@
       </div>
       <div v-else>
         <router-link :to="{ name: 'vendorordersfinalized' }">
-          <button
-            class="mb-2 py-2 px-4 shadow-md no-underline rounded-full text-white
+          <button class="mb-2 py-2 px-4 shadow-md no-underline rounded-full text-white
              font-sans text-sm hover:text-white bg-zinc-600 hover:bg-zinc-400
              focus:outline-none active:shadow-none mr-2">
             Finalized
@@ -107,8 +98,7 @@
 
       <div v-if="vendor_orders_request_cancel">
         <router-link :to="{ name: 'vendororderscancel' }">
-          <button
-            class="mb-2 flex py-2 px-4 shadow-md no-underline rounded-full
+          <button class="mb-2 flex py-2 px-4 shadow-md no-underline rounded-full
              bg-zinc-600 hover:bg-zinc-400 hover:text-white text-white font-sans
               text-sm btn-primary focus:outline-none active:shadow-none mr-2">
             <span class="px-2">{{ vendor_orders_request_cancel }}</span>
@@ -118,8 +108,7 @@
       </div>
       <div v-else>
         <router-link :to="{ name: 'vendororderscancel' }">
-          <button
-            class="mb-2 py-2 px-4 shadow-md no-underline rounded-full
+          <button class="mb-2 py-2 px-4 shadow-md no-underline rounded-full
              text-white font-sans text-sm hover:text-white bg-zinc-600 hover:bg-zinc-400
               focus:outline-none active:shadow-none mr-2">
             Cancel
@@ -140,7 +129,7 @@
               <div class="grid grid-cols-12">
 
                 <div class="col-span-12 mb-5 text-center">
-                  <router-link class="col-span-12 text-blue-600 hover:underline hover:text-blue-400 text-[18px] "
+                  <router-link class="col-span-12 text-primary hover:underline hover:text-primary text-[18px] "
                     :to="{ name: 'MarketItem', params: { id: order.item_uuid } }">
                     {{ order.title_of_item }}
                   </router-link>
@@ -152,7 +141,7 @@
                 </div>
                 <div class="col-span-12 sm:col-span-4 mb-1">
                   <div class="font-bold">Order Date</div>
-                  {{ relativeDate (order.created) }}
+                  {{ relativeDate(order.created) }}
                 </div>
                 <div class="col-span-12 sm:col-span-4 mb-1">
                   <div class="font-bold">Item Quantity:</div>
@@ -164,7 +153,7 @@
                     name: 'userprofile',
                     params: { uuid: order.customer_uuid },
                   }">
-                    <div class="text-blue-700 hover:underline hover:text-blue-500">
+                    <div class="text-primary hover:underline hover:text-blue-500">
                       {{ order.customer_user_name }}
                     </div>
                   </router-link>
@@ -257,16 +246,13 @@
               </div>
             </div>
             <div class="col-span-12 sm:col-span-2">
-              <button
-                class="bg-green-600 m-2 hover:bg-green-400 text-white font-bold
-                py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
-                type="button" @click="acceptorder(order.uuid)">
+              <button class="bg-green-600 m-2 hover:bg-green-400 text-white font-bold
+                py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full" type="button"
+                @click="acceptorder(order.uuid)">
                 Accept
               </button>
-              <button
-                class="bg-red-600 m-2 hover:bg-red-400 text-white font-bold py-1 px-3 rounded
-                focus:outline-none focus:shadow-outline w-full"
-                type="button" @click="rejectorder(order.uuid)">
+              <button class="bg-red-600 m-2 hover:bg-red-400 text-white font-bold py-1 px-3 rounded
+                focus:outline-none focus:shadow-outline w-full" type="button" @click="rejectorder(order.uuid)">
                 Reject
               </button>
             </div>
@@ -346,7 +332,7 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
-          this.orders = response.data;
+        this.orders = response.data;
       });
     },
     // accepts the new order

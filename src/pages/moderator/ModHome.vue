@@ -4,14 +4,14 @@
   <MainHeaderMid />
   <MainHeaderBottom />
   <div class="wrapper">
-    
+
     <div class="container max-w-4xl mx-auto wrapper px-10 text-white">
       <div class="grid grid-cols-1 w-full gap-4">
         <nav class="rounded-md">
           <ol class="list-reset flex">
             <li>
               <router-link :to="{ name: 'home' }">
-                <a class="text-blue-600 hover:text-blue-700">Home</a>
+                <a class="text-primary hover:text-primary ">Home</a>
               </router-link>
             </li>
             <li>
@@ -27,13 +27,13 @@
           <div class="bg-neutral rounded-md p-3">
             <div class="text-[20px] font-bold ">Admin Navigation</div>
             <router-link :to="{ name: 'ModHome' }">
-              <div class="hover:underline text-blue-600 hover:text-blue-700 my-5">Mod Home</div>
+              <div class="hover:underline text-primary hover:text-primary my-5">Mod Home</div>
             </router-link>
             <router-link :to="{ name: 'ModTicketsHome' }">
-              <div class="hover:underline text-blue-600 hover:text-blue-700 my-5">Tickets</div>
+              <div class="hover:underline text-primary hover:text-primary my-5">Tickets</div>
             </router-link>
             <router-link :to="{ name: 'ModDisputeHome' }">
-              <div class="hover:underline text-blue-600 hover:text-blue-700 my-5">Disputes</div>
+              <div class="hover:underline text-primary hover:text-primary my-5">Disputes</div>
             </router-link>
           </div>
         </div>
@@ -101,7 +101,7 @@ export default defineComponent({
 
     };
   },
-  created(){
+  created () {
     this.userstatus();
   },
   mounted () {
@@ -121,7 +121,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-       if (response.data.login == true) {
+          if (response.data.login == true) {
             if (response.data.user.user_admin < 2) {
               this.$router.push({ name: "home" });
             }

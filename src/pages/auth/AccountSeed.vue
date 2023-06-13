@@ -7,7 +7,7 @@
                     <ol class="list-reset flex">
                         <li>
                             <router-link :to="{ name: 'home' }">
-                                <a class="text-blue-600 hover:text-blue-700">Home</a>
+                                <a class="text-primary hover:text-primary ">Home</a>
                             </router-link>
                         </li>
                         <li>
@@ -17,7 +17,7 @@
                 </nav>
             </div>
 
-            <div class="flex justify-center mx-auto bg-red-200">
+            <div class="flex justify-center mx-auto ">
                 <div class="max-w-3xl bg-neutral rounded-md">
                     <div class="text-center">
                         In order to unlock your account, change password, or recover your account in the future you will
@@ -154,7 +154,7 @@ export default defineComponent({
                     if (response.data.login == true) {
                         this.user = response.data.user;
                     }
-                    else{
+                    else {
                         this.$router.push({ name: "login" });
                     }
                 })

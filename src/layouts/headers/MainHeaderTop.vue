@@ -1,5 +1,5 @@
 <template>
-  <div class="nav bg-neutral md:py-2 ">
+  <div class="nav  md:py-2 ">
     <div class="container gap-x-0 max-w-7xl mx-auto text-center bg">
       <div v-if="loaded">
         <div v-if="user">
@@ -15,16 +15,15 @@
               </div>
             </div>
             <div class="sm:col-span-3 sm:invisible sm:h-1 md:visible md:col-span-1">
-              <div class="flex justify-center sm:justify-between lg:justify-start ml-5 text-white font-bold pb-2">
+              <div class="flex justify-center sm:justify-between lg:justify-start ml-5 text-white font-bold pb-2 pt-2">
                 <div class="px-3.5">English</div>
                 <div class="px-3 ">{{ returncurrency(user.currency) }}</div>
+                 <div class="px-3 ">{{user.user_name}}</div>
               </div>
             </div>
             <div class="col-span-1 lg:col-span-2 ">
               <div class="flex flex-wrap sm:justify-center lg:justify-end md:justify-evenly">
                 <div v-if="user" class="flex">
-
-
 
                   <!-- # Selling -->
                   <router-link :to="{ name: 'sell' }">
@@ -71,7 +70,7 @@
                           class="dropdown-content dropdown-hover  menu p-2 shadow bg-neutral rounded-box w-52 text-white text-left">
                           <div v-for="notes in newnotes">
                             <li class="w-full p-5  hover:text-white hover:font-bold text-[13px]">
-                              {{ notes.message }}
+                              {{ notes.message }} 
                             </li>
                           </div>
                         </ul>
@@ -99,26 +98,26 @@
                         </ul>
                       </div>
                     </div>
-
-
-
                 </div>
               </div>
             </div>
           </div>
         </div>
         <div v-else class="">
-          <div class="flex gap-5 justify-center p-5">
+          <div class="flex gap-5 justify-center p-5 bg-neutral rounded-md">
+            <div class="flex font-bold text-white">
+              Join a new economy at Freeport.  Escrow trading of good and services with multiple cryptocurrencies.
+            </div>
             <router-link :to="{ name: 'login' }">
               <button
-                class="bg-zinc-700 hover:bg-zinc-400 text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline font-bold">
+                class="bg-secondary hover:bg-zinc-700 text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline font-bold">
                 Login
               </button>
             </router-link>
             <router-link :to="{ name: 'register' }">
               <button
-                class="bg-zinc-700 hover:bg-zinc-400 text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline font-bold">
-                Sign Up
+                class="bg-primary hover:bg-zinc-700 text-black hover:text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline font-bold">
+                Register
               </button>
             </router-link>
           </div>

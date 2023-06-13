@@ -2,7 +2,7 @@
     <div class="text-center mt-1 flex sm:justify-evenly md:justify-center pl-1">
         <router-link :to="{ name: 'forsale' }">
             <button
-                class="bg-primary hover:bg-zinc-700 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mr-2"
+                class="bg-secondary hover:bg-primary hover:text-black text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mr-2"
             >
                 Items
             </button>
@@ -10,7 +10,7 @@
         <div v-if="disputes">
             <router-link :to="{ name: 'vendorordersdispute' }">
                 <button
-                    class="bg-orange-600 hover:bg-zinc-700 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mr-2"
+                    class="bg-warning hover:bg-primary text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mr-2"
                 >
                     <span class="px-2">{{ disputes }}</span>
                     <span class>Disputes</span>
@@ -20,7 +20,7 @@
         <div v-else>
             <router-link :to="{ name: 'vendorordersdispute' }">
                 <button
-                    class="bg-primary hover:bg-zinc-700 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mr-2"
+                    class="bg-secondary hover:bg-primary hover:text-black text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mr-2"
                 >
                     Disputes
                 </button>
@@ -30,7 +30,7 @@
             <div v-if="feedback" class="q-mt-none">
                 <router-link :to="{ name: 'vendorfeedback', params: { uuid: user.user_id } }">
                     <button
-                        class="bg-orange-600 hover:bg-zinc-700 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mr-2"
+                        class="bg-warning hover:bg-zinc-700 hover:text-black text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mr-2"
                     >
                         <span class="px-2">{{ feedback }}</span>
                         <span class>Feedback</span>
@@ -40,7 +40,7 @@
             <div v-else>
                 <router-link :to="{ name: 'vendorfeedback', params: { uuid: user.user_id } }">
                     <button
-                        class="bg-primary hover:bg-zinc-700 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mr-2"
+                        class="bg-secondary hover:bg-primary hover:text-black text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mr-2"
                     >
                         Feedback
                     </button>
@@ -50,7 +50,7 @@
         <div v-if="orders">
             <router-link :to="{ name: 'vendorordersnew' }">
                 <button
-                    class="bg-orange-600 hover:bg-zinc-700 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mr-2"
+                    class="bg-warning hover:bg-zinc-700 hover:text-black text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mr-2"
                 >
                     <span class="px-2">{{ orders }}</span>
                     <span class>Orders</span>
@@ -60,7 +60,7 @@
         <div v-else>
             <router-link :to="{ name: 'vendorordersnew' }">
                 <button
-                    class="bg-primary hover:bg-zinc-700 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mr-2"
+                    class="bg-secondary hover:bg-primary hover:text-black text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mr-2"
                 >
                     Orders
                 </button>

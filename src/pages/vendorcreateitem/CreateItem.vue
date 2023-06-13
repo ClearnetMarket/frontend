@@ -1,6 +1,5 @@
 
 <template>
-
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
@@ -15,7 +14,7 @@
           <ol class="list-reset flex">
             <li>
               <router-link :to="{ name: 'home' }">
-                <a class="text-blue-600 hover:text-blue-700">Home</a>
+                <a class="text-primary hover:text-primary ">Home</a>
               </router-link>
             </li>
             <li>
@@ -23,7 +22,7 @@
             </li>
             <li>
               <router-link :to="{ name: 'forsale' }">
-                <a class="text-blue-600 hover:text-blue-700">Items for Sale</a>
+                <a class="text-primary hover:text-primary ">Items for Sale</a>
               </router-link>
             </li>
             <li>
@@ -35,68 +34,34 @@
       <div class="grid grid-cols-1 rounded-md p-6 max-w-3xl mx-auto">
         <div class="text-[24px]">Create a new Item</div>
 
-        <UploadImages
-          :item_id="item_id"
-          :image_main="image_main"
-          :image_two="image_two"
-          :image_three="image_three"
-          :image_four="image_four"
-        />
-        <form
-          class="rounded-md px-8 pt-6 pb-8 mb-4 w-full"
-          enctype="multipart/form-data"
-          @submit.prevent="onSubmit"
-        >
+        <UploadImages :item_id="item_id" :image_main="image_main" :image_two="image_two" :image_three="image_three"
+          :image_four="image_four" />
+        <form class="rounded-md px-8 pt-6 pb-8 mb-4 w-full" enctype="multipart/form-data" @submit.prevent="onSubmit">
           <div class="text-[18px] mt-5 mb-5">General Info</div>
           <div class="mb-4">
-            <label class="block text-white text-sm font-bold mb-2"
-              >Item Title</label
-            >
-            <input
-              v-model="CreateItemForm.basicInfo.title"
+            <label class="block text-white text-sm font-bold mb-2">Item Title</label>
+            <input v-model="CreateItemForm.basicInfo.title"
               class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
-              id="title"
-              type="text"
-              placeholder="Enter title of your item .."
-            />
+              id="title" type="text" placeholder="Enter title of your item .." />
           </div>
           <div class="flex gap-5">
             <div class="flex-1 mb-4">
-              <label class="block text-white text-sm font-bold mb-2"
-                >Category</label
-              >
+              <label class="block text-white text-sm font-bold mb-2">Category</label>
               <select
                 class="shadow form-select appearance-none block w-full px-3 py-1.5 text-base font-normal focus:shadow-outline text-gray-500 bg-neutral bg-clip-padding bg-no-repeat border rounded transition ease-in-out m-0 focus:text-white focus:bg-neutral focus:border-blue-600 focus:outline-none"
-                aria-label="Default select example"
-                id="category"
-                v-model="CreateItemForm.basicInfo.category_id_0"
-              >
-                <option
-                  class="text-white"
-                  v-for="(category, index) in categoryList"
-                  :key="index"
-                  :value="category.value"
-                >
+                aria-label="Default select example" id="category" v-model="CreateItemForm.basicInfo.category_id_0">
+                <option class="text-white" v-for="(category, index) in categoryList" :key="index" :value="category.value">
                   {{ category.name }}
                 </option>
               </select>
             </div>
             <div class="flex-1 mb-4">
-              <label class="block text-white text-sm font-bold mb-2"
-                >Condition</label
-              >
+              <label class="block text-white text-sm font-bold mb-2">Condition</label>
               <select
                 class="shadow form-select appearance-none block w-full px-3 py-1.5 text-base font-normal focus:shadow-outline text-gray-500 bg-neutral bg-clip-padding bg-no-repeat border rounded transition ease-in-out m-0 focus:text-white focus:bg-neutral focus:border-blue-600 focus:outline-none"
-                aria-label="Default select example"
-                id="condition"
-                v-model="CreateItemForm.basicInfo.item_condition"
-              >
-                <option
-                  class="text-white"
-                  v-for="(condition, index) in conditionList"
-                  :key="index"
-                  :value="condition.value"
-                >
+                aria-label="Default select example" id="condition" v-model="CreateItemForm.basicInfo.item_condition">
+                <option class="text-white" v-for="(condition, index) in conditionList" :key="index"
+                  :value="condition.value">
                   {{ condition.text }}
                 </option>
               </select>
@@ -105,137 +70,70 @@
           <div class="text-[18px] mt-5 mb-5">Pricing</div>
           <div class="flex gap-5">
             <div class="mb-4 flex-1">
-              <label class="block text-white text-sm font-bold mb-2"
-                >Item Price</label
-              >
-              <label class="block text-white text-sm mb-2 text-[11px]"
-                >Item Price in your local currency per item</label
-              >
-              <input
-                v-model="CreateItemForm.pricingInfo.price"
+              <label class="block text-white text-sm font-bold mb-2">Item Price</label>
+              <label class="block text-white text-sm mb-2 text-[11px]">Item Price in your local currency per item</label>
+              <input v-model="CreateItemForm.pricingInfo.price"
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
-                id="price"
-                type="number"
-                min="0"
-                placeholder="Price in your currency..."
-                @keypress="onlyNumberWithDot"
-              />
+                id="price" type="number" min="0" placeholder="Price in your currency..." @keypress="onlyNumberWithDot" />
             </div>
             <div class="mb-4 flex-1">
-              <label class="block text-white text-sm font-bold mb-2"
-                >Item Count</label
-              >
-              <label class="block text-white text-sm mb-2 text-[11px]"
-                >How many you have for sale</label
-              >
-              <input
-                v-model="CreateItemForm.pricingInfo.item_count"
+              <label class="block text-white text-sm font-bold mb-2">Item Count</label>
+              <label class="block text-white text-sm mb-2 text-[11px]">How many you have for sale</label>
+              <input v-model="CreateItemForm.pricingInfo.item_count"
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
-                id="count"
-                type="number"
-                min="0"
-                placeholder="How many your are selling ..."
-                @keypress="onlyNumber"
-              />
+                id="count" type="number" min="0" placeholder="How many your are selling ..." @keypress="onlyNumber" />
             </div>
           </div>
           <div class="flex gap-5">
             <div class="mb-4 flex-1">
-              <label class="block text-white text-sm font-bold mb-2"
-                >Accept Bitcoin</label
-              >
-              <input
-                type="checkbox"
-                id="digital_currency_1"
-                v-model="CreateItemForm.pricingInfo.digital_currency_1"
-              />
+              <label class="block text-white text-sm font-bold mb-2">Accept Bitcoin</label>
+              <input type="checkbox" id="digital_currency_1" v-model="CreateItemForm.pricingInfo.digital_currency_1" />
             </div>
             <div class="mb-4 flex-1">
-              <label class="block text-white text-sm font-bold mb-2"
-                >Accept Bitcoin Cash</label
-              >
-              <input
-                type="checkbox"
-                id="digital_currency_2"
-                v-model="CreateItemForm.pricingInfo.digital_currency_2"
-              />
+              <label class="block text-white text-sm font-bold mb-2">Accept Bitcoin Cash</label>
+              <input type="checkbox" id="digital_currency_2" v-model="CreateItemForm.pricingInfo.digital_currency_2" />
             </div>
             <div class="mb-4 flex-1">
-              <label class="block text-white text-sm font-bold mb-2"
-                >Accept Monero</label
-              >
-              <input
-                type="checkbox"
-                id="digital_currency_3"
-                v-model="CreateItemForm.pricingInfo.digital_currency_3"
-              />
+              <label class="block text-white text-sm font-bold mb-2">Accept Monero</label>
+              <input type="checkbox" id="digital_currency_3" v-model="CreateItemForm.pricingInfo.digital_currency_3" />
             </div>
           </div>
           <div class="text-[18px] mt-5 mb-5">Description</div>
           <div class="mb-4 flex-1">
-            <textarea
-              v-model="CreateItemForm.basicInfo.item_description"
-              id="item_description"
-              class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
-            ></textarea>
+            <textarea v-model="CreateItemForm.basicInfo.item_description" id="item_description"
+              class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"></textarea>
           </div>
 
           <div class="text-[18px] mt-5 mb-5">Destination</div>
           <div class="mb-4">
             <div class="flex gap-5">
               <div class="mb-4 flex-1">
-                <label class="block text-white text-sm font-bold mb-2"
-                  >Worldwide Shipping or Digital Item</label
-                >
-                <input
-                  type="checkbox"
-                  id="digital_currency_1"
-                  v-model="isSelectDisabled"
-                />
+                <label class="block text-white text-sm font-bold mb-2">Worldwide Shipping or Digital Item</label>
+                <input type="checkbox" id="digital_currency_1" v-model="isSelectDisabled" />
               </div>
             </div>
             <div class="flex gap-5">
               <div class="mb-4 flex-1">
-                <label class="block text-white text-sm font-bold mb-2"
-                  >Destination One</label
-                >
+                <label class="block text-white text-sm font-bold mb-2">Destination One</label>
 
                 <select
                   class="shadow form-select appearance-none block w-full px-3 py-1.5 text-base font-normal focus:shadow-outline text-gray-500 bg-neutral bg-clip-padding bg-no-repeat border rounded transition ease-in-out m-0 focus:text-white focus:bg-neutral focus:border-blue-600 focus:outline-none"
-                  aria-label="Default select example"
-                  id="category"
-                  v-model="CreateItemForm.shippingInfo.shipping_to_country_one"
-                  :disabled="isSelectDisabled"
-                >
-                  <option
-                    class="text-white"
-                    v-for="(country, index) in countryList"
-                    :key="index"
-                    :value="country.value"
-                  >
+                  aria-label="Default select example" id="category"
+                  v-model="CreateItemForm.shippingInfo.shipping_to_country_one" :disabled="isSelectDisabled">
+                  <option class="text-white" v-for="(country, index) in countryList" :key="index" :value="country.value">
                     {{ country.name }}
                   </option>
                 </select>
               </div>
 
               <div class="mb-4 flex-1">
-                <label class="block text-white text-sm font-bold mb-2"
-                  >Destination Two</label
-                >
+                <label class="block text-white text-sm font-bold mb-2">Destination Two</label>
 
                 <select
                   class="shadow form-select appearance-none block w-full px-3 py-1.5 text-base font-normal focus:shadow-outline text-gray-500 bg-neutral bg-clip-padding bg-no-repeat border rounded transition ease-in-out m-0 focus:text-white focus:bg-neutral focus:border-blue-600 focus:outline-none"
-                  aria-label="Default select example"
-                  id="category"
-                  v-model="CreateItemForm.shippingInfo.shipping_to_country_two"
-                  :disabled="isSelectDisabled"
-                >
-                  <option
-                    class="text-white"
-                    v-for="(country, index) in countryList"
-                    :key="index"
-                    :value="country.value"
-                  >
+                  aria-label="Default select example" id="category"
+                  v-model="CreateItemForm.shippingInfo.shipping_to_country_two" :disabled="isSelectDisabled">
+                  <option class="text-white" v-for="(country, index) in countryList" :key="index" :value="country.value">
                     {{ country.name }}
                   </option>
                 </select>
@@ -243,48 +141,26 @@
             </div>
             <div class="flex gap-5">
               <div class="mb-4 flex-1">
-                <label class="block text-white text-sm font-bold mb-2"
-                  >Destination Three</label
-                >
+                <label class="block text-white text-sm font-bold mb-2">Destination Three</label>
 
                 <select
                   class="shadow form-select appearance-none block w-full px-3 py-1.5 text-base font-normal focus:shadow-outline text-gray-500 bg-neutral bg-clip-padding bg-no-repeat border rounded transition ease-in-out m-0 focus:text-white focus:bg-neutral focus:border-blue-600 focus:outline-none"
-                  aria-label="Default select example"
-                  id="category"
-                  v-model="
-                    CreateItemForm.shippingInfo.shipping_to_country_three
-                  "
-                  :disabled="isSelectDisabled"
-                >
-                  <option
-                    class="text-white"
-                    v-for="(country, index) in countryList"
-                    :key="index"
-                    :value="country.value"
-                  >
+                  aria-label="Default select example" id="category" v-model="CreateItemForm.shippingInfo.shipping_to_country_three
+                    " :disabled="isSelectDisabled">
+                  <option class="text-white" v-for="(country, index) in countryList" :key="index" :value="country.value">
                     {{ country.name }}
                   </option>
                 </select>
               </div>
 
               <div class="mb-4 flex-1">
-                <label class="block text-white text-sm font-bold mb-2"
-                  >Destination Four</label
-                >
+                <label class="block text-white text-sm font-bold mb-2">Destination Four</label>
 
                 <select
                   class="shadow form-select appearance-none block w-full px-3 py-1.5 text-base font-normal focus:shadow-outline text-gray-500 bg-neutral bg-clip-padding bg-no-repeat border rounded transition ease-in-out m-0 focus:text-white focus:bg-neutral focus:border-blue-600 focus:outline-none"
-                  aria-label="Default select example"
-                  id="category"
-                  v-model="CreateItemForm.shippingInfo.shipping_to_country_four"
-                  :disabled="isSelectDisabled"
-                >
-                  <option
-                    class="text-white"
-                    v-for="(country, index) in countryList"
-                    :key="index"
-                    :value="country.value"
-                  >
+                  aria-label="Default select example" id="category"
+                  v-model="CreateItemForm.shippingInfo.shipping_to_country_four" :disabled="isSelectDisabled">
+                  <option class="text-white" v-for="(country, index) in countryList" :key="index" :value="country.value">
                     {{ country.name }}
                   </option>
                 </select>
@@ -301,99 +177,59 @@
           </div>
 
           <div class="mb-4">
-            <label class="block text-white text-sm font-bold mb-2"
-              >Free Shipping</label
-            >
+            <label class="block text-white text-sm font-bold mb-2">Free Shipping</label>
             <div class="flex gap-5">
               <div class="flex-1">
-                <input
-                  type="checkbox"
-                  v-model="CreateItemForm.shippingInfo.free_shipping"
-                />
+                <input type="checkbox" v-model="CreateItemForm.shippingInfo.free_shipping" />
               </div>
               <div class="flex-1"></div>
               <div class="flex-1">
-                <input
-                  type="number"
-                  placeholder="Estimated Days"
-                  min="0"
+                <input type="number" placeholder="Estimated Days" min="0"
                   class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
-                  v-model="CreateItemForm.shippingInfo.free_shipping_days"
-                />
+                  v-model="CreateItemForm.shippingInfo.free_shipping_days" />
               </div>
             </div>
           </div>
           <div class="mb-4">
-            <label class="block text-white text-sm font-bold mb-2"
-              >Option 1</label
-            >
+            <label class="block text-white text-sm font-bold mb-2">Option 1</label>
             <div class="flex gap-5">
               <div class="flex-1">
-                <input
-                  type="checkbox"
-                  v-model="CreateItemForm.shippingInfo.shipping_2"
-                />
+                <input type="checkbox" v-model="CreateItemForm.shippingInfo.shipping_2" />
               </div>
               <div class="flex-1">
-                <input
-                  type="number"
-                  placeholder="Price"
-                  min="0"
+                <input type="number" placeholder="Price" min="0"
                   class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
-                  v-model="CreateItemForm.shippingInfo.shipping_2_price"
-                  @keypress="onlyNumberWithDot"
-                />
+                  v-model="CreateItemForm.shippingInfo.shipping_2_price" @keypress="onlyNumberWithDot" />
               </div>
               <div class="flex-1">
-                <input
-                  type="number"
-                  placeholder="Estimated Days"
-                  min="0"
+                <input type="number" placeholder="Estimated Days" min="0"
                   class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
-                  v-model="CreateItemForm.shippingInfo.shipping_2_days"
-                  @keypress="onlyNumber"
-                />
+                  v-model="CreateItemForm.shippingInfo.shipping_2_days" @keypress="onlyNumber" />
               </div>
             </div>
           </div>
           <div class="mb-4">
-            <label class="block text-white text-sm font-bold mb-2"
-              >Option 3</label
-            >
+            <label class="block text-white text-sm font-bold mb-2">Option 3</label>
             <div class="flex gap-5">
               <div class="flex-1">
-                <input
-                  type="checkbox"
-                  v-model="CreateItemForm.shippingInfo.shipping_3"
-                />
+                <input type="checkbox" v-model="CreateItemForm.shippingInfo.shipping_3" />
               </div>
               <div class="flex-1">
-                <input
-                  type="number"
-                  placeholder="Price"
-                  min="0"
+                <input type="number" placeholder="Price" min="0"
                   class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
-                  v-model="CreateItemForm.shippingInfo.shipping_3_price"
-                  @keypress="onlyNumberWithDot"
-                />
+                  v-model="CreateItemForm.shippingInfo.shipping_3_price" @keypress="onlyNumberWithDot" />
               </div>
               <div class="flex-1">
-                <input
-                  type="number"
-                  placeholder="Estimated Days"
-                  min="0"
+                <input type="number" placeholder="Estimated Days" min="0"
                   class="shadow appearance-none border rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
-                  v-model="CreateItemForm.shippingInfo.shipping_3_days"
-                  @keypress="onlyNumber"
-                />
+                  v-model="CreateItemForm.shippingInfo.shipping_3_days" @keypress="onlyNumber" />
               </div>
             </div>
           </div>
           <div class="flex justify-center mt-20">
             <button
               class="bg-gray-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              type="submit"
-            >
+              type="submit">
               Create Item
             </button>
           </div>
@@ -401,8 +237,6 @@
       </div>
     </div>
   </div>
-
-
 </template>
 
 <script lang="ts">
@@ -429,21 +263,21 @@ export default defineComponent({
     MainFooter,
     UploadImages,
   },
-  setup() {
+  setup () {
     const isSelectDisabled = ref(false); // Form Toggle
     return { isSelectDisabled }; // Form Toggle
   },
-  created() {
+  created () {
     this.userstatus();
   },
-  mounted(){
+  mounted () {
     this.createitemtemporary();
     this.getCategoryList(); // Query Categories
     this.getConditionList(); // Query Conditionlist
     this.getCountryList(); // Query Countries
   },
 
-  data() {
+  data () {
     return {
       user: null,
       item_id: null,
@@ -492,24 +326,22 @@ export default defineComponent({
   },
 
   methods: {
-     userstatus() {
-       axios({
+    userstatus () {
+      axios({
         method: "get",
         url: "/auth/whoami",
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
-      if (response.data.login == true) 
-        { this.user = response.data.user }
-      else 
-        { this.$router.push("/login") }
+        if (response.data.login == true) { this.user = response.data.user }
+        else { this.$router.push("/login") }
       })
-      .catch(() => {
-        this.$router.push("/login")
-      })
+        .catch(() => {
+          this.$router.push("/login")
+        })
     },
 
-     CreateItem(payload: {
+    CreateItem (payload: {
       item_id: string;
       title: string;
       item_condition: string;
@@ -535,7 +367,7 @@ export default defineComponent({
       shipping_to_country_four: string;
     }) {
       let path = "/vendorcreateitem/create-item-main/" + this.item_id;
-       axios({
+      axios({
         method: "POST",
         url: path,
         data: payload,
@@ -555,14 +387,14 @@ export default defineComponent({
         });
     },
 
-    onlyNumber($event: any) {
+    onlyNumber ($event: any) {
       let keyCode = $event.keyCode ? $event.keyCode : $event.which;
       if (keyCode < 48 || keyCode > 57) {
         // 46 is dot
         $event.preventDefault();
       }
     },
-    onlyNumberWithDot($event: any) {
+    onlyNumberWithDot ($event: any) {
       let keyCode = $event.keyCode ? $event.keyCode : $event.which;
       if ((keyCode < 48 || keyCode > 57) && keyCode !== 46) {
         // 46 is dot
@@ -570,7 +402,7 @@ export default defineComponent({
       }
     },
 
-     getItemForSale() {
+    getItemForSale () {
       // Get the item thats being modified
       const path = "/item/" + this.item_id;
       axios({
@@ -587,11 +419,11 @@ export default defineComponent({
             this.image_four = response.data.image_four_server;
           }
         })
-        .catch(() => {});
+        .catch(() => { });
     },
-     createitemtemporary() {
+    createitemtemporary () {
       // Create an Item.  // Using thi
-       axios({
+      axios({
         method: "GET",
         url: "/vendorcreateitem/create-item",
         withCredentials: true,
@@ -604,22 +436,22 @@ export default defineComponent({
       });
     },
 
-     getCountryList() {
+    getCountryList () {
       // Get Countries
-       let path = "/vendorcreateitem/query/country";
-       axios({
+      let path = "/vendorcreateitem/query/country";
+      axios({
         method: "get", //you can set what request you want to be
         url: path,
         withCredentials: true,
-        
+
       })
         .then((response) => {
           this.countryList = response.data;
         })
     },
-  
 
-     getCategoryList() {
+
+    getCategoryList () {
       const path = "/vendorcreateitem/query/category";
 
       axios({
@@ -630,9 +462,9 @@ export default defineComponent({
         .then((response) => {
           this.categoryList = response.data;
         })
-        .catch(() => {});
+        .catch(() => { });
     },
-     getConditionList() {
+    getConditionList () {
       const path = "/vendorcreateitem/query/condition";
       axios({
         method: "get",
@@ -642,9 +474,9 @@ export default defineComponent({
         .then((response) => {
           this.conditionList = response.data;
         })
-        .catch(() => {});
+        .catch(() => { });
     },
-     onSubmit() {
+    onSubmit () {
 
       let payload = {
         item_id: this.item_id,

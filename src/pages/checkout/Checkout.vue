@@ -16,7 +16,7 @@
             <ol class="list-reset flex">
               <li>
                 <router-link :to="{ name: 'home' }">
-                  <a class="text-blue-600 hover:text-blue-700">Home</a>
+                  <a class="text-primary hover:text-primary ">Home</a>
                 </router-link>
               </li>
               <li>
@@ -24,7 +24,7 @@
               </li>
               <li>
                 <router-link :to="{ name: 'cart' }">
-                  <a class="text-blue-600 hover:text-blue-700">Shopping Cart</a>
+                  <a class="text-primary hover:text-primary ">Shopping Cart</a>
                 </router-link>
               </li>
               <li>
@@ -60,7 +60,7 @@
             <div v-else class="col-span-6 font-bold text-red-600">
               Please Enter a shipping address to Checkout
             </div>
-            <div class="col-span-2 text-center text-[12px] text-blue-600 hover:text-blue-400">
+            <div class="col-span-2 text-center text-[12px] text-primary hover:text-primary">
               <router-link :to="{ name: 'defaultaddress' }"> Change/Add </router-link>
             </div>
           </div>
@@ -196,19 +196,19 @@
                 <div v-if="address_name.length > 5">
                 </div>
                 <div v-else class="text-red-600 text-center font-bold">Need A Shipping Address</div>
-                <button v-show="
-                  xmrtotalprice <= xmrbalance &&
+                <button v-show="xmrtotalprice <= xmrbalance &&
                   bchtotalprice <= bchbalance &&
                   btctotalprice <= btcbalance &&
                   address_name.length > 5
-                " @click="checkoutorder()"
-                  class="bg-yellow-500 bg-r rounded-md font-semibold hover:bg-yellow-600 py-3 text-sm text-white uppercase w-full">
+                  " @click="checkoutorder()"
+                  class="bg-secondary  rounded-md font-semibold hover:bg-primary py-3 text-sm text-white uppercase w-full">
                   Place Order
                 </button>
-                <span class="flex font-semibold text-[10px] uppercase text-center mt-10">By Clicking checkout, you agree to the terms
+                <span class="flex font-semibold text-[10px] uppercase text-center mt-10">By Clicking checkout, you agree
+                  to the terms
                   of Freeport </span>
                 <router-link :to="{ name: 'policies' }">
-                  <div class="text-blue-600 hover:text-blue-500 text-sm font-bold flex justify-center">
+                  <div class="text-primary hover:text-blue-500 text-sm font-bold flex justify-center">
                     Freeport Terms
                   </div>
                 </router-link>
@@ -282,14 +282,14 @@ export default defineComponent({
     };
   },
 
- 
+
   created () {
     this.userstatus();
     this.interval = setInterval(() => {
       this.updateprices();
     }, 50000);
   },
-   mounted () {
+  mounted () {
     this.getxmrprice();
     this.getbchprice();
     this.getbtcprice();
@@ -311,7 +311,7 @@ export default defineComponent({
           if (response.data.login == true) {
             this.user = response.data.user;
           }
-          else{ this.$router.push({ name: "login" }) }
+          else { this.$router.push({ name: "login" }) }
         })
         .catch(() => {
           this.$router.push({ name: "login" });

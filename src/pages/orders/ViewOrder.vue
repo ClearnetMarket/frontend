@@ -10,7 +10,7 @@
         <ol class="list-reset flex">
           <li>
             <router-link :to="{ name: 'home' }">
-              <a class="text-blue-600 hover:text-blue-700">Home</a>
+              <a class="text-primary hover:text-primary ">Home</a>
             </router-link>
           </li>
           <li>
@@ -18,7 +18,7 @@
           </li>
           <li>
             <router-link :to="{ name: 'userorders' }">
-              <a class="text-blue-600 hover:text-blue-700">Orders</a>
+              <a class="text-primary hover:text-primary ">Orders</a>
             </router-link>
           </li>
           <li>
@@ -31,9 +31,9 @@
       <div v-if="order_found">
         <div class="grid grid-cols-1 w-full px-5">
           <h1 class="col-span-1 font-semibold text-[14px] md:text-2xl text-center">Order# {{ order.uuid }}</h1>
-          <div class="grid grid-cols-12 rounded-md border border-gray-300 mb-5">
-            <div class="col-span-12 bg-gray-300  ">
-              <div class="grid grid-cols-12 text-[14px]">
+          <div class="grid grid-cols-12 rounded-md border border-gray-300">
+            <div class="col-span-12 bg-secondary ">
+              <div class="grid grid-cols-12 text-[14px] p-5 ">
                 <div class="col-span-12 sm:col-span-3">
                   <div class="font-bold">Order Placed</div>
                   <div class="">{{ order.created }}</div>
@@ -81,7 +81,7 @@
                           <img class="object-contain" :src="order.image_one" alt="" />
                         </div>
                         <div class="col-span-12 sm:col-span-9 mb-3">
-                          <div class="text-blue-500 hover:text-blue-300 hover:underline text-center text-[20px] mb-5">
+                          <div class="text-white hover:text-primary hover:underline text-center text-[20px] mb-5">
                             <div v-if="order.item_uuid">
                               <router-link :to="{
                                 name: 'MarketItem',
@@ -99,7 +99,7 @@
                                 name: 'userprofile',
                                 params: { uuid: order.vendor_uuid }
                               }">
-                                <div class="text-blue-500 hover:text-blue-300 hover:underline pl-3 flex">
+                                <div class="text-white hover:text-primary hover:underline pl-3 flex">
                                   {{ order.vendor_user_name }}
 
                                   <div class="text-[12px] flex">
@@ -124,12 +124,11 @@
                   </div>
                 </div>
                 <div class="col-span-12 sm:col-span-3 px-3">
-                  <div v-if="
-                    order.overall_status === 3 ||
+                  <div v-if="order.overall_status === 3 ||
                     order.overall_status === 2 ||
                     order.overall_status === 4 ||
                     order.overall_status === 8
-                  ">
+                    ">
 
                   </div>
                   <!-- waiting on vendor acceptance order -->
@@ -391,9 +390,9 @@ export default defineComponent({
 
     };
   },
-created(){
+  created () {
     this.userstatus();
-},
+  },
   mounted () {
     let order_id_route = useRoute();
     this.order_id = order_id_route.params.uuid;
@@ -413,10 +412,8 @@ created(){
         headers: authHeader(),
       })
         .then((response) => {
-          if (response.data.login == true)
-            { this.user = response.data.user }
-          else
-            { this.$router.push("/login") }
+          if (response.data.login == true) { this.user = response.data.user }
+          else { this.$router.push("/login") }
         })
         .catch(() => {
           this.$router.push("/login")
@@ -430,16 +427,16 @@ created(){
         headers: authHeader(),
       }).then((response) => {
 
-          this.order = response.data;
-          this.order_found = true;
-          this.getvendorinfo();
+        this.order = response.data;
+        this.order_found = true;
+        this.getvendorinfo();
 
-          if (this.order) {
-            this.getvendorinfo();
-          }
-          if (this.order.user_feedback == 1) {
-            this.getorderfeedback();
-          }
+        if (this.order) {
+          this.getvendorinfo();
+        }
+        if (this.order.user_feedback == 1) {
+          this.getorderfeedback();
+        }
       })
         .catch(() => {
           this.$router.push({ name: "home" });
@@ -617,15 +614,14 @@ created(){
         headers: authHeader(),
       })
         .then((response) => {
-          if (response.data.success)
-          {
+          if (response.data.success) {
             this.createdisputechat(uuid);
             this.createdisputenotificationchat(uuid);
             window.location.reload();
           }
         });
     },
-        // creates dispute chat (background call)
+    // creates dispute chat (background call)
     createdisputechat (uuid: any) {
       axios({
         method: "post",
@@ -636,7 +632,7 @@ created(){
 
       });
     },
-            // creates dispute chat (background call)
+    // creates dispute chat (background call)
     createdisputenotificationchat (uuid: any) {
       axios({
         method: "post",
@@ -680,8 +676,6 @@ created(){
 });
 </script>
 <style>
-
-
 fieldset,
 label {
   margin: 0;

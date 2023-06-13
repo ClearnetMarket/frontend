@@ -9,7 +9,7 @@
                     <ol class="list-reset flex">
                         <li>
                             <router-link :to="{ name: 'home' }">
-                                <a class="text-blue-600 hover:text-blue-700">Home</a>
+                                <a class="text-primary hover:text-primary ">Home</a>
                             </router-link>
                         </li>
                         <li>
@@ -28,12 +28,12 @@
                 <div v-for="(f, index) in searchresults">
                     <Searchitems :item="f" :selected-index="index" />
                 </div>
-                 <div class="col-span-12 mb-20" v-if="recordsLength > 0">
-                <pagination @paginate="getPage" :records="recordsLength" v-model="page" :per-page="perPage"
-                  :options="options"> </pagination>
-                <div class="flex justify-center"> {{ recordsLength }} items Found</div>
-              </div>
-              <div class="col-span-12 mb-20 flex justify-center" v-else>{{ recordsLength }} items</div>
+                <div class="col-span-12 mb-20" v-if="recordsLength > 0">
+                    <pagination @paginate="getPage" :records="recordsLength" v-model="page" :per-page="perPage"
+                        :options="options"> </pagination>
+                    <div class="flex justify-center"> {{ recordsLength }} items Found</div>
+                </div>
+                <div class="col-span-12 mb-20 flex justify-center" v-else>{{ recordsLength }} items</div>
             </div>
         </div>
     </div>
@@ -67,12 +67,12 @@ export default defineComponent({
         CategoryList,
     },
 
-    data() {
+    data () {
         return {
             searchresults: [],
             searchresultscount: 0,
             searchstring: null,
-            
+
             page: 1,
             perPage: 50,
             recordsLength: 0,
@@ -85,13 +85,13 @@ export default defineComponent({
         }
     },
     watch: {
-        $route() {
+        $route () {
             this.searchresults == null
             this.searchstring = this.$route.params.searchstring
             this.getPage(this.page);
         },
     },
-    mounted() {
+    mounted () {
         this.searchstring = this.$route.params.searchstring
         this.main_search_count()
         this.getPage(this.page);
@@ -102,24 +102,24 @@ export default defineComponent({
             this.searchresults = [];
             const startIndex = this.perPage * (page - 1) + 1;
             const endIndex = startIndex + this.perPage - 1;
-          
+
             this.main_search(page)
-       
+
         },
 
-        main_search(page: any) {
+        main_search (page: any) {
             axios({
                 method: 'get',
                 url: '/search/query/' + this.searchstring + '/' + this.page,
                 headers: authHeader(),
-            }).then((response) => {this.searchresults = response.data})
+            }).then((response) => { this.searchresults = response.data })
         },
-        main_search_count() {
+        main_search_count () {
             axios({
                 method: 'get',
-                url: '/search/query/count/' + this.searchstring ,
+                url: '/search/query/count/' + this.searchstring,
                 headers: authHeader(),
-            }).then((response) => { this.recordsLength = response.data.count})
+            }).then((response) => { this.recordsLength = response.data.count })
         },
     },
 })

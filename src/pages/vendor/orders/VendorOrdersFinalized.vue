@@ -1,5 +1,4 @@
 <template>
-
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
@@ -10,7 +9,7 @@
         <ol class="list-reset flex">
           <li>
             <router-link :to="{ name: 'home' }">
-              <a class="text-blue-600 hover:text-blue-700">Home</a>
+              <a class="text-primary hover:text-primary ">Home</a>
             </router-link>
           </li>
           <li>
@@ -22,8 +21,7 @@
     <div class="sm:flex sm:justify-evenly">
       <div v-if="vendor_orders_new">
         <router-link :to="{ name: 'vendorordersnew' }">
-          <button
-            class="mb-2 flex py-2 px-4 shadow-md no-underline rounded-full text-white font-sans
+          <button class="mb-2 flex py-2 px-4 shadow-md no-underline rounded-full text-white font-sans
              hover:text-white text-sm bg-zinc-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2">
             <span class="px-2">{{ vendor_orders_new }}</span>
             <span class>New</span>
@@ -32,8 +30,7 @@
       </div>
       <div v-else>
         <router-link :to="{ name: 'vendorordersnew' }">
-          <button
-            class="mb-2 py-2 px-4 shadow-md no-underline rounded-full text-white font-sans
+          <button class="mb-2 py-2 px-4 shadow-md no-underline rounded-full text-white font-sans
             text-sm hover:text-white bg-zinc-600 hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2">
             New
           </button>
@@ -42,8 +39,7 @@
 
       <div v-if="vendor_orders_accepted" class="q-mt-none">
         <router-link :to="{ name: 'vendororderswaiting' }">
-          <button
-            class="mb-2 flex py-2 px-4 shadow-md text-sm no-underline rounded-full bg-zinc-600
+          <button class="mb-2 flex py-2 px-4 shadow-md text-sm no-underline rounded-full bg-zinc-600
              hover:bg-zinc-400 text-white font-sans hover:text-white focus:outline-none active:shadow-none mr-2">
             <span class="px-2">{{ vendor_orders_accepted }}</span>
             <span class>Waiting</span>
@@ -52,8 +48,7 @@
       </div>
       <div v-else>
         <router-link :to="{ name: 'vendororderswaiting' }">
-          <button
-            class="mb-2 py-2 px-4 shadow-md no-underline rounded-full
+          <button class="mb-2 py-2 px-4 shadow-md no-underline rounded-full
              text-white font-sans text-sm hover:text-white bg-zinc-600 hover:bg-zinc-400
               focus:outline-none active:shadow-none mr-2">
             Waiting
@@ -63,8 +58,7 @@
 
       <div v-if="vendor_orders_shipped">
         <router-link :to="{ name: 'vendorordersshipped' }">
-          <button
-            class="mb-2 flex py-2 px-4 shadow-md no-underline rounded-full
+          <button class="mb-2 flex py-2 px-4 shadow-md no-underline rounded-full
              bg-zinc-600 hover:bg-zinc-400 hover:text-white text-white font-sans text-sm btn-primary
               focus:outline-none active:shadow-none mr-2">
             <span class="px-2">{{ vendor_orders_shipped }}</span>
@@ -74,8 +68,7 @@
       </div>
       <div v-else>
         <router-link :to="{ name: 'vendorordersshipped' }">
-          <button
-            class="mb-2 py-2 px-4 shadow-md no-underline rounded-full text-white
+          <button class="mb-2 py-2 px-4 shadow-md no-underline rounded-full text-white
              font-sans text-sm hover:text-white bg-zinc-600 hover:bg-zinc-400
              focus:outline-none active:shadow-none mr-2">
             Shipped
@@ -85,8 +78,7 @@
 
       <div v-if="vendor_orders_finalized">
         <router-link :to="{ name: 'vendorordersfinalized' }">
-          <button
-            class="mb-2 flex py-2 px-4 shadow-md no-underline rounded-full bg-zinc-600
+          <button class="mb-2 flex py-2 px-4 shadow-md no-underline rounded-full bg-zinc-600
              hover:bg-zinc-400 hover:text-white text-white font-sans text-sm btn-primary
               focus:outline-none active:shadow-none mr-2">
             <span class="px-2">{{ vendor_orders_finalized }}</span>
@@ -96,8 +88,7 @@
       </div>
       <div v-else>
         <router-link :to="{ name: 'vendorordersfinalized' }">
-          <button
-            class="mb-2 py-2 px-4 shadow-md no-underline rounded-full
+          <button class="mb-2 py-2 px-4 shadow-md no-underline rounded-full
              text-white font-sans text-sm hover:text-white bg-zinc-600
               hover:bg-zinc-400 focus:outline-none active:shadow-none mr-2">
             Finalized
@@ -107,8 +98,7 @@
 
       <div v-if="vendor_orders_request_cancel">
         <router-link :to="{ name: 'vendororderscancel' }">
-          <button
-            class="mb-2 flex py-2 px-4 shadow-md no-underline rounded-full
+          <button class="mb-2 flex py-2 px-4 shadow-md no-underline rounded-full
              bg-zinc-600 hover:bg-zinc-400 hover:text-white text-white font-sans
               text-sm btn-primary focus:outline-none active:shadow-none mr-2">
             <span class="px-2">{{ vendor_orders_request_cancel }}</span>
@@ -118,8 +108,7 @@
       </div>
       <div v-else>
         <router-link :to="{ name: 'vendororderscancel' }">
-          <button
-            class="py-2 px-4 shadow-md no-underline rounded-full
+          <button class="py-2 px-4 shadow-md no-underline rounded-full
              text-white font-sans text-sm hover:text-white bg-zinc-600 hover:bg-zinc-400
               focus:outline-none active:shadow-none mr-2">
             Cancel
@@ -138,7 +127,7 @@
           <div class="rounded-md bg-neutral p-5">
             <div class="grid grid-cols-12 ">
               <div class="col-span-12 text-[20px]  mb-5">
-                <router-link class="text-blue-600 hover:underline hover:text-blue-400 text-center"
+                <router-link class="text-primary hover:underline hover:text-primary text-center"
                   :to="{ name: 'MarketItem', params: { id: order.item_uuid } }">
                   <div>{{ order.title_of_item }}</div>
                 </router-link>
@@ -157,7 +146,7 @@
                   <div class="font-bold px-2">
                     Ordered:
                   </div>
-                  <div class="px-2 flex ">{{ relativeDate (order.created) }}</div>
+                  <div class="px-2 flex ">{{ relativeDate(order.created) }}</div>
                 </div>
                 <div class="col-span-1 flex">
                   <div class="font-bold px-2">
@@ -198,8 +187,7 @@
               <div class="col-span-12 sm:col-span-3 ">
                 <div class=" text-[14px] font-bold flex justify-center">
                   <router-link :to="{ name: 'vendorordersfeedback', params: { uuid: order.uuid }, }" class="px-3">
-                    <button
-                      class="bg-primary hover:bg-zinc-400 text-white
+                    <button class="bg-primary hover:bg-zinc-400 text-white
                        font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline ">
                       View Order
                     </button>
@@ -274,7 +262,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-            this.orders = response.data;
+          this.orders = response.data;
         });
     },
     // gets the count for the top bars count
@@ -307,8 +295,6 @@ export default defineComponent({
 });
 </script>
 <style>
-
-
 fieldset,
 label {
   margin: 0;

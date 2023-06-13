@@ -15,7 +15,7 @@
             <ol class="list-reset flex">
               <li>
                 <router-link :to="{ name: 'home' }">
-                  <a class="text-blue-600 hover:text-blue-700 ">Home</a>
+                  <a class="text-primary hover:text-primary ">Home</a>
                 </router-link>
               </li>
               <li>
@@ -23,21 +23,21 @@
               </li>
               <li>
                 <router-link :to="{ name: 'categoryhome' }">
-                  <a class="text-blue-600 hover:text-blue-700">Categories</a>
+                  <a class="text-primary hover:text-primary ">Categories</a>
                 </router-link>
               </li>
               <li>
                 <span class="text-gray-500 mx-2">/</span>
               </li>
-               <router-link :to="`/category/${catname}`">
-                    <a class="text-blue-600 hover:text-blue-700">{{ catshow }}</a>
-                  </router-link>
+              <router-link :to="`/category/${catname}`">
+                <a class="text-primary hover:text-primary ">{{ catshow }}</a>
+              </router-link>
 
             </ol>
           </nav>
         </div>
 
- 
+
       </div>
       <ItemTop @UpdateCart="UpdateCart" />
       <ItemDescription v-bind:description="description" />
@@ -133,7 +133,7 @@ export default defineComponent({
 
     },
   },
-  created(){
+  created () {
     this.userstatus();
   },
   mounted () {
@@ -163,7 +163,7 @@ export default defineComponent({
       })
         .then((response) => {
           this.item = response.data;
-          
+
           this.itemcount = response.data.item_count;
           this.totalsold = response.data.total_sold;
           this.description = response.data.item_description;
@@ -180,8 +180,8 @@ export default defineComponent({
           this.shippingpricethree = response.data.shipping_price_3;
           this.shippingdaythree = response.data.shipping_day_3;
           this.getvendorreviews();
-         this.getcategoryname();
-         this.catshow = this.item.category_name_0;
+          this.getcategoryname();
+          this.catshow = this.item.category_name_0;
           this.loaded_feedback = true;
         })
         .catch(() => {
@@ -195,7 +195,7 @@ export default defineComponent({
     UpdateCart () {
       this.shoppingcartcount += 1;
     },
- 
+
     getvendorreviews () {
       axios({
         method: "get",
@@ -210,89 +210,89 @@ export default defineComponent({
         })
         .catch(() => { this.vendorreviews = null; });
     },
-    getcategoryname (){
-      if (this.item.category_name_0 === "Electronics") {this.catname = 'electronics'}
-       else if (this.item.category_name_0 === "Smartphones & Tablets") {this.catname = 'smartphones'}
-       else if (this.item.category_name_0 === "Automotive") {this.catname = 'automotive'}
-       else if (this.item.category_name_0 === "Hobbies & Toys") { this.catname = 'hobbies' }
-       else if (this.item.category_name_0 === "Sports and Outdoors") { this.catname = 'sportinggoods' }
-       else if (this.item.category_name_0 === "Jewelry & Gold & Coins") { this.catname = 'jewelrygold' }
-       else if (this.item.category_name_0 === "Apparel & Accessories") { this.catname = 'apparel' }
-       else if (this.item.category_name_0 === "Gift Cards") { this.catname = 'giftcards' }
-       else if (this.item.category_name_0 === "Art") { this.catname = 'art' }
-       else if (this.item.category_name_0 === "Computers & Parts") { this.catname = 'computers' }
-       else if (this.item.category_name_0 === "Books & Movies") { this.catname = 'booksandmovies' }
-       else if (this.item.category_name_0 === "Digital Items") { this.catname = 'digital' }
-       else if (this.item.category_name_0 === "Home and Garden") { this.catname = 'homeandgarden' }
+    getcategoryname () {
+      if (this.item.category_name_0 === "Electronics") { this.catname = 'electronics' }
+      else if (this.item.category_name_0 === "Smartphones & Tablets") { this.catname = 'smartphones' }
+      else if (this.item.category_name_0 === "Automotive") { this.catname = 'automotive' }
+      else if (this.item.category_name_0 === "Hobbies & Toys") { this.catname = 'hobbies' }
+      else if (this.item.category_name_0 === "Sports and Outdoors") { this.catname = 'sportinggoods' }
+      else if (this.item.category_name_0 === "Jewelry & Gold & Coins") { this.catname = 'jewelrygold' }
+      else if (this.item.category_name_0 === "Apparel & Accessories") { this.catname = 'apparel' }
+      else if (this.item.category_name_0 === "Gift Cards") { this.catname = 'giftcards' }
+      else if (this.item.category_name_0 === "Art") { this.catname = 'art' }
+      else if (this.item.category_name_0 === "Computers & Parts") { this.catname = 'computers' }
+      else if (this.item.category_name_0 === "Books & Movies") { this.catname = 'booksandmovies' }
+      else if (this.item.category_name_0 === "Digital Items") { this.catname = 'digital' }
+      else if (this.item.category_name_0 === "Home and Garden") { this.catname = 'homeandgarden' }
 
     },
     returncurrencysymbol (currencydigit: number) {
-      if (currencydigit === 0) {return "$"}
-        else if (currencydigit === 1) {return "₱"}
-        else if (currencydigit === 2) {return "CHF"}
-        else if (currencydigit === 3) {return "SAD"}
-        else if (currencydigit === 4) {return "B/."}
-        else if (currencydigit === 5) {return "₽"}
-        else if (currencydigit === 6) {return "kr"}
-        else if (currencydigit === 7) {return "kr"} 
-        else if (currencydigit === 8) {return "kr"}
-        else if (currencydigit === 9) {return "₪"}
-        else if (currencydigit === 10) {return "kr"}
-        else if (currencydigit === 11) {return "฿"} 
-        else if (currencydigit === 12) {return "R$"} 
-        else if (currencydigit === 13) {return "₹"}
-        else if (currencydigit === 14) {return "R"} 
-        else if (currencydigit === 14) {return "$"} 
-        else if (currencydigit === 16) {return "¥"} 
-        else if (currencydigit === 17) {return "Ft"} 
-        else if (currencydigit === 18) {return "$"}
-        else if (currencydigit === 19) {return "¥"} 
-        else if (currencydigit === 20) {return "$"} 
-        else if (currencydigit === 21) {return "zł"}
-        else if (currencydigit === 22) {return "£"} 
-        else if (currencydigit === 23) {return "₺"}
-        else if (currencydigit === 24) {return "₩"} 
-        else if (currencydigit === 25) {return "Rp"}
-        else if (currencydigit === 26) {return "$"}
-        else if (currencydigit === 27) {return "RM"} 
-        else if (currencydigit === 28) {return "лв"} 
-        else if (currencydigit === 29) {return "€"}
-        else if (currencydigit === 31) {return "kn"} 
-        else if (currencydigit === 30) {return "Kč"}
+      if (currencydigit === 0) { return "$" }
+      else if (currencydigit === 1) { return "₱" }
+      else if (currencydigit === 2) { return "CHF" }
+      else if (currencydigit === 3) { return "SAD" }
+      else if (currencydigit === 4) { return "B/." }
+      else if (currencydigit === 5) { return "₽" }
+      else if (currencydigit === 6) { return "kr" }
+      else if (currencydigit === 7) { return "kr" }
+      else if (currencydigit === 8) { return "kr" }
+      else if (currencydigit === 9) { return "₪" }
+      else if (currencydigit === 10) { return "kr" }
+      else if (currencydigit === 11) { return "฿" }
+      else if (currencydigit === 12) { return "R$" }
+      else if (currencydigit === 13) { return "₹" }
+      else if (currencydigit === 14) { return "R" }
+      else if (currencydigit === 14) { return "$" }
+      else if (currencydigit === 16) { return "¥" }
+      else if (currencydigit === 17) { return "Ft" }
+      else if (currencydigit === 18) { return "$" }
+      else if (currencydigit === 19) { return "¥" }
+      else if (currencydigit === 20) { return "$" }
+      else if (currencydigit === 21) { return "zł" }
+      else if (currencydigit === 22) { return "£" }
+      else if (currencydigit === 23) { return "₺" }
+      else if (currencydigit === 24) { return "₩" }
+      else if (currencydigit === 25) { return "Rp" }
+      else if (currencydigit === 26) { return "$" }
+      else if (currencydigit === 27) { return "RM" }
+      else if (currencydigit === 28) { return "лв" }
+      else if (currencydigit === 29) { return "€" }
+      else if (currencydigit === 31) { return "kn" }
+      else if (currencydigit === 30) { return "Kč" }
     },
     returncurrency (currencydigit: any) {
-      if (currencydigit === 0) {return "USD"} 
-        else if (currencydigit === 1) {return "PHP"}
-        else if (currencydigit === 2) {return "CHF"} 
-        else if (currencydigit === 3) {return "SAD"} 
-        else if (currencydigit === 4) {return "SGD"} 
-        else if (currencydigit === 5) {return "RUB"}
-        else if (currencydigit === 6) {return "DKK"}
-        else if (currencydigit === 7) {return "RON" }
-        else if (currencydigit === 8) {return "NOK" } 
-        else if (currencydigit === 9) {return "ILS";}
-        else if (currencydigit === 10) {return "SEK"}
-        else if (currencydigit === 11) {return "THB"} 
-        else if (currencydigit === 12) {return "BRL"} 
-        else if (currencydigit === 13) {return "INR" }
-        else if (currencydigit === 14) {return "ZAR"}
-        else if (currencydigit === 14) {return "HKD"}
-        else if (currencydigit === 16) {return "JPY"}
-        else if (currencydigit === 17) {return "HUF"} 
-        else if (currencydigit === 18) {return "MXN"} 
-        else if (currencydigit === 19) {return "CNY"}
-        else if (currencydigit === 20) {return "AUD"} 
-        else if (currencydigit === 21) {return "PLN"} 
-        else if (currencydigit === 22) {return "GBP"} 
-        else if (currencydigit === 23) {return "TRY"}
-        else if (currencydigit === 24) {return "KRW"} 
-        else if (currencydigit === 25) {return "IDR"}
-        else if (currencydigit === 26) {return "NZD"} 
-        else if (currencydigit === 27) {return "MYR"} 
-        else if (currencydigit === 28) {return "BGN"} 
-        else if (currencydigit === 29) {return "EUR"}
-        else if (currencydigit === 31) {return "HRK"}
-        else if (currencydigit === 30) {return "CZK" }
+      if (currencydigit === 0) { return "USD" }
+      else if (currencydigit === 1) { return "PHP" }
+      else if (currencydigit === 2) { return "CHF" }
+      else if (currencydigit === 3) { return "SAD" }
+      else if (currencydigit === 4) { return "SGD" }
+      else if (currencydigit === 5) { return "RUB" }
+      else if (currencydigit === 6) { return "DKK" }
+      else if (currencydigit === 7) { return "RON" }
+      else if (currencydigit === 8) { return "NOK" }
+      else if (currencydigit === 9) { return "ILS"; }
+      else if (currencydigit === 10) { return "SEK" }
+      else if (currencydigit === 11) { return "THB" }
+      else if (currencydigit === 12) { return "BRL" }
+      else if (currencydigit === 13) { return "INR" }
+      else if (currencydigit === 14) { return "ZAR" }
+      else if (currencydigit === 14) { return "HKD" }
+      else if (currencydigit === 16) { return "JPY" }
+      else if (currencydigit === 17) { return "HUF" }
+      else if (currencydigit === 18) { return "MXN" }
+      else if (currencydigit === 19) { return "CNY" }
+      else if (currencydigit === 20) { return "AUD" }
+      else if (currencydigit === 21) { return "PLN" }
+      else if (currencydigit === 22) { return "GBP" }
+      else if (currencydigit === 23) { return "TRY" }
+      else if (currencydigit === 24) { return "KRW" }
+      else if (currencydigit === 25) { return "IDR" }
+      else if (currencydigit === 26) { return "NZD" }
+      else if (currencydigit === 27) { return "MYR" }
+      else if (currencydigit === 28) { return "BGN" }
+      else if (currencydigit === 29) { return "EUR" }
+      else if (currencydigit === 31) { return "HRK" }
+      else if (currencydigit === 30) { return "CZK" }
     },
   },
 });

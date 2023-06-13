@@ -3,7 +3,7 @@
 
     <div class="h-80 sm:w-40 md:w-48" @click="$router.replace({ name: 'MarketItem', params: { id: item.uuid } })" style="cursor: pointer">
 
-        <div class="rounded overflow-hidden border  text-center shadow-md sm:w-40 md:w-48 md:w-42 h-64 bg-neutral mt-5 ">
+        <div class="rounded overflow-hidden  text-center shadow-md sm:w-40 md:w-48 md:w-42 h-64 bg-neutral mt-5 ">
             <div class="flex justify-center w-full overflow-hidden h-48">
                 <div class="md:w-48 md:h-48 " v-if="item.image_one_url_250">
                     <img class="object-contain " :src="item.image_one_url_250" />
@@ -22,11 +22,11 @@
             <div class="flex justify-center pt-2">
             
                 <span v-if="item.digital_currency_1 === true"
-                    class="inline-block   px-3 py-1 text-sm font-semibold text-orange-500 mr-2 mb-2">BTC</span>
+                    class="inline-block   px-3 py-1 text-sm font-semibold mr-2 mb-2">BTC</span>
                 <span v-if="item.digital_currency_3 === true"
-                    class="inline-block   px-3 py-1 text-sm font-semibold text-orange-700 mr-2 mb-2">XMR</span>
+                    class="inline-block   px-3 py-1 text-sm font-semibold mr-2 mb-2">XMR</span>
                 <span v-if="item.digital_currency_2 === true"
-                    class="inline-block  px-2 py-1 text-sm font-semibold text-green-600 mr-2 mb-2">BCH</span>
+                    class="inline-block  px-2 py-1 text-sm font-semibold mr-2 mb-2">BCH</span>
             </div>
         </div>
     </div>

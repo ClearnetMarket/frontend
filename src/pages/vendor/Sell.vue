@@ -1,6 +1,5 @@
 
 <template>
-
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
@@ -15,7 +14,7 @@
         <ol class="list-reset flex">
           <li>
             <router-link :to="{ name: 'home' }">
-              <a class="text-blue-600 hover:text-blue-700">Home</a>
+              <a class="text-primary hover:text-primary ">Home</a>
             </router-link>
           </li>
           <li>
@@ -35,7 +34,7 @@
       selling today, and bring crypto ecommerce to your part of the world.
     </div>
     <div class="md:flex text-center gap-5">
-      <div class="flex-1 bg-neutral rounded-md border border-1 p-5">
+      <div class="flex-1 bg-neutral rounded-md  p-5">
         <div class="text-[20px]">No bullshit</div>
         <div class="flex mb-10 text-center">
           Selling without any hidden fees. No signup or annual fee. No paypal or
@@ -43,17 +42,17 @@
         </div>
       </div>
 
-      <div class="flex-1 bg-neutral rounded-md border border-1 p-5">
+      <div class="flex-1 bg-neutral rounded-md  p-5">
         <div class="text-[20px]">Privacy</div>
         <div class="flex mb-10 text-center">
           Sell with privacy. We don't store your personal information.
-           Sell with confidence that your
+          Sell with confidence that your
           information is never sold, distributed, or used without your
           knowledge.
         </div>
       </div>
 
-      <div class="flex-1 bg-neutral rounded-md border border-1 p-5">
+      <div class="flex-1 bg-neutral rounded-md p-5">
         <div class="text-[20px]">No banks</div>
         <div class="flex mb-10 text-center">
           Anyone anywhere can sell. No credit cards, banks, or third party
@@ -69,16 +68,18 @@
             <div class="flex text-white text-sm font-bold">
               I accept the terms of becoming a vendor
             </div>
+            <div class="flex gap-5">
             <router-link :to="{ name: 'policies' }">
-              <div class="text-blue-600 hover:text-blue-500 text-sm font-bold">
+              <div class="text-primary hover:text-blue-500 text-sm font-bold">
                 Vendor Agreement
               </div>
             </router-link>
-            <router-link :to="{ name: 'policies' }">
-              <div class="text-blue-600 hover:text-blue-500 text-sm font-bold">
+            <router-link :to="{ name: 'prohibited' }">
+              <div class="text-primary hover:text-blue-500 text-sm font-bold">
                 Prohibited Items
               </div>
             </router-link>
+            </div>
           </div>
           <div class="">
             <input type="checkbox" v-model="accept" name="acceptTerms" />
@@ -89,7 +90,7 @@
         </div>
         <div class="mt-5">
           <button
-            class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            class="bg-secondary hover:bg-primary text-white hover:text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             type="submit">
             Become Vendor
           </button>
@@ -151,7 +152,7 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
-      if ((response.data.login == true)) {
+        if ((response.data.login == true)) {
           this.user_admin = response.data.user.user_admin;
           if (this.user_admin == 1) {
             this.$router.push({ name: "forsale" });
@@ -196,7 +197,7 @@ export default defineComponent({
           type: "error",
         });
       } else {
-        
+
         this.becomevendor(payLoad);
       }
     },
@@ -204,6 +205,4 @@ export default defineComponent({
 });
 </script>
 
-<style>
-
-</style>
+<style></style>

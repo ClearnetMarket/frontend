@@ -12,7 +12,7 @@
                     <ol class="list-reset flex">
                         <li>
                             <router-link :to="{ name: 'home' }">
-                                <a class="text-blue-600 hover:text-blue-700">Home</a>
+                                <a class="text-primary hover:text-primary ">Home</a>
                             </router-link>
                         </li>
                         <li>
@@ -25,7 +25,7 @@
 
         <div class="grid grid-cols-12 gap-4">
             <div class="col-span-12 sm:col-span-12 md:col-span-3">
-               <CategoryList />
+                <CategoryList />
             </div>
             <div class="col-span-12 sm:col-span-12 md:col-span-9 ">
                 <div class="text-center text-[28px]">All Items</div>
@@ -66,6 +66,6 @@ export default defineComponent({
         }
     },
     mounted () { },
-    methods: { },
+    methods: {},
 })
 </script>

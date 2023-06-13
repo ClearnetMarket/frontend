@@ -9,7 +9,7 @@
         <ol class="list-reset flex">
           <li>
             <router-link :to="{ name: 'home' }">
-              <a class="text-blue-600 hover:text-blue-700">Home</a>
+              <a class="text-primary hover:text-primary ">Home</a>
             </router-link>
           </li>
           <li>
@@ -17,7 +17,7 @@
           </li>
           <li>
             <router-link :to="{ name: 'MsgHome' }">
-              <a class="text-blue-600 hover:text-blue-700">Message Center</a>
+              <a class="text-primary hover:text-primary ">Message Center</a>
             </router-link>
           </li>
           <li>
@@ -117,12 +117,12 @@ export default defineComponent({
     MainHeaderVendor,
     MainFooter,
   },
-  created(){
+  created () {
     this.userstatus();
   },
   mounted () {
     this.getmsgsofusers();
-   
+
   },
   data () {
     return {
@@ -147,10 +147,8 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if (response.data.login == true)
-           { this.user = response.data.user }
-          else 
-           { this.$router.push("/login") }
+          if (response.data.login == true) { this.user = response.data.user }
+          else { this.$router.push("/login") }
         })
         .catch(() => {
           this.$router.push("/login")
@@ -164,8 +162,8 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       })
-        .then((response) => {this.userlist = response.data })
-        .catch(() => {})
+        .then((response) => { this.userlist = response.data })
+        .catch(() => { })
     },
   },
 });

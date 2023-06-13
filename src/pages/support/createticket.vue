@@ -5,13 +5,13 @@
     <MainHeaderBottom />
     <div class="wrapper">
         <div v-if="user">
-            <div class="container max-w-5xl mx-auto px-10  mb-10 text-white">
+            <div class="container max-w-5xl mx-auto px-10  mb-10 ">
                 <div class="grid grid-cols-1 w-full gap-4 mb-5">
                     <nav class="rounded-md">
                         <ol class="list-reset flex">
                             <li>
                                 <router-link :to="{ name: 'home' }">
-                                    <a class="text-blue-600 hover:text-blue-700">Home</a>
+                                    <a class="text-primary hover:text-primary ">Home</a>
                                 </router-link>
                             </li>
                             <li>
@@ -19,7 +19,7 @@
                             </li>
                             <li>
                                 <router-link :to="{ name: 'supporthome' }">
-                                    <a class="text-blue-600 hover:text-blue-700">Customer Support</a>
+                                    <a class="text-primary hover:text-primary ">Customer Support</a>
                                 </router-link>
                             </li>
                             <li>
@@ -38,7 +38,7 @@
                                     <router-link class="col-span-12"
                                         :to="{ name: 'supportviewticket', params: { uuid: ticket.uuid } }">
                                         <div
-                                            class="col-span-12  hover:underline text-blue-600 hover:text-blue-500 text-[16px] overflow-hidden">
+                                            class="col-span-12  hover:underline text-primary hover:text-blue-500 text-[16px] overflow-hidden">
                                             {{ ticket.subject }}
                                         </div>
                                     </router-link>
@@ -73,26 +73,23 @@
                         <div class="text-[18px] mb-3 text-center">
                             Create a New Ticket
                         </div>
-
                         <form class="rounded-md pt-6 pb-8 mb-4 w-full bg-neutral p-5" @submit.prevent="onSubmit">
-                            <label class="block text-white text-sm font-bold mb-2">Subject</label>
-                            <input v-model="SendMsgForm.subject" class="shadow appearance-none border rounded w-full py-2 px-3 text-white
+                            <label class="block text-sm font-bold mb-2">Subject</label>
+                            <input v-model="SendMsgForm.subject" class="shadow appearance-none border rounded w-full py-2 px-3 text-black
                                 leading-tight focus:outline-none focus:shadow-outline" id="subject" type="text"
                                 placeholder="Enter a subject of your issue .." />
                             <span v-if="v$.SendMsgForm.subject.$error" class="text-red-600 text-center">
                                 {{ v$.SendMsgForm.subject.$errors[0].$message }}
                             </span>
-                            <label class="block text-white text-sm font-bold mb-2 mt-3">Issue</label>
+                            <label class="block text-sm font-bold mb-2 mt-3">Issue</label>
                             <textarea v-model="SendMsgForm.msginfo" id="item_description" placeholder="Write something .."
-                                class="shadow appearance-none border rounded w-full py-2 px-3
-                                    text-white leading-tight
-                                    focus:outline-none focus:shadow-outline mb-3">
+                                class="border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline mb-3 text-black">
                             </textarea>
                             <span v-if="v$.SendMsgForm.msginfo.$error" class="text-red-600 text-center">
                                 {{ v$.SendMsgForm.msginfo.$errors[0].$message }}
                             </span>
                             <div class="flex justify-end">
-                                <button class="bg-gray-600 hover:bg-zinc-400 text-white font-bold 
+                                <button class="bg-primary hover:bg-zinc-400  font-bold 
                                             py-2 px-4 rounded
                                             focus:outline-none focus:shadow-outline" type="submit">
                                     Create Ticket

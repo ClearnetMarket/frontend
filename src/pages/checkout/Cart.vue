@@ -1,6 +1,5 @@
 
 <template>
- 
   <div v-if="loaded">
     <MainHeaderTop />
     <MainHeaderMid />
@@ -9,247 +8,248 @@
       <MainHeaderVendor v-show="user.user_admin === 1" />
     </div>
     <div class="wrapper">
-    <div class="max-w-7xl mx-auto pb-36 ">
-      <div class="grid grid-cols-1 w-full gap-4 px-10 mb-5">
-        <div class="mt-5">
-          <nav class="rounded-md">
-            <ol class="list-reset flex">
-              <li>
-                <router-link :to="{ name: 'home' }">
-                  <a class="text-blue-600 hover:text-blue-700 ">Home</a>
-                </router-link>
-              </li>
-              <li>
-                <span class="text-gray-500 mx-2">/</span>
-              </li>
-            </ol>
-          </nav>
-        </div>
-      </div>
-      <div class="grid grid-cols-12 gap-4">
-        <div class="col-span-12 md:col-span-9 px-2">
-          <div class="grid grid-cols-4 border-b pb-8">
-            <div class="col-span-3 font-semibold text-2xl ">Shopping Cart</div>
-            <div class="col-span-1 col-start-4 font-semibold text-2xl">
-              {{ order_summary_count }} Items
-            </div>
+      <div class="max-w-7xl mx-auto pb-36 ">
+        <div class="grid grid-cols-1 w-full gap-4 px-10 mb-5">
+          <div class="mt-5">
+            <nav class="rounded-md">
+              <ol class="list-reset flex">
+                <li>
+                  <router-link :to="{ name: 'home' }">
+                    <a class="text-primary hover:text-primary ">Home</a>
+                  </router-link>
+                </li>
+                <li>
+                  <span class="text-gray-500 mx-2">/</span>
+                </li>
+              </ol>
+            </nav>
           </div>
-          <div v-if="order_summary_count > 0">
-            <div v-for="(item, index) in shopping_cart_items_list" :key="index">
-              <div v-if="item.title_of_item">
-                <div class="bg-neutral hover:bg-blue-300 p-2 rounded-md">
-                  <div class="grid grid-cols-12 px-1 py-1 gap-5">
-                    <!-- product -->
+        </div>
+        <div class="grid grid-cols-12 gap-4">
+          <div class="col-span-12 md:col-span-9 px-2">
+            <div class="grid grid-cols-4 border-b pb-8">
+              <div class="col-span-3 font-semibold text-2xl ">Shopping Cart</div>
+              <div class="col-span-1 col-start-4 font-semibold text-2xl">
+                {{ order_summary_count }} Items
+              </div>
+            </div>
+            <div v-if="order_summary_count > 0">
+              <div v-for="(item, index) in shopping_cart_items_list" :key="index">
+                <div v-if="item.title_of_item">
+                  <div class="bg-neutral hover:bg-secondary p-2 rounded-md">
+                    <div class="grid grid-cols-12 px-1 py-1 gap-5">
+                      <!-- product -->
 
+                      <div class="col-span-3">
+                        <img class="h-24" :src="item.image_of_item" alt="" />
+                      </div>
+                      <div class="col-span-7">
+                        <div class="grid grid-cols-12 ">
+                          <div class="col-span-12 font-bold text-[18px]">
+                            {{ item.title_of_item }}
+                          </div>
+                          <div class="col-span-12 font-bold text-[18px] py-1">
+                            <span class="text-primary hover:text-blue-300 text-xs ">
+                              <div v-if="item.vendor_uuid">
+                                <router-link :to="{
+                                  name: 'userprofile',
+                                  params: { uuid: item.vendor_uuid },
+                                }">
+                                  Sold by: {{ item.vendor_user_name }}
+                                </router-link>
+                              </div>
+                            </span>
+                          </div>
+                          <div class="col-span-12 font-bold text-[18px] py-1 text-black">
+                            <select @change="itemamount($event, item)" v-model="item.quantity_of_item">
+                              <option value="1">1</option>
+                              <option value="2" v-if="item.vendor_supply >= 2">
+                                2
+                              </option>
+                              <option value="3" v-if="item.vendor_supply >= 3">
+                                3
+                              </option>
+                              <option value="4" v-if="item.vendor_supply >= 4">
+                                4
+                              </option>
+                              <option value="5" v-if="item.vendor_supply >= 5">
+                                5
+                              </option>
+                              <option value="6" v-if="item.vendor_supply >= 6">
+                                6
+                              </option>
+                              <option value="7" v-if="item.vendor_supply >= 7">
+                                7
+                              </option>
+                              <option value="8" v-if="item.vendor_supply >= 8">
+                                8
+                              </option>
+                              <option value="9" v-if="item.vendor_supply >= 9">
+                                9
+                              </option>
+                              <option value="10" v-if="item.vendor_supply >= 10">
+                                10
+                              </option>
+                            </select>
+                          </div>
+
+                          <div class="col-span-12 font-bold text-[18px] py-1 text-black">
+                            <select @change="selectedshipping($event, item)" :key="item.id"
+                              v-model="item.selected_shipping">
+                              <option value="1" v-if="item.shipping_free === true">
+                                {{ item.shipping_info_0 }}
+                              </option>
+                              <option value="2" v-if="item.shipping_two === true">
+                                {{ item.shipping_info_2 }}
+                              </option>
+                              <option value="3" v-if="item.shipping_three === true">
+                                {{ item.shipping_info_3 }}
+                              </option>
+                            </select>
+                          </div>
+                          <div class="col-span-12 font-bold text-[18px] py-1">
+                            <div class="flex">
+                              <div class="">
+                                <a @click="deleteitem(item)" href="#"
+                                  class="font-semibold hover:text-red-500 text-gray-500 text-xs">Remove</a>
+                              </div>
+                              <div class="px-5">
+                                <a @click.prevent="saveforlateritem(item)" href="#"
+                                  class="font-semibold hover:text-red-500 text-gray-500 text-xs">Save For Later</a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-span-2 text-right text-[18px] p-5">
+                        <span class="font-semibold"> {{ item.price_of_item }}{{ returncurrencysymbol(item.currency)
+                        }}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div v-else>
+              <div class="hover:bg-blue-300">
+                <div class="grid grid-cols-1 px-1 py-1">
+                  <div class="text-[20px] text-center">
+                    No Items in your shopping cart!
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="grid grid-cols-4 pb-8 mt-10 border-t">
+              <div class="col-span-12 font-semibold text-lg">Saved for Later</div>
+            </div>
+
+            <div v-if="shopping_cart_items_saved_list">
+              <div v-for="item in shopping_cart_items_saved_list">
+                <div class="hover:bg-blue-300 bg-neutral">
+                  <div class="grid grid-cols-12 px-1 py-1">
+                    <!-- product -->
                     <div class="col-span-3">
                       <img class="h-24" :src="item.image_of_item" alt="" />
                     </div>
                     <div class="col-span-7">
-                      <div class="grid grid-cols-12 ">
+                      <div class="grid grid-cols-12">
                         <div class="col-span-12 font-bold text-[18px]">
                           {{ item.title_of_item }}
                         </div>
                         <div class="col-span-12 font-bold text-[18px] py-1">
-                          <span class="text-blue-600 hover:text-blue-300 text-xs ">
-                            <div v-if="item.vendor_uuid">
-                              <router-link :to="{
-                                name: 'userprofile',
-                                params: { uuid: item.vendor_uuid },
-                              }">
-                                Sold by: {{ item.vendor_user_name }}
-                              </router-link>
-                            </div>
+                          <span class="text-white text-xs">
+                            Sold by: {{ item.vendor_user_name }}
                           </span>
                         </div>
-                        <div class="col-span-12 font-bold text-[18px] py-1">
-                          <select @change="itemamount($event, item)" v-model="item.quantity_of_item">
-                            <option value="1">1</option>
-                            <option value="2" v-if="item.vendor_supply >= 2">
-                              2
-                            </option>
-                            <option value="3" v-if="item.vendor_supply >= 3">
-                              3
-                            </option>
-                            <option value="4" v-if="item.vendor_supply >= 4">
-                              4
-                            </option>
-                            <option value="5" v-if="item.vendor_supply >= 5">
-                              5
-                            </option>
-                            <option value="6" v-if="item.vendor_supply >= 6">
-                              6
-                            </option>
-                            <option value="7" v-if="item.vendor_supply >= 7">
-                              7
-                            </option>
-                            <option value="8" v-if="item.vendor_supply >= 8">
-                              8
-                            </option>
-                            <option value="9" v-if="item.vendor_supply >= 9">
-                              9
-                            </option>
-                            <option value="10" v-if="item.vendor_supply >= 10">
-                              10
-                            </option>
-                          </select>
-                        </div>
 
-                        <div class="col-span-12 font-bold text-[18px] py-1">
-                          <select @change="selectedshipping($event, item)" :key="item.id"
-                            v-model="item.selected_shipping">
-                            <option value="1" v-if="item.shipping_free === true">
-                              {{ item.shipping_info_0 }}
-                            </option>
-                            <option value="2" v-if="item.shipping_two === true">
-                              {{ item.shipping_info_2 }}
-                            </option>
-                            <option value="3" v-if="item.shipping_three === true">
-                              {{ item.shipping_info_3 }}
-                            </option>
-                          </select>
-                        </div>
                         <div class="col-span-12 font-bold text-[18px] py-1">
                           <div class="flex">
                             <div class="">
-                              <a @click="deleteitem(item)" href="#"
+                              <a @click.prevent="deleteitem(item)" href="#"
                                 class="font-semibold hover:text-red-500 text-gray-500 text-xs">Remove</a>
                             </div>
                             <div class="px-5">
-                              <a @click.prevent="saveforlateritem(item)" href="#"
-                                class="font-semibold hover:text-red-500 text-gray-500 text-xs">Save For Later</a>
+                              <a @click.prevent="movetocartitem(item)" href="#"
+                                class="font-semibold hover:text-red-500 text-gray-500 text-xs">Move to Cart</a>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                    <div class="col-span-2 text-right text-[18px] p-5">
-                      <span class="font-semibold">   {{ item.price_of_item }}{{ returncurrencysymbol (item.currency) }}</span>
+                    <div class="col-span-2 text-right">
+                      <span class="font-semibold">
+                        {{ item.price_of_item }}{{ returncurrencysymbol(item.currency) }}</span>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div v-else>
-            <div class="hover:bg-blue-300">
-              <div class="grid grid-cols-1 px-1 py-1">
-                <div class="text-[20px] text-center">
-                  No Items in your shopping cart!
+            <div v-else>
+              <div class="hover:bg-gray-300">
+                <div class="grid grid-cols-1 px-1 py-1">
+                  <div class="text-[20px] text-center">No saved items!</div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="grid grid-cols-4 pb-8 mt-10 border-t">
-            <div class="col-span-12 font-semibold text-lg">Saved for Later</div>
-          </div>
 
-          <div v-if="shopping_cart_items_saved_list">
-            <div v-for="item in shopping_cart_items_saved_list">
-              <div class="hover:bg-blue-300 bg-neutral">
-                <div class="grid grid-cols-12 px-1 py-1">
-                  <!-- product -->
-                  <div class="col-span-3">
-                    <img class="h-24" :src="item.image_of_item" alt="" />
-                  </div>
-                  <div class="col-span-7">
-                    <div class="grid grid-cols-12">
-                      <div class="col-span-12 font-bold text-[18px]">
-                        {{ item.title_of_item }}
-                      </div>
-                      <div class="col-span-12 font-bold text-[18px] py-1">
-                        <span class="text-white text-xs">
-                          Sold by: {{ item.vendor_user_name }}
-                        </span>
-                      </div>
-
-                      <div class="col-span-12 font-bold text-[18px] py-1">
-                        <div class="flex">
-                          <div class="">
-                            <a @click.prevent="deleteitem(item)" href="#"
-                              class="font-semibold hover:text-red-500 text-gray-500 text-xs">Remove</a>
-                          </div>
-                          <div class="px-5">
-                            <a @click.prevent="movetocartitem(item)" href="#"
-                              class="font-semibold hover:text-red-500 text-gray-500 text-xs">Move to Cart</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-span-2 text-right">
-                    <span class="font-semibold">
-                      {{ item.price_of_item }}{{ returncurrencysymbol (item.currency) }}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div v-else>
-            <div class="hover:bg-gray-300">
-              <div class="grid grid-cols-1 px-1 py-1">
-                <div class="text-[20px] text-center">No saved items!</div>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="col-span-12 md:col-span-3 px-8  rounded-md  bg-neutral">
-          <div v-if="order_summary_count > 0">
-            <div class="grid grid-cols-1">
-              <div class="col-span-1">
-                <h1 class="font-semibold text-2xl border-b pb-8">Order Summary</h1>
-              </div>
-              <div class="mb-5">
+          <div class="col-span-12 md:col-span-3 px-8  rounded-md  bg-neutral">
+            <div v-if="order_summary_count > 0">
+              <div class="grid grid-cols-1">
                 <div class="col-span-1">
-                  <span class="font-semibold text-sm uppercase">Items {{ order_summary_count }}</span>
+                  <h1 class="font-semibold text-2xl border-b pb-8">Order Summary</h1>
                 </div>
-              </div>
-              <div>
-                <div class="col-span-12">
-                  <label class="font-medium inline-block mb-3 text-sm uppercase">Item Cost: {{ order_summary_cost }} {{
-                    returncurrencysymbol (user.currency)
-                  }}</label>
-                </div>
-                <div class="col-span-12">
-                  <div v-if="order_summary_shipping_cost === 0">
-                    <div v-if="order_summary_count > 0">
-                      <div class="text-blue-600 font-bold">Free Shipping</div>
-                    </div>
+                <div class="mb-5">
+                  <div class="col-span-1">
+                    <span class="font-semibold text-sm uppercase">Items {{ order_summary_count }}</span>
                   </div>
-                  <div v-else>
-                    <label class="font-medium inline-block mb-3 text-sm uppercase">Shipping: {{
-                      order_summary_shipping_cost
+                </div>
+                <div>
+                  <div class="col-span-12">
+                    <label class="font-medium inline-block mb-3 text-sm uppercase">Item Cost: {{ order_summary_cost }} {{
+                      returncurrencysymbol(user.currency)
                     }}</label>
                   </div>
-                </div>
-              </div>
-              <div class="col-span-1">
-                <div class="border-t mt-8">
-                  <div class="font-semibold py-6 text-sm uppercase">
-                    <span>Total cost {{ order_summary_shipping_and_price_cost }} {{
-                      returncurrencysymbol (user.currency)
-                    }}</span>
+                  <div class="col-span-12">
+                    <div v-if="order_summary_shipping_cost === 0">
+                      <div v-if="order_summary_count > 0">
+                        <div class="text-primary font-bold">Free Shipping</div>
+                      </div>
+                    </div>
+                    <div v-else>
+                      <label class="font-medium inline-block mb-3 text-sm uppercase">Shipping: {{
+                        order_summary_shipping_cost
+                      }}</label>
+                    </div>
                   </div>
-                  <router-link :to="{ name: 'checkout' }">
-                    <button v-if="order_summary_count > 0"
-                      class="bg-yellow-500 font-semibold hover:bg-yellow-600 py-3 text-sm text-white uppercase w-full rounded-md">
-                      Checkout
-                    </button>
-                  </router-link>
+                </div>
+                <div class="col-span-1">
+                  <div class="border-t mt-8">
+                    <div class="font-semibold py-6 text-sm uppercase">
+                      <span>Total cost {{ order_summary_shipping_and_price_cost }} {{
+                        returncurrencysymbol(user.currency)
+                      }}</span>
+                    </div>
+                    <router-link :to="{ name: 'checkout' }">
+                      <button v-if="order_summary_count > 0"
+                        class="bg-primary font-semibold hover:bg-primary py-3 text-sm text-white uppercase w-full rounded-md">
+                        Checkout
+                      </button>
+                    </router-link>
 
-                  <div class="text-black bg-blue-300 mt-5 mb-5 text-center font-bold">
-                    Crypto Prices will be calculated on next page
+                    <div class="text-white bg-secondary mt-5 mb-5 text-center font-bold">
+                      Crypto Prices will be calculated on Checkout
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div v-else>
-            <h1 class="font-semibold text-[16px] text-center text-white">Add Items to your cart to checkout</h1>
+            <div v-else>
+              <h1 class="font-semibold text-[16px] text-center text-white">Add Items to your cart to checkout</h1>
+            </div>
           </div>
         </div>
       </div>
-    </div>
     </div>
     <MainFooter />
   </div>
@@ -293,7 +293,7 @@ export default defineComponent({
       order_summary_shipping_and_price_cost: "",
     };
   },
-  created(){
+  created () {
     this.userstatus();
   },
   mounted () {
@@ -312,7 +312,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-      if (response.data.login == true) {
+          if (response.data.login == true) {
             this.user = response.data.user;
           }
         })
@@ -330,7 +330,7 @@ export default defineComponent({
         .then((response) => {
           if (response.data.success) { }
         })
-        .catch((error) => {});
+        .catch((error) => { });
     },
     // gets the items in the shopping cart
     get_shopping_cart_items () {
@@ -340,8 +340,8 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if (response.data.error) {this.shopping_cart_items_list = null}
-          else {this.shopping_cart_items_list = response.data}
+          if (response.data.error) { this.shopping_cart_items_list = null }
+          else { this.shopping_cart_items_list = response.data }
         })
         .catch(() => {
           this.shopping_cart_items_list = null;
@@ -356,8 +356,8 @@ export default defineComponent({
       })
         .then((response) => {
 
-            if (response.data.error) {this.shopping_cart_items_saved_list = null}
-            else {this.shopping_cart_items_saved_list = response.data}
+          if (response.data.error) { this.shopping_cart_items_saved_list = null }
+          else { this.shopping_cart_items_saved_list = response.data }
 
         })
         .catch(() => {

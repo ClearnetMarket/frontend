@@ -7,33 +7,33 @@
                         <div class="pb-2">
                             <div class="dropdown">
                                 <button
-                                    class="hover:bg-gray-600 text-white hover:text-white py-1 pt-3 rounded focus:outline-none focus:shadow-outline font-bold">
+                                    class="hover:bg-secondary text-white hover:text-white py-1 pt-3 rounded focus:outline-none focus:shadow-outline font-bold px-5">
                                     Categories
                                 </button>
                                 <ul tabindex="0"
                                     class="dropdown-content menu p-2 shadow bg-neutral rounded-box w-52 text-white text-left ">
-                                    <li class="text-white hover:bg-accent hover:font-bold hover:text-black"><a
+                                    <li class="text-white hover:bg-secondary hover:font-bold hover:text-black"><a
                                             @click="gotourl('categoryelectronics')"> Electronics </a></li>
-                                    <li class="text-white hover:bg-accent hover:font-bold hover:text-black"><a
+                                    <li class="text-white hover:bg-secondary hover:font-bold hover:text-black"><a
                                             @click="gotourl('categorycomputers')"> Computers and Parts </a></li>
-                                    <li class="text-white hover:bg-accent hover:font-bold hover:text-black"><a
+                                    <li class="text-white hover:bg-secondary hover:font-bold hover:text-black"><a
                                             @click="gotourl('categorysmartphones')">Smart Phones and Accessories</a> </li>
-                                    <li class="text-white hover:bg-accent hover:font-bold hover:text-black"><a
+                                    <li class="text-white hover:bg-secondary hover:font-bold hover:text-black"><a
                                             @click="gotourl('categoryautomotive')">Automotive </a></li>
-                                    <li class="text-white hover:bg-accent hover:font-bold hover:text-black"><a
+                                    <li class="text-white hover:bg-secondary hover:font-bold hover:text-black"><a
                                             @click="gotourl('categoryhobbies')">Hobbies and Collectibles</a></li>
-                                    <li class="text-white hover:bg-accent hover:font-bold hover:text-black"><a
+                                    <li class="text-white hover:bg-secondary hover:font-bold hover:text-black"><a
                                             @click="gotourl('categoryjewelrygold')"> Jewelry Precious Metals and Coins</a>
                                     </li>
-                                    <li class="text-white hover:bg-accent hover:font-bold hover:text-black"><a
+                                    <li class="text-white hover:bg-secondary hover:font-bold hover:text-black"><a
                                             @click="gotourl('categoryapparel')"> Apparel </a></li>
-                                    <li class="text-white hover:bg-accent hover:font-bold hover:text-black"><a
+                                    <li class="text-white hover:bg-secondary hover:font-bold hover:text-black"><a
                                             @click="gotourl('categoryhomeandgarden')"> Home and Garden </a></li>
-                                    <li class="text-white hover:bg-accent hover:font-bold hover:text-black"><a
+                                    <li class="text-white hover:bg-secondary hover:font-bold hover:text-black"><a
                                             @click="gotourl('categoryart')"> Arts and Crafts </a></li>
-                                    <li class="text-white hover:bg-accent hover:font-bold hover:text-black"><a
+                                    <li class="text-white hover:bg-secondary hover:font-bold hover:text-black"><a
                                             @click="gotourl('categorybooksandmovies')"> Books and Movies </a></li>
-                                    <li class="text-white hover:bg-accent hover:font-bold hover:text-black"><a
+                                    <li class="text-white hover:bg-secondary hover:font-bold hover:text-black"><a
                                             @click="gotourl('categorydigital')"> Digital Items </a></li>
                                 </ul>
                             </div>
@@ -45,7 +45,7 @@
                         <div class="sm:col-span-12 sm:invisible sm:h-0 md:visible md:h-auto md:col-span-2">
                             <div class=" md:pt-2 text-[13px] font-bold">
                                 <router-link :to="{ name: 'wallet' }" class="px-3">
-                                    <button class="bg-accent hover:bg-yellow-500 text-black font-bold py-1 px-3
+                                    <button class="bg-secondary hover:bg-zinc-700 text-white font-bold py-1 px-3
                                                                 rounded focus:outline-none focus:shadow-outline">
                                         Wallets
                                     </button>
@@ -59,10 +59,10 @@
                                         <div class=" text-[14px] font-bold">
                                             <div class="text-white">BTC</div>
 
-                                            <div class="break-normal text-red-600" v-if="btcpricechange == 0">
+                                            <div class="break-normal text-warning" v-if="btcpricechange == 0">
                                                 {{ btcprice }} {{ returncurrency(user.currency) }}
                                             </div>
-                                            <div class="break-normal text-green-600" v-if="btcpricechange == 1">
+                                            <div class="break-normal text-success" v-if="btcpricechange == 1">
                                                 {{ btcprice }} {{ returncurrency(user.currency) }}
                                             </div>
                                         </div>
@@ -70,10 +70,10 @@
                                     <div v-else>
                                         <div class=" text-[14px] font-bold">
                                             <div class="text-white">BTC</div>
-                                            <div class="break-normal text-red-600" v-if="btcpricechange == 0">
+                                            <div class="break-normal text-warning" v-if="btcpricechange == 0">
                                                 {{ btcprice }} USD
                                             </div>
-                                            <div class="break-normal text-green-600" v-if="btcpricechange == 1">
+                                            <div class="break-normal text-success" v-if="btcpricechange == 1">
                                                 {{ btcprice }} USD
                                             </div>
                                         </div>
@@ -83,10 +83,10 @@
                                     <div v-if="user">
                                         <div class=" text-[14px] font-bold">
                                             <div class="text-white">BCH</div>
-                                            <div class="break-normal text-red-600" v-if="bchpricechange == 0">
+                                            <div class="break-normal text-warning" v-if="bchpricechange == 0">
                                                 {{ bchprice }} {{ returncurrency(user.currency) }}
                                             </div>
-                                            <div class="break-normal text-green-600" v-if="bchpricechange == 1">
+                                            <div class="break-normal text-success" v-if="bchpricechange == 1">
                                                 {{ bchprice }} {{ returncurrency(user.currency) }}
                                             </div>
                                         </div>
@@ -94,10 +94,10 @@
                                     <div v-else>
                                         <div class=" text-[14px] font-bold">
                                             <div class="text-white">BCH</div>
-                                            <div class="break-normal text-red-600" v-if="bchpricechange == 0">
+                                            <div class="break-normal text-warning" v-if="bchpricechange == 0">
                                                 {{ bchprice }} USD
                                             </div>
-                                            <div class="break-normal text-green-600" v-if="bchpricechange == 1">
+                                            <div class="break-normal text-success" v-if="bchpricechange == 1">
                                                 {{ bchprice }} USD
                                             </div>
                                         </div>
@@ -107,10 +107,10 @@
                                     <div v-if="user">
                                         <div class=" text-[14px] font-bold">
                                             <div class="text-white">XMR</div>
-                                            <div class="break-normal text-red-600" v-if="xmrpricechange == 0">
+                                            <div class="break-normal text-warning" v-if="xmrpricechange == 0">
                                                 {{ xmrprice }} {{ returncurrency(user.currency) }}
                                             </div>
-                                            <div class="break-normal text-green-600" v-if="xmrpricechange == 1">
+                                            <div class="break-normal text-success" v-if="xmrpricechange == 1">
                                                 {{ xmrprice }} {{ returncurrency(user.currency) }}
                                             </div>
                                         </div>
@@ -118,10 +118,10 @@
                                     <div v-else>
                                         <div class=" text-[14px] font-bold">
                                             <div class="text-white">XMR</div>
-                                            <div class="break-normal text-red-600" v-if="xmrpricechange == 0">
+                                            <div class="break-normal text-warning" v-if="xmrpricechange == 0">
                                                 {{ xmrprice }} USD
                                             </div>
-                                            <div class="break-normal text-green-600" v-if="xmrpricechange == 1">
+                                            <div class="break-normal text-success" v-if="xmrpricechange == 1">
                                                 {{ xmrprice }} USD
                                             </div>
                                         </div>

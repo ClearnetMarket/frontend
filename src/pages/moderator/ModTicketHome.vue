@@ -11,7 +11,7 @@
                     <ol class="list-reset flex">
                         <li>
                             <router-link :to="{ name: 'home' }">
-                                <a class="text-blue-600 hover:text-blue-700">Home</a>
+                                <a class="text-primary hover:text-primary ">Home</a>
                             </router-link>
                         </li>
                         <li>
@@ -19,7 +19,7 @@
                         </li>
                         <li>
                             <router-link :to="{ name: 'ModHome' }">
-                                <a class="text-blue-600 hover:text-blue-700">Mod Home</a>
+                                <a class="text-primary hover:text-primary ">Mod Home</a>
                             </router-link>
                         </li>
                         <li>
@@ -35,13 +35,13 @@
                     <div class="bg-neutral rounded-md p-3">
                         <div class="text-[20px] font-bold ">Admin Navigation</div>
                         <router-link :to="{ name: 'ModHome' }">
-                            <div class="hover:underline text-blue-600 hover:text-blue-700 my-5">Mod Home</div>
+                            <div class="hover:underline text-primary hover:text-primary my-5">Mod Home</div>
                         </router-link>
                         <router-link :to="{ name: 'ModTicketsHome' }">
-                            <div class="hover:underline text-blue-600 hover:text-blue-700 my-5">Tickets</div>
+                            <div class="hover:underline text-primary hover:text-primary my-5">Tickets</div>
                         </router-link>
                         <router-link :to="{ name: 'ModDisputeHome' }">
-                            <div class="hover:underline text-blue-600 hover:text-blue-700 my-5">Disputes</div>
+                            <div class="hover:underline text-primary hover:text-primary my-5">Disputes</div>
                         </router-link>
                     </div>
                 </div>
@@ -52,11 +52,12 @@
                         <div class="col-span-12 sm:col-span-12 ">
                             <div v-if="all_tickets.length > 0">
                                 <div v-for="ticket in all_tickets" :key="ticket.id">
-                                    <div class="grid grid-cols-12 border-b-2 border-gray-400  bg-neutral mb-5 p-5 rounded-md">
+                                    <div
+                                        class="grid grid-cols-12 border-b-2 border-gray-400  bg-neutral mb-5 p-5 rounded-md">
                                         <router-link class="col-span-12"
                                             :to="{ name: 'ModTicket', params: { uuid: ticket.uuid } }">
                                             <div
-                                                class="col-span-12  text-blue-600 hover:underline hover:text-blue-500 text-[16px] overflow-hidden">
+                                                class="col-span-12  text-primary hover:underline hover:text-blue-500 text-[16px] overflow-hidden">
                                                 {{ ticket.subject }}
                                             </div>
                                         </router-link>
@@ -83,7 +84,8 @@
                                             <div class="">
                                                 <div class="text-red-600 font-bold" v-if="ticket.status == 0">Closed</div>
                                                 <div class="text-green-600 font-bold" v-if="ticket.status == 1">Open</div>
-                                                <div class="text-orange-600 font-bold" v-if="ticket.status == 2">New Message</div>
+                                                <div class="text-orange-600 font-bold" v-if="ticket.status == 2">New Message
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -136,7 +138,7 @@ export default defineComponent({
             stats_completed: 0,
         };
     },
-    created(){
+    created () {
         this.userstatus();
     },
     mounted () {
@@ -145,7 +147,7 @@ export default defineComponent({
             this.get_all_tickets();
         }, 30000);
     },
-    beforeDestroy  () {
+    beforeDestroy () {
         clearInterval(this.interval)
     },
     methods: {
@@ -161,10 +163,10 @@ export default defineComponent({
                 headers: authHeader(),
             })
                 .then((response) => {
-                   if ((response.data.login == true)) {
+                    if ((response.data.login == true)) {
                         this.user = response.data.user;
                         if (this.user.user_admin !== 10) {
-                         
+
                         }
                     }
                 })

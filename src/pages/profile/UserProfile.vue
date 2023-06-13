@@ -1,6 +1,5 @@
 
 <template>
-
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
@@ -10,7 +9,7 @@
         <ol class="list-reset flex">
           <li>
             <router-link :to="{ name: 'home' }">
-              <a class="text-blue-600 hover:text-blue-700">Home</a>
+              <a class="text-primary hover:text-primary ">Home</a>
             </router-link>
           </li>
           <li>
@@ -25,22 +24,22 @@
             <div class="grid grid-cols-12 mb-5 rounded-md gap-4 w-full p-5 bg-neutral">
               <div class="col-span-12 ">
                 <div v-if="user">
-                  <router-link v-if="user.user_id == userprofile.uuid" :to="{ name: 'editprofile' }" 
-                  class="text-blue-600 hover:text-blue-700"> Edit
+                  <router-link v-if="user.user_id == userprofile.uuid" :to="{ name: 'editprofile' }"
+                    class="text-primary hover:text-primary"> Edit
                     Profile
                   </router-link>
                 </div>
-              
+
               </div>
               <div class="col-span-12 md:col-span-3 flex justify-center">
-                <img class="object-fit" :src="userprofile.profileimage_url_250" >
+                <img class="object-fit" :src="userprofile.profileimage_url_250">
               </div>
               <div class="col-span-12 md:col-span-9">
                 <div class="text-[20px] text-center">{{ userprofile.display_name }}</div>
                 <div class=" text-center  mb-5">
-                  Member Since: {{ relativeDate (userprofile.member_since) }} ago
+                  Member Since: {{ relativeDate(userprofile.member_since) }} ago
                 </div>
-               
+
 
                 <div v-if="userprofile.admin_role === 1" class=" ">
 
@@ -67,17 +66,15 @@
           </div>
 
           <div class="grid grid-cols-12 gap-4 text-white pb-36">
-
             <div class="col-span-12">
               <div v-if="userprofile.admin_role == 1">
-
                 <div v-if="vendor_reviews_total > 0">
                   <div v-for="review in vendorreviews" :key="review.id">
                     <div class="grid grid-cols-12 bg-neutral rounded-md p-5 mb-2">
                       <div class="col-span-12 text-sm font-medium text-gray-500 dark:text-gray-400">
                         {{ review.customer_name }}
                       </div>
-                      <div class="col-span-12  text-blue-600 hover:text-blue-600 hover:underline text-[14px]">
+                      <div class="col-span-12 text-white hover:text-accent hover:underline text-[14px]">
                         <router-link :to="{
                           name: 'MarketItem',
                           params: { id: review.item_uuid },
@@ -86,7 +83,7 @@
                         </router-link>
                       </div>
                       <div class="col-span-12 text-sm font-medium text-gray-500 dark:text-gray-400">
-                        Date Purchased: {{ relativeDate (review.timestamp) }}
+                        Date Purchased: {{ relativeDate(review.timestamp) }}
                       </div>
                       <div class="col-span-12 mb-2">
                         <StarRating v-bind:rating="review.vendor_rating" />
@@ -110,7 +107,7 @@
                         </router-link>
                       </div>
                       <div class="col-span-12 text-sm font-medium text-gray-500 dark:text-gray-400">
-                        Date Purchased: {{ relativeDate (review.timestamp) }}
+                        Date Purchased: {{ relativeDate(review.timestamp) }}
                       </div>
                       <div class="col-span-12 mb-2">
                         <StarRating v-bind:rating="review.customer_rating" />
@@ -121,14 +118,14 @@
                 </div>
               </div>
             </div>
-               <div class="col-span-12 mb-10" v-if="recordsLength > 9">
-                    <pagination @paginate="getPage" :records="recordsLength" v-model="page" :per-page="perPage"
-                      :options="options"> </pagination>
-                    <div class="flex justify-center mb-10"> {{ recordsLength }} items Found</div>
-                  </div>
-                  <div class="col-span-12 flex justify-center" v-else>{{ recordsLength }} items</div>
+            <div class="col-span-12 mb-10" v-if="recordsLength > 9">
+              <pagination @paginate="getPage" :records="recordsLength" v-model="page" :per-page="perPage"
+                :options="options"> </pagination>
+              <div class="flex justify-center mb-10"> {{ recordsLength }} items Found</div>
+            </div>
+            <div class="col-span-12 flex justify-center" v-else>{{ recordsLength }} items</div>
           </div>
-        </div>     
+        </div>
       </div>
     </div>
   </div>
@@ -194,7 +191,7 @@ export default defineComponent({
       vendor_reviews_total: 0,
       userreviews: [],
       vendorreviews: [],
-      
+
       page: 1,
       perPage: 10,
       recordsLength: 0,
@@ -236,7 +233,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-        if (response.data.login == true) {
+          if (response.data.login == true) {
             this.user = response.data.user;
           }
         })
@@ -258,17 +255,17 @@ export default defineComponent({
         method: "get",
         url: "/info/user-info/" + this.user_uuid,
         withCredentials: true,
-    
+
       }).then((response) => {
-          this.userprofile = response.data;
-          this.userprofile.profileimage = response.data.profileimage;
-          this.userprofile.display_name = response.data.display_name;
-          this.userprofile.member_since = response.data.member_since;
-          this.userprofile.bio = response.data.bio;
-          this.userprofile.admin_role = response.data.admin_role;
-          this.userprofile.vendor_name = response.data.vendor_name;
-          this.userprofile.customer_rating = response.data.customer_rating;
-          this.userprofile.profileimage_url_250 = response.data.profileimage_url_250;
+        this.userprofile = response.data;
+        this.userprofile.profileimage = response.data.profileimage;
+        this.userprofile.display_name = response.data.display_name;
+        this.userprofile.member_since = response.data.member_since;
+        this.userprofile.bio = response.data.bio;
+        this.userprofile.admin_role = response.data.admin_role;
+        this.userprofile.vendor_name = response.data.vendor_name;
+        this.userprofile.customer_rating = response.data.customer_rating;
+        this.userprofile.profileimage_url_250 = response.data.profileimage_url_250;
       })
     },
     getuserstats () {
@@ -278,8 +275,8 @@ export default defineComponent({
         withCredentials: true,
 
       }).then((response) => {
-          this.user_stats = response.data;
-          this.user_stats.total_items_bought = response.data.total_items_bought;
+        this.user_stats = response.data;
+        this.user_stats.total_items_bought = response.data.total_items_bought;
       });
     },
     getvendorstats () {
@@ -287,9 +284,9 @@ export default defineComponent({
         method: "get",
         url: "/info/vendor-stats/" + this.user_uuid,
         withCredentials: true,
-   
+
       }).then((response) => {
-          this.vendor_stats = response.data
+        this.vendor_stats = response.data
       });
     },
     getusercountryandcurrency () {
@@ -297,7 +294,7 @@ export default defineComponent({
         method: "get",
         url: "/info/country-currency/" + this.user_uuid,
         withCredentials: true,
-     
+
       }).then((response) => {
         if (response.data.success) {
           this.currencydefault = response.data.currency;
@@ -315,19 +312,18 @@ export default defineComponent({
         withCredentials: true,
       })
         .then((response) => {
-            this.userreviews = response.data;
-            if (this.userreviews == undefined)
-            {this.userreviews = null}
+          this.userreviews = response.data;
+          if (this.userreviews == undefined) { this.userreviews = null }
         })
         .catch(() => { });
     },
-        // gets the vendor reviews
+    // gets the vendor reviews
     getvendorreviewscount () {
       axios({
         method: "get",
         url: "/vendor/vendor-feedback/count/" + this.user_uuid,
         withCredentials: true,
-  
+
       })
         .then((response) => {
           this.recordsLength = response.data.count;
@@ -340,10 +336,10 @@ export default defineComponent({
         method: "get",
         url: "/vendor/all-feedback/" + this.user_uuid,
         withCredentials: true,
-        
+
       })
         .then((response) => {
-          {this.vendor_reviews_total = response.data.total_feedback}
+          { this.vendor_reviews_total = response.data.total_feedback }
         })
         .catch((error) => {
           console.log(error)
@@ -357,10 +353,10 @@ export default defineComponent({
         withCredentials: true,
       })
         .then((response) => {
-            this.vendorreviews = response.data;
-            if (this.vendorreviews == undefined) {
-              this.vendorreviews = null;
-            }
+          this.vendorreviews = response.data;
+          if (this.vendorreviews == undefined) {
+            this.vendorreviews = null;
+          }
         })
         .catch(() => {
           console.log()

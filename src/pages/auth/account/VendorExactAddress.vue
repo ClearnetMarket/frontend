@@ -16,7 +16,7 @@
           <ol class="list-reset flex">
             <li>
               <router-link :to="{ name: 'home' }">
-                <a class="text-blue-600 hover:text-blue-700">Home</a>
+                <a class="text-primary hover:text-primary ">Home</a>
               </router-link>
             </li>
             <li>
@@ -24,7 +24,7 @@
             </li>
             <li>
               <router-link :to="{ name: 'forsale' }">
-                <a class="text-blue-600 hover:text-blue-700">My Items</a>
+                <a class="text-primary hover:text-primary ">My Items</a>
               </router-link>
             </li>
             <li>
@@ -108,7 +108,7 @@ export default defineComponent({
     };
   },
 
-  created(){
+  created () {
     this.userstatus();
   },
 

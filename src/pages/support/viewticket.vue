@@ -10,7 +10,7 @@
                     <ol class="list-reset flex">
                         <li>
                             <router-link :to="{ name: 'home' }">
-                                <a class="text-blue-600 hover:text-blue-700">Home</a>
+                                <a class="text-primary hover:text-primary ">Home</a>
                             </router-link>
                         </li>
                         <li>
@@ -18,7 +18,7 @@
                         </li>
                         <li>
                             <router-link :to="{ name: 'supporthome' }">
-                                <a class="text-blue-600 hover:text-blue-700">Customer Support</a>
+                                <a class="text-primary hover:text-primary ">Customer Support</a>
                             </router-link>
                         </li>
                         <li>
@@ -26,7 +26,7 @@
                         </li>
                         <li>
                             <router-link :to="{ name: 'supportticket' }">
-                                <a class="text-blue-600 hover:text-blue-700">Ticket Center</a>
+                                <a class="text-primary hover:text-primary ">Ticket Center</a>
                             </router-link>
                         </li>
                         <li>
@@ -43,12 +43,11 @@
                             <div class="text-[18px] mb-5">Tickets</div>
                             <div v-if="all_tickets.length > 0">
                                 <div v-for="ticket in all_tickets" :key="ticket.id">
-                                    <div class="grid grid-cols-12 border-b-2 border-gray-400 mb-5"
-                                        v-if="ticket !== null">
+                                    <div class="grid grid-cols-12 border-b-2 border-gray-400 mb-5" v-if="ticket !== null">
                                         <router-link class="col-span-12"
                                             :to="{ name: 'supportviewticket', params: { uuid: ticket.uuid } }">
                                             <div
-                                                class="col-span-12 text-blue-700 hover:underline hover:text-blue-500 text-[16px] overflow-hidden">
+                                                class="col-span-12 text-primary hover:underline hover:text-blue-500 text-[16px] overflow-hidden">
                                                 {{ ticket.subject }}
                                             </div>
                                         </router-link>
@@ -135,7 +134,8 @@
                                 <div class="flex justify-end">
                                     <button class="bg-gray-600 hover:bg-zinc-400 text-white font-bold 
                                                                     py-2 px-4 rounded
-                                                                    focus:outline-none focus:shadow-outline" type="submit">
+                                                                    focus:outline-none focus:shadow-outline"
+                                        type="submit">
                                         Send Message
                                     </button>
                                 </div>
@@ -229,7 +229,7 @@ export default defineComponent({
             },
         };
     },
-    created(){
+    created () {
         this.userstatus();
     },
     mounted () {
@@ -243,7 +243,7 @@ export default defineComponent({
 
     },
 
-    destroyed  () {
+    destroyed () {
         clearInterval(this.interval)
     },
     validations () {
@@ -276,7 +276,7 @@ export default defineComponent({
                 headers: authHeader(),
             })
                 .then((response) => {
-                   if (response.data.login == true) {
+                    if (response.data.login == true) {
                         this.user = response.data.user;
                     }
                 })
@@ -303,24 +303,24 @@ export default defineComponent({
 
         get_current_ticket () {
             let url = this.$route.params.uuid
-            if (url == null){
+            if (url == null) {
                 clearInterval(this.interval)
                 this.interval = null;
-            }else{
-   
-            axios({
-                method: "post",
-                url: "/customer-service/ticket/" + url,
-                withCredentials: true,
-              
-                headers: authHeader(),
-            })
-                .then((response) => {
-                    if (response.data.success) {
-                        this.get_ticket = response.data
-                    }
-                });
-                   }
+            } else {
+
+                axios({
+                    method: "post",
+                    url: "/customer-service/ticket/" + url,
+                    withCredentials: true,
+
+                    headers: authHeader(),
+                })
+                    .then((response) => {
+                        if (response.data.success) {
+                            this.get_ticket = response.data
+                        }
+                    });
+            }
         },
         get_current_ticket_messages () {
             let url = this.$route.params.uuid
@@ -328,7 +328,7 @@ export default defineComponent({
                 method: "post",
                 url: "/customer-service/ticket/messages/" + url,
                 withCredentials: true,
-            
+
                 headers: authHeader(),
             })
                 .then((response) => {
@@ -388,7 +388,7 @@ export default defineComponent({
                     text: "Form Failure",
                     type: "error",
                 });
-            this.SendMsgForm.msginfo = '';
+                this.SendMsgForm.msginfo = '';
             }
             else {
 

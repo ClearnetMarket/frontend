@@ -3,7 +3,7 @@
 
     <div class="h-80 w-40 md:w-48 rounded-md" @click="$router.replace({ name: 'MarketItem', params: { id: item.uuid } })" style="cursor: pointer">
 
-        <div class="rounded overflow-hidden border  text-center shadow-md w-40 md:w-48 md:w-42 h-80 bg-neutral mt-5 ">
+        <div class="rounded overflow-hidden text-center shadow-md w-40 md:w-48 md:w-42 h-80 bg-neutral mt-5 ">
             <div class="flex justify-center w-full overflow-hidden h-48">
                 <div class="md:w-48 md:h-48 " v-if="item.image_one_url_250">
                     <img class="object-contain " :src="item.image_one_url_250" />
@@ -22,15 +22,15 @@
             <div class=" justify-center pt-2">
 
                 <span v-if="item.digital_currency_1 === true"
-                    class="inline-block    py-1 text-sm font-semibold text-orange-500 ">
+                    class="inline-block    py-1 text-sm font-semibold ">
                   {{ pricefilter_btc(item.currency, item.price) }} {{ price_coin_btc }}  BTC
                 </span>
                 <span v-if="item.digital_currency_3 === true"
-                    class="inline-block    py-1 text-sm font-semibold text-orange-700  ">
+                    class="inline-block    py-1 text-sm font-semibold  ">
                   {{ pricefilter_xmr (item.currency, item.price) }} {{ price_coin_xmr }}  XMR
                 </span>
                 <span v-if="item.digital_currency_2 === true"
-                    class="inline-block  py-1 text-sm font-semibold text-green-600 ">
+                    class="inline-block  py-1 text-sm font-semibold  ">
                 {{ pricefilter_bch(item.currency, item.price) }} {{ price_coin_bch }}    BCH
                 </span>
             </div>

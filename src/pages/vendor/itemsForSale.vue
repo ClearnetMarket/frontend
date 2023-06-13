@@ -16,7 +16,7 @@
           <ol class="list-reset flex">
             <li>
               <router-link :to="{ name: 'home' }">
-                <a class="text-blue-600 hover:text-blue-700">Home</a>
+                <a class="text-primary hover:text-primary ">Home</a>
               </router-link>
             </li>
             <li>
@@ -25,17 +25,14 @@
           </ol>
         </nav>
       </div>
-
       <div class="grid grid-cols-1 rounded-md ">
         <div class="text-[24px] text-center">Items for Sale</div>
-
         <div class="flex justify-center mt-5 md:mt-0 md:justify-end">
           <button v-on:click="createanitem()"
-            class="bg-primary hover:bg-zinc-700 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mr-2">
+            class="bg-primary hover:bg-zinc-700 text-black font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mr-2">
             Create Item
           </button>
         </div>
-
         <div class="mt-5 grid grid-cols-12 gap-4 ">
           <div v-for="(item, index)  in items" :key="index" class="col-span-12">
             <div class="bg-neutral rounded-md ">
@@ -64,7 +61,7 @@
                   <div class="grid grid-cols-12 grid-row-5 text-white ">
                     <div class="col-span-12 text-[18px] px-1 ">
                       <router-link :to="{ name: 'MarketItem', params: { id: item.uuid } }">
-                        <div class="text-center  text-blue-600 hover:text-blue-400 hover:underline">
+                        <div class="text-white hover:text-accent hover:underline">
                           {{ item.item_title }}
                         </div>
                       </router-link>
@@ -107,26 +104,26 @@
                   <div class="mb-2">
                     <div v-if="item.online === 0">
                       <button v-on:click="putonline(item.uuid)"
-                        class="bg-zinc-600 hover:bg-zinc-700 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mr-2 w-full">
+                        class="bg-secondary hover:bg-primary text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mr-2 w-full">
                         Turn On
                       </button>
                     </div>
                     <div v-else>
                       <button v-on:click="putoffline(item.uuid)"
-                        class="bg-zinc-600 hover:bg-zinc-700 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mr-2 w-full">
+                        class="bg-secondary hover:bg-primary text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mr-2 w-full">
                         Turn Off
                       </button>
                     </div>
                   </div>
                   <div class="mb-2">
                     <button v-on:click="gotoitem(item.uuid)"
-                      class="bg-zinc-600 hover:bg-zinc-700 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mr-2 w-full">
+                      class="bg-secondary hover:bg-primary text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mr-2 w-full">
                       Edit
                     </button>
                   </div>
                   <div class="mb-2">
                     <button v-on:click="cloneitem(item.uuid)"
-                      class="bg-zinc-600 hover:bg-zinc-700 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mr-2 w-full">
+                      class="bg-secondary hover:bg-primary text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mr-2 w-full">
                       Clone
                     </button>
                   </div>
@@ -191,7 +188,7 @@ export default defineComponent({
       accept: ref(false),
 
       page: 1,
-      perPage: 3,
+      perPage: 10,
       recordsLength: 0,
       options: {
         edgeNavigation: false,
@@ -227,11 +224,11 @@ export default defineComponent({
       this.items = [];
       const startIndex = this.perPage * (page - 1) + 1;
       const endIndex = startIndex + this.perPage - 1;
-     
-        // gets the vendor items
+
+      // gets the vendor items
       this.getvendoritems(page)
 
-    
+
     },
 
     // gets the vendor items
@@ -343,22 +340,22 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
-        
-          if (response.data.success) {
-              this.getPage(this.page);
-            notify({
-              title: "Item: " + itemid,
-              text: "Item is online",
-              type: "success",
-            });
-          }   
-          if (response.data.error) {
-            notify({
-              title: "Item: " + itemid,
-              text: response.data.error,
-              type: "error",
-            });
-          }
+
+        if (response.data.success) {
+          this.getPage(this.page);
+          notify({
+            title: "Item: " + itemid,
+            text: "Item is online",
+            type: "success",
+          });
+        }
+        if (response.data.error) {
+          notify({
+            title: "Item: " + itemid,
+            text: response.data.error,
+            type: "error",
+          });
+        }
       });
     },
     // put item offline
@@ -369,9 +366,9 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
-     
+
         if (response.data.success) {
-             this.getPage(this.page);
+          this.getPage(this.page);
           notify({
             title: "Item: " + itemid,
             text: "Item is offline",

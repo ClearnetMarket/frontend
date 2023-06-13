@@ -3,18 +3,32 @@ module.exports = {
     presets: [],
     darkMode: 'class',
     daisyui: {
+        
         themes: [{
             mytheme: {
-                "primary": "#2563EB",
-                "secondary": "#ffffff",
-                "accent": "#ffff4d",
+                "primary": "#33cc33",
+                "secondary": "#27272a",
+                "accent": "#9ca3af",
                 "neutral": "#343232",
                 "base-100": "#181717",
                 "info": "#74a0d5",
-                "success": "#1C8D63",
+                "success": "#33cc33",
                 "warning": "#97520C",
-                "error": "#FA0A4E",
+                "error": "#da0e0e",
             },
+            /*
+            mytheme: {
+                "primary": "#6600cc",
+                "secondary": "#e6e600",
+                "accent": "#33cc33",
+                "neutral": "#343232",
+                "base-100": "#181717",
+                "info": "#74a0d5",
+                "success": "#33cc33",
+                "warning": "#97520C",
+                "error": "#da0e0e",
+            },
+            */ 
         }, ],
     },
     plugins: [require('daisyui')],

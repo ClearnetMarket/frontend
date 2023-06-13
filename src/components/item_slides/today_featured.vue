@@ -6,7 +6,7 @@
                          md:justify-start 
                         md:overflow-hidden ">
             <div v-for="item in todayfeatured" :key="item.id">
-                <generic_item_price :item="item" />
+                <generic_item :item="item" />
             </div>
         </div>
     </div>
@@ -15,12 +15,12 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import axios from 'axios'
-import generic_item_price from '../item/generic_item_price.vue'
+import generic_item from '../item/generic_item.vue'
 
 export default defineComponent({
     name: 'TodayFeatured',
     components: {
-        generic_item_price,
+        generic_item,
     },
     data () {
         return {

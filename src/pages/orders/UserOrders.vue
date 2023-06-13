@@ -11,7 +11,7 @@
             <ol class="list-reset flex">
               <li>
                 <router-link :to="{ name: 'home' }">
-                  <a class="text-blue-600 hover:text-blue-500">Home</a>
+                  <a class="text-primary hover:text-blue-500">Home</a>
                 </router-link>
               </li>
               <li>
@@ -25,8 +25,8 @@
         <h1 class="col-span-1 font-semibold text-2xl text-center text-white">Your Orders</h1>
         <div v-if="recordsLength > 0">
           <div v-for="(order, i) in orders" :key="i" class="pb-5">
-            <div class="grid grid-cols-12 rounded-md border border-gray-300 ">
-              <div class="col-span-12 bg-info px-5 py-5 rounded-t-md">
+            <div class="grid grid-cols-12 rounded-md   ">
+              <div class="col-span-12 bg-secondary px-5 py-5 rounded-t-md">
                 <div class="grid grid-cols-12 text-[12px]">
                   <div class="col-span-12 md:col-span-4  gap-2 text-[15px]">
                     <div class="md:text-center font-bold">Order Placed</div>
@@ -50,7 +50,7 @@
                   <div class="col-span-12 md:col-span-4 gap-2 text-[15px]">
                     <div class="md:text-center font-bold">Order #</div>
                     <div class="md:text-center">
-                      <router-link class="text-blue-600 hover:text-blue-500 hover:underline" :to="{
+                      <router-link class="text-primary hover:text-blue-500 hover:underline" :to="{
                         name: 'ordersview',
                         params: { uuid: order.uuid },
                       }">
@@ -91,7 +91,7 @@
                             <img class="object-contain" :src="order.image_one" alt="" />
                           </div>
                           <div class="col-span-12 md:col-span-9">
-                            <div class="text-blue-600 hover:text-blue-600 hover:underline text-[18px] text-center">
+                            <div class="text-white hover:text-primary hover:underline text-[18px] text-center">
                               <router-link :to="{
                                 name: 'MarketItem',
                                 params: { id: order.item_uuid },
@@ -107,7 +107,7 @@
                                     name: 'userprofile',
                                     params: { uuid: order.vendor_uuid },
                                   }">
-                                    <div class="text-blue-600 hover:text-blue-500 hover:underline pl-3">
+                                    <div class="text-white hover:text-blue-500 hover:underline pl-3">
                                       {{ order.vendor_user_name }}
                                     </div>
                                   </router-link>
@@ -120,19 +120,18 @@
                     </div>
                   </div>
                   <div class="col-span-12 sm:col-span-3">
-                    <div v-if="
-                      order.overall_status === 3 ||
+                    <div v-if="order.overall_status === 3 ||
                       order.overall_status === 2 ||
                       order.overall_status === 4 ||
                       order.overall_status === 8
-                    ">
+                      ">
                       <div class="my-2">
                         <router-link :to="{
                           name: 'ordersview',
                           params: { uuid: order.uuid },
                         }">
                           <button
-                            class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
+                            class="bg-secondary hover:bg-primary text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
                             type="button">
                             Tracking Info
                           </button>
@@ -160,7 +159,7 @@
                       </div>
                       <div class="my-2">
                         <button
-                          class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
+                          class="bg-secondary hover:bg-primary text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
                           type="button" @click="finalize(order.uuid)">
                           Finalize Order
                         </button>
@@ -168,7 +167,7 @@
 
                       <div class="my-2">
                         <button
-                          class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
+                          class="bg-secondary hover:bg-primary text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
                           type="button" @click="disputeorder(order.uuid)">
                           Dispute Order
                         </button>
@@ -178,21 +177,21 @@
                     <div v-if="order.overall_status === 3">
                       <div class="my-2">
                         <button
-                          class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
+                          class="bg-secondary hover:bg-primary text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
                           type="button" @click="delivered(order.uuid)">
                           Mark as Delivered
                         </button>
                       </div>
                       <div class="my-2">
                         <button
-                          class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
+                          class="bg-secondary hover:bg-primary text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
                           type="button" @click="finalize(order.uuid)">
                           Finalize Order
                         </button>
                       </div>
                       <div class="my-2">
                         <button
-                          class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
+                          class="bg-secondary hover:bg-primary text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
                           type="button" @click="disputeorder(order.uuid)">
                           Dispute Order
                         </button>
@@ -202,14 +201,14 @@
                     <div v-if="order.overall_status === 4">
                       <div class="my-2">
                         <button
-                          class="bg-green-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
+                          class="bg-green-600 hover:bg-secondary text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
                           type="button" @click="finalize(order.uuid)">
                           Finalize Order
                         </button>
                       </div>
                       <div class="my-2">
                         <button
-                          class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
+                          class="bg-zinc-600 hover:secondary text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
                           type="button" @click="disputeorder(order.uuid)">
                           Dispute Order
                         </button>
@@ -224,7 +223,7 @@
                         params: { uuid: order.uuid },
                       }">
                         <button
-                          class="bg-red-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
+                          class="bg-red-600 hover:bg-secondary text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
                           type="button">
                           View Dispute
                         </button>
@@ -239,12 +238,12 @@
                         }">
                         </router-link>
 
-                        <router-link class="text-blue-600 hover:text-blue-500 hover:underline" :to="{
+                        <router-link class="text-primary hover:text-blue-500 hover:underline" :to="{
                           name: 'ordersview',
                           params: { uuid: order.uuid },
                         }">
                           <button
-                            class="bg-yellow-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
+                            class="bg-yellow-600 hover:bg-secondary text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
                             type="button">
                             Leave Feedback
                           </button>
@@ -312,11 +311,11 @@ export default defineComponent({
 
     };
   },
-  created(){
+  created () {
     this.userstatus();
   },
-  mounted(){
- 
+  mounted () {
+
     this.getuserorderscount();
     this.getPage(this.page);
   },
@@ -329,15 +328,13 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       })
-      .then((response) => {
-      if (response.data.login == true) 
-        { this.user = response.data.user }
-      else 
-        { this.$router.push("/login") }
-      })
-      .catch(() => {
-        this.$router.push("/login")
-      })
+        .then((response) => {
+          if (response.data.login == true) { this.user = response.data.user }
+          else { this.$router.push("/login") }
+        })
+        .catch(() => {
+          this.$router.push("/login")
+        })
     },
 
 
@@ -347,7 +344,7 @@ export default defineComponent({
       const startIndex = this.perPage * (page - 1) + 1;
       const endIndex = startIndex + this.perPage - 1;
       this.getuserorders(page)
-     
+
     },
     // gets the user orders
     getuserorders (page: any) {

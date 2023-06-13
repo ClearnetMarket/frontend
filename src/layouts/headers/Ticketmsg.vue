@@ -2,12 +2,10 @@
     <div v-if="loaded === true">
         <div v-if="newticket !== 0">
             <div class="bg-yellow-400 py-1 text-white font-bold">
-                <div
-                    class="container flex flex-col max-w-7xl mx-auto text-bold text-center justify-center align-center"
-                >
+                <div class="container flex flex-col max-w-7xl mx-auto text-bold text-center justify-center align-center">
                     You currently have a new message on a ticket
                 </div>
-                <div class="text-blue-700 hover:text-blue-600">
+                <div class="text-primary hover:text-primary">
                     <router-link :to="{ name: 'supportticket' }"> View it here </router-link>
                 </div>
             </div>
@@ -22,19 +20,19 @@ import axios from 'axios'
 export default defineComponent({
     name: 'Newticketmsg',
 
-    data() {
+    data () {
         return {
             loaded: false,
             user: null,
             newticket: 0,
         }
     },
-    created() {
+    created () {
         this.userstatus()
         this.checkfornewticket()
     },
     methods: {
-        userstatus() {
+        userstatus () {
             axios({
                 method: 'get',
                 url: '/auth/whoami',
@@ -42,7 +40,7 @@ export default defineComponent({
                 headers: authHeader(),
             })
                 .then((response) => {
-                 if (response.data.login == true) {
+                    if (response.data.login == true) {
                         this.user = response.data.user
                         this.user.confirmed = response.data.user.confirmed
 
@@ -53,7 +51,7 @@ export default defineComponent({
                     this.user = null
                 })
         },
-        checkfornewticket() {
+        checkfornewticket () {
             axios({
                 method: 'get',
                 url: '/customer-service/newticket',

@@ -1,6 +1,5 @@
 
 <template>
-
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
@@ -11,7 +10,7 @@
         <ol class="list-reset flex">
           <li>
             <router-link :to="{ name: 'home' }">
-              <a class="text-blue-600 hover:text-blue-700">Home</a>
+              <a class="text-primary hover:text-primary ">Home</a>
             </router-link>
           </li>
           <li>
@@ -27,7 +26,7 @@
         <div class="rounded-md bg-neutral p-5">
           <div class="grid grid-cols-12 ">
             <div class="col-span-12 text-[20px]  mb-5">
-              <router-link class="text-blue-600 hover:underline hover:text-blue-400 text-center"
+              <router-link class="text-primary hover:underline hover:text-primary text-center"
                 :to="{ name: 'MarketItem', params: { id: order.item_uuid } }">
                 <div>{{ order.title_of_item }}</div>
               </router-link>
@@ -46,7 +45,7 @@
                 <div class="font-bold px-2">
                   Ordered:
                 </div>
-                <div class="px-2">{{ relativeDate (order.created) }}</div>
+                <div class="px-2">{{ relativeDate(order.created) }}</div>
               </div>
               <div class="col-span-1 flex">
                 <div class="font-bold px-2">
@@ -129,16 +128,13 @@
               <div class="col-span-12 mb-1 text-[14px] pt-5">Leave a review:</div>
               <form class="col-span-12" @submit.prevent="sendreview(order.uuid)">
                 <div class="col-span-12">
-                  <textarea v-model="review"
-                    class="shadow appearance-none border border-gray-500 rounded w-full py-2 px-3
-                     text-white leading-tight focus:outline-none focus:shadow-outline"
-                    id="message" type="textfield" placeholder="Review Rating" />
+                  <textarea v-model="review" class="shadow appearance-none border border-gray-500 rounded w-full py-2 px-3
+                     text-white leading-tight focus:outline-none focus:shadow-outline" id="message" type="textfield"
+                    placeholder="Review Rating" />
                 </div>
                 <div class="col-span-12  col-start-4">
-                  <button
-                    class="bg-yellow-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded
-                     focus:outline-none focus:shadow-outline  "
-                    type="submit">
+                  <button class="bg-yellow-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded
+                     focus:outline-none focus:shadow-outline  " type="submit">
                     Add Feedback
                   </button>
                 </div>
@@ -213,7 +209,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-            this.order = response.data;
+          this.order = response.data;
         });
     },
     //see if score already present
@@ -226,16 +222,16 @@ export default defineComponent({
       })
         .then((response) => {
           if (response.data.success) {
-              // hide rating div
-              this.rating_number = response.data.customer_rating;
-              this.review = response.data.review;
-              this.rated = true
-            }
-            else {
-              this.rating_number = 0;
-              this.review = "";
-              this.rated = false
-            }
+            // hide rating div
+            this.rating_number = response.data.customer_rating;
+            this.review = response.data.review;
+            this.rated = true
+          }
+          else {
+            this.rating_number = 0;
+            this.review = "";
+            this.rated = false
+          }
 
         })
         .catch(() => {
@@ -297,21 +293,21 @@ export default defineComponent({
 
         .then((response) => {
           if (response.data.success) {
-              notify({
-                title: "Message Center",
-                text: "Successfully sent feedback",
-                type: "success",
-              });
-              this.rated = true
-              this.getuserorder();
-            }
-            else {
-              notify({
-                title: "Freeport Error",
-                text: "Error posting information.",
-                type: "error",
-              })
-            }
+            notify({
+              title: "Message Center",
+              text: "Successfully sent feedback",
+              type: "success",
+            });
+            this.rated = true
+            this.getuserorder();
+          }
+          else {
+            notify({
+              title: "Freeport Error",
+              text: "Error posting information.",
+              type: "error",
+            })
+          }
         })
         .catch(() => {
           notify({
@@ -331,8 +327,6 @@ export default defineComponent({
 });
 </script>
 <style>
-
-
 fieldset,
 label {
   margin: 0;

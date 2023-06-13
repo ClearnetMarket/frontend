@@ -1,29 +1,18 @@
+
 <template>
     <MainHeaderTop />
     <MainHeaderMid />
     <MainHeaderBottom />
 
-    <div v-if="user">
-        <MainHeaderVendor v-show="user.user_admin === 1" />
-    </div>
-
-    <div class="container max-w-7xl mx-auto px-10 bg-gray-300 mt-2 text-white">
-        <div class="mt-5 mb-5">
-            <nav class="rounded-md w-full">
-                <ol class="list-reset flex">
-                    <li>
-                        <router-link :to="{ name: 'home' }">
-                            <a class="text-primary hover:text-primary bg-red-200">Home</a>
-                        </router-link>
-                    </li>
-                    <li>
-                        <span class="text-gray-500 mx-2 mb-2 mt-2 bg-">/</span>
-                    </li>
-                </ol>
-            </nav>
+    <div class="wrapper">
+        <div class="container max-w-7xl mx-auto px-10 wrapper mb-10 overflow-hidden text-white">
+            <div class="bg-neutral">
+                <div class="text-center">
+                    Please send payment to Address below to complete checkout
+                </div>
+            </div>
         </div>
     </div>
-
     <MainFooter />
 </template>
 
@@ -36,7 +25,7 @@ import MainHeaderVendor from '../../layouts/headers/MainHeaderVendor.vue'
 import MainFooter from '../../layouts/footers/FooterMain.vue'
 
 export default defineComponent({
-    name: 'Vendoragreement',
+    name: 'Payment',
     components: {
         MainHeaderTop,
         MainHeaderMid,
@@ -47,6 +36,8 @@ export default defineComponent({
     data () {
         return {
             user: null,
+            payment_status: 0,
+            
         }
     },
 

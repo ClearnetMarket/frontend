@@ -1,9 +1,8 @@
 <template>
   
   <div v-if="marketitem">
-
     <div class="text-[18px] mt-5 mb-5">Images</div>
-
+    <div v-if="got_items_for_sale">
     <div class="rounded-md border border-1 ">
       <div class="grid sm:grid-cols-1 md:grid-cols-2  gap-5 ">
         <div class="flex justify-center">
@@ -71,8 +70,6 @@
             </form>
           </div>
         </div>
-
-
         <div class="flex justify-center">
           <div v-if="visibledelete3">
             <div class="block bg-cover bg-center">
@@ -106,10 +103,6 @@
             </form>
           </div>
         </div>
-
-
-
-
         <div class="flex justify-center">
           <div v-if="visibledelete4">
             <div class="block bg-cover bg-center">
@@ -143,9 +136,7 @@
             </form>
           </div>
         </div>
-
-
-        
+        </div>
       </div>
     </div>
   </div>
@@ -169,8 +160,10 @@ export default defineComponent({
     this.getItemForSale();
   },
 
+
   data () {
     return {
+      got_items_for_sale: false,
       previewimageone: null,
       previewImage1: null,
       previewImage2: null,
@@ -207,7 +200,6 @@ export default defineComponent({
       })
         .then((response) => {
             this.marketitem = response.data;
-
             this.image_1_in_db = this.marketitem.image_one_server == null;
 
             if (this.image_1_in_db == false) {
@@ -250,6 +242,8 @@ export default defineComponent({
               this.visibleform4 = true;
           }
         })
+         this.got_items_for_sale = true
+        
     },
     CreateItemImages () {
 
@@ -636,6 +630,7 @@ export default defineComponent({
             // if any images uploaded success
             this.marketitem.image_one_url_250 = null;
             this.marketitem.image_one_url_250 = response.data.status;
+           
           }
         })
         .catch((error) => {

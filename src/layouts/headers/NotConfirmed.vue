@@ -1,16 +1,14 @@
 <template>
     <div v-if="loaded === true">
         <div v-if="user.confirmed === 0">
-            <div class="bg-yellow-400 py-1 text-white font-bold">
-                <div
-                    class="container flex flex-col max-w-7xl mx-auto text-bold text-center justify-center align-center"
-                >
+            <div class="bg-secondary py-1 text-black font-bold">
+                <div class="container flex flex-col max-w-7xl mx-auto text-bold text-center justify-center align-center">
                     <div class="">
                         You are currently unconfirmed. If you forget your password, pin, or account gets stolen your
                         crypto is gone!
                     </div>
 
-                    <div class="text-blue-700 hover:text-blue-600">
+                    <div class="text-primary hover:text-primary">
                         <router-link :to="{ name: 'accountseed' }">Confirm Account </router-link>
                     </div>
                 </div>
@@ -26,7 +24,7 @@ import axios from 'axios'
 export default defineComponent({
     name: 'Confirmed',
 
-    data() {
+    data () {
         return {
             loaded: false,
             user: null,
@@ -36,12 +34,12 @@ export default defineComponent({
             confirmed: false,
         }
     },
-    created() {
+    created () {
         this.userstatus()
         this.userstatusconfirmed()
     },
     methods: {
-        userstatus() {
+        userstatus () {
             axios({
                 method: 'get',
                 url: '/auth/whoami',
@@ -59,7 +57,7 @@ export default defineComponent({
                     this.user = null
                 })
         },
-        userstatusconfirmed() {
+        userstatusconfirmed () {
             axios({
                 method: 'get',
                 url: '/auth/amiconfirmed',
@@ -75,7 +73,7 @@ export default defineComponent({
                         }
                     }
                 })
-                .catch(() => {})
+                .catch(() => { })
         },
     },
 })

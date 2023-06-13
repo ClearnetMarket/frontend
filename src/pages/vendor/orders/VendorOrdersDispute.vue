@@ -10,7 +10,7 @@
         <ol class="list-reset flex">
           <li>
             <router-link :to="{ name: 'home' }">
-              <a class="text-blue-600 hover:text-blue-700">Home</a>
+              <a class="text-primary hover:text-primary ">Home</a>
             </router-link>
           </li>
           <li>
@@ -19,7 +19,6 @@
         </ol>
       </nav>
     </div>
-
     <div class="grid grid-cols-1 w-full gap-4 mt-5 mb-20">
       <h1 class="col-span-1 font-bold text-2xl">Disputed Orders</h1>
       <div v-for="order in orders" :key="order.id">
@@ -49,7 +48,7 @@
                 <div class="col-span-12 md:col-span-4 gap-2 text-[15px]">
                   <div class="md:text-center font-bold">Order #</div>
                   <div class="md:text-center">
-                    <router-link class="text-blue-600 hover:text-blue-500 hover:underline" :to="{
+                    <router-link class="text-primary hover:text-blue-500 hover:underline" :to="{
                       name: 'ordersview',
                       params: { uuid: order.uuid },
                     }">
@@ -90,7 +89,7 @@
                           <img class="object-contain" :src="order.image_one" alt="" />
                         </div>
                         <div class="col-span-12 md:col-span-9">
-                          <div class="text-blue-600 hover:text-blue-600 hover:underline text-[18px] text-center">
+                          <div class="text-accent hover:text-accent hover:underline text-[18px] text-center">
                             <router-link :to="{
                               name: 'MarketItem',
                               params: { id: order.item_uuid },
@@ -98,63 +97,61 @@
                               {{ order.title_of_item }}
                             </router-link>
                           </div>
-                      
-                            <div v-if="order.vendor_uuid">
-                              <div class="flex justify-center md:justify-start">
-                                <div class="">Sold by:</div>
-                                <router-link :to="{
-                                  name: 'userprofile',
-                                  params: { uuid: order.vendor_uuid },
-                                }">
-                                  <div class="text-blue-600 hover:text-blue-500 hover:underline pl-3">
-                                    {{ order.vendor_user_name }}
-                                  </div>
-                                </router-link>
-                              </div>
+
+                          <div v-if="order.vendor_uuid">
+                            <div class="flex justify-center md:justify-start">
+                              <div class="">Sold by:</div>
+                              <router-link :to="{
+                                name: 'userprofile',
+                                params: { uuid: order.vendor_uuid },
+                              }">
+                                <div class="text-accent hover:text-blue-500 hover:underline pl-3">
+                                  {{ order.vendor_user_name }}
+                                </div>
+                              </router-link>
                             </div>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div class="col-span-3 my-10 ">
-                <!-- Requested Cancel from vendor -->
-                <div v-if="order.overall_status === 6" class=""></div>
-                <!-- Disputed order -->
-                <div v-if="order.overall_status === 8" class=" ">
-                  <router-link :to="{
-                    name: 'Dispute',
-                    params: { uuid: order.uuid },
-                  }">
-                    <button class="bg-red-600 hover:bg-zinc-400 text-white font-bold 
-                      py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full" type="button">
-                      View Dispute
-                    </button>
-                  </router-link>
-                </div>
-                <!-- Finalized order -->
-                <div v-if="order.overall_status === 10" class="">
-                  <div v-if="order.vendor_feedback === 0">
+                  <!-- Requested Cancel from vendor -->
+                  <div v-if="order.overall_status === 6" class=""></div>
+                  <!-- Disputed order -->
+                  <div v-if="order.overall_status === 8" class=" ">
                     <router-link :to="{
                       name: 'Dispute',
                       params: { uuid: order.uuid },
                     }">
-                    </router-link>
-
-                    <router-link class="text-blue-600 hover:text-blue-500 hover:underline" :to="{
-                      name: 'ordersview',
-                      params: { uuid: order.uuid },
-                    }">
-                      <button
-                        class="bg-yellow-600 hover:bg-zinc-400 text-white font-bold py-1
-                                  px-3 rounded focus:outline-none focus:shadow-outline w-full"
-                        type="button">
-                        Leave Feedback
+                      <button class="bg-red-600 hover:bg-zinc-400 text-white font-bold 
+                      py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full" type="button">
+                        View Dispute
                       </button>
                     </router-link>
                   </div>
+                  <!-- Finalized order -->
+                  <div v-if="order.overall_status === 10" class="">
+                    <div v-if="order.vendor_feedback === 0">
+                      <router-link :to="{
+                        name: 'Dispute',
+                        params: { uuid: order.uuid },
+                      }">
+                      </router-link>
+
+                      <router-link class="text-primary hover:text-blue-500 hover:underline" :to="{
+                        name: 'ordersview',
+                        params: { uuid: order.uuid },
+                      }">
+                        <button class="bg-yellow-600 hover:bg-zinc-400 text-white font-bold py-1
+                                  px-3 rounded focus:outline-none focus:shadow-outline w-full" type="button">
+                          Leave Feedback
+                        </button>
+                      </router-link>
+                    </div>
+                  </div>
                 </div>
-              </div>
               </div>
             </div>
           </div>
@@ -226,8 +223,8 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
-          this.orders = response.data;
-          this.loaded = true
+        this.orders = response.data;
+        this.loaded = true
       });
     },
     deleteordernotice () {

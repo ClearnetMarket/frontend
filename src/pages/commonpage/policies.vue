@@ -13,7 +13,7 @@
                 <ol class="list-reset flex">
                     <li>
                         <router-link :to="{ name: 'home' }">
-                            <a class="text-blue-600 hover:text-blue-700">Home</a>
+                            <a class="text-primary hover:text-primary ">Home</a>
                         </router-link>
                     </li>
                     <li>
@@ -24,13 +24,13 @@
         </div>
 
         <div class="bg-neutral rounded-md p-5 mb-5">
-            <div class="text-[18px] font-bold text-blue-600 rounded-md">Freeport Policies</div>
+            <div class="text-[18px] font-bold text-white rounded-md">Freeport Policies</div>
         </div>
         <div class="bg-neutral rounded-md p-5 mb-5 text-white">
             <div class="text-[18px] font-bold rounded-md ">Code of conduct</div>
             <div class="text-red-600">- NO ILLEGAL ITEMS THAT WOULD BE ILLEGAL IN THE USA ARE ALLOWED. Refer to
-                <router-link :to="{ name: 'policies' }">
-                    <div class="text-blue-600 hover:text-blue-500 text-sm font-bold">
+                <router-link :to="{ name: 'prohibited' }">
+                    <div class="text-accent hover:text-blue-500 text-sm font-bold">
                         Prohibited Items
                     </div>
                 </router-link>

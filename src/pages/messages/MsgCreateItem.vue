@@ -9,7 +9,7 @@
         <ol class="list-reset flex">
           <li>
             <router-link :to="{ name: 'home' }">
-              <a class="text-blue-600 hover:text-blue-700">Home</a>
+              <a class="text-primary hover:text-primary ">Home</a>
             </router-link>
           </li>
           <li>
@@ -17,7 +17,7 @@
           </li>
           <li>
             <router-link :to="{ name: 'MsgHome' }">
-              <a class="text-blue-600 hover:text-blue-700">Message Center Home</a>
+              <a class="text-primary hover:text-primary ">Message Center Home</a>
             </router-link>
           </li>
           <li>
@@ -74,59 +74,59 @@
             </div>
           </div>
         </div>
-     
-      <div class="col-span-12 md:col-span-9">
-        <div v-if="itemforsale">
-          <div class="grid grid-cols-12 gap-4 border border-1 p-4 mb-4 bg-neutral rounded-md">
-            <div class="col-span-2">
-              <img class="" :src="itemforsale.image_one_url_500" alt="" />
-            </div>
-            <div class="col-span-10">
-              <div class="font-bold text-[18px]">
-                {{ itemforsale.item_title }}
-              </div>
-              <div class="text-[14px]">Item ID: {{ itemforsale.uuid }}</div>
-              <div class="text-[14px]">Item Price: {{ itemforsale.price }}</div>
 
-              <div class="text-[14px]">
-                Item Location: {{ itemforsale.origin_country_name }}
+        <div class="col-span-12 md:col-span-9">
+          <div v-if="itemforsale">
+            <div class="grid grid-cols-12 gap-4 border border-1 p-4 mb-4 bg-neutral rounded-md">
+              <div class="col-span-2">
+                <img class="" :src="itemforsale.image_one_url_500" alt="" />
               </div>
+              <div class="col-span-10">
+                <div class="font-bold text-[18px]">
+                  {{ itemforsale.item_title }}
+                </div>
+                <div class="text-[14px]">Item ID: {{ itemforsale.uuid }}</div>
+                <div class="text-[14px]">Item Price: {{ itemforsale.price }}</div>
 
-              <div class="text-[14px]">
-                Free Shipping: {{ itemforsale.shipping_info_0 }}
-              </div>
-              <div class="text-[14px]">
-                Paid Shipping: {{ itemforsale.shipping_info_2 }}
+                <div class="text-[14px]">
+                  Item Location: {{ itemforsale.origin_country_name }}
+                </div>
+
+                <div class="text-[14px]">
+                  Free Shipping: {{ itemforsale.shipping_info_0 }}
+                </div>
+                <div class="text-[14px]">
+                  Paid Shipping: {{ itemforsale.shipping_info_2 }}
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="text-[18px] mb-3">
-          <div v-if="other_user">
-            Contact {{ other_user.display_name }}
+          <div class="text-[18px] mb-3">
+            <div v-if="other_user">
+              Contact {{ other_user.display_name }}
+            </div>
           </div>
-        </div>
-        <form class="rounded-md pt-6 pb-8 mb-4 w-full" @submit.prevent="onSubmit">
-          <div class="">
-            <textarea v-model="SendMsgForm.msginfo" id="item_description" placeholder="Write something .."
-              class="rounded w-full py-2 px-3 input-primary text-black">
+          <form class="rounded-md pt-6 pb-8 mb-4 w-full" @submit.prevent="onSubmit">
+            <div class="">
+              <textarea v-model="SendMsgForm.msginfo" id="item_description" placeholder="Write something .."
+                class="rounded w-full py-2 px-3 input-primary text-black">
                   </textarea>
-            <span v-if="v$.SendMsgForm.msginfo.$error" class="text-red-600 text-center">
-              {{ v$.SendMsgForm.msginfo.$errors[0].$message }}
-            </span>
-          </div>
-          <div class="flex justify-end">
-            <button
-              class="bg-gray-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              type="submit">
-              Message User
-            </button>
-          </div>
-        </form>
+              <span v-if="v$.SendMsgForm.msginfo.$error" class="text-red-600 text-center">
+                {{ v$.SendMsgForm.msginfo.$errors[0].$message }}
+              </span>
+            </div>
+            <div class="flex justify-end">
+              <button
+                class="bg-primary hover:bg-secondary text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                type="submit">
+                Message Vendor
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>
-   </div>
 
   <MainFooter />
 </template>
@@ -203,19 +203,14 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-          if (response.data.login == true)
-           { this.user = response.data.user }
-          else 
-          { this.$router.push("/login") }
+          if (response.data.login == true) { this.user = response.data.user }
+          else { this.$router.push("/login") }
         })
         .catch((error) => {
           this.$router.push("/login")
         })
     },
-
-
     gettheitem () {
-
       axios({
         method: "get",
         url: "/item/" + this.item_uuid,
@@ -223,10 +218,7 @@ export default defineComponent({
         headers: authHeader(),
       })
         .then((response) => {
-
           this.itemforsale = response.data;
-
-
         })
         .catch((error) => {
           console.log(error)
@@ -261,9 +253,7 @@ export default defineComponent({
           this.userlist = response.data;
           console.log(this.userlist)
         })
-        .catch(() => {
-
-        });
+        .catch(() => { });
     },
     getcountofusers () {
       axios({
@@ -294,6 +284,10 @@ export default defineComponent({
               title: "Message Center",
               text: "Successfully sent message!",
               type: "success",
+            });
+            this.$router.push({
+              name: "MarketItem",
+              params: { id: this.itemforsale.uuid },
             });
           }
           if (response.data.error) {

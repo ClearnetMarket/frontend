@@ -1,5 +1,5 @@
 <template>
-    <nav class="bg-blue-600 py-2 md:py-3">
+    <nav class="bg-secondary py-2 md:py-3">
         <div class="container px-4 mx-auto md:flex md:items-center">
             <div class="flex justify-between items-center">
                 <router-link class="font-bold text-xl text-white hover:text-gray-400" to="/"> Freeport </router-link>

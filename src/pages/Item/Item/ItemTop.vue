@@ -1,11 +1,8 @@
 
 <template>
   <div class="max-w-7xl mx-auto text-white">
-
     <div class="grid sm:grid-cols-1 md:grid-cols-12  gap-5 sm:pb-10  ">
-
       <div class="sm:grid sm:col-span-12 md:invisible sm:visible">
-
         <div class="col-span-12 text-center md:invisible md:h-0">
           <div class="text-[20px] font-bold ">{{ title }}</div>
         </div>
@@ -113,7 +110,7 @@
               Shipping Option 1:
             </div>
             <div class="grid grid-cols-4 grid-rows-2 px-5">
-              <div class="col-span-3 row-span-1 text-[16px] text-yellow-600 font-bold">
+              <div class="col-span-3 row-span-1 text-[16px] text-warning font-bold">
                 *FREE SHIPPING*
               </div>
               <div class="col-span-3 row-span-1 text-[14px] text-white">
@@ -155,7 +152,7 @@
           <div v-if="user">
             <div v-if="vendoruuid !== user.user_id">
               <button
-                class="bg-accent hover:bg-zinc-400 hover:text-white rounded-lg text-black font-semibold py-2 px-10 focus:outline-none focus:shadow-outline content-center justify-center"
+                class="bg-primary hover:bg-secondary hover:text-white rounded-lg text-black font-semibold py-2 px-10 focus:outline-none focus:shadow-outline content-center justify-center"
                 type="submit" @click="addtocart()">
                 Add to Cart
               </button>
@@ -168,15 +165,13 @@
           </div>
           <div v-else>
             <button
-              class="bg-accent hover:bg-zinc-400 hover:text-white rounded-lg text-black font-semibold py-2 px-10 focus:outline-none focus:shadow-outline content-center justify-center"
+              class="bg-primary hover:bg-secondary hover:text-white rounded-lg text-black font-semibold py-2 px-10 focus:outline-none focus:shadow-outline content-center justify-center"
               type="submit" @click="addtocart()">
               Add to Cart
             </button>
           </div>
         </div>
-        <div class="text-center mb-2 text-yellow-600 font-bold" v-if="freeshipping === true">
-          Free Shipping
-        </div>
+        
         <div class="flex flex-col">
           <div class="px-2 mb-5 text-white font-semibold">
             <div class="border rounded-lg px-2">
@@ -256,7 +251,7 @@
                 Item Reported
               </div>
               <div v-else>
-                <button class="bg-grey-600  text-black font-bold py-1 px-3
+                <button class="bg-grey-600  text-white font-bold py-1 px-3
                           rounded focus:outline-none focus:shadow-outline" @click.prevent="reportitem()">
                   Report Item
                 </button>

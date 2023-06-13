@@ -3,7 +3,7 @@
   <div class="mt-5 mx-10 flex gap-5">
     <div v-for="item in itemsforsale" :key="item.id">
       <div class="" @click="$router.replace({ name: 'item', params: { id: item.uuid } })" style="cursor: pointer">
-      
+
         <div class="rounded overflow-hidden border border-gray-200 text-center w-64 h-64 bg-neutral shadow-md">
           <div class="flex justify-center w-full">
             <div class="bg-red-200" v-if="item.image_one != null">
@@ -16,12 +16,12 @@
             </div>
           </div>
           <!--- Item title -->
-          <div class="text-[16px] h-12 text-blue-600 hover:text-blue-500 hover:underline overflow-hidden p-1">
+          <div class="text-[16px] h-12 text-primary hover:text-blue-500 hover:underline overflow-hidden p-1">
             {{ item.item_title }}
           </div>
           <!--- Price and Currency -->
           <div class="text-green-600 text-[18px] font-bold h-4">
-            {{ item.price }} {{ returncurrencysymbol (item.currency) }}
+            {{ item.price }} {{ returncurrencysymbol(item.currency) }}
           </div>
           <!--- Location -->
           <div class="text-[11px] h-6 overflow-hidden p-2 text-gray-500">

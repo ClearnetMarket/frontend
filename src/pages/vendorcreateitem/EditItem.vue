@@ -1,5 +1,4 @@
 <template>
-
   <MainHeaderTop />
   <MainHeaderMid />
   <MainHeaderBottom />
@@ -14,7 +13,7 @@
           <ol class="list-reset flex">
             <li>
               <router-link :to="{ name: 'home' }">
-                <a class="text-blue-600 hover:text-blue-700">Home</a>
+                <a class="text-primary hover:text-primary ">Home</a>
               </router-link>
             </li>
             <li>
@@ -22,7 +21,7 @@
             </li>
             <li>
               <router-link :to="{ name: 'forsale' }">
-                <a class="text-blue-600 hover:text-blue-700">Items for Sale</a>
+                <a class="text-primary hover:text-primary ">Items for Sale</a>
               </router-link>
             </li>
             <li>
@@ -33,7 +32,7 @@
       </div>
       <div class="grid grid-cols-1 rounded-md p-6 max-w-3xl mx-auto bg-neutral">
         <div class="text-[18px] text-center ">Item# {{ item_id }}</div>
-          <UploadImages :item_id="item_id" />
+        <UploadImages :item_id="item_id" />
         <form class="rounded-md px-8 pt-6 pb-8 mb-4 w-full" enctype="multipart/form-data" @submit.prevent="onSubmit">
           <p v-for="error of v$.$errors" :key="error.$uid">
             {{ error.$message }}
@@ -43,10 +42,8 @@
             <div class="mb-4">
               <label class="block text-white text-sm font-bold mb-2">Item Title</label>
               <input v-model="CreateItemForm.basicInfo.item_title"
-                      class="rounded w-full py-2 px-3 input-primary text-black"
-                      id="item_title"
-                      type="text"
-                      placeholder="Enter title of your item .." />
+                class="rounded w-full py-2 px-3 input-primary text-black" id="item_title" type="text"
+                placeholder="Enter title of your item .." />
               <span v-if="v$.CreateItemForm.basicInfo.item_title.$error" class="text-red-600 text-center">
                 {{ v$.CreateItemForm.basicInfo.item_title.$errors[0].$message }}
               </span>
@@ -54,11 +51,8 @@
             <div class="flex gap-5">
               <div class="flex-1 mb-4">
                 <label class="block text-white text-sm font-bold mb-2">Category</label>
-                <select
-                 class="rounded w-full py-2 px-3 input-primary text-black focus:bg-neutral"
-                  aria-label="Default select example"
-                  id="category"
-                  v-model="CreateItemForm.basicInfo.category_id_0">
+                <select class="rounded w-full py-2 px-3 input-primary text-black focus:bg-neutral"
+                  aria-label="Default select example" id="category" v-model="CreateItemForm.basicInfo.category_id_0">
                   <option class="text-white" v-for="(category, index) in categoryList" :key="index"
                     :value="category.value">
                     {{ category.name }}
@@ -71,8 +65,7 @@
               </div>
               <div class="flex-1 mb-4">
                 <label class="block text-white text-sm font-bold mb-2">Condition</label>
-                <select
-                 class="rounded w-full py-2 px-3 input-primary text-black focus:bg-neutral"
+                <select class="rounded w-full py-2 px-3 input-primary text-black focus:bg-neutral"
                   aria-label="Default select example" id="condition" v-model="CreateItemForm.basicInfo.item_condition">
                   <option class="text-white" v-for="(condition, index) in conditionList" :key="index"
                     :value="condition.value">
@@ -93,8 +86,8 @@
                 <label class="block text-white text-sm mb-2 text-[11px]">Item Price in your local currency per
                   item</label>
                 <input v-model="CreateItemForm.pricingInfo.price"
-                  class="rounded w-full py-2 px-3 input-primary text-black"
-                  id="price" placeholder="Price in your currency..." @keypress="onlyNumberWithDot" />
+                  class="rounded w-full py-2 px-3 input-primary text-black" id="price"
+                  placeholder="Price in your currency..." @keypress="onlyNumberWithDot" />
                 <span v-if="v$.CreateItemForm.pricingInfo.price.$error" class="text-red-600 text-center">
                   {{ v$.CreateItemForm.pricingInfo.price.$errors[0].$message }}
                 </span>
@@ -103,8 +96,8 @@
                 <label class="block text-white text-sm font-bold mb-2">Item Count</label>
                 <label class="block text-white text-sm mb-2 text-[11px]">How many you have for sale</label>
                 <input v-model="CreateItemForm.pricingInfo.item_count"
-                  class="rounded w-full py-2 px-3 input-primary text-black"
-                  id="count" type="number" min="0" placeholder="How many your are selling ..." @keypress="onlyNumber" />
+                  class="rounded w-full py-2 px-3 input-primary text-black" id="count" type="number" min="0"
+                  placeholder="How many your are selling ..." @keypress="onlyNumber" />
                 <span v-if="v$.CreateItemForm.pricingInfo.item_count.$error" class="text-red-600 text-center">
                   {{ v$.CreateItemForm.pricingInfo.item_count.$errors[0].$message }}
                 </span>
@@ -113,27 +106,23 @@
             <div class="flex gap-5">
               <div class="mb-4 flex-1">
                 <label class="block text-white text-sm font-bold mb-2">Accept Bitcoin</label>
-                <input type="checkbox" id="digital_currency_1"
-                  v-model="CreateItemForm.pricingInfo.digital_currency_1" />
+                <input type="checkbox" id="digital_currency_1" v-model="CreateItemForm.pricingInfo.digital_currency_1" />
               </div>
               <div class="mb-4 flex-1">
                 <label class="block text-white text-sm font-bold mb-2">Accept Bitcoin Cash</label>
-                <input type="checkbox" id="digital_currency_2"
-                  v-model="CreateItemForm.pricingInfo.digital_currency_2" />
+                <input type="checkbox" id="digital_currency_2" v-model="CreateItemForm.pricingInfo.digital_currency_2" />
               </div>
               <div class="mb-4 flex-1">
                 <label class="block text-white text-sm font-bold mb-2">Accept Monero</label>
-                <input type="checkbox" id="digital_currency_3"
-                  v-model="CreateItemForm.pricingInfo.digital_currency_3" />
+                <input type="checkbox" id="digital_currency_3" v-model="CreateItemForm.pricingInfo.digital_currency_3" />
               </div>
             </div>
           </div>
           <div class="border-b pb-10">
             <div class="text-[20px] mt-5 mb-5 font-bold ">Description</div>
             <div class="mb-4 flex-1">
-              <textarea v-model="CreateItemForm.basicInfo.item_description"
-                        id="item_description"
-                        class="rounded w-full py-2 px-3 input-primary text-black">
+              <textarea v-model="CreateItemForm.basicInfo.item_description" id="item_description"
+                class="rounded w-full py-2 px-3 input-primary text-black">
               </textarea>
               <span v-if="v$.CreateItemForm.basicInfo.item_description.$error" class="text-red-600 text-center">
                 {{ v$.CreateItemForm.basicInfo.item_description.$errors[0].$message }}
@@ -178,7 +167,7 @@
                 </div>
                 <div class="flex-1">
                   <input type="number" placeholder="Price" min="0"
-                   class="rounded w-full py-2 px-3 input-primary text-black"
+                    class="rounded w-full py-2 px-3 input-primary text-black"
                     v-model="CreateItemForm.shippingInfo.shipping_2_price" @keypress="onlyNumberWithDot" />
                 </div>
                 <div class="flex-1">
@@ -323,11 +312,9 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       })
-      .then((response) => {
-        if (response.data.login == true)
-           { this.user = response.data.user }
-        else 
-          { this.$router.push("/login") }
+        .then((response) => {
+          if (response.data.login == true) { this.user = response.data.user }
+          else { this.$router.push("/login") }
         })
         .catch(() => {
           this.$router.push("/login")
@@ -395,7 +382,7 @@ export default defineComponent({
             });
           }
           if (response.data.error == "error") {
-      
+
             notify({
               title: "Item Error",
               text: "Item not Online.  Not all information provided.",

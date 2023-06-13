@@ -58,7 +58,7 @@
         <div class="flex flex-col justify-center mt-5">
           <router-link
             :to="{ name: 'forgotpassword' }"
-            class="text-center font-bold text-sm text-blue-500 hover:text-blue-800"
+            class="text-center font-bold text-sm text-white hover:text-accent"
             >Forgot Password?</router-link
           >
         </div>
@@ -66,7 +66,7 @@
         <div class="flex flex-col justify-center mt-5">
           <router-link
             :to="{ name: 'register' }"
-            class="text-center font-bold text-sm text-blue-500 hover:text-blue-800"
+            class="text-center font-bold text-sm text-white hover:text-accent"
             >Register Here</router-link
           >
         </div>

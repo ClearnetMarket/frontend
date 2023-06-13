@@ -9,7 +9,7 @@
             <ol class="list-reset flex">
               <li>
                 <router-link :to="{ name: 'home' }">
-                  <a class="text-blue-600 hover:text-blue-700">Home</a>
+                  <a class="text-primary hover:text-primary ">Home</a>
                 </router-link>
               </li>
               <li>
@@ -24,22 +24,16 @@
           <div class="mb-4 text-center text-[28px] ">Change Pin</div>
           <div class="mb-4">
             <label class="block text-white text-sm font-bold mb-2">Enter current Password</label>
-            <input v-model="ChangePinForm.password"
-                   class="rounded w-full py-2 px-3 input-primary text-black"
-                   id="password"
-                   type="password"
-                   placeholder="Password" />
+            <input v-model="ChangePinForm.password" class="rounded w-full py-2 px-3 input-primary text-black"
+              id="password" type="password" placeholder="Password" />
             <span v-if="v$.ChangePinForm.password.$error" class="text-red-600 text-center">
               {{ v$.ChangePinForm.password.$errors[0].$message }}
             </span>
           </div>
           <div class="mb-4">
             <label class="block text-white text-sm font-bold mb-2">Enter New Pin</label>
-            <input v-model="ChangePinForm.pin"
-                    class="rounded w-full py-2 px-3 input-primary text-black"
-                    id="password"
-                    type="password"
-                    placeholder="Password" />
+            <input v-model="ChangePinForm.pin" class="rounded w-full py-2 px-3 input-primary text-black" id="password"
+              type="password" placeholder="Password" />
             <span v-if="v$.ChangePinForm.pin.$error" class="text-red-600 text-center">
               {{ v$.ChangePinForm.pin.$errors[0].$message }}
             </span>
@@ -47,12 +41,8 @@
 
           <div class="mb-6">
             <label class="block text-white text-sm font-bold mb-2">Confirm New Pin</label>
-            <input v-model="ChangePinForm.pin_confirm"
-                    class="rounded w-full py-2 px-3 input-primary text-black"
-                    id="passwordtwo"
-                    type="password"
-                    autocomplete="off"
-                    placeholder="Confirm Password" />
+            <input v-model="ChangePinForm.pin_confirm" class="rounded w-full py-2 px-3 input-primary text-black"
+              id="passwordtwo" type="password" autocomplete="off" placeholder="Confirm Password" />
             <span v-if="v$.ChangePinForm.pin_confirm.$error" class="text-red-600 text-center">
               {{ v$.ChangePinForm.pin_confirm.$errors[0].$message }}
             </span>
@@ -97,7 +87,7 @@ export default defineComponent({
       },
     };
   },
-  created(){
+  created () {
     this.userstatus;
   },
   validations () {
