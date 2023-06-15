@@ -201,7 +201,7 @@
                   btctotalprice <= btcbalance &&
                   address_name.length > 5
                   " @click="checkoutorder()"
-                  class="bg-secondary  rounded-md font-semibold hover:bg-primary py-3 text-sm text-white uppercase w-full">
+                  class="bg-primary  rounded-md font-semibold hover:bg-accent py-3 text-sm text-white uppercase w-full">
                   Place Order
                 </button>
                 <span class="flex font-semibold text-[10px] uppercase text-center mt-10">By Clicking checkout, you agree

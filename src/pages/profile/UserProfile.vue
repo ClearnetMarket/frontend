@@ -29,7 +29,6 @@
                     Profile
                   </router-link>
                 </div>
-
               </div>
               <div class="col-span-12 md:col-span-3 flex justify-center">
                 <img class="object-fit" :src="userprofile.profileimage_url_250">
@@ -39,10 +38,7 @@
                 <div class=" text-center  mb-5">
                   Member Since: {{ relativeDate(userprofile.member_since) }} ago
                 </div>
-
-
                 <div v-if="userprofile.admin_role === 1" class=" ">
-
                   <div class=" text-white">
                     Selling From: {{ country }}
                   </div>
@@ -51,49 +47,15 @@
                       Total Items Bought: {{ user_stats.total_items_bought }}
                     </div>
                   </div>
-                  <div class=" text-white">
-                    <div v-if="vendor_stats !== null">
-                      Total Items Sold: {{ vendor_stats.total_sales }}
-                    </div>
-                  </div>
-
+                 
                   <div class="text-white border-t border-gray-500 mt-5">{{ userprofile.bio }}</div>
-
                 </div>
               </div>
-
             </div>
           </div>
-
+       
           <div class="grid grid-cols-12 gap-4 text-white pb-36">
             <div class="col-span-12">
-              <div v-if="userprofile.admin_role == 1">
-                <div v-if="vendor_reviews_total > 0">
-                  <div v-for="review in vendorreviews" :key="review.id">
-                    <div class="grid grid-cols-12 bg-neutral rounded-md p-5 mb-2">
-                      <div class="col-span-12 text-sm font-medium text-gray-500 dark:text-gray-400">
-                        {{ review.customer_name }}
-                      </div>
-                      <div class="col-span-12 text-white hover:text-accent hover:underline text-[14px]">
-                        <router-link :to="{
-                          name: 'MarketItem',
-                          params: { id: review.item_uuid },
-                        }">
-                          {{ review.title_of_item }}
-                        </router-link>
-                      </div>
-                      <div class="col-span-12 text-sm font-medium text-gray-500 dark:text-gray-400">
-                        Date Purchased: {{ relativeDate(review.timestamp) }}
-                      </div>
-                      <div class="col-span-12 mb-2">
-                        <StarRating v-bind:rating="review.vendor_rating" />
-                      </div>
-                      <div class="col-span-12 mt-2">{{ review.review_of_vendor }}</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div v-else>
                 <div v-if="userreviews.length > 0">
                   <div class="flex font-semibold text-white">User Reviews</div>
                   <div v-for="review in userreviews" :key="review.id" class="pb-5">
@@ -102,8 +64,8 @@
                         Vendor: {{ review.vendor_name }}
                       </div>
                       <div class="col-span-12">
-                        <router-link :to="{ name: 'item', params: { id: review.item_uuid } }">
-                          {{ review.item_title }}
+                        <router-link :to="{ name: 'MarketItem', params: { id: review.item_uuid } }">
+                          {{ review.title_of_item }}
                         </router-link>
                       </div>
                       <div class="col-span-12 text-sm font-medium text-gray-500 dark:text-gray-400">
@@ -112,11 +74,10 @@
                       <div class="col-span-12 mb-2">
                         <StarRating v-bind:rating="review.customer_rating" />
                       </div>
-                      <div class="col-span-12 mt-2">{{ review.review }}</div>
+                      <div class="col-span-12 mt-2">{{ review.review_of_customer }}</div>
                     </div>
                   </div>
                 </div>
-              </div>
             </div>
             <div class="col-span-12 mb-10" v-if="recordsLength > 9">
               <pagination @paginate="getPage" :records="recordsLength" v-model="page" :per-page="perPage"
@@ -165,16 +126,12 @@ export default defineComponent({
       date: Date.now(),
       orders: [],
       user_uuid: null,
-
       user: null,
       userprofile: null,
       user_stats: null,
-      vendor_stats: null,
       item_title: null,
-
       currencydefault: null,
       countrydefault: null,
-
       user_reviews_percent_one: null,
       user_reviews_percent_two: null,
       user_reviews_percent_three: null,
@@ -188,10 +145,7 @@ export default defineComponent({
       country: "",
       currency: "",
       user_reviews_total: 0,
-      vendor_reviews_total: 0,
       userreviews: [],
-      vendorreviews: [],
-
       page: 1,
       perPage: 10,
       recordsLength: 0,
@@ -200,7 +154,6 @@ export default defineComponent({
         format: false,
         template: PaginationComp
       }
-
     };
   },
   created () {
@@ -210,15 +163,13 @@ export default defineComponent({
     this.userstatus();
   },
   mounted () {
-    this.getratingsvendor();
+
     this.getratingscustomer();
-    this.getreviews();
+    this.getreviews(this.page);
     this.getPage(this.page);
     this.getuser();
     this.getuserstats();
-    this.getvendorstats();
     this.getusercountryandcurrency();
-    this.getvendorreviewscount();
   },
   methods: {
     relativeDate (value: any) {
@@ -243,13 +194,12 @@ export default defineComponent({
     },
     getPage: function (page: any) {
       // we simulate an api call that fetch the records from a backend
-      this.vendorreviews = [];
+      this.userreviews = [];
       const startIndex = this.perPage * (page - 1) + 1;
       const endIndex = startIndex + this.perPage - 1;
       // gets the vendor items
-      this.getvendorreviews(page)
+      this.getreviews(page)
     },
-
     getuser () {
       axios({
         method: "get",
@@ -273,20 +223,9 @@ export default defineComponent({
         method: "get",
         url: "/info/user-stats/" + this.user_uuid,
         withCredentials: true,
-
       }).then((response) => {
         this.user_stats = response.data;
         this.user_stats.total_items_bought = response.data.total_items_bought;
-      });
-    },
-    getvendorstats () {
-      axios({
-        method: "get",
-        url: "/info/vendor-stats/" + this.user_uuid,
-        withCredentials: true,
-
-      }).then((response) => {
-        this.vendor_stats = response.data
       });
     },
     getusercountryandcurrency () {
@@ -294,7 +233,6 @@ export default defineComponent({
         method: "get",
         url: "/info/country-currency/" + this.user_uuid,
         withCredentials: true,
-
       }).then((response) => {
         if (response.data.success) {
           this.currencydefault = response.data.currency;
@@ -305,10 +243,10 @@ export default defineComponent({
         }
       });
     },
-    getreviews () {
+    getreviews (page: any) {
       axios({
         method: "get",
-        url: "/info/user-feedback/" + this.user_uuid,
+        url: "/info/user-feedback/" + this.user_uuid + '/' + this.page,
         withCredentials: true,
       })
         .then((response) => {
@@ -316,51 +254,6 @@ export default defineComponent({
           if (this.userreviews == undefined) { this.userreviews = null }
         })
         .catch(() => { });
-    },
-    // gets the vendor reviews
-    getvendorreviewscount () {
-      axios({
-        method: "get",
-        url: "/vendor/vendor-feedback/count/" + this.user_uuid,
-        withCredentials: true,
-
-      })
-        .then((response) => {
-          this.recordsLength = response.data.count;
-        })
-        .catch(() => { });
-    },
-
-    getratingsvendor () {
-      axios({
-        method: "get",
-        url: "/vendor/all-feedback/" + this.user_uuid,
-        withCredentials: true,
-
-      })
-        .then((response) => {
-          { this.vendor_reviews_total = response.data.total_feedback }
-        })
-        .catch((error) => {
-          console.log(error)
-        });
-    },
-    // gets the vendor reviews
-    getvendorreviews (page: any) {
-      axios({
-        method: "get",
-        url: "/vendor/vendor-feedback/" + this.user_uuid + '/' + this.page,
-        withCredentials: true,
-      })
-        .then((response) => {
-          this.vendorreviews = response.data;
-          if (this.vendorreviews == undefined) {
-            this.vendorreviews = null;
-          }
-        })
-        .catch(() => {
-          console.log()
-        });
     },
     getratingscustomer () {
       axios({
@@ -371,7 +264,6 @@ export default defineComponent({
         .then((response) => {
           if (response.data.success) {
             this.user_reviews_total = response.data.total_feedback;
-
           }
         })
         .catch(() => { });

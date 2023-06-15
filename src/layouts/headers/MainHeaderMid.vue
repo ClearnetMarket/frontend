@@ -2,7 +2,7 @@
   <div class="max-w-7xl mx-auto grid grid-cols-12 md:py-2">
     <div class="col-span-12 md:col-span-3 lg:col-span-3 text-center  text-white hover:text-white "
       @click="gotourl('home')" style="cursor: pointer">
-      <div class="text-[24px] text-white font-bold pt-1 ">Freeport</div>
+      <div class="text-[24px] text-white hover:text-accent font-bold pt-1 ">Freeport</div>
     </div>
     <div class="sm:col-span-12 sm:px-10 md:col-span-6 lg:col-span-7 overflow-hidden">
       <form class="grid grid-cols-12" @submit.prevent="mainsearch()">
@@ -12,7 +12,7 @@
             placeholder="Search freeport..." />
         </div>
         <div class="col-span-2 md:col-span-4 ">
-          <button class="bg-secondary hover:bg-primary text-white font-bold py-2 pt-1
+          <button class="bg-primary hover:bg-accent text-white font-bold py-2 pt-1
                px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
             Search
           </button>

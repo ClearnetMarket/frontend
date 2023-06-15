@@ -110,7 +110,7 @@
               Shipping Option 1:
             </div>
             <div class="grid grid-cols-4 grid-rows-2 px-5">
-              <div class="col-span-3 row-span-1 text-[16px] text-warning font-bold">
+              <div class="col-span-3 row-span-1 text-[16px] text-primary font-bold">
                 *FREE SHIPPING*
               </div>
               <div class="col-span-3 row-span-1 text-[14px] text-white">
@@ -195,10 +195,10 @@
                       <div class="flex">
                         <div class="">Sold by:</div>
                         <router-link :to="{
-                          name: 'userprofile',
+                          name: 'vendorprofile',
                           params: { uuid: vendoruuid },
                         }">
-                          <div class="text-blue-500 hover:text-blue-300 hover:underline pl-3">
+                          <div class="text-primary hover:text-accent hover:underline pl-3">
                             {{ vendorname }} ({{ vendortotalsales }})
                           </div>
                         </router-link>
@@ -224,7 +224,7 @@
                   </div>
 
                   <div v-if="vendoruuid">
-                    <div class="mb-5 mt-5 text-[14px] text-blue-500 hover:text-blue-300 hover:underline pl-3 text-center">
+                    <div class="mb-5 mt-5 text-[14px] text-primary hover:text-accent hover:underline pl-3 text-center">
                       <router-link v-if="user" :to="{
                         name: 'MsgCreateItem',
                         params: { uuid: vendoruuid, itemuuid: uuid },
@@ -234,9 +234,9 @@
                     </div>
                   </div>
                   <div v-if="vendoruuid">
-                    <div class="text-[14px] text-blue-500 hover:text-blue-300 hover:underline pl-3 text-center">
+                    <div class="text-[14px] text-primary hover:text-accent hover:underline pl-3 text-center">
                       <router-link :to="{
-                        name: 'userprofile',
+                        name: 'vendorprofile',
                         params: { uuid: vendoruuid },
                       }">
                         View Vendor Profile
@@ -251,7 +251,7 @@
                 Item Reported
               </div>
               <div v-else>
-                <button class="bg-grey-600  text-white font-bold py-1 px-3
+                <button class="bg-grey-600 hover:text-accent text-white font-bold py-1 px-3
                           rounded focus:outline-none focus:shadow-outline" @click.prevent="reportitem()">
                   Report Item
                 </button>

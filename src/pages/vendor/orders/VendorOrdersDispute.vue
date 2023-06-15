@@ -102,7 +102,7 @@
                             <div class="flex justify-center md:justify-start">
                               <div class="">Sold by:</div>
                               <router-link :to="{
-                                name: 'userprofile',
+                                name: 'vendorprofile',
                                 params: { uuid: order.vendor_uuid },
                               }">
                                 <div class="text-accent hover:text-blue-500 hover:underline pl-3">
@@ -144,7 +144,7 @@
                         name: 'ordersview',
                         params: { uuid: order.uuid },
                       }">
-                        <button class="bg-yellow-600 hover:bg-zinc-400 text-white font-bold py-1
+                        <button class="bg-primary hover:bg-accent text-white font-bold py-1
                                   px-3 rounded focus:outline-none focus:shadow-outline w-full" type="button">
                           Leave Feedback
                         </button>

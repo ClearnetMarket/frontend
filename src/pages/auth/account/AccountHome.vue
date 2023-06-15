@@ -5,7 +5,7 @@
 
     <div v-if="user">
         <MainHeaderVendor v-show="user.user_admin === 1" />
-    </div>
+
     <div class="wrapper">
         <div class="container max-w-7xl mx-auto px-10  text-white">
             <!-- Container-->
@@ -117,7 +117,7 @@
             </div>
         </div>
     </div>
-
+</div>
     <!-- END container-->
     <MainFooter />
 </template>

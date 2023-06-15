@@ -56,11 +56,9 @@
               <div class="col-span-2 flex">
                 <div class="font-bold px-2">Customer: </div>
                 <div class="px-2">{{ order.customer_user_name }}</div>
-
               </div>
               <div class="col-span-4 flex">
                 <div class="font-bold px-2">Payment Info: </div>
-
                 <div class="" v-if="order.digital_currency === 1">
                   <div v-if="order.shipping_price_btc === 0">Free Shipping</div>
                   <div v-else>{{ order.shipping_price_btc }}</div>
@@ -93,57 +91,62 @@
       <div class="col-span-12 font-semibold text-2xl">Rate customer</div>
       <div class="grid grid-cols-12 mt-5  p-5 bg-neutral rounded-md mb-5">
         <div class="col-span-12 bg-neutral rounded-md">
-          <div class="grid grid-cols-12">
-            <div class="col-span-12">Customer Rating:</div>
-            <div class="col-span-12">
-              <fieldset class="rating" v-if="rated === false">
-                <input type="radio" id="vendorstar10" name="vendorrating"
-                  @click.prevent="sendscore(order.uuid, 10)" /><label class="full" for="vendorstar10"></label>
-                <input type="radio" id="vendorstar9" name="vendorrating" value="9"
-                  @click.prevent="sendscore(order.uuid, 9)" /><label class="full" for="vendorstar9"></label>
-                <input type="radio" id="vendorstar8" name="vendorrating" value="8"
-                  @click.prevent="sendscore(order.uuid, 8)" /><label class="full" for="vendorstar8"></label>
-                <input type="radio" id="vendorstar7" name="vendorrating" value="7"
-                  @click.prevent="sendscore(order.uuid, 7)" /><label class="full" for="vendorstar7"></label>
-                <input type="radio" id="vendorstar6" name="vendorrating" value="6"
-                  @click.prevent="sendscore(order.uuid, 6)" /><label class="full" for="vendorstar6"></label>
-                <input type="radio" id="vendorstar5" name="vendorrating" value="5"
-                  @click.prevent="sendscore(order.uuid, 5)" /><label class="full" for="vendorstar5"></label>
-                <input type="radio" id="vendorstar4" name="vendorrating" value="4"
-                  @click.prevent="sendscore(order.uuid, 4)" /><label class="full" for="vendorstar4"></label>
-                <input type="radio" id="vendorstar3" name="vendorrating" value="3"
-                  @click.prevent="sendscore(order.uuid, 3)" /><label class="full" for="vendorstar3"></label>
-                <input type="radio" id="vendorstar2" name="vendorrating" value="2"
-                  @click.prevent="sendscore(order.uuid, 2)" /><label class="full" for="vendorstar2"></label>
-                <input type="radio" id="vendorstar1" name="vendorrating" value="1"
-                  @click.prevent="sendscore(order.uuid, 1)" /><label class="full" for="vendorstar1"></label>
-              </fieldset>
-              <div v-if="rated === true">
-                {{ rating_number }} out of 10 Feedback Given
+          <form @submit.prevent="onSubmitFeedback">
+            <div class="grid grid-cols-12">
+              <div class="col-span-12">Customer Rating:</div>
+              <div class="col-span-12">
+                <div class="rating">
+                  <input type="radio" id="customerstar1" name="rating-2" value="1"
+                    v-model="CustomerRating.customerrating1" class="mask mask-star-2 bg-orange-400" />
+                  <input type="radio" id="customerstar2" name="rating-2" value="2"
+                    v-model="CustomerRating.customerrating2" class="mask mask-star-2 bg-orange-400" />
+                  <input type="radio" id="customerstar3" name="rating-2" value="3"
+                    v-model="CustomerRating.customerrating3" class="mask mask-star-2 bg-orange-400" />
+                  <input type="radio" id="customerstar4" name="rating-2" value="4"
+                    v-model="CustomerRating.customerrating4" class="mask mask-star-2 bg-orange-400" />
+                  <input type="radio" id="customerstar5" name="rating-2" value="5"
+                    v-model="CustomerRating.customerrating5" class="mask mask-star-2 bg-orange-400" />
+                  <input type="radio" id="customerstar6" name="rating-2" value="6"
+                    v-model="CustomerRating.customerrating6" class="mask mask-star-2 bg-orange-400" />
+                  <input type="radio" id="customerstar7" name="rating-2" value="7"
+                    v-model="CustomerRating.customerrating7" class="mask mask-star-2 bg-orange-400" />
+                  <input type="radio" id="customerstar8" name="rating-2" value="8"
+                    v-model="CustomerRating.customerrating8" class="mask mask-star-2 bg-orange-400" />
+                  <input type="radio" id="customerstar9" name="rating-2" value="9"
+                    v-model="CustomerRating.customerrating9" class="mask mask-star-2 bg-orange-400" />
+                  <input type="radio" id="customerstar10" name="rating-2" value="10"
+                    v-model="CustomerRating.customerrating10" class="mask mask-star-2 bg-orange-400" />
+                </div>
+                <div v-if="rated === true">
+                  {{ rating_customer }} out of 10 Feedback Given
+                </div>
               </div>
             </div>
-          </div>
-          <div v-if="rated === false">
-            <div class="grid grid-cols-12">
-              <div class="col-span-12 mb-1 text-[14px] pt-5">Leave a review:</div>
-              <form class="col-span-12" @submit.prevent="sendreview(order.uuid)">
+            <div v-if="rated === false">
+              <div class="grid grid-cols-12">
+                <div class="col-span-12 mb-1 text-[14px] pt-5">Leave a review:</div>
+
                 <div class="col-span-12">
-                  <textarea v-model="review" class="shadow appearance-none border border-gray-500 rounded w-full py-2 px-3
-                     text-white leading-tight focus:outline-none focus:shadow-outline" id="message" type="textfield"
+                  <textarea v-model="review" class="text-black shadow appearance-none border border-gray-500 rounded w-full py-2 px-3
+                      leading-tight focus:outline-none focus:shadow-outline" id="message" type="textfield"
                     placeholder="Review Rating" />
                 </div>
-                <div class="col-span-12  col-start-4">
-                  <button class="bg-yellow-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded
-                     focus:outline-none focus:shadow-outline  " type="submit">
-                    Add Feedback
-                  </button>
+                <div class="col-span-12 ">
+                  <div class="flex justify-end">
+                    <button class="bg-primary hover:bg-accent text-white font-bold py-2 px-4 rounded
+                     focus:outline-none focus:shadow-outline" type="submit">
+                      Add Feedback
+                    </button>
+                  </div>
+
                 </div>
-              </form>
+
+              </div>
             </div>
-          </div>
-          <div v-if="rated === true">
-            <div class="col-span-12 mt-5">{{ review }}</div>
-          </div>
+            <div v-if="rated === true">
+              <div class="col-span-12 mt-5">{{ review }}</div>
+            </div>
+          </form>
         </div>
       </div>
     </div>
@@ -185,7 +188,21 @@ export default defineComponent({
       rated: false,
       review: null,
       uuid: null,
-      rating_number: 0
+      rating_customer: 0,
+      customerrating: 0,
+      CustomerRating: {
+        customerrating1: '',
+        customerrating2: '',
+        customerrating3: '',
+        customerrating4: '',
+        customerrating5: '',
+        customerrating6: '',
+        customerrating7: '',
+        customerrating8: '',
+        customerrating9: '',
+        customerrating10: '',
+      },
+
     };
   },
 
@@ -216,23 +233,17 @@ export default defineComponent({
     getFeedback (uuid: any) {
       axios({
         method: "get",
-        url: "/orders/feedback/get/vendor/" + uuid,
+        url: "/orders/feedback/vendor/" + uuid,
         withCredentials: true,
         headers: authHeader(),
       })
         .then((response) => {
           if (response.data.success) {
             // hide rating div
-            this.rating_number = response.data.customer_rating;
+            this.rating_customer = response.data.customer_rating;
             this.review = response.data.review;
-            this.rated = true
+            this.rated = response.data.rated;
           }
-          else {
-            this.rating_number = 0;
-            this.review = "";
-            this.rated = false
-          }
-
         })
         .catch(() => {
           notify({
@@ -243,70 +254,103 @@ export default defineComponent({
         });
     },
 
-    //payload for the score
-    sendscore (uuid: string, rating: number) {
-      let payLoad = { rating: rating };
-      this.sendFeedbackScore(uuid, payLoad);
-      this.rating_number = rating
+    // set variables for ratings
+    onSubmitFeedback () {
+      if (this.CustomerRating.customerrating1 == '1') {
+        this.rating_customer = 1;
+      } else if (this.CustomerRating.customerrating2 == '2') {
+        this.rating_customer = 2;
+      } else if (this.CustomerRating.customerrating3 == '3') {
+        this.rating_customer = 3;
+      } else if (this.CustomerRating.customerrating4 == '4') {
+        this.rating_customer = 4;
+      } else if (this.CustomerRating.customerrating5 == '5') {
+        this.rating_customer = 5;
+      } else if (this.CustomerRating.customerrating6 == '6') {
+        this.rating_customer = 6;
+      } else if (this.CustomerRating.customerrating7 == '7') {
+        this.rating_customer = 7;
+      } else if (this.CustomerRating.customerrating8 == '8') {
+        this.rating_customer = 8;
+      } else if (this.CustomerRating.customerrating9 == '9') {
+        this.rating_customer = 9;
+      } else if (this.CustomerRating.customerrating10 == '10') {
+        this.rating_customer = 10;
+      }
+      else{
+         this.rating_customer = 10;
+      }
+  
+      let payLoadReview = { review: this.review };
+      let payLoadScore = { customerrating: this.rating_customer };
+
+      this.sendFeedbackReview(payLoadReview);
+      this.sendFeedbackScore(payLoadScore);
     },
-    // send the score for a feedback
-    sendFeedbackScore (uuid: any, payLoad: any) {
+    // send the feedback rating
+    sendFeedbackReview (payLoad: {
+      review: string;
+    }) {
       axios({
         method: "post",
-        url: "/orders/vendor/feedback/score/" + uuid,
+        url: "/orders/vendor/feedback/review/" + this.order.uuid,
         data: payLoad,
         withCredentials: true,
         headers: authHeader(),
       })
-        .then((response) => {
-          if (response.data.success) {
-
-            // hide rating div
-            this.selectedrating = false;
-          }
-        })
-        .catch(() => {
-
-          notify({
-            title: "Freeport Error",
-            text: "Error Posting Review.",
-            type: "error",
-          });
-        });
-    },
-    // payload for sending feedback
-    sendreview (uuid: any) {
-      let review = this.review;
-      let payLoad = { review: review };
-      this.sendFeedbackReview(uuid, payLoad);
-    },
-    // send the feedback
-    sendFeedbackReview (uuid: string, payLoad: any) {
-
-      axios({
-        method: "post",
-        url: "/orders/vendor/feedback/review/" + uuid,
-        data: payLoad,
-        withCredentials: true,
-        headers: authHeader(),
-      })
-
         .then((response) => {
           if (response.data.success) {
             notify({
               title: "Message Center",
-              text: "Successfully sent feedback",
+              text: "Successfully sent feedback Review!",
               type: "success",
             });
-            this.rated = true
-            this.getuserorder();
+            this.$router.push({
+              name: "vendorordersfinalized",
+            });
           }
           else {
             notify({
-              title: "Freeport Error",
-              text: "Error posting information.",
+              title: "Message Center",
+              text: "Failure to send review Message",
               type: "error",
-            })
+            });
+          }
+        })
+        .catch(() => {
+          notify({
+            title: "Freeport Error",
+            text: "Error posting information.",
+            type: "error",
+          });
+        });
+    },
+    // send the feedback rating
+    sendFeedbackScore (payLoad: { customerrating: number }) {
+      axios({
+        method: "post",
+        url: "/orders/vendor/feedback/score/" + this.order.uuid,
+        data: payLoad,
+        withCredentials: true,
+        headers: authHeader(),
+      })
+        .then((response) => {
+          if (response.data.success) {
+            notify({
+              title: "Message Center",
+              text: "Successfully sent feedback Score!",
+              type: "success",
+            });
+            this.$router.push({
+              name: "vendorordersfinalized",
+            });
+          }
+          else {
+            notify({
+              title: "Message Center",
+              text: "Failure to Send Feedback Score",
+              type: "error",
+            });
           }
         })
         .catch(() => {
@@ -318,6 +362,16 @@ export default defineComponent({
         });
     },
 
+
+
+
+
+
+
+
+
+
+
     // get the date conversion
     relativeDate (value: any) {
       let e = new Date(value).valueOf();
@@ -326,57 +380,4 @@ export default defineComponent({
   },
 });
 </script>
-<style>
-fieldset,
-label {
-  margin: 0;
-  padding: 0;
-}
-
-h1 {
-  font-size: 1.5em;
-  margin: 10px;
-}
-
-/****** Style Star Rating Widget *****/
-.rating {
-  border: none;
-  float: left;
-}
-
-.rating>input {
-  display: none;
-}
-
-.rating>label:before {
-  margin: 5px;
-  font-size: 1.25em;
-  font-family: 'FontAwesome', sans-serif;
-  display: inline-block;
-  content: "\f005";
-}
-
-.rating>label {
-  color: #ddd;
-  float: right;
-}
-
-/***** CSS Magic to Highlight Stars on Hover *****/
-.rating>input:checked~label,
-/* show gold star when clicked */
-.rating:not(:checked)>label:hover,
-/* hover current star */
-.rating:not(:checked)>label:hover~label {
-  color: #ffd700;
-}
-
-/* hover previous stars in list */
-.rating>input:checked+label:hover,
-/* hover current star when changing rating */
-.rating>input:checked~label:hover,
-.rating>label:hover~input:checked~label,
-/* lighten current selection */
-.rating>input:checked~label:hover~label {
-  color: #ffed85;
-}
-</style>
+<style></style>

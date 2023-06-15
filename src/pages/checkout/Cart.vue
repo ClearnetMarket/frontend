@@ -52,7 +52,7 @@
                             <span class="text-primary hover:text-blue-300 text-xs ">
                               <div v-if="item.vendor_uuid">
                                 <router-link :to="{
-                                  name: 'userprofile',
+                                  name: 'vendorprofile',
                                   params: { uuid: item.vendor_uuid },
                                 }">
                                   Sold by: {{ item.vendor_user_name }}

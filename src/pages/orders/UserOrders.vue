@@ -104,7 +104,7 @@
                                 <div class="flex justify-center md:justify-start">
                                   <div class="">Sold by:</div>
                                   <router-link :to="{
-                                    name: 'userprofile',
+                                    name: 'vendorprofile',
                                     params: { uuid: order.vendor_uuid },
                                   }">
                                     <div class="text-white hover:text-blue-500 hover:underline pl-3">
@@ -131,7 +131,7 @@
                           params: { uuid: order.uuid },
                         }">
                           <button
-                            class="bg-secondary hover:bg-primary text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
+                            class="bg-secondary hover:bg-accent text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
                             type="button">
                             Tracking Info
                           </button>
@@ -142,7 +142,7 @@
                     <div v-if="order.overall_status === 1">
                       <div class="my-2">
                         <button
-                          class="bg-red-600 hover:bg-red-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
+                          class="bg-secondary hover:bg-accent text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
                           type="button" @click="requestcancel(order.uuid)">
                           Request Cancel
                         </button>
@@ -152,14 +152,14 @@
                     <div v-if="order.overall_status === 2">
                       <div class="my-2">
                         <button
-                          class="bg-red-600 hover:bg-red-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
+                          class="bg-secondary hover:bg-accent text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
                           type="button" @click="requestcancel(order.uuid)">
                           Request Cancel
                         </button>
                       </div>
                       <div class="my-2">
                         <button
-                          class="bg-secondary hover:bg-primary text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
+                          class="bg-secondary hover:bg-accent text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
                           type="button" @click="finalize(order.uuid)">
                           Finalize Order
                         </button>
@@ -167,7 +167,7 @@
 
                       <div class="my-2">
                         <button
-                          class="bg-secondary hover:bg-primary text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
+                          class="bg-secondary hover:bg-accent text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
                           type="button" @click="disputeorder(order.uuid)">
                           Dispute Order
                         </button>
@@ -177,21 +177,21 @@
                     <div v-if="order.overall_status === 3">
                       <div class="my-2">
                         <button
-                          class="bg-secondary hover:bg-primary text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
+                          class="bg-secondary hover:bg-accent text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
                           type="button" @click="delivered(order.uuid)">
                           Mark as Delivered
                         </button>
                       </div>
                       <div class="my-2">
                         <button
-                          class="bg-secondary hover:bg-primary text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
+                          class="bg-secondary hover:bg-accent text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
                           type="button" @click="finalize(order.uuid)">
                           Finalize Order
                         </button>
                       </div>
                       <div class="my-2">
                         <button
-                          class="bg-secondary hover:bg-primary text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
+                          class="bg-secondary hover:bg-accent text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
                           type="button" @click="disputeorder(order.uuid)">
                           Dispute Order
                         </button>
@@ -201,14 +201,14 @@
                     <div v-if="order.overall_status === 4">
                       <div class="my-2">
                         <button
-                          class="bg-green-600 hover:bg-secondary text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
+                          class="bg-secondary hover:bg-accent text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
                           type="button" @click="finalize(order.uuid)">
                           Finalize Order
                         </button>
                       </div>
                       <div class="my-2">
                         <button
-                          class="bg-zinc-600 hover:secondary text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
+                          class="bg-secondary hover:bg-accent text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
                           type="button" @click="disputeorder(order.uuid)">
                           Dispute Order
                         </button>
@@ -223,7 +223,7 @@
                         params: { uuid: order.uuid },
                       }">
                         <button
-                          class="bg-red-600 hover:bg-secondary text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
+                          class="bg-error hover:bg-secondary text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
                           type="button">
                           View Dispute
                         </button>
@@ -243,7 +243,7 @@
                           params: { uuid: order.uuid },
                         }">
                           <button
-                            class="bg-yellow-600 hover:bg-secondary text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
+                            class="bg-primary hover:bg-accent text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
                             type="button">
                             Leave Feedback
                           </button>
@@ -384,6 +384,13 @@ export default defineComponent({
             type: "success",
           });
         }
+         else {
+          notify({
+            title: "Message Center",
+            text: "Error marking order as delivered",
+            type: "error",
+          });
+        }
       });
     },
     // marks as finalized
@@ -402,6 +409,13 @@ export default defineComponent({
             type: "success",
           });
         }
+        else{
+            notify({
+            title: "Message Center",
+            text: "Error finalizing order",
+            type: "error",
+          });
+        }
       });
     },
     // mark as requested to cancel
@@ -418,9 +432,18 @@ export default defineComponent({
             text: "Successfully sent cancel request to vendor!",
             type: "success",
           });
+          
           this.getuserorderscount();
           this.getPage(this.page);
         }
+         else {
+          notify({
+            title: "Message Center",
+            text: "Error cancelling order",
+            type: "error",
+          });
+        }
+
       });
     },
     // mark as disputed
@@ -434,12 +457,19 @@ export default defineComponent({
         if (response.data.success) {
           notify({
             title: "Message Center",
-            text: "Successfully request a dispute.",
+            text: "Successfully request a dispute",
             type: "success",
           });
           this.createdisputechat(uuid);
           this.createdisputenotificationchat(uuid);
           this.getPage(this.page);
+        }
+         else {
+          notify({
+            title: "Message Center",
+            text: "Error disputing order.",
+            type: "error",
+          });
         }
       });
     },

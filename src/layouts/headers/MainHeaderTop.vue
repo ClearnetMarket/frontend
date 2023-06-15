@@ -18,7 +18,14 @@
               <div class="flex justify-center sm:justify-between lg:justify-start ml-5 text-white font-bold pb-2 pt-2">
                 <div class="px-3.5">English</div>
                 <div class="px-3 ">{{ returncurrency(user.currency) }}</div>
-                 <div class="px-3 ">{{user.user_name}}</div>
+                 <div class="px-3 ">
+                    <router-link :to="{
+                      name: 'userprofile',
+                      params: { uuid: user.user_id },
+                    }">
+                        {{ user.user_name }}
+                    </router-link>
+                </div>
               </div>
             </div>
             <div class="col-span-1 lg:col-span-2 ">
@@ -77,7 +84,7 @@
                       </div>
                       <div v-else>
                         <button
-                          class="bg-red-600 text-white hover:text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline font-bold dropdown-hover"
+                          class="bg-error hover:bg-neutral text-white hover:text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline font-bold dropdown-hover"
                           @click.prevent="notificationsnotificiationmarkasread()">
                           {{ notecount }} <font-awesome-icon icon="fa-solid fa-bell " class="text-[22px]" />
                         </button>
@@ -90,7 +97,7 @@
                               </li>
                             </div>
                             <div v-else>
-                              <li class="w-full p-5 bg-red-300hover:font-bold">
+                              <li class="w-full p-5 bg-red-300 hover:font-bold">
                                 {{ notes.message }}
                               </li>
                             </div>

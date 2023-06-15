@@ -28,6 +28,7 @@
         <ol class="list-reset flex"></ol>
       </nav>
 
+
       <div v-if="order_found">
         <div class="grid grid-cols-1 w-full px-5">
           <h1 class="col-span-1 font-semibold text-[14px] md:text-2xl text-center">Order# {{ order.uuid }}</h1>
@@ -135,7 +136,7 @@
                   <div v-if="order.overall_status === 1">
                     <div class="my-2">
                       <button
-                        class="bg-red-600 hover:bg-red-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
+                        class="bg-secondary hover:bg-accent text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
                         type="button" @click="requestcancel(order.uuid)">
                         Request Cancel
                       </button>
@@ -145,14 +146,14 @@
                   <div v-if="order.overall_status === 2">
                     <div class="my-2">
                       <button
-                        class="bg-red-600 hover:bg-red-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
+                        class="bg-secondary hover:bg-accent text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
                         type="button" @click="requestcancel(order.uuid)">
                         Request Cancel
                       </button>
                     </div>
                     <div class="my-2">
                       <button
-                        class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
+                        class="bg-secondary hover:bg-accent text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
                         type="button" @click="finalize(order.uuid)">
                         Finalize Order
                       </button>
@@ -160,7 +161,7 @@
 
                     <div class="my-2">
                       <button
-                        class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
+                        class="bg-secondary hover:bg-accent text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
                         type="button" @click="disputeorder(order.uuid)">
                         Dispute Order
                       </button>
@@ -170,7 +171,7 @@
                   <div v-if="order.overall_status === 3">
                     <div class="my-2">
                       <button
-                        class="bg-zinc-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
+                        class="bg-secondary hover:bg-accent text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
                         type="button" @click="delivered(order.uuid)">
                         Mark as Delivered
                       </button>
@@ -263,32 +264,31 @@
               <form @submit.prevent="onSubmitFeedback">
                 <div class="grid grid-cols-12 rounded-md border bg-neutral mb-5 p-5">
                   <div class="col-span-12 text-[14px] mb-5">Leave Feedback</div>
-
                   <div class="col-span-12">
                     <div class="col-span-12">Vendor Rating</div>
                     <div class="col-span-12 mb-5">
-                      <fieldset class="rating1">
-                        <input type="radio" id="vendorstar10" name="vendorrating" value="10"
-                          v-model="VendorRating.vendorrating10" /><label class="full" for="vendorstar10"></label>
-                        <input type="radio" id="vendorstar9" name="vendorrating" value="9"
-                          v-model="VendorRating.vendorrating9" /><label class="full" for="vendorstar9"></label>
-                        <input type="radio" id="vendorstar8" name="vendorrating" value="8"
-                          v-model="VendorRating.vendorrating8" /><label class="full" for="vendorstar8"></label>
-                        <input type="radio" id="vendorstar7" name="vendorrating" value="7"
-                          v-model="VendorRating.vendorrating7" /><label class="full" for="vendorstar7"></label>
-                        <input type="radio" id="vendorstar6" name="vendorrating" value="6"
-                          v-model="VendorRating.vendorrating6" /><label class="full" for="vendorstar6"></label>
-                        <input type="radio" id="vendorstar5" name="vendorrating" value="5"
-                          v-model="VendorRating.vendorrating5" /><label class="full" for="vendorstar5"></label>
-                        <input type="radio" id="vendorstar4" name="vendorrating" value="4"
-                          v-model="VendorRating.vendorrating4" /><label class="full" for="vendorstar4"></label>
-                        <input type="radio" id="vendorstar3" name="vendorrating" value="3"
-                          v-model="VendorRating.vendorrating3" /><label class="full" for="vendorstar3"></label>
-                        <input type="radio" id="vendorstar2" name="vendorrating" value="2"
-                          v-model="VendorRating.vendorrating2" /><label class="full" for="vendorstar2"></label>
-                        <input type="radio" id="vendorstar1" name="vendorrating" value="1"
-                          v-model="VendorRating.vendorrating1" /><label class="full" for="vendorstar1"></label>
-                      </fieldset>
+                      <div class="rating">
+                        <input type="radio" id="vendorstar1" name="rating-2" value="1"
+                          v-model="VendorRating.vendorrating1" class="mask mask-star-2 bg-orange-400" />
+                        <input type="radio" id="vendorstar2" name="rating-2" value="2"
+                          v-model="VendorRating.vendorrating2" class="mask mask-star-2 bg-orange-400" />
+                        <input type="radio" id="vendorstar3" name="rating-2" value="3"
+                          v-model="VendorRating.vendorrating3" class="mask mask-star-2 bg-orange-400" />
+                        <input type="radio" id="vendorstar4" name="rating-2" value="4"
+                          v-model="VendorRating.vendorrating4" class="mask mask-star-2 bg-orange-400" />
+                        <input type="radio" id="vendorstar5" name="rating-2" value="5"
+                          v-model="VendorRating.vendorrating5" class="mask mask-star-2 bg-orange-400" />
+                        <input type="radio" id="vendorstar6" name="rating-2" value="6"
+                          v-model="VendorRating.vendorrating6" class="mask mask-star-2 bg-orange-400" />
+                        <input type="radio" id="vendorstar7" name="rating-2" value="7"
+                          v-model="VendorRating.vendorrating7" class="mask mask-star-2 bg-orange-400" />
+                        <input type="radio" id="vendorstar8" name="rating-2" value="8"
+                          v-model="VendorRating.vendorrating8" class="mask mask-star-2 bg-orange-400" />
+                        <input type="radio" id="vendorstar9" name="rating-2" value="9"
+                          v-model="VendorRating.vendorrating9" class="mask mask-star-2 bg-orange-400" />
+                        <input type="radio" id="vendorstar10" name="rating-2" value="10"
+                          v-model="VendorRating.vendorrating10" class="mask mask-star-2 bg-orange-400" />
+                      </div>
                     </div>
                   </div>
                   <div class="col-span-12 mt-5 mb-1">
@@ -296,12 +296,13 @@
                   </div>
                   <div class="col-span-12">
                     <textarea v-model="review"
-                      class="shadow appearance-none border border-gray-500 rounded w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline"
+                      class="shadow appearance-none border border-gray-500 rounded w-full py-2 px-3 text-black
+                       leading-tight focus:outline-none focus:shadow-outline"
                       id="message" type="textfield" placeholder="Review Rating" />
                   </div>
                   <div class="col-span-12 text-center mt-5">
                     <button
-                      class="bg-yellow-600 hover:bg-zinc-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                      class="bg-primary hover:bg-accent text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                       type="submit">
                       Add Feedback
                     </button>
@@ -419,6 +420,7 @@ export default defineComponent({
           this.$router.push("/login")
         })
     },
+
     getuserorder () {
       axios({
         method: "get",
@@ -426,11 +428,9 @@ export default defineComponent({
         withCredentials: true,
         headers: authHeader(),
       }).then((response) => {
-
         this.order = response.data;
         this.order_found = true;
         this.getvendorinfo();
-
         if (this.order) {
           this.getvendorinfo();
         }
@@ -447,6 +447,7 @@ export default defineComponent({
           });
         });
     },
+
     //  get vendor info for stats
     getvendorinfo () {
       axios({
@@ -481,9 +482,10 @@ export default defineComponent({
         }
       });
     },
+
     // set variables for ratings
     onSubmitFeedback () {
-
+      console.log(this.VendorRating)
       if (this.VendorRating.vendorrating1 == '1') {
         this.rating_vendor = 1;
       } else if (this.VendorRating.vendorrating2 == '2') {
@@ -505,7 +507,10 @@ export default defineComponent({
       } else if (this.VendorRating.vendorrating10 == '10') {
         this.rating_vendor = 10;
       }
-
+      else{
+        this.rating_vendor = 10;
+      }
+      console.log(this.rating_vendor)
       let payLoadReview = { review: this.review };
       let payLoadScore = { vendorrating: this.rating_vendor };
 
@@ -532,6 +537,13 @@ export default defineComponent({
             });
             this.$router.push({
               name: "userorders",
+            });
+          }
+          else{
+              notify({
+              title: "Message Center",
+              text: "Failure to send review Message",
+              type: "error",
             });
           }
         })
@@ -564,9 +576,15 @@ export default defineComponent({
               name: "userorders",
             });
           }
+          else{
+            notify({
+              title: "Message Center",
+              text: "Failure to Send Feedback Score",
+              type: "error",
+            });
+          }
         })
         .catch(() => {
-
           notify({
             title: "Freeport Error",
             text: "Error posting information.",
@@ -675,108 +693,4 @@ export default defineComponent({
   },
 });
 </script>
-<style>
-fieldset,
-label {
-  margin: 0;
-  padding: 0;
-}
-
-h1 {
-  font-size: 1.5em;
-  margin: 10px;
-}
-
-/****** Style Star Rating Widget *****/
-.rating {
-  border: none;
-  float: left;
-}
-
-.rating>input {
-  display: none;
-}
-
-.rating>label:before {
-  margin: 5px;
-  font-size: 1.25em;
-  font-family: 'FontAwesome', sans-serif;
-  display: inline-block;
-  content: "\f005";
-}
-
-/*.rating > .half:before {
-  content: "\f089";
-  position: absolute;
-}*/
-.rating>label {
-  color: #ddd;
-  float: right;
-}
-
-/***** CSS Magic to Highlight Stars on Hover *****/
-.rating>input:checked~label,
-/* show gold star when clicked */
-.rating:not(:checked)>label:hover,
-/* hover current star */
-.rating:not(:checked)>label:hover~label {
-  color: #ffd700;
-}
-
-/* hover previous stars in list */
-.rating>input:checked+label:hover,
-/* hover current star when changing rating */
-.rating>input:checked~label:hover,
-.rating>label:hover~input:checked~label,
-/* lighten current selection */
-.rating>input:checked~label:hover~label {
-  color: #ffed85;
-}
-
-/* */
-
-.rating1 {
-  border: none;
-  float: left;
-}
-
-.rating1>input {
-  display: none;
-}
-
-.rating1>label:before {
-  margin: 5px;
-  font-size: 1.25em;
-  font-family: 'FontAwesome', sans-serif;
-  display: inline-block;
-  content: "\f005";
-}
-
-/*.rating1 > .half:before {
-  content: "\f089";
-  position: absolute;
-}*/
-.rating1>label {
-  color: #ddd;
-  float: right;
-}
-
-/***** CSS Magic to Highlight Stars on Hover *****/
-.rating1>input:checked~label,
-/* show gold star when clicked */
-.rating1:not(:checked)>label:hover,
-/* hover current star */
-.rating1:not(:checked)>label:hover~label {
-  color: #ffd700;
-}
-
-/* hover previous stars in list */
-.rating1>input:checked+label:hover,
-/* hover current star when changing rating */
-.rating1>input:checked~label:hover,
-.rating1>label:hover~input:checked~label,
-/* lighten current selection */
-.rating1>input:checked~label:hover~label {
-  color: #ffed85;
-}
-</style>
+<style></style>

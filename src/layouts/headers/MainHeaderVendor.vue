@@ -10,7 +10,7 @@
         <div v-if="disputes">
             <router-link :to="{ name: 'vendorordersdispute' }">
                 <button
-                    class="bg-warning hover:bg-primary text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mr-2"
+                    class="bg-error hover:bg-primary text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mr-2"
                 >
                     <span class="px-2">{{ disputes }}</span>
                     <span class>Disputes</span>
@@ -30,7 +30,7 @@
             <div v-if="feedback" class="q-mt-none">
                 <router-link :to="{ name: 'vendorfeedback', params: { uuid: user.user_id } }">
                     <button
-                        class="bg-warning hover:bg-zinc-700 hover:text-black text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mr-2"
+                        class="bg-error hover:bg-zinc-700 hover:text-black text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mr-2"
                     >
                         <span class="px-2">{{ feedback }}</span>
                         <span class>Feedback</span>
@@ -50,7 +50,7 @@
         <div v-if="orders">
             <router-link :to="{ name: 'vendorordersnew' }">
                 <button
-                    class="bg-warning hover:bg-zinc-700 hover:text-black text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mr-2"
+                    class="bg-error hover:bg-zinc-700 hover:text-white text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline mr-2"
                 >
                     <span class="px-2">{{ orders }}</span>
                     <span class>Orders</span>

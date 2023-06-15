@@ -160,7 +160,7 @@
                                             name: 'ordersview',
                                             params: { uuid: order.uuid },
                                         }">
-                                            <button class="bg-yellow-600 hover:bg-zinc-400 text-white font-bold py-1 px-3 
+                                            <button class="bg-primary hover:bg-accent text-white font-bold py-1 px-3 
                                                         rounded focus:outline-none focus:shadow-outline w-full"
                                                 type="button">
                                                 Leave Feedback

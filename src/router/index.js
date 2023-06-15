@@ -23,6 +23,7 @@ import login from '../pages/auth/Login.vue'
 import register from '../pages/auth/Register.vue'
 import forgotpassword from '../pages/auth/ForgotPassword.vue'
 import userprofile from '../pages/profile/UserProfile.vue'
+import vendorprofile from '../pages/profile/VendorProfile.vue'
 import userorders from '../pages/orders/UserOrders.vue'
 import ordersview from '../pages/orders/ViewOrder.vue'
 import vendorordersview from '../pages/orders/ViewOrder.vue'
@@ -78,6 +79,7 @@ import ModDispute from '../pages/moderator/ModDispute.vue'
 import ModHome from '../pages/moderator/ModHome.vue'
 import ModTicketsHome from '../pages/moderator/ModTicketHome.vue'
 import ModTicket from '../pages/moderator/ModTicket.vue'
+import Payment from '../pages/payment/payment.vue'
 
 const routes = [
     {
@@ -85,6 +87,11 @@ const routes = [
         name: 'home',
         component: home,
     },
+        {
+            path: '/payment',
+            name: 'Payment',
+            component: Payment,
+        },
     {
         path: '/mod/tickets/:uuid',
         name: 'ModTicket',
@@ -281,11 +288,15 @@ const routes = [
         name: 'forgotpassword',
         component: forgotpassword,
     },
-    // Account  Logged in Required
     {
         path: '/user/:uuid',
         name: 'userprofile',
         component: userprofile,
+    },
+    {
+        path: '/vendor/:uuid',
+        name: 'vendorprofile',
+        component: vendorprofile,
     },
     {
         path: '/vendor/orders/:uuid',

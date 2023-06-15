@@ -6,9 +6,12 @@
 
     <div class="wrapper">
         <div class="container max-w-7xl mx-auto px-10 wrapper mb-10 overflow-hidden text-white">
-            <div class="bg-neutral">
+            <div class="bg-neutral mt-10">
                 <div class="text-center">
                     Please send payment to Address below to complete checkout
+                </div>
+                <div class="border border-1 p-5">
+                 
                 </div>
             </div>
         </div>
@@ -37,7 +40,7 @@ export default defineComponent({
         return {
             user: null,
             payment_status: 0,
-            
+
         }
     },
 
