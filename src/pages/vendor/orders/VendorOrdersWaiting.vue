@@ -257,12 +257,12 @@
               <!-- Main modal -->
               <div id="modal" tabindex="-1" aria-hidden="true"
                 class="hidden overflow-y-auto overflow-x-hidden fixed grid place-items-center h-screen w-full inset-0 h-modal h-full mb-36">
-                <div class="relative p-4 w-full max-w-md h-full md:h-auto">
+                <div class="relative p-4 w-full max-w-md h-full md:h-auto bg-accent">
                   <!-- Modal content -->
-                  <div class="relative text-white rounded-lg shadow bg-neutral">
+                  <div class="relative text-white rounded-lg shadow bg-base-100 ">
                     <div class="flex justify-end p-2">
                       <button type="button"
-                        class="text-gray-400 bg-transparent hover:bg-gray-300 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-400 dark:hover:text-white"
+                        class=" bg-transparent rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-accent dark:hover:text-white"
                         data-modal-toggle="authentication-modal" @click="closeModal()">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                           <path fill-rule="evenodd"
@@ -271,31 +271,32 @@
                         </svg>
                       </button>
                     </div>
-                    <form class="px-6 pb-4 space-y-6 lg:px-8 sm:pb-6 xl:pb-8">
-                      <h3 class="text-xl font-medium text-gray-900">
+                    <form class="px-2 pb-4 space-y-2 lg:px-2 sm:pb-6 xl:pb-8 ">
+                      <div class="text-xl font-medium flex justify-center">
                         Add Tracking for " {{ order.title_of_item }} "
-                      </h3>
-                      <h5>{{ order.shipping_description }}</h5>
+                      </div>
+                      <div>{{ order.uuid }}</div>
+                      <div>{{ order.shipping_description }}</div>
                       <div>
-                        <label for="carrier_name" class="block mb-2 text-sm font-medium text-gray-900">Carrier
+                        <label for="carrier_name" class="block mb-2 text-sm font-medium ">Carrier
                           Name</label>
                         <input v-model="trackingForm.carrier" type="text" name="carrier_name" id="carrier_name"
-                          class="shadow appearance-none border rounded w-full py-2 px-3 text-white mb-3 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-400"
+                          class="shadow appearance-none border rounded w-full py-2 px-3 text-black mb-3 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-400"
                           placeholder="Enter name of shipping carrier" required />
                       </div>
                       <div>
-                        <label for="tracking_number" class="block mb-2 text-sm font-medium text-gray-900">Tracking
+                        <label for="tracking_number" class="block mb-2 text-sm font-medium ">Tracking
                           Number</label>
                         <input v-model="trackingForm.tracking" type="text" name="tracking_number" id="tracking_number"
                           placeholder="Tracking Number"
-                          class="shadow appearance-none border rounded w-full py-2 px-3 text-white mb-3 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-400"
+                          class="shadow appearance-none border rounded w-full py-2 px-3 text-black mb-3 leading-tight focus:outline-none focus:shadow-outline focus:border-blue-400"
                           required />
                       </div>
 
                       <!-- Modal footer -->
 
                       <div class="px-4 py-2 border-t flex justify-end items-center space-x-4">
-                        <button class="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-700 transition"
+                        <button class="bg-primary text-white px-4 py-2 rounded-md hover:bg-accent transition"
                           @click="closeModal()" @click.prevent="onSendTracking(order.uuid)">
                           Add Tracking
                         </button>
@@ -409,7 +410,7 @@ export default defineComponent({
     // rejects orders
     rejectorder (uuid: any) {
       axios({
-        method: "delete",
+        method: "post",
         url: "/vendororders/new/reject/" + uuid,
         withCredentials: true,
         headers: authHeader(),
@@ -425,6 +426,7 @@ export default defineComponent({
         }
       });
     },
+    
     // send the tracking info on a popup modal
     sendtrackinginfo (payLoad: {
       order_uuid: string;

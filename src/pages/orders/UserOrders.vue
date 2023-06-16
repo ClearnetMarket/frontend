@@ -64,26 +64,17 @@
                 <div class="grid grid-cols-12 ">
                   <div class="col-span-12 md:col-span-9 ">
                     <div class="grid grid-cols-12">
-                      <div class="col-span-12 text-[20px] text-center md:text-left">
-                        <div v-if="order.overall_status === 1">
-                          Waiting to be accepted
-                        </div>
-                        <div v-if="order.overall_status === 2">
-                          Waiting on Shipment
-                        </div>
+                      <div class="col-span-12 text-[20px] text-center md:text-left text-primary">
+                        <div v-if="order.overall_status === 1"> Waiting to be accepted</div>
+                        <div v-if="order.overall_status === 2"> Waiting on Shipment</div>
                         <div v-if="order.overall_status === 3">Shipped</div>
-                        <div v-if="order.overall_status === 4">Delivered</div>
-                        <div v-if="order.overall_status === 5">
-                          Finalized Order
-                        </div>
-                        <div v-if="order.overall_status === 6">
-                          Requested cancel from vendor
-                        </div>
+                      
+                        <div v-if="order.overall_status === 5"> Finalized Order</div>
+                        <div v-if="order.overall_status === 6"> Requested cancel from vendor </div>
                         <div v-if="order.overall_status === 7">Cancelled</div>
-                        <div class="text-red-600" v-if="order.overall_status === 8">
-                          Disputed
-                        </div>
+                        <div v-if="order.overall_status === 8"> Disputed </div>
                         <div v-if="order.overall_status === 10">Finalized</div>
+                        <div v-if="order.overall_status === 11">Rejected by Vendor</div>
                       </div>
                       <div class="col-span-12 text-[14px]">
                         <div class="grid grid-cols-12 md:pt-5 md:gap-5">
@@ -175,13 +166,7 @@
                     </div>
                     <!-- Shipped order -->
                     <div v-if="order.overall_status === 3">
-                      <div class="my-2">
-                        <button
-                          class="bg-secondary hover:bg-accent text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
-                          type="button" @click="delivered(order.uuid)">
-                          Mark as Delivered
-                        </button>
-                      </div>
+                    
                       <div class="my-2">
                         <button
                           class="bg-secondary hover:bg-accent text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
@@ -250,6 +235,7 @@
                         </router-link>
                       </div>
                     </div>
+                    <div v-if="order.overall_status === 11"></div>
                   </div>
                 </div>
               </div>

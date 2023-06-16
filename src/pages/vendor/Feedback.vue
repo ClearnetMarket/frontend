@@ -29,11 +29,9 @@
         <div class="grid grid-cols-12 p-5 gap-5 text-white">
           <div class="col-span-12 md:col-span-4 bg-neutral rounded-md p-5">
             <div class="flex">All Vendor Reviews</div>
-
             <p class="text-sm font-medium ">
               {{ vendor_reviews_total }} total ratings
             </p>
-
             <div class="flex items-center mt-4">
               <span class="text-sm font-medium pr-2 flex">10</span>
               <div class="mx-4 w-2/4 h-5 rounded ">
@@ -119,8 +117,8 @@
 
           <div class="col-span-12 md:col-span-8">
             <div class="text-white" v-if="recordsLength > 0">
-              <div v-for="(review, index) in vendorreviews" :key="review.id">
-                <div class="grid grid-cols-12 bg-neutral rounded-md p-5 mb-5">
+              <div v-for="(review, index) in vendorreviews" :key="review.id" >
+                <div class="grid grid-cols-12 bg-neutral rounded-md p-5 mb-5" v-if="review.review_of_vendor">
                   <div class="col-span-12 text-sm font-medium ">
                     {{ review.customer_name }}
                   </div>

@@ -126,13 +126,11 @@
       <div v-for="order in orders" :key="order.id" class="pb-5">
         <div v-if="order.uuid">
           <div class="grid grid-cols-12 gap-5 rounded  bg-neutral  p-5">
-
             <div class="col-span-3 ">
               <img class="object-contain" :src="order.image_one" alt="" />
             </div>
             <div class="col-span-7 ">
               <div class="grid grid-cols-12">
-
                 <div class="col-span-12 mb-5">
                   <router-link class="col-span-12 text-primary hover:underline hover:text-primary text-[18px] "
                     :to="{ name: 'MarketItem', params: { id: order.item_uuid } }">
@@ -180,8 +178,6 @@
                     {{ order.price_total_xmr }}
                   </div>
                 </div>
-
-
                 <div class="col-span-12 mb-2">
                   <div class="font-bold">Shipping Description:</div>
                   {{ order.shipping_description }}
@@ -208,12 +204,12 @@
               <button
                 class="bg-green-600 m-2 hover:bg-green-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
                 type="button" @click="acceptorder(order.uuid)">
-                Accept
+                Keep Order
               </button>
               <button
                 class="bg-red-600 m-2 hover:bg-red-400 text-white font-bold py-1 px-3 rounded focus:outline-none focus:shadow-outline w-full"
                 type="button" @click="rejectorder(order.uuid)">
-                Reject
+                Cancel Order
               </button>
             </div>
           </div>

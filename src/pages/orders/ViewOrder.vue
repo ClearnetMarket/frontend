@@ -245,16 +245,16 @@
             </div>
           </div>
           <div v-if="tracking_number">
-            <div class="grid grid-cols-12 rounded-md border bg-neutral  mb-5 p-5">
+            <div class="grid grid-cols-12 rounded-md border bg-neutral mb-5 p-5 mt-5">
               <div class="col-span-12 text-[20px]">Tracking</div>
               <div class="col-span-12">Carrier: {{ carrier_name }}</div>
               <div class="col-span-12">Tracking Number: {{ tracking_number }}</div>
             </div>
           </div>
           <div v-else>
-            <div class="grid grid-cols-12 rounded-md border bg-neutral  mb-5 p-5">
+            <div class="grid grid-cols-12 rounded-md border bg-neutral mb-5 p-5">
               <div class="col-span-12 text-center font-bold">
-                Tracking Info not Provided
+                Tracking Info Not Provided
               </div>
             </div>
           </div>
@@ -452,7 +452,7 @@ export default defineComponent({
     getvendorinfo () {
       axios({
         method: "get",
-        url: "/vendor/vendor-info/" + "6ad833fd4b214b48beef0944c1931b14",
+        url: "/vendor/vendor-info/" + this.order.vendor_uuid,
         withCredentials: true,
         headers: authHeader(),
       })
@@ -510,7 +510,6 @@ export default defineComponent({
       else{
         this.rating_vendor = 10;
       }
-      console.log(this.rating_vendor)
       let payLoadReview = { review: this.review };
       let payLoadScore = { vendorrating: this.rating_vendor };
 
@@ -518,9 +517,7 @@ export default defineComponent({
       this.sendFeedbackScore(payLoadScore);
     },
     // send the feedback rating
-    sendFeedbackReview (payLoad: {
-      review: string;
-    }) {
+    sendFeedbackReview (payLoad: {review: string;}) {
       axios({
         method: "post",
         url: "/orders/feedback/review/" + this.order.uuid,

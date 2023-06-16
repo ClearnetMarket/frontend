@@ -361,23 +361,14 @@ export default defineComponent({
           });
         });
     },
-
-
-
-
-
-
-
-
-
-
-
     // get the date conversion
     relativeDate (value: any) {
       let e = new Date(value).valueOf();
       return formatDistance(e, new Date());
     },
   },
+
+  
 });
 </script>
 <style></style>
