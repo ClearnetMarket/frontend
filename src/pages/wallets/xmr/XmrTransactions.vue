@@ -274,6 +274,10 @@ export default defineComponent({
       }
     };
   },
+  mounted () {
+    this.getPage(this.page);
+    this.transactions_xmr_count();
+  },
 
   methods: {
     userstatus () {

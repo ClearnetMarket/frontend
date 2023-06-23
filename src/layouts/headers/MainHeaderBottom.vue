@@ -45,7 +45,7 @@
                         <div class="sm:col-span-12 sm:invisible sm:h-0 md:visible md:h-auto md:col-span-2">
                             <div class=" md:pt-2 text-[13px] font-bold">
                                 <router-link :to="{ name: 'wallet' }" class="px-3">
-                                    <button class="bg-secondary hover:bg-zinc-700 text-white font-bold py-1 px-3
+                                    <button class="bg-accent hover:bg-primary text-white font-bold py-1 px-3
                                                                 rounded focus:outline-none focus:shadow-outline">
                                         Wallets
                                     </button>

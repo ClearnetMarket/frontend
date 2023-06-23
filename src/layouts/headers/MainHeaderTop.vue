@@ -8,7 +8,7 @@
               <div v-if="user.user_admin >= 2">
                 <router-link :to="{ name: 'ModHome' }" class="px-3">
                   <button
-                    class="hover:bg-zinc-700 text-white hover:text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline font-bold">
+                    class="bg-primary text-white hover:bg-secondary py-1 px-3 rounded focus:outline-none focus:shadow-outline font-bold">
                     Moderator Home
                   </button>
                 </router-link>
@@ -48,7 +48,6 @@
                     </button>
                   </router-link>
 
-
                   <!-- # Account  -->
                   <router-link :to="{ name: 'account' }" class="px-1">
                     <button
@@ -56,7 +55,6 @@
                       Account
                     </button>
                   </router-link>
-
 
                     <!-- # Messages -->
                     <router-link :to="{ name: 'MsgHome' }" class="px-1">
@@ -84,7 +82,9 @@
                       </div>
                       <div v-else>
                         <button
-                          class="bg-error hover:bg-neutral text-white hover:text-white py-1 px-3 rounded focus:outline-none focus:shadow-outline font-bold dropdown-hover"
+                          class=" text-white  py-1 px-3 rounded focus:outline-none focus:shadow-outline font-bold dropdown-hover"
+                          v-bind:class="{ 'bg-error': !clicked, 'bg-neutral': clicked }"
+                          v-on:click ="clicked = !clicked"
                           @click.prevent="notificationsnotificiationmarkasread()">
                           {{ notecount }} <font-awesome-icon icon="fa-solid fa-bell " class="text-[22px]" />
                         </button>
@@ -97,7 +97,7 @@
                               </li>
                             </div>
                             <div v-else>
-                              <li class="w-full p-5 bg-red-300 hover:font-bold">
+                              <li class="bg-accent text-primary w-full p-5  hover:font-bold">
                                 {{ notes.message }}
                               </li>
                             </div>
@@ -152,7 +152,9 @@ export default defineComponent({
       msgcount: 0,
       newnotes: [],
       notecount: 0,
-      rednote: false
+      rednote: false,
+      clicked: false,
+      hovered: false,
 
     };
   },

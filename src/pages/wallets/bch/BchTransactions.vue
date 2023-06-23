@@ -253,6 +253,8 @@ export default defineComponent({
   },
   mounted () {
     this.getPage(this.page);
+    this.transactions_bch_count();
+    
   },
   data () {
     return {
@@ -303,16 +305,18 @@ export default defineComponent({
     transactionsbch (page: any) {
       axios({
         method: 'get',
-        url: "/bch/transactions",
+        url: "/bch/transactions/" + this.page,
         headers: authHeader(),
       }).then((response) => { this.transactions = response.data; })
     },
     transactions_bch_count () {
+      console.log("going")
       axios({
         method: 'get',
         url: "/bch/transactions/count",
         headers: authHeader(),
       }).then((response) => { this.recordsLength = response.data.count })
+      console.log(this.recordsLength)
     },
     relativeDate (value: any) {
       let e = new Date(value).valueOf();

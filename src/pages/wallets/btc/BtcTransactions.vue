@@ -62,7 +62,7 @@
           <div v-for="t in transactions" class="text-white font-semibold text-[14px] bg-neutral rounded-md">
             <!-- Wallet Created -->
 
-            <div v-if="t.category === 1" class="grid grid-cols-12 grid-rows-1 border-b  rounded-md  m-1 p-1 my-5"
+            <div v-if="t.category === 1" class="grid grid-cols-12 grid-rows-1  rounded-md  m-1 p-1"
               :key="t.id">
               <div class="col-span-12 sm:col-span-2">{{ relativeDate(t.created) }}</div>
               <div class="col-span-12 sm:col-span-6">Wallet Created</div>
@@ -70,7 +70,7 @@
               <div class="col-span-12 sm:col-span-2">Balance: 0</div>
             </div>
             <!-- WithDrawl -->
-            <div v-if="t.category === 2" class="grid grid-cols-12 grid-rows-3  border-b rounded-md m-1 p-1 my-5"
+            <div v-if="t.category === 2" class="grid grid-cols-12 grid-rows-3 rounded-md m-1 p-1"
               :key="t.id">
               <div class="col-span-12 sm:col-span-2 row-span-1">{{ relativeDate(t.created) }}</div>
               <div class="col-span-12 sm:col-span-6 row-span-3">
@@ -84,7 +84,7 @@
             </div>
 
             <!--#3 = Deposit -->
-            <div v-if="t.category === 3" class="grid grid-cols-12 grid-rows-3 border-b rounded-md m-1 p-1 my-5"
+            <div v-if="t.category === 3" class="grid grid-cols-12 grid-rows-3 rounded-md m-1 p-1"
               :key="t.id">
               <div class="col-span-12 sm:col-span-2 row-span-1">{{ relativeDate(t.created) }}</div>
               <div class="col-span-12 sm:col-span-6 row-span-3">
@@ -111,7 +111,7 @@
             </div>
 
             <!--#4 = send coin to escrow -->
-            <div v-if="t.category === 4" class="grid grid-cols-12 grid-rows-2 border-b m-1 p-1 my-5" :key="t.id">
+            <div v-if="t.category === 4" class="grid grid-cols-12 grid-rows-2 m-1 p-1 " :key="t.id">
               <div class="col-span-12 sm:col-span-2 row-span-1">{{ relativeDate(t.created) }}</div>
               <div class="col-span-12 sm:col-span-6 row-span-1">
                 <div class="col-span-12 sm:col-span-6 row-span-2"></div>
@@ -127,7 +127,7 @@
             </div>
 
             <!--#5 = sent coin to user -->
-            <div v-if="t.category === 5" class="grid grid-cols-12 grid-rows-2 border-b m-1 p-1 my-5 " :key="t.id">
+            <div v-if="t.category === 5" class="grid grid-cols-12 grid-rows-2 m-1 p-1" :key="t.id">
               <div class="col-span-12 sm:col-span-2 row-span-1">{{ relativeDate(t.created) }}</div>
               <div class="col-span-12 sm:col-span-6 row-span-2">
 
@@ -143,7 +143,7 @@
             </div>
 
             <!--#6 = Freeport profit -->
-            <div v-if="t.category === 6" class="grid grid-cols-12 grid-rows-2 border-b rounded-md m-1 p-1 my-5"
+            <div v-if="t.category === 6" class="grid grid-cols-12 grid-rows-2 rounded-md m-1 p-1"
               :key="t.id">
               <div class="col-span-12 sm:col-span-2 row-span-1">{{ relativeDate(t.created) }}</div>
               <div class="col-span-12 sm:col-span-6 row-span-2">
@@ -175,7 +175,7 @@
               <div class="col-span-12 sm:col-span-2 row-span-1 ">{{ t.balance }}</div>
             </div>
 
-            <div v-if="t.category === 8" class="grid grid-cols-12 grid-rows-2  bordered rounded-md m-1 p-1 my-5"
+            <div v-if="t.category === 8" class="grid grid-cols-12 grid-rows-2 rounded-md m-1 p-1 "
               :key="t.id">
               <div class="col-span-12 sm:col-span-2 row-span-1">{{ relativeDate(t.created) }}</div>
               <div class="col-span-12 sm:col-span-6 row-span-2">
@@ -191,7 +191,7 @@
               <div class="col-span-12 sm:col-span-2 row-span-1 ">{{ t.balance }}</div>
             </div>
 
-            <div v-if="t.category === 9" class="grid grid-cols-12 grid-rows-2 bordered rounded-md m-1 p-1" :key="t.id">
+            <div v-if="t.category === 9" class="grid grid-cols-12 grid-rows-2 rounded-md m-1 p-1" :key="t.id">
               <div class="col-span-12 sm:col-span-2 row-span-1">{{ relativeDate(t.created) }}</div>
               <div class="col-span-12 sm:col-span-6 row-span-2">
                 Refund from Escrow
@@ -259,7 +259,7 @@ export default defineComponent({
       tab: [],
       user: null,
       page: 1,
-      perPage: 50,
+      perPage: 25,
       recordsLength: 0,
       options: {
         edgeNavigation: false,
@@ -268,7 +268,10 @@ export default defineComponent({
       }
     };
   },
-
+  mounted () {
+    this.transactions_btc_count();
+    this.getPage(this.page);
+  },
   methods: {
     userstatus () {
       axios({
@@ -298,7 +301,7 @@ export default defineComponent({
     transactionsbtc (page: any) {
       axios({
         method: 'get',
-        url: "/btc/transactions",
+        url: "/btc/transactions/" + this.page,
         headers: authHeader(),
       }).then((response) => { this.transactions = response.data; })
     },
@@ -308,6 +311,7 @@ export default defineComponent({
         url: "/btc/transactions/count",
         headers: authHeader(),
       }).then((response) => { this.recordsLength = response.data.count })
+      console.log(this.recordsLength)
     },
 
     relativeDate (value: any) {

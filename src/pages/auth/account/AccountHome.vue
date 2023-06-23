@@ -30,7 +30,7 @@
                 <!-- END Top Stuff-->
                 <div class="grid sm:grid-cols-1 md:grid-cols-3 gap-5 my-3 pb-40 text-white">
                     <router-link :to="{ name: 'userorders' }">
-                        <div class="col-span-1 rounded-md p-5 bg-neutral hover:bg-accent hover:text-black"
+                        <div class="col-span-1 rounded-md p-5 bg-neutral hover:bg-accent "
                             style="cursor: pointer">
                             <div class="grid grid-cols-4 grid-rows-2">
                                 <div class="col-span-1 row-span-2"></div>
@@ -40,7 +40,7 @@
                         </div>
                     </router-link>
                     <router-link :to="{ name: 'changepassword' }">
-                        <div class="col-span-1 rounded-md p-5 bg-neutral hover:bg-accent hover:text-black"
+                        <div class="col-span-1 rounded-md p-5 bg-neutral hover:bg-accent "
                             style="cursor: pointer">
                             <div class="grid grid-cols-4 grid-rows-2">
                                 <div class="col-span-1 row-span-2"></div>
@@ -53,7 +53,7 @@
                     </router-link>
 
                     <router-link :to="{ name: 'userprofile', params: { uuid: user.user_id } }">
-                        <div class=" rounded-md p-5 bg-neutral hover:bg-accent hover:text-black" style="cursor: pointer">
+                        <div class=" rounded-md p-5 bg-neutral hover:bg-accent " style="cursor: pointer">
                             <div class="grid grid-cols-4 grid-rows-2">
                                 <div class="col-span-1 row-span-2"></div>
                                 <div class="col-span-3 row-span-1 text-[20px]">Profile</div>
@@ -62,7 +62,7 @@
                         </div>
                     </router-link>
                     <router-link :to="{ name: 'MsgHome' }">
-                        <div class=" rounded-md p-5 bg-neutral hover:bg-accent hover:text-black" style="cursor: pointer">
+                        <div class=" rounded-md p-5 bg-neutral hover:bg-accent" style="cursor: pointer">
                             <div class="grid grid-cols-4 grid-rows-2">
                                 <div class="col-span-1 row-span-2"></div>
                                 <div class="col-span-3 row-span-1 text-[20px]">Messages</div>
@@ -71,7 +71,7 @@
                         </div>
                     </router-link>
                     <router-link :to="{ name: 'defaultaddress' }">
-                        <div class=" rounded-md p-5 bg-neutral hover:bg-accent hover:text-black" style="cursor: pointer">
+                        <div class=" rounded-md p-5 bg-neutral hover:bg-accent " style="cursor: pointer">
                             <div class="grid grid-cols-4 grid-rows-2">
                                 <div class="col-span-1 row-span-2"></div>
                                 <div class="col-span-3 row-span-1 text-[20px]">Shipping Address</div>
@@ -82,7 +82,7 @@
                         </div>
                     </router-link>
                     <router-link :to="{ name: 'cart' }">
-                        <div class=" rounded-md p-5 bg-neutral hover:bg-accent hover:text-black" style="cursor: pointer">
+                        <div class=" rounded-md p-5 bg-neutral hover:bg-accent " style="cursor: pointer">
                             <div class="grid grid-cols-4 grid-rows-2">
                                 <div class="col-span-1 row-span-2"></div>
                                 <div class="col-span-3 row-span-1 text-[20px]">Shopping Cart</div>
@@ -94,7 +94,7 @@
                     </router-link>
 
                     <router-link :to="{ name: 'wallet' }">
-                        <div class=" rounded-md p-5 bg-neutral hover:bg-accent hover:text-black" style="cursor: pointer">
+                        <div class=" rounded-md p-5 bg-neutral hover:bg-accent " style="cursor: pointer">
                             <div class="grid grid-cols-4 grid-rows-2">
                                 <div class="col-span-1 row-span-2"></div>
                                 <div class="col-span-3 row-span-1 text-[20px]">Wallets</div>
@@ -105,7 +105,7 @@
                         </div>
                     </router-link>
 
-                    <div class=" rounded-md p-5 bg-neutral hover:bg-accent hover:text-black" style="cursor: pointer"
+                    <div class=" rounded-md p-5 bg-neutral hover:bg-accent " style="cursor: pointer"
                         @click.prevent="logout()">
                         <div class="grid grid-cols-4 grid-rows-2">
                             <div class="col-span-1 row-span-2"></div>
